@@ -22,6 +22,10 @@ NeoBundle "tpope/vim-commentary"
 NeoBundle "tpope/vim-unimpaired"
 NeoBundle "tpope/vim-surround"
 NeoBundle "Shougo/vimfiler.vim"
+NeoBundle "jeffkreeftmeijer/vim-numbertoggle"
+NeoBundle "mattn/emmet-vim"
+NeoBundle "Lokaltog/vim-easymotion"
+NeoBundle "kien/ctrlp.vim"
 
 " Required:
 call neobundle#end()
@@ -119,4 +123,7 @@ set pastetoggle=<F12>
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-" 
+
+" ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'

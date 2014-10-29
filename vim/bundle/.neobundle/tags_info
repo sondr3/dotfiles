@@ -1,9 +1,13 @@
+ctrlp.vim
+emmet-vim
 neobundle.vim
 vim-airline
 vim-colors-solarized
 vim-commentary
+vim-easymotion
 vim-fugitive
 vim-gitgutter
+vim-numbertoggle
 vim-surround
 vim-unimpaired
 vimfiler.vim
