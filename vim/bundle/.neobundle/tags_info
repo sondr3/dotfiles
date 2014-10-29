@@ -1,0 +1,9 @@
+neobundle.vim
+vim-airline
+vim-colors-solarized
+vim-commentary
+vim-fugitive
+vim-gitgutter
+vim-surround
+vim-unimpaired
+vimfiler.vim
