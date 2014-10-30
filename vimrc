@@ -26,6 +26,10 @@ NeoBundle "jeffkreeftmeijer/vim-numbertoggle"
 NeoBundle "mattn/emmet-vim"
 NeoBundle "Lokaltog/vim-easymotion"
 NeoBundle "kien/ctrlp.vim"
+NeoBundle "fatih/vim-go"
+NeoBundle "Shougo/neocomplete"
+NeoBundle "Shougo/neosnippet"
+NeoBundle "Shougo/neosnippet-snippets"
 
 " Required:
 call neobundle#end()
@@ -127,3 +131,9 @@ let g:airline#extensions#tabline#enabled = 1
 " ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" NeoComplete/NeoSnippet
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
