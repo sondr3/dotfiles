@@ -1,49 +1,26 @@
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  set nocompatible               " Be iMproved
+" vim-plug settings
+call plug#begin('~/.vim/plugged')
 
-  " Required:
-  set runtimepath+=/Users/sondre/.vim/bundle/neobundle.vim/
-endif
+" Installed addons
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
+Plug 'Shougo/vimfiler.vim'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'mattn/emmet-vim'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'kien/ctrlp.vim'
+Plug 'raimondi/delimitMate'
 
-" Required:
-call neobundle#begin(expand('/Users/sondre/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-NeoBundle "altercation/vim-colors-solarized"
-NeoBundle "bling/vim-airline"
-NeoBundle "airblade/vim-gitgutter"
-NeoBundle "tpope/vim-fugitive"
-NeoBundle "tpope/vim-commentary"
-NeoBundle "tpope/vim-unimpaired"
-NeoBundle "tpope/vim-surround"
-NeoBundle "Shougo/vimfiler.vim"
-NeoBundle "jeffkreeftmeijer/vim-numbertoggle"
-NeoBundle "mattn/emmet-vim"
-NeoBundle "Lokaltog/vim-easymotion"
-NeoBundle "kien/ctrlp.vim"
-NeoBundle "fatih/vim-go"
-NeoBundle "Shougo/neocomplete"
-NeoBundle "Shougo/neosnippet"
-NeoBundle "Shougo/neosnippet-snippets"
-
-" Required:
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
+call plug#end()
 
 " General settings
 :imap jj <Esc>
+filetype plugin indent on
 syntax on
 set mouse=a
 set mousehide
@@ -60,7 +37,7 @@ set iskeyword-=-
 
 " Interface
 set background=dark
-if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+if filereadable(expand("~/.vim/plugged/vim-colors-solarized/colors/solarized.vim"))
     let g:solarized_termcolors=256
     let g:solarized_termtrans=1
     let g:solarized_contrast="normal"
@@ -123,7 +100,6 @@ set splitright
 set splitbelow
 set pastetoggle=<F12>
 
-
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -132,8 +108,5 @@ let g:airline#extensions#tabline#enabled = 1
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-" NeoComplete/NeoSnippet
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
+" delmitMate
+let delimitMate_expand_cr = 2
