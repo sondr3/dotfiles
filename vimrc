@@ -35,6 +35,14 @@ set iskeyword-=.
 set iskeyword-=#
 set iskeyword-=-
 
+" Useful defaults
+" Trim whitespace when saving
+autocmd BufWritePre * %s/\s\+$//e
+" Return to last location when loading
+autocmd BufReadPost * normal `"
+" Make <space> the leader button
+let mapleader="\<space>"
+
 " Interface
 set background=dark
 if filereadable(expand("~/.vim/plugged/vim-colors-solarized/colors/solarized.vim"))
