@@ -1,9 +1,12 @@
-;; hide some stuff
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+;; Smart stuff
+(setq visible-bell t
+      font-lock-maximum-decoration t
+      color-theme-is-global t
+      truncate-partial-width-windows nil)
 
 ;; show column number and line number
+(require 'linum-relative)
+(setq linum-relative-format "%3s ")
 (dolist (mode '(column-number-mode line-number-mode))
   (when (fboundp mode) (funcall mode t)))
 (dolist (mode-hook '(text-mode-hook prog-mode-hook conf-mode-hook))
@@ -17,11 +20,15 @@
 ;; show matching parenthesis'
 (show-paren-mode 1)
 (setq show-paren-style 'expression)
+(when window-system
+  (setq frame-title-format '(buffer-file-name "%f" ("%b")))
+  (tooltip-mode -1)
+  (blink-cursor-mode -1))
 
 ;; highlight the line you're on
 (global-hl-line-mode 1)
 
-;; font settings
-(set-face-attribute 'default nil :family "Monaco")
+;; Something smart
+(setq redisplay-dont-pause t)
 
 (provide 'appearance)

@@ -5,6 +5,8 @@
 .elc
 auto-save-list
 tramp
-.\#*
+.\#*~
+*~
 elpa
 el-get
+.places
