@@ -1,2 +1,10 @@
 *.swp
 .DS_Store
+
+# Hide emacs folders/files
+.elc
+auto-save-list
+tramp
+.\#*
+elpa
+el-get
