@@ -15,6 +15,10 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize) ;; You might already have this line
 
+;; Make the path on OSX proper
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 ;; Load the different config and theme files
 (add-to-list 'load-path "~/.emacs.d/appearance")
 (add-to-list 'load-path "~/.emacs.d/core")
@@ -25,7 +29,7 @@
 (require 'appearance)
 (require 'font)
 (require 'theme)
-(require 'smart-line)
+;; (require 'powerline-settings)
 
 ;; Some core settings
 (require 'core)
