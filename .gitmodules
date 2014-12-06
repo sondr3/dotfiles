@@ -1,0 +1,6 @@
+[submodule "emacs.d/vendor/emacs-powerline"]
+	path = emacs.d/vendor/emacs-powerline
+	url = git@github.com:jonathanchu/emacs-powerline.git
+[submodule "emacs.d/themes"]
+	path = emacs.d/themes
+	url = git@github.com:neil477/base16-emacs.git

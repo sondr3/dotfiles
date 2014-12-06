@@ -25,6 +25,7 @@
 (require 'appearance)
 (require 'font)
 (require 'theme)
+(require 'smart-line)
 
 ;; Some core settings
 (require 'core)
