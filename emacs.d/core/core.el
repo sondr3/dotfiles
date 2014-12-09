@@ -7,4 +7,7 @@
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq backup-by-copying t)
 
+;; Backup files even when they are in git
+(setq vc-make-backup-files t)
+
 (provide 'core)
