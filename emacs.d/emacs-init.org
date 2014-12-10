@@ -2,15 +2,22 @@
 #+Author: sondr3
 
 * My Emacs settings
-  This is my emacs settings that are continously evolving... and I'm a newbie so I don't really know what I'm doing either.
+  This is my emacs settings that are continously evolving... and I'm a newbie so
+  I don't really know what I'm doing either.
 
 ** NOTE
    This file is automagically tangled into a =emacs-init.el= file so no editing that file.
 
+* Package management
+  I have no idea how that works, but apparently [[https://github.com/rdallasgray/pallet][Pallet]] and [[https://github.com/cask/cask][Cask]] is the new
+  hotness in Emacsland. I will also be using the excellent [[https://github.com/jwiegley/use-package][use-package]] along
+  with [[https://github.com/edvorg/req-package][req-package]] for some real package management goodness. Good golly.
+
 * Core settings
 
 ** Make sure the path loads properly on OS X
-   This depends on the [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] package so it will properly load the path.
+   This depends on the [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] package so it will properly load the
+   path.
 
 #+BEGIN_SRC emacs-lisp
   (when (memq window-system '(mac ns))
@@ -29,7 +36,8 @@
 #+END_SRC
 
 ** Some general settings
-   Common sense settings really, most of these are pretty basic and shouldn't contain any magic. Most things are also comments just in case.
+   Common sense settings really, most of these are pretty basic and shouldn't
+   contain any magic. Most things are also comments just in case. 
 
 #+BEGIN_SRC emacs-lisp
   (setq
