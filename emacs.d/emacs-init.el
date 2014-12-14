@@ -1,6 +1,12 @@
 
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+(require 'req-package)
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+(req-package exec-path-from-shell
+  :init
+  (when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize)))
 
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -47,10 +53,6 @@
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'erase-buffer 'disable 'nil)
-
-(require 'req-package)
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
 
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
