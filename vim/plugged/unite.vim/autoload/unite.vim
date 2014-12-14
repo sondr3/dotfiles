@@ -32,7 +32,7 @@ augroup plugin-unite
 augroup END
 
 function! unite#version() "{{{
-  return str2nr(printf('%02d%02d', 6, 1))
+  return str2nr(printf('%02d%02d', 6, 2))
 endfunction"}}}
 
 " User functions. "{{{
@@ -208,7 +208,7 @@ function! unite#get_status_string() "{{{
     return ''
   endif
 
-  return unite#view#_get_status_head_string()
+  return unite#view#_get_status_plane_string()
         \ . ' | '. unite#view#_get_status_tail_string()
 endfunction"}}}
 function! unite#get_marked_candidates() "{{{

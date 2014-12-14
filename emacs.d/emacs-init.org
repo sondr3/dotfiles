@@ -142,6 +142,22 @@
   (load-theme 'zenburn t)
 #+END_SRC
 
+** Powerline aka smart-mode-line
+   After getting used to the pretty powerline in VIM looking at the normal
+   powerline in Emacs just isn't very nice, although it does show plenty of
+   information. However, none of the direct VIM forks of Powerline (or
+   vim-airline in my case), so I ended up using [[https://github.com/Bruce-Connor/smart-mode-line/][smart-mode-line]] instead.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package smart-mode-line)
+
+  (req-package smart-mode-line-powerline-theme
+    :require smart-mode-line
+    :init
+    (sml/setup)
+    (setq sml/theme 'powerline))
+#+END_SRC
+
 * EVIL aka VIM in Emacs
   Now for the greater things in life; VIM. As much as I love Emacs I still think
   modal editing is a much better way to edit text, and as such I'm using EVIL
@@ -206,6 +222,21 @@
 #+BEGIN_SRC emacs-lisp
 (req-package ace-jump-mode)
 #+END_SRC
+
+** Keybinds
+   The only one I really need is being able to use =jj= instead of =ESC=, but to
+   do this I need [[http://www.emacswiki.org/emacs/key-chord.el][key-chord.el]].
+
+#+BEGIN_SRC emacs-lisp
+  (req-package key-chord
+    :init
+    (key-chord-mode 1)
+    :config
+    (progn
+      (setq key-chord-two-keys-delay 0.5)
+      (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)))
+#+END_SRC
+
 * And finish
   Now we only need to finish installing everything and we can be on our merry
   way!

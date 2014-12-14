@@ -44,7 +44,7 @@ function! unite#helper#call_hook(sources, hook_name) "{{{
       call unite#print_error(v:throwpoint)
       call unite#print_error(v:exception)
       call unite#print_error(
-            \ '[unite.vim] Error occured in calling hook "' . a:hook_name . '"!')
+            \ '[unite.vim] Error occurred in calling hook "' . a:hook_name . '"!')
       call unite#print_error(
             \ '[unite.vim] Source name is ' . source.name)
     endtry
@@ -226,23 +226,6 @@ function! unite#helper#convert_source_name(source_name) "{{{
         \  !unite.context.short_source_names) ? a:source_name :
         \ a:source_name !~ '\A'  ? a:source_name[:1] :
         \ substitute(a:source_name, '\a\zs\a\+', '', 'g')
-endfunction"}}}
-
-function! unite#helper#loaded_source_names_with_args() "{{{
-  let len_source = len(unite#loaded_sources_list())
-  return map(copy(unite#loaded_sources_list()), "
-        \ (len_source == 0) ? ['interactive'] :
-        \ (len_source > 1 && v:val.unite__len_candidates == 0) ? '_' :
-        \ join(insert(filter(copy(v:val.args),
-        \  'type(v:val) <= 1'),
-        \   unite#helper#convert_source_name(v:val.name)), ':')
-        \ . (v:val.unite__len_candidates == 0 ? '' :
-        \      v:val.unite__orig_len_candidates ==
-        \            v:val.unite__len_candidates ?
-        \            '(' .  v:val.unite__len_candidates . ')' :
-        \      printf('(%s/%s)', v:val.unite__len_candidates,
-        \      v:val.unite__orig_len_candidates))
-        \ ")
 endfunction"}}}
 
 function! unite#helper#invalidate_cache(source_name)  "{{{

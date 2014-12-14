@@ -68,6 +68,14 @@
 
 (load-theme 'zenburn t)
 
+(req-package smart-mode-line)
+
+(req-package smart-mode-line-powerline-theme
+  :require smart-mode-line
+  :init
+  (sml/setup)
+  (setq sml/theme 'powerline))
+
 (req-package evil
   :require (evil-surround undo-tree ace-jump-mode)
   :ensure evil
@@ -98,5 +106,13 @@
     (global-undo-tree-mode)))
 
 (req-package ace-jump-mode)
+
+(req-package key-chord
+  :init
+  (key-chord-mode 1)
+  :config
+  (progn
+    (setq key-chord-two-keys-delay 0.5)
+    (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)))
 
 (req-package-finish)
