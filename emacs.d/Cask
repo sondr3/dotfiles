@@ -4,3 +4,5 @@
 
 (depends-on "exec-path-from-shell")
 (depends-on "pallet")
+(depends-on "use-package")
+(depends-on "req-package")

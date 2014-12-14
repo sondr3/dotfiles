@@ -39,6 +39,7 @@
    Common sense settings really, most of these are pretty basic and shouldn't
    contain any magic. Most things are also comments just in case. 
 
+*** Settings some defaults
 #+BEGIN_SRC emacs-lisp
   (setq
    x-select-enable-clipboard t           ;; allow pasting outside Emacs
@@ -56,17 +57,44 @@
    font-lock-maximum-decoration t        ;; decorate all buffers with colors
    color-theme-is-global t               ;; does what it says
    truncate-partial-width-windows nil    ;; truncate buffers
+   tab-always-indent 'complete           ;; tab before indenting
+   require-final-newline t               ;; always add a newline when saving
+   show-paren-delay 0                    ;; because saving miliseconds is woreth it
+   load-prefer-newer t                   ;; prefer newer .el files to .elc
    )
 
   (setq-default
    tab-width 4
    indent-tabs-mode nil                  ;; indent with spaces and not tabs
-   fill-column 80
+   fill-column 80                        ;; max 80 characters wide
+   auto-fill-function 'do-auto-fill      ;; automatically wrap long lines
    )
 #+END_SRC
 
+*** Global modes
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode t)    ;; show matching paranthesises
+  (blink-cursor-mode -1) ;; don't blink the cursor
+#+END_SRC
+
+*** IDO Mode
+#+BEGIN_SRC emacs-lisp
+  (require 'ido)
+  (ido-mode t)
+#+END_SRC
+
+*** Assorted commands
+    Mostly commands that annoy the hell out of me, like trying to undo and being
+    asked repeadedly if you wanted to downcase it instead. Blerh.
+#+BEGIN_SRC emacs-lisp
+  (put 'downcase-region 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+  (put 'narrow-to-region 'disabled nil)
+  (put 'erase-buffer 'disable 'nil)
+#+END_SRC
+
 * Appearance
-  Now comes the time to make sure Emacs starts looking dashin'. These settings configure (in order)
+  Now comes the time to make sure Emacs starts looking dashin'.
 
 ** Bars, bars
    There's no need for the menubar/toolbar/scrollbar or splash screen so these are all hidden.
@@ -77,3 +105,21 @@
   (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
   (setq inhibit-startup-message t)
 #+END_SRC
+
+** Fonts
+   I've currently settled for using Inconsolata for Emacs and terminals
+   alike, it's a great font that's very easily readable and also works well with
+   code and numbers.
+
+#+BEGIN_SRC emacs-lisp
+  (set-default-font "Monaco")
+  (set-face-attribute 'default nil
+                      :family "Monaco"
+                      :height 120
+                      :weight 'normal
+                      :width 'normal)
+#+END_SRC
+
+
+
+
