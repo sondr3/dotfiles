@@ -69,12 +69,12 @@
 (load-theme 'zenburn t)
 
 (req-package evil
-  :require (undo-tree surround helm-config ace-jump-mode)
+  :require (evil-surround undo-tree ace-jump-mode)
   :ensure evil
   :init
   (progn
-    (setq evil-default-cursor t)
     (evil-mode 1)
+    (setq evil-default-cursor t)
     (setq evil-motion-state-modes
           (append evil-emacs-state-modes evil-motion-state-modes))))
 
@@ -87,10 +87,8 @@
     (global-evil-leader-mode 1)))
 
 (req-package evil-surround
-  :require evil
-  :ensure evil-surround
   :init
-  (global-surround-mode 1))
+  (global-evil-surround-mode 1))
 
 (req-package undo-tree
   :diminish ""
