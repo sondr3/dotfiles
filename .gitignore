@@ -10,6 +10,6 @@ tramp
 *~
 elpa
 el-get
-.places
+*places
 .cask
 emacs-init.el

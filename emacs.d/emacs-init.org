@@ -2,15 +2,15 @@
 #+Author: sondr3
 
 * My Emacs settings
-  This is my emacs settings that are continously evolving... and I'm a newbie so
+  This is my Emacs settings that are continuously evolving... and I'm a newbie so
   I don't really know what I'm doing either.
 
 ** NOTE
-   This file is automagically tangled into a =emacs-init.el= file so no editing that file.
+   This file is automatically tangled into a =emacs-init.el= file so no editing that file.
 
 * Package management
   I have no idea how that works, but apparently [[https://github.com/rdallasgray/pallet][Pallet]] and [[https://github.com/cask/cask][Cask]] is the new
-  hotness in Emacsland. I will also be using the excellent [[https://github.com/jwiegley/use-package][use-package]] along
+  hotness in Emacs-land. I will also be using the excellent [[https://github.com/jwiegley/use-package][use-package]] along
   with [[https://github.com/edvorg/req-package][req-package]] for some real package management goodness. Good golly.
 
 * Core settings
@@ -90,12 +90,21 @@
   (blink-cursor-mode -1) ;; don't blink the cursor
 #+END_SRC
 
-*** IDO Mode
-#+BEGIN_SRC emacs-lisp
-  (require 'ido)
-  (ido-mode t)
-#+END_SRC
+*** Save between sessions
+    This makes it so when you open a file you've previously closed it'll open at
+    the last location.
 
+#+BEGIN_SRC emacs-lisp
+  (req-package saveplace)
+  (setq-default save-place t)
+  (setq save-place-file (expand-file-name "places" user-emacs-directory))
+#+END_SRC
+*** Other
+    Don't pause updating the display.
+
+#+BEGIN_SRC emacs-lisp
+(setq redisplay-dont-pause t)
+#+END_SRC
 ** Annoying things
    Because nothing is perfect.
 
@@ -119,8 +128,15 @@
   (setq backup-directory-alist (list (cons ".*" backup-dir)))
   (setq auto-save-list-file-prefix autosave-dir)
   (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+  (setq backup-by-copying t)
 #+END_SRC
 
+*** Assorted annoyingness
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (setq x-select-enable-clipboard t)
+  (setq vc-make-backup-files t)
+#+END_SRC
 * Appearance
   Now comes the time to make sure Emacs starts looking dashin'.
 
@@ -158,6 +174,15 @@
   (req-package basic-theme)
 #+END_SRC
 
+*** Pretty mode
+    Who doesn't like it pretty?
+
+#+BEGIN_SRC emacs-lisp
+  (req-package pretty-mode
+    :config
+    (global-pretty-mode 1))
+#+END_SRC
+
 ** Powerline aka smart-mode-line
    After getting used to the pretty powerline in vim looking at the normal
    powerline in Emacs just isn't very nice, although it does show plenty of
@@ -169,6 +194,16 @@
     :init
     (sml/setup)
     (setq sml/theme 'respectful))
+#+END_SRC
+
+*** Customizing the layout
+
+#+BEGIN_SRC emacs-lisp
+  (setq displa-time-day-and-date t
+        display-time-format "%a %b %d %R"
+        display-time-interval 60
+        display-fime-default-load-average nil)
+  (display-time)
 #+END_SRC
 
 ** Gutter
@@ -282,6 +317,60 @@
     (progn
       (setq key-chord-two-keys-delay 0.5)
       (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)))
+#+END_SRC
+
+* Editing
+  Now that we have vim running inside of Emacs (almost), we really don't need
+  much more. Well... maybe we do.
+
+** Delimiters
+   I like my paranthesises and brackets and whatnot to be matching and distinct,
+   for this I use [[https://github.com/Fuco1/smartparens][smartparens]] and [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] for color matching
+   them. Dashing.
+
+   First some Emacs default settings.
+
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode t)
+  (setq show-paren-delay 0)
+  (setq show-paren-style 'parenthesis)
+
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (req-package smartparens-config
+    :ensure smartparens
+    :diminish (smartparens-mode . "()")
+    :init
+    (smartparens-global-mode t)
+    :config
+    (progn
+      (setq sp-show-pair-delay 0)
+      (setq sp-show-pair-from-inside t)
+      (setq sp-autoescape-string-quote nil)
+      (setq sp-autoinsert-if-followed-by-same 1)
+      (setq sp-highlight-pair-overlay nil)))
+
+  (req-package rainbow-delimiters
+    :config
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+#+END_SRC 
+
+   However we do need some colors elsewhere too.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package rainbow-mode
+    :diminish (rainbow-mode . "")
+    :init
+    (add-hook 'prog-mode-hook 'rainbow-mode))
+#+END_SRC
+** Magit
+   It's literally magic.
+
+#+BEGIN_SRC emacs-lisp
+  (defvar magit-emacsclient-executable nil)
+  (req-package magit
+    :diminish magit-auto-revert-mode)
 #+END_SRC
 
 * And finish
