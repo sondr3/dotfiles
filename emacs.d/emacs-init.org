@@ -13,6 +13,9 @@
   hotness in Emacsland. I will also be using the excellent [[https://github.com/jwiegley/use-package][use-package]] along
   with [[https://github.com/edvorg/req-package][req-package]] for some real package management goodness. Good golly.
 
+* Core settings
+  Some settings to give Emacs a bunch of sane defaults.
+
 ** =Req-package= (=use-package=) and custom settings
    Before we start using packages and such we need to setup =req-packages= and
    =use-package= as well
@@ -102,8 +105,6 @@
   (put 'narrow-to-region 'disabled nil)
   (put 'erase-buffer 'disable 'nil)
 #+END_SRC
-
-* Core settings
 
 * Appearance
   Now comes the time to make sure Emacs starts looking dashin'.

@@ -11,3 +11,4 @@ elpa
 el-get
 .places
 .cask
+emacs-init.el
