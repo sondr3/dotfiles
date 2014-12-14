@@ -96,7 +96,10 @@
   (ido-mode t)
 #+END_SRC
 
-*** Assorted commands
+** Annoying things
+   Because nothing is perfect.
+
+*** Lowercase/uppercase etc
     Mostly commands that annoy the hell out of me, like trying to undo and being
     asked repeadedly if you wanted to downcase it instead. Blerh.
 #+BEGIN_SRC emacs-lisp
@@ -104,6 +107,18 @@
   (put 'upcase-region 'disabled nil)
   (put 'narrow-to-region 'disabled nil)
   (put 'erase-buffer 'disable 'nil)
+#+END_SRC
+
+*** Autosaving and such
+    Mostly because it's really annoying with all the =#filename= and =filename~=
+    files that end up living in your directories.
+
+#+BEGIN_SRC emacs-lisp
+  (defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
+  (defvar autosave-dir (expand-file-name "~/.emacs.d/autosave"))
+  (setq backup-directory-alist (list (cons ".*" backup-dir)))
+  (setq auto-save-list-file-prefix autosave-dir)
+  (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 #+END_SRC
 
 * Appearance
@@ -135,34 +150,62 @@
 
 ** Theme
    Probably the most second most important thing in an editor for me, after of
-   course a text editor. And an operating system. VIM would be nice to have
-   too. [[https://github.com/bbatsov/zenburn-emacs][Zenburn]] is a good start, although [[ethanschoonover.com/solarized][Solarized]] isn't bad at all, just hard
-   to find a properly working version of it.
+   course a text editor. And an operating system. vim would be nice to have
+   too. I've currently settled on using [[ethanschoonover.com/solarized][Solarized]] although it's not as pretty as
+   I would've liked it to be. 
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'zenburn t)
+  (req-package basic-theme)
 #+END_SRC
 
 ** Powerline aka smart-mode-line
-   After getting used to the pretty powerline in VIM looking at the normal
+   After getting used to the pretty powerline in vim looking at the normal
    powerline in Emacs just isn't very nice, although it does show plenty of
-   information. However, none of the direct VIM forks of Powerline (or
+   information. However, none of the direct vim forks of Powerline (or
    vim-airline in my case), so I ended up using [[https://github.com/Bruce-Connor/smart-mode-line/][smart-mode-line]] instead.
 
 #+BEGIN_SRC emacs-lisp
-  (req-package smart-mode-line)
-
-  (req-package smart-mode-line-powerline-theme
-    :require smart-mode-line
+  (req-package smart-mode-line
     :init
     (sml/setup)
-    (setq sml/theme 'powerline))
+    (setq sml/theme 'respectful))
 #+END_SRC
 
-* EVIL aka VIM in Emacs
-  Now for the greater things in life; VIM. As much as I love Emacs I still think
+** Gutter
+   If you've used vim for a while you get used to having both relative line
+   numbers as well as git diffs in the gutter. Personally I find this incredibly
+   useful and so I'll be implementing it in Emacs as well.
+
+*** Git-gutter
+#+BEGIN_SRC emacs-lisp
+  (req-package git-gutter
+    :init
+    (global-git-gutter-mode +1)
+    :config
+    (progn
+      (git-gutter:linum-setup)))
+#+END_SRC
+
+*** Relative line numbers
+#+BEGIN_SRC emacs-lisp
+  (req-package linum-relative
+    :init
+    :config
+    (progn
+      (setq linum-relative-format "%3s ")
+      (setq linum-relative-current-symbol "")
+      (dolist (mode '(column-number-mode line-number-mode))
+        (when (fboundp mode) (funcall mode t)))
+      (dolist (mode-hook '(text-mode-hook prog-mode-hook conf-mode-hook))
+        (add-hook mode-hook
+                  (lambda ()
+                    (linum-mode 1))))))
+#+END_SRC
+
+* EVIL aka vim in Emacs
+  Now for the greater things in life; vim. As much as I love Emacs I still think
   modal editing is a much better way to edit text, and as such I'm using EVIL
-  mode in Emacs to get all the goodies from VIM into Emacs. It's a combination
+  mode in Emacs to get all the goodies from vim into Emacs. It's a combination
   that simply can't be beat.
 
 ** =evil=
@@ -191,11 +234,14 @@
     :init
     (progn
       (evil-leader/set-leader "<SPC>")
-      (global-evil-leader-mode 1)))
+      (global-evil-leader-mode 1)
+      (evil-leader/set-key
+        "l" 'org-insert-link
+        "w" 'save-buffer)))
 #+END_SRC
    
 ** =evil-surround=
-   I love =wim-surround=, it's incredibly handy being able to switch what
+   I love =vim-surround=, it's incredibly handy being able to switch what
    characters surround what, remove them, add new ones and so on and Tim Pope's
    plugin is great for it, luckily, it's for Emacs too.
 
