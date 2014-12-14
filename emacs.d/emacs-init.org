@@ -20,8 +20,10 @@
    path.
 
 #+BEGIN_SRC emacs-lisp
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize))
+  (req-package exec-path-from-shell
+    :init
+    (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
 #+END_SRC
 
 ** Encoding
@@ -93,6 +95,16 @@
   (put 'erase-buffer 'disable 'nil)
 #+END_SRC
 
+** =Req-package= (=use-package=) and custom settings
+   Before we start using packages and such we need to setup =req-packages= and
+   =use-package= as well
+
+#+BEGIN_SRC emacs-lisp
+  (require 'req-package)
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file)
+#+END_SRC
+
 * Appearance
   Now comes the time to make sure Emacs starts looking dashin'.
 
@@ -107,7 +119,7 @@
 #+END_SRC
 
 ** Fonts
-   I've currently settled for using Inconsolata for Emacs and terminals
+   I've currently settled for using Monaco for Emacs and terminals
    alike, it's a great font that's very easily readable and also works well with
    code and numbers.
 
@@ -120,6 +132,86 @@
                       :width 'normal)
 #+END_SRC
 
+** Theme
+   Probably the most second most important thing in an editor for me, after of
+   course a text editor. And an operating system. VIM would be nice to have
+   too. [[https://github.com/bbatsov/zenburn-emacs][Zenburn]] is a good start, although [[ethanschoonover.com/solarized][Solarized]] isn't bad at all, just hard
+   to find a properly working version of it.
 
+#+BEGIN_SRC emacs-lisp
+  (load-theme 'zenburn t)
+#+END_SRC
 
+* EVIL aka VIM in Emacs
+  Now for the greater things in life; VIM. As much as I love Emacs I still think
+  modal editing is a much better way to edit text, and as such I'm using EVIL
+  mode in Emacs to get all the goodies from VIM into Emacs. It's a combination
+  that simply can't be beat.
 
+** =evil=
+
+#+BEGIN_SRC emacs-lisp
+  (req-package evil
+    :require (undo-tree surround helm-config ace-jump-mode)
+    :ensure evil
+    :init
+    (progn
+      (setq evil-default-cursor t)
+      (evil-mode 1)
+      (setq evil-motion-state-modes
+            (append evil-emacs-state-modes evil-motion-state-modes))))
+#+END_SRC
+
+** =evil-leader=
+   The leader is a really useful thing in Vim and pretty much required for me,
+   and luckily with =evil-leader= you can have it in Emacs as well! Here it's
+   set to =<SPACE>=.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package evil-leader
+    :require evil
+    :ensure evil-leader
+    :init
+    (progn
+      (evil-leader/set-leader "<SPC>")
+      (global-evil-leader-mode 1)))
+#+END_SRC
+   
+** =evil-surround=
+   I love =wim-surround=, it's incredibly handy being able to switch what
+   characters surround what, remove them, add new ones and so on and Tim Pope's
+   plugin is great for it, luckily, it's for Emacs too.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package evil-surround
+    :require evil
+    :ensure evil-surround
+    :init
+    (global-surround-mode 1))
+#+END_SRC
+
+** =undo-tree=
+   Because the regular way that Emacs does undos is not very intuitive.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package undo-tree
+    :diminish ""
+    :init
+    (progn
+      (setq undo-tree-auto-save-history t)
+      (global-undo-tree-mode)))
+#+END_SRC
+
+** =ace-jump-mode=
+   Getting around quickly is quite useful.
+
+#+BEGIN_SRC emacs-lisp
+(req-package ace-jump-mode)
+#+END_SRC
+* And finish
+  Now we only need to finish installing everything and we can be on our merry
+  way!
+
+#+BEGIN_SRC emacs-lisp
+(req-package-finish)
+#+END_SRC
