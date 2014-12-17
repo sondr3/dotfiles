@@ -54,34 +54,45 @@
 
 *** Settings some defaults
 #+BEGIN_SRC emacs-lisp
+  (require 'uniquify)
+
   (setq
-   x-select-enable-clipboard t           ;; allow pasting outside Emacs
-   global-auto-revert-non-file-buffers t ;; auto refresh dired quietly
+   x-select-enable-clipboard t                             ;; allow pasting outside Emacs
+   global-auto-revert-non-file-buffers t                   ;; auto refresh dired quietly
    auto-revert-verbose nil
-   echo-keystrokes 0.1                   ;; show keystrokes in progress
-   delete-by-moving-to-trash t           ;; does what it says
-   jump-char-lazy-highlight-face nil     ;; don't highlight matches with jump-char
-   line-number-mode t                    ;; display line numbers
-   column-number-mode t                  ;; and columns
-   fill-column 80                        ;; lines should be 80 chars wide
-   gc-cons-threshold 20000000            ;; we have tons of memory now, don't be greedy
-   enable-recursive-minibuffers t        ;; let minibuffers be recursive
-   visible-bell t                        ;; hide that ding ding
-   font-lock-maximum-decoration t        ;; decorate all buffers with colors
-   color-theme-is-global t               ;; does what it says
-   truncate-partial-width-windows nil    ;; truncate buffers
-   tab-always-indent 'complete           ;; tab before indenting
-   require-final-newline t               ;; always add a newline when saving
-   show-paren-delay 0                    ;; because saving miliseconds is woreth it
-   load-prefer-newer t                   ;; prefer newer .el files to .elc
+   echo-keystrokes 0.02                                    ;; show keystrokes in progress
+   delete-by-moving-to-trash t                             ;; does what it says
+   jump-char-lazy-highlight-face nil                       ;; don't highlight matches with jump-char
+   line-number-mode t                                      ;; display line numbers
+   column-number-mode t                                    ;; and columns
+   fill-column 80                                          ;; lines should be 80 chars wide
+   gc-cons-threshold 20000000                              ;; we have tons of memory now, don't be greedy
+   enable-recursive-minibuffers t                          ;; let minibuffers be recursive
+   visible-bell t                                          ;; hide that ding ding
+   font-lock-maximum-decoration t                          ;; decorate all buffers with colors
+   color-theme-is-global t                                 ;; does what it says
+   truncate-partial-width-windows nil                      ;; truncate buffers
+   tab-always-indent 'complete                             ;; tab before indenting
+   require-final-newline t                                 ;; always add a newline when saving
+   show-paren-delay 0                                      ;; because saving miliseconds is woreth it
+   load-prefer-newer t                                     ;; prefer newer .el files to .elc
+   window-combination-resize t                             ;; for better window resizing
+   x-underline-at-descent-line t                           ;; draw underline lower
+   uniquify-buffer-name-style 'post-forward-angle-brackets ;; make nonunique
+                                                           ;; buffer names better
+   uniquify-ignore-buffers-re "^\\*"                       ;; but don't mess with special buffersc'
    )
 
   (setq-default
    tab-width 4
-   indent-tabs-mode nil                  ;; indent with spaces and not tabs
-   fill-column 80                        ;; max 80 characters wide
-   auto-fill-function 'do-auto-fill      ;; automatically wrap long lines
+   indent-tabs-mode nil                                     ;; indent with spaces and not tabs
+   fill-column 80                                           ;; max 80 characters wide
+   auto-fill-function 'do-auto-fill                         ;; automatically wrap long lines
+   show-trailing-whitespace nil                             ;; whitespace mode
    )
+
+  (global-auto-revert-mode 1)
+  (electric-indent-mode)
 #+END_SRC
 
 *** Global modes
@@ -136,6 +147,20 @@
   (defalias 'yes-or-no-p 'y-or-n-p)
   (setq x-select-enable-clipboard t)
   (setq vc-make-backup-files t)
+#+END_SRC
+** Keybindings
+   Since I'm using the [[https://github.com/railwaycat/emacs-mac-port][emacs-mac-port]] of Emacs for OS X I need to change the
+   keybindings for the meta key because it uses them backwards from what the
+   normal settings are.
+
+#+BEGIN_SRC emacs-lisp
+  (setq mac-option-modifier 'meta)
+  (setq mac-command-modifier 'super)
+  (setq mac-pass-control-to-system nil)
+
+  (global-set-key (kbd "s-q") 'save-buffers-kill-emacs)
+  (global-set-key (kbd "s-v") 'yank)
+  (global-set-key (kbd "s-c") 'copy-region-as-kill)
 #+END_SRC
 * Appearance
   Now comes the time to make sure Emacs starts looking dashin'.
@@ -271,8 +296,9 @@
       (evil-leader/set-leader "<SPC>")
       (global-evil-leader-mode 1)
       (evil-leader/set-key
-        "l" 'org-insert-link
-        "w" 'save-buffer)))
+        "w" 'ace-jump-word-mode
+        "c" 'ace-jump-char-mode
+        "l" 'ace-jump-line-mode)))
 #+END_SRC
    
 ** =evil-surround=
@@ -373,6 +399,43 @@
     :diminish magit-auto-revert-mode)
 #+END_SRC
 
+* Languages
+  Now time to add some language specific configurations.
+
+** Clojure
+
+*** =clojure-mode=
+   First of all, [[https://github.com/clojure-emacs/clojure-mode][clojure-mode]] for font-locking, indentations, navigation and
+   such for Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package clojure-mode)
+  (req-package clojure-mode-extra-font-locking)
+
+  (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
+  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+#+END_SRC
+
+*** Cider
+    And now to hook into the REPL for Clojure.
+
+#+BEGIN_SRC emacs-lisp
+  (req-package cider)
+
+  (setq nrepel-log-messages
+        nrepl-hide-special-buffers t
+        cider-repl-tab-command 'indent-for-tab-command
+        cider-prefer-local-resources t
+        cider-repl-pop-to-buffer-on-connect nil
+        cider-auto-select-error-buffer nil
+        cider-stacktrace-fill-column 80
+        nrepl-buffer-name-separator "-"
+        cider-repl-result-prefix ";; =>"
+        cider-interactive-eval-result-prefix ";; =>"
+        )
+
+  (add-hook cider-mode-hook 'cider-turn-on-eldoc-mode)
+#+END_SRC
 * And finish
   Now we only need to finish installing everything and we can be on our merry
   way!
