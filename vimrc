@@ -94,7 +94,7 @@ endif
 
 set backspace=indent,eol,start
 set linespace=0
-" set nu
+set nu
 set showmatch
 set incsearch
 set hlsearch
