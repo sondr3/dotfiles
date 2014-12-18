@@ -26,6 +26,8 @@ syntax on
 set mouse=a
 set mousehide
 set showcmd
+set complete-=i
+set smarttab
 scriptencoding utf-8
 set shortmess+=filmnrxoOtT
 set viewoptions=folds,options,cursor,unix,slash
@@ -36,6 +38,12 @@ set hidden
 set iskeyword-=.
 set iskeyword-=#
 set iskeyword-=-
+set nrformats-=octal
+set autoread
+set fileformats+=mac
+
+set ttimeout
+set ttimeoutlen=100
 
 " Useful defaults
 " Trim whitespace when saving
@@ -67,20 +75,50 @@ if filereadable(expand("~/.vim/plugged/vim-colors-solarized/colors/solarized.vim
     color solarized
 endif
 
+" Sensible defaults from Tpope
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
+
+if &encoding ==# 'latin1' && has('gui_running')
+  set encoding=utf-8
+endif
+
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+
+if has('path_extra')
+  setglobal tags-=./tags tags^=./tags;
+endif
+
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+set sessionoptions-=options
+
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux'
+  set t_Co=16
+endif
+
+inoremap <C-U> <C-G>u<C-U>
+
 :let g:vimfiler_as_default_explorer = 1
 
-set tabpagemax=15
+set tabpagemax=50
 set showmode
 
 set cursorline
 highlight clear SignColumn
 highlight clear LineNr
 
-if has('cmdline_info')
-    set ruler
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
-    set showcmd
-endif
+set ruler
+set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
 
 if has('statusline')
     set laststatus=2
