@@ -83,7 +83,6 @@ let s:TYPE = {
 \   'funcref': type(function('call'))
 \ }
 let s:loaded = get(s:, 'loaded', {})
-let s:triggers = get(s:, 'triggers', {})
 
 function! plug#begin(...)
   if a:0 > 0
@@ -171,7 +170,7 @@ function! plug#end()
           endif
           call add(s:triggers[name].map, cmd)
         elseif cmd =~ '^[A-Z]'
-          if exists(':'.cmd) != 2
+          if !exists(':'.cmd)
             execute printf(
             \ 'command! -nargs=* -range -bang %s call s:lod_cmd(%s, "<bang>", <line1>, <line2>, <q-args>, %s)',
             \ cmd, string(cmd), string(name))
@@ -1266,7 +1265,7 @@ function! s:clean(force)
     call append(line('$'), 'Already clean.')
   else
     call inputsave()
-    let yes = a:force || (input('Proceed? (y/N) ') =~? '^y')
+    let yes = a:force || (input('Proceed? (Y/N) ') =~? '^y')
     call inputrestore()
     if yes
       for dir in todo
@@ -1483,7 +1482,7 @@ endfunction
 function! s:revert()
   let name = s:find_name(line('.'))
   if empty(name) || !has_key(g:plugs, name) ||
-    \ input(printf('Revert the update of %s? (y/N) ', name)) !~? '^y'
+    \ input(printf('Revert the update of %s? (Y/N) ', name)) !~? '^y'
     return
   endif
 

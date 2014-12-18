@@ -80,7 +80,8 @@
    x-underline-at-descent-line t                           ;; draw underline lower
    uniquify-buffer-name-style 'post-forward-angle-brackets ;; make nonunique
                                                            ;; buffer names better
-   uniquify-ignore-buffers-re "^\\*"                       ;; but don't mess with special buffersc'
+   uniquify-ignore-buffers-re "^\\*"                       ;; but don't mess with
+   ;; special buffers
    )
 
   (setq-default
@@ -89,6 +90,7 @@
    fill-column 80                                           ;; max 80 characters wide
    auto-fill-function 'do-auto-fill                         ;; automatically wrap long lines
    show-trailing-whitespace nil                             ;; whitespace mode
+   undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/undo/"))) 
    )
 
   (global-auto-revert-mode 1)
@@ -373,7 +375,6 @@
     (progn
       (setq sp-show-pair-delay 0)
       (setq sp-show-pair-from-inside t)
-      (setq sp-autoescape-string-quote nil)
       (setq sp-autoinsert-if-followed-by-same 1)
       (setq sp-highlight-pair-overlay nil)))
 
@@ -420,22 +421,24 @@
     And now to hook into the REPL for Clojure.
 
 #+BEGIN_SRC emacs-lisp
-  (req-package cider)
-
-  (setq nrepel-log-messages
-        nrepl-hide-special-buffers t
-        cider-repl-tab-command 'indent-for-tab-command
-        cider-prefer-local-resources t
-        cider-repl-pop-to-buffer-on-connect nil
-        cider-auto-select-error-buffer nil
-        cider-stacktrace-fill-column 80
-        nrepl-buffer-name-separator "-"
-        cider-repl-result-prefix ";; =>"
-        cider-interactive-eval-result-prefix ";; =>"
-        )
-
-  (add-hook cider-mode-hook 'cider-turn-on-eldoc-mode)
+  (req-package cider
+    :config
+    (progn
+      (setq nrepl-log-messages t
+      nrepl-hide-special-buffers t
+      cider-repl-tab-command 'indent-for-tab-command
+      cider-prefer-local-resources t
+      cider-pop-to-buffer-on-connect nil
+      cider-auto-selet-error-buffer nil
+      cider-stacktrace-fill-column 80
+      nrepl-buffer-name-separator "-"
+      cider-repl-result-refix ";; =>"
+      cider-interactive-eval-result-prefix ";; =>")
+      (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+      (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+      (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)))
 #+END_SRC
+
 * And finish
   Now we only need to finish installing everything and we can be on our merry
   way!

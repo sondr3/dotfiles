@@ -136,22 +136,18 @@ function! s:source.hooks.on_syntax(args, context) "{{{
   endif
 
   syntax case ignore
-  syntax region uniteSource__GrepLine
-        \ start=' ' end='$'
+  syntax match uniteSource__GrepFile /^[^:]*:/ contained
         \ containedin=uniteSource__Grep
-  syntax match uniteSource__GrepFile /^[^:]*/ contained
-        \ containedin=uniteSource__GrepLine
-        \ nextgroup=uniteSource__GrepSeparator
-  syntax match uniteSource__GrepSeparator /:/ contained
-        \ containedin=uniteSource__GrepLine
-        \ nextgroup=uniteSource__GrepLineNr
-  syntax match uniteSource__GrepLineNr /\d\+\ze:/ contained
-        \ containedin=uniteSource__GrepLine
+        \ nextgroup=uniteSource__GrepLineNR
+  syntax match uniteSource__GrepLineNR /\d\+:/ contained
+        \ containedin=uniteSource__Grep
         \ nextgroup=uniteSource__GrepPattern
   execute 'syntax match uniteSource__GrepPattern /'
         \ . substitute(a:context.source__input, '\([/\\]\)', '\\\1', 'g')
-        \ . '/ contained containedin=uniteSource__GrepLine'
-  highlight default link uniteSource__GrepFile Directory
+        \ . '/ contained containedin=uniteSource__Grep'
+  syntax match uniteSource__GrepSeparator /:/ contained conceal
+        \ containedin=uniteSource__GrepFile,uniteSource__GrepLineNR
+  highlight default link uniteSource__GrepFile Comment
   highlight default link uniteSource__GrepLineNr LineNR
   execute 'highlight default link uniteSource__GrepPattern'
         \ get(a:context, 'custom_grep_search_word_highlight',
@@ -167,6 +163,11 @@ function! s:source.hooks.on_post_filter(args, context) "{{{
     let candidate.kind = ['file', 'jump_list']
     let candidate.action__col_pattern = a:context.source__input
     let candidate.is_multiline = 1
+    let candidate.action__path =
+          \ unite#util#substitute_path_separator(
+          \   fnamemodify(candidate.source__info[0], ':p'))
+    let candidate.action__line = candidate.source__info[1]
+    let candidate.action__text = candidate.source__info[2]
   endfor
 endfunction"}}}
 
@@ -271,35 +272,38 @@ function! s:source.async_gather_candidates(args, context) "{{{
   let _ = []
   for candidate in candidates
     if len(candidate[1]) <= 1 || candidate[1][1] !~ '^\d\+$'
-      let dict = {
-            \   'action__path' : a:context.source__target[0],
-            \ }
+      let path = a:context.source__target[0]
       if len(candidate[1]) <= 1
-        let dict.action__line = candidate[0][:1][0]
-        let dict.action__text = candidate[1][0]
+        let line = candidate[0][:1][0]
+        let text = candidate[1][0]
       else
-        let dict.action__line = candidate[0][:1].candidate[1][0]
-        let dict.action__text = join(candidate[1][1:], ':')
+        let line = candidate[0][:1].candidate[1][0]
+        let text = join(candidate[1][1:], ':')
       endif
     else
-      let dict = {
-            \   'action__path' : unite#util#substitute_path_separator(
-            \   fnamemodify(candidate[0][:1].candidate[1][0], ':p')),
-            \   'action__line' : candidate[1][1],
-            \   'action__text' : join(candidate[1][2:], ':'),
-            \ }
+      let path = candidate[0][:1].candidate[1][0]
+      let line = candidate[1][1]
+      let text = join(candidate[1][2:], ':')
     endif
 
-    let dict.word = printf('%s:%s:%s',
-          \  unite#util#substitute_path_separator(
-          \     fnamemodify(dict.action__path, ':.')),
-          \ dict.action__line, dict.action__text)
-
-    call add(_, dict)
+    call add(_, { 'word' : text, 'source__info' : [path, line, text]})
   endfor
 
   return _
 endfunction "}}}
+
+function! s:source.source__converter(candidates, context) "{{{
+  for candidate in a:candidates
+    let candidate.abbr = printf('%s:%4s: %s',
+          \  unite#util#substitute_path_separator(
+          \     fnamemodify(candidate.source__info[0], ':.')),
+          \ candidate.source__info[1], candidate.source__info[2])
+  endfor
+
+  return a:candidates
+endfunction"}}}
+
+let s:source.converters = [s:source.source__converter]
 
 function! s:source.complete(args, context, arglead, cmdline, cursorpos) "{{{
   return ['%', '#', '$buffers'] + unite#sources#file#complete_directory(

@@ -4,6 +4,9 @@
 
 (depends-on "ace-jump-mode")
 (depends-on "basic-theme")
+(depends-on "cider")
+(depends-on "clojure-mode")
+(depends-on "clojure-mode-extra-font-locking")
 (depends-on "evil")
 (depends-on "evil-leader")
 (depends-on "evil-surround")
@@ -20,5 +23,6 @@
 (depends-on "req-package")
 (depends-on "smart-mode-line")
 (depends-on "smartparens")
+(depends-on "solarized-theme")
 (depends-on "undo-tree")
 (depends-on "use-package")
