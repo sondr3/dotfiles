@@ -25,6 +25,7 @@ filetype plugin indent on
 syntax on
 set mouse=a
 set mousehide
+set showcmd
 scriptencoding utf-8
 set shortmess+=filmnrxoOtT
 set viewoptions=folds,options,cursor,unix,slash
@@ -42,7 +43,19 @@ autocmd BufWritePre * %s/\s\+$//e
 " Return to last location when loading
 autocmd BufReadPost * normal `"
 " Make <space> the leader button
-let mapleader="\<space>"
+let mapleader=","
+" Change the command key for vim
+nnoremap ; :
+
+" Easier moving between windows
+" Skips having to press C-w first
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" Clear searches automatically
+nmap <silent> ,/ :nohlsearch<CR>
 
 " Interface
 set background=dark
@@ -81,7 +94,7 @@ endif
 
 set backspace=indent,eol,start
 set linespace=0
-set nu
+" set nu
 set showmatch
 set incsearch
 set hlsearch
