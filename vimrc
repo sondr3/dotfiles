@@ -20,7 +20,7 @@ Plug 'raimondi/delimitMate'
 call plug#end()
 
 " General settings
-:imap jj <Esc>
+:imap jk <Esc>
 filetype plugin indent on
 syntax on
 set mouse=a
@@ -41,6 +41,7 @@ set iskeyword-=-
 set nrformats-=octal
 set autoread
 set fileformats+=mac
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 set ttimeout
 set ttimeoutlen=100
@@ -50,10 +51,18 @@ set ttimeoutlen=100
 autocmd BufWritePre * %s/\s\+$//e
 " Return to last location when loading
 autocmd BufReadPost * normal `"
+
+" Keybindings
 " Make <space> the leader button
 let mapleader=","
 " Change the command key for vim
 nnoremap ; :
+" Make vim scroll line-by-line, not around wrapped lines
+:nmap j gj
+:nmap k gk
+" <Leader>o to open a new file
+nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>w :w<CR>
 
 " Easier moving between windows
 " Skips having to press C-w first
@@ -86,10 +95,6 @@ set display+=lastline
 
 if &encoding ==# 'latin1' && has('gui_running')
   set encoding=utf-8
-endif
-
-if &listchars ==# 'eol:$'
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
 
 if has('path_extra')
@@ -146,7 +151,7 @@ set scrolljump=5
 set scrolloff=3
 set foldenable
 set list
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 
 " Formatting
 set nowrap
@@ -167,6 +172,9 @@ let g:airline#extensions#tabline#enabled = 1
 " ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_show_hidden = 0
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_working_path_mode = 'ra'
 
 " delmitMate
 let delimitMate_expand_cr = 2
