@@ -165,6 +165,9 @@ set splitright
 set splitbelow
 set pastetoggle=<F12>
 
+" Markdown
+au BufRead,BufNewFile *.md setlocal textwidth=80
+
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
