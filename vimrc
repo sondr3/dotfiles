@@ -16,6 +16,8 @@ Plug 'mattn/emmet-vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'kien/ctrlp.vim'
 Plug 'raimondi/delimitMate'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
@@ -143,6 +145,7 @@ set incsearch
 set hlsearch
 set winminheight=0
 set ignorecase
+set wildignorecase
 set smartcase
 set wildmenu
 set wildmode=list:longest,full

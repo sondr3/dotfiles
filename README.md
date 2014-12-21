@@ -23,7 +23,7 @@ formatting and such, but feel free to take a look at it.
 ## `tmux`
 
 Same as with `vim`, I install it with [Homebrew](homebrew): `brew install
-tmux`, however I also install [tmux-MacOSX-pasteboard](pasteboard) to get
+tmux --HEAD`, however I also install [tmux-MacOSX-pasteboard](pasteboard) to get
 pasting to properly work. To manage plugins I use [tpm](tpm) (Tmux Plugin
 Manager). And as with vim the `tmux.conf` gets symlinked to
 `~/.tmux.conf`.
