@@ -2,7 +2,7 @@
 call plug#begin('~/.vim/plugged')
 
 " Installed addons
-Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
 Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -77,14 +77,14 @@ map <C-l> <C-w>l
 nmap <silent> ,/ :nohlsearch<CR>
 
 " Interface
-set background=dark
-if filereadable(expand("~/.vim/plugged/vim-colors-solarized/colors/solarized.vim"))
-    let g:solarized_termcolors=256
-    let g:solarized_termtrans=1
-    let g:solarized_contrast="normal"
-    let g:solarized_visibility="normal"
-    color solarized
-endif
+set term=screen-256color
+set t_Co=256
+let base16colorspace=256
+colorscheme base16-solarized
+highlight clear GitGutterAdd
+highlight clear GitGutterChange
+highlight clear GitGutterDelete
+highlight clear GitGutterChangeDelete
 
 " Sensible defaults from Tpope
 if !&scrolloff
