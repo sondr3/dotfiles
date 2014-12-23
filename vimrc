@@ -18,6 +18,8 @@ Plug 'kien/ctrlp.vim'
 Plug 'raimondi/delimitMate'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
@@ -170,6 +172,8 @@ set pastetoggle=<F12>
 
 " Markdown
 au BufRead,BufNewFile *.md setlocal textwidth=80
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:vim_markdown_frontmatter=1
 
 " Airline
 let g:airline_powerline_fonts = 1
