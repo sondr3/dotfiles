@@ -278,6 +278,7 @@ function! unite#init#_current_unite(sources, context) "{{{
   let unite.prev_line = 0
   let unite.update_time_save = &updatetime
   let unite.statusline = unite#view#_get_status_string(unite)
+  let unite.original_context = deepcopy(a:context)
 
   " Create new buffer name.
   let postfix = unite#helper#get_postfix(
@@ -382,11 +383,11 @@ function! unite#init#_candidates(candidates) "{{{
       let abbr = candidate.unite__abbr
       let candidate.unite__abbr = ''
 
-      while abbr !~ '^\s\+$'
+      while abbr != ''
         let trunc_abbr = unite#util#strwidthpart(
               \ abbr, max_width)
         let candidate.unite__abbr .= trunc_abbr . "~\n"
-        let abbr = '  ' . abbr[len(trunc_abbr):]
+        let abbr = abbr[len(trunc_abbr):]
       endwhile
 
       let candidate.unite__abbr =
@@ -411,8 +412,7 @@ function! unite#init#_candidates(candidates) "{{{
           \   context.max_multi_lines-1]
       let candidate_multi = (cnt != 0) ?
             \ deepcopy(candidate) : candidate
-      let candidate_multi.unite__abbr =
-            \ (cnt == 0 ? '+ ' : '| ') . multi
+      let candidate_multi.unite__abbr = multi
 
       if cnt != 0
         let candidate_multi.is_dummy = 1
@@ -427,10 +427,6 @@ function! unite#init#_candidates(candidates) "{{{
 
   " Multiline check.
   if is_multiline || context.multi_line
-    for candidate in filter(copy(candidates), '!v:val.is_multiline')
-      let candidate.unite__abbr = '  ' . candidate.unite__abbr
-    endfor
-
     let unite.is_multi_line = 1
   endif
 

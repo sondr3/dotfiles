@@ -858,18 +858,6 @@ g:unite_enable_short_source_names
 		Note: This variable is deprecated.  Please use
 		|unite#custom#profile()| instead.
 
-g:unite_marked_icon				*g:unite_marked_icon*
-		It controls unite marked candidates icon.
-		Note: Must be only one character.
-		Note: This variable is deprecated.  Please use
-		|unite#custom#profile()| instead.
-
-g:unite_candidate_icon				*g:unite_candidate_icon*
-		It controls unite normal candidates icon.
-		Note: Must be only one character.
-		Note: This variable is deprecated.  Please use
-		|unite#custom#profile()| instead.
-
 g:unite_abbr_highlight				*g:unite_abbr_highlight*
 		Specify abbreviated candidates highlight.
 		Note: This variable is deprecated.  Please use
@@ -1905,16 +1893,6 @@ the context dictionary.
 		-unique
 		Unique candidates by word attribute.
 
-						*unite-options-candidate-icon*
-		-candidate-icon={icon-text}
-		Specify the candidate icon text.  The default value is ' '.
-		Note: Must be only one character.
-
-						*unite-options-marked-icon*
-		-marked-icon={icon-text}
-		Specify the marked icon text.  The default value is '*'.
-		Note: Must be only one character.
-
 						*unite-options-cursor-line-time*
 		-cursor-line-time={icon-text}
 		Specify the cursor line highlight time.
@@ -1949,6 +1927,11 @@ the context dictionary.
 		(when executing the file preview action) vertically rather than
 		horizontally. It will take up half the width of the current
 		Unite buffer.
+
+						*unite-options-force-redraw*
+		-force-redraw
+		It it is on, Unite will redraw the candidates like
+		|<Plug>(unite_redraw)|.
 
 ==============================================================================
 SOURCES						*unite-sources*
@@ -2748,6 +2731,7 @@ Opens a file into a new buffer.  This kind extends |unite-action-openable| and
 	mkdir		Make the directory.  If it already exists, this action
 			does nothing.
 	rename		Change the file name.
+	exrename	Batch rename selected files.
 	grep		Grep the files.
 	grep_directory	Grep the files in the directories.
 	wunix		Write by unix fileformat.

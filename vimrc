@@ -20,11 +20,15 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'scrooloose/syntastic'
+Plug 'vim-ruby/vim-ruby'
+Plug 'slim-template/vim-slim'
 
 call plug#end()
 
 " General settings
 :imap jk <Esc>
+set nocompatible
 filetype plugin indent on
 syntax on
 set mouse=a
@@ -47,6 +51,10 @@ set autoread
 set fileformats+=mac
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
+set backup
+set backupdir=~/.vim/backup
+set dir=~/.vim/swap
+
 set ttimeout
 set ttimeoutlen=100
 
@@ -55,6 +63,7 @@ set ttimeoutlen=100
 autocmd BufWritePre * %s/\s\+$//e
 " Return to last location when loading
 autocmd BufReadPost * normal `"
+set colorcolumn=80
 
 " Keybindings
 " Make <space> the leader button
@@ -87,6 +96,7 @@ highlight clear GitGutterAdd
 highlight clear GitGutterChange
 highlight clear GitGutterDelete
 highlight clear GitGutterChangeDelete
+highlight VertSplit cterm=none ctermbg=21 ctermfg=21
 
 " Sensible defaults from Tpope
 if !&scrolloff
@@ -161,10 +171,8 @@ set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 " Formatting
 set nowrap
 set autoindent
-set shiftwidth=4
+set shiftwidth=2 tabstop=2 softtabstop=2
 set expandtab
-set tabstop=4
-set softtabstop=4
 set nojoinspaces
 set splitright
 set splitbelow
@@ -173,6 +181,7 @@ set pastetoggle=<F12>
 " Markdown
 au BufRead,BufNewFile *.md setlocal textwidth=80
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 
 " Airline

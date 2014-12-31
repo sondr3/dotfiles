@@ -261,6 +261,8 @@ function! unite#view#_set_syntax() "{{{
   syntax clear
 
   syntax match uniteQuickMatchMarker /^.|/ contained
+        \ contains=uniteQuickMatchSeparator
+  syntax match uniteQuickMatchSeparator /|/ contained conceal
   syntax match uniteInputCommand /\\\@<! :\S\+/ contained
 
   let unite = unite#get_current_unite()
@@ -277,20 +279,20 @@ function! unite#view#_set_syntax() "{{{
         \ ' contains=uniteCandidateMarker,'.
         \ 'uniteCandidateSourceName'
   execute 'syntax match uniteCandidateMarker /^'.
-        \ candidate_icon.' / contained'
+        \ candidate_icon.'/ contained conceal'
 
   let marked_icon = unite#util#escape_pattern(
         \ unite.context.marked_icon)
   execute 'syntax region uniteMarkedLine start=/^'.
         \ marked_icon.'/ end=''$'' keepend'
+        \ ' contains=uniteMarkedMarker'
+  execute 'syntax match uniteMarkedMarker /^'.
+        \ marked_icon.'/ contained conceal'
 
   silent! syntax clear uniteCandidateSourceName
   if unite.max_source_name > 0
     syntax match uniteCandidateSourceName
           \ /\%3c[[:alnum:]_\/-]\+/ contained
-  else
-    execute 'syntax match uniteCandidateSourceName /^'.
-          \ candidate_icon.' / contained'
   endif
 
   " Set syntax.
@@ -537,13 +539,13 @@ function! unite#view#_init_cursor() "{{{
   let key = unite#loaded_source_names_string()
   let is_restore = context.restore
         \ && has_key(positions, key) && context.select <= 0
-        \ && positions[key].candidate ==#
-        \     unite#helper#get_current_candidate(positions[key].pos[1])
+        \ && (context.resume || positions[key].candidate ==#
+        \       unite#helper#get_current_candidate(positions[key].pos[1]))
 
   if context.start_insert && !context.auto_quit
     let unite.is_insert = 1
 
-    if is_restore && context.resume
+    if is_restore
           \ && positions[key].pos[1] != unite.prompt_linenr
       " Restore position.
       call setpos('.', positions[key].pos)

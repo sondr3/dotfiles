@@ -103,7 +103,11 @@ function! unite#start#standard(sources, ...) "{{{
 
   setlocal modifiable
 
-  call unite#view#_redraw_candidates()
+  if context.force_redraw
+    call unite#force_redraw()
+  else
+    call unite#view#_redraw_candidates()
+  endif
 
   call unite#handlers#_on_bufwin_enter(bufnr('%'))
 
@@ -161,6 +165,7 @@ function! unite#start#temporary(sources, ...) "{{{
   let context.unite__is_restart = 0
   let context.quick_match = 0
   let context.resume = 0
+  let context.force_redraw = 0
 
   if context.script
     " Set buffer-name automatically.
@@ -313,7 +318,6 @@ function! unite#start#resume(buffer_name, ...) "{{{
   endif
 
   let context = getbufvar(bufnr, 'unite').context
-  let context.resume = 1
 
   let prev_bufnr = bufnr('%')
   let winnr = winnr()
@@ -345,10 +349,15 @@ function! unite#start#resume(buffer_name, ...) "{{{
   let unite.is_finalized = 0
   let unite.preview_candidate = {}
   let unite.highlight_candidate = {}
+  let unite.context.resume = 1
 
   call unite#set_current_unite(unite)
 
-  if has_key(new_context, 'input')
+  if context.force_redraw
+    call unite#force_redraw()
+  endif
+
+  if has_key(new_context, 'input') && new_context.input != ''
     call unite#mappings#narrowing(new_context.input)
     call unite#redraw()
   endif

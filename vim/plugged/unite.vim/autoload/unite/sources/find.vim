@@ -74,7 +74,8 @@ function! s:source.hooks.on_init(args, context) "{{{
     redraw
     echo "Please input command-line(quote is needed) Ex: -name '*.vim'"
     let a:context.source__input = unite#util#input(
-          \ printf('%s %s %s ', g:unite_source_find_command, g:unite_source_find_default_opts,
+          \ printf('"%s" %s %s ',
+          \   g:unite_source_find_command, g:unite_source_find_default_opts,
           \   a:context.source__target), '-name ')
   endif
 endfunction"}}}
@@ -92,8 +93,10 @@ function! s:source.gather_candidates(args, context) "{{{
   endif
 
   if unite#util#is_windows() &&
-        \ vimproc#get_command_name(g:unite_source_find_command) =~? '/Windows/system.*/find\.exe$'
-    call unite#print_source_message('Detected windows find command.', s:source.name)
+        \ vimproc#get_command_name(g:unite_source_find_command)
+        \     =~? '/Windows/system.*/find\.exe$'
+    call unite#print_source_message(
+          \ 'Detected windows find command.', s:source.name)
     let a:context.is_async = 0
     return []
   endif
@@ -102,8 +105,9 @@ function! s:source.gather_candidates(args, context) "{{{
     let a:context.is_async = 1
   endif
 
-  let cmdline = printf('%s %s %s %s', g:unite_source_find_command, g:unite_source_find_default_opts,
-    \   string(a:context.source__target), a:context.source__input)
+  let cmdline = printf('"%s" %s %s %s',
+        \ g:unite_source_find_command, g:unite_source_find_default_opts,
+        \   string(a:context.source__target), a:context.source__input)
   call unite#print_source_message('Command-line: ' . cmdline, s:source.name)
   let a:context.source__proc = vimproc#pgroup_open(
         \ vimproc#util#iconv(cmdline, &encoding, 'char'))

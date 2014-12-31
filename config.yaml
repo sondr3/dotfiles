@@ -1,0 +1,36 @@
+directory: ~/Music
+library: ~/Music/library.blb
+import:
+  copy: yes
+  write: yes
+  resume: ask
+  log: beetslog.txt
+art_filename: albumart
+threaded: yes
+color: yes
+
+paths:
+  default: $albumartist/$album%aunique{} ($year)/%if{$multidisc,Disc $disc/}$track - $title
+  singleton: Singles/$artist/$title
+  comp: Compilations/$album%aunique{} ($year)/$track-$tracktotal $title
+  albumtype:soundtrack: Soundtracks/$album ($year)/$track-$tracktotal $title
+
+plugins: discogs fetchart lastgenre lastimport mbsync mpdupdate info inline
+
+item_fields:
+  multidisc: 1 if disctotal > 1 else 0
+
+fetchart:
+  cautious: true
+  cover_names: front back
+
+lastgenre:
+  auto: yes
+  count: 3
+
+lastfm:
+  user: sondr3
+
+mpd:
+  host: 127.0.0.1
+  port: 6600
