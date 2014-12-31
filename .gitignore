@@ -1,6 +1,12 @@
 *.swp
 .DS_Store
 
+# hide vim folders
+autoload
+backup
+plugged
+swap
+
 # Hide emacs folders/files
 .elc
 auto-save-list
