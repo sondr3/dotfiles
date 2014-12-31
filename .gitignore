@@ -2,10 +2,10 @@
 .DS_Store
 
 # hide vim folders
-autoload
-backup
-plugged
-swap
+vim/autoload
+vim/backup
+vim/plugged
+vim/swap
 
 # Hide emacs folders/files
 .elc
