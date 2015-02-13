@@ -82,13 +82,12 @@
                                                            ;; buffer names better
    uniquify-ignore-buffers-re "^\\*"                       ;; but don't mess with
    ;; special buffers
+   visual-line-mode 1 ;; proper word wrapping
    )
 
   (setq-default
    tab-width 4
    indent-tabs-mode nil                                     ;; indent with spaces and not tabs
-   fill-column 80                                           ;; max 80 characters wide
-   auto-fill-function 'do-auto-fill                         ;; automatically wrap long lines
    show-trailing-whitespace nil                             ;; whitespace mode
    undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/undo/"))) 
    )
@@ -198,7 +197,21 @@
    I would've liked it to be. 
 
 #+BEGIN_SRC emacs-lisp
-  (req-package basic-theme)
+  (req-package solarized-theme
+    :config
+    (progn
+      (setq
+       solarized-distinct-fringe-background t
+       solarized-high-contrast-mode-line t
+       solarized-use-less-bold t
+       solarized-use-more-italic t
+       solarized-emphasize-indicators nil
+       solarized-scale-org-headlines nil
+       solarized-height-minus-1 1
+       solarized-height-plus-1 1
+       solarized-height-plus-2 1
+       solarized-height-plus-3 1
+       solarized-height-plus-4 1)))
 #+END_SRC
 
 *** Pretty mode
@@ -281,7 +294,17 @@
       (evil-mode 1)
       (setq evil-default-cursor t)
       (setq evil-motion-state-modes
-            (append evil-emacs-state-modes evil-motion-state-modes))))
+            (append evil-emacs-state-modes evil-motion-state-modes)))
+    :config
+    (progn
+      (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+      (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+      (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+      (setq evil-emacs-state-cursor '("#dfaf8f" box))
+      (setq evil-normal-state-cursor '("#f8f893" box))
+      (setq evil-insert-state-cursor '("#f8f893" bar))
+      (setq evil-replace-state-cursor '("#cc9393" box))))
 #+END_SRC
 
 ** =evil-leader=
@@ -334,7 +357,7 @@
 #+END_SRC
 
 ** Keybinds
-   The only one I really need is being able to use =jj= instead of =ESC=, but to
+   The only one I really need is being able to use =jk= instead of =ESC=, but to
    do this I need [[http://www.emacswiki.org/emacs/key-chord.el][key-chord.el]].
 
 #+BEGIN_SRC emacs-lisp
@@ -344,7 +367,7 @@
     :config
     (progn
       (setq key-chord-two-keys-delay 0.5)
-      (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)))
+      (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)))
 #+END_SRC
 
 * Editing
@@ -438,6 +461,27 @@
       (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
       (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)))
 #+END_SRC
+
+** Common LISP
+   Time to get started with Common LISP.
+
+*** =slime=
+    Superior LISP Interaction
+
+    #+BEGIN_SRC emacs-lisp
+      (req-package slime
+        :init
+        (progn
+          (setq inferior-lisp-program "/usr/local/bin/sbcl")
+          (setq
+           slime-contribs '(slime-fancy
+                                 slime-indentation
+                                 slime-banner
+                                 slime-highlight-edits)
+           slime-net-coding-system 'utf-8-unix
+           slime-complete-symbol*-fancy t
+           slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
+    #+END_SRC
 
 * And finish
   Now we only need to finish installing everything and we can be on our merry

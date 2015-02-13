@@ -54,6 +54,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set backup
 set backupdir=~/.vim/backup
 set dir=~/.vim/swap
+set clipboard=unnamed
 
 set ttimeout
 set ttimeoutlen=100
@@ -63,11 +64,11 @@ set ttimeoutlen=100
 autocmd BufWritePre * %s/\s\+$//e
 " Return to last location when loading
 autocmd BufReadPost * normal `"
-set colorcolumn=80
+" set colorcolumn=80
 
 " Keybindings
 " Make <space> the leader button
-let mapleader=","
+let mapleader="\<Space>"
 " Change the command key for vim
 nnoremap ; :
 " Make vim scroll line-by-line, not around wrapped lines
@@ -201,3 +202,6 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " delmitMate
 let delimitMate_expand_cr = 2
+
+" syntastic
+let g:syntastic_html_checkers=['']
