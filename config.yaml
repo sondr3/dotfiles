@@ -15,7 +15,7 @@ paths:
   comp: Compilations/$album%aunique{} ($year)/$track-$tracktotal $title
   albumtype:soundtrack: Soundtracks/$album ($year)/$track-$tracktotal $title
 
-plugins: discogs fetchart lastgenre lastimport mbsync mpdupdate info inline
+plugins: discogs fetchart embedart lastgenre lastimport mbsync info inline
 
 item_fields:
   multidisc: 1 if disctotal > 1 else 0
@@ -30,7 +30,3 @@ lastgenre:
 
 lastfm:
   user: sondr3
-
-mpd:
-  host: 127.0.0.1
-  port: 6600
