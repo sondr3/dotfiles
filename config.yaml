@@ -1,5 +1,5 @@
 directory: ~/Music
-library: ~/Music/library.blb
+library: ~/Music/.beets/library.blb
 import:
   copy: yes
   write: yes
@@ -9,16 +9,25 @@ art_filename: albumart
 threaded: yes
 color: yes
 
+match:
+  preferred:
+    media: ['CD', 'Digital Media|File', 'Vinyl']
+  max_rec:
+    mediums: low
+    tracks: medium
+
 paths:
-  default: $albumartist/$album%aunique{} ($year)/%if{$multidisc,Disc $disc/}$track - $title
+  default: $myartist/%asciify{$album%aunique{}} ($year)/%if{$multidisc,Disc $disc/}$track - $title
+  #default: $albumartist/$album%aunique{} ($year)/%if{$multidisc,Disc $disc/}$track - $title
   singleton: Singles/$artist/$title
-  comp: Compilations/$album%aunique{} ($year)/$track-$tracktotal $title
-  albumtype:soundtrack: Soundtracks/$album ($year)/$track-$tracktotal $title
+  comp: Compilations/$album%aunique{} ($year)/%if{$multidisc,Disc $disc/}$track - $title
+  albumtype:soundtrack: Soundtracks/$album%aunique{} ($year)/%if{$multidisc,Disc $disc/}$track - $title
 
 plugins: discogs fetchart embedart lastgenre lastimport mbsync mpdupdate info inline
 
 item_fields:
   multidisc: 1 if disctotal > 1 else 0
+  myartist: albumartist.split(';')[0]
 
 fetchart:
   cautious: true
