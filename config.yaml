@@ -5,6 +5,7 @@ import:
   write: yes
   resume: ask
   log: beetslog.txt
+  languages: 'en'
 art_filename: albumart
 threaded: yes
 color: yes
@@ -17,7 +18,7 @@ match:
     tracks: medium
 
 paths:
-  default: $myartist/%asciify{$album%aunique{}} ($year)/%if{$multidisc,Disc $disc/}$track - $title
+  default: $firstartist/%asciify{$album%aunique{}} %if{$restartist,performed by $restartist} ($year)/%if{$multidisc,$disc}-$track - $title
   #default: $albumartist/$album%aunique{} ($year)/%if{$multidisc,Disc $disc/}$track - $title
   singleton: Singles/$artist/$title
   comp: Compilations/$album%aunique{} ($year)/%if{$multidisc,Disc $disc/}$track - $title
@@ -27,7 +28,13 @@ plugins: discogs fetchart embedart lastgenre lastimport mbsync mpdupdate info in
 
 item_fields:
   multidisc: 1 if disctotal > 1 else 0
-  myartist: albumartist.split(';')[0]
+  firstartist: albumartist.split(';')[0]
+  restartist: |
+    parts = albumartist.split(';', 1)
+    if len(parts) > 1:
+      return parts[1]
+    else:
+      return ''
 
 fetchart:
   cautious: true
