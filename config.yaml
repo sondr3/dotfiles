@@ -2,13 +2,12 @@ directory: ~/Music
 library: ~/Music/.beets/library.blb
 import:
   copy: yes
-  write: yes
+  write: no
   resume: ask
   log: beetslog.txt
   languages: 'en'
 art_filename: albumart
 threaded: yes
-color: yes
 
 match:
   preferred:
@@ -33,7 +32,7 @@ paths:
   comp: Compilations/$album%aunique{} ($year)/%if{$multidisc,Disc $disc/}$track - $title
   albumtype:soundtrack: Soundtracks/%asciify{$album%aunique{}} %if{$restartist,performed by $restartist} ($year)/%if{$multidisc,$disc-}$track - $title
 
-plugins: discogs fetchart embedart lastgenre lastimport mbsync mpdupdate info inline
+plugins: discogs fetchart embedart lastgenre lastimport mbsync info inline scrub mpdupdate
 
 item_fields:
   multidisc: 1 if disctotal > 1 else 0

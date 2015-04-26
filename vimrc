@@ -1,5 +1,5 @@
 " vim-plug settings
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.nvim/plugged')
 
 " Installed addons
 Plug 'chriskempson/base16-vim'
@@ -89,15 +89,9 @@ map <C-l> <C-w>l
 nmap <silent> ,/ :nohlsearch<CR>
 
 " Interface
-set term=screen-256color
-set t_Co=256
 let base16colorspace=256
+set background=dark
 colorscheme base16-solarized
-highlight clear GitGutterAdd
-highlight clear GitGutterChange
-highlight clear GitGutterDelete
-highlight clear GitGutterChangeDelete
-highlight VertSplit cterm=none ctermbg=21 ctermfg=21
 
 " Sensible defaults from Tpope
 if !&scrolloff
@@ -134,8 +128,6 @@ set tabpagemax=50
 set showmode
 
 set cursorline
-highlight clear SignColumn
-highlight clear LineNr
 
 set ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
