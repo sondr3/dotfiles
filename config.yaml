@@ -1,8 +1,8 @@
-directory: ~/Music
+directory: ~/Volume/Media/Music
 library: ~/Music/.beets/library.blb
 import:
   copy: yes
-  write: no
+  write: write
   resume: ask
   log: beetslog.txt
   languages: 'en'

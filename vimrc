@@ -1,10 +1,10 @@
 " vim-plug settings
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 " Installed addons
 Plug 'chriskempson/base16-vim'
-Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
+Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
@@ -23,11 +23,13 @@ Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/syntastic'
 Plug 'vim-ruby/vim-ruby'
 Plug 'slim-template/vim-slim'
+Plug 'othree/yajs.vim'
 
 call plug#end()
 
 " General settings
-:imap jk <Esc>
+:set shell=/bin/bash
+imap jk <Esc>
 set nocompatible
 filetype plugin indent on
 syntax on
