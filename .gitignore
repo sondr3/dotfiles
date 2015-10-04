@@ -19,3 +19,6 @@ el-get
 *places
 .cask
 emacs-init.el
+
+# Ignore test dir
+test
