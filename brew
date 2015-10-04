@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Ask for sudo
+sudo -v
+
+# Upgrade and update
+brew update
+brew upgrade --all
+
+# Tap some brews
+brew tap neovim/neovim
+
+# Install fish for command line omgz
+brew install fish
+
+# Install packages you want
+brew install git --with-brewed-openssl
+brew install tmux --HEAD
+brew install reattach-to-user-namespace
+brew install --HEAD neovim
+brew install tree
+
+# Install programming stuff
+brew install ruby --with-doc
+brew install nodejs --without-npm
+
+# And clean
+brew cleanup
