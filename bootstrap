@@ -12,6 +12,11 @@ Dir.glob("config.fish") do |fish|
 end
 
 Dir.glob("nvim") do |nvim|
-  `cp -R #{nvim} ~/.dotfiles/test/.nvim`
+  `cp -R #{nvim} ~/.config/nvim`
   puts "Copied directory " "#{nvim}"
+end
+
+Dir.glob("init.vim") do |init|
+  `cp -R #{init} ~/.config/nvim`
+  puts "Linked file #{init}"
 end
