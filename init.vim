@@ -22,13 +22,12 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/syntastic'
 Plug 'vim-ruby/vim-ruby'
-Plug 'slim-template/vim-slim'
-Plug 'othree/yajs.vim'
+" Plug 'othree/yajs.vim'
+Plug 'elzr/vim-json'
 
 call plug#end()
 
 " General settings
-:set shell=/bin/bash
 imap jk <Esc>
 set nocompatible
 filetype plugin indent on
@@ -82,10 +81,10 @@ nnoremap <Leader>w :w<CR>
 
 " Easier moving between windows
 " Skips having to press C-w first
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+nnoremap <silent> <C-l> <c-w>l
+nnoremap <silent> <C-h> <c-w>h
+nnoremap <silent> <C-k> <c-w>k
+nnoremap <silent> <C-j> <c-w>j
 
 " Clear searches automatically
 nmap <silent> ,/ :nohlsearch<CR>
@@ -103,24 +102,6 @@ if !&sidescrolloff
   set sidescrolloff=5
 endif
 set display+=lastline
-
-if &encoding ==# 'latin1' && has('gui_running')
-  set encoding=utf-8
-endif
-
-if has('path_extra')
-  setglobal tags-=./tags tags^=./tags;
-endif
-
-if !empty(&viminfo)
-  set viminfo^=!
-endif
-set sessionoptions-=options
-
-" Allow color schemes to do bright colors without forcing bold.
-if &t_Co == 8 && $TERM !~# '^linux'
-  set t_Co=16
-endif
 
 inoremap <C-U> <C-G>u<C-U>
 
@@ -199,3 +180,7 @@ let delimitMate_expand_cr = 2
 
 " syntastic
 let g:syntastic_html_checkers=['']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
