@@ -20,18 +20,20 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'vim-ruby/vim-ruby'
-" Plug 'othree/yajs.vim'
-Plug 'elzr/vim-json'
+Plug 'othree/yajs.vim'
+Plug 'benekastah/neomake'
 
 call plug#end()
 
 " General settings
+set shell=/usr/local/bin/zsh
 imap jk <Esc>
 set nocompatible
 filetype plugin indent on
 syntax on
+set lazyredraw
 set mouse=a
 set mousehide
 set showcmd
@@ -179,8 +181,9 @@ let g:ctrlp_working_path_mode = 'ra'
 let delimitMate_expand_cr = 2
 
 " syntastic
-let g:syntastic_html_checkers=['']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_html_checkers=['']
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+let g:neomake_javascript_enabled_makers = ['eslint']
