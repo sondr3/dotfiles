@@ -25,7 +25,14 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
 Plug 'othree/yajs.vim'
 Plug 'benekastah/neomake'
-Plug 'fatih/vim-go'
+Plug 'gerw/vim-HiLinkTrace'
+" Glorious Scheme/LISP
+Plug 'wlangstroth/vim-racket'
+Plug 'kovisoft/slimv'
+Plug 'jpalardy/vim-slime'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 call plug#end()
 
@@ -185,3 +192,12 @@ let g:ctrlp_working_path_mode = 'ra'
 let delimitMate_expand_cr = 2
 
 let g:neomake_javascript_enabled_makers = ['eslint']
+
+" Python
+" let g:python3_host_prog = '/usr/local/bin/python3'
+
+" LISP and such
+let g:paredit_electric_return=0
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "2"}
+let g:slime_dont_ask_default = 1
