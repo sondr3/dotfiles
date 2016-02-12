@@ -22,15 +22,20 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 " Plug 'scrooloose/syntastic'
 Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-endwise'
 Plug 'othree/yajs.vim'
 Plug 'benekastah/neomake'
+Plug 'fatih/vim-go'
 
 call plug#end()
 
+" Neovim settings
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
 " General settings
-set shell=/usr/local/bin/zsh
+set shell=/usr/local/bin/fish
 imap jk <Esc>
-set nocompatible
 filetype plugin indent on
 syntax on
 set lazyredraw
@@ -143,8 +148,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 set scrolljump=5
 set scrolloff=3
 set foldenable
-set list
-set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+set nolist
 
 " Formatting
 set nowrap
@@ -174,16 +178,10 @@ let g:airline#extensions#tabline#left_alt_sep = ''
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_show_hidden = 0
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|vendor)|\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_working_path_mode = 'ra'
 
 " delmitMate
 let delimitMate_expand_cr = 2
 
-" syntastic
-" let g:syntastic_html_checkers=['']
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
 let g:neomake_javascript_enabled_makers = ['eslint']
