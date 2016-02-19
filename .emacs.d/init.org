@@ -34,8 +34,9 @@ I don't need any of these as they just end up taking up my precious screen real 
 Load Marmalade and Melpa for more packaging goodness.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (require 'package)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives
+               '("melpa" . "https://melpa.org/packages/")
+               '("marmalade" . "https://marmalade-repo.org/packages/"))
   (package-initialize)
 #+END_SRC
 
