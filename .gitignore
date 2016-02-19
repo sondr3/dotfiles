@@ -1,24 +1,23 @@
 *.swp
 .DS_Store
 
-# hide vim folders
-vim/autoload
-vim/backup
-vim/plugged
-vim/swap
-
-# Hide emacs folders/files
-.elc
+# Hide Emacs folders and files
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
 auto-save-list
 tramp
-.\#*~
-\#*~
-*~
-elpa
-el-get
-*places
-.cask
-emacs-init.el
+.\#*
+.org-id-locations
+*_archive
+*_flymake.*
+/eshell/history
+/eshell/lastdir
+/elpa/
+*.rel
+.cask/
 
 # Ignore test dir
 test
