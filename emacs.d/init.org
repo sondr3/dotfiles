@@ -4,14 +4,15 @@
 
 * Preface
 
-I've always been a fan of ~org-babel~, even from before I used Emacs. Now I can finally document the whys and hows without tons of comments everywhere.
+I've always been a fan of ~org-babel~, even from before I used
+Emacs. Now I can finally document the whys and hows without tons of
+comments everywhere.
 
-** Settings
+** Setup 
 
-I run the latest and greatest of Emacs (whatever that is) and that works for me.
+I run the latest and greatest of Emacs (whatever that is) under OS X.
 
 * General settings
-
 For settings that don't really belong in any specific category.
 
 *** Name
@@ -79,10 +80,20 @@ Emacs for some lovely VIM on Emacs action.
     :init
     (evil-mode 1))
 #+END_SRC
-** Set the ~<leader>~ key
+** Leader and chords 
 I switched the leader key in VIM to ~<SPC>~ almost immediately after
 starting to use it, so I don't even know what it is set to by
 default. So I need it to be space here too.
+
+I also have a few chords set up that I use for various commands:
+| Command                | Chord     |
+|------------------------+-----------|
+| Save current buffer    | ~<SPC> w~ |
+| Open file              | ~<SPC> o~ |
+| Switch between buffers | ~<SPC> b~ |
+
+I also set up a few chords that I use for various things, currently I
+only really need to use is ~<SPC> w~ to save my current buffer.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package evil-leader
     :ensure t
@@ -91,14 +102,45 @@ default. So I need it to be space here too.
     (progn
       (evil-leader/set-leader "<SPC>")
       (evil-leader/set-key
-        "w" 'save-buffer)))
+        "w" 'save-buffer
+        "o" 'find-file
+        "b" 'switch-to-buffer)))
 #+END_SRC
-
+** Using ~jk~ to exit insert mode
+~ESC~ is just too far to reach for mere mortals, and I even play
+piano. So I changed the way you exit Insert Mode in VIM to be ~jk~ to
+help my pinky. For this we have to use a package called ~KeyChord~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package key-chord
+    :ensure t
+    :config
+    (setq key-chord-two-keys-delays 0.5)
+    (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+    (key-chord-mode 1))
+#+END_SRC
+** Keybinds
+*** Change ~:~ to ~;~
+I read about this on reddit while I still used VIM and I really
+enjoyed it. It also helps that I'm lazy and don't want to press ~S-:~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (define-key evil-normal-state-map (kbd ";") 'evil-ex)
+#+END_SRC
+*** Moving between buffers
+I use Tmux in my terminal and bound the key to switch between windows
+in it to be ~C-[hjkl]~, and did the same in VIM to be able to move
+between windows in both Tmux and VIM. So to have the same in Emacs
+would be nice, even though I could use ~C-w [hjkl]~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+#+END_SRC
 * Functions
 ** Automatically tangle and byte compile init.org
 I tried having a local variable at the end of this file that would automatically
 tangle this file into a ~init.el~ file on save, but that didn't work so I had to
-create this function instead. It also byte compiles the ~init.el~ file on save as 
+steal this function instead. It also byte compiles the ~init.el~ file on save as 
 well. Taken from [[https://github.com/larstvei/dot-emacs]].
 
 Due to how I organize my dotfiles, Emacs will ask to follow the
