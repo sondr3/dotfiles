@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Configuring Emacs</title>
+<!-- 2016-02-20 Sat 12:59 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Sondre Nilsen" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Configuring Emacs</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Preface</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Settings</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. General settings</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-2-0-1">2.0.1. Name</a></li>
+<li><a href="#sec-2-0-2">2.0.2. Real estate</a></li>
+<li><a href="#sec-2-0-3">2.0.3. Packages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Functions</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Automatically tangle init.org</a>
+<ul>
+<li><a href="#sec-3-1-1">3.1.1. Into <code>init.el</code></a></li>
+<li><a href="#sec-3-1-2">3.1.2. Into <code>init.html</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Preface</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+I've always been a fan of <code>org-babel</code>, even from before I used Emacs. Now I can finally document the whys and hows without tons of comments everywhere.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Settings</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+I run the latest and greatest of Emacs (whatever that is) and that works for me.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> General settings</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+For settings that don't really belong in any specific category.
+</p>
+</div>
+
+<div id="outline-container-sec-2-0-1" class="outline-4">
+<h4 id="sec-2-0-1"><span class="section-number-4">2.0.1</span> Name</h4>
+<div class="outline-text-4" id="text-2-0-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq user-full-name "Sondre Nilsen"
+      user-mail-addres "nilsen.sondre@gmail.com")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-0-2" class="outline-4">
+<h4 id="sec-2-0-2"><span class="section-number-4">2.0.2</span> Real estate</h4>
+<div class="outline-text-4" id="text-2-0-2">
+<p>
+I don't need any of these as they just end up taking up my precious screen real estate.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(when window-system
+  (tooltip-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode 1)
+  (scroll-bar-mode -1))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-0-3" class="outline-4">
+<h4 id="sec-2-0-3"><span class="section-number-4">2.0.3</span> Packages</h4>
+<div class="outline-text-4" id="text-2-0-3">
+<p>
+Load Marmalade and Melpa for more packaging goodness.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'package)
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/")
+	     '("marmalade" . "https://marmalade-repo.org/packages/"))
+(package-initialize)
+</pre>
+</div>
+
+<p>
+And since I am going to be using <code>use-package</code> for installing and configuring packages as well, I need to make sure that is installed as well.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package)
+</pre>
+</div>
+
+<p>
+Furthermore, I want to automatically compile my emacs files.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package auto-compile
+  :ensure t
+  :config (auto-compile-on-load-mode))
+(setq load-prefer-newer t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Functions</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Automatically tangle init.org</h3>
+<div class="outline-text-3" id="text-3-1">
+</div><div id="outline-container-sec-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Into <code>init.el</code></h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+I tried having a local variable at the end of this file that would automatically
+tangle this file into a <code>init.el</code> file on save, but that didn't work so I had to
+create this function instead. Taken from <a href="http://thewanderingcoder.com/2015/02/literate-emacs-configuration/">thewanderingcoder.com</a>.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun my/tangle-init-on-save()
+  (when (string= buffer-file-name (file-truename "~/.emacs.d/init.org"))
+    (org-babel-tangle)))
+
+(add-hook 'after-save-hook 'my/tangle-init-on-save)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> Into <code>init.html</code></h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+And then also tangle it into a <code>init.html</code> file so it can be displayed on my website.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Sondre Nilsen</p>
+<p class="date">Created: 2016-02-20 Sat 12:59</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

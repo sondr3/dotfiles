@@ -22,3 +22,19 @@
   :ensure t
   :config (auto-compile-on-load-mode))
 (setq load-prefer-newer t)
+
+(use-package evil
+  :ensure t
+  :init
+  :config
+  (evil 1))
+
+(defun my/tangle-init()
+  "If the current file is 'init.org', the code blocks are tangled and compiled"
+  (when (equal (buffer-file-name)
+               (expand-file-name (concat user-emacs-directory "init.org")))
+    (let ((prog-mode-hook nil))
+      (org-babel-tangle)
+      (byte-compile-file (concat user-emacs-directory "init.el")))))
+
+(add-hook 'after-save-hook 'my/tangle-init)

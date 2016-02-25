@@ -1,0 +1,90 @@
+#+TITLE: Configuring Emacs
+#+AUTHOR: Sondre Nilsen
+#+EMAIL: nilsen.sondre@gmail.com
+
+* Preface
+
+I've always been a fan of ~org-babel~, even from before I used Emacs. Now I can finally document the whys and hows without tons of comments everywhere.
+
+** Settings
+
+I run the latest and greatest of Emacs (whatever that is) and that works for me.
+
+* General settings
+
+For settings that don't really belong in any specific category.
+
+*** Name
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq user-full-name "Sondre Nilsen"
+        user-mail-addres "nilsen.sondre@gmail.com")
+#+END_SRC
+
+*** Real estate
+I don't need any of these as they just end up taking up my precious screen real estate.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (when window-system
+    (tooltip-mode -1)
+    (tool-bar-mode -1)
+    (menu-bar-mode 1)
+    (scroll-bar-mode -1))
+#+END_SRC
+
+*** Packages
+Load Marmalade and Melpa for more packaging goodness.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (require 'package)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.org/packages/")
+               '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (package-initialize)
+#+END_SRC
+
+And since I am going to be using ~use-package~ for installing and
+configuring packages as well, I need to make sure that is installed as
+well.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+  (require 'use-package)
+#+END_SRC
+
+Furthermore, I want to automatically compile my emacs files.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package auto-compile
+    :ensure t
+    :config (auto-compile-on-load-mode))
+  (setq load-prefer-newer t)
+#+END_SRC
+
+* Evil
+I won't claim that I'm a huge VIM power user, because I'm not, but
+after having used it for a while (and only scratching the surface), I
+absolutely cannot live without it. So by extension I need Evil in
+Emacs for some lovely VIM on Emacs action.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package evil
+    :ensure t
+    :config
+    (evil-mode 1))
+#+END_SRC
+
+
+* Functions
+
+** Automatically tangle and byte compile init.org
+I tried having a local variable at the end of this file that would automatically
+tangle this file into a ~init.el~ file on save, but that didn't work so I had to
+create this function instead. It also byte compiles the ~init.el~ file on save as 
+well. Taken from [[https://github.com/larstvei/dot-emacs]].
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun my/tangle-init()
+    "If the current file is 'init.org', the code blocks are tangled and compiled"
+    (when (equal (buffer-file-name)
+                 (expand-file-name (concat user-emacs-directory "init.org")))
+      (let ((prog-mode-hook nil))
+        (org-babel-tangle)
+        (byte-compile-file (concat user-emacs-directory "init.el")))))
+
+  (add-hook 'after-save-hook 'my/tangle-init)
+#+END_SRC
