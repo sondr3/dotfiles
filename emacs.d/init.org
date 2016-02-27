@@ -110,9 +110,6 @@ I also have a few chords set up that I use for various commands:
 | Save current buffer    | ~<SPC> w~ |
 | Open file              | ~<SPC> o~ |
 | Switch between buffers | ~<SPC> b~ |
-
-I also set up a few chords that I use for various things, currently I
-only really need to use is ~<SPC> w~ to save my current buffer.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package general
     :ensure t
