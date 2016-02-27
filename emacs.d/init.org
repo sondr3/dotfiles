@@ -48,6 +48,12 @@ Furthermore, I want to automatically compile my emacs files.
   (setq load-prefer-newer t)
 #+END_SRC
 
+*** Yes and/or no
+It's annoying having to write ~yes~ or ~no~ instead of just ~y~ or
+~n~. So we change that as well.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
 * Interface
 ** Font
 Good fonts are important and I normally change quite often between
