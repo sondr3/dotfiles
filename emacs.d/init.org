@@ -68,6 +68,19 @@ I don't need any of these as they just end up taking up my precious screen real 
     (scroll-bar-mode -1))
 #+END_SRC
 
+** Cursor
+I have a hard time with using a box for the cursor compared to a bar,
+since I never seem to figure out which side of the character the
+cursor is on. So we change the cursor to be a bar instead.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq-default cursor-type 'bar)
+#+END_SRC
+** Window title
+I'd like to be able to see which file I'm editing from the frame, not
+just ~Emacs@hostname~. 
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq frame-title-format '(:eval (concat (buffer-name) " :: GNU Emacs")))
+#+END_SRC
 * Evil
 ** Installing
 I won't claim that I'm a huge VIM power user, because I'm not, but
