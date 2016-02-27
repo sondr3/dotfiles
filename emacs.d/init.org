@@ -95,16 +95,15 @@ I also have a few chords set up that I use for various commands:
 I also set up a few chords that I use for various things, currently I
 only really need to use is ~<SPC> w~ to save my current buffer.
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package evil-leader
+  (use-package general
     :ensure t
-    :init (global-evil-leader-mode)
     :config
     (progn
-      (evil-leader/set-leader "<SPC>")
-      (evil-leader/set-key
-        "w" 'save-buffer
-        "o" 'find-file
-        "b" 'switch-to-buffer)))
+      (setq general-default-keymaps 'evil-normal-state-map)
+      (setq general-default-prefix "<SPC>")
+      (general-define-key "w" 'save-buffer
+                          "o" 'find-file
+                          "b" 'switch-to-buffer)))
 #+END_SRC
 ** Using ~jk~ to exit insert mode
 ~ESC~ is just too far to reach for mere mortals, and I even play
