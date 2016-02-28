@@ -13,7 +13,8 @@ comments everywhere.
 I run the latest and greatest of Emacs (whatever that is) under OS X.
 
 * General settings
-For settings that don't really belong in any specific category.
+For settings that don't really belong in any specific category. Like
+default behaviour and such.
 
 *** Name
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -25,9 +26,11 @@ For settings that don't really belong in any specific category.
 Load Marmalade and Melpa for more packaging goodness.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (require 'package)
-  (add-to-list 'package-archives
-               '("melpa" . "http://melpa.org/packages/")
-               '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (setq package-archives
+        '(("gnu" . "http://elpa.gnu.org/packages/")
+          ("org" . "http://orgmode.org/elpa/")
+          ("melpa" . "http://melpa.org/packages/")
+          ("marmalade" . "http://marmalade-repo.org/packages/")))
   (package-initialize)
 #+END_SRC
 
@@ -54,7 +57,13 @@ It's annoying having to write ~yes~ or ~no~ instead of just ~y~ or
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
+*** Disable the bell
+Because god fucking dammit, that shit gets annoying really quick.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq ring-bell-function 'ignore)
+#+END_SRC
 * Interface
+Settings that change how the interface looks and behaves.
 ** Font
 Good fonts are important and I normally change quite often between
 some, but have now settled for Source Code Pro. It has all the bells
@@ -74,8 +83,21 @@ I don't need any of these as they just end up taking up my precious screen real 
     (scroll-bar-mode -1))
 #+END_SRC
 
-** Line numbers
+** Relative line numbers
+This is probably one of my favorite features from VIM, makes it
+incredibly easy to both see where you are on the screen and move
+around within the buffer. However, we'll only enable relative line
+numbers in programming modes as it freaks out in for example Org mode.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package linum-relative
+    :ensure t
+    :config
+    (setq linum-relative-current-symbol ""
+          linum-relative-format " %3s "))
 
+  (add-hook 'prog-mode-hook 'linum-relative-mode)
+#+END_SRC
+** TODO Line numbers in text modes
 ** Cursor
 I have a hard time with using a box for the cursor compared to a bar,
 since I never seem to figure out which side of the character the
@@ -88,6 +110,12 @@ I'd like to be able to see which file I'm editing from the frame, not
 just ~Emacs@hostname~. 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq frame-title-format '(:eval (concat (buffer-name) " :: GNU Emacs")))
+#+END_SRC
+** Mode line
+*** Hide line and column numbers
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (line-number-mode 0)
+  (column-number-mode 0)
 #+END_SRC
 * Evil
 ** Installing
@@ -107,11 +135,11 @@ starting to use it, so I don't even know what it is set to by
 default. So I need it to be space here too.
 
 I also have a few chords set up that I use for various commands:
-| Command                | Chord     |
-|------------------------+-----------|
-| Save current buffer    | ~<SPC> w~ |
-| Open file              | ~<SPC> o~ |
-| Switch between buffers | ~<SPC> b~ |
+| Chord     | Description            | Function           |
+|-----------+------------------------+--------------------|
+| ~<SPC> w~ | Save current buffer    | ~save-buffer~      |
+| ~<SPC> o~ | Open file              | ~find-file~        |
+| ~<SPC> b~ | Switch between buffers | ~switch-to-buffer~ |
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package general
     :ensure t
@@ -168,14 +196,10 @@ the main leader.
 * Org mode
 ** Get Org mode from Git
 This is mostly because I like being able to have the latest and
-greatest of things, however with packages that come with Emacs you
-need to do something extra for it to fetch the latest version. For
-more info see [[https://github.com/jwiegley/use-package/issues/319][here]].  
-
-First we need to add the Org mode ELPA package repository.
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-#+END_SRC
+greatest of things, however with ~use-package~ and packages that come
+with Emacs you need to do something extra for it to fetch the latest
+version. For more info see [[https://github.com/jwiegley/use-package/issues/319][here]]. We have already added the Org mode
+ELPA repo.
 
 Then we need to make sure we install the latest version of Org. To do
 this we actually need to ensure ~org-plus-contrib~.
