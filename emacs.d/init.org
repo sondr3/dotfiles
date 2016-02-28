@@ -74,6 +74,8 @@ I don't need any of these as they just end up taking up my precious screen real 
     (scroll-bar-mode -1))
 #+END_SRC
 
+** Line numbers
+
 ** Cursor
 I have a hard time with using a box for the cursor compared to a bar,
 since I never seem to figure out which side of the character the
@@ -162,6 +164,28 @@ the main leader.
     (setq secondary-leader ",")
     (general-define-key :prefix secondary-leader
                         "e" 'eval-buffer))
+#+END_SRC
+* Org mode
+** Get Org mode from Git
+This is mostly because I like being able to have the latest and
+greatest of things, however with packages that come with Emacs you
+need to do something extra for it to fetch the latest version. For
+more info see [[https://github.com/jwiegley/use-package/issues/319][here]].  
+
+First we need to add the Org mode ELPA package repository.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+#+END_SRC
+
+Then we need to make sure we install the latest version of Org. To do
+this we actually need to ensure ~org-plus-contrib~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package org
+    :ensure org-plus-contrib)
+#+END_SRC
+** Syntax highlighting
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq-default org-src-fontify-natively t)
 #+END_SRC
 * Functions
 ** Automatically tangle and byte compile init.org
