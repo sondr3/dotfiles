@@ -113,13 +113,12 @@ I also have a few chords set up that I use for various commands:
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package general
     :ensure t
+    :init (setq general-default-keymaps 'evil-normal-state-map)
     :config
-    (progn
-      (setq general-default-keymaps 'evil-normal-state-map)
-      (setq general-default-prefix "<SPC>")
-      (general-define-key "w" 'save-buffer
-                          "o" 'find-file
-                          "b" 'switch-to-buffer)))
+    (setq general-default-prefix "<SPC>")
+    (general-define-key "w" 'save-buffer
+                        "o" 'find-file
+                        "b" 'switch-to-buffer))
 #+END_SRC
 ** Using ~jk~ to exit insert mode
 ~ESC~ is just too far to reach for mere mortals, and I even play
@@ -150,6 +149,19 @@ would be nice, even though I could use ~C-w [hjkl]~.
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+#+END_SRC
+* Keybinds
+*** Extra leader keybinds
+Because I want only the most important keybinds to be bound via
+~<SPC>~, I have set up ~,~ as a secondary leader key with commands
+that I use quite often but aren't as "important" as the ones bound to
+the main leader.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package general
+    :config
+    (setq secondary-leader ",")
+    (general-define-key :prefix secondary-leader
+                        "e" 'eval-buffer))
 #+END_SRC
 * Functions
 ** Automatically tangle and byte compile init.org
