@@ -126,7 +126,7 @@ Emacs for some lovely VIM on Emacs action.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package evil
     :ensure t
-    :init
+    :config
     (evil-mode 1))
 #+END_SRC
 ** Leader and chords 
@@ -143,8 +143,8 @@ I also have a few chords set up that I use for various commands:
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package general
     :ensure t
-    :init (setq general-default-keymaps 'evil-normal-state-map)
     :config
+    (setq general-default-keymaps 'evil-normal-state-map)
     (setq general-default-prefix "<SPC>")
     (general-define-key "w" 'save-buffer
                         "o" 'find-file
