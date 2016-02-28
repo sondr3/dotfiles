@@ -95,7 +95,7 @@ numbers in programming modes as it freaks out in for example Org mode.
     (setq linum-relative-current-symbol ""
           linum-relative-format " %3s "))
 
-  (add-hook 'prog-mode-hook 'linum-relative-mode)
+  (add-hook 'prog-mode-hook #'linum-relative-mode)
 #+END_SRC
 ** TODO Line numbers in text modes
 ** Cursor
@@ -162,6 +162,29 @@ help my pinky. For this we have to use a package called ~KeyChord~.
     (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
     (key-chord-mode 1))
 #+END_SRC
+** Make ~ESC~ quit everything
+In VIM once your press ~ESC~ you stop everything, in Emacs you end up
+having to button mash it quite a few times to exit all the way
+out. Thankfully, ~davvil~ on Github has it solved [[https://github.com/davvil/.emacs.d/blob/master/init.el][here]].
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun minibuffer-keyboard-quit ()
+    "Abort recursive edit.
+    In Delete Selection mode, if the mark is active, just deactivate it;
+    then it takes a second \\[keyboard-quit] to abort the minibuffer."
+    (interactive)
+    (if (and delete-selection-mode transient-mark-mode mark-active)
+        (setq deactivate-mark  t)
+      (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+      (abort-recursive-edit)))
+  (define-key evil-normal-state-map [escape] 'keyboard-quit)
+  (define-key evil-visual-state-map [escape] 'keyboard-quit)
+  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+  (global-set-key [escape] 'evil-exit-emacs-state)
+#+END_SRC
 ** Keybinds
 *** Change ~:~ to ~;~
 I read about this on reddit while I still used VIM and I really
@@ -199,7 +222,7 @@ the main leader.
 ~electric-pair-mode~ automatically inserts the correct closing bracket
 or parentheses, but I only want this in programming modes.
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (add-hook 'prog-mode-hook 'electric-pair-mode)
+  (add-hook 'prog-mode-hook #'electric-pair-mode)
 #+END_SRC
 *** Parentheses
 I mostly dabble in Scheme or LISP, and so parentheses are pretty
@@ -217,7 +240,7 @@ Then, to make the parentheses even more pretty, we are going to use
   (use-package rainbow-delimiters
     :ensure t
     :config
-    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 * Org mode
 ** Get Org mode from Git
@@ -257,5 +280,5 @@ your emacs home directory.
         (org-babel-tangle)
         (byte-compile-file (concat user-emacs-directory "init.el")))))
 
-  (add-hook 'after-save-hook 'my/tangle-init)
+  (add-hook 'after-save-hook #'my/tangle-init)
 #+END_SRC
