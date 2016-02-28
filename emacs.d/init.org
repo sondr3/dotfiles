@@ -12,7 +12,7 @@ comments everywhere.
 
 I run the latest and greatest of Emacs (whatever that is) under OS X.
 
-* General settings
+* General preferences 
 For settings that don't really belong in any specific category. Like
 default behaviour and such.
 
@@ -192,6 +192,32 @@ the main leader.
     (setq secondary-leader ",")
     (general-define-key :prefix secondary-leader
                         "e" 'eval-buffer))
+#+END_SRC
+* Programming
+** General preferences
+*** Electric pair mode
+~electric-pair-mode~ automatically inserts the correct closing bracket
+or parentheses, but I only want this in programming modes.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (add-hook 'prog-mode-hook 'electric-pair-mode)
+#+END_SRC
+*** Parentheses
+I mostly dabble in Scheme or LISP, and so parentheses are pretty
+important to me. We already have them auto-close, now we want them to
+automatically show the matching parenthesis, brackets and so on, and
+do it without delay.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (show-paren-mode)
+  (setq show-paren-delay 0)
+#+END_SRC
+
+Then, to make the parentheses even more pretty, we are going to use
+~rainbow-delimeters~ to make em purdy.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package rainbow-delimiters
+    :ensure t
+    :config
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 #+END_SRC
 * Org mode
 ** Get Org mode from Git
