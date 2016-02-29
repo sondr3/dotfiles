@@ -411,6 +411,14 @@ actually need to ensure ~org-plus-contrib~.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq-default org-src-fontify-natively t)
 #+END_SRC
+** Intend Org headers
+I accidentally found out about this function in a comment on StackOverflow, but
+I can't figure out where I found it. What it does is indent the heading
+according to their level. So a ~**~ is indented to the right under a ~*~ and so
+on.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq org-startup-indented t)
+#+END_SRC
 * Functions
 ** Automatically tangle and byte compile init.org
 I tried having a local variable at the end of this file that would
