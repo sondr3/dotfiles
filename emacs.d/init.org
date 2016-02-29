@@ -363,6 +363,16 @@ parentheses, but I only want this in programming modes.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (add-hook 'prog-mode-hook #'electric-pair-mode)
 #+END_SRC
+*** Aggressive indentation
+I'm sure we have all struggled with indentation getting absolutely fucked up
+when we change something in a file. With ~aggressive-indent-mode~ you don't
+have to worry about that anymore.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package aggressive-indent
+    :ensure t
+    :config
+    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode))
+#+END_SRC
 *** Parentheses
 I mostly dabble in Scheme or LISP, and so parentheses are pretty important to
 me. We already have them auto-close, now we want them to automatically show the
@@ -388,6 +398,11 @@ besides making them prettier. Yo dawg. It just looks cool.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (global-prettify-symbols-mode t)
   (setq prettify-symbols-unprettify-at-point 'right)
+#+END_SRC
+**** LISPS and Scheme
+So we don't litter everything with tons of symbols that are for some languages
+but aren't for other, we'll set the symbols on a language by language basis.
+#+BEGIN_SRC emacs-lisp :tangle yes
   (setq lisps-symbols
         '(("lambda" . ?λ)
           ("nil" . ?∅)))
