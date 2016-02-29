@@ -151,7 +151,23 @@ numbers in programming modes as it freaks out in for example Org mode.
 
   (add-hook 'prog-mode-hook #'linum-relative-mode)
 #+END_SRC
-** TODO Line numbers in text modes
+** Git gutter
+This is yet a thing that I found and loved in VIM, show git changes in
+the gutter. I looked at ~git-gutter~ which is the most updated one,
+but I want to display my gutter on the right, and then I had to use
+~git-gutter-fringe~ which isn't updated nearly as much. I looked at a
+few more variants of ~git-gutter~ but after a while found ~diff-hl~
+which does most of what I want. 
+
+However, I'd like it to show signs instead of colors, but it doesn't
+support that. Might have to write my own after all...
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package diff-hl 
+    :ensure t
+    :config
+    (setq diff-hl-side 'right)
+    (global-diff-hl-mode))
+#+END_SRC
 ** Cursor
 I have a hard time with using a box for the cursor compared to a bar,
 since I never seem to figure out which side of the character the
