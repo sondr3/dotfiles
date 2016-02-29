@@ -8,11 +8,11 @@ I've always been a fan of ~org-babel~, even from before I used
 Emacs. Now I can finally document the whys and hows without tons of
 comments everywhere.
 
-** Setup 
+** Setup
 
-I run the latest and greatest of Emacs (whatever that is) under OS X.
+I currently run the Emacs 25.1 pretest release on OS X.
 
-* General preferences 
+* General preferences
 For settings that don't really belong in any specific category. Like
 default behaviour and such.
 
@@ -31,6 +31,7 @@ Megabytes™.
 Using anything other than UTF8 anywhere is pretty stupid, so we don't
 do that.
 #+BEGIN_SRC emacs-lisp :tangle yes
+  (set-language-environment 'utf-8)
   (prefer-coding-system 'utf-8)
   (set-default-coding-systems 'utf-8)
   (set-terminal-coding-system 'utf-8)
@@ -93,6 +94,7 @@ This is just a sane default in my opinion, when do you not want to
 have something syntax highlighted? Yeah, thought so too.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (global-font-lock-mode t)
+  (setq font-lockk-maximum-decoration t)
 #+END_SRC
 *** Disable bidirectional text
 I have no need for it as none of the languages I know use
@@ -113,6 +115,47 @@ However, I prefer using two space indents over four space indents. No
 real reason here to be honest, I just prefer how compact it looks.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq-default tab-width 2)
+#+END_SRC
+*** Backup and autosave files
+By default Emacs saves backup files and autosave files into the same
+directory as the current file you're editing so you end up with a
+bunch of ~filename.el~~ and ~filename.el#~ and so on files. Instead I
+want them saved to the emacs home folder in their own folders.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq backup-directory-alist
+        '((".*" . "~/.emacs.d/backups"))
+        auto-save-file-name-transforms
+        '((".*" "~/.emacs.d/autosave/" t))
+        version-control t
+        delete-old-versions t)
+#+END_SRC
+*** COMMENT OS X
+I am currently using OS X, so I want to make sure it can read my
+~$PATH~. 
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize))
+#+END_SRC
+
+Then we need to set some OS X specific settings, I want ~Command~ for
+example to be the meta key in Emacs, and not ~Option~, and enable the
+clipboard to work outside Emacs.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (when (memq window-system '(mac ns))
+    (setq ns-pop-up-frames nil
+          mac-option-modifier nil
+          mac-command-modifier 'meta
+          select-enable-clipboard t))
+#+END_SRC
+*** Secrets
+Cause some things are better left outside of version control...
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (add-hook 'after-init-hook (lambda ()
+                               (let ((private-file (concat user-emacs-directory "secrets.el")))
+                                 (when (file-exists-p private-file)
+                                   (load-file private-file)))))
 #+END_SRC
 * Interface
 Settings that change how the interface looks and behaves.
@@ -157,12 +200,12 @@ the gutter. I looked at ~git-gutter~ which is the most updated one,
 but I want to display my gutter on the right, and then I had to use
 ~git-gutter-fringe~ which isn't updated nearly as much. I looked at a
 few more variants of ~git-gutter~ but after a while found ~diff-hl~
-which does most of what I want. 
+which does most of what I want.
 
 However, I'd like it to show signs instead of colors, but it doesn't
 support that. Might have to write my own after all...
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package diff-hl 
+  (use-package diff-hl
     :ensure t
     :config
     (setq diff-hl-side 'right)
@@ -177,7 +220,7 @@ cursor is on. So we change the cursor to be a bar instead.
 #+END_SRC
 ** Window title
 I'd like to be able to see which file I'm editing from the frame, not
-just ~Emacs@hostname~. 
+just ~Emacs@hostname~.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq frame-title-format '(:eval (concat (buffer-name) " :: GNU Emacs")))
 #+END_SRC
@@ -199,7 +242,7 @@ Emacs for some lovely VIM on Emacs action.
     :config
     (evil-mode 1))
 #+END_SRC
-** Leader and chords 
+** Leader and chords
 I switched the leader key in VIM to ~<SPC>~ almost immediately after
 starting to use it, so I don't even know what it is set to by
 default. So I need it to be space here too.
@@ -300,8 +343,10 @@ important to me. We already have them auto-close, now we want them to
 automatically show the matching parenthesis, brackets and so on, and
 do it without delay.
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (show-paren-mode)
-  (setq show-paren-delay 0)
+  (use-package paren
+    :config
+    (show-paren-mode)
+    (setq show-paren-delay 0))
 #+END_SRC
 
 Then, to make the parentheses even more pretty, we are going to use
@@ -311,6 +356,20 @@ Then, to make the parentheses even more pretty, we are going to use
     :ensure t
     :config
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+END_SRC
+*** Prettify symbols
+There really is no practical purpose in my opinion for making symbols
+prettier besides making them prettier. Yo dawg. It just looks cool.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq prettify-symbols-unprettify-at-point 'right)
+  (defun my/lisp-prettify-symbols-alist ()
+    "Prettify words or strings in LISPs and Scheme"
+    (setq prettify-symbols-alist
+          '(
+            ("lambda" . ?λ)
+            ("nil" . ?∅))))
+
+  (add-hook 'emacs-lisp-mode-hook 'my/lisp-prettify-symbols-alist)
 #+END_SRC
 * Org mode
 ** Get Org mode from Git
@@ -334,13 +393,13 @@ this we actually need to ensure ~org-plus-contrib~.
 ** Automatically tangle and byte compile init.org
 I tried having a local variable at the end of this file that would automatically
 tangle this file into a ~init.el~ file on save, but that didn't work so I had to
-steal this function instead. It also byte compiles the ~init.el~ file on save as 
+steal this function instead. It also byte compiles the ~init.el~ file on save as
 well. Taken from [[https://github.com/larstvei/dot-emacs]].
 
 Due to how I organize my dotfiles, Emacs will ask to follow the
 symlink to where I link it from, this is not wanted behaviour as it
 makes the function not work since you're no longer editing a file in
-your emacs home directory.  
+your emacs home directory.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun my/tangle-init()
     "If the current file is 'init.org', the code blocks are tangled and compiled"
