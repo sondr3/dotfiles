@@ -21,7 +21,22 @@ default behaviour and such.
   (setq user-full-name "Sondre Nilsen"
         user-mail-addres "nilsen.sondre@gmail.com")
 #+END_SRC
-
+*** Memory
+Luckily we aren't in the 1990, so we can allow more than Eight
+Megabytes™.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq gc-cons-treshold (* 100 1024 1024)) ;; 100mb
+#+END_SRC
+*** UTF8
+Using anything other than UTF8 anywhere is pretty stupid, so we don't
+do that.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (prefer-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (setq buffer-file-coding-system 'utf-8)
+#+END_SRC
 *** Packages
 Load Marmalade and Melpa for more packaging goodness.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -51,6 +66,17 @@ Furthermore, I want to automatically compile my emacs files.
   (setq load-prefer-newer t)
 #+END_SRC
 
+*** Startup screen
+It gets a bit tiring of seeing the same startup screen every time,
+especially since I have no real interest in it. So we'll just disable
+it and change the default display message.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq inhibit-startup-screen t
+        initial-scratch-message ""
+        initial-major-mode #'emacs-lisp-mode)
+  (defun display-startup-echo-area-message ()
+    (message ""))
+#+END_SRC
 *** Yes and/or no
 It's annoying having to write ~yes~ or ~no~ instead of just ~y~ or
 ~n~. So we change that as well.
@@ -61,6 +87,32 @@ It's annoying having to write ~yes~ or ~no~ instead of just ~y~ or
 Because god fucking dammit, that shit gets annoying really quick.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq ring-bell-function 'ignore)
+#+END_SRC
+*** Global syntax highlighting
+This is just a sane default in my opinion, when do you not want to
+have something syntax highlighted? Yeah, thought so too.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (global-font-lock-mode t)
+#+END_SRC
+*** Disable bidirectional text
+I have no need for it as none of the languages I know use
+right-to-left, most of them just use a bunch of parentheses.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq-default bidi-paragraph-direction 'left-to-right)
+#+END_SRC
+*** Spaces, not tabs
+I know this is controversial and all that jazz, but I am a firm
+believer in spaces instead of tabs. I like the consistency and it's
+just the way I've been rocking since I started using any kind of text
+editing.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
+
+However, I prefer using two space indents over four space indents. No
+real reason here to be honest, I just prefer how compact it looks.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq-default tab-width 2)
 #+END_SRC
 * Interface
 Settings that change how the interface looks and behaves.
@@ -93,7 +145,9 @@ numbers in programming modes as it freaks out in for example Org mode.
     :ensure t
     :config
     (setq linum-relative-current-symbol ""
-          linum-relative-format " %3s "))
+          linum-relative-format " %3s ")
+    (custom-set-faces '(linum-relative-current-face
+                         ((t :inherit linum :foreground "black" :background "white" :weight bold)))))
 
   (add-hook 'prog-mode-hook #'linum-relative-mode)
 #+END_SRC
