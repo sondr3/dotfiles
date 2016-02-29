@@ -114,9 +114,11 @@ reason here to be honest, I just prefer how compact it looks.
 #+END_SRC
 ** Whitespace
 Deleting trailing whitespace is something that Vim does by default, and most
-other editors I've tried (mostly Sublime) did it as well.
+other editors I've tried (mostly Sublime) did it as well. And sentences should
+not end on double spaces, that's just nuts.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (add-hook 'before-save-hook #'delete-trailing-whitespace)
+  (setq sentence-end-double-space nil)
 #+END_SRC
 ** Autofill
 Another thing I liked in VIM, it would automatically wrap your lines when they
@@ -384,15 +386,15 @@ Then, to make the parentheses even more pretty, we are going to use
 There really is no practical purpose in my opinion for making symbols prettier
 besides making them prettier. Yo dawg. It just looks cool.
 #+BEGIN_SRC emacs-lisp :tangle yes
+  (global-prettify-symbols-mode t)
   (setq prettify-symbols-unprettify-at-point 'right)
-  (defun my/lisp-prettify-symbols-alist ()
-    "Prettify words or strings in LISPs and Scheme"
-    (setq prettify-symbols-alist
-          '(
-            ("lambda" . 955)  ; λ
-            ("nil" . 8709)))) ; ∅
+  (setq lisps-symbols
+        '(("lambda" . ?λ)
+          ("nil" . ?∅)))
 
-  (add-hook 'emacs-lisp-mode-hook 'my/lisp-prettify-symbols-alist)
+  (add-hook 'emacs-lisp-mode-hook
+            (lambda ()
+              (setq prettify-symbols-alist lisps-symbols)))
 #+END_SRC
 * Org mode
 ** Get Org mode from Git
