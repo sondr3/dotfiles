@@ -112,7 +112,7 @@ reason here to be honest, I just prefer how compact it looks.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq-default tab-width 2)
 #+END_SRC
-** Whitespace
+** White space
 Deleting trailing whitespace is something that Vim does by default, and most
 other editors I've tried (mostly Sublime) did it as well. And sentences should
 not end on double spaces, that's just nuts.
@@ -120,13 +120,49 @@ not end on double spaces, that's just nuts.
   (add-hook 'before-save-hook #'delete-trailing-whitespace)
   (setq sentence-end-double-space nil)
 #+END_SRC
-** Autofill
+** Auto fill
 Another thing I liked in VIM, it would automatically wrap your lines when they
 got too long. It's a bit annoying having to ~M-q~ all the time when writing
 this file for example.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq-default fill-column 79
                 auto-fill-function 'do-auto-fill)
+#+END_SRC
+** Spell checking
+Amazingly, Emacs has a feature that will automatically check your spelling. Is
+there anything Emacs cannot do? Here we enable it in all text major modes and
+it's programming mode, which only checks comments. Flyspell can use several
+different spelling programs, I settled on ~hunspell~ as it's actively
+maintained and downloaded ~LibreOffices~ dictionaries for Norsk Bokmål and
+American English.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package flyspell
+    :config
+    (setq-default ispell-program-name "hunspell")
+    (setq ispell-really-hunspell t
+          ispell-dictionary "en_US")
+    (setq ispell-local-dictionary-alist
+          '(
+            ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)
+            ("nb_NO" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
+    (add-hook 'text-mode-hook #'turn-on-flyspell)
+    (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+#+END_SRC
+
+**** Automatically switch between dictionaries
+I am bilingual with a slight trilingual spell during high school. So it'd be
+nice to be able to switch between Norwegian and English when using it.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (let ((langs '("en_US" "nb_NO")))
+    (setq lang-ring (make-ring (length langs)))
+    (dolist (elem langs) (ring-insert lang-ring elem)))
+  (defun my/cycle-languages ()
+    "Changes the dictionary"
+    (interactive)
+    (let ((lang (ring-ref lang-ring -1)))
+      (ring-insert lang-ring lang)
+      (ispell-change-dictionary lang)
+      (message "Dictionary changed to %s" lang)))
 #+END_SRC
 ** Backups, history and saves
 By default Emacs saves backup files and autosave files into the same directory
@@ -275,11 +311,12 @@ to use it, so I don't even know what it is set to by default. So I need it to
 be space here too.
 
 I also have a few chords set up that I use for various commands:
-| Chord     | Description            | Function           |
-|-----------+------------------------+--------------------|
-| ~<SPC> w~ | Save current buffer    | ~save-buffer~      |
-| ~<SPC> o~ | Open file              | ~find-file~        |
-| ~<SPC> b~ | Switch between buffers | ~switch-to-buffer~ |
+| Chord     | Description                | Function             |
+|-----------+----------------------------+----------------------|
+| ~<SPC> w~ | Save current buffer        | ~save-buffer~        |
+| ~<SPC> o~ | Open file                  | ~find-file~          |
+| ~<SPC> b~ | Switch between buffers     | ~switch-to-buffer~   |
+| ~<SPC> l~ | Change dictionary language | ~my/cycle-languages~ |
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package general
     :ensure t
@@ -288,7 +325,8 @@ I also have a few chords set up that I use for various commands:
     (setq general-default-prefix "<SPC>")
     (general-define-key "w" 'save-buffer
                         "o" 'find-file
-                        "b" 'switch-to-buffer))
+                        "b" 'switch-to-buffer
+                        "l" 'my/cycle-languages))
 #+END_SRC
 ** Using ~jk~ to exit insert mode
 ~ESC~ is just too far to reach for mere mortals, and I even play piano. So I
@@ -407,9 +445,12 @@ but aren't for other, we'll set the symbols on a language by language basis.
         '(("lambda" . ?λ)
           ("nil" . ?∅)))
 
-  (add-hook 'emacs-lisp-mode-hook
-            (lambda ()
-              (setq prettify-symbols-alist lisps-symbols)))
+  (dolist (mode '(emacs-lisp-mode-hook
+                  inferior-lisp-mode-hook
+                  scheme-mode-hook))
+    (add-hook mode
+              '(lambda ()
+                 (setq prettify-symbols-alist lisps-symbols))))
 #+END_SRC
 * Org mode
 ** Get Org mode from Git
