@@ -1,3 +1,19 @@
 #+TITLE: Tmux settings
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
+#+PROPERTY: header-args :tangle ~/.dotfiles.tmux.conf
+
+* Preface
+After having used ~org-babel~ to configure my Emacs settings, I just enjoyed it
+so much that I've decided to redo all my dotfiles as literate programming
+documents that will automatically create my dotfiles.
+
+** Tmux
+I discovered Tmux while using Vim, and it was love at first sight. I won't
+claim I am a power user, not at all. I'm still having trouble with the whole
+window/frames thing that Tmux uses. But just being able to have multiple "tabs"
+open and doing very different tasks was awesome.
+* General settings
+#+BEGIN_SRC conf :tangle yes
+  TESTING
+#+END_SRC
