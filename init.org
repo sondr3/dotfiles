@@ -1,9 +1,9 @@
 #+TITLE: Configuring Emacs
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
+#+PROPERTY: tangle "~/.emacs.d"
 
 * Preface
-
 I've always been a fan of ~org-babel~, even from before I used
 Emacs. Now I can finally document the whys and hows without tons of
 comments everywhere.
@@ -17,18 +17,18 @@ For settings that don't really belong in any specific category. Like default
 behaviour and such.
 
 ** Name
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq user-full-name "Sondre Nilsen"
         user-mail-addres "nilsen.sondre@gmail.com")
 #+END_SRC
 ** Memory
 Luckily we aren't in the 1990, so we can allow more than Eight Megabytes™.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq gc-cons-treshold (* 100 1024 1024)) ;; 100mb
 #+END_SRC
 ** UTF8
 Using anything other than UTF8 anywhere is pretty stupid, so we don't do that.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (set-language-environment 'utf-8)
   (prefer-coding-system 'utf-8)
   (set-default-coding-systems 'utf-8)
@@ -38,7 +38,7 @@ Using anything other than UTF8 anywhere is pretty stupid, so we don't do that.
 #+END_SRC
 ** Packages
 Load Marmalade and Melpa for more packaging goodness.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (require 'package)
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -50,14 +50,14 @@ Load Marmalade and Melpa for more packaging goodness.
 
 And since I am going to be using ~use-package~ for installing and configuring
 packages as well, I need to make sure that is installed as well.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (unless (package-installed-p 'use-package)
     (package-install 'use-package))
   (require 'use-package)
 #+END_SRC
 
 Furthermore, I want to automatically compile my emacs files.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package auto-compile
     :ensure t
     :config (auto-compile-on-load-mode))
@@ -68,7 +68,7 @@ Furthermore, I want to automatically compile my emacs files.
 It gets a bit tiring of seeing the same startup screen every time, especially
 since I have no real interest in it. So we'll just disable it and change the
 default display message.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-screen t
         initial-scratch-message ""
         initial-major-mode #'emacs-lisp-mode)
@@ -78,45 +78,50 @@ default display message.
 ** Yes and/or no
 It's annoying having to write ~yes~ or ~no~ instead of just ~y~ or ~n~. So we
 change that as well.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 ** Disable the bell
 Because god fucking dammit, that shit gets annoying really quick.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq ring-bell-function 'ignore)
 #+END_SRC
 ** Global syntax highlighting
 This is just a sane default in my opinion, when do you not want to have
 something syntax highlighted? Yeah, thought so too.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (global-font-lock-mode t)
   (setq font-lockk-maximum-decoration t)
 #+END_SRC
 ** Disable bidirectional text
 I have no need for it as none of the languages I know use right-to-left, most
 of them just use a bunch of parentheses.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq-default bidi-paragraph-direction 'left-to-right)
 #+END_SRC
 ** Spaces, not tabs
 I know this is controversial and all that jazz, but I am a firm believer in
 spaces instead of tabs. I like the consistency and it's just the way I've been
 rocking since I started using any kind of text editing.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
 #+END_SRC
 
 However, I prefer using two space indents over four space indents. No real
 reason here to be honest, I just prefer how compact it looks.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq-default tab-width 2)
+#+END_SRC
+** Ignore case on completing file names
+Because that's just plain annoying. And you know it.
+#+BEGIN_SRC emacs-lisp
+  (setq read-file-name-completion-ignore-case t)
 #+END_SRC
 ** White space
 Deleting trailing whitespace is something that Vim does by default, and most
 other editors I've tried (mostly Sublime) did it as well. And sentences should
 not end on double spaces, that's just nuts.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (add-hook 'before-save-hook #'delete-trailing-whitespace)
   (setq sentence-end-double-space nil)
 #+END_SRC
@@ -124,7 +129,7 @@ not end on double spaces, that's just nuts.
 Another thing I liked in VIM, it would automatically wrap your lines when they
 got too long. It's a bit annoying having to ~M-q~ all the time when writing
 this file for example.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq-default fill-column 79
                 auto-fill-function 'do-auto-fill)
 #+END_SRC
@@ -135,7 +140,7 @@ it's programming mode, which only checks comments. Flyspell can use several
 different spelling programs, I settled on ~hunspell~ as it's actively
 maintained and downloaded ~LibreOffices~ dictionaries for Norsk Bokmål and
 American English.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package flyspell
     :config
     (setq-default ispell-program-name "hunspell")
@@ -152,7 +157,7 @@ American English.
 **** Automatically switch between dictionaries
 I am bilingual with a slight trilingual spell during high school. So it'd be
 nice to be able to switch between Norwegian and English when using it.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (let ((langs '("en_US" "nb_NO")))
     (setq lang-ring (make-ring (length langs)))
     (dolist (elem langs) (ring-insert lang-ring elem)))
@@ -169,22 +174,19 @@ By default Emacs saves backup files and autosave files into the same directory
 as the current file you're editing so you end up with a bunch of ~filename.el~~
 and ~filename.el#~ and so on files. Instead I want them saved to the emacs home
 folder in their own folders.
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (defvar emacs-autosave-directory
-    (concat user-emacs-directory "saves/"))
-  (setq make-backup-files t
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist
+        `(("." . "~/.emacs.d/saves"))
+        auto-save-file-name-transforms
+        `((".*" "~/.emacs.d/auto-save" t))
         backup-by-copying t
         version-control t
-        delete-old-versions t
-        backup-directory-alist
-        '((".*" . ,emacs-autosave-directory))
-        auto-save-file-name-transforms
-        '((".*" ,emacs-autosave-directory t)))
+        delete-old-versions t)
 #+END_SRC
 
 There's also a way to save the recent files and recent prompts you use in
 Emacs, so we'll change their save file and length.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package recentf
     :config
     (recentf-mode 1)
@@ -196,13 +198,13 @@ Emacs, so we'll change their save file and length.
 
 Lastly, Emacs has a way to save where in a file you were when you were last
 editing in, even between sessions of using the program. Which is really neat.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq-default save-place t)
   (setq save-place-file "~/.emacs.d/saveplace")
 #+END_SRC
 ** OS X
 I am currently using OS X, so I want to make sure it can read my ~$PATH~.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package exec-path-from-shell
     :ensure t
     :config
@@ -212,7 +214,7 @@ I am currently using OS X, so I want to make sure it can read my ~$PATH~.
 Then we need to set some OS X specific settings, I want ~Command~ for example
 to be the meta key in Emacs, and not ~Option~, and enable the clipboard to work
 outside Emacs.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (when (memq window-system '(mac ns))
     (setq ns-pop-up-frames nil
           mac-option-modifier nil
@@ -221,7 +223,7 @@ outside Emacs.
 #+END_SRC
 ** Secrets
 Cause some things are better left outside of version control...
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (add-hook 'after-init-hook (lambda ()
                                (let ((private-file (concat user-emacs-directory "secrets.el")))
                                  (when (file-exists-p private-file)
@@ -233,7 +235,7 @@ Settings that change how the interface looks and behaves.
 Good fonts are important and I normally change quite often between some, but
 have now settled for Source Code Pro. It has all the bells and whistles that I
 want and looks really good.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (set-frame-font "Source Code Pro")
   (set-face-attribute 'default nil
                       :height 120)
@@ -241,7 +243,7 @@ want and looks really good.
 ** Real estate
 I don't need any of these as they just end up taking up my precious screen real
 estate.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (when window-system
     (tooltip-mode -1)
     (tool-bar-mode -1)
@@ -254,7 +256,7 @@ This is probably one of my favorite features from VIM, makes it incredibly easy
 to both see where you are on the screen and move around within the
 buffer. However, we'll only enable relative line numbers in programming modes
 as it freaks out in for example Org mode.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package linum-relative
     :ensure t
     :config
@@ -274,7 +276,7 @@ but after a while found ~diff-hl~ which does most of what I want.
 
 However, I'd like it to show signs instead of colors, but it doesn't support
 that. Might have to write my own after all...
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package diff-hl
     :ensure t
     :config
@@ -285,18 +287,18 @@ that. Might have to write my own after all...
 I have a hard time with using a box for the cursor compared to a bar, since I
 never seem to figure out which side of the character the cursor is on. So we
 change the cursor to be a bar instead.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq-default cursor-type 'bar)
 #+END_SRC
 ** Window title
 I'd like to be able to see which file I'm editing from the frame, not just
 ~Emacs@hostname~.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq frame-title-format '(:eval (concat (buffer-name) " :: GNU Emacs")))
 #+END_SRC
 ** Mode line
 *** Hide line and column numbers
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (line-number-mode 0)
   (column-number-mode 0)
 #+END_SRC
@@ -306,7 +308,7 @@ I won't claim that I'm a huge VIM power user, because I'm not, but after having
 used it for a while (and only scratching the surface), I absolutely cannot live
 without it. So by extension I need Evil in Emacs for some lovely VIM on Emacs
 action.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package evil
     :ensure t
     :config
@@ -324,7 +326,7 @@ I also have a few chords set up that I use for various commands:
 | ~<SPC> o~ | Open file                  | ~find-file~          |
 | ~<SPC> b~ | Switch between buffers     | ~switch-to-buffer~   |
 | ~<SPC> l~ | Change dictionary language | ~my/cycle-languages~ |
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package general
     :ensure t
     :config
@@ -339,7 +341,7 @@ I also have a few chords set up that I use for various commands:
 ~ESC~ is just too far to reach for mere mortals, and I even play piano. So I
 changed the way you exit Insert Mode in VIM to be ~jk~ to help my pinky. For
 this we have to use a package called ~KeyChord~.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package key-chord
     :ensure t
     :config
@@ -351,7 +353,7 @@ this we have to use a package called ~KeyChord~.
 In VIM once your press ~ESC~ you stop everything, in Emacs you end up having to
 button mash it quite a few times to exit all the way out. Thankfully, ~davvil~
 on Github has it solved [[https://github.com/davvil/.emacs.d/blob/master/init.el][here]].
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defun minibuffer-keyboard-quit ()
     "Abort recursive edit.
     In Delete Selection mode, if the mark is active, just deactivate it;
@@ -374,7 +376,7 @@ on Github has it solved [[https://github.com/davvil/.emacs.d/blob/master/init.el
 *** Change ~:~ to ~;~
 I read about this on reddit while I still used VIM and I really enjoyed it. It
 also helps that I'm lazy and don't want to press ~S-:~.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (define-key evil-normal-state-map (kbd ";") 'evil-ex)
 #+END_SRC
 *** Moving between buffers
@@ -382,7 +384,7 @@ I use Tmux in my terminal and bound the key to switch between windows in it to
 be ~C-[hjkl]~, and did the same in VIM to be able to move between windows in
 both Tmux and VIM. So to have the same in Emacs would be nice, even though I
 could use ~C-w [hjkl]~.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
@@ -393,7 +395,7 @@ could use ~C-w [hjkl]~.
 Because I want only the most important keybinds to be bound via ~<SPC>~, I have
 set up ~,~ as a secondary leader key with commands that I use quite often but
 aren't as "important" as the ones bound to the main leader.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package general
     :config
     (setq secondary-leader ",")
@@ -405,14 +407,14 @@ aren't as "important" as the ones bound to the main leader.
 *** Electric pair mode
 ~electric-pair-mode~ automatically inserts the correct closing bracket or
 parentheses, but I only want this in programming modes.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (add-hook 'prog-mode-hook #'electric-pair-mode)
 #+END_SRC
 *** Aggressive indentation
 I'm sure we have all struggled with indentation getting absolutely fucked up
 when we change something in a file. With ~aggressive-indent-mode~ you don't
 have to worry about that anymore.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package aggressive-indent
     :ensure t
     :config
@@ -422,7 +424,7 @@ have to worry about that anymore.
 I mostly dabble in Scheme or LISP, and so parentheses are pretty important to
 me. We already have them auto-close, now we want them to automatically show the
 matching parenthesis, brackets and so on, and do it without delay.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package paren
     :config
     (show-paren-mode)
@@ -431,7 +433,7 @@ matching parenthesis, brackets and so on, and do it without delay.
 
 Then, to make the parentheses even more pretty, we are going to use
 ~rainbow-delimeters~ to make em purdy.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package rainbow-delimiters
     :ensure t
     :config
@@ -440,14 +442,14 @@ Then, to make the parentheses even more pretty, we are going to use
 *** Prettify symbols
 There really is no practical purpose in my opinion for making symbols prettier
 besides making them prettier. Yo dawg. It just looks cool.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (global-prettify-symbols-mode t)
   (setq prettify-symbols-unprettify-at-point 'right)
 #+END_SRC
 **** LISPS and Scheme
 So we don't litter everything with tons of symbols that are for some languages
 but aren't for other, we'll set the symbols on a language by language basis.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq lisps-symbols
         '(("lambda" . ?λ)
           ("nil" . ?∅)))
@@ -468,12 +470,12 @@ to do something extra for it to fetch the latest version. For more info see
 
 Then we need to make sure we install the latest version of Org. To do this we
 actually need to ensure ~org-plus-contrib~.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package org
     :ensure org-plus-contrib)
 #+END_SRC
 ** Syntax highlighting
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq-default org-src-fontify-natively t)
 #+END_SRC
 ** Intend Org headers
@@ -481,7 +483,7 @@ I accidentally found out about this function in a comment on StackOverflow, but
 I can't figure out where I found it. What it does is indent the heading
 according to their level. So a ~**~ is indented to the right under a ~*~ and so
 on.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq org-startup-indented t)
 #+END_SRC
 * Functions
@@ -495,10 +497,11 @@ work so I had to steal this function instead. It also byte compiles the
 Due to how I organize my dotfiles, Emacs will ask to follow the symlink to
 where I link it from, this is not wanted behaviour as it makes the function not
 work since you're no longer editing a file in your emacs home directory.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defun my/tangle-init ()
     "If the current file is 'init.org', the code blocks are tangled and compiled"
-    (when (string= buffer-file-name (file-truename (concat (getenv "HOME") "/.dotfiles/init.org")))
+    (when (equal (buffer-file-name)
+                 (expand-file-name "~/.dotfiles/init.org"))
       (let ((prog-mode-hook nil))
         (org-babel-tangle)
         (byte-compile-file (concat user-emacs-directory "init.el"))
@@ -511,11 +514,11 @@ After having tried (and successfully) organized my Emacs init file, I've
 decided I want to do it with all my other dotfiles as well. However, it'd be
 nice if it as well auto-tangled the files on save, as I do with my ~init.org~
 file.
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defun my/tangle-dotfiles ()
     "If the current file is in '~/.dotfiles', the code blocks are tangled"
     (when (equal (buffer-file-name)
-                 (expand-file-name (concat (getenv "HOME") "/.dotfiles")))
+                 (expand-file-name "~/.dotfiles/tmux.org"))
       (org-babel-tangle)
       (message "Dotfile tangled")))
 
