@@ -140,8 +140,8 @@ American English.
     :config
     (setq-default ispell-program-name "hunspell")
     (setq ispell-really-hunspell t
-          ispell-dictionary "en_US")
-    (setq ispell-local-dictionary-alist
+          ispell-dictionary "en_US"
+          ispell-local-dictionary-alist
           '(
             ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)
             ("nb_NO" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
@@ -478,7 +478,7 @@ on.
   (setq org-startup-indented t)
 #+END_SRC
 * Functions
-** Automatically tangle and byte compile init.org
+** Tangle and byte compile init.org
 I tried having a local variable at the end of this file that would
 automatically tangle this file into a ~init.el~ file on save, but that didn't
 work so I had to steal this function instead. It also byte compiles the
@@ -489,13 +489,29 @@ Due to how I organize my dotfiles, Emacs will ask to follow the symlink to
 where I link it from, this is not wanted behaviour as it makes the function not
 work since you're no longer editing a file in your emacs home directory.
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun my/tangle-init()
+  (defun my/tangle-init ()
     "If the current file is 'init.org', the code blocks are tangled and compiled"
     (when (equal (buffer-file-name)
                  (expand-file-name (concat user-emacs-directory "init.org")))
       (let ((prog-mode-hook nil))
         (org-babel-tangle)
-        (byte-compile-file (concat user-emacs-directory "init.el")))))
+        (byte-compile-file (concat user-emacs-directory "init.el"))
+        (message "Init.org tangled"))))
 
   (add-hook 'after-save-hook #'my/tangle-init)
+#+END_SRC
+** Tangle dotfiles
+After having tried (and successfully) organized my Emacs init file, I've
+decided I want to do it with all my other dotfiles as well. However, it'd be
+nice if it as well auto-tangled the files on save, as I do with my ~init.org~
+file.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun my/tangle-dotfiles ()
+    "If the current file is in '~/.dotfiles', the code blocks are tangled"
+    (when (equal (buffer-file-name)
+                 (expand-file-name (concat (getenv "HOME") "/.dotfiles")))
+      (org-babel-tangle)
+      (message "Dotfile tangled")))
+
+  (add-hook 'after-save-hook #'my/tangle-dotfiles)
 #+END_SRC
