@@ -170,21 +170,28 @@ as the current file you're editing so you end up with a bunch of ~filename.el~~
 and ~filename.el#~ and so on files. Instead I want them saved to the emacs home
 folder in their own folders.
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq backup-directory-alist
-        '((".*" . "~/.emacs.d/backups"))
-        auto-save-file-name-transforms
-        '((".*" "~/.emacs.d/autosave/" t))
+  (defvar emacs-autosave-directory
+    (concat user-emacs-directory "saves/"))
+  (setq make-backup-files t
+        backup-by-copying t
         version-control t
-        delete-old-versions t)
+        delete-old-versions t
+        backup-directory-alist
+        '((".*" . ,emacs-autosave-directory))
+        auto-save-file-name-transforms
+        '((".*" ,emacs-autosave-directory t)))
 #+END_SRC
 
 There's also a way to save the recent files and recent prompts you use in
 Emacs, so we'll change their save file and length.
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq recentf-save-file "~/.emacs.d/recentf"
-        recentf-max-saved-items 100
-        savehist-file "~/.emacs.d/savehist"
-        history-length 100)
+  (use-package recentf
+    :config
+    (recentf-mode 1)
+    (setq recentf-save-file "~/.emacs.d/recentf"
+          recentf-max-saved-items 100
+          savehist-file "~/.emacs.d/savehist"
+          history-length 100))
 #+END_SRC
 
 Lastly, Emacs has a way to save where in a file you were when you were last
@@ -491,8 +498,7 @@ work since you're no longer editing a file in your emacs home directory.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun my/tangle-init ()
     "If the current file is 'init.org', the code blocks are tangled and compiled"
-    (when (equal (buffer-file-name)
-                 (expand-file-name (concat user-emacs-directory "init.org")))
+    (when (string= buffer-file-name (file-truename (concat (getenv "HOME") "/.dotfiles/init.org")))
       (let ((prog-mode-hook nil))
         (org-babel-tangle)
         (byte-compile-file (concat user-emacs-directory "init.el"))
