@@ -1,0 +1,3 @@
+#+TITLE: Tmux settings
+#+AUTHOR: Sondre Nilsen
+#+EMAIL: nilsen.sondre@gmail.com
