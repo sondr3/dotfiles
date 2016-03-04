@@ -1,0 +1,68 @@
+#+TITLE: (Neo)Vim settings
+#+AUTHOR: Sondre Nilsen
+#+EMAIL: nilsen.sondre@gmail.com
+#+PROPERTY: tangle "~/.dotfiles/vim.conf"
+
+* Preface
+My venture into Vim began some time in the middle of 2014 after reading too
+much about it on reddit and elsewhere. I had tried to use Emacs for a bit of
+time but it was just a bit too much, so I went with Vim instead.
+
+After having used it for two years and really liking it, I decided to try out
+Emacs with Evil and now it clicked, so I moved "back" to Emacs again. I've
+decided to minify my Vim settings to be a minimal installation so that it can
+be used on other computers as a quick fix-me-up tool, rather than a full
+editing suite.
+
+** Setup
+I currently run Neovim, installed from the latest ~--HEAD~, whenever that was.
+Always run in iTerm2 and Tmux.
+* Plugins
+With Vim, you don't really need to declare your plugin installer of choice nor
+all of your plugins in the top of the file, but to me it makes the most sense
+to do it this way.
+** Plug
+I didn't really look at Pathogen or Vundle and that when I started using Vim, I
+just found ~vim-plug~ and liked how minimal and easy it was to use. So I stuck
+to using that.
+#+BEGIN_SRC sh
+  call plug#begin('~/.vim/plugged')
+#+END_SRC
+** The actual plugins
+And here are the actual plugins being installed. Most of them are language
+agnostic since this isn't supposed to be a full fledged editor.
+#+BEGIN_SRC sh
+  Plug 'chriskempson/base16-vim'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'bling/vim-airline'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-surround'
+  Plug 'Shougo/unite.vim'
+  Plug 'Shougo/vimfiler.vim'
+  Plug 'jeffkreeftmeijer/vim-numbertoggle'
+  Plug 'Lokaltog/vim-easymotion'
+  Plug 'kien/ctrlp.vim'
+  Plug 'raimondi/delimitMate'
+  Plug 'tmux-plugins/vim-tmux'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'godlygeek/tabular'
+#+END_SRC
+** And run the plugins
+This is pretty self explanatory, but you need to call this at the end to make
+sure that your plugins are installed.
+#+BEGIN_SRC sh
+  call plug#end()
+#+END_SRC
+* General settings
+These are settings that in my opinion are the best, sane settings for running
+Vim. However, your mileage may vary quite a lot from my opinion.
+** Enable true color and cursor shape
+These two settings are specific to Neovim, but they allow it to display colors
+in glorious 24 million. Or something like that. It's a bit more that 256 colors
+at least.
+#+BEGIN_SRC sh
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+#+END_SRC
