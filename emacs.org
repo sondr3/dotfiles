@@ -126,12 +126,12 @@ not end on double spaces, that's just nuts.
   (setq sentence-end-double-space nil)
 #+END_SRC
 ** Auto fill
-Another thing I liked in VIM, it would automatically wrap your lines when they
+Another thing I liked in Vim, it would automatically wrap your lines when they
 got too long. It's a bit annoying having to ~M-q~ all the time when writing
 this file for example.
 #+BEGIN_SRC emacs-lisp
-  (setq-default fill-column 79
-                auto-fill-function 'do-auto-fill)
+  (setq-default fill-column 79)
+  (add-hook 'text-mode-hook 'turn-on-auto-fill)
 #+END_SRC
 ** Spell checking
 Amazingly, Emacs has a feature that will automatically check your spelling. Is
@@ -252,7 +252,7 @@ estate.
 #+END_SRC
 
 ** Relative line numbers
-This is probably one of my favorite features from VIM, makes it incredibly easy
+This is probably one of my favorite features from Vim, makes it incredibly easy
 to both see where you are on the screen and move around within the
 buffer. However, we'll only enable relative line numbers in programming modes
 as it freaks out in for example Org mode.
@@ -268,7 +268,7 @@ as it freaks out in for example Org mode.
   (add-hook 'prog-mode-hook #'linum-relative-mode)
 #+END_SRC
 ** Git gutter
-This is yet a thing that I found and loved in VIM, show git changes in the
+This is yet a thing that I found and loved in Vim, show git changes in the
 gutter. I looked at ~git-gutter~ which is the most updated one, but I want to
 display my gutter on the right, and then I had to use ~git-gutter-fringe~ which
 isn't updated nearly as much. I looked at a few more variants of ~git-gutter~
@@ -304,9 +304,9 @@ I'd like to be able to see which file I'm editing from the frame, not just
 #+END_SRC
 * Evil
 ** Installing
-I won't claim that I'm a huge VIM power user, because I'm not, but after having
+I won't claim that I'm a huge Vim power user, because I'm not, but after having
 used it for a while (and only scratching the surface), I absolutely cannot live
-without it. So by extension I need Evil in Emacs for some lovely VIM on Emacs
+without it. So by extension I need Evil in Emacs for some lovely Vim on Emacs
 action.
 #+BEGIN_SRC emacs-lisp
   (use-package evil
@@ -315,7 +315,7 @@ action.
     (evil-mode 1))
 #+END_SRC
 ** Leader and chords
-I switched the leader key in VIM to ~<SPC>~ almost immediately after starting
+I switched the leader key in Vim to ~<SPC>~ almost immediately after starting
 to use it, so I don't even know what it is set to by default. So I need it to
 be space here too.
 
@@ -339,7 +339,7 @@ I also have a few chords set up that I use for various commands:
 #+END_SRC
 ** Using ~jk~ to exit insert mode
 ~ESC~ is just too far to reach for mere mortals, and I even play piano. So I
-changed the way you exit Insert Mode in VIM to be ~jk~ to help my pinky. For
+changed the way you exit Insert Mode in Vim to be ~jk~ to help my pinky. For
 this we have to use a package called ~KeyChord~.
 #+BEGIN_SRC emacs-lisp
   (use-package key-chord
@@ -350,7 +350,7 @@ this we have to use a package called ~KeyChord~.
     (key-chord-mode 1))
 #+END_SRC
 ** Make ~ESC~ quit everything
-In VIM once your press ~ESC~ you stop everything, in Emacs you end up having to
+In Vim once your press ~ESC~ you stop everything, in Emacs you end up having to
 button mash it quite a few times to exit all the way out. Thankfully, ~davvil~
 on Github has it solved [[https://github.com/davvil/.emacs.d/blob/master/init.el][here]].
 #+BEGIN_SRC emacs-lisp
@@ -374,15 +374,15 @@ on Github has it solved [[https://github.com/davvil/.emacs.d/blob/master/init.el
 #+END_SRC
 ** Keybinds
 *** Change ~:~ to ~;~
-I read about this on reddit while I still used VIM and I really enjoyed it. It
+I read about this on reddit while I still used Vim and I really enjoyed it. It
 also helps that I'm lazy and don't want to press ~S-:~.
 #+BEGIN_SRC emacs-lisp
   (define-key evil-normal-state-map (kbd ";") 'evil-ex)
 #+END_SRC
 *** Moving between buffers
 I use Tmux in my terminal and bound the key to switch between windows in it to
-be ~C-[hjkl]~, and did the same in VIM to be able to move between windows in
-both Tmux and VIM. So to have the same in Emacs would be nice, even though I
+be ~C-[hjkl]~, and did the same in Vim to be able to move between windows in
+both Tmux and Vim. So to have the same in Emacs would be nice, even though I
 could use ~C-w [hjkl]~.
 #+BEGIN_SRC emacs-lisp
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
@@ -485,6 +485,14 @@ according to their level. So a ~**~ is indented to the right under a ~*~ and so
 on.
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-indented t)
+#+END_SRC
+** Org babel languages
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+     (emacs-lisp . t)
+     (sh . t)))
 #+END_SRC
 * Functions
 ** Tangle dotfiles
