@@ -517,10 +517,10 @@ file.
 #+BEGIN_SRC emacs-lisp
   (defun my/tangle-dotfiles ()
     "If the current file is in '~/.dotfiles', the code blocks are tangled"
-    (when (equal (buffer-file-name)
-                 (expand-file-name "~/.dotfiles/tmux.org"))
+    (when (equal (file-name-directory (directory-file-name buffer-file-name))
+                 (concat (getenv "HOME") "/.dotfiles/"))
       (org-babel-tangle)
-      (message "Dotfile tangled")))
+      (message "%s tangled" buffer-file-name)))
 
   (add-hook 'after-save-hook #'my/tangle-dotfiles)
 #+END_SRC
