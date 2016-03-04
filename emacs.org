@@ -1,7 +1,7 @@
 #+TITLE: Configuring Emacs
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
-#+PROPERTY: tangle "~/.emacs.d"
+#+PROPERTY: tangle "~/.emacs.d/init.el"
 
 * Preface
 I've always been a fan of ~org-babel~, even from before I used
@@ -487,28 +487,6 @@ on.
   (setq org-startup-indented t)
 #+END_SRC
 * Functions
-** Tangle and byte compile init.org
-I tried having a local variable at the end of this file that would
-automatically tangle this file into a ~init.el~ file on save, but that didn't
-work so I had to steal this function instead. It also byte compiles the
-~init.el~ file on save as well. Taken from
-[[https://github.com/larstvei/dot-emacs]].
-
-Due to how I organize my dotfiles, Emacs will ask to follow the symlink to
-where I link it from, this is not wanted behaviour as it makes the function not
-work since you're no longer editing a file in your emacs home directory.
-#+BEGIN_SRC emacs-lisp
-  (defun my/tangle-init ()
-    "If the current file is 'init.org', the code blocks are tangled and compiled"
-    (when (equal (buffer-file-name)
-                 (expand-file-name "~/.dotfiles/init.org"))
-      (let ((prog-mode-hook nil))
-        (org-babel-tangle)
-        (byte-compile-file (concat user-emacs-directory "init.el"))
-        (message "Init.org tangled"))))
-
-  (add-hook 'after-save-hook #'my/tangle-init)
-#+END_SRC
 ** Tangle dotfiles
 After having tried (and successfully) organized my Emacs init file, I've
 decided I want to do it with all my other dotfiles as well. However, it'd be
@@ -523,4 +501,18 @@ file.
       (message "%s tangled" buffer-file-name)))
 
   (add-hook 'after-save-hook #'my/tangle-dotfiles)
+#+END_SRC
+** Byte compile init.org
+The other function will automatically tangle any file it finds in
+~\~/.dotfiles~, but I want my Emacs settings to be byte compiled as well for
+even greater speeds.
+#+BEGIN_SRC emacs-lisp
+  (defun my/tangle-init ()
+    "If the current file is 'emacs.org', byte compile '~/.emacs.d/init.el'"
+    (when (equal (buffer-file-name)
+                 (expand-file-name "~/.dotfiles/emacs.org"))
+      (let ((prog-mode-hook nil))
+        (byte-compile-file (concat user-emacs-directory "init.el")))))
+
+  (add-hook 'after-save-hook #'my/tangle-init)
 #+END_SRC
