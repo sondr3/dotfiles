@@ -1,0 +1,30 @@
+#+TITLE: My dotfiles
+#+AUTHOR: Sondre Nilsen
+#+EMAIL: nilsen.sondre@gmail.com
+
+* ~dotfiles~
+These are my dotfiles. There are many like them but these ones are mine. They
+are all written in Emacs' ~org-mode~ and are tangled to their specific files
+with ~org-babel~. I decided to rewrite my dotfiles as literate configurations.
+I started with Emacs, loved it and have now started rewriting most of my other
+dotfiles in it as well.
+* Applications
+** Emacs
+I am currently running the latest Emacs 25.1 pretest on OS X, downloaded with
+Homebrew as ~brew install emacs --with-cocoa --with-gnutls --with-imagemagick
+--devel~. My settings can be found in the [[https://github.com/sondr3/dotfiles/blob/master/emacs.org][~emacs.org~]] file.
+** (Neo)vim
+I have completely switched over to using Neovim as my daily Vim driver. I
+install it as ~brew install neovim --HEAD~. My settings can be found in the
+[[https://github.com/sondr3/dotfiles/blob/master/vim.org][~vim.org~]] file.
+** Tmux
+Initially I just used the tabs in ~iTerm2~ but found somewhere that Tmux was a
+lot better. So I switched to it. This is also installed via Homebrew as ~brew
+install tmux --HEAD~. Yes, I like breaking things. Again, my settings can be
+found in [[https://github.com/sondr3/dotfiles/blob/master/tmux.org][~tmux.org~]].
+** Terminal
+I run the latest nightly beta version of ~iTerm2~. Whichever that is.
+* Installation
+I seriously recommend you to not use these for yourself. Find things in them
+you like and steal those instead of just straight up copying these. They are
+made for me and only me.

@@ -1,7 +1,7 @@
 #+TITLE: Tmux settings
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
-#+PROPERTY: header-args :tangle ~/.dotfiles.tmux.conf
+#+PROPERTY: tangle "~/.dotfiles/tmux.conf"
 
 * Preface
 After having used ~org-babel~ to configure my Emacs settings, I just enjoyed it
@@ -14,6 +14,7 @@ claim I am a power user, not at all. I'm still having trouble with the whole
 window/frames thing that Tmux uses. But just being able to have multiple "tabs"
 open and doing very different tasks was awesome.
 * General settings
-#+BEGIN_SRC conf :tangle yes
-  TESTING
+#+BEGIN_SRC conf
+  (buffer-file-name)
+  NOT A TEST
 #+END_SRC
