@@ -1,0 +1,18 @@
+#+TITLE: Git settings
+#+AUTHOR: Sondre Nilsen
+#+EMAIL: nilsen.sondre@gmail.com
+
+* Preface
+These are the settings and aliases and all that jazz that I use for Git. Git is
+installed via Homebrew and is always running the latest stable version. No
+~--HEAD~ here.
+* ~.gitconfig~
+These are the utmost basic settings that are set for Git. My name, email and
+default way to push.
+#+BEGIN_SRC sh :tangle "~/.gitconfig"
+  [user]
+    name = Sondre Nilsen
+    email = nilsen.sondre@gmail.com
+  [push]
+    default = simple
+#+END_SRC

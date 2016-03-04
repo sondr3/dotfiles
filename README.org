@@ -12,16 +12,16 @@ dotfiles in it as well.
 ** Emacs
 I am currently running the latest Emacs 25.1 pretest on OS X, downloaded with
 Homebrew as ~brew install emacs --with-cocoa --with-gnutls --with-imagemagick
---devel~. My settings can be found in the [[https://github.com/sondr3/dotfiles/blob/master/emacs.org][~emacs.org~]] file.
+--devel~. My settings can be found in the [[https://github.com/sondr3/dotfiles/blob/master/emacs.org][emacs.org]] file.
 ** (Neo)vim
 I have completely switched over to using Neovim as my daily Vim driver. I
 install it as ~brew install neovim --HEAD~. My settings can be found in the
-[[https://github.com/sondr3/dotfiles/blob/master/vim.org][~vim.org~]] file.
+[[https://github.com/sondr3/dotfiles/blob/master/vim.org][vim.org]] file.
 ** Tmux
 Initially I just used the tabs in ~iTerm2~ but found somewhere that Tmux was a
 lot better. So I switched to it. This is also installed via Homebrew as ~brew
 install tmux --HEAD~. Yes, I like breaking things. Again, my settings can be
-found in [[https://github.com/sondr3/dotfiles/blob/master/tmux.org][~tmux.org~]].
+found in [[https://github.com/sondr3/dotfiles/blob/master/tmux.org][tmux.org]].
 ** Terminal
 I run the latest nightly beta version of ~iTerm2~. Whichever that is.
 * Installation
