@@ -507,12 +507,12 @@ The other function will automatically tangle any file it finds in
 ~\~/.dotfiles~, but I want my Emacs settings to be byte compiled as well for
 even greater speeds.
 #+BEGIN_SRC emacs-lisp
-  (defun my/tangle-init ()
+  (defun my/byte-compile-init ()
     "If the current file is 'emacs.org', byte compile '~/.emacs.d/init.el'"
     (when (equal (buffer-file-name)
                  (expand-file-name "~/.dotfiles/emacs.org"))
       (let ((prog-mode-hook nil))
         (byte-compile-file (concat user-emacs-directory "init.el")))))
 
-  (add-hook 'after-save-hook #'my/tangle-init)
+  (add-hook 'after-save-hook #'my/byte-compile-init)
 #+END_SRC
