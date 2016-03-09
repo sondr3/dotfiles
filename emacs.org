@@ -197,19 +197,16 @@ Emacs, so we'll change their save file and length.
             recentf-max-saved-items 100
             history-length 100))
     :config
-    (progn
-      (recentf-mode 1)))
+    (recentf-mode 1))
 #+END_SRC
 
 And then the settings for the prompts.
 #+BEGIN_SRC emacs-lisp
   (use-package savehist
     :init
-    (progn
-      (setq savehist-file (concat user-emacs-directory "savehist")))
+    (setq savehist-file (concat user-emacs-directory "savehist"))
     :config
-    (progn
-      (savehist-mode t)))
+    (savehist-mode t))
 #+END_SRC
 
 Lastly, Emacs has a way to save where in a file you were when you were last
@@ -217,8 +214,7 @@ editing in, even between sessions of using the program. Which is really neat.
 #+BEGIN_SRC emacs-lisp
   (use-package saveplace
     :init
-    (progn
-      (setq save-place-file (concat user-emacs-directory "saveplace")))
+    (setq save-place-file (concat user-emacs-directory "saveplace"))
     :config
     (setq-default save-place t))
 #+END_SRC
@@ -257,7 +253,7 @@ Cause some things are better left outside of version control...
                                  (when (file-exists-p private-file)
                                    (load-file private-file)))))
 #+END_SRC
-* Interface
+* Looks
 Settings that change how the interface looks and behaves.
 ** Font
 Good fonts are important and I normally change quite often between some, but
@@ -340,6 +336,20 @@ informative. I use ~uniquify~ to solve that.
   (line-number-mode 0)
   (column-number-mode 0)
 #+END_SRC
+* Behavior
+For things that change how things behave but aren't related to either the
+interface (which should only change how things looks) or general preferences
+(which only change sane defaults). With this I mean things like ~avy~ and
+~smex~ and such.
+** Avy
+In Vim I used [[https://github.com/easymotion/vim-easymotion][vim-easymotion]] quite a bit to move around in the buffer I was in,
+and of course Emacs has something like it as well.
+#+BEGIN_SRC emacs-lisp
+  (use-package avy
+    :ensure t
+    :config
+    (avy-setup-default))
+#+END_SRC
 * Evil
 ** Installing
 I won't claim that I'm a huge Vim power user, because I'm not, but after having
@@ -364,6 +374,8 @@ I also have a few chords set up that I use for various commands:
 | ~<SPC> o~ | Open file                  | ~find-file~          |
 | ~<SPC> b~ | Switch between buffers     | ~switch-to-buffer~   |
 | ~<SPC> l~ | Change dictionary language | ~my/cycle-languages~ |
+| ~<SPC> j~ | Jump to thing              | ~avy-goto-char~      |
+| ~<SPC> J~ | Jump to things on STEROIDS | ~avy-goto-word-0~    |
 #+BEGIN_SRC emacs-lisp
   (use-package general
     :ensure t
@@ -373,7 +385,9 @@ I also have a few chords set up that I use for various commands:
     (general-define-key "w" 'save-buffer
                         "o" 'find-file
                         "b" 'switch-to-buffer
-                        "l" 'my/cycle-languages))
+                        "l" 'my/cycle-languages
+                        "j" 'avy-goto-char
+                        "J" 'avy-goto-word-0))
 #+END_SRC
 ** Using ~jk~ to exit insert mode
 ~ESC~ is just too far to reach for mere mortals, and I even play piano. So I
