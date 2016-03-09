@@ -12,31 +12,7 @@ comments everywhere.
 
 I currently run the Emacs 25.1 pretest release on OS X.
 
-* General preferences
-For settings that don't really belong in any specific category. Like default
-behaviour and such.
-
-** Name
-#+BEGIN_SRC emacs-lisp
-  (setq user-full-name "Sondre Nilsen"
-        user-mail-addres "nilsen.sondre@gmail.com")
-#+END_SRC
-** Memory
-Luckily we aren't in the 1990, so we can allow more than Eight Megabytes™.
-#+BEGIN_SRC emacs-lisp
-  (setq gc-cons-treshold (* 100 1024 1024)) ;; 100mb
-#+END_SRC
-** UTF8
-Using anything other than UTF8 anywhere is pretty stupid, so we don't do that.
-#+BEGIN_SRC emacs-lisp
-  (set-language-environment 'utf-8)
-  (prefer-coding-system 'utf-8)
-  (set-default-coding-systems 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (setq buffer-file-coding-system 'utf-8)
-#+END_SRC
-** Packages
+* Packages
 Load Marmalade and Melpa for more packaging goodness.
 #+BEGIN_SRC emacs-lisp
   (require 'package)
@@ -64,6 +40,30 @@ Furthermore, I want to automatically compile my emacs files.
   (setq load-prefer-newer t)
 #+END_SRC
 
+* General preferences
+For settings that don't really belong in any specific category. Like default
+behaviour and such.
+
+** Name
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Sondre Nilsen"
+        user-mail-addres "nilsen.sondre@gmail.com")
+#+END_SRC
+** Memory
+Luckily we aren't in the 1990, so we can allow more than Eight Megabytes™.
+#+BEGIN_SRC emacs-lisp
+  (setq gc-cons-treshold (* 100 1024 1024)) ;; 100mb
+#+END_SRC
+** UTF8
+Using anything other than UTF8 anywhere is pretty stupid, so we don't do that.
+#+BEGIN_SRC emacs-lisp
+  (set-language-environment 'utf-8)
+  (prefer-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (setq buffer-file-coding-system 'utf-8)
+#+END_SRC
 ** Startup screen
 It gets a bit tiring of seeing the same startup screen every time, especially
 since I have no real interest in it. So we'll just disable it and change the
@@ -84,7 +84,8 @@ change that as well.
 ** Disable the bell
 Because god fucking dammit, that shit gets annoying really quick.
 #+BEGIN_SRC emacs-lisp
-  (setq ring-bell-function 'ignore)
+  (setq ring-bell-function 'ignore
+        visible-bell t)
 #+END_SRC
 ** Global syntax highlighting
 This is just a sane default in my opinion, when do you not want to have
@@ -120,10 +121,12 @@ Because that's just plain annoying. And you know it.
 ** White space
 Deleting trailing whitespace is something that Vim does by default, and most
 other editors I've tried (mostly Sublime) did it as well. And sentences should
-not end on double spaces, that's just nuts.
+not end on double spaces, that's just nuts. And finally, files should require a
+final newline.
 #+BEGIN_SRC emacs-lisp
   (add-hook 'before-save-hook #'delete-trailing-whitespace)
-  (setq sentence-end-double-space nil)
+  (setq sentence-end-double-space nil
+        require-final-newline t)
 #+END_SRC
 ** Auto fill
 Another thing I liked in Vim, it would automatically wrap your lines when they
@@ -176,9 +179,9 @@ and ~filename.el#~ and so on files. Instead I want them saved to the emacs home
 folder in their own folders.
 #+BEGIN_SRC emacs-lisp
   (setq backup-directory-alist
-        `(("." . "~/.emacs.d/saves"))
+        `(("." . ,(concat user-emacs-directory "saves")))
         auto-save-file-name-transforms
-        `((".*" "~/.emacs.d/auto-save" t))
+        `((".*" ,(concat user-emacs-directory "auto-save") t))
         backup-by-copying t
         version-control t
         delete-old-versions t)
@@ -188,19 +191,45 @@ There's also a way to save the recent files and recent prompts you use in
 Emacs, so we'll change their save file and length.
 #+BEGIN_SRC emacs-lisp
   (use-package recentf
+    :init
+    (progn
+      (setq recentf-save-file (concat user-emacs-directory "recentf")
+            recentf-max-saved-items 100
+            history-length 100))
     :config
-    (recentf-mode 1)
-    (setq recentf-save-file "~/.emacs.d/recentf"
-          recentf-max-saved-items 100
-          savehist-file "~/.emacs.d/savehist"
-          history-length 100))
+    (progn
+      (recentf-mode 1)))
+#+END_SRC
+
+And then the settings for the prompts.
+#+BEGIN_SRC emacs-lisp
+  (use-package savehist
+    :init
+    (progn
+      (setq savehist-file (concat user-emacs-directory "savehist")))
+    :config
+    (progn
+      (savehist-mode t)))
 #+END_SRC
 
 Lastly, Emacs has a way to save where in a file you were when you were last
 editing in, even between sessions of using the program. Which is really neat.
 #+BEGIN_SRC emacs-lisp
-  (setq-default save-place t)
-  (setq save-place-file "~/.emacs.d/saveplace")
+  (use-package saveplace
+    :init
+    (progn
+      (setq save-place-file (concat user-emacs-directory "saveplace")))
+    :config
+    (setq-default save-place t))
+#+END_SRC
+** Copying and pasting
+Because why would you not want to be able to copy and paste outside Emacs, and
+some sane defaults from [[https://github.com/technomancy/better-defaults/blob/master/better-defaults.el][better-defaults.el]].
+#+BEGIN_SRC emacs-lisp
+  (setq select-enable-clipboard t
+        select-enable-primary t
+        save-interprogram-paste-before-kill t
+        mouse-yank-at-point t)
 #+END_SRC
 ** OS X
 I am currently using OS X, so I want to make sure it can read my ~$PATH~.
@@ -218,8 +247,7 @@ outside Emacs.
   (when (memq window-system '(mac ns))
     (setq ns-pop-up-frames nil
           mac-option-modifier nil
-          mac-command-modifier 'meta
-          select-enable-clipboard t))
+          mac-command-modifier 'meta))
 #+END_SRC
 ** Secrets
 Cause some things are better left outside of version control...
@@ -295,6 +323,16 @@ I'd like to be able to see which file I'm editing from the frame, not just
 ~Emacs@hostname~.
 #+BEGIN_SRC emacs-lisp
   (setq frame-title-format '(:eval (concat (buffer-name) " :: GNU Emacs")))
+#+END_SRC
+** Unique buffer names
+Occasionally you'll have multiple files with the same file name open, and Emacs'
+default behavior for this is just to append ~<2>~, which is both ugly and not
+informative. I use ~uniquify~ to solve that.
+#+BEGIN_SRC emacs-lisp
+  (use-package uniquify
+    :init
+    (progn
+      (setq uniquify-buffer-name-style 'forward)))
 #+END_SRC
 ** Mode line
 *** Hide line and column numbers
