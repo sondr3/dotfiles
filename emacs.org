@@ -91,8 +91,11 @@ Because god fucking dammit, that shit gets annoying really quick.
 This is just a sane default in my opinion, when do you not want to have
 something syntax highlighted? Yeah, thought so too.
 #+BEGIN_SRC emacs-lisp
-  (global-font-lock-mode t)
-  (setq font-lockk-maximum-decoration t)
+  (use-package font-lock
+    :init
+    (setq font-lock-maximum-decoration t)
+    :config
+    (global-font-lock-mode t))
 #+END_SRC
 ** Disable bidirectional text
 I have no need for it as none of the languages I know use right-to-left, most
@@ -262,7 +265,8 @@ want and looks really good.
 #+BEGIN_SRC emacs-lisp
   (set-frame-font "Source Code Pro")
   (set-face-attribute 'default nil
-                      :height 120)
+                      :height 120
+                      :weight 'normal)
 #+END_SRC
 ** Real estate
 I don't need any of these as they just end up taking up my precious screen real
@@ -275,11 +279,23 @@ estate.
     (scroll-bar-mode -1))
 #+END_SRC
 
+** Line spacing
+This isn't probably the most useful thing, but the space it gives everything
+makes everything seems so light. I really enjoy it, although I doubt it's
+something for everyone.
+#+BEGIN_SRC emacs-lisp
+  (setq-default line-spacing 0.15)
+#+END_SRC
+** Fringe
+Even though I hardly use the fringe for anything, it's still nice to have to
+separate the borders of the screen and the contents of the buffer.
+#+BEGIN_SRC emacs-lisp
+  (fringe-mode '(1 . 10))
+#+END_SRC
 ** Relative line numbers
 This is probably one of my favorite features from Vim, makes it incredibly easy
 to both see where you are on the screen and move around within the
-buffer. However, we'll only enable relative line numbers in programming modes
-as it freaks out in for example Org mode.
+buffer.
 #+BEGIN_SRC emacs-lisp
   (use-package linum-relative
     :ensure t
@@ -287,10 +303,14 @@ as it freaks out in for example Org mode.
     (setq linum-relative-current-symbol ""
           linum-relative-format " %3s ")
     (custom-set-faces '(linum-relative-current-face
-                         ((t :inherit linum :foreground "black" :background "white" :weight bold)))))
+                        ((t :inherit linum :foreground "black" :background "white" :weight bold)))))
 
   (add-hook 'prog-mode-hook #'linum-relative-mode)
 #+END_SRC
+
+*** TODO Text modes
+However, this doesn't work in org-mode, so we'll need to make it use only
+regular line numbers instead.
 ** Git gutter
 This is yet a thing that I found and loved in Vim, show git changes in the
 gutter. I looked at ~git-gutter~ which is the most updated one, but I want to
@@ -303,8 +323,9 @@ that. Might have to write my own after all...
 #+BEGIN_SRC emacs-lisp
   (use-package diff-hl
     :ensure t
+    :init
+    (setq diff-hl-side 'left)
     :config
-    (setq diff-hl-side 'right)
     (global-diff-hl-mode))
 #+END_SRC
 ** Cursor
