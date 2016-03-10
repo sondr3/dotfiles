@@ -230,6 +230,10 @@ some sane defaults from [[https://github.com/technomancy/better-defaults/blob/ma
         save-interprogram-paste-before-kill t
         mouse-yank-at-point t)
 #+END_SRC
+** Always start maximized
+#+BEGIN_SRC emacs-lisp
+  (toggle-frame-maximized)
+#+END_SRC
 ** OS X
 I am currently using OS X, so I want to make sure it can read my ~$PATH~.
 #+BEGIN_SRC emacs-lisp
@@ -568,32 +572,26 @@ on.
      (sh . t)))
 #+END_SRC
 * Functions
-** Tangle dotfiles
+** Tangle dotfiles and byte compile Emacs settings
 After having tried (and successfully) organized my Emacs init file, I've
 decided I want to do it with all my other dotfiles as well. However, it'd be
 nice if it as well auto-tangled the files on save, as I do with my ~init.org~
 file.
+
+I tried splitting out a separate function to byte compile my ~init.el~ file
+separately from the tangle function, but this didn't work as they fired
+asynchronously, when I wanted it synchronously. So I added in another
+conditional to check whether the file is ~emacs.org~.
 #+BEGIN_SRC emacs-lisp
   (defun my/tangle-dotfiles ()
     "If the current file is in '~/.dotfiles', the code blocks are tangled"
     (when (equal (file-name-directory (directory-file-name buffer-file-name))
                  (concat (getenv "HOME") "/.dotfiles/"))
       (org-babel-tangle)
-      (message "%s tangled" buffer-file-name)))
-
-  (add-hook 'after-save-hook #'my/tangle-dotfiles)
-#+END_SRC
-** Byte compile init.org
-The other function will automatically tangle any file it finds in
-~\~/.dotfiles~, but I want my Emacs settings to be byte compiled as well for
-even greater speeds.
-#+BEGIN_SRC emacs-lisp
-  (defun my/byte-compile-init ()
-    "If the current file is 'emacs.org', byte compile '~/.emacs.d/init.el'"
-    (when (equal (buffer-file-name)
-                 (expand-file-name "~/.dotfiles/emacs.org"))
-      (let ((prog-mode-hook nil))
+      (message "%s tangled" buffer-file-name)
+      (when (equal (buffer-file-name)
+                   (expand-file-name "~/.dotfiles/emacs.org"))
         (byte-compile-file (concat user-emacs-directory "init.el")))))
 
-  (add-hook 'after-save-hook #'my/byte-compile-init)
+  (add-hook 'after-save-hook #'my/tangle-dotfiles)
 #+END_SRC
