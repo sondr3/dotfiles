@@ -36,7 +36,9 @@ Furthermore, I want to automatically compile my emacs files.
 #+BEGIN_SRC emacs-lisp
   (use-package auto-compile
     :ensure t
-    :config (auto-compile-on-load-mode))
+    :config
+    (auto-compile-on-load-mode))
+
   (setq load-prefer-newer t)
 #+END_SRC
 
@@ -230,9 +232,10 @@ some sane defaults from [[https://github.com/technomancy/better-defaults/blob/ma
         save-interprogram-paste-before-kill t
         mouse-yank-at-point t)
 #+END_SRC
-** Always start maximized
+** Always start as full screen
+Because I'm lazy and don't want to press the maximize button all the time.
 #+BEGIN_SRC emacs-lisp
-  (toggle-frame-maximized)
+  (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
 #+END_SRC
 ** OS X
 I am currently using OS X, so I want to make sure it can read my ~$PATH~.
@@ -401,6 +404,7 @@ I also have a few chords set up that I use for various commands:
 | ~<SPC> l~ | Change dictionary language | ~my/cycle-languages~ |
 | ~<SPC> j~ | Jump to thing              | ~avy-goto-char~      |
 | ~<SPC> J~ | Jump to things on STEROIDS | ~avy-goto-word-0~    |
+| ~<SPC> g~ | Show git status            | ~magit-status~       |
 #+BEGIN_SRC emacs-lisp
   (use-package general
     :ensure t
@@ -412,7 +416,8 @@ I also have a few chords set up that I use for various commands:
                         "b" 'switch-to-buffer
                         "l" 'my/cycle-languages
                         "j" 'avy-goto-char
-                        "J" 'avy-goto-word-0))
+                        "J" 'avy-goto-word-0
+                        "g" 'magit-status))
 #+END_SRC
 ** Using ~jk~ to exit insert mode
 ~ESC~ is just too far to reach for mere mortals, and I even play piano. So I
@@ -481,6 +486,19 @@ aren't as "important" as the ones bound to the main leader.
 #+END_SRC
 * Programming
 ** General preferences
+*** Syntax checking
+Because I have a tendency to write when I'm sleepy or feeling lazy I tend to
+have a bunch of syntax errors when writing, which is annoying. So I'm using
+~Flycheck~ to check my syntax for me.
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :init
+    (global-flycheck-mode)
+    :config
+    (with-eval-after-load 'flycheck
+      (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+#+END_SRC
 *** Electric pair mode
 ~electric-pair-mode~ automatically inserts the correct closing bracket or
 parentheses, but I only want this in programming modes.
@@ -538,6 +556,39 @@ but aren't for other, we'll set the symbols on a language by language basis.
               '(lambda ()
                  (setq prettify-symbols-alist lisps-symbols))))
 #+END_SRC
+** Git
+Everyone uses Git, and the best editor out there is Magit. No questions asked.
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :ensure t
+    :commands
+    (magit-commit
+     magit-status))
+#+END_SRC
+
+However, it's not configured for Evil bindings so we need to add those and make
+sure they load /after/ ~magit~.
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-magit
+    :ensure t
+    :after magit)
+#+END_SRC
+** Python
+I'm also a big fan of Python, because it's just a really nice language. I
+initially started out with Ruby, but for reasons that I'm not really sure of
+myself either I ended up using Python instead.
+
+You can install what you need from ~pip~ with ~pip install virtualenv jedi
+flake8 importmagic autopep8 yapf~.
+*** Elpy
+I ended up having quite the row with this and making it work with Python3.5,
+however I'm 99% sure it's because I'm on OS X and it tends to be a major PITA
+to make it work properly there in my experience. I really should get around to
+using Linux...
+#+BEGIN_SRC emacs-lisp
+  (use-package elpy :ensure t :config (elpy-enable) (setq
+    elpy-rpc-python-command "python3") (elpy-use-cpython "python3") (setq
+    python-shell-interpreter "python3")) #+END_SRC
 * Org mode
 ** Get Org mode from Git
 This is mostly because I like being able to have the latest and greatest of
@@ -570,6 +621,16 @@ on.
    '(
      (emacs-lisp . t)
      (sh . t)))
+#+END_SRC
+** TODO Center org text
+I usually edit my org-files in a single window, however on a screen that is 2560
+pixels wide, there's a lot of empty room on the right side and I'd like it to
+be centered instead. But only when it's open in a single frame.
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package centered-window-mode
+  ;;  :ensure t)
+  ;;
+  ;; (add-hook 'org-mode-hook #'centered-window-mode)
 #+END_SRC
 * Functions
 ** Tangle dotfiles and byte compile Emacs settings
