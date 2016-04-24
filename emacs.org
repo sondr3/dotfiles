@@ -497,7 +497,7 @@ have a bunch of syntax errors when writing, which is annoying. So I'm using
     (global-flycheck-mode)
     :config
     (with-eval-after-load 'flycheck
-      (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+      (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc emacs-lisp))))
 #+END_SRC
 *** Electric pair mode
 ~electric-pair-mode~ automatically inserts the correct closing bracket or
@@ -584,11 +584,15 @@ flake8 importmagic autopep8 yapf~.
 I ended up having quite the row with this and making it work with Python3.5,
 however I'm 99% sure it's because I'm on OS X and it tends to be a major PITA
 to make it work properly there in my experience. I really should get around to
-using Linux...
+using Linux.
 #+BEGIN_SRC emacs-lisp
-  (use-package elpy :ensure t :config (elpy-enable) (setq
-    elpy-rpc-python-command "python3") (elpy-use-cpython "python3") (setq
-    python-shell-interpreter "python3"))
+  (use-package elpy
+    :ensure t
+    :config
+    (elpy-enable)
+    (setq elpy-rpc-python-command "python3"
+          python-shell-interpreter "python3")
+    (elpy-use-cpython "python3"))
 #+END_SRC
 * Org mode
 ** Get Org mode from Git
