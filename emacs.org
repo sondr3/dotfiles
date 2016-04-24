@@ -588,7 +588,8 @@ using Linux...
 #+BEGIN_SRC emacs-lisp
   (use-package elpy :ensure t :config (elpy-enable) (setq
     elpy-rpc-python-command "python3") (elpy-use-cpython "python3") (setq
-    python-shell-interpreter "python3")) #+END_SRC
+    python-shell-interpreter "python3"))
+#+END_SRC
 * Org mode
 ** Get Org mode from Git
 This is mostly because I like being able to have the latest and greatest of
