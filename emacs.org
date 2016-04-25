@@ -396,15 +396,16 @@ to use it, so I don't even know what it is set to by default. So I need it to
 be space here too.
 
 I also have a few chords set up that I use for various commands:
-| Chord     | Description                | Function             |
-|-----------+----------------------------+----------------------|
-| ~<SPC> w~ | Save current buffer        | ~save-buffer~        |
-| ~<SPC> o~ | Open file                  | ~find-file~          |
-| ~<SPC> b~ | Switch between buffers     | ~switch-to-buffer~   |
-| ~<SPC> l~ | Change dictionary language | ~my/cycle-languages~ |
-| ~<SPC> j~ | Jump to thing              | ~avy-goto-char~      |
-| ~<SPC> J~ | Jump to things on STEROIDS | ~avy-goto-word-0~    |
-| ~<SPC> g~ | Show git status            | ~magit-status~       |
+| Chord      | Description                | Function             |
+|------------+----------------------------+----------------------|
+| ~<SPC> w~  | Save current buffer        | ~save-buffer~        |
+| ~<SPC> o~  | Open file                  | ~find-file~          |
+| ~<SPC> b~  | Switch between buffers     | ~switch-to-buffer~   |
+| ~<SPC> l~  | Change dictionary language | ~my/cycle-languages~ |
+| ~<SPC> j~  | Jump to thing              | ~avy-goto-char~      |
+| ~<SPC> J~  | Jump to things on STEROIDS | ~avy-goto-word-0~    |
+| ~<SPC>g s~ | Show git status            | ~magit-status~       |
+| ~<SPC>g c~ | Open a commit window       | ~magit-commit~       |
 #+BEGIN_SRC emacs-lisp
   (use-package general
     :ensure t
@@ -417,7 +418,8 @@ I also have a few chords set up that I use for various commands:
                         "l" 'my/cycle-languages
                         "j" 'avy-goto-char
                         "J" 'avy-goto-word-0
-                        "g" 'magit-status))
+                        "gs" 'magit-status
+                        "gc" 'magit-commit))
 #+END_SRC
 ** Using ~jk~ to exit insert mode
 ~ESC~ is just too far to reach for mere mortals, and I even play piano. So I
