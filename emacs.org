@@ -365,6 +365,10 @@ informative. I use ~uniquify~ to solve that.
       (setq uniquify-buffer-name-style 'forward)))
 #+END_SRC
 ** Mode line
+*** Spaceline
+I honestly can't be arsed to configure the mode line a lot, I tried with
+~smart-mode-line~ and it was a major PITA to get it working anywhere close to how
+I wanted it to work. However, ~spaceline~ does exactly that. Neat.
 *** Hide line and column numbers
 #+BEGIN_SRC emacs-lisp
   (line-number-mode 0)
