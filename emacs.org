@@ -44,7 +44,7 @@ Furthermore, I want to automatically compile my emacs files.
 
 * General preferences
 For settings that don't really belong in any specific category. Like default
-behaviour and such.
+behavior and such.
 
 ** Name
 #+BEGIN_SRC emacs-lisp
@@ -154,6 +154,7 @@ American English.
     (setq-default ispell-program-name "hunspell")
     (setq ispell-really-hunspell t
           ispell-dictionary "en_US"
+          ispell-silently-savep t
           ispell-local-dictionary-alist
           '(
             ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)
@@ -297,7 +298,7 @@ something for everyone.
 Even though I hardly use the fringe for anything, it's still nice to have to
 separate the borders of the screen and the contents of the buffer.
 #+BEGIN_SRC emacs-lisp
-  (fringe-mode '(1 . 10))
+  (fringe-mode '(16 . 16))
 #+END_SRC
 ** Relative line numbers
 This is probably one of my favorite features from Vim, makes it incredibly easy
@@ -330,10 +331,15 @@ that. Might have to write my own after all...
 #+BEGIN_SRC emacs-lisp
   (use-package diff-hl
     :ensure t
-    :init
-    (setq diff-hl-side 'left)
     :config
-    (global-diff-hl-mode))
+    (global-diff-hl-mode t)
+    (diff-hl-margin-mode t)
+    (diff-hl-flydiff-mode t)
+    (setq diff-hl-side 'right)
+
+    (set-face-attribute 'diff-added nil :background "green")
+    (set-face-attribute 'diff-changed nil :background "purple")
+    (set-face-attribute 'diff-removed nil :background "red"))
 #+END_SRC
 ** Cursor
 I have a hard time with using a box for the cursor compared to a bar, since I
@@ -396,16 +402,18 @@ to use it, so I don't even know what it is set to by default. So I need it to
 be space here too.
 
 I also have a few chords set up that I use for various commands:
-| Chord      | Description                | Function             |
-|------------+----------------------------+----------------------|
-| ~<SPC> w~  | Save current buffer        | ~save-buffer~        |
-| ~<SPC> o~  | Open file                  | ~find-file~          |
-| ~<SPC> b~  | Switch between buffers     | ~switch-to-buffer~   |
-| ~<SPC> l~  | Change dictionary language | ~my/cycle-languages~ |
-| ~<SPC> j~  | Jump to thing              | ~avy-goto-char~      |
-| ~<SPC> J~  | Jump to things on STEROIDS | ~avy-goto-word-0~    |
-| ~<SPC>g s~ | Show git status            | ~magit-status~       |
-| ~<SPC>g c~ | Open a commit window       | ~magit-commit~       |
+| Chord      | Description                     | Function                     |
+|------------+---------------------------------+------------------------------|
+| ~<SPC> w~  | Save current buffer             | ~save-buffer~                |
+| ~<SPC> o~  | Open file                       | ~find-file~                  |
+| ~<SPC> b~  | Switch between buffers          | ~switch-to-buffer~           |
+| ~<SPC>f l~ | Change dictionary language      | ~my/cycle-languages~         |
+| ~<SPC>f e~ | Go to next wrongly spelled word | ~flyspell-goto-next-error~   |
+| ~<SPC>f w~ | Auto correct current word       | ~flyspell-auto-correct-word~ |
+| ~<SPC> j~  | Jump to thing                   | ~avy-goto-char-timer~        |
+| ~<SPC> l~  | Jump to line                    | ~avy-goto-line~              |
+| ~<SPC>g s~ | Show git status                 | ~magit-status~               |
+| ~<SPC>g c~ | Open a commit window            | ~magit-commit~               |
 #+BEGIN_SRC emacs-lisp
   (use-package general
     :ensure t
@@ -415,9 +423,11 @@ I also have a few chords set up that I use for various commands:
     (general-define-key "w" 'save-buffer
                         "o" 'find-file
                         "b" 'switch-to-buffer
-                        "l" 'my/cycle-languages
-                        "j" 'avy-goto-char
-                        "J" 'avy-goto-word-0
+                        "fl" 'my/cycle-languages
+                        "fe" 'flyspell-goto-next-error
+                        "fw" 'flyspell-auto-correct-word
+                        "j" 'avy-goto-char-timer
+                        "l" 'avy-goto-line
                         "gs" 'magit-status
                         "gc" 'magit-commit))
 #+END_SRC
@@ -456,7 +466,7 @@ on Github has it solved [[https://github.com/davvil/.emacs.d/blob/master/init.el
   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
   (global-set-key [escape] 'evil-exit-emacs-state)
 #+END_SRC
-** Keybinds
+** Key binds
 *** Change ~:~ to ~;~
 I read about this on reddit while I still used Vim and I really enjoyed it. It
 also helps that I'm lazy and don't want to press ~S-:~.
@@ -474,7 +484,7 @@ could use ~C-w [hjkl]~.
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 #+END_SRC
-* Keybinds
+* Key binds
 ** Extra leader keybinds
 Because I want only the most important keybinds to be bound via ~<SPC>~, I have
 set up ~,~ as a secondary leader key with commands that I use quite often but
@@ -620,6 +630,47 @@ according to their level. So a ~**~ is indented to the right under a ~*~ and so
 on.
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-indented t)
+#+END_SRC
+** Hide emphasis markers
+Should be self explanatory, I don't need to see 'em so I'll just hide 'em.
+#+BEGIN_SRC emacs-lisp
+  (setq org-hide-emphasis-markers t)
+#+END_SRC
+** Better bullets
+Something I found on [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][Howardism.org]], this makes your bullet points in ~org-mode~
+look nice. And I like nice.
+#+BEGIN_SRC emacs-lisp
+  (font-lock-add-keywords 'org-mode
+                          '(("^ +\\([-*]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+#+END_SRC
+
+And then some for the headers. Not that They don't look nice already... they
+just could look even better.
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+    :ensure t)
+
+  (add-hook 'org-mode'hook (lambda () (org-bullets-mode 1)))
+#+END_SRC
+** Better headers
+#+BEGIN_SRC emacs-lisp
+  (let* ((variable-tuple (cond ((x-list-fonts "Source Code Pro") '(:font "Source Code Pro"))
+                               ((x-list-fonts "Monaco")          '(:font "Monaco"))
+                               (nil (warn "Cannot find font."))))
+         (base-font-color (face-foreground 'default nil 'default))
+         (headline `(:inherit default :weight bold :foreground ,base-font-color)))
+
+    (custom-theme-set-faces 'user
+                            `(org-level-8 ((t (,@headline ,@variable-tuple))))
+                            `(org-level-7 ((t (,@headline ,@variable-tuple))))
+                            `(org-level-6 ((t (,@headline ,@variable-tuple))))
+                            `(org-level-5 ((t (,@headline ,@variable-tuple))))
+                            `(org-level-4 ((t (,@headline ,@variable-tuple :height 1))))
+                            `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.125))))
+                            `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.25))))
+                            `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.4))))
+                            `(org-document-title ((t (,@headline ,@variable-tuple :height 1.5 :underline nil))))))
 #+END_SRC
 ** Org babel languages
 #+BEGIN_SRC emacs-lisp
