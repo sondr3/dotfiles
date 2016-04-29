@@ -1,1 +1,1 @@
-.spacemacs.d/
+/Users/sondrenilsen/.spacemacs.d/
