@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
@@ -20,7 +21,7 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-" Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
 Plug 'othree/yajs.vim'
@@ -36,15 +37,12 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 call plug#end()
 
-" Neovim settings
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
 " General settings
 set shell=/usr/local/bin/fish
 imap jk <Esc>
 filetype plugin indent on
 syntax on
+set termguicolors
 set lazyredraw
 set mouse=a
 set mousehide
@@ -166,6 +164,12 @@ set nojoinspaces
 set splitright
 set splitbelow
 set pastetoggle=<F12>
+
+" Syntax
+let g:syntastic_javascript_eslint_generic = 1
+let g:syntastic_javascript_eslint_exec = 'xo'
+let g:syntastic_javascript_eslint_args = '--reporter=compact'
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Markdown
 au BufRead,BufNewFile *.md setlocal textwidth=80
