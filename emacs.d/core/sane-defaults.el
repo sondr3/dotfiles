@@ -70,4 +70,8 @@
       save-interprogram-paste-before-kill t
       mouse-yank-at-point t)
 
+;; And fuck that bell and its sound
+(setq visible-bell nil
+      ring-bell-function 'ignore)
+
 (provide 'sane-defaults)
