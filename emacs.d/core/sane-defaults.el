@@ -24,20 +24,50 @@
 ;; Show matching parenthesis
 (show-paren-mode 1)
 
-;; Do not use tabs!
+;; Do not use tabs, it's heresy
 (setq-default indent-tabs-mode nil)
 
-;; And assorted commands stolen from 'better-defaults.el'
-(setq x-select-enable-clipboard t
-      x-select-enable-primary t
+;; However, I do like to indent by 2, not 4
+(setq-default tab-width 2)
+
+;; 'y' or 'n' instead of 'yes' and 'no'
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; UTF-8 ALL THE THINGS
+(prefer-coding-system 'utf-8)
+(set-language-environment 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(setq buffer-file-coding-system 'utf-8
+      locale-coding-system 'utf-8)
+
+;; Sentences end in one space
+(set-default 'sentence-end-double-space nil)
+
+;; Set backup directories
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "saves")))
+      auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "auto-save") t)))
+
+;; Backup settings
+(setq backup-by-copying t
+      version-control t
+      delete-old-versions t)
+
+;; Save a list of recent files
+(recentf-mode 1)
+(setq recentf-max-saved-items 100)
+
+;; And the minibuffer as well
+(savehist-mode 1)
+(setq history-length 1000)
+
+;; Copying and pasting
+(setq select-enable-clipboard t
+      select-enable-primary t
       save-interprogram-paste-before-kill t
-      apropos-do-all t
-      mouse-yank-at-point t
-      require-final-newline t
-      visible-bell t
-      load-prefer-newer t
-      editt-window-setup-function 'ediff-setup-window-plain
-      save-place-file (concat user-emacs-directory "places")
-      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+      mouse-yank-at-point t)
 
 (provide 'sane-defaults)

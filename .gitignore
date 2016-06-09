@@ -7,17 +7,10 @@
 /.emacs.desktop
 /.emacs.desktop.lock
 *.elc
+elpa
+backups
 auto-save-list
-tramp
-.\#*
-.org-id-locations
-*_archive
-*_flymake.*
-/eshell/history
-/eshell/lastdir
-/elpa/
-*.rel
-.cask/
+history
 
 # Ignore test dir
 test
