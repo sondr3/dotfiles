@@ -348,6 +348,65 @@ exactly what I'm going to be doing.
       (add-hook 'prog-mode-hook 'nlinum-relative-mode)
       (add-hook 'text'mode-hook 'nlinum-relative-mode)))
 #+END_SRC
+* Evil
+As a ~vim~ fugitive and modal editing fan, there's nothing better than being able
+to emulate it inside Emacs. I heard you like modal editing, yo.
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :init (evil-mode 1))
+#+END_SRC
+
+** Escape insert mode
+I changed my escape sequence in ~vim~ to be ~jk~ after having read about it
+somewhere on reddit, so we'll do the same here!
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-escape
+    :init (evil-escape-mode 1)
+    :config
+    (progn
+      (setq-default evil-escape-key-sequence "jk")))
+#+END_SRC
+** Make ~ESC~ quit everything
+In Vim once your press ~ESC~ you stop everything, in Emacs you end up having to
+button mash it quite a few times to exit all the way out. Thankfully, ~davvil~
+on Github has it solved [[https://github.com/davvil/.emacs.d/blob/master/init.el][here]].
+#+BEGIN_SRC emacs-lisp
+  (defun minibuffer-keyboard-quit ()
+    "Abort recursive edit.
+    In Delete Selection mode, if the mark is active, just deactivate it;
+    then it takes a second \\[keyboard-quit] to abort the minibuffer."
+    (interactive)
+    (if (and delete-selection-mode transient-mark-mode mark-active)
+        (setq deactivate-mark  t)
+      (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+      (abort-recursive-edit)))
+  (define-key evil-normal-state-map [escape] 'keyboard-quit)
+  (define-key evil-visual-state-map [escape] 'keyboard-quit)
+  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+  (global-set-key [escape] 'evil-exit-emacs-state)
+#+END_SRC
+** Change ~:~ to ~;~
+I read about this on reddit while I still used Vim and I really enjoyed it. It
+also helps that I'm lazy and don't want to press ~S-:~.
+#+BEGIN_SRC emacs-lisp
+  (define-key evil-normal-state-map (kbd ";") 'evil-ex)
+#+END_SRC
+** Moving between buffers
+I use Tmux in my terminal and bound the key to switch between windows in it to
+be ~C-[hjkl]~, and did the same in Vim to be able to move between windows in
+both Tmux and Vim. So to have the same in Emacs would be nice, even though I
+could use ~C-w [hjkl]~.
+#+BEGIN_SRC emacs-lisp
+  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+#+END_SRC
+
 * General
 This is where non-specific stuff like spell checking and such goes.
 
@@ -455,22 +514,6 @@ When reading text in org mode it's a bit annoying having slashes and underscores
 littered about when instead, you can hide them!
 #+BEGIN_SRC emacs-lisp
   (setq org-hide-emphasis-markers t)
-#+END_SRC
-
-** Better bullets
-Something I found on [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][Howardism.org]], this makes your bullet points in ~org-mode~
-look nice. And I like nice.
-#+BEGIN_SRC emacs-lisp
-  (font-lock-add-keywords 'org-mode
-                          '(("^ +\\([-*]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-#+END_SRC
-
-And then some for the headers. Not that They don't look nice already... they
-just could look even better.
-#+BEGIN_SRC emacs-lisp
-  (use-package org-bullets
-    :init (add-hook 'org-mode'hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 * Functions
 ** Automatically tangle and byte compile ~emacs.org~

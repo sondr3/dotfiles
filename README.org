@@ -2,6 +2,10 @@
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
 
+I'm in the process of converting all my dotfiles into Org mode files that will
+tangle them into their respective files, but it's slow moving because I'm a lazy
+sod.
+
 * ~dotfiles~
 These are my dotfiles. There are many like them but these ones are mine. And
 for the most part the hardly work, even for me. So beware.
