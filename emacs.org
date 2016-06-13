@@ -18,7 +18,7 @@ Before we do anything, we'll have to make sure Emacs is properly configured with
 packages and some sane defaults.
 
 ** Packages
-*** ~Initial settings~
+*** Initial settings
 I'm using ~use-package~ for all packages, even internal Emacs packages. The
 biggest benefit is being able to ensure that packages are installed and defer
 them until they are needed, making restarting and starting Emacs really fast.
@@ -44,7 +44,6 @@ And then we can tell it to initialize packages.
 #+BEGIN_SRC emacs-lisp
   (package-initialize)
 #+END_SRC
-
 *** ~use-package~
 As mentioned, we'll be using ~use-package~ for all packaging goodness, so we'll
 have to make sure it's installed, and if not install it.
@@ -192,6 +191,7 @@ Because there's nothing more annoying than being spammed with that nonsense.
   (setq visible-bell nil
         ring-bell-function 'ignore)
 #+END_SRC
+
 *** Backups
 Normally Emacs saves a bunch of backup and auto save files in whatever directory
 you're currently working in. It's a minor nuisance to say the least. So we'll
@@ -210,6 +210,17 @@ And then some settings for the backups.
         delete-old-versions t)
 #+END_SRC
 
+***
+*** Cleanup white space characters
+In the beginning I used ~#'delete-trailing-whitespace~ but it was a bit too
+aggressive for my tastes, and so like any half respecting Emacs user does I
+looked at how Spacemacs solved it.
+#+BEGIN_SRC emacs-lisp
+  (use-package ws-butler
+    :config
+    (progn
+      (ws-butler-global-mode 1)))
+#+END_SRC
 *** ~saveplace~
 ~saveplace~ saves the position you were in the last time you had the buffer
 open, so you'll go right back to where you were.
@@ -413,6 +424,53 @@ incredibly handy in LISPs for example.
 #+BEGIN_SRC emacs-lisp
   (use-package aggressive-indent
     :init (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode))
+#+END_SRC
+* Org mode
+I don't really know much about Org mode, other than using it for this file and
+other dotfiles, I do want to learn and to do that we need to make sure we're
+using the latest version of it as well! The easiest way to do this is to ensure
+that it's installed with ~org-plus-contrib~ which will force it to download the
+latest version.
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :ensure org-plus-contrib)
+#+END_SRC
+
+** Syntax highlighting
+It's pretty useful to be able to see syntax highlighting in source blocks.
+#+BEGIN_SRC emacs-lisp
+  (setq-default org-src-fontify-natively t)
+#+END_SRC
+
+** Intend headers
+Something I found on StackOverflow a while back, but I have no idea where any
+more. What it does is indenting headers according to their level. It's a purely
+cosmetic change, but I do like cosmetics.
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-indented t)
+#+END_SRC
+
+** Hide emphasis markers
+When reading text in org mode it's a bit annoying having slashes and underscores
+littered about when instead, you can hide them!
+#+BEGIN_SRC emacs-lisp
+  (setq org-hide-emphasis-markers t)
+#+END_SRC
+
+** Better bullets
+Something I found on [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][Howardism.org]], this makes your bullet points in ~org-mode~
+look nice. And I like nice.
+#+BEGIN_SRC emacs-lisp
+  (font-lock-add-keywords 'org-mode
+                          '(("^ +\\([-*]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+#+END_SRC
+
+And then some for the headers. Not that They don't look nice already... they
+just could look even better.
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+    :init (add-hook 'org-mode'hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 * Functions
 ** Automatically tangle and byte compile ~emacs.org~
