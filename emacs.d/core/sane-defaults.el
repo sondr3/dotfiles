@@ -1,5 +1,8 @@
 ;; sane-defaults.el --- Because Emacs is old and quirky
 
+;; Disable the splash screen
+(setq inhibit-startup-message t)
+
 ;; First we use IDO
 (ido-mode t)
 (setq ido-enable-flex-matching t)
