@@ -13,6 +13,7 @@ auto-save-list
 history
 recentf
 ido.last
+places
 
 # Ignore test dir
 test

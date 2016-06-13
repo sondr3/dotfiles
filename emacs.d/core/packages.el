@@ -37,4 +37,4 @@
   (auto-compile-on-save-mode))
 
 ;; And provide it
-(provide 'appearance)
+(provide 'packages)
