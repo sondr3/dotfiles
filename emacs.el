@@ -151,7 +151,7 @@
 
 ;;; APPEARANCE
 ;; Here I'll be setting how Emacs looks, very personal preference
-;; stuff.
+;; stuff. If it would only work...
 
 ;; Always fontify text
 (setq font-lock-maximum-decoration t)
@@ -184,6 +184,7 @@
 
 ;; I want line numbers, but they should be relative
 (use-package nlinum-relative
+  :init (global-nlinum-mode)
   :config
   (progn
     ;; (nlinum-relative-setup-evil)
