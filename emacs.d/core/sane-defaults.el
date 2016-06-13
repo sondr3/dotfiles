@@ -14,12 +14,18 @@
   (horizontal-scroll-bar-mode -1))
 
 ;; Make buffer names unique
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
+(use-package uniquify
+  :ensure nil
+  :config
+  (progn
+    (setq uniqify-buffer-name-style 'forward)))
 
 ;; Save where you left off in buffers
-(require 'saveplace)
-(setq-default save-place t)
+(use-package saveplace
+  :ensure nil
+  :config
+  (progn
+    (setq-default save-place t)))
 
 ;; Show matching parenthesis
 (show-paren-mode 1)

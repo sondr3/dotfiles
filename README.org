@@ -3,16 +3,15 @@
 #+EMAIL: nilsen.sondre@gmail.com
 
 * ~dotfiles~
-These are my dotfiles. There are many like them but these ones are mine. They
-are all written in Emacs' ~org-mode~ and are tangled to their specific files
-with ~org-babel~. I decided to rewrite my dotfiles as literate configurations.
-I started with Emacs, loved it and have now started rewriting most of my other
-dotfiles in it as well.
+These are my dotfiles. There are many like them but these ones are mine. And
+for the most part the hardly work, even for me. So beware.
+
 * Applications
 ** Emacs
 I am currently running the latest Emacs 25.1 pretest on OS X, downloaded with
 Homebrew as ~brew install emacs --with-cocoa --with-gnutls --with-imagemagick
---devel~. My settings can be found in the [[https://github.com/sondr3/dotfiles/blob/master/emacs.org][emacs.org]] file.
+--devel~. My settings can be found in the
+[[https://github.com/sondr3/dotfiles/blob/master/emacs.org][emacs.org]] file.
 ** (Neo)vim
 I have completely switched over to using Neovim as my daily Vim driver. I
 install it as ~brew install neovim --HEAD~. My settings can be found in the

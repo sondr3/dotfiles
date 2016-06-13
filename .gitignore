@@ -11,6 +11,8 @@ elpa
 backups
 auto-save-list
 history
+recentf
+ido.last
 
 # Ignore test dir
 test
