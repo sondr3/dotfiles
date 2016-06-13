@@ -433,6 +433,30 @@ symlinked the ~en_US.{aff,dic}~ file to ~default.{aff,dic}~.
               ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)
               ("nb_NO" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))))
 #+END_SRC
+** Git
+You might think that Git is purely a programming tool, but it's not. I use it
+for quite a few other things, including keeping track of my blog posts, or just
+various tips and tricks that I've learned over the years. And Emacs has the best
+Git interface in Magit.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :commands (magit-commit-popup
+               magit-magit-fetch-popup
+               magit-log-popup
+               magit-pull-popup
+               magit-push-popup
+               magit-status))
+#+END_SRC
+
+*** Make it work with Evil
+Because we're using Evil we're going to need to install the ~evil-magit~ package
+because otherwise I'll go nuts. We just have to make sure to install it after
+Magit.
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-magit
+    :after magit)
+#+END_SRC
 * Programming
 Contains all sorts of settings that aren't limited to any one specific language.
 
