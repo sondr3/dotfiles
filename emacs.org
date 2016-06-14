@@ -217,6 +217,7 @@ aggressive for my tastes, and so like any half respecting Emacs user does I
 looked at how Spacemacs solved it.
 #+BEGIN_SRC emacs-lisp
   (use-package ws-butler
+    :delight ws-butler-mode " ⓦ"
     :config
     (progn
       (ws-butler-global-mode 1)))
@@ -348,6 +349,21 @@ exactly what I'm going to be doing.
       (add-hook 'prog-mode-hook 'nlinum-relative-mode)
       (add-hook 'text'mode-hook 'nlinum-relative-mode)))
 #+END_SRC
+** Mode line
+We'll switch to something a bit more fancy than the default mode line, however
+we do need to hide a few minor modes because they are quite frankly incredibly
+annoying to look at. Normally, you'd use diminish for this but we're going to be
+using delight because it also supports major modes.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package delight
+    :config
+    (delight '((auto-fill-function nil "simple")
+               (org-src-mode nil "org-src")
+               (org-indent-mode nil "org-indent")
+               (auto-revert-mode nil "autorevert")
+               (undo-tree-mode nil "undo-tree"))))
+#+END_SRC
 * Evil
 As a ~vim~ fugitive and modal editing fan, there's nothing better than being able
 to emulate it inside Emacs. I heard you like modal editing, yo.
@@ -361,6 +377,7 @@ I changed my escape sequence in ~vim~ to be ~jk~ after having read about it
 somewhere on reddit, so we'll do the same here!
 #+BEGIN_SRC emacs-lisp
   (use-package evil-escape
+    :delight evil-escape-mode
     :init (evil-escape-mode 1)
     :config
     (progn
@@ -401,10 +418,10 @@ be ~C-[hjkl]~, and did the same in Vim to be able to move between windows in
 both Tmux and Vim. So to have the same in Emacs would be nice, even though I
 could use ~C-w [hjkl]~.
 #+BEGIN_SRC emacs-lisp
-  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+  ;; (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+  ;; (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+  ;; (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+  ;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 #+END_SRC
 
 * General
@@ -418,6 +435,7 @@ downloaded from LibreOffice and installed to ~/Library/Spelling~, and I've
 symlinked the ~en_US.{aff,dic}~ file to ~default.{aff,dic}~.
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell
+    :delight flyspell-mode " Ⓢ"
     :init
     (progn
       (add-hook 'text-mode-hook #'turn-on-flyspell)
@@ -464,6 +482,7 @@ Contains all sorts of settings that aren't limited to any one specific language.
 Should be self explanatory, you need syntax checking when programming.
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
+    :delight flycheck-mode " ⓢ"
     :init (global-flycheck-mode)
     :config
     (progn
@@ -506,7 +525,14 @@ pretty much anything that can be indented while you're editing your code. It's
 incredibly handy in LISPs for example.
 #+BEGIN_SRC emacs-lisp
   (use-package aggressive-indent
+    :delight aggressive-indent-mode " Ⓘ"
     :init (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode))
+#+END_SRC
+* Languages
+** Emacs LISP
+We'll change the name in the mode line for Emacs Lisp to be just ~Elisp~.
+#+BEGIN_SRC emacs-lisp
+  (delight 'emacs-lisp-mode "Elisp" :major)
 #+END_SRC
 * Org mode
 I don't really know much about Org mode, other than using it for this file and
@@ -516,6 +542,7 @@ that it's installed with ~org-plus-contrib~ which will force it to download the
 latest version.
 #+BEGIN_SRC emacs-lisp
   (use-package org
+    :delight org " O"
     :ensure org-plus-contrib)
 #+END_SRC
 
@@ -531,6 +558,7 @@ more. What it does is indenting headers according to their level. It's a purely
 cosmetic change, but I do like cosmetics.
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-indented t)
+  (delight 'org-indent-mode)
 #+END_SRC
 
 ** Hide emphasis markers
