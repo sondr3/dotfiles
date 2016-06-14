@@ -304,11 +304,11 @@ Probably the most important part of the editing experience in my opinion is the
 font you choose. I'm currently using ~Source Code Pro~.
 #+BEGIN_SRC emacs-lisp 
   (set-face-attribute 'default nil
-                      :family "Source Code Pro"
+                      :family "Input Mono"
                       :height 120
                       :weight 'normal)
   (set-face-attribute 'mode-line nil
-                      :family "Source Code Pro"
+                      :family "Input Mono"
                       :height 110
                       :weight 'light)
 #+END_SRC
@@ -350,11 +350,13 @@ exactly what I'm going to be doing.
       (add-hook 'text'mode-hook 'nlinum-relative-mode)))
 #+END_SRC
 ** Mode line
-We'll switch to something a bit more fancy than the default mode line, however
-we do need to hide a few minor modes because they are quite frankly incredibly
-annoying to look at. Normally, you'd use diminish for this but we're going to be
-using delight because it also supports major modes.
+I'll be attempting to theme my own spaceline. Brace yourselves. It's not going
+to be pretty.
 
+*** Delight
+First order of business, we need to hide a bunch of minor modes from the mode
+line because they just cause a bunch of clutter and I don't really need or want
+to see them.
 #+BEGIN_SRC emacs-lisp
   (use-package delight
     :config
@@ -364,6 +366,35 @@ using delight because it also supports major modes.
                (auto-revert-mode nil "autorevert")
                (undo-tree-mode nil "undo-tree"))))
 #+END_SRC
+*** Spaceline
+There's a few other mode line packages out there, but this is by far the one
+that looks best out of the box and since it has the full weight of Spacemacs
+behind it it'll always be updated. Neat.
+#+BEGIN_SRC emacs-lisp
+  (use-package spaceline
+    :demand t
+    :config
+    (progn
+      (require 'spaceline-config)
+      (setq-default mode-line-format '("%e" (:eval (spaceline-ml-main)))
+                    powerline-height 30
+                    powerline-default-separator 'utf-8
+                    powerline-utf-8-separator-left ?
+                    powerline-utf-8-separator-right ?
+                    spaceline-highlight-face-func #'spaceline-highlight-face-evil-state
+                    spaceline-separator-dir-left '(left . left)
+                    spaceline-separator-dir-right '(right . right))
+      (spaceline-define-segment evil-current-state
+        (upcase (format "%s" evil-state))
+        :when (bound-and-true-p evil-local-mode))
+      (spaceline-install
+       '(((evil-current-state
+           :face highlight-face)
+          major-mode))
+       '((battery)))
+      (spaceline-compile)))
+#+END_SRC
+
 * Evil
 As a ~vim~ fugitive and modal editing fan, there's nothing better than being able
 to emulate it inside Emacs. I heard you like modal editing, yo.
