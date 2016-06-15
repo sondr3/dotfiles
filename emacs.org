@@ -441,23 +441,35 @@ try out for a while, so here goes nothing!
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (defhydra hydra-main-menu (:color pink
-                                    :hint nil)
+  (defhydra hydra-file-menu (:hint nil)
     "
   ^Save^             ^Search^           ^Actions^          ^Search
   ^^^^^^^^-----------------------------------------------------------------
   _s_: save          _f_: unmark        _x_: execute       _R_: re-isearch
   _S_: save all      _F_: unmark up     _b_: bury          _I_: isearch
   "
-    ("s" save-buffer :color blue)
-    ("S" evil-write-all :color blue)
+    ("s" save-buffer :exit t)
+    ("S" evil-write-all :exit t)
     ("f" Buffer-menu-backup-unmark)
     ("F" Buffer-menu-delete)
     ("x" Buffer-menu-delete-backwards)
     ("b" Buffer-menu-save)
     ("R" Buffer-menu-not-modified)
     ("I" Buffer-menu-execute)
-    ("q" quit-window "quit" :color blue))
+    ("q" nil "quit" :exit t))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-main-menu (:hint nil)
+    "
+  ^Actions^             ^Search^           ^Actions^          ^Search
+  ^^^^^^^^-----------------------------------------------------------------
+  _f_: files            ^ ^                ^ ^                ^ ^
+  _g_: git              ^ ^                ^ ^                ^ ^
+  "
+    ("f" hydra-file-menu/body :exit t)
+    ("g" hydra-git/body :exit t)
+    ("q" nil "quit" :exit t))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -467,7 +479,8 @@ try out for a while, so here goes nothing!
       (setq general-default-keymaps 'evil-normal-state-map
             general-default-prefix "<SPC>")
       (general-define-key
-       "f" 'hydra-main-menu/body
+       "" 'hydra-main-menu/body
+       "f" 'hydra-file-menu/body
        "g" 'hydra-git/body)))
 #+END_SRC
 * General
@@ -528,21 +541,22 @@ Magit.
 *** Give it a Hydra
 Because why the fuck not.
 #+BEGIN_SRC emacs-lisp
-  (defhydra hydra-git ()
+  (defhydra hydra-git (:hint nil :exit t)
     "
-      TIME TO MAGIT
     ^Stage^              ^Commit^            ^Diff^            ^Etc
     ^^^^^^^^-----------------------------------------------------------------
     _s_: status          _c_: commit        _d_: diff          _p_: push
     _S_: stage file      ^ ^                _D_: magit diff    _l_: log
   "
-    ("s" magit-status :color blue)
-    ("S" magit-stage-file :color blue)
-    ("c" magit-commit-popup :color blue)
-    ("d" magit-diff-popup :color blue)
-    ("D" magit-diff-head :color blue)
-    ("p" magit-push-popup :color blue)
-    ("l" magit-log-popup :color blue))
+    ("s" magit-status)
+    ("S" magit-stage-file)
+    ("c" magit-commit-popup)
+    ("d" magit-diff-popup)
+    ("D" magit-diff-head)
+    ("p" magit-push-popup)
+    ("l" magit-log-popup)
+    ("q" nil "quit")
+    ("b" hydra-main-menu/body "back"))
 #+END_SRC
 * Programming
 Contains all sorts of settings that aren't limited to any one specific language.
