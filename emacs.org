@@ -264,6 +264,12 @@ double space.
 #+BEGIN_SRC emacs-lisp
   (setq-default sentence-end-double-space nil)
 #+END_SRC
+
+We'll also tell Emacs to use the new byte codes introduced in Emacs 24.4,
+because newer is always better.
+#+BEGIN_SRC emacs-lisp
+  (setq byte-compile--use-old-handlers nil)
+#+END_SRC
 * Appearance
 You can really make ~vim~ look dashing, and I'll be damned if I won't be doing
 it with Emacs as well. Here we'll be configuring anything that has anything with
@@ -366,36 +372,7 @@ to see them.
                (auto-revert-mode nil "autorevert")
                (undo-tree-mode nil "undo-tree"))))
 #+END_SRC
-*** Spaceline
-There's a few other mode line packages out there, but this is by far the one
-that looks best out of the box and since it has the full weight of Spacemacs
-behind it it'll always be updated. Neat.
-#+BEGIN_SRC emacs-lisp
-  (use-package spaceline
-    :demand t
-    :config
-    (progn
-      (require 'spaceline-config)
-      (setq-default mode-line-format '("%e" (:eval (spaceline-ml-main)))
-                    powerline-height 30
-                    powerline-default-separator 'utf-8
-                    powerline-utf-8-separator-left ?
-                    powerline-utf-8-separator-right ?
-                    spaceline-highlight-face-func #'spaceline-highlight-face-evil-state
-                    spaceline-separator-dir-left '(left . left)
-                    spaceline-separator-dir-right '(right . right))
-      (spaceline-define-segment evil-current-state
-        (upcase (format "%s" evil-state))
-        :when (bound-and-true-p evil-local-mode))
-      (spaceline-install
-       '(((evil-current-state
-           :face highlight-face)
-          major-mode))
-       '((battery)))
-      (spaceline-compile)))
-#+END_SRC
-
-* Evil
+* Evil/key bindings
 As a ~vim~ fugitive and modal editing fan, there's nothing better than being able
 to emulate it inside Emacs. I heard you like modal editing, yo.
 #+BEGIN_SRC emacs-lisp
@@ -455,6 +432,44 @@ could use ~C-w [hjkl]~.
   ;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 #+END_SRC
 
+** Hydra
+Hydra is a really cool piece of software written by ~abo-abo~ that I've wanted to
+try out for a while, so here goes nothing!
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra
+    :demand t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-main-menu (:color pink
+                                    :hint nil)
+    "
+  ^Save^             ^Search^           ^Actions^          ^Search
+  ^^^^^^^^-----------------------------------------------------------------
+  _s_: save          _f_: unmark        _x_: execute       _R_: re-isearch
+  _S_: save all      _F_: unmark up     _b_: bury          _I_: isearch
+  "
+    ("s" save-buffer :color blue)
+    ("S" evil-write-all :color blue)
+    ("f" Buffer-menu-backup-unmark)
+    ("F" Buffer-menu-delete)
+    ("x" Buffer-menu-delete-backwards)
+    ("b" Buffer-menu-save)
+    ("R" Buffer-menu-not-modified)
+    ("I" Buffer-menu-execute)
+    ("q" quit-window "quit" :color blue))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :config
+    (progn
+      (setq general-default-keymaps 'evil-normal-state-map
+            general-default-prefix "<SPC>")
+      (general-define-key
+       "f" 'hydra-main-menu/body
+       "g" 'hydra-git/body)))
+#+END_SRC
 * General
 This is where non-specific stuff like spell checking and such goes.
 
@@ -491,6 +506,9 @@ Git interface in Magit.
 #+BEGIN_SRC emacs-lisp
   (use-package magit
     :commands (magit-commit-popup
+               magit-stage-file
+               magit-diff-popup
+               magit-diff-head
                magit-magit-fetch-popup
                magit-log-popup
                magit-pull-popup
@@ -505,6 +523,26 @@ Magit.
 #+BEGIN_SRC emacs-lisp
   (use-package evil-magit
     :after magit)
+#+END_SRC
+
+*** Give it a Hydra
+Because why the fuck not.
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-git ()
+    "
+      TIME TO MAGIT
+    ^Stage^              ^Commit^            ^Diff^            ^Etc
+    ^^^^^^^^-----------------------------------------------------------------
+    _s_: status          _c_: commit        _d_: diff          _p_: push
+    _S_: stage file      ^ ^                _D_: magit diff    _l_: log
+  "
+    ("s" magit-status :color blue)
+    ("S" magit-stage-file :color blue)
+    ("c" magit-commit-popup :color blue)
+    ("d" magit-diff-popup :color blue)
+    ("D" magit-diff-head :color blue)
+    ("p" magit-push-popup :color blue)
+    ("l" magit-log-popup :color blue))
 #+END_SRC
 * Programming
 Contains all sorts of settings that aren't limited to any one specific language.
@@ -549,7 +587,7 @@ We all need some rainbows in our lives, oh yes indeed.
     :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 
-** Aggressively indent
+** Indentation
 This was something that I found on a blog somewhere out there on the internet.
 ~aggressive-indent~ automatically, and aggressively indents whole regions and
 pretty much anything that can be indented while you're editing your code. It's
@@ -558,6 +596,11 @@ incredibly handy in LISPs for example.
   (use-package aggressive-indent
     :delight aggressive-indent-mode " Ⓘ"
     :init (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode))
+#+END_SRC
+
+We'll also make it so pressing ~RET~ automatically indents code as well.
+#+BEGIN_SRC emacs-lisp
+  (general-define-key "RET" 'newline-and-indent)
 #+END_SRC
 * Languages
 ** Emacs LISP
