@@ -437,38 +437,63 @@ Hydra is a really cool piece of software written by ~abo-abo~ that I've wanted t
 try out for a while, so here goes nothing!
 #+BEGIN_SRC emacs-lisp
   (use-package hydra
-    :demand t)
+    :demand t
+    :init
+    (progn
+      (hydra-add-font-lock)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (defhydra hydra-file-menu (:hint nil)
     "
-  ^Save^             ^Search^           ^Actions^          ^Search
+  ^Write^             ^Search^           ^Actions^          ^Search
   ^^^^^^^^-----------------------------------------------------------------
-  _s_: save          _f_: unmark        _x_: execute       _R_: re-isearch
-  _S_: save all      _F_: unmark up     _b_: bury          _I_: isearch
+  _w_: write         _f_: unmark        _x_: execute       _R_: re-isearch
+  _W_: write all     _F_: unmark up     ^ ^                _I_: isearch
+
   "
-    ("s" save-buffer :exit t)
-    ("S" evil-write-all :exit t)
+    ("w" save-buffer :exit t)
+    ("W" evil-write-all :exit t)
     ("f" Buffer-menu-backup-unmark)
     ("F" Buffer-menu-delete)
     ("x" Buffer-menu-delete-backwards)
-    ("b" Buffer-menu-save)
     ("R" Buffer-menu-not-modified)
     ("I" Buffer-menu-execute)
+    ("b" hydra-main-menu/body "back" :exit t)
     ("q" nil "quit" :exit t))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (defvar whitespace-mode nil)
+  (defhydra hydra-toggle (:color pink)
+    "
+
+  [_a_]: abbrev-mode:       %`abbrev-mode
+  [_d_]: debug-on-error:    %`debug-on-error
+  [_f_]: auto-fill-mode:    %`auto-fill-function
+  [_t_]: truncate-lines:    %`truncate-lines
+  [_w_]: whitespace-mode:   %`whitespace-mode
+
+  "
+    ("a" abbrev-mode nil)
+    ("d" toggle-debug-on-error nil)
+    ("f" auto-fill-mode nil)
+    ("t" toggle-truncate-lines nil)
+    ("w" whitespace-mode nil)
+    ("q" nil "quit"))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (defhydra hydra-main-menu (:hint nil)
     "
-  ^Actions^             ^Search^           ^Actions^          ^Search
-  ^^^^^^^^-----------------------------------------------------------------
-  _f_: files            ^ ^                ^ ^                ^ ^
-  _g_: git              ^ ^                ^ ^                ^ ^
+
+  [_f_]: files            [_M_]: minor modes ^ ^                ^ ^
+  [_g_]: git              ^ ^                ^ ^                ^ ^
+
   "
     ("f" hydra-file-menu/body :exit t)
     ("g" hydra-git/body :exit t)
+    ("M" hydra-toggle/body :exit t)
     ("q" nil "quit" :exit t))
 #+END_SRC
 
@@ -547,6 +572,7 @@ Because why the fuck not.
     ^^^^^^^^-----------------------------------------------------------------
     _s_: status          _c_: commit        _d_: diff          _p_: push
     _S_: stage file      ^ ^                _D_: magit diff    _l_: log
+
   "
     ("s" magit-status)
     ("S" magit-stage-file)
@@ -555,8 +581,8 @@ Because why the fuck not.
     ("D" magit-diff-head)
     ("p" magit-push-popup)
     ("l" magit-log-popup)
-    ("q" nil "quit")
-    ("b" hydra-main-menu/body "back"))
+    ("b" hydra-main-menu/body "back")
+    ("q" nil "quit"))
 #+END_SRC
 * Programming
 Contains all sorts of settings that aren't limited to any one specific language.
