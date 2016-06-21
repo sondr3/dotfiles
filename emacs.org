@@ -660,6 +660,17 @@ who has a bunch of really awesome Emacs packages.
     ("b" hydra-main-menu/body "back")
     ("q" nil "quit"))
 #+END_SRC
+** ~Ivy~
+Ivy is like IDO, only more updated. Not really sure what more I can say, it's
+pretty useful.
+#+BEGIN_SRC emacs-lisp
+  (use-package swiper
+    :delight ivy-mode " ⓘ"
+    :init (ivy-mode 1)
+    :config
+    (progn
+      (setq ivy-use-virtual-buffers t)))
+#+END_SRC
 * Programming
 Contains all sorts of settings that aren't limited to any one specific language.
 
@@ -752,7 +763,6 @@ that it's installed with ~org-plus-contrib~ which will force it to download the
 latest version.
 #+BEGIN_SRC emacs-lisp
   (use-package org
-    :delight org " O"
     :ensure org-plus-contrib)
 #+END_SRC
 
