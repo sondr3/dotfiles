@@ -437,10 +437,7 @@ Hydra is a really cool piece of software written by ~abo-abo~ that I've wanted t
 try out for a while, so here goes nothing!
 #+BEGIN_SRC emacs-lisp
   (use-package hydra
-    :demand t
-    :init
-    (progn
-      (hydra-add-font-lock)))
+    :demand t)
 #+END_SRC
 
 Now we can create a few different Hydras for the various modes and such that we
@@ -489,7 +486,7 @@ corresponding major mode menu. Awesome.
     (interactive)
     (cl-case major-mode
       (emacs-lisp-mode
-       (hydra-eslip/body))
+       (hydra-elisp/body))
       (org-mode
        (hydra-org/body))
       (t
@@ -727,6 +724,26 @@ We'll change the name in the mode line for Emacs Lisp to be just ~Elisp~.
 #+BEGIN_SRC emacs-lisp
   (delight 'emacs-lisp-mode "Elisp" :major)
 #+END_SRC
+
+*** Emacs LISP hydra
+Hell yeah.
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-elisp (:color blue :hint nil)
+    "
+  _r_: eval region
+  _B_: eval buffer
+  _s_: eval last sexp
+  _d_: eval defun
+  _e_: eval expression
+  "
+    ("r" eval-region)
+    ("B" eval-buffer)
+    ("s" eval-last-sexp)
+    ("d" eval-defun)
+    ("e" eval-expression)
+    ("b" hydra-main-menu/body "back")
+    ("q" nil "quit"))
+#+END_SRC
 * Org mode
 I don't really know much about Org mode, other than using it for this file and
 other dotfiles, I do want to learn and to do that we need to make sure we're
@@ -739,6 +756,12 @@ latest version.
     :ensure org-plus-contrib)
 #+END_SRC
 
+** Org hydra
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-org ()
+    "
+  ")
+#+END_SRC
 ** Syntax highlighting
 It's pretty useful to be able to see syntax highlighting in source blocks.
 #+BEGIN_SRC emacs-lisp
