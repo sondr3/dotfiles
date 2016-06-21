@@ -467,18 +467,34 @@ used to invoke other menus.
   (defhydra hydra-main-menu (:hint nil :exit t)
     "
 
-  _f_: files     _M_: minor modes   _a_: avy             ^ ^
-  _g_: git       ^ ^                _s_: spell checking  ^ ^
+  _f_: files     _m_: major modes   _a_: avy      ^ ^
+  _g_: git       _M_: minor modes   ^ ^         _s_: spell checking
 
   "
     ("f" hydra-file-menu/body)
     ("g" hydra-git/body)
+    ("m" hydra-by-major-mode)
     ("M" hydra-toggle/body)
     ("a" hydra-avy/body)
     ("s" hydra-spell-checking/body)
     ("q" nil "quit"))
 #+END_SRC
 
+** Major mode hydra
+Thanks to ~abo-abo~ for this! Makes it so invoking ~SPC-m~ always invokes the
+corresponding major mode menu. Awesome.
+#+BEGIN_SRC emacs-lisp
+  (defun hydra-by-major-mode ()
+    "Opens the correct major mode hydra for each mode"
+    (interactive)
+    (cl-case major-mode
+      (emacs-lisp-mode
+       (hydra-eslip/body))
+      (org-mode
+       (hydra-org/body))
+      (t
+       (error "%S not implemented" major-mode))))
+#+END_SRC
 ** Minor mode hydra
 There's quite a few minor modes that would be useful to be able to toggle on and
 off without having to remember their names and modes and so on.
