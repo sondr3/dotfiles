@@ -432,7 +432,7 @@ could use ~C-w [hjkl]~.
   ;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 #+END_SRC
 
-** Hydra
+* Hydra
 Hydra is a really cool piece of software written by ~abo-abo~ that I've wanted to
 try out for a while, so here goes nothing!
 #+BEGIN_SRC emacs-lisp
@@ -443,6 +443,67 @@ try out for a while, so here goes nothing!
       (hydra-add-font-lock)))
 #+END_SRC
 
+Now we can create a few different Hydras for the various modes and such that we
+want. We'll define a few higher level ones here and then the rest of them will
+be defined together with their corresponding packages.
+
+** ~General.el~
+To be able to invoke the various Hydras we'll need something to create custom
+key bindings, personally I'm a huge fan of ~general.el~ for this.
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :config
+    (progn
+      (setq general-default-keymaps 'evil-normal-state-map
+            general-default-prefix "<SPC>")
+      (general-define-key
+       "" 'hydra-main-menu/body)))
+#+END_SRC
+
+** Main hydra
+This is the main menu Hydra. It's called when pressing ~SPC~ and is only really
+used to invoke other menus.
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-main-menu (:hint nil :exit t)
+    "
+
+  _f_: files     _M_: minor modes   _a_: avy             ^ ^
+  _g_: git       ^ ^                _s_: spell checking  ^ ^
+
+  "
+    ("f" hydra-file-menu/body)
+    ("g" hydra-git/body)
+    ("M" hydra-toggle/body)
+    ("a" hydra-avy/body)
+    ("s" hydra-spell-checking/body)
+    ("q" nil "quit"))
+#+END_SRC
+
+** Minor mode hydra
+There's quite a few minor modes that would be useful to be able to toggle on and
+off without having to remember their names and modes and so on.
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-toggle (:color pink)
+    "
+
+  _a_: abbrev-mode:       %`abbrev-mode
+  _d_: debug-on-error:    %`debug-on-error
+  _f_: auto-fill-mode:    %`auto-fill-function
+  _t_: truncate-lines:    %`truncate-lines
+  _w_: whitespace-mode:   %`whitespace-mode
+
+  "
+    ("a" abbrev-mode nil)
+    ("d" toggle-debug-on-error nil)
+    ("f" auto-fill-mode nil)
+    ("t" toggle-truncate-lines nil)
+    ("w" whitespace-mode nil)
+    ("b" hydra-main-menu/body "back" :color blue)
+    ("q" nil "quit" :color blue))
+#+END_SRC
+
+** File hydra
+We're also going to need a hydra for file specific actions.
 #+BEGIN_SRC emacs-lisp
   (defhydra hydra-file-menu (:hint nil)
     "
@@ -452,62 +513,17 @@ try out for a while, so here goes nothing!
   _W_: write all     _F_: unmark up     ^ ^                _I_: isearch
 
   "
-    ("w" save-buffer :exit t)
-    ("W" evil-write-all :exit t)
+    ("w" save-buffer :color blue)
+    ("W" evil-write-all :color blue)
     ("f" Buffer-menu-backup-unmark)
     ("F" Buffer-menu-delete)
     ("x" Buffer-menu-delete-backwards)
     ("R" Buffer-menu-not-modified)
     ("I" Buffer-menu-execute)
-    ("b" hydra-main-menu/body "back" :exit t)
-    ("q" nil "quit" :exit t))
+    ("b" hydra-main-menu/body "back" :color blue)
+    ("q" nil "quit" :color blue))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
-  (defvar whitespace-mode nil)
-  (defhydra hydra-toggle (:color pink)
-    "
-
-  [_a_]: abbrev-mode:       %`abbrev-mode
-  [_d_]: debug-on-error:    %`debug-on-error
-  [_f_]: auto-fill-mode:    %`auto-fill-function
-  [_t_]: truncate-lines:    %`truncate-lines
-  [_w_]: whitespace-mode:   %`whitespace-mode
-
-  "
-    ("a" abbrev-mode nil)
-    ("d" toggle-debug-on-error nil)
-    ("f" auto-fill-mode nil)
-    ("t" toggle-truncate-lines nil)
-    ("w" whitespace-mode nil)
-    ("q" nil "quit"))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (defhydra hydra-main-menu (:hint nil)
-    "
-
-  [_f_]: files            [_M_]: minor modes ^ ^                ^ ^
-  [_g_]: git              ^ ^                ^ ^                ^ ^
-
-  "
-    ("f" hydra-file-menu/body :exit t)
-    ("g" hydra-git/body :exit t)
-    ("M" hydra-toggle/body :exit t)
-    ("q" nil "quit" :exit t))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (use-package general
-    :config
-    (progn
-      (setq general-default-keymaps 'evil-normal-state-map
-            general-default-prefix "<SPC>")
-      (general-define-key
-       "" 'hydra-main-menu/body
-       "f" 'hydra-file-menu/body
-       "g" 'hydra-git/body)))
-#+END_SRC
 * General
 This is where non-specific stuff like spell checking and such goes.
 
@@ -534,6 +550,24 @@ symlinked the ~en_US.{aff,dic}~ file to ~default.{aff,dic}~.
             '(
               ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)
               ("nb_NO" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))))
+#+END_SRC
+
+*** Spell checking hydra
+I'm too lazy to remember all the various ~flyspell~~ and ~ispell~ commands, so we'll create a
+Hydra for that as well. Yay.
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-spell-checking (:color blue :hint nil)
+    "
+
+  _c_: spell check buffer
+  _n_: go to next error
+  _d_: change dictionary
+  "
+    ("c" flyspell-buffer)
+    ("n" flyspell-goto-next-error)
+    ("d" ispell-change-dictionary)
+    ("b" hydra-main-menu/body "back")
+    ("q" nil "quit"))
 #+END_SRC
 ** Git
 You might think that Git is purely a programming tool, but it's not. I use it
@@ -581,6 +615,35 @@ Because why the fuck not.
     ("D" magit-diff-head)
     ("p" magit-push-popup)
     ("l" magit-log-popup)
+    ("b" hydra-main-menu/body "back")
+    ("q" nil "quit"))
+#+END_SRC
+** ~avy~
+I used ~vim-easymotion~ quite extensively in vim, and having something like that
+for Emacs would be really nice. And of course it exists. Much thanks to ~abo-abo~
+who has a bunch of really awesome Emacs packages.
+#+BEGIN_SRC emacs-lisp
+  (use-package avy
+    :commands (avy-goto-char
+               avy-goto-char-2
+               avy-goto-line
+               avy-goto-word-1))
+#+END_SRC
+
+*** ~avy~ hydra
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-avy (:color blue :hint nil)
+    "
+  ^Char^              ^Line^               ^Word^
+  ^^^^^^--------------------------------------------------
+  _c_: go to char      _l_: go to line     _w_: go to word
+  _C_: go to char 2
+
+  "
+    ("c" avy-goto-char)
+    ("C" avy-goto-char-2)
+    ("l" avy-goto-line)
+    ("w" avy-goto-word-1)
     ("b" hydra-main-menu/body "back")
     ("q" nil "quit"))
 #+END_SRC
