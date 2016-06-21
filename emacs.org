@@ -452,9 +452,9 @@ key bindings, personally I'm a huge fan of ~general.el~ for this.
     :config
     (progn
       (setq general-default-keymaps 'evil-normal-state-map
-            general-default-prefix "<SPC>")
-      (general-define-key
-       "" 'hydra-main-menu/body)))
+            my-leader "SPC")
+      (general-define-key :prefix my-leader
+                          "" 'hydra-main-menu/body)))
 #+END_SRC
 
 ** Main hydra
@@ -664,12 +664,14 @@ who has a bunch of really awesome Emacs packages.
 Ivy is like IDO, only more updated. Not really sure what more I can say, it's
 pretty useful.
 #+BEGIN_SRC emacs-lisp
-  (use-package swiper
-    :delight ivy-mode " ⓘ"
+  (use-package ivy
+    :ensure swiper
+    :delight ivy-mode
     :init (ivy-mode 1)
     :config
     (progn
-      (setq ivy-use-virtual-buffers t)))
+      (setq ivy-use-virtual-buffers t
+            ivy-display-style 'fancy)))
 #+END_SRC
 * Programming
 Contains all sorts of settings that aren't limited to any one specific language.
@@ -768,9 +770,14 @@ latest version.
 
 ** Org hydra
 #+BEGIN_SRC emacs-lisp
-  (defhydra hydra-org ()
+(defhydra hydra-org (:color blue :hint nil)
     "
-  ")
+  _l_: insert link
+
+  "
+    ("l" org-insert-link)
+    ("b" hydra-main-menu/body "back")
+    ("q" nil "quit"))
 #+END_SRC
 ** Syntax highlighting
 It's pretty useful to be able to see syntax highlighting in source blocks.
