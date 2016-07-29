@@ -27,21 +27,12 @@ Plug 'tpope/vim-endwise'
 Plug 'othree/yajs.vim'
 Plug 'benekastah/neomake'
 Plug 'gerw/vim-HiLinkTrace'
-" Glorious Scheme/LISP
-Plug 'wlangstroth/vim-racket'
-Plug 'kovisoft/slimv'
-Plug 'jpalardy/vim-slime'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 call plug#end()
 
 " General settings
 set shell=/usr/local/bin/fish
 imap jk <Esc>
-filetype plugin indent on
-syntax on
 set termguicolors
 set lazyredraw
 set mouse=a
@@ -104,7 +95,7 @@ nmap <silent> ,/ :nohlsearch<CR>
 " Interface
 let base16colorspace=256
 set background=dark
-colorscheme base16-solarized
+colorscheme base16-solarized-dark
 
 " Sensible defaults from Tpope
 if !&scrolloff
@@ -126,16 +117,6 @@ set cursorline
 
 set ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
-
-if has('statusline')
-    set laststatus=2
-    set statusline=%<%f\
-    set statusline+=%w%h%m%r
-    set statusline+=%{fugitive#statusline()}
-    set statusline+=\ [%{&ff}/%Y]
-    set statusline+=\ [%{getcwd()}]
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%%
-endif
 
 set backspace=indent,eol,start
 set linespace=0
@@ -196,12 +177,3 @@ let g:ctrlp_working_path_mode = 'ra'
 let delimitMate_expand_cr = 2
 
 let g:neomake_javascript_enabled_makers = ['eslint']
-
-" Python
-" let g:python3_host_prog = '/usr/local/bin/python3'
-
-" LISP and such
-let g:paredit_electric_return=0
-let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": "default", "target_pane": "2"}
-let g:slime_dont_ask_default = 1
