@@ -110,18 +110,6 @@ It's the 21st century, we're going to have to UTF-8 ALL THE THINGS!
         locale-coding-system 'utf-8)
 #+END_SRC
 
-*** IDO
-I love IDO, and so should you. It's a lot better than the default way
-that Emacs does matching.
-#+BEGIN_SRC emacs-lisp
-  (use-package ido
-    :init (ido-mode t)
-    :config
-    (progn
-      (setq ido-enable-flex-matching t
-            ido-everywhere t)))
-#+END_SRC
-
 *** Startup message and splash screen
 Not something that I use at all nor do I care to look at any of it so
 we'll just outright disable it. We'll also start the initial major
