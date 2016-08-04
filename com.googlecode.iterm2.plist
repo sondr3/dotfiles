@@ -8,6 +8,8 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>CopySelection</key>
+	<true/>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>base16-solarized.dark.256</key>
@@ -314,13 +316,13 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>690 319 909 509 0 0 2560 1440 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>582 974 606 456 0 0 2560 1440 </string>
+	<string>-1411 978 606 456 -1680 390 1680 1050 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
 	<string>972 950 616 174 0 0 2560 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>970 787 620 392 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 69 570 427 0 0 1680 1050 </string>
+	<string>0 42 570 427 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>212 106 570 427 0 0 1680 1050 </string>
 	<key>New Bookmarks</key>
@@ -988,6 +990,8 @@
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
+			<key>Set Local Environment Vars</key>
+			<true/>
 			<key>Shortcut</key>
 			<string></string>
 			<key>Silence Bell</key>
@@ -1096,10 +1100,10 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-07-09T14:35:39Z</date>
+	<date>2016-07-29T15:44:03Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.1</string>
+	<string>3.0.4</string>
 </dict>
 </plist>
