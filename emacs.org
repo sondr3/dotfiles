@@ -684,7 +684,12 @@ We'll change the name in the mode line for Emacs Lisp to be just ~Elisp~.
 #+BEGIN_SRC emacs-lisp
   (delight 'emacs-lisp-mode "Elisp" :major)
 #+END_SRC
-
+** Scheme
+To edit and run and so on Scheme code we'll use ~Geiser~. It's pretty neat.
+#+BEGIN_SRC emacs-lisp
+  (use-package geiser
+    :commands run-geiser)
+#+END_SRC
 * Org mode
 I don't really know much about Org mode, other than using it for this file and
 other dotfiles, I do want to learn and to do that we need to make sure we're
