@@ -471,94 +471,35 @@ try out for a while, so here goes nothing!
       (hydra-add-font-lock)))
 #+END_SRC
 
-Now we can create a few different Hydras for the various modes and such that we
-want. We'll define a few higher level ones here and then the rest of them will
-be defined together with their corresponding packages.
+After testing it out I realized I'd spend all my time trying to create various
+hydras instead of using something like ~general.el~ to bind keys every which way I
+want and then use ~which-key~ to display those.
 
-** Main hydra
-This is the main menu Hydra. It's called when pressing ~SPC~ and is only really
-used to invoke other menus.
+** Key binds
+And here the real fun begins.
+
 #+BEGIN_SRC emacs-lisp
-  (defhydra hydra-main-menu (:hint nil :exit t)
-    "
-
-  _f_: files     _m_: major modes   _a_: avy      ^ ^
-  _g_: git       _M_: minor modes   ^ ^         _s_: spell checking
-
-  "
-    ("f" hydra-file-menu/body)
-    ("g" hydra-git/body)
-    ("m" hydra-by-major-mode)
-    ("M" hydra-toggle/body)
-    ("a" hydra-avy/body)
-    ("s" hydra-spell-checking/body)
-    ("q" nil "quit")
-    ("Q" save-buffers-kill-terminal "exit"))
+  (general-define-key "SPC" 'which-key-show-top-level)
 #+END_SRC
-
-** Major mode hydra
-Thanks to ~abo-abo~ for this! Makes it so invoking ~SPC-m~ always invokes the
-corresponding major mode menu. Awesome.
-#+BEGIN_SRC emacs-lisp
-  (defun hydra-by-major-mode ()
-    "Opens the correct major mode hydra for each mode"
-    (interactive)
-    (cl-case major-mode
-      (emacs-lisp-mode
-       (hydra-elisp/body))
-      (org-mode
-       (hydra-org/body))
-      (t
-       (error "%S not implemented" major-mode))))
-#+END_SRC
-** Minor mode hydra
-There's quite a few minor modes that would be useful to be able to toggle on and
-off without having to remember their names and modes and so on.
-#+BEGIN_SRC emacs-lisp
-  (defhydra hydra-toggle (:color pink)
-    "
-
-  _a_: abbrev-mode:       %`abbrev-mode
-  _d_: debug-on-error:    %`debug-on-error
-  _f_: auto-fill-mode:    %`auto-fill-function
-  _t_: truncate-lines:    %`truncate-lines
-  _w_: whitespace-mode:   %`whitespace-mode
-
-  "
-    ("a" abbrev-mode nil)
-    ("d" toggle-debug-on-error nil)
-    ("f" auto-fill-mode nil)
-    ("t" toggle-truncate-lines nil)
-    ("w" whitespace-mode nil)
-    ("B" hydra-main-menu/body "back" :color blue)
-    ("q" nil "quit" :color blue))
-#+END_SRC
-
-** File hydra
-We're also going to need a hydra for file specific actions.
-#+BEGIN_SRC emacs-lisp
-  (defhydra hydra-file-menu (:hint nil)
-    "
-  ^Write^             ^Search^           ^Actions^          ^Search
-  ^^^^^^^^-----------------------------------------------------------------
-  _w_: write         _f_: unmark        _x_: execute       _R_: re-isearch
-  _W_: write all     _F_: unmark up     ^ ^                _I_: isearch
-
-  "
-    ("w" save-buffer :color blue)
-    ("W" evil-write-all :color blue)
-    ("f" Buffer-menu-backup-unmark)
-    ("F" Buffer-menu-delete)
-    ("x" Buffer-menu-delete-backwards)
-    ("R" Buffer-menu-not-modified)
-    ("I" Buffer-menu-execute)
-    ("B" hydra-main-menu/body "back" :color blue)
-    ("q" nil "quit" :color blue))
-#+END_SRC
-
 * General
 This is where non-specific stuff like spell checking and such goes.
 
+** Auto completion
+Although not something that I even used in Vim nor Sublime it's something that
+I've had on my TODO-list for quite some time. And Emacs has a really nice auto
+completion framework in ~Company~.
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :delight company-mode " Ⓒ"
+    :init
+    (progn
+      (setq company-idle-delay 0.2
+            company-minimum-prefix-length 2
+            company-require-match nil
+            company-dabbrev-ignore-case nil
+            company-dabbrev-downcase nil)
+      (global-company-mode +1)))
+#+END_SRC
 ** Spell checking
 After reading a bit online and testing out the various spell checkers that are
 available I've settled on using ~hunspell~ as it has the most features, is still
@@ -596,25 +537,6 @@ Because the current way of using ~ispell~ is kinda sucky.
       (setq flyspell-correct-interface 'flyspell-correct-popup)))
 #+END_SRC
 
-*** Spell checking hydra
-I'm too lazy to remember all the various ~flyspell~~ and ~ispell~ commands, so we'll create a
-Hydra for that as well. Yay.
-#+BEGIN_SRC emacs-lisp
-  (defhydra hydra-spell-checking (:color blue :hint nil)
-    "
-
-  _b_: spell check buffer
-  _c_: correct previous word
-  _n_: go to next error
-  _d_: change dictionary
-  "
-    ("b" flyspell-buffer)
-    ("c" flyspell-correct-previous-word-generic)
-    ("n" flyspell-goto-next-error)
-    ("d" ispell-change-dictionary)
-    ("B" hydra-main-menu/body "back")
-    ("q" nil "quit"))
-#+END_SRC
 ** Git
 You might think that Git is purely a programming tool, but it's not. I use it
 for quite a few other things, including keeping track of my blog posts, or just
@@ -643,27 +565,6 @@ Magit.
     :after magit)
 #+END_SRC
 
-*** Give it a Hydra
-Because why the fuck not.
-#+BEGIN_SRC emacs-lisp
-  (defhydra hydra-git (:hint nil :exit t)
-    "
-    ^Stage^              ^Commit^            ^Diff^            ^Etc
-    ^^^^^^^^-----------------------------------------------------------------
-    _s_: status          _c_: commit        _d_: diff          _p_: push
-    _S_: stage file      ^ ^                _D_: magit diff    _l_: log
-
-  "
-    ("s" magit-status)
-    ("S" magit-stage-file)
-    ("c" magit-commit-popup)
-    ("d" magit-diff-popup)
-    ("D" magit-diff-head)
-    ("p" magit-push-popup)
-    ("l" magit-log-popup)
-    ("B" hydra-main-menu/body "back")
-    ("q" nil "quit"))
-#+END_SRC
 ** ~avy~
 I used ~vim-easymotion~ quite extensively in vim, and having something like that
 for Emacs would be really nice. And of course it exists. Much thanks to ~abo-abo~
@@ -674,24 +575,6 @@ who has a bunch of really awesome Emacs packages.
                avy-goto-char-2
                avy-goto-line
                avy-goto-word-1))
-#+END_SRC
-
-*** ~avy~ hydra
-#+BEGIN_SRC emacs-lisp
-  (defhydra hydra-avy (:color blue :hint nil)
-    "
-  ^Char^              ^Line^               ^Word^
-  ^^^^^^--------------------------------------------------
-  _c_: go to char      _l_: go to line     _w_: go to word
-  _C_: go to char 2
-
-  "
-    ("c" avy-goto-char)
-    ("C" avy-goto-char-2)
-    ("l" avy-goto-line)
-    ("w" avy-goto-word-1)
-    ("B" hydra-main-menu/body "back")
-    ("q" nil "quit"))
 #+END_SRC
 ** ~Ivy~
 Ivy is like IDO, only more updated. Not really sure what more I can say, it's
@@ -765,33 +648,35 @@ We'll also make it so pressing ~RET~ automatically indents code as well.
   (general-define-key "RET" 'newline-and-indent)
 #+END_SRC
 * Languages
+** Lisps
+Since most of the languages in the Lisp family share very similar syntax I'll
+group most of their settings in this group.
+*** Lispy
+~Lispy~ is a new mode for editing Lisps in the same vein as ~paredit~ and
+~cleverparens~ but newer and better. Especially as it's written by ~abo-abo~ and
+that guy is amazing.
+#+BEGIN_SRC emacs-lisp
+  (use-package lispy
+    :delight lispy-mode " Ⓛ"
+    :init
+    (progn
+      (defun my-lispy-off ()
+        (when lispy-mode
+          (lispy-mode -1)))
+      (defun my-lispy-on ()
+        (when (member major-mode
+                      '(emacs-lisp-mode scheme-mode lisp-interaction-mode))
+          (lispy-mode)))
+
+      (add-hook 'evil-insert-state-entry-hook #'my-lispy-on)
+      (add-hook 'evil-insert-state-exit-hook #'my-lispy-off)))
+#+END_SRC
 ** Emacs LISP
 We'll change the name in the mode line for Emacs Lisp to be just ~Elisp~.
 #+BEGIN_SRC emacs-lisp
   (delight 'emacs-lisp-mode "Elisp" :major)
 #+END_SRC
 
-*** Emacs LISP hydra
-Hell yeah.
-#+BEGIN_SRC emacs-lisp
-  (defhydra hydra-elisp (:color blue :hint nil)
-    "
-  _r_: eval region
-  _b_: eval buffer
-  _s_: eval last sexp
-  _d_: eval defun
-  _e_: eval expression
-
-  "
-    ("r" eval-region)
-    ("b" eval-buffer)
-    ("s" eval-last-sexp)
-    ("d" eval-defun)
-    ("e" eval-expression)
-    (
-    "B" hydra-main-menu/body "back")
-    ("q" nil "quit"))
-#+END_SRC
 * Org mode
 I don't really know much about Org mode, other than using it for this file and
 other dotfiles, I do want to learn and to do that we need to make sure we're
@@ -803,17 +688,6 @@ latest version.
     :ensure org-plus-contrib)
 #+END_SRC
 
-** Org hydra
-#+BEGIN_SRC emacs-lisp
-(defhydra hydra-org (:color blue :hint nil)
-    "
-  _l_: insert link
-
-  "
-    ("l" org-insert-link)
-    ("B" hydra-main-menu/body "back")
-    ("q" nil "quit"))
-#+END_SRC
 ** Syntax highlighting
 It's pretty useful to be able to see syntax highlighting in source blocks.
 #+BEGIN_SRC emacs-lisp
