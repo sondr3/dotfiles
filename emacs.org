@@ -589,6 +589,14 @@ pretty useful.
       (setq ivy-use-virtual-buffers t
             ivy-display-style 'fancy)))
 #+END_SRC
+** ~anzu~
+Although I never used it's counterpart in Vim it does look useful for both Emacs
+and Vim.
+#+BEGIN_SRC emacs-lisp
+  (use-package anzu
+    :delight anzu-mode " ⓐ"
+    :init (global-anzu-mode +1))
+#+END_SRC
 * Programming
 Contains all sorts of settings that aren't limited to any one specific language.
 
