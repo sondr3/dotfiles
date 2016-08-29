@@ -360,7 +360,8 @@ to see them.
                (auto-revert-mode nil "autorevert")
                (undo-tree-mode nil "undo-tree"))))
 #+END_SRC
-* Evil/key bindings
+* Key bindings
+** Evil
 As a ~vim~ fugitive and modal editing fan, there's nothing better than being able
 to emulate it inside Emacs. I heard you like modal editing, yo.
 #+BEGIN_SRC emacs-lisp
@@ -368,7 +369,7 @@ to emulate it inside Emacs. I heard you like modal editing, yo.
     :init (evil-mode 1))
 #+END_SRC
 
-** Escape insert mode
+*** Escape insert mode
 I changed my escape sequence in ~vim~ to be ~jk~ after having read about it
 somewhere on reddit, so we'll do the same here!
 #+BEGIN_SRC emacs-lisp
@@ -379,7 +380,7 @@ somewhere on reddit, so we'll do the same here!
     (progn
       (setq-default evil-escape-key-sequence "jk")))
 #+END_SRC
-** Make ~ESC~ quit everything
+*** Make ~ESC~ quit everything
 In Vim once your press ~ESC~ you stop everything, in Emacs you end up having to
 button mash it quite a few times to exit all the way out. Thankfully, ~davvil~
 on Github has it solved [[https://github.com/davvil/.emacs.d/blob/master/init.el][here]].
@@ -402,13 +403,13 @@ on Github has it solved [[https://github.com/davvil/.emacs.d/blob/master/init.el
   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
   (global-set-key [escape] 'evil-exit-emacs-state)
 #+END_SRC
-** Change ~:~ to ~;~
+*** Change ~:~ to ~;~
 I read about this on reddit while I still used Vim and I really enjoyed it. It
 also helps that I'm lazy and don't want to press ~S-:~.
 #+BEGIN_SRC emacs-lisp
   (define-key evil-normal-state-map (kbd ";") 'evil-ex)
 #+END_SRC
-** Moving between buffers
+*** Moving between buffers
 I use Tmux in my terminal and bound the key to switch between windows in it to
 be ~C-[hjkl]~, and did the same in Vim to be able to move between windows in
 both Tmux and Vim. So to have the same in Emacs would be nice, even though I
@@ -420,28 +421,46 @@ could use ~C-w [hjkl]~.
   ;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 #+END_SRC
 
-** ~General.el~
-To be able to invoke the various Hydras we'll need something to create custom
-key bindings, personally I'm a huge fan of ~general.el~ for this.
-#+BEGIN_SRC emacs-lisp
-  (use-package general
-    :config
-    (progn
-      (setq general-default-keymaps 'evil-normal-state-map
-            my-leader "SPC")
-      (general-define-key :prefix my-leader
-                          "" 'hydra-main-menu/body)))
-#+END_SRC
-
-** Assorted
-*** Change ~popup.el~ key binds
+*** Assorted
+**** Change ~popup.el~ key binds
 Because who uses the arrow keys, honestly?
 #+BEGIN_SRC emacs-lisp
   (general-define-key :keymaps 'popup-menu-keymap
                       "j" 'popup-next
                       "k" 'popup-previous)
 #+END_SRC
-* Hydra
+** Moving around
+To move around in Emacs using various key binds we'll use both ~which-key~ and
+~general.el~ to display the various key bindings and actually bind them. Finally,
+we'll also use ~Hydra~ here and there to add various menus that can't be added
+with either of the others.
+
+*** ~which-key~
+Famously used in Spacemacs where it shows up when using ~SPC~, it shows all the
+various commands you can run in it, I'll be stealing this idea from them but
+with my own various twists and such. Neat.
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :delight which-key-mode
+    :demand t
+    :config
+    (progn
+      (which-key-mode)))
+#+END_SRC
+*** ~General.el~
+I'm not sure what they use in Spacemacs to bind keys, but I happened across
+~general.el~ somehow, somewhere and have used it ever since. I really enjoy using
+it and haven't had any problems with it either, so we'll stick with using it as
+well. Yay us.
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :config
+    (progn
+      (setq general-default-keymaps 'evil-normal-state-map
+            major-leader ",")))
+#+END_SRC
+
+*** Hydra
 Hydra is a really cool piece of software written by ~abo-abo~ that I've wanted to
 try out for a while, so here goes nothing!
 #+BEGIN_SRC emacs-lisp
