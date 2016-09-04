@@ -10,23 +10,25 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
-Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'mattn/emmet-vim'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'kien/ctrlp.vim'
 Plug 'raimondi/delimitMate'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'scrooloose/syntastic'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
 Plug 'othree/yajs.vim'
-Plug 'benekastah/neomake'
 Plug 'gerw/vim-HiLinkTrace'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'neomake/neomake'
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fatih/vim-go'
+
 
 call plug#end()
 
@@ -79,7 +81,8 @@ nnoremap ; :
 :nmap j gj
 :nmap k gk
 " <Leader>o to open a new file
-nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>o :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>w :w<CR>
 
 " Easier moving between windows
@@ -166,14 +169,9 @@ let g:airline_right_sep = ''
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
 
-" ctrlp
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_show_hidden = 0
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|vendor)|\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_working_path_mode = 'ra'
-
 " delmitMate
 let delimitMate_expand_cr = 2
 
+" nvim plugins
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:deoplete#enable_at_startup = 1
