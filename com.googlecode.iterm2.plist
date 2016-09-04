@@ -321,8 +321,10 @@
 	<string>972 950 616 174 0 0 2560 1440 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>970 787 620 392 0 0 2560 1440 </string>
+	<key>NSWindow Frame SharedPreferences</key>
+	<string>258 255 796 473 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 42 570 427 0 0 1680 1050 </string>
+	<string>0 53 570 427 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>212 106 570 427 0 0 1680 1050 </string>
 	<key>New Bookmarks</key>
@@ -640,7 +642,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string>tmux attach -t base; or tmux new -s base</string>
+			<string>tmux -2 attach -t base; or tmux -2 new -s base</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -1100,10 +1102,10 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-07-29T15:44:03Z</date>
+	<date>2016-09-04T01:59:40Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.4</string>
+	<string>3.0.7</string>
 </dict>
 </plist>
