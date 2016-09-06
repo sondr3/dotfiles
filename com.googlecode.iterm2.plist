@@ -314,7 +314,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>690 319 909 509 0 0 2560 1440 </string>
+	<string>690 319 909 375 0 0 2560 1440 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>-1411 978 606 456 -1680 390 1680 1050 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
@@ -322,7 +322,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>970 787 620 392 0 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>258 255 796 473 0 0 2560 1440 </string>
+	<string>258 347 796 473 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 53 570 427 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
@@ -955,7 +955,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodePro-Regular 12</string>
+			<string>InputMono-Regular 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
