@@ -265,7 +265,20 @@ you should place your code here."
   (setq aggressive-indent-mode t)
 
   ;; Add some spacing between lines so they don't look too crowded
-  (setq-default line-spacing 0.15))
+  (setq-default line-spacing 0.15)
+
+  ;; Hide emphasis markers in Org mode
+  (setq org-hide-emphasis-markers t)
+
+  ;; function to automatically tangle files in ~/.dotfiles
+  (defun my-tangle-dotfiles ()
+    "Automatically tangle any org file in ~/.dotfiles"
+    (when (equal (file-name-directory (directory-file-name buffer-file-name))
+                 (concat (getenv "HOME") "/.dotfiles/"))
+      (org-babel-tangle)
+      (message "%s tangled" buffer-file-truename)))
+
+  (add-hook 'after-save-hook #'my-tangle-dotfiles))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
