@@ -2,7 +2,7 @@
 set -g -x fish_greeting ''
 
 # base16 shell
-eval sh $HOME/.config/base16-shell/base16-solarized.dark.sh
+# eval sh $HOME/.config/base16-shell/base16-solarized.dark.sh
 
 # ~/.config/fish/functions/add_to_path.fish
 function add_to_path --description 'Persistently prepends paths to your PATH'
@@ -11,3 +11,7 @@ end
 
 # use ag so fzf can use .gitignore
 export FZF_DEFAULT_COMMAND='ag -g ""'
+
+# export go paths
+set -x GOPATH ~/Code/golang
+set -gx PATH $GOPATH/bin $PATH
