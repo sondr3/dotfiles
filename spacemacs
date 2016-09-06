@@ -270,6 +270,9 @@ you should place your code here."
   ;; Hide emphasis markers in Org mode
   (setq org-hide-emphasis-markers t)
 
+  ;; Always have auto-fill-mode enabled in text modes
+  (add-hook 'text-mode-hook #'auto-fill-mode)
+
   ;; function to automatically tangle files in ~/.dotfiles
   (defun my-tangle-dotfiles ()
     "Automatically tangle any org file in ~/.dotfiles"
