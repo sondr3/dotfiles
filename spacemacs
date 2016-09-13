@@ -273,11 +273,15 @@ you should place your code here."
   ;; Always have auto-fill-mode enabled in text modes
   (add-hook 'text-mode-hook #'auto-fill-mode)
 
+  ;; Always follow symbolic links
+  (setq vc-follow-symlinks t)
+
   ;; function to automatically tangle files in ~/.dotfiles
   (defun my-tangle-dotfiles ()
     "Automatically tangle any org file in ~/.dotfiles"
-    (when (equal (file-name-directory (directory-file-name buffer-file-name))
-                 (concat (getenv "HOME") "/.dotfiles/"))
+    (when (and (equal (file-name-directory (directory-file-name buffer-file-name))
+                      (concat (getenv "HOME") "/.dotfiles/"))
+               (equal (file-name-extension buffer-file-name) "org"))
       (org-babel-tangle)
       (message "%s tangled" buffer-file-truename)))
 
