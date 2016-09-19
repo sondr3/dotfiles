@@ -263,7 +263,9 @@ you should place your code here."
 
   ;; Properly set indentation
   (setq-default indent-tabs-mode nil
-                tab-width 2)
+                tab-width 2
+                default-tab-width 2
+                indent-line-function 2)
 
   ;; Fix the issue with RGB being messed up on OS X
   (setq powerline-default-separator 'bar)
@@ -288,7 +290,8 @@ you should place your code here."
   (setq create-lockfiles nil)
 
   ;; change how JS is indented
-  (setq-default js2-basic-offset 2)
+  (setq-default js2-basic-offset 2
+                js2-basic-offset 2)
 
   ;; function to automatically tangle files in ~/.dotfiles
   (defun my-tangle-dotfiles ()
