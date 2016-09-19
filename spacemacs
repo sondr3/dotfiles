@@ -261,6 +261,10 @@ you should place your code here."
   ;; Remap <esc> to <jk> instead
   (setq-default evil-escape-key-sequence "jk")
 
+  ;; Properly set indentation
+  (setq-default indent-tabs-mode nil
+                tab-width 2)
+
   ;; Fix the issue with RGB being messed up on OS X
   (setq powerline-default-separator 'bar)
   (spaceline-compile)
