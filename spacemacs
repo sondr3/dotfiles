@@ -283,6 +283,9 @@ you should place your code here."
   ;; Don't create lock files
   (setq create-lockfiles nil)
 
+  ;; change how JS is indented
+  (setq-default js2-basic-offset 2)
+
   ;; function to automatically tangle files in ~/.dotfiles
   (defun my-tangle-dotfiles ()
     "Automatically tangle any org file in ~/.dotfiles"
