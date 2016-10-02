@@ -33,6 +33,7 @@
       :defer t
       :config
       (progn
+        (spacemacs|diminish lispyville-mode " ")
         (add-hook 'lispy-mode-hook #'lispyville-mode))))
 
 ;;; packages.el ends here
