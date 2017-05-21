@@ -94,6 +94,74 @@ can demand it by using ~:demand t~ while configuring it.
 #+BEGIN_SRC emacs-lisp
   (setq use-package-always-defer t)
 #+END_SRC
+* Appearance
+I'm a sucker for minimalistic and clean interfaces, and Emacs out of
+the box does not really look nice. It definitely looks like something
+out of the eighties, which is fine... as long as you can change it as
+you want to.
+
+** Font
+There are a ton of different fonts that I've tried and seen. I've
+previously used ~Monaco~ and ~Source Code Pro~ but for the last few months
+I've been using ~Input Mono~ which I really like.
+
+This is however definitely subject to change.
+#+BEGIN_SRC emacs-lisp
+  (set-face-attribute 'default nil
+                      :family "Input Mono" :height 120)
+  (set-face-attribute 'variable-pitch nil
+                      :family "Input Mono" :height 130 :weight 'regular)
+#+END_SRC
+** Theme
+The second most important part of making things look good is the
+theme, and I far prefer light themes over dark themes. Unless it's
+late at night, then having a dark theme is fine. So using a theme that
+has both and that I like is what I was after. I found that in ~tao~.
+
+TODO Create function to change theme with shortcut
+#+BEGIN_SRC emacs-lisp
+  (use-package tao-theme
+    :demand t
+    :init (load-theme 'tao-yang t))
+#+END_SRC
+** Fringe
+I am also not a fan of how close to the edge of the windows everything
+is in Emacs, so I like to make sure the fringe is a bit wider than
+normal.
+#+BEGIN_SRC emacs-lisp
+  (fringe-mode '(16 . 16))
+#+END_SRC
+** Hide various bars
+I don't really use any of these and they look really out of place,
+especially the menu bar. So I just hide them.
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'menu-bar-mode)
+    (menu-bar-mode -1))
+  (when (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+  (when (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
+#+END_SRC
+** Start maximized
+Whenever I start up Emacs I just want it to immediately go into
+fullscreen.
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
+#+END_SRC
+** Cursor
+The default icon for the cursor in Emacs is a bar, and I have always
+been really bad at understanding exactly what is under or next to it
+when it's a bar, so I'll just change it to a bar instead.
+#+BEGIN_SRC emacs-lisp
+  (setq-default cursor-type '(bar . 2))
+#+END_SRC
+** Highlight current line
+When the cursor is a small bar however it can be pretty hard to tell
+where it is, so to make it easier to spot I will simply highlight the
+whole line that the cursor is on.
+#+BEGIN_SRC emacs-lisp
+  (global-hl-line-mode t)
+#+END_SRC
 * Org-mode
 As this whole configuration is built on ~org-mode~ we're going to
 install the latest and greatest version of it as well to get even more
