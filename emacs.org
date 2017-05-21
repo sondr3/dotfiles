@@ -103,3 +103,32 @@ goodies.
     :pin org
     :ensure org-plus-contrib)
 #+END_SRC
+
+** Conveniences
+There are a few things I need to configure with ~org-mode~ though,
+just to make it a bit more convenient to work with.
+
+*** Syntax highlighting
+First of all, having all the ~BEGIN_SRC~ blocks display their syntax
+highlighting always.
+#+BEGIN_SRC emacs-lisp
+  (setq-default org-src-fontify-natively t)
+#+END_SRC
+
+*** Indent headers
+Although ~org-mode~ looks nice out of the box, I find it a bit
+difficult to see which header is on which level, so I'm going to
+indent them instead, and use ~Delight~ to hide the ~org-indent-mode~
+from the powerline.
+#+BEGIN_SRC emacs-lisp
+  (setq org-startup-indented t)
+  (delight 'org-indent-mode)
+#+END_SRC
+
+*** Emphasis markers
+And then finally I'm going to hide the emphasis markers. This makes it
+so source blocks that are inline, italicized words and so on have
+their markers hidden. No more ~_hello world_~ and so on.
+#+BEGIN_SRC emacs-lisp
+  (setq org-hide-emphasis-markers t)
+#+END_SRC
