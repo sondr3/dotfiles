@@ -327,22 +327,6 @@ and tons of other stuff, my fringe needs a bit of breathing room.
 #+BEGIN_SRC emacs-lisp
   (fringe-mode '(16 . 16))
 #+END_SRC
-** Line numbering
-After having used relative line numbering in ~vim~ it's just something that I
-cannot not have, it's too good. Especially when paired with Evil... which is
-exactly what I'm going to be doing.
-#+BEGIN_SRC emacs-lisp
-  (use-package nlinum-relative
-    :init (global-nlinum-relative-mode)
-    :config
-    (progn
-      ;; (nlinum-relative-setup-evil)
-      (setq nlinum-format " %3s "
-            nlinum-relative-current-symbol ""
-            nlinum-relative-redisplay-delay 0)
-      (add-hook 'prog-mode-hook 'nlinum-relative-mode)
-      (add-hook 'text'mode-hook 'nlinum-relative-mode)))
-#+END_SRC
 ** Mode line
 I'll be attempting to theme my own spaceline. Brace yourselves. It's not going
 to be pretty.
@@ -454,6 +438,7 @@ it and haven't had any problems with it either, so we'll stick with using it as
 well. Yay us.
 #+BEGIN_SRC emacs-lisp
   (use-package general
+    :demand t
     :config
     (progn
       (setq general-default-keymaps 'evil-normal-state-map
@@ -678,6 +663,16 @@ that guy is amazing.
 
       (add-hook 'evil-insert-state-entry-hook #'my-lispy-on)
       (add-hook 'evil-insert-state-exit-hook #'my-lispy-off)))
+#+END_SRC
+
+*** Lispyville
+Since I use Evil with Emacs I need Lispy to work well with it, and this is what
+Lispyville does for me.
+#+BEGIN_SRC emacs-lisp
+  (use-package lispyville
+    :config
+    (progn 
+      (add-hook 'lispy-mode-hook #'lispyville-mode)))
 #+END_SRC
 ** Emacs LISP
 We'll change the name in the mode line for Emacs Lisp to be just ~Elisp~.
