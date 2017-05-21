@@ -1,7 +1,7 @@
 #+TITLE: Emacs settings
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
-#+PROPERTY: header-args :tangle ~./emacs.d/init.el
+#+PROPERTY: header-args :tangle ~/.emacs.d/init.el
 
 * Introduction
 After many a times when I've tried to use Emacs and Vim and whatnot I
@@ -199,4 +199,22 @@ so source blocks that are inline, italicized words and so on have
 their markers hidden. No more ~_hello world_~ and so on.
 #+BEGIN_SRC emacs-lisp
   (setq org-hide-emphasis-markers t)
+#+END_SRC
+** Functions
+Assorted functions related to ~org-mode~.
+
+*** Tangle ~emacs.org~
+I keep forgetting to tangle this file whenever I do changes to it and
+I get really confused when the changes aren't there when I restart
+Emacs again. This function automatically tangles this file on save and
+bytecompiles the ~.emacs.d~ directory at the same time. /Efficiency!/
+#+BEGIN_SRC emacs-lisp
+  (defun my-tangle-bytecompile-org ()
+    "Tangles emacs.org and bytecompiles .emacs.d"
+    (when (equal (buffer-name)
+                 (concat "emacs.org"))
+      (org-babel-tangle)
+      (byte-recompile-directory (expand-file-name user-emacs-directory) 0)))
+
+  (add-hook 'after-save-hook #'my-tangle-bytecompile-org)
 #+END_SRC
