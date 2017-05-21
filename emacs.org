@@ -1,737 +1,105 @@
 #+TITLE: Emacs settings
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
-#+PROPERTY: tangle "~/.emacs.d/init.el"
+#+PROPERTY: header-args :tangle ~./emacs.d/init.el
 
 * Introduction
-I've always been a fan of ~org-babel~ and have tried it a few times for Emacs
-and also just running various setups using regular ~.el~ files, however I keep
-returning to using just one "mega" file for Emacs, and in that case I might as
-well just keep using ~org-babel~.
+After many a times when I've tried to use Emacs and Vim and whatnot I
+always end up trying to configure it to do way too much
+initially. Instead of just starting out with a bare minimum of
+configuration I just pile on stuff from the beginning instead of just
+using them and then changing what bothers me. This is an attempt to
+start out bare and then just change whatever bothers me.
 
-** Setup
-I'm running the latest Emacs 25 version installed via Homebrew with ~brew
-install emacs --devel --with-cocoa --with-gnutls --with-librsvg~.
+* Initial settings
+Before we get going we're going to set up packaging for Emacs.
 
-* Initializing
-Before we do anything, we'll have to make sure Emacs is properly configured with
-packages and some sane defaults.
+** User
+First and foremost, I'm going to set my own name and email so we can
+use that.
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Sondre Nilsen"
+	user-mail-address "nilsen.sondre@gmail.com")
+#+END_SRC
 
-** Packages
-*** Initial settings
-I'm using ~use-package~ for all packages, even internal Emacs packages. The
-biggest benefit is being able to ensure that packages are installed and defer
-them until they are needed, making restarting and starting Emacs really fast.
+** Packaging
+I'm going to be using ~use-package~ to load all my packages, I've used
+it before with great success and it's going to be in Emacs core sooner
+or later so why not get a headstart. First of all though we do need to
+do some initial configuring for it to get properly set up.
 
-So first order of business, adding a few package repositories:
+*** Initialize package
+Obviously we do need to start out with enabling packages... goes
+without saying.
 #+BEGIN_SRC emacs-lisp
   (require 'package)
-  (setq package-archives
-        '(("gnu" . "http://elpa.gnu.org/packages/")
-          ("org" . "http://orgmode.org/elpa/")
-          ("melpa" . "http://melpa.org/packages/")))
 #+END_SRC
 
-Then we'll make sure we always load newer files if they are available, even if
-there's a byte compiled version and disable automatic requiring of packages on
-start as it'll be handled by ~use-package~.
+*** Repositories
+I'm also going to add a few package repositories to get packages from.
 #+BEGIN_SRC emacs-lisp
-  (setq load-prefer-newer t
-        package-enable-at-startup nil)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 #+END_SRC
 
-And then we can tell it to initialize packages.
+*** Settings
+I also always want the newest version of files to be loaded.
+#+BEGIN_SRC emacs-lisp
+  (setq-default load-prefer-newer t)
+#+END_SRC
+
+And since I am using ~use-package~ there is no need to enable the
+packages on startup as it will be defered by it.
+#+BEGIN_SRC emacs-lisp
+  (setq-default package-enable-at-startup nil)
+#+END_SRC
+
+*** Actually initialize
+And now we can finally initialize the packages.
 #+BEGIN_SRC emacs-lisp
   (package-initialize)
 #+END_SRC
-*** ~use-package~
-As mentioned, we'll be using ~use-package~ for all packaging goodness, so we'll
-have to make sure it's installed, and if not install it.
+
+*** Install ~use-package~ and ~delight~
+I did mention that I was going to use ~use-package~ but I am also
+going to install ~delight~ from the get-go since I will be using it to
+hide and change the names of major and minor modes.
 #+BEGIN_SRC emacs-lisp
-  (unless (package-installed-p 'use-package)
+  (unless (and (package-installed-p 'use-package)
+	       (package-installed-p 'delight))
     (package-refresh-contents)
-    (package-install 'use-package))
+    (package-install 'use-package t)
+    (package-install 'delight t))
 #+END_SRC
 
-After that's done, it's time to initialize it!
+*** ~use-package~ settings
+And then at the end we can set some settings for ~use-package~.
+
+Since all the packages configured via ~use-package~ are actually used
+I'm going to set it so that all packages are always ensured, so that
+you can forgo doing ~:ensure t~ on every package.
 #+BEGIN_SRC emacs-lisp
-  (eval-when-compile
-    (require 'use-package))
+  (setq use-package-always-ensure t)
 #+END_SRC
 
-And finally, we'll set some default settings for ~use-package~ so we don't have
-to specify them all the time in the package declaration.
+And then we make sure that all the packages are actually installed
+before initializing them.
 #+BEGIN_SRC emacs-lisp
-  (setq use-package-always-ensure t
-        use-package-always-defer t)
+  (setq use-package-check-before-init t)
 #+END_SRC
 
-** User
-Before we do anything else, we'll set the name and email.
+Finally we're going to always defer loading packages, just to save
+some time to load Emacs. If we require a package before it's loaded we
+can demand it by using ~:demand t~ while configuring it.
 #+BEGIN_SRC emacs-lisp
-  (setq user-full-name "Sondre Nilsen"
-        user-mail-address "nilsen.sondre@gmail.com")
+  (setq use-package-always-defer t)
 #+END_SRC
-** Sane defaults
-Emacs is a pretty old editor by now and has lots of quirks and
-oddities that have accumulated over the years that doesn't really make
-much sense to me, so we'll be changing a few things to make it more
-sensible.
-
-*** Fix $PATH on OS X
-#+BEGIN_SRC emacs-lisp
-  (use-package exec-path-from-shell
-    :init (exec-path-from-shell-initialize))
-#+END_SRC
-
-*** Custom and abbrev file
-We don't want to have any kind of custom settings automatically added
-into the ~init.el~ file because it's overwritten every time it's
-saved, so we'll save it to it's own ~custom.el~ file.
-#+BEGIN_SRC emacs-lisp
-  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-  (load custom-file)
-#+END_SRC
-
-And then we set the abbrev file.
-#+BEGIN_SRC emacs-lisp
-  (setq abbrev-file-name (concat user-emacs-directory "abbrev_defs"))
-#+END_SRC
-
-*** UTF-8
-It's the 21st century, we're going to have to UTF-8 ALL THE THINGS!
-#+BEGIN_SRC emacs-lisp
-  (prefer-coding-system 'utf-8)
-  (set-language-environment 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (set-selection-coding-system 'utf-8)
-  (setq buffer-file-coding-system 'utf-8
-        locale-coding-system 'utf-8)
-#+END_SRC
-
-*** Startup message and splash screen
-Not something that I use at all nor do I care to look at any of it so
-we'll just outright disable it. We'll also start the initial major
-mode as ~text-mode~ for a very minor load boost when starting Emacs.
-#+BEGIN_SRC emacs-lisp
-  (setq initial-major-mode 'text-mode
-        inhibit-startup-message t
-        initial-scratch-message "")
-  (defalias 'display-startup-echo-area-message #'ignore)
-#+END_SRC
-
-*** Line wrapping
-I've gotten a bit too used to wrapping lines at 80 and in ~vim~ it
-happens automatically in text modes, so I'll be damned if we don't do
-it here as well.
-#+BEGIN_SRC emacs-lisp
-  (setq-default fill-column 80)
-  (add-hook 'text-mode-hook #'auto-fill-mode)
-#+END_SRC
-
-*** Indentation
-I do not use tabs. No, no, no. I use spaces. Spaces for ever. I also indent by 2
-spaces, and not 4. Deal with it.
-#+BEGIN_SRC emacs-lisp
-  (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 2)
-#+END_SRC
-
-*** Lines
-We'll also indicate empoty lines and require that there's a final new line in
-every file that we save. Because reasons.
-#+BEGIN_SRC emacs-lisp
-  (setq indicate-empty-lines t
-        require-final-newline t)
-#+END_SRC
-
-*** Yes or y, that is the question
-#+BEGIN_SRC emacs-lisp
-  (defalias 'yes-or-no-p 'y-or-n-p)
-#+END_SRC
-
-*** Buffers
-We'll make sure Emacs properly sets the names for the buffers, and we'll do this
-using ~uniquify~.
-#+BEGIN_SRC emacs-lisp
-  (use-package uniquify
-    :ensure nil
-    :config
-    (progn
-      (setq uniquify-buffer-name-style 'forward
-            uniquify-separator "/"
-            uniquify-after-kill-buffer-p t
-            unifuify-ignore-buffers-re "^\\*")))
-#+END_SRC
-
-*** Copy and paste
-#+BEGIN_SRC emacs-lisp
-  (setq select-enable-clipboard t
-        select-enable-primary t
-        save-interprogram-paste-before-kill t
-        mouse-yank-at-point t)
-#+END_SRC
-
-*** Silence the bloody bell
-Because there's nothing more annoying than being spammed with that nonsense.
-#+BEGIN_SRC emacs-lisp
-  (setq visible-bell nil
-        ring-bell-function 'ignore)
-#+END_SRC
-
-*** Backups
-Normally Emacs saves a bunch of backup and auto save files in whatever directory
-you're currently working in. It's a minor nuisance to say the least. So we'll
-change that. Obviously.
-#+BEGIN_SRC emacs-lisp
-  (setq backup-directory-alist
-        `(("." . ,(concat user-emacs-directory "saves")))
-        auto-save-file-name-transforms
-        `((".*" ,(concat user-emacs-directory "auto-save") t)))
-#+END_SRC
-
-And then some settings for the backups.
-#+BEGIN_SRC emacs-lisp
-  (setq backup-by-copying t
-        version-control t
-        delete-old-versions t)
-#+END_SRC
-
-***
-*** Cleanup white space characters
-In the beginning I used ~#'delete-trailing-whitespace~ but it was a bit too
-aggressive for my tastes, and so like any half respecting Emacs user does I
-looked at how Spacemacs solved it.
-#+BEGIN_SRC emacs-lisp
-  (use-package ws-butler
-    :delight ws-butler-mode " ⓦ"
-    :config
-    (progn
-      (ws-butler-global-mode 1)))
-#+END_SRC
-*** ~saveplace~
-~saveplace~ saves the position you were in the last time you had the buffer
-open, so you'll go right back to where you were.
-#+BEGIN_SRC emacs-lisp
-  (use-package saveplace
-    :ensure nil
-    :init (save-place-mode 1)
-    :config
-    (progn
-      (setq-default save-place t)
-      (setq save-place-file "~/.emacs.d/places")))
-#+END_SRC
-*** ~recentf~
-~recentf~ saves your recently opened files so you can access them through
-sessions.
-#+BEGIN_SRC emacs-lisp
-  (use-package recentf
-    :ensure nil
-    :init (recentf-mode 1)
-    :config
-    (progn
-      (setq recentf-max-saved-items 100
-            recentf-max-menu-items 25)))
-#+END_SRC
-*** ~savehist~
-~savehist~ saves the recent commands your ran in the minibuffer, which is quite
-useful. And like ~recentf~ it does this across sessions.
-#+BEGIN_SRC emacs-lisp
-  (use-package savehist
-    :ensure nil
-    :init (savehist-mode 1)
-    :config
-    (progn
-      (setq history-length 1000)))
-#+END_SRC
-*** Assorted
-Under here we'll put various settings that don't really don't need their own
-heading. We'll begin with the crazy assumption that sentences should end with a
-double space.
-#+BEGIN_SRC emacs-lisp
-  (setq-default sentence-end-double-space nil)
-#+END_SRC
-
-We'll also tell Emacs to use the new byte codes introduced in Emacs 24.4,
-because newer is always better.
-#+BEGIN_SRC emacs-lisp
-  (setq byte-compile--use-old-handlers nil)
-#+END_SRC
-* Appearance
-You can really make ~vim~ look dashing, and I'll be damned if I won't be doing
-it with Emacs as well. Here we'll be configuring anything that has anything with
-how Emacs looks.
-
-** Fixes
-*** Hide all the bars
-There's a bunch of bars that we don't need to use because we're obviously 100%
-fluent in Emacs... of course.
-#+BEGIN_SRC emacs-lisp
-  (menu-bar-mode -1)
-  (when (fboundp 'tool-bar-mode)
-    (tool-bar-mode -1))
-  (when (fboundp 'scroll-bar-mode)
-    (scroll-bar-mode -1))
-  (when (fboundp 'horizontal-scroll-bar-mode)
-    (horizontal-scroll-bar-mode -1))
-#+END_SRC
-*** Start maximized
-I always want Emacs to start in fullscreen.
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
-#+END_SRC
-*** Always fontify text
-#+BEGIN_SRC emacs-lisp
-  (setq font-lock-maximum-decoration t)
-#+END_SRC
-
-*** Highlight current line
-It's something I've gotten so used to in other editors that I simply can't live
-without it.
-#+BEGIN_SRC emacs-lisp
-  (global-hl-line-mode 1)
-#+END_SRC
-** Font
-*** Selecting the font
-Probably the most important part of the editing experience in my opinion is the
-font you choose. I'm currently using ~Source Code Pro~.
-#+BEGIN_SRC emacs-lisp 
-  (set-face-attribute 'default nil
-                      :family "Input Mono"
-                      :height 120
-                      :weight 'normal)
-  (set-face-attribute 'mode-line nil
-                      :family "Input Mono"
-                      :height 110
-                      :weight 'light)
-#+END_SRC
-*** Line spacing
-It's a very personal preference, but I find the default line spacing to be a bit
-too tight for my liking, so we'll increase it just a bit.
-#+BEGIN_SRC emacs-lisp
-  (setq-default line-spacing 0.15)
-#+END_SRC
-** Theme
-*** Selecting the theme
-Then the second most important part, the theme. Personally I'm not a fan of dark
-colors and I like them very simple, almost monochrome. I've currently settled on
-~tao-theme~ with the light variant, which I find to be awesome.
-#+BEGIN_SRC emacs-lisp
-  (use-package tao-theme
-    :init (load-theme 'tao-yang t))
-#+END_SRC
-*** The fringe
-Used for all sorts of useful stuff, including spell checking, syntax checking
-and tons of other stuff, my fringe needs a bit of breathing room.
-#+BEGIN_SRC emacs-lisp
-  (fringe-mode '(16 . 16))
-#+END_SRC
-** Mode line
-I'll be attempting to theme my own spaceline. Brace yourselves. It's not going
-to be pretty.
-
-*** Delight
-First order of business, we need to hide a bunch of minor modes from the mode
-line because they just cause a bunch of clutter and I don't really need or want
-to see them.
-#+BEGIN_SRC emacs-lisp
-  (use-package delight
-    :config
-    (delight '((auto-fill-function nil "simple")
-               (org-src-mode nil "org-src")
-               (org-indent-mode nil "org-indent")
-               (auto-revert-mode nil "autorevert")
-               (undo-tree-mode nil "undo-tree"))))
-#+END_SRC
-* Key bindings
-** Evil
-As a ~vim~ fugitive and modal editing fan, there's nothing better than being able
-to emulate it inside Emacs. I heard you like modal editing, yo.
-#+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :init (evil-mode 1))
-#+END_SRC
-
-*** Escape insert mode
-I changed my escape sequence in ~vim~ to be ~jk~ after having read about it
-somewhere on reddit, so we'll do the same here!
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-escape
-    :delight evil-escape-mode
-    :init (evil-escape-mode 1)
-    :config
-    (progn
-      (setq-default evil-escape-key-sequence "jk")))
-#+END_SRC
-*** Make ~ESC~ quit everything
-In Vim once your press ~ESC~ you stop everything, in Emacs you end up having to
-button mash it quite a few times to exit all the way out. Thankfully, ~davvil~
-on Github has it solved [[https://github.com/davvil/.emacs.d/blob/master/init.el][here]].
-#+BEGIN_SRC emacs-lisp
-  (defun minibuffer-keyboard-quit ()
-    "Abort recursive edit.
-    In Delete Selection mode, if the mark is active, just deactivate it;
-    then it takes a second \\[keyboard-quit] to abort the minibuffer."
-    (interactive)
-    (if (and delete-selection-mode transient-mark-mode mark-active)
-        (setq deactivate-mark  t)
-      (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
-      (abort-recursive-edit)))
-  (define-key evil-normal-state-map [escape] 'keyboard-quit)
-  (define-key evil-visual-state-map [escape] 'keyboard-quit)
-  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-  (global-set-key [escape] 'evil-exit-emacs-state)
-#+END_SRC
-*** Change ~:~ to ~;~
-I read about this on reddit while I still used Vim and I really enjoyed it. It
-also helps that I'm lazy and don't want to press ~S-:~.
-#+BEGIN_SRC emacs-lisp
-  (define-key evil-normal-state-map (kbd ";") 'evil-ex)
-#+END_SRC
-*** Moving between buffers
-I use Tmux in my terminal and bound the key to switch between windows in it to
-be ~C-[hjkl]~, and did the same in Vim to be able to move between windows in
-both Tmux and Vim. So to have the same in Emacs would be nice, even though I
-could use ~C-w [hjkl]~.
-#+BEGIN_SRC emacs-lisp
-  ;; (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-  ;; (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-  ;; (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-  ;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-#+END_SRC
-
-*** Assorted
-**** Change ~popup.el~ key binds
-Because who uses the arrow keys, honestly?
-#+BEGIN_SRC emacs-lisp
-  (general-define-key :keymaps 'popup-menu-keymap
-                      "j" 'popup-next
-                      "k" 'popup-previous)
-#+END_SRC
-** Moving around
-To move around in Emacs using various key binds we'll use both ~which-key~ and
-~general.el~ to display the various key bindings and actually bind them. Finally,
-we'll also use ~Hydra~ here and there to add various menus that can't be added
-with either of the others.
-
-*** ~which-key~
-Famously used in Spacemacs where it shows up when using ~SPC~, it shows all the
-various commands you can run in it, I'll be stealing this idea from them but
-with my own various twists and such. Neat.
-#+BEGIN_SRC emacs-lisp
-  (use-package which-key
-    :delight which-key-mode
-    :demand t
-    :config
-    (progn
-      (which-key-mode)))
-#+END_SRC
-*** ~General.el~
-I'm not sure what they use in Spacemacs to bind keys, but I happened across
-~general.el~ somehow, somewhere and have used it ever since. I really enjoy using
-it and haven't had any problems with it either, so we'll stick with using it as
-well. Yay us.
-#+BEGIN_SRC emacs-lisp
-  (use-package general
-    :demand t
-    :config
-    (progn
-      (setq general-default-keymaps 'evil-normal-state-map
-            major-leader ",")))
-#+END_SRC
-
-*** Hydra
-Hydra is a really cool piece of software written by ~abo-abo~ that I've wanted to
-try out for a while, so here goes nothing!
-#+BEGIN_SRC emacs-lisp
-  (use-package hydra
-    :demand t
-    :config
-    (progn
-      (hydra-add-font-lock)))
-#+END_SRC
-
-After testing it out I realized I'd spend all my time trying to create various
-hydras instead of using something like ~general.el~ to bind keys every which way I
-want and then use ~which-key~ to display those.
-
-** Key binds
-And here the real fun begins.
-
-#+BEGIN_SRC emacs-lisp
-  (general-define-key "SPC" 'which-key-show-top-level)
-#+END_SRC
-* General
-This is where non-specific stuff like spell checking and such goes.
-
-** Auto completion
-Although not something that I even used in Vim nor Sublime it's something that
-I've had on my TODO-list for quite some time. And Emacs has a really nice auto
-completion framework in ~Company~.
-#+BEGIN_SRC emacs-lisp
-  (use-package company
-    :delight company-mode " Ⓒ"
-    :init
-    (progn
-      (setq company-idle-delay 0.2
-            company-minimum-prefix-length 2
-            company-require-match nil
-            company-dabbrev-ignore-case nil
-            company-dabbrev-downcase nil)
-      (global-company-mode +1)))
-#+END_SRC
-** Spell checking
-After reading a bit online and testing out the various spell checkers that are
-available I've settled on using ~hunspell~ as it has the most features, is still
-under development and has the best actual spell checking. The dictionaries are
-downloaded from LibreOffice and installed to ~/Library/Spelling~, and I've
-symlinked the ~en_US.{aff,dic}~ file to ~default.{aff,dic}~.
-#+BEGIN_SRC emacs-lisp
-  (use-package flyspell
-    :delight flyspell-mode " Ⓢ"
-    :init
-    (progn
-      (add-hook 'text-mode-hook #'turn-on-flyspell)
-      (add-hook 'prog-mode-hook #'flyspell-prog-mode))
-    :config
-    (progn
-      (setq-default ispell-program-name "hunspell")
-      (setq ispell-really-hunspell t
-            ispell-dictionary "en_US"
-            ispell-silently-savep t
-            ispell-local-dictionary-alist
-            '(
-              ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)
-              ("nb_NO" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))))
-#+END_SRC
-
-*** ~flyspell-correct~
-Because the current way of using ~ispell~ is kinda sucky.
-#+BEGIN_SRC emacs-lisp
-  (use-package flyspell-correct-popup
-    :after flyspell
-    :commands (flyspell-correct-word-generic
-               flyspell-correct-previous-word-generic)
-    :config
-    (progn
-      (setq flyspell-correct-interface 'flyspell-correct-popup)))
-#+END_SRC
-
-** Git
-You might think that Git is purely a programming tool, but it's not. I use it
-for quite a few other things, including keeping track of my blog posts, or just
-various tips and tricks that I've learned over the years. And Emacs has the best
-Git interface in Magit.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package magit
-    :commands (magit-commit-popup
-               magit-stage-file
-               magit-diff-popup
-               magit-diff-head
-               magit-magit-fetch-popup
-               magit-log-popup
-               magit-pull-popup
-               magit-push-popup
-               magit-status))
-#+END_SRC
-
-*** Make it work with Evil
-Because we're using Evil we're going to need to install the ~evil-magit~ package
-because otherwise I'll go nuts. We just have to make sure to install it after
-Magit.
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-magit
-    :after magit)
-#+END_SRC
-
-** ~avy~
-I used ~vim-easymotion~ quite extensively in vim, and having something like that
-for Emacs would be really nice. And of course it exists. Much thanks to ~abo-abo~
-who has a bunch of really awesome Emacs packages.
-#+BEGIN_SRC emacs-lisp
-  (use-package avy
-    :commands (avy-goto-char
-               avy-goto-char-2
-               avy-goto-line
-               avy-goto-word-1))
-#+END_SRC
-** ~Ivy~
-Ivy is like IDO, only more updated. Not really sure what more I can say, it's
-pretty useful.
-#+BEGIN_SRC emacs-lisp
-  (use-package ivy
-    :ensure swiper
-    :delight ivy-mode
-    :init (ivy-mode 1)
-    :config
-    (progn
-      (setq ivy-use-virtual-buffers t
-            ivy-display-style 'fancy)))
-#+END_SRC
-** ~anzu~
-Although I never used it's counterpart in Vim it does look useful for both Emacs
-and Vim.
-#+BEGIN_SRC emacs-lisp
-  (use-package anzu
-    :delight anzu-mode " ⓐ"
-    :init (global-anzu-mode +1))
-#+END_SRC
-* Programming
-Contains all sorts of settings that aren't limited to any one specific language.
-
-** Syntax checking
-Should be self explanatory, you need syntax checking when programming.
-#+BEGIN_SRC emacs-lisp
-  (use-package flycheck
-    :delight flycheck-mode " ⓢ"
-    :init (global-flycheck-mode)
-    :config
-    (progn
-      (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))))
-#+END_SRC
-
-However, as you can see I have to disable it for some things, like ~checkdoc~
-for Emacs lisp, because otherwise your whole buffer will be squiggly red.
-
-** Delimiters
-Anything that has to do with parenthesis', brackets, angles and so on goes here.
-And boy, there's quite a bit.
-
-*** Electric pair mode
-Automatically inserts a matching delimiter and closes the matching one as well.
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'prog-mode-hook #'electric-pair-mode)
-#+END_SRC
-
-*** Show matching parenthesis
-#+BEGIN_SRC emacs-lisp
-  (use-package paren
-    :config
-    (progn
-      (show-paren-mode 1)
-      (setq show-paren-delay 0)))
-#+END_SRC
-
-*** Make them /dashing/
-We all need some rainbows in our lives, oh yes indeed.
-#+BEGIN_SRC emacs-lisp
-  (use-package rainbow-delimiters
-    :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-#+END_SRC
-
-** Indentation
-This was something that I found on a blog somewhere out there on the internet.
-~aggressive-indent~ automatically, and aggressively indents whole regions and
-pretty much anything that can be indented while you're editing your code. It's
-incredibly handy in LISPs for example.
-#+BEGIN_SRC emacs-lisp
-  (use-package aggressive-indent
-    :delight aggressive-indent-mode " Ⓘ"
-    :init (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode))
-#+END_SRC
-
-We'll also make it so pressing ~RET~ automatically indents code as well.
-#+BEGIN_SRC emacs-lisp
-  (general-define-key "RET" 'newline-and-indent)
-#+END_SRC
-* Languages
-** Lisps
-Since most of the languages in the Lisp family share very similar syntax I'll
-group most of their settings in this group.
-*** Lispy
-~Lispy~ is a new mode for editing Lisps in the same vein as ~paredit~ and
-~cleverparens~ but newer and better. Especially as it's written by ~abo-abo~ and
-that guy is amazing.
-#+BEGIN_SRC emacs-lisp
-  (use-package lispy
-    :delight lispy-mode " Ⓛ"
-    :init
-    (progn
-      (defun my-lispy-off ()
-        (when lispy-mode
-          (lispy-mode -1)))
-      (defun my-lispy-on ()
-        (when (member major-mode
-                      '(emacs-lisp-mode scheme-mode lisp-interaction-mode))
-          (lispy-mode)))
-
-      (add-hook 'evil-insert-state-entry-hook #'my-lispy-on)
-      (add-hook 'evil-insert-state-exit-hook #'my-lispy-off)))
-#+END_SRC
-
-*** Lispyville
-Since I use Evil with Emacs I need Lispy to work well with it, and this is what
-Lispyville does for me.
-#+BEGIN_SRC emacs-lisp
-  (use-package lispyville
-    :config
-    (progn 
-      (add-hook 'lispy-mode-hook #'lispyville-mode)))
-#+END_SRC
-** Emacs LISP
-We'll change the name in the mode line for Emacs Lisp to be just ~Elisp~.
-#+BEGIN_SRC emacs-lisp
-  (delight 'emacs-lisp-mode "Elisp" :major)
-#+END_SRC
-** Scheme
-To edit and run and so on Scheme code we'll use ~Geiser~. It's pretty neat.
-#+BEGIN_SRC emacs-lisp
-  (use-package geiser
-    :commands run-geiser)
-#+END_SRC
-* Org mode
-I don't really know much about Org mode, other than using it for this file and
-other dotfiles, I do want to learn and to do that we need to make sure we're
-using the latest version of it as well! The easiest way to do this is to ensure
-that it's installed with ~org-plus-contrib~ which will force it to download the
-latest version.
+* Org-mode
+As this whole configuration is built on ~org-mode~ we're going to
+install the latest and greatest version of it as well to get even more
+goodies.
 #+BEGIN_SRC emacs-lisp
   (use-package org
+    :pin org
     :ensure org-plus-contrib)
 #+END_SRC
-
-** Syntax highlighting
-It's pretty useful to be able to see syntax highlighting in source blocks.
-#+BEGIN_SRC emacs-lisp
-  (setq-default org-src-fontify-natively t)
-#+END_SRC
-
-** Intend headers
-Something I found on StackOverflow a while back, but I have no idea where any
-more. What it does is indenting headers according to their level. It's a purely
-cosmetic change, but I do like cosmetics.
-#+BEGIN_SRC emacs-lisp
-  (setq org-startup-indented t)
-  (delight 'org-indent-mode)
-#+END_SRC
-
-** Hide emphasis markers
-When reading text in org mode it's a bit annoying having slashes and underscores
-littered about when instead, you can hide them!
-#+BEGIN_SRC emacs-lisp
-  (setq org-hide-emphasis-markers t)
-#+END_SRC
-* Functions
-** Automatically tangle and byte compile ~emacs.org~
-Since all the settings for Emacs are in this file it doesn't get tangled or byte
-compiled unless we say so, so this is a command to automatically tangle and
-byte compile this file whenever it's saved.
-#+BEGIN_SRC emacs-lisp
-  (defun my-tangle-byte-compile-org ()
-    "Tangle and byte compile Emacs settings file when saving"
-    (when (equal (buffer-name)
-                 (concat "emacs.org"))
-      (org-babel-tangle)
-      (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)))
-
-  (add-hook 'after-save-hook #'my-tangle-byte-compile-org)
-#+END_SRC
-
-* The end
-And that's it!
