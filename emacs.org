@@ -147,6 +147,13 @@ normal.
 #+BEGIN_SRC emacs-lisp
   (fringe-mode '(16 . 16))
 #+END_SRC
+** Line spacing
+This is different from most other Emacs configurations I've seen, but I like to
+give my lines some more space to make them breathe, otherwise they feel too
+squished together.
+#+BEGIN_SRC emacs-lisp
+  (setq-default line-spacing 0.15)
+#+END_SRC
 ** Hide various bars
 I don't really use any of these and they look really out of place,
 especially the menu bar. So I just hide them.
