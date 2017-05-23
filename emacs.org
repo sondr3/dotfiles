@@ -60,20 +60,20 @@ And now we can finally initialize the packages.
   (package-initialize)
 #+END_SRC
 
-*** Install ~use-package~ and ~delight~
+*** Install ~use-package~ and ~Dim~
 I did mention that I was going to use ~use-package~ but I am also
-going to install ~delight~ from the get-go since I will be using it to
+going to install ~Dim~ from the get-go since I will be using it to
 hide and change the names of major and minor modes.
 #+BEGIN_SRC emacs-lisp
   (unless (and (package-installed-p 'use-package)
-	       (package-installed-p 'delight))
+               (package-installed-p 'dim))
     (package-refresh-contents)
     (package-install 'use-package t)
-    (package-install 'delight t))
+    (package-install 'dim t))
 #+END_SRC
 
 *** ~use-package~ settings
-And then at the end we can set some settings for ~use-package~.
+Then we need to set some settings for ~use-package~.
 
 Since all the packages configured via ~use-package~ are actually used
 I'm going to set it so that all packages are always ensured, so that
@@ -93,6 +93,22 @@ some time to load Emacs. If we require a package before it's loaded we
 can demand it by using ~:demand t~ while configuring it.
 #+BEGIN_SRC emacs-lisp
   (setq use-package-always-defer t)
+#+END_SRC
+* Defaults
+There are a lot of quirks and settings that doesn't make sense to me,
+but since it's Emacs we can change everything. And we are more than
+likely going to do so too, hah.
+
+** Built-in modes
+*** /(Auto) Fill Mode/
+Even though I could use ~M-q~ to fill out my paragraphs I like when it
+happens automatically, luckily we have ~auto-fill-mode~ for this. I also
+like my text to be a maximum of 80 characters wide. We'll also use
+~Delight~ to change the ~auto-fill-mode~ mode-bar indicator.
+#+BEGIN_SRC emacs-lisp
+  (setq-default fill-column 80)
+  (add-hook 'text-mode-hook #'auto-fill-mode)
+  (dim-minor-name 'auto-fill-function " Ⓕ")
 #+END_SRC
 * Appearance
 I'm a sucker for minimalistic and clean interfaces, and Emacs out of
