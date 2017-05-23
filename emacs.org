@@ -216,6 +216,11 @@ from the powerline.
   (delight 'org-indent-mode)
 #+END_SRC
 
+And since this will be on by default, we'll just completely hide it's mode from
+the mode-line.
+#+BEGIN_SRC emacs-lisp
+  (dim-minor-name 'org-indent-mode "")
+#+END_SRC
 *** Emphasis markers
 And then finally I'm going to hide the emphasis markers. This makes it
 so source blocks that are inline, italicized words and so on have
