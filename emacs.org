@@ -1,3 +1,4 @@
+
 #+TITLE: Emacs settings
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
@@ -60,18 +61,20 @@ And now we can finally initialize the packages.
   (package-initialize)
 #+END_SRC
 
-*** Install ~use-package~ and ~Dim~
-I did mention that I was going to use ~use-package~ but I am also
-going to install ~Dim~ from the get-go since I will be using it to
-hide and change the names of major and minor modes.
+*** Install ~use-package~
+I did mention that I was going to use ~use-package~ for managing and installing
+packages. So we'll always make sure that it's installed and available.
 #+BEGIN_SRC emacs-lisp
-  (unless (and (package-installed-p 'use-package)
-               (package-installed-p 'dim))
+  (unless (package-installed-p 'use-package)
     (package-refresh-contents)
-    (package-install 'use-package t)
-    (package-install 'dim t))
+    (package-install 'use-package))
 #+END_SRC
 
+And then finally we load ~use-package~.
+#+BEGIN_SRC emacs-lisp
+  (eval-when-compile
+    (require 'use-package))
+#+END_SRC
 *** ~use-package~ settings
 Then we need to set some settings for ~use-package~.
 
@@ -103,12 +106,10 @@ likely going to do so too, hah.
 *** /(Auto) Fill Mode/
 Even though I could use ~M-q~ to fill out my paragraphs I like when it
 happens automatically, luckily we have ~auto-fill-mode~ for this. I also
-like my text to be a maximum of 80 characters wide. We'll also use
-~Delight~ to change the ~auto-fill-mode~ mode-bar indicator.
+like my text to be a maximum of 80 characters wide.
 #+BEGIN_SRC emacs-lisp
   (setq-default fill-column 80)
   (add-hook 'text-mode-hook #'auto-fill-mode)
-  (dim-minor-name 'auto-fill-function " Ⓕ")
 #+END_SRC
 * Appearance
 I'm a sucker for minimalistic and clean interfaces, and Emacs out of
@@ -213,13 +214,6 @@ indent them instead, and use ~Delight~ to hide the ~org-indent-mode~
 from the powerline.
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-indented t)
-  (delight 'org-indent-mode)
-#+END_SRC
-
-And since this will be on by default, we'll just completely hide it's mode from
-the mode-line.
-#+BEGIN_SRC emacs-lisp
-  (dim-minor-name 'org-indent-mode "")
 #+END_SRC
 *** Emphasis markers
 And then finally I'm going to hide the emphasis markers. This makes it
