@@ -1,4 +1,3 @@
-
 #+TITLE: Emacs settings
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
@@ -60,13 +59,16 @@ And now we can finally initialize the packages.
   (package-initialize)
 #+END_SRC
 
-*** Install ~use-package~
+*** Install ~use-package~ and ~Dim~
 I did mention that I was going to use ~use-package~ for managing and installing
-packages. So we'll always make sure that it's installed and available.
+packages. So we'll always make sure that it's installed and available. We'll
+also install ~Dim~ to hide and/or rename minor and major modes in the mode line.
 #+BEGIN_SRC emacs-lisp
-  (unless (package-installed-p 'use-package)
+  (unless (and (package-installed-p 'use-package)
+               (package-installed-p 'dim))
     (package-refresh-contents)
-    (package-install 'use-package))
+    (package-install 'use-package t)
+    (package-install 'dim t))
 #+END_SRC
 
 And then finally we load ~use-package~.
@@ -337,6 +339,15 @@ looks fun, ~abo-abo~ is amazing and why not?
     :config
     (progn
       (add-hook 'emacs-lisp-mode-hook #'lispy-mode)))
+#+END_SRC
+
+*** Fix quoting in ~lispy-mode~
+So for some reason the way that Lispy does quotes is pretty strange to me, when
+I insert a ~"~ I expect my cursor to move from ~"word|"~ to ~"word"|~, instead it will
+insert an escaped sequence of quotes like this: ~"word\"""~, and that completely
+messes me up. So we'll disable this function for Lispy.
+#+BEGIN_SRC emacs-lisp
+  (define-key lispy-mode-map-lispy (kbd "\"") nil)
 #+END_SRC
 * The end
 And that's all folks! Hope you enjoyed and/or learned something new.
