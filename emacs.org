@@ -177,19 +177,18 @@ When trying out ~Spacemacs~ I really enjoyed the way that they used icons for
 various minor modes in the mode line, so I'll be stealing tons of inspiration
 from them on how to style this.
 
-| Minor mode name                    | Minor mode icon |
-|------------------------------------+-----------------|
-| ~auto-revert-mode~                   | ~nil~             |
-| ~auto-fill-mode~                     | ~Ⓕ~               |
-| ~org-indent-mode~ (only in Org-mode) | ~nil~             |
+| Minor mode name                    | Minor mode icon | Configured where |
+|------------------------------------+-----------------+------------------|
+| ~(magit-)auto-revert-mode~           | ~nil~             | ~Magit~ settings   |
+| ~auto-fill-mode~                     | ~Ⓕ~               | ~Dim~ settings     |
+| ~org-indent-mode~ (only in Org-mode) | ~nil~             | ~Dim~ settings     |
 
 #+BEGIN_SRC emacs-lisp
   (use-package dim
     :demand t
     :init
     (progn
-      (dim-minor-names '((auto-revert-mode "")
-                         (auto-fill-function " Ⓕ")))
+      (dim-minor-names '((auto-fill-function " Ⓕ"))) 
       (dim-minor-name 'org-indent-mode "" 'org-indent)))
 #+END_SRC
 ** Line spacing
@@ -251,7 +250,11 @@ it.
 #+BEGIN_SRC emacs-lisp
   (use-package magit
     :commands (magit-status)
-    :general ("C-c g" 'magit-status))
+    :general ("C-c g" 'magit-status)
+    :config
+    (progn
+      (dim-minor-name 'magit-auto-revert-mode "")
+      (dim-minor-name 'auto-revert-mode "")))
 #+END_SRC
 * Org-mode
 As this whole configuration is built on ~org-mode~ we're going to install the
@@ -362,7 +365,7 @@ looks fun, ~abo-abo~ is amazing and why not?
   (use-package lispy
     :config
     (progn
-      (add-hook 'emacs-lisp-mode-hook #'lispy-mode)))
+      (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
 #+END_SRC
 
 *** Fix quoting in ~lispy-mode~
@@ -372,6 +375,14 @@ insert an escaped sequence of quotes like this: ~"word\"""~, and that completely
 messes me up. So we'll disable this function for Lispy.
 #+BEGIN_SRC emacs-lisp
   (define-key lispy-mode-map-lispy (kbd "\"") nil)
+#+END_SRC
+
+*** ~Fin~
+And then we need to close the parantheses for the ~use-package~ declaration for
+~lispy~. (thank god the ~init.el~ file is not meant to be read by humans because it
+looks disgusting doing it this way, but hey, it works!)
+#+BEGIN_SRC emacs-lisp
+  ))
 #+END_SRC
 * The end
 And that's all folks! Hope you enjoyed and/or learned something new.
