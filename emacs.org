@@ -5,33 +5,30 @@
 #+PROPERTY: header-args :tangle ~/.emacs.d/init.el
 
 * Introduction
-After many a times when I've tried to use Emacs and Vim and whatnot I
-always end up trying to configure it to do way too much
-initially. Instead of just starting out with a bare minimum of
-configuration I just pile on stuff from the beginning instead of just
-using them and then changing what bothers me. This is an attempt to
-start out bare and then just change whatever bothers me.
+After many a times when I've tried to use Emacs and Vim and whatnot I always end
+up trying to configure it to do way too much initially. Instead of just starting
+out with a bare minimum of configuration I just pile on stuff from the beginning
+instead of just using them and then changing what bothers me. This is an attempt
+to start out bare and then just change whatever bothers me.
 
 * Initial settings
 Before we get going we're going to set up packaging for Emacs.
 
 ** User
-First and foremost, I'm going to set my own name and email so we can
-use that.
+First and foremost, I'm going to set my own name and email so we can use that.
 #+BEGIN_SRC emacs-lisp
   (setq user-full-name "Sondre Nilsen"
 	user-mail-address "nilsen.sondre@gmail.com")
 #+END_SRC
 
 ** Packaging
-I'm going to be using ~use-package~ to load all my packages, I've used
-it before with great success and it's going to be in Emacs core sooner
-or later so why not get a headstart. First of all though we do need to
-do some initial configuring for it to get properly set up.
+I'm going to be using ~use-package~ to load all my packages, I've used it before
+with great success and it's going to be in Emacs core sooner or later so why not
+get a headstart. First of all though we do need to do some initial configuring
+for it to get properly set up.
 
 *** Initialize package
-Obviously we do need to start out with enabling packages... goes
-without saying.
+Obviously we do need to start out with enabling packages... goes without saying.
 #+BEGIN_SRC emacs-lisp
   (require 'package)
 #+END_SRC
@@ -51,8 +48,8 @@ I also always want the newest version of files to be loaded.
   (setq-default load-prefer-newer t)
 #+END_SRC
 
-And since I am using ~use-package~ there is no need to enable the
-packages on startup as it will be defered by it.
+And since I am using ~use-package~ there is no need to enable the packages on
+startup as it will be defered by it.
 #+BEGIN_SRC emacs-lisp
   (setq-default package-enable-at-startup nil)
 #+END_SRC
@@ -80,49 +77,48 @@ And then finally we load ~use-package~.
 *** ~use-package~ settings
 Then we need to set some settings for ~use-package~.
 
-Since all the packages configured via ~use-package~ are actually used
-I'm going to set it so that all packages are always ensured, so that
-you can forgo doing ~:ensure t~ on every package.
+Since all the packages configured via ~use-package~ are actually used I'm going to
+set it so that all packages are always ensured, so that you can forgo doing
+~:ensure t~ on every package.
 #+BEGIN_SRC emacs-lisp
   (setq use-package-always-ensure t)
 #+END_SRC
 
-And then we make sure that all the packages are actually installed
-before initializing them.
+And then we make sure that all the packages are actually installed before
+initializing them.
 #+BEGIN_SRC emacs-lisp
   (setq use-package-check-before-init t)
 #+END_SRC
 
-Finally we're going to always defer loading packages, just to save
-some time to load Emacs. If we require a package before it's loaded we
-can demand it by using ~:demand t~ while configuring it.
+Finally we're going to always defer loading packages, just to save some time to
+load Emacs. If we require a package before it's loaded we can demand it by using
+~:demand t~ while configuring it.
 #+BEGIN_SRC emacs-lisp
   (setq use-package-always-defer t)
 #+END_SRC
 * Defaults
-There are a lot of quirks and settings that doesn't make sense to me,
-but since it's Emacs we can change everything. And we are more than
-likely going to do so too, hah.
+There are a lot of quirks and settings that doesn't make sense to me, but since
+it's Emacs we can change everything. And we are more than likely going to do so
+too, hah.
 
 ** Built-in modes
 *** /(Auto) Fill Mode/
-Even though I could use ~M-q~ to fill out my paragraphs I like when it
-happens automatically, luckily we have ~auto-fill-mode~ for this. I also
-like my text to be a maximum of 80 characters wide.
+Even though I could use ~M-q~ to fill out my paragraphs I like when it happens
+automatically, luckily we have ~auto-fill-mode~ for this. I also like my text to
+be a maximum of 80 characters wide.
 #+BEGIN_SRC emacs-lisp
   (setq-default fill-column 80)
   (add-hook 'text-mode-hook #'auto-fill-mode)
 #+END_SRC
 * Appearance
-I'm a sucker for minimalistic and clean interfaces, and Emacs out of
-the box does not really look nice. It definitely looks like something
-out of the eighties, which is fine... as long as you can change it as
-you want to.
+I'm a sucker for minimalistic and clean interfaces, and Emacs out of the box
+does not really look nice. It definitely looks like something out of the
+eighties, which is fine... as long as you can change it as you want to.
 
 ** Font
-There are a ton of different fonts that I've tried and seen. I've
-previously used ~Monaco~ and ~Source Code Pro~ but for the last few months
-I've been using ~Input Mono~ which I really like.
+There are a ton of different fonts that I've tried and seen. I've previously
+used ~Monaco~ and ~Source Code Pro~ but for the last few months I've been using
+~Input Mono~ which I really like.
 
 This is however definitely subject to change.
 #+BEGIN_SRC emacs-lisp
@@ -131,11 +127,12 @@ This is however definitely subject to change.
   (set-face-attribute 'variable-pitch nil
                       :family "Input Mono" :height 130 :weight 'regular)
 #+END_SRC
+
 ** Theme
-The second most important part of making things look good is the
-theme, and I far prefer light themes over dark themes. Unless it's
-late at night, then having a dark theme is fine. So using a theme that
-has both and that I like is what I was after. I found that in ~tao~.
+The second most important part of making things look good is the theme, and I
+far prefer light themes over dark themes. Unless it's late at night, then having
+a dark theme is fine. So using a theme that has both and that I like is what I
+was after. I found that in ~tao~.
 
 TODO Create function to change theme with shortcut
 #+BEGIN_SRC emacs-lisp
@@ -143,13 +140,14 @@ TODO Create function to change theme with shortcut
     :demand t
     :init (load-theme 'tao-yang t))
 #+END_SRC
+
 ** Fringe
-I am also not a fan of how close to the edge of the windows everything
-is in Emacs, so I like to make sure the fringe is a bit wider than
-normal.
+I am also not a fan of how close to the edge of the windows everything is in
+Emacs, so I like to make sure the fringe is a bit wider than normal.
 #+BEGIN_SRC emacs-lisp
   (fringe-mode '(16 . 16))
 #+END_SRC
+
 ** Line spacing
 This is different from most other Emacs configurations I've seen, but I like to
 give my lines some more space to make them breathe, otherwise they feel too
@@ -157,9 +155,10 @@ squished together.
 #+BEGIN_SRC emacs-lisp
   (setq-default line-spacing 0.15)
 #+END_SRC
+
 ** Hide various bars
-I don't really use any of these and they look really out of place,
-especially the menu bar. So I just hide them.
+I don't really use any of these and they look really out of place, especially
+the menu bar. So I just hide them.
 #+BEGIN_SRC emacs-lisp
   (when (fboundp 'menu-bar-mode)
     (menu-bar-mode -1))
@@ -168,30 +167,31 @@ especially the menu bar. So I just hide them.
   (when (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
 #+END_SRC
+
 ** Start maximized
-Whenever I start up Emacs I just want it to immediately go into
-fullscreen.
+Whenever I start up Emacs I just want it to immediately go into fullscreen.
 #+BEGIN_SRC emacs-lisp
   (add-hook 'window-setup-hook 'toggle-frame-fullscreen t)
 #+END_SRC
+
 ** Cursor
-The default icon for the cursor in Emacs is a bar, and I have always
-been really bad at understanding exactly what is under or next to it
-when it's a bar, so I'll just change it to a bar instead.
+The default icon for the cursor in Emacs is a bar, and I have always been really
+bad at understanding exactly what is under or next to it when it's a bar, so
+I'll just change it to a bar instead.
 #+BEGIN_SRC emacs-lisp
   (setq-default cursor-type '(bar . 2))
 #+END_SRC
+
 ** Highlight current line
-When the cursor is a small bar however it can be pretty hard to tell
-where it is, so to make it easier to spot I will simply highlight the
-whole line that the cursor is on.
+When the cursor is a small bar however it can be pretty hard to tell where it
+is, so to make it easier to spot I will simply highlight the whole line that the
+cursor is on.
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode t)
 #+END_SRC
 * Org-mode
-As this whole configuration is built on ~org-mode~ we're going to
-install the latest and greatest version of it as well to get even more
-goodies.
+As this whole configuration is built on ~org-mode~ we're going to install the
+latest and greatest version of it as well to get even more goodies.
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :pin org
@@ -199,28 +199,28 @@ goodies.
 #+END_SRC
 
 ** Conveniences
-There are a few things I need to configure with ~org-mode~ though,
-just to make it a bit more convenient to work with.
+There are a few things I need to configure with ~org-mode~ though, just to make it
+a bit more convenient to work with.
 
 *** Syntax highlighting
-First of all, having all the ~BEGIN_SRC~ blocks display their syntax
-highlighting always.
+First of all, having all the ~BEGIN_SRC~ blocks display their syntax highlighting
+always.
 #+BEGIN_SRC emacs-lisp
   (setq-default org-src-fontify-natively t)
 #+END_SRC
 
 *** Indent headers
-Although ~org-mode~ looks nice out of the box, I find it a bit
-difficult to see which header is on which level, so I'm going to
-indent them instead, and use ~Delight~ to hide the ~org-indent-mode~
-from the powerline.
+Although ~org-mode~ looks nice out of the box, I find it a bit difficult to see
+which header is on which level, so I'm going to indent them instead, and use
+~Delight~ to hide the ~org-indent-mode~ from the powerline.
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-indented t)
 #+END_SRC
+
 *** Emphasis markers
-And then finally I'm going to hide the emphasis markers. This makes it
-so source blocks that are inline, italicized words and so on have
-their markers hidden. No more ~_hello world_~ and so on.
+And then finally I'm going to hide the emphasis markers. This makes it so source
+blocks that are inline, italicized words and so on have their markers hidden. No
+more ~_hello world_~ and so on.
 #+BEGIN_SRC emacs-lisp
   (setq org-hide-emphasis-markers t)
 #+END_SRC
@@ -228,10 +228,10 @@ their markers hidden. No more ~_hello world_~ and so on.
 Assorted functions related to ~org-mode~.
 
 *** Tangle ~emacs.org~
-I keep forgetting to tangle this file whenever I do changes to it and
-I get really confused when the changes aren't there when I restart
-Emacs again. This function automatically tangles this file on save and
-bytecompiles the ~.emacs.d~ directory at the same time. /Efficiency!/
+I keep forgetting to tangle this file whenever I do changes to it and I get
+really confused when the changes aren't there when I restart Emacs again. This
+function automatically tangles this file on save and bytecompiles the ~.emacs.d~
+directory at the same time. /Efficiency!/
 #+BEGIN_SRC emacs-lisp
   (defun my-tangle-bytecompile-org ()
     "Tangles emacs.org and bytecompiles .emacs.d"
