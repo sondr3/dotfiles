@@ -242,3 +242,34 @@ directory at the same time. /Efficiency!/
 
   (add-hook 'after-save-hook #'my-tangle-bytecompile-org)
 #+END_SRC
+* Programming
+This is where assorted settings that's related to programming go, either that's
+syntax highlighting or syntax checking and so on.
+
+** Delimiters
+Parantheses, brackets, angles and so on and so forth.
+
+*** ~Electric Pair Mode~
+This is a built-in mode for automatically pairing various delimiters, so in
+programming modes for example it will automatically create a closing delimiter.
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'prog-mode-hook #'electric-pair-mode)
+#+END_SRC
+
+*** Show matching parantheses
+This is a global minor mode that highlights matching parantheses according to
+your theme. Especially nice for Lisps (obviously). I also don't want a delay for
+showing the matching paranthesis, so it'll display immediately.
+#+BEGIN_SRC emacs-lisp
+  (use-package paren
+    :init (show-paren-mode 1)
+    :config (setq show-paren-delay 0))
+#+END_SRC
+*** Rainbows
+Oh yes indded, nothing better than some colors to lighten up our world. This is
+also surprisingly helpful when trying to at a glance figure out which
+paranthesis belongs with each other.
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-delimiters
+    :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+END_SRC
