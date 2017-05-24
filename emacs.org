@@ -246,6 +246,17 @@ directory at the same time. /Efficiency!/
 This is where assorted settings that's related to programming go, either that's
 syntax highlighting or syntax checking and so on.
 
+** Indentation
+I've long been a fan of automatic indentation of code, and there's a package
+called ~aggressive-indent~ that I really enjoy using for Lisps. /NOTE/: This doesn't
+work with all languages, so I'll only enable them for Lisps at the moment.
+#+BEGIN_SRC emacs-lisp
+  (use-package aggressive-indent
+    :config
+    (progn
+      (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)))
+#+END_SRC
+
 ** Delimiters
 Parantheses, brackets, angles and so on and so forth.
 
@@ -265,6 +276,7 @@ showing the matching paranthesis, so it'll display immediately.
     :init (show-paren-mode 1)
     :config (setq show-paren-delay 0))
 #+END_SRC
+
 *** Rainbows
 Oh yes indded, nothing better than some colors to lighten up our world. This is
 also surprisingly helpful when trying to at a glance figure out which
