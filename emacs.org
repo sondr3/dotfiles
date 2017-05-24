@@ -286,6 +286,10 @@ paranthesis belongs with each other.
     :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 * Lisp(s)
+Lisps are all a big, convoluted family with languages that all look the same
+(parantheses!) but are actually nothing alike. So we'll just configure them all
+under their own umbrella.
+
 ** ~Lispy~
 Although there is the long established ~Paredit~ that people use to move through
 and manipulate Lisps, I actually want to do a deepdive into ~Lispy~ instead. It
