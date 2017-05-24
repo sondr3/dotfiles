@@ -168,6 +168,30 @@ Emacs, so I like to make sure the fringe is a bit wider than normal.
   (fringe-mode '(16 . 16))
 #+END_SRC
 
+** Mode line
+Initially all I'm going to change is the mode line names and icons and such,
+later on I'll probably try out something like ~Spaceline~.
+
+*** ~Dim~ the mode line
+When trying out ~Spacemacs~ I really enjoyed the way that they used icons for
+various minor modes in the mode line, so I'll be stealing tons of inspiration
+from them on how to style this.
+
+| Minor mode name                    | Minor mode icon |
+|------------------------------------+-----------------|
+| ~auto-revert-mode~                   | ~nil~             |
+| ~auto-fill-mode~                     | ~Ⓕ~               |
+| ~org-indent-mode~ (only in Org-mode) | ~nil~             |
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dim
+    :demand t
+    :init
+    (progn
+      (dim-minor-names '((auto-revert-mode "")
+                         (auto-fill-function " Ⓕ")))
+      (dim-minor-name 'org-indent-mode "" 'org-indent)))
+#+END_SRC
 ** Line spacing
 This is different from most other Emacs configurations I've seen, but I like to
 give my lines some more space to make them breathe, otherwise they feel too
