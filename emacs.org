@@ -278,10 +278,21 @@ showing the matching paranthesis, so it'll display immediately.
 #+END_SRC
 
 *** Rainbows
-Oh yes indded, nothing better than some colors to lighten up our world. This is
+Oh yes indeed, nothing better than some colors to lighten up our world. This is
 also surprisingly helpful when trying to at a glance figure out which
 paranthesis belongs with each other.
 #+BEGIN_SRC emacs-lisp
   (use-package rainbow-delimiters
     :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+END_SRC
+* Lisp(s)
+** ~Lispy~
+Although there is the long established ~Paredit~ that people use to move through
+and manipulate Lisps, I actually want to do a deepdive into ~Lispy~ instead. It
+looks fun, ~abo-abo~ is amazing and why not?
+#+BEGIN_SRC emacs-lisp
+  (use-package lispy
+    :config
+    (progn
+      (add-hook 'emacs-lisp-mode-hook #'lispy-mode)))
 #+END_SRC
