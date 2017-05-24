@@ -117,6 +117,17 @@ be a maximum of 80 characters wide.
   (setq-default fill-column 80)
   (add-hook 'text-mode-hook #'auto-fill-mode)
 #+END_SRC
+** Assorted
+For various things that are just a bit bizarre or not really needed in any other
+category.
+
+*** Use new byte codes
+There are some new byte codes introduced in 24.4, sadly I can't find any
+information online about what exactly it does nor is the ~bytecompile.el~ file
+very helpful. But I'm sure it's all good... new is always better.
+#+BEGIN_SRC emacs-lisp
+  (setq byte-compile--use-old-handlers nil)
+#+END_SRC
 * Appearance
 I'm a sucker for minimalistic and clean interfaces, and Emacs out of the box
 does not really look nice. It definitely looks like something out of the
@@ -196,6 +207,16 @@ cursor is on.
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode t)
 #+END_SRC
+* Keybindings
+It's also important to be able to bind keys however you want, I've used ~General~
+before and really like the syntax and just how great ~noctuid~ has been in
+supporting it.
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :config
+    (progn
+      (setq default-leader "C-c")))
+#+END_SRC
 * (Ma)Git
 Honestly, after having tried ~Magit~, even just from a few cursory glances while
 trying out Spacemacs and trying it myself, I can't understand how I never used
@@ -203,7 +224,8 @@ it before. I find it to be far superior to the command line, I absolutely love
 it.
 #+BEGIN_SRC emacs-lisp
   (use-package magit
-    :bind ("C-c g" . magit-status))
+    :commands (magit-status)
+    :general ("C-c g" 'magit-status))
 #+END_SRC
 * Org-mode
 As this whole configuration is built on ~org-mode~ we're going to install the
@@ -316,3 +338,5 @@ looks fun, ~abo-abo~ is amazing and why not?
     (progn
       (add-hook 'emacs-lisp-mode-hook #'lispy-mode)))
 #+END_SRC
+* The end
+And that's all folks! Hope you enjoyed and/or learned something new.
