@@ -189,6 +189,15 @@ cursor is on.
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode t)
 #+END_SRC
+* (Ma)Git
+Honestly, after having tried ~Magit~, even just from a few cursory glances while
+trying out Spacemacs and trying it myself, I can't understand how I never used
+it before. I find it to be far superior to the command line, I absolutely love
+it.
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :bind ("C-c g" . magit-status))
+#+END_SRC
 * Org-mode
 As this whole configuration is built on ~org-mode~ we're going to install the
 latest and greatest version of it as well to get even more goodies.
