@@ -101,6 +101,13 @@ There are a lot of quirks and settings that doesn't make sense to me, but since
 it's Emacs we can change everything. And we are more than likely going to do so
 too, hah.
 
+** Path
+Sadly, on OS X the $PATH variable is kinda borked for whatever reason, so we
+need to install a package for it to properly work. A tiny bit annoying.
+#+BEGIN_SRC emacs-lisp
+  (use-package exec-path-from-shell
+    :init (exec-path-from-shell-initialize))
+#+END_SRC
 ** Built-in modes
 *** /(Auto) Fill Mode/
 Even though I could use ~M-q~ to fill out my paragraphs I like when it happens
