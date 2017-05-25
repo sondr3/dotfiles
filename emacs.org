@@ -178,6 +178,26 @@ Because damn do I do enough stuff to make it beep continously.
   (setq visible-bell nil
         ring-bell-function 'ignore)
 #+END_SRC
+*** Backups
+By default Emacs saves a bunch of lockfiles and auto saved files to the
+directory you're working in, which messes up my Git repositories because I can't
+be arsed to add them to my ~.gitignore~.
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist
+        `(("." . ,(concat user-emacs-directory "saves")))
+        auto-save-file-name-transforms
+        `((".*" ,(concat user-emacs-directory "auto-save") t)))
+#+END_SRC
+
+Them we'll make sure that whenever we do make backups we do so by copying the
+file, and then we'll make sure the backups are version controlled (not Git, it
+just adds numbers to the file name of your backups) and finally delete old
+versions... because they are old now.
+#+BEGIN_SRC emacs-lisp
+  (setq backup-by-copying t
+        version-control t
+        delete-old-versions t)
+#+END_SRC
 ** Assorted
 For various things that are just a bit bizarre or not really needed in any other
 category.
