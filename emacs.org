@@ -130,6 +130,28 @@ text. Bonkers.
 #+BEGIN_SRC emacs-lisp
   (delete-selection-mode t)
 #+END_SRC 
+
+*** y tho
+This kinda makes sense in a way, makes it so you don't accidentally delete
+something by pressing ~y~ when asking for something important. But I don't do
+tyops.
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+*** UTF-8
+And since we're in ~<current year>~ we want to make sure everything is in
+UTF-8. And I mean everything.
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'set-charset-priority)
+    (set-charset-priority 'unicode))
+  (prefer-coding-system			'utf-8) 
+  (set-terminal-coding-system		'utf-8)
+  (set-keyboard-coding-system		'utf-8)
+  (set-selection-coding-system		'utf-8)
+  (setq locale-coding-system		'utf-8)
+  (setq-default buffer-file-coding-system 'utf-8)
+#+END_SRC
 ** Assorted
 For various things that are just a bit bizarre or not really needed in any other
 category.
