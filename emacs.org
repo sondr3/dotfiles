@@ -13,6 +13,12 @@ to start out bare and then just change whatever bothers me.
 * Initial settings
 Before we get going we're going to set up packaging for Emacs.
 
+** Pre-everything
+We'll increase the amount of memory that Emacs can actually use before doing
+garbage collection.
+#+BEGIN_SRC emacs-lisp
+  (setq gc-cons-threshold (* 100 1024 1024))
+#+END_SRC
 ** User
 First and foremost, I'm going to set my own name and email so we can use that.
 #+BEGIN_SRC emacs-lisp
