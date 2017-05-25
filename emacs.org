@@ -139,6 +139,20 @@ be a maximum of 80 characters wide.
   (setq-default fill-column 80)
   (add-hook 'text-mode-hook #'auto-fill-mode)
 #+END_SRC
+*** Auto Revert Mode
+I always want my files to reflect their status on disk, so that I don't end up
+accidentally overwriting them because I didn't realise they had changed on
+disk. So we'll just always enable ~auto-revert-mode~.
+#+BEGIN_SRC emacs-lisp
+  (use-package autorevert
+    :ensure nil
+    :init (global-auto-revert-mode)
+    :config
+    (progn
+      (setq auto-revert-verbose nil
+            global-auto-revert-non-file-buffers t)
+      (dim-minor-name 'auto-revert-mode "")))
+#+END_SRC
 ** Sanity fixes
 Some things that Emacs does drives me up against the wall with how strange it
 is.
@@ -256,12 +270,13 @@ When trying out ~Spacemacs~ I really enjoyed the way that they used icons for
 various minor modes in the mode line, so I'll be stealing tons of inspiration
 from them on how to style this.
 
-| Minor mode name                    | Minor mode icon | Configured where |
-|------------------------------------+-----------------+------------------|
-| ~(magit-)auto-revert-mode~           | ~nil~             | ~Magit~ settings   |
-| ~auto-fill-mode~                     | ~Ⓕ~               | ~Dim~ settings     |
-| ~org-indent-mode~ (only in Org-mode) | ~nil~             | ~Dim~ settings     |
-| ~company-mode~                       | ~Ⓐ~               | ~Company~ settings |
+| Minor mode name                    | Minor mode icon | Configured where    |
+|------------------------------------+-----------------+---------------------|
+| ~magit-auto-revert-mode~             | ~nil~             | ~Magit~ settings      |
+| ~auto-revert-mode~                   | ~nil~             | ~autorevert~ settings |
+| ~auto-fill-mode~                     | ~Ⓕ~               | ~Dim~ settings        |
+| ~org-indent-mode~ (only in Org-mode) | ~nil~             | ~Dim~ settings        |
+| ~company-mode~                       | ~Ⓐ~               | ~Company~ settings    |
 
 #+BEGIN_SRC emacs-lisp
   (use-package dim
@@ -342,8 +357,7 @@ it.
     :general ("C-c g" 'magit-status)
     :config
     (progn
-      (dim-minor-name 'magit-auto-revert-mode "")
-      (dim-minor-name 'auto-revert-mode "")))
+      (dim-minor-name 'magit-auto-revert-mode "")))
 #+END_SRC
 * Org-mode
 As this whole configuration is built on ~org-mode~ we're going to install the
