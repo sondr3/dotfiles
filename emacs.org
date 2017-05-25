@@ -119,6 +119,10 @@ So loading our custom file like this will make it so that there are no errors if
 we try to load it when it doesn't exist and there won't be a message for it,
 since I won't be needing it too much.
 
+And then we can set the abbreviation file as well here.
+#+BEGIN_SRC emacs-lisp
+  (setq abbrev-file-name (concat user-emacs-directory "abbrev_defs"))
+#+END_SRC
 ** ~$PATH~
 Sadly, on OS X the $PATH variable is kinda borked for whatever reason, so we
 need to install a package for it to properly work. A tiny bit annoying.
