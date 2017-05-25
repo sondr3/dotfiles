@@ -103,7 +103,7 @@ There are a lot of quirks and settings that doesn't make sense to me, but since
 it's Emacs we can change everything. And we are more than likely going to do so
 too, hah.
 
-** Path
+** ~$PATH~
 Sadly, on OS X the $PATH variable is kinda borked for whatever reason, so we
 need to install a package for it to properly work. A tiny bit annoying.
 #+BEGIN_SRC emacs-lisp
@@ -119,6 +119,17 @@ be a maximum of 80 characters wide.
   (setq-default fill-column 80)
   (add-hook 'text-mode-hook #'auto-fill-mode)
 #+END_SRC
+** Sanity fixes
+Some things that Emacs does drives me up against the wall with how strange it
+is.
+
+*** Replace region
+Like why it by default doesn't replace what you've selected by what you start
+writing, it just adds whatever you started typing to the end of the selected
+text. Bonkers.
+#+BEGIN_SRC emacs-lisp
+  (delete-selection-mode t)
+#+END_SRC 
 ** Assorted
 For various things that are just a bit bizarre or not really needed in any other
 category.
