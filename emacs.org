@@ -215,6 +215,7 @@ from them on how to style this.
 | ~(magit-)auto-revert-mode~           | ~nil~             | ~Magit~ settings   |
 | ~auto-fill-mode~                     | ~Ⓕ~               | ~Dim~ settings     |
 | ~org-indent-mode~ (only in Org-mode) | ~nil~             | ~Dim~ settings     |
+| ~company-mode~                       | ~Ⓐ~               | ~Company~ settings |
 
 #+BEGIN_SRC emacs-lisp
   (use-package dim
@@ -346,6 +347,23 @@ directory at the same time. /Efficiency!/
 This is where assorted settings that's related to programming go, either that's
 syntax highlighting or syntax checking and so on.
 
+** Auto-completion
+I actually used Vim for close to a year without any kind of auto-completion
+because I was too lazy to put in the effort to make them work properly. Luckily,
+with Emacs we have ~Company~ which automagically just works. Yay.
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :init
+    (progn
+      (global-company-mode)
+      (setq company-idle-delay 0.2
+            company-minimum-prefix-length 2
+            company-require-match nil
+            company-dabbrev-ignore-case nil
+            company-dabbrev-downcase nil))
+    :config
+    (dim-minor-name 'company-mode " Ⓐ"))
+#+END_SRC
 ** Indentation
 I've long been a fan of automatic indentation of code, and there's a package
 called ~aggressive-indent~ that I really enjoy using for Lisps. /NOTE/: This doesn't
