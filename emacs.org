@@ -103,6 +103,22 @@ There are a lot of quirks and settings that doesn't make sense to me, but since
 it's Emacs we can change everything. And we are more than likely going to do so
 too, hah.
 
+** Custom file
+Since my ~init.el~ file is automatically created whenever I save this file, the
+custom settings shouldn't be saved to it, but instead to its own ~custom.el~.
+
+/Note/: When loading a file in Emacs, the ~load~ function takes a few extra
+arguments besides just the file name, the first two being ~NOERROR~ and
+~NOMESSAGE~.
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (load custom-file t t)
+#+END_SRC
+
+So loading our custom file like this will make it so that there are no errors if
+we try to load it when it doesn't exist and there won't be a message for it,
+since I won't be needing it too much.
+
 ** ~$PATH~
 Sadly, on OS X the $PATH variable is kinda borked for whatever reason, so we
 need to install a package for it to properly work. A tiny bit annoying.
@@ -151,6 +167,12 @@ UTF-8. And I mean everything.
   (set-selection-coding-system		'utf-8)
   (setq locale-coding-system		'utf-8)
   (setq-default buffer-file-coding-system 'utf-8)
+#+END_SRC
+*** Don't beep
+Because damn do I do enough stuff to make it beep continously.
+#+BEGIN_SRC emacs-lisp
+  (setq visible-bell nil
+        ring-bell-function 'ignore)
 #+END_SRC
 ** Assorted
 For various things that are just a bit bizarre or not really needed in any other
@@ -358,7 +380,6 @@ with Emacs we have ~Company~ which automagically just works. Yay.
       (global-company-mode)
       (setq company-idle-delay 0.2
             company-minimum-prefix-length 2
-            company-require-match nil
             company-dabbrev-ignore-case nil
             company-dabbrev-downcase nil))
     :config
