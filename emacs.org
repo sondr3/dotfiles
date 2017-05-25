@@ -271,6 +271,15 @@ from them on how to style this.
       (dim-minor-names '((auto-fill-function " Ⓕ"))) 
       (dim-minor-name 'org-indent-mode "" 'org-indent)))
 #+END_SRC
+*** Show the local time
+Since I run Emacs in full screen it's really easy for me to lose track of the
+time, suddenly it's all dark outside! So we'll add the time to the modeline.
+#+BEGIN_SRC emacs-lisp
+  (display-time-mode t)
+  (setq display-time-day-and-date t
+        display-time-24hr-format t
+        display-time-default-load-average nil)
+#+END_SRC
 ** Line spacing
 This is different from most other Emacs configurations I've seen, but I like to
 give my lines some more space to make them breathe, otherwise they feel too
