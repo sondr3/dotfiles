@@ -29,7 +29,7 @@ First and foremost, I'm going to set my own name and email so we can use that.
 ** Packaging
 I'm going to be using ~use-package~ to load all my packages, I've used it before
 with great success and it's going to be in Emacs core sooner or later so why not
-get a headstart. First of all though we do need to do some initial configuring
+get a head start. First of all though we do need to do some initial configuring
 for it to get properly set up.
 
 *** Initialize package
@@ -448,6 +448,38 @@ it.
     :config
     (progn
       (dim-minor-name 'magit-auto-revert-mode "")))
+#+END_SRC
+** Spell checking
+I'm not a native speaker in English, nor am my Norwegian written perfectly
+(shocker), so spell checking is really vital to my use of Emacs. My personal
+preference is to use ~Hunspell~ for my spellchecker as it's the most developed and
+is being used by several big projects (LibreOffice). I download the dictionaries
+from LibreOffice and install them to ~/Library/Spelling~, and symlink the
+~en_us.{aff,dic}~ files to ~default.{aff,dic}~.
+
+There's a bunch of settings here, first off we need to tell ~ISpell~ to find
+~Hunspell~, then we set a default dictionary and for some reason we need to
+manually set the dictionaries to be used. Then we'll disable using the mouse
+button to correct spelling.
+#+BEGIN_SRC emacs-lisp
+  (use-package flyspell
+    :init
+    (progn
+      (add-hook 'text-mode-hook #'turn-on-flyspell)
+      (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+    :config
+    (progn
+      (dim-minor-name 'flyspell-mode " Ⓢ")
+      (setq-default ispell-program-name (executable-find "hunspell"))
+      (setq ispell-really-hunspell t
+            ispell-silently-savep t
+            ispell-dictionary "en_US"
+            ispell-local-dictionary-alist
+            '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)
+              ("nb_NO" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
+
+      (define-key flyspell-mouse-map [down-mouse-2] nil)
+      (define-key flyspell-mouse-map [mouse-2] nil)))
 #+END_SRC
 * Org-mode
 As this whole configuration is built on ~org-mode~ we're going to install the
