@@ -136,7 +136,7 @@ need to install a package for it to properly work. A tiny bit annoying.
   (use-package exec-path-from-shell
     :init (exec-path-from-shell-initialize))
 #+END_SRC
-** Built-in modes
+** Built-in modes and packages
 *** (Auto) Fill Mode
 Even though I could use ~M-q~ to fill out my paragraphs I like when it happens
 automatically, luckily we have ~auto-fill-mode~ for this. I also like my text to
@@ -195,6 +195,18 @@ or less like ~recentf~ but for commands and not files.
     :config
     (progn
       (setq history-length 1000)))
+#+END_SRC
+*** ~Uniquify~ Mode
+~uniquify~ is a way to make buffer names that Emacs has open more unique, by
+default if you have multiple buffers with the same name open they'll show as
+~name~ and ~name<2>~, which I find really not helpful. Changing it to be ~forward~ it
+instead becomes ~foo/bar/name~ and ~quux/foo/name~.
+#+BEGIN_SRC emacs-lisp
+  (use-package uniquify
+    :ensure nil
+    :config
+    (progn
+      (setq uniquify-buffer-name-style 'forward)))
 #+END_SRC
 ** Sanity fixes
 Some things that Emacs does drives me up against the wall with how strange it
@@ -507,6 +519,13 @@ with Emacs we have ~Company~ which automagically just works. Yay.
 #+END_SRC
 
 ** Indentation
+First off, we'll set some initial settings for indentation. Like not using tabs
+and keeping the width of indents to two spaces. Because that's the only correct
+way.
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil
+                tab-width 2)
+#+END_SRC
 I've long been a fan of automatic indentation of code, and there's a package
 called ~aggressive-indent~ that I really enjoy using for Lisps. /NOTE/: This doesn't
 work with all languages, so I'll only enable them for Lisps at the moment.
