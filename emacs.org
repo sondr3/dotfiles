@@ -299,10 +299,10 @@ from them on how to style this.
 Since I run Emacs in full screen it's really easy for me to lose track of the
 time, suddenly it's all dark outside! So we'll add the time to the modeline.
 #+BEGIN_SRC emacs-lisp
-  (display-time-mode t)
   (setq display-time-day-and-date t
         display-time-24hr-format t
         display-time-default-load-average nil)
+  (display-time-mode t)
 #+END_SRC
 ** Line spacing
 This is different from most other Emacs configurations I've seen, but I like to
