@@ -421,7 +421,12 @@ cursor is on.
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode t)
 #+END_SRC
-* Keybindings
+* General
+General settings, which means any kind of setting that's applicable throughout
+all of Emacs but isn't necessarily built-in. Like keybindings, the use of Git,
+spell checking and so on.
+
+** Keybindings
 It's also important to be able to bind keys however you want, I've used ~General~
 before and really like the syntax and just how great ~noctuid~ has been in
 supporting it.
@@ -431,7 +436,7 @@ supporting it.
     (progn
       (setq default-leader "C-c")))
 #+END_SRC
-* (Ma)Git
+** (Ma)Git
 Honestly, after having tried ~Magit~, even just from a few cursory glances while
 trying out Spacemacs and trying it myself, I can't understand how I never used
 it before. I find it to be far superior to the command line, I absolutely love
@@ -501,7 +506,8 @@ directory at the same time. /Efficiency!/
 This is where assorted settings that's related to programming go, either that's
 syntax highlighting or syntax checking and so on.
 
-** Auto-completion
+** General programming settings
+*** Auto-completion
 I actually used Vim for close to a year without any kind of auto-completion
 because I was too lazy to put in the effort to make them work properly. Luckily,
 with Emacs we have ~Company~ which automagically just works. Yay.
@@ -518,7 +524,7 @@ with Emacs we have ~Company~ which automagically just works. Yay.
     (dim-minor-name 'company-mode " Ⓐ"))
 #+END_SRC
 
-** Indentation
+*** Indentation
 First off, we'll set some initial settings for indentation. Like not using tabs
 and keeping the width of indents to two spaces. Because that's the only correct
 way.
@@ -537,17 +543,17 @@ work with all languages, so I'll only enable them for Lisps at the moment.
       (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)))
 #+END_SRC
 
-** Delimiters
+*** Delimiters
 Parantheses, brackets, angles and so on and so forth.
 
-*** ~Electric Pair Mode~
+**** ~Electric Pair Mode~
 This is a built-in mode for automatically pairing various delimiters, so in
 programming modes for example it will automatically create a closing delimiter.
 #+BEGIN_SRC emacs-lisp
   (add-hook 'prog-mode-hook #'electric-pair-mode)
 #+END_SRC
 
-*** Show matching parantheses
+**** Show matching parantheses
 This is a global minor mode that highlights matching parantheses according to
 your theme. Especially nice for Lisps (obviously). I also don't want a delay for
 showing the matching paranthesis, so it'll display immediately.
@@ -557,7 +563,7 @@ showing the matching paranthesis, so it'll display immediately.
     :config (setq show-paren-delay 0))
 #+END_SRC
 
-*** Rainbows
+**** Rainbows
 Oh yes indeed, nothing better than some colors to lighten up our world. This is
 also surprisingly helpful when trying to at a glance figure out which
 paranthesis belongs with each other.
@@ -565,12 +571,12 @@ paranthesis belongs with each other.
   (use-package rainbow-delimiters
     :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
-* Lisp(s)
+** Lisp(s)
 Lisps are all a big, convoluted family with languages that all look the same
 (parantheses!) but are actually nothing alike. So we'll just configure them all
 under their own umbrella.
 
-** ~Lispy~
+*** ~Lispy~
 Although there is the long established ~Paredit~ that people use to move through
 and manipulate Lisps, I actually want to do a deepdive into ~Lispy~ instead. It
 looks fun, ~abo-abo~ is amazing and why not?
@@ -582,7 +588,7 @@ looks fun, ~abo-abo~ is amazing and why not?
       (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
 #+END_SRC
 
-*** Fix quoting in ~lispy-mode~
+**** Fix quoting in ~lispy-mode~
 So for some reason the way that Lispy does quotes is pretty strange to me, when
 I insert a ~"~ I expect my cursor to move from ~"word|"~ to ~"word"|~, instead it will
 insert an escaped sequence of quotes like this: ~"word\"""~, and that completely
@@ -591,7 +597,7 @@ messes me up. So we'll disable this function for Lispy.
   (define-key lispy-mode-map-lispy (kbd "\"") nil)
 #+END_SRC
 
-*** ~Fin~
+**** ~Fin~
 And then we need to close the parantheses for the ~use-package~ declaration for
 ~lispy~. (thank god the ~init.el~ file is not meant to be read by humans because it
 looks disgusting doing it this way, but hey, it works!)
