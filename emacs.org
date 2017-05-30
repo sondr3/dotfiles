@@ -336,6 +336,7 @@ from them on how to style this.
 | ~aggressive-indent-mode~             | ~Ⓘ~               | ~Indentation~      |
 | ~Lispy~                              | ~Ⓛ~               | ~Lispy~            |
 | ~ws-butler~                          | ~ⓦ~               | ~Whitespace~       |
+| ~with-editor-mode~                   | ~nil~             | ~Dim~            |
 
 #+BEGIN_SRC emacs-lisp
   (use-package dim
@@ -345,6 +346,7 @@ from them on how to style this.
       (dim-minor-names '((auto-fill-function " Ⓕ")))
       (dim-minor-name 'org-indent-mode "" 'org-indent)
       (dim-minor-name 'org-src-mode "" 'org-src)
+      (dim-minor-name 'with-editor-mode "")
       (dim-minor-name 'undo-tree-mode "" 'undo-tree)))
 
 #+END_SRC
