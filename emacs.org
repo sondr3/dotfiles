@@ -421,7 +421,7 @@ cursor is on.
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode t)
 #+END_SRC
-* General
+* General settings
 General settings, which means any kind of setting that's applicable throughout
 all of Emacs but isn't necessarily built-in. Like keybindings, the use of Git,
 spell checking and so on.
@@ -482,6 +482,17 @@ button to correct spelling.
       (define-key flyspell-mouse-map [mouse-2] nil)
 
       (add-to-list 'ispell-skip-region-alist '("#\\+BEGIN_SRC" . "#\\+END_SRC"))))
+#+END_SRC
+
+And then we'll use ~flyspell-correct~ to correct words via ~popup.el~ (in the
+future, Ivy). It's nice because the default interface for both Flyspell and
+Ispell sucks. And then last, but not least, we'll make ~C-;~ do the spell checking
+for us!
+#+BEGIN_SRC emacs-lisp
+  (use-package flyspell-correct-popup
+    :after flyspell
+    :bind (:map flyspell-mode-map
+                ("C-;" . flyspell-correct-previous-word-generic)))
 #+END_SRC
 * Org-mode
 As this whole configuration is built on ~org-mode~ we're going to install the
