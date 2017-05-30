@@ -255,6 +255,18 @@ versions... because they are old now.
         version-control t
         delete-old-versions t)
 #+END_SRC
+*** Whitespace
+In my previous iterations of using Emacs I always used the
+~#'delete-trailing-whitespace~ function on save, but it is a bit too aggressive
+when used with other people. So I looked at how Spacemacs did theirs and stole
+it.
+#+BEGIN_SRC emacs-lisp
+  (use-package ws-butler
+    :delight ws-butler-mode " ⓦ"
+    :config
+    (progn
+      (ws-butler-global-mode 1)))
+#+END_SRC
 ** Assorted
 For various things that are just a bit bizarre or not really needed in any other
 category.
@@ -323,6 +335,7 @@ from them on how to style this.
 | ~undo-tree-mode~                     | ~nil~             | ~Dim~              |
 | ~aggressive-indent-mode~             | ~Ⓘ~               | ~Indentation~      |
 | ~Lispy~                              | ~Ⓛ~               | ~Lispy~            |
+| ~ws-butler~                          | ~ⓦ~               | ~Whitespace~       |
 
 #+BEGIN_SRC emacs-lisp
   (use-package dim
