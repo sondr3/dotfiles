@@ -15,7 +15,7 @@ Before we get going we're going to set up packaging for Emacs.
 
 ** Pre-everything
 We'll increase the amount of memory that Emacs can actually use before doing
-garbage collection.
+garbage collection. In this case it'll be 100MB.
 #+BEGIN_SRC emacs-lisp
   (setq gc-cons-threshold (* 100 1024 1024))
 #+END_SRC
@@ -283,14 +283,17 @@ from them on how to style this.
 | ~auto-fill-mode~                     | ~Ⓕ~               | ~Dim~ settings        |
 | ~org-indent-mode~ (only in Org-mode) | ~nil~             | ~Dim~ settings        |
 | ~company-mode~                       | ~Ⓐ~               | ~Company~ settings    |
+| ~undo-tree-mode~                     | ~nil~             | ~Dim~ settings        |
 
 #+BEGIN_SRC emacs-lisp
   (use-package dim
     :demand t
     :init
     (progn
-      (dim-minor-names '((auto-fill-function " Ⓕ"))) 
-      (dim-minor-name 'org-indent-mode "" 'org-indent)))
+      (dim-minor-names '((auto-fill-function " Ⓕ")))
+      (dim-minor-name 'org-indent-mode "" 'org-indent)
+      (dim-minor-name 'undo-tree-mode "" 'undo-tree)))
+
 #+END_SRC
 *** Show the local time
 Since I run Emacs in full screen it's really easy for me to lose track of the
@@ -343,6 +346,18 @@ cursor is on.
   (global-hl-line-mode t)
 #+END_SRC
 * Keybindings
+I tried, I really tried to use Emacs without using Evil, but I just can't get
+over how much better and more intuitive it feels to use Vim keybindings over the
+Emacs one. So I'll install it again... and again...
+
+** Evil
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :demand t
+    :config (evil-mode t))
+#+END_SRC
+
+** ~General.el~
 It's also important to be able to bind keys however you want, I've used ~General~
 before and really like the syntax and just how great ~noctuid~ has been in
 supporting it.
