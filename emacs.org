@@ -13,7 +13,7 @@ to start out bare and then just change whatever bothers me.
 * Initial settings
 Before we get going we're going to set up packaging for Emacs.
 
-** Pre-everything
+** Initial initialization
 We'll increase the amount of memory that Emacs can actually use before doing
 garbage collection. In this case it'll be 100MB.
 #+BEGIN_SRC emacs-lisp
@@ -479,7 +479,9 @@ button to correct spelling.
               ("nb_NO" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
 
       (define-key flyspell-mouse-map [down-mouse-2] nil)
-      (define-key flyspell-mouse-map [mouse-2] nil)))
+      (define-key flyspell-mouse-map [mouse-2] nil)
+
+      (add-to-list 'ispell-skip-region-alist '("#\\+BEGIN_SRC" . "#\\+END_SRC"))))
 #+END_SRC
 * Org-mode
 As this whole configuration is built on ~org-mode~ we're going to install the
