@@ -276,14 +276,16 @@ When trying out ~Spacemacs~ I really enjoyed the way that they used icons for
 various minor modes in the mode line, so I'll be stealing tons of inspiration
 from them on how to style this.
 
-| Minor mode name                    | Minor mode icon | Configured where    |
-|------------------------------------+-----------------+---------------------|
-| ~magit-auto-revert-mode~             | ~nil~             | ~Magit~ settings      |
-| ~auto-revert-mode~                   | ~nil~             | ~autorevert~ settings |
-| ~auto-fill-mode~                     | ~Ⓕ~               | ~Dim~ settings        |
-| ~org-indent-mode~ (only in Org-mode) | ~nil~             | ~Dim~ settings        |
-| ~company-mode~                       | ~Ⓐ~               | ~Company~ settings    |
-| ~undo-tree-mode~                     | ~nil~             | ~Dim~ settings        |
+| Minor mode name                    | Minor mode icon | Configured where |
+|------------------------------------+-----------------+------------------|
+| ~magit-auto-revert-mode~             | ~nil~             | ~Magit~            |
+| ~auto-revert-mode~                   | ~nil~             | ~autorevert~       |
+| ~auto-fill-mode~                     | ~Ⓕ~               | ~Dim~              |
+| ~org-indent-mode~ (only in Org-mode) | ~nil~             | ~Dim~              |
+| ~company-mode~                       | ~Ⓐ~               | ~Company~          |
+| ~undo-tree-mode~                     | ~nil~             | ~Dim~              |
+| ~aggressive-indent-mode~             | ~Ⓘ~               | ~Indentation~      |
+| ~Lispy~                              | ~Ⓛ~               | ~Lispy~            |
 
 #+BEGIN_SRC emacs-lisp
   (use-package dim
@@ -292,8 +294,18 @@ from them on how to style this.
     (progn
       (dim-minor-names '((auto-fill-function " Ⓕ")))
       (dim-minor-name 'org-indent-mode "" 'org-indent)
+      (dim-minor-name 'org-src-mode "" 'org-src)
       (dim-minor-name 'undo-tree-mode "" 'undo-tree)))
 
+#+END_SRC
+
+And then I'll change the name of some of the major modes... just because.
+| Major mode name | Major mode name | Configured where |
+|-----------------+-----------------+------------------|
+| ~Emacs lisp~      | ~Elisp~           | ~Dim~ settings     |
+
+#+BEGIN_SRC emacs-lisp
+  (dim-major-names '((emacs-lisp-mode "Elisp")))
 #+END_SRC
 *** Show the local time
 Since I run Emacs in full screen it's really easy for me to lose track of the
@@ -346,18 +358,6 @@ cursor is on.
   (global-hl-line-mode t)
 #+END_SRC
 * Keybindings
-I tried, I really tried to use Emacs without using Evil, but I just can't get
-over how much better and more intuitive it feels to use Vim keybindings over the
-Emacs one. So I'll install it again... and again...
-
-** Evil
-#+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :demand t
-    :config (evil-mode t))
-#+END_SRC
-
-** ~General.el~
 It's also important to be able to bind keys however you want, I've used ~General~
 before and really like the syntax and just how great ~noctuid~ has been in
 supporting it.
@@ -453,6 +453,7 @@ with Emacs we have ~Company~ which automagically just works. Yay.
     :config
     (dim-minor-name 'company-mode " Ⓐ"))
 #+END_SRC
+
 ** Indentation
 I've long been a fan of automatic indentation of code, and there's a package
 called ~aggressive-indent~ that I really enjoy using for Lisps. /NOTE/: This doesn't
@@ -461,6 +462,7 @@ work with all languages, so I'll only enable them for Lisps at the moment.
   (use-package aggressive-indent
     :config
     (progn
+      (dim-minor-name 'aggressive-indent-mode " Ⓘ")
       (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)))
 #+END_SRC
 
@@ -503,8 +505,9 @@ and manipulate Lisps, I actually want to do a deepdive into ~Lispy~ instead. It
 looks fun, ~abo-abo~ is amazing and why not?
 #+BEGIN_SRC emacs-lisp
   (use-package lispy
-    :config
+    :config 
     (progn
+      (dim-minor-name 'lispy-mode " Ⓛ")
       (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
 #+END_SRC
 
