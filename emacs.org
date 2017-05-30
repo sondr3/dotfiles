@@ -137,7 +137,7 @@ need to install a package for it to properly work. A tiny bit annoying.
     :init (exec-path-from-shell-initialize))
 #+END_SRC
 ** Built-in modes
-*** /(Auto) Fill Mode/
+*** (Auto) Fill Mode
 Even though I could use ~M-q~ to fill out my paragraphs I like when it happens
 automatically, luckily we have ~auto-fill-mode~ for this. I also like my text to
 be a maximum of 80 characters wide.
@@ -158,6 +158,43 @@ disk. So we'll just always enable ~auto-revert-mode~.
       (setq auto-revert-verbose nil
             global-auto-revert-non-file-buffers t)
       (dim-minor-name 'auto-revert-mode "")))
+#+END_SRC
+
+*** Save-place Mode
+~saveplace~ saves where I left off in a file and upon opening the file again will
+automatically open where I left off. Neat.
+#+BEGIN_SRC emacs-lisp
+  (use-package saveplace
+    :ensure nil
+    :init (save-place-mode)
+    :config
+    (progn
+      (setq save-place-file (concat user-emacs-directory "places"))))
+#+END_SRC
+
+*** Recentf Mode
+~recentf~ is a mode that saves a list of the files that I recently opened making
+it possible for my to more quickly access frequently used files.
+#+BEGIN_SRC emacs-lisp
+  (use-package recentf
+    :ensure nil
+    :init (recentf-mode)
+    :config
+    (progn
+      (setq recentf-max-menu-items 25
+            recentf-max-saved-items 100)))
+#+END_SRC
+
+*** Savehist Mode
+~savehist~ saves the most recent commands you ran in the minibuffer, so it's more
+or less like ~recentf~ but for commands and not files.
+#+BEGIN_SRC emacs-lisp
+  (use-package savehist
+    :ensure nil
+    :init (savehist-mode)
+    :config
+    (progn
+      (setq history-length 1000)))
 #+END_SRC
 ** Sanity fixes
 Some things that Emacs does drives me up against the wall with how strange it
