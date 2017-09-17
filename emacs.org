@@ -665,6 +665,77 @@ to date, all the time.
   (add-hook 'after-save-hook #'my--tangle-byte-compile-org)
   (add-hook 'kill-emacs-hook #'my--tangle-byte-compile-org)
 #+END_SRC
+* Latex
+After I started studying I decided that it was finally time to learn Latex and
+all its joys of typesetting and such, I initially used sharelatex.com but it was
+pretty annoying for the most part, especially since I didn't have access to any
+of my favorite Emacs commands and tools. So here is my Latex setup.
+
+** AUCTeX
+Everyone who uses Latex and Emacs uses ~AUCTeX~ do to it, so I'll be following the
+norm.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package tex
+    :ensure auctex
+    :init
+    (progn
+      (setq TeX-command-default "latexmk"
+            TeX-command-force "latexmk"
+            TeX-auto-save t
+            TeX-parse-self t
+            TeX-save-query nil
+            TeX-PDF-mode t
+            TeX-syntactic-comment t
+            TeX-clean-confirm t
+            TeX-source-correlate-method 'synctex
+            TeX-source-correlate-mode t
+            TeX-source-correlate-start-server t
+            LaTeX-fill-break-at-separators nil
+            TeX-view-program-selection '((output-pdf "PDF Viewer"))
+            TeX-view-program-list
+            '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+      (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
+      (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+      (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
+      (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+      (add-hook 'LaTeX-mode-hook 'flyspell-buffer)))
+#+END_SRC
+
+And everyone seems to be using ~latexMK~ to automatically generate the ~PDF~-files.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package auctex-latexmk
+    :init
+    (progn
+      (setq auctex-latexmk-inherit-TeX-PDF-mode t)
+      (auctex-latexmk-setup)))
+#+END_SRC
+
+Then we'll enable ~Company~ for it so we get some decent auto completion for
+LaTeX.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company-auctex
+    :init
+    (progn
+      (company-auctex-init)))
+#+END_SRC
+
+And finally we'll add ~magic-latex-buffer~ for some proper magic.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magic-latex-buffer
+    :init
+    (progn
+      (add-hook 'LaTeX-mode-hook 'magic-latex-buffer)
+      (setq magic-latex-enable-block-highlight t
+            magic-latex-enable-suscript t
+            magic-latex-enable-pretty-symbols t
+            magic-latex-enable-block-align nil
+            magic-latex-enable-inline-image nil)))
+#+END_SRC
 * Programming
 Anything related to mostly anything related to programming goes here.
 
