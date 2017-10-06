@@ -736,6 +736,36 @@ And finally we'll add ~magic-latex-buffer~ for some proper magic.
             magic-latex-enable-block-align nil
             magic-latex-enable-inline-image nil)))
 #+END_SRC
+** RefTEX
+Whenever you are writing a document that required references you'll need
+something like ~RefTEX~ to keep them in proper order.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package reftex
+    :ensure nil
+    :commands (turn-on-reftex reftex-mode)
+    :init
+    (progn
+      (setq reftex-plug-into-AUCTeX t
+            reftex-use-fonts t
+            ;; reftex-default-bibliography (list +latex-bibtex-default-file)
+            reftex-toc-split-windows-fraction 0.2))
+    (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
+#+END_SRC
+
+And then we can configure ~bibtex~.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package bibtex
+    :ensure nil
+    :config
+    (progn
+      (setq bibtex-dialect 'biblatex
+            bibtex-align-at-equal-sign t
+            bibtex-text-indentation 20
+            ;; bibtex-completion-bibliography (list +latex-bibtex-default-file)
+            )))
+#+END_SRC
 * Programming
 Anything related to mostly anything related to programming goes here.
 
