@@ -624,6 +624,39 @@ yourself.
       (evil-goggles-mode)
       (evil-goggles-use-magit-faces)))
 #+END_SRC
+** ~General~
+For any and all binding goodness I'll use ~General~. It's pretty awesome.
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :load-path "site-lisp/general.el/"
+    :config
+    (progn
+      (general-evil-setup)))
+#+END_SRC
+*** Major keybind
+This is where the major stuff happens.
+#+BEGIN_SRC emacs-lisp
+  (general-define-key :prefix "SPC"
+                      :non-normal-prefix "M-SPC"
+                      :global-prefix "C-c"
+                      :states '(emacs normal visual motion insert)
+                      "" '(nil :which-key "Amalthea")
+                      "g" '(:which-key "git")
+                      "gs" 'magit-status)
+#+END_SRC
+
+** ~which-key~
+You've probably seen this in Spacemacs where it's used extensively to display
+what keybindings are available in different major modes and in general. I like
+this idea and I'll be stealing it. Neato.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :config
+    (progn
+      (which-key-mode)
+      (setq which-key-prefix-prefix nil)))
+#+END_SRC
 * Org mode
 Even though Emacs comes bundled with Org installed I do want to make sure I have
 the latest version, to do this with ~use-package~ you have to ensure that
