@@ -570,17 +570,20 @@ popular. Yay me.
 #+BEGIN_SRC emacs-lisp
   frame-title-format '("Amalthea :: %b"))
 #+END_SRC
-* Evil-mode
+* Keybindings
+Any and all settings related to keybindings go here, this includes configuration
+for Evil and setting up the general key map that I'll be using to edit files.
+** evil-mode
 After having used Vim for quite a while doing my editing and such of basically
 anything I'm addicted to the way you move and manipulate text with it. Even
-though I'm god awful with it. So obviously we'll use ~Evil~ for good.
+though I'm god awful with it. So obviously we'll use ~evil~ for good.
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil
     :init (evil-mode 1))
 #+END_SRC
 
-** Evil-escape
+*** evil-escape
 However, if you've ever used Vim you know that using ~ESC~ to escape out of any
 mode is god awful. So we won't do that.
 
@@ -592,7 +595,7 @@ mode is god awful. So we won't do that.
     (progn
       (setq-default evil-escape-key-sequence "jk")))
 #+END_SRC
-** Evil-surround
+*** evil-surround
 And then we'll add ~evil-surround~ because it's really neat being able to change
 the delimiters surrounding something on the fly.
 
@@ -600,13 +603,26 @@ the delimiters surrounding something on the fly.
   (use-package evil-surround
     :init (global-evil-surround-mode 1))
 #+END_SRC
-** Evil-commentary
+*** evil-commentary
 This is a neat package if you comment out code a lot. Like I do.
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil-commentary
     :delight evil-commentary-mode
     :init (evil-commentary-mode))
+#+END_SRC
+*** evil-goggles
+This is a really neat extension that I found on /r/emacs, what it does is
+display visual hints when doing various actions while editing to highlight what
+changed. Really useful for both pair programming and seeing what you did
+yourself.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-goggles
+    :config
+    (progn
+      (evil-goggles-mode)
+      (evil-goggles-use-magit-faces)))
 #+END_SRC
 * Org mode
 Even though Emacs comes bundled with Org installed I do want to make sure I have
@@ -748,7 +764,7 @@ something like ~RefTEX~ to keep them in proper order.
     (progn
       (setq reftex-plug-into-AUCTeX t
             reftex-use-fonts t
-            ;; reftex-default-bibliography (list +latex-bibtex-default-file)
+            reftex-default-bibliography '("~/Documents/UiB/bibliography.bib")
             reftex-toc-split-windows-fraction 0.2))
     (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
 #+END_SRC
@@ -763,8 +779,7 @@ And then we can configure ~bibtex~.
       (setq bibtex-dialect 'biblatex
             bibtex-align-at-equal-sign t
             bibtex-text-indentation 20
-            ;; bibtex-completion-bibliography (list +latex-bibtex-default-file)
-            )))
+            bibtex-completion-bibliography '("~/Documents/UiB/bibliography.bib"))))
 #+END_SRC
 * Programming
 Anything related to mostly anything related to programming goes here.
