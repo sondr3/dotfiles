@@ -227,64 +227,64 @@ times that have long since passed, so we'll create some settings to make it feel
 and work a bit more modern.
 
 *** UTF-8
-We*'re in the 21st century so we are all using UTF-8, right?
-  *
-#+*BEGIN_SRC emacs-lisp
-  *(when (fboundp 'set-charset-priority)
-  *  (set-charset-priority 'unicode))
-  *(prefer-coding-system                   'utf-8)
-  *(set-terminal-coding-system             'utf-8)
-  *(set-keyboard-coding-system             'utf-8)
-  *(set-selection-coding-system            'utf-8)
-  *(setq locale-coding-system              'utf-8)
-  *(setq-default buffer-file-coding-system 'utf-8)
-#+*END_SRC
+We're in the 21st century so we are all using UTF-8, right?
+
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'set-charset-priority)
+    (set-charset-priority 'unicode))
+  (prefer-coding-system                   'utf-8)
+  (set-terminal-coding-system             'utf-8)
+  (set-keyboard-coding-system             'utf-8)
+  (set-selection-coding-system            'utf-8)
+  (setq locale-coding-system              'utf-8)
+  (setq-default buffer-file-coding-system 'utf-8)
+#+END_SRC
 *** y tho
-To* yes or to y
-  *
-#+*BEGIN_SRC emacs-lisp
-  *(fset 'yes-or-no-p 'y-or-n-p)
-#+*END_SRC
+To yes or to y
+
+#+BEGIN_SRC emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
 *** Delete selection
-By* default Emacs doesn't replace text you select but rather just starts
-in*serting text at the cursor. It's really annoying.
-  *
-#+*BEGIN_SRC emacs-lisp
-  *(delete-selection-mode t)
-#+*END_SRC
+By default Emacs doesn't replace text you select but rather just starts
+inserting text at the cursor. It's really annoying.
+
+#+BEGIN_SRC emacs-lisp
+  (delete-selection-mode t)
+#+END_SRC
 *** Custom file
-Si*nce we'll be tangling this file into ~init.el~ you need to save all the custom
-st*uff to it's own file because otherwise it would just be overwritten all the
-ti*me. So we'll set our own custom file.
-  *
-#+*BEGIN_SRC emacs-lisp
-  *(setq custom-file (expand-file-name (concat user-emacs-directory "custom.el")))
-#+*END_SRC
-  *
-An*d load it, but give no errors if it doesn't exist and no messages.
-  *
-#+*BEGIN_SRC emacs-lisp
-  *(load custom-file t t)
-#+*END_SRC
+Since we'll be tangling this file into ~init.el~ you need to save all the custom
+stuff to it's own file because otherwise it would just be overwritten all the
+time. So we'll set our own custom file.
+
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file (expand-file-name (concat user-emacs-directory "custom.el")))
+#+END_SRC
+
+And load it, but give no errors if it doesn't exist and no messages.
+
+#+BEGIN_SRC emacs-lisp
+  (load custom-file t t)
+#+END_SRC
 *** Hide startup messages
-I *don't really care about all the messages about GNU and stuff whenever I boot
-Em*acs. Don't get me wrong, I love GNU software and FSF and whatnot, I just don't
-wa*nt the reminder in my editor all the damn time.
-  *
-#+*BEGIN_SRC emacs-lisp
-  *(setq inhibit-startup-message t
-  *      inhibit-startup-echo-area-message t)
-  *(defun display-startup-echo-area-message ())
-#+*END_SRC
+I don't really care about all the messages about GNU and stuff whenever I boot
+Emacs. Don't get me wrong, I love GNU software and FSF and whatnot, I just don't
+want the reminder in my editor all the damn time.
+
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-message t
+        inhibit-startup-echo-area-message t)
+  (defun display-startup-echo-area-message ())
+#+END_SRC
 *** new emacs, who dis
-An*d don't ring the bloody bell whenever you scroll /anywhere/. It's fucking
-an*noying.
-  *
-#+*BEGIN_SRC emacs-lisp
-  *(setq visible-bell nil
-  *      ring-bell-function #'ignore)
-#+*END_SRC
-*** OS X settings
+And don't ring the bloody bell whenever you scroll /anywhere/. It's fucking
+annoying.
+
+#+BEGIN_SRC emacs-lisp
+  (setq visible-bell nil
+        ring-bell-function #'ignore)
+#+END_SRC
+** OS X settings
 I use a MacBook Pro, and for some reason the $PATH variable doesn't get properly
 registered in Emacs. So we have to use a package to make sure it correctly
 loads.
@@ -521,6 +521,24 @@ And then we can use Flyspell to actually check the spelling. Neato.
             `(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US" "-p" ,(expand-file-name "~/Library/Spelling/")) nil utf-8)
               ("nb_NO" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "nb_NO" "-p" ,(expand-file-name "~/Library/Spelling/")) nil utf-8)))))
 #+END_SRC
+
+*** Ivy and Flyspell
+Since we're using Ivy we can use it instead of the default flyspell buffer/popup
+to change words. Which is a lot nicer, let me tell you.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flyspell-correct
+    :commands (flyspell-correct-word-generic
+               flyspell-correct-previous-word-generic))
+  (use-package flyspell-correct-ivy
+    :general
+    (my-bindings "S" '(:ignore t :which-key "spelling")
+                 "Sb" '(flyspell-buffer :which-key "spellcheck buffer")
+                 "Sc" '(flyspell-correct-previous-word-generic :which-key "correct spelling")
+                 "Sn" '(flyspell-goto-next-error :which-key "next spelling error"))
+    :commands (flyspell-correct-ivy)
+    :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
+#+END_SRC
 ** Ivy, Counsel and Swiper
 ~abo-abo~ has created an awesome set of packages to help with completions,
 specifically when finding files, running commands and such. It does not compete
@@ -533,15 +551,18 @@ glorious goodies.
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
     :general
-    (my-bindings ";" '(:ignore t :which-key "M-x") ;; ugly, but it works
-                 ";" 'counsel-M-x
+    (my-bindings ";" '(counsel-M-x :which-key "M-x")
                  "f" '(:which-key "files")
-                 "ff" 'counsel-find-file))
+                 "ff" '(counsel-find-file :which-key "find files")
+                 "fr" '(counsel-recentf :which-key "find recent"))
+    :config
+    (progn
+      (counsel-mode)))
 
   (use-package ivy
     :general
     (my-bindings "b" '(:which-key "buffers")
-                 "bb" 'ivy-switch-buffer)
+                 "bb" '(ivy-switch-buffer :which-key "switch buffers"))
     :config
     (progn
       (ivy-mode)
@@ -552,12 +573,12 @@ glorious goodies.
   (use-package swiper
     :general
     (my-bindings "s" '(:which-key "search")
-                 "ss" 'swiper))
+                 "ss" '(swiper :which-key "search buffer")))
 #+END_SRC
 
 * Appearance
 Emacs does indeed look like it never properly left the eighties, but you can
-configure it to be properly dashing. And I like my things /T H I C C/. I mean
+configure it to be properly dashing. And I like my things ~T H I C C~. I mean
 fancy. I mean dashing.
 
 ** Theme
