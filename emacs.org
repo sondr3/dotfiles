@@ -193,7 +193,8 @@ this idea and I'll be stealing it. Neato.
     :config
     (progn
       (which-key-mode)
-      (setq which-key-prefix-prefix nil)))
+      (setq which-key-prefix-prefix nil
+            which-key-idle-delay 0.3)))
 #+END_SRC
 ** ~General~
 For any and all binding goodness I'll use ~General~. It's pretty awesome.
@@ -520,6 +521,40 @@ And then we can use Flyspell to actually check the spelling. Neato.
             `(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US" "-p" ,(expand-file-name "~/Library/Spelling/")) nil utf-8)
               ("nb_NO" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "nb_NO" "-p" ,(expand-file-name "~/Library/Spelling/")) nil utf-8)))))
 #+END_SRC
+** Ivy, Counsel and Swiper
+~abo-abo~ has created an awesome set of packages to help with completions,
+specifically when finding files, running commands and such. It does not compete
+with Company for example.
+
+To begin with, they're all included in the ~counsel~ package, so we'll install
+that first. Then we can start using Ivy for switching buffers and all it's
+glorious goodies.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package counsel
+    :general
+    (my-bindings ";" '(:ignore t :which-key "M-x") ;; ugly, but it works
+                 ";" 'counsel-M-x
+                 "f" '(:which-key "files")
+                 "ff" 'counsel-find-file))
+
+  (use-package ivy
+    :general
+    (my-bindings "b" '(:which-key "buffers")
+                 "bb" 'ivy-switch-buffer)
+    :config
+    (progn
+      (ivy-mode)
+      (setq ivy-use-virtual-buffers t
+            enable-recursive-minibuffers t
+            ivy-count-format "%d%d ")))
+
+  (use-package swiper
+    :general
+    (my-bindings "s" '(:which-key "search")
+                 "ss" 'swiper))
+#+END_SRC
+
 * Appearance
 Emacs does indeed look like it never properly left the eighties, but you can
 configure it to be properly dashing. And I like my things /T H I C C/. I mean
