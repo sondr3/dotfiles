@@ -129,6 +129,93 @@ because who restarts Emacs.
 #+BEGIN_SRC emacs-lisp
   (add-hook 'after-init-hook (lambda () (message (concat "Booted in: " (emacs-init-time)))))
 #+END_SRC
+* Keybindings
+Any and all settings related to keybindings go here, this includes configuration
+for Evil and setting up the general key map that I'll be using to edit files.
+** evil-mode
+After having used Vim for quite a while doing my editing and such of basically
+anything I'm addicted to the way you move and manipulate text with it. Even
+though I'm god awful with it. So obviously we'll use ~evil~ for good.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :init (evil-mode 1))
+#+END_SRC
+
+*** evil-escape
+However, if you've ever used Vim you know that using ~ESC~ to escape out of any
+mode is god awful. So we won't do that.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-escape
+    :delight evil-escape-mode
+    :init (evil-escape-mode 1)
+    :config
+    (progn
+      (setq-default evil-escape-key-sequence "jk")))
+#+END_SRC
+*** evil-surround
+And then we'll add ~evil-surround~ because it's really neat being able to change
+the delimiters surrounding something on the fly.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-surround
+    :init (global-evil-surround-mode 1))
+#+END_SRC
+*** evil-commentary
+This is a neat package if you comment out code a lot. Like I do.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-commentary
+    :delight evil-commentary-mode
+    :init (evil-commentary-mode))
+#+END_SRC
+*** evil-goggles
+This is a really neat extension that I found on /r/emacs, what it does is
+display visual hints when doing various actions while editing to highlight what
+changed. Really useful for both pair programming and seeing what you did
+yourself.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-goggles
+    :config
+    (progn
+      (evil-goggles-mode)))
+#+END_SRC
+** ~which-key~
+You've probably seen this in Spacemacs where it's used extensively to display
+what keybindings are available in different major modes and in general. I like
+this idea and I'll be stealing it. Neato.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :demand t
+    :config
+    (progn
+      (which-key-mode)
+      (setq which-key-prefix-prefix nil)))
+#+END_SRC
+** ~General~
+For any and all binding goodness I'll use ~General~. It's pretty awesome.
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :demand t
+    :load-path "site-lisp/general.el/"
+    :config
+    (progn
+      (general-evil-setup)))
+#+END_SRC
+*** Major keybind
+This is where the major stuff happens.
+
+#+BEGIN_SRC emacs-lisp
+  (general-create-definer my-bindings
+                          :states '(emacs normal visual motion insert)
+                          :global-prefix "C-c"
+                          :non-normal-prefix "M-SPC"
+                          :prefix "SPC")
+#+END_SRC
+
 * Core settings
 We'll configure anything that relates to how I want the core of Emacs to behave
 and work, regardless of whether or not it's an actual core feature.
@@ -370,7 +457,10 @@ And then we can use ~Magit~ and install a compatibility layer for Evil.
 
 #+BEGIN_SRC emacs-lisp
   (use-package magit
-    :delight auto-revert-mode)
+    :delight auto-revert-mode
+    :general
+    (my-bindings "g" '(:which-key "git")
+                 "gs" 'magit-status))
   (use-package evil-magit
     :after magit)
 #+END_SRC
@@ -569,93 +659,6 @@ popular. Yay me.
 
 #+BEGIN_SRC emacs-lisp
   frame-title-format '("Amalthea :: %b"))
-#+END_SRC
-* Keybindings
-Any and all settings related to keybindings go here, this includes configuration
-for Evil and setting up the general key map that I'll be using to edit files.
-** evil-mode
-After having used Vim for quite a while doing my editing and such of basically
-anything I'm addicted to the way you move and manipulate text with it. Even
-though I'm god awful with it. So obviously we'll use ~evil~ for good.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :init (evil-mode 1))
-#+END_SRC
-
-*** evil-escape
-However, if you've ever used Vim you know that using ~ESC~ to escape out of any
-mode is god awful. So we won't do that.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-escape
-    :delight evil-escape-mode
-    :init (evil-escape-mode 1)
-    :config
-    (progn
-      (setq-default evil-escape-key-sequence "jk")))
-#+END_SRC
-*** evil-surround
-And then we'll add ~evil-surround~ because it's really neat being able to change
-the delimiters surrounding something on the fly.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-surround
-    :init (global-evil-surround-mode 1))
-#+END_SRC
-*** evil-commentary
-This is a neat package if you comment out code a lot. Like I do.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-commentary
-    :delight evil-commentary-mode
-    :init (evil-commentary-mode))
-#+END_SRC
-*** evil-goggles
-This is a really neat extension that I found on /r/emacs, what it does is
-display visual hints when doing various actions while editing to highlight what
-changed. Really useful for both pair programming and seeing what you did
-yourself.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-goggles
-    :config
-    (progn
-      (evil-goggles-mode)
-      (evil-goggles-use-magit-faces)))
-#+END_SRC
-** ~General~
-For any and all binding goodness I'll use ~General~. It's pretty awesome.
-#+BEGIN_SRC emacs-lisp
-  (use-package general
-    :load-path "site-lisp/general.el/"
-    :config
-    (progn
-      (general-evil-setup)))
-#+END_SRC
-*** Major keybind
-This is where the major stuff happens.
-#+BEGIN_SRC emacs-lisp
-  (general-define-key :prefix "SPC"
-                      :non-normal-prefix "M-SPC"
-                      :global-prefix "C-c"
-                      :states '(emacs normal visual motion insert)
-                      "" '(nil :which-key "Amalthea")
-                      "g" '(:which-key "git")
-                      "gs" 'magit-status)
-#+END_SRC
-
-** ~which-key~
-You've probably seen this in Spacemacs where it's used extensively to display
-what keybindings are available in different major modes and in general. I like
-this idea and I'll be stealing it. Neato.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package which-key
-    :config
-    (progn
-      (which-key-mode)
-      (setq which-key-prefix-prefix nil)))
 #+END_SRC
 * Org mode
 Even though Emacs comes bundled with Org installed I do want to make sure I have
