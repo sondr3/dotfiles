@@ -206,7 +206,7 @@ For any and all binding goodness I'll use ~General~. It's pretty awesome.
     (progn
       (general-evil-setup)))
 #+END_SRC
-*** Major keybind
+*** Major keybinding
 This is where the major stuff happens.
 
 #+BEGIN_SRC emacs-lisp
@@ -217,6 +217,12 @@ This is where the major stuff happens.
                           :prefix "SPC")
 #+END_SRC
 
+*** Assorted rebinds
+1. Change from the default, built-in Evil-search to Swiper.
+
+#+BEGIN_SRC emacs-lisp
+  (general-nmap "/" 'swiper)
+#+END_SRC
 * Core settings
 We'll configure anything that relates to how I want the core of Emacs to behave
 and work, regardless of whether or not it's an actual core feature.
@@ -532,12 +538,12 @@ to change words. Which is a lot nicer, let me tell you.
     :commands (flyspell-correct-word-generic
                flyspell-correct-previous-word-generic))
   (use-package flyspell-correct-ivy
+    :commands (flyspell-correct-ivy)
     :general
     (my-bindings "S" '(:ignore t :which-key "spelling")
                  "Sb" '(flyspell-buffer :which-key "spellcheck buffer")
                  "Sc" '(flyspell-correct-previous-word-generic :which-key "correct spelling")
                  "Sn" '(flyspell-goto-next-error :which-key "next spelling error"))
-    :commands (flyspell-correct-ivy)
     :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
 #+END_SRC
 ** Syntax checking
