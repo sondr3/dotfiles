@@ -539,6 +539,21 @@ to change words. Which is a lot nicer, let me tell you.
     :commands (flyspell-correct-ivy)
     :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
 #+END_SRC
+** Syntax checking
+Now that we can assure ourselves that we don't make spelling mistakes anymore,
+it's time to make sure we never make any syntax mistakes either. Or at least a
+man can dream.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :init
+    (progn
+      (global-flycheck-mode t)
+      (setq flycheck-standard-error-navigation nil))
+    :config
+    (progn
+      (setq flycheck-indication-mode 'right-fringe)))
+#+END_SRC
 ** Ivy, Counsel and Swiper
 ~abo-abo~ has created an awesome set of packages to help with completions,
 specifically when finding files, running commands and such. It does not compete
@@ -635,7 +650,7 @@ using that. Huzzah.
 And because of this we can just disable the fringe all together.
 
 #+BEGIN_SRC emacs-lisp
-  (set-fringe-style 0)
+  (set-fringe-style '(0 . 16))
 #+END_SRC
 ** Highlight current line
 Also a thing from my days with VIM. This just creates a line that highlights the
