@@ -463,7 +463,8 @@ And then we can use ~Magit~ and install a compatibility layer for Evil.
     (my-bindings "g" '(:which-key "git")
                  "gs" 'magit-status))
   (use-package evil-magit
-    :after magit)
+    :after magit
+    :init (evil-magit-init))
 #+END_SRC
 *** Diff-hl
 Lots of people use the various ~git-gutter~ packages but I've found that
