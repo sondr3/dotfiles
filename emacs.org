@@ -499,19 +499,18 @@ And then we can use Flyspell to actually check the spelling. Neato.
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell
     :init
-    (progn
-      (add-hook 'text-mode-hook #'turn-on-flyspell)
-      (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+    (setenv "DICTIONARY" "en_US")
+    (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+    (dolist (mode-hook '(text-mode-hook LaTeX-mode-hook))
+      (add-hook mode-hook (lambda () (flyspell-mode))))
     :config
-    (progn
-      (setenv "DICPATH" (expand-file-name "~/Library/Spelling"))
-      (setq-default ispell-program-name (executable-find "hunspell"))
-      (setq ispell-really-hunspell t
-            ispell-silently-savep t
-            ispell-dictionary "en_US"
-            ispell-local-dictionary-alist
-            `(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US" "-p" ,(expand-file-name "~/Library/Spelling/")) nil utf-8)
-              ("nb_NO" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "nb_NO" "-p" ,(expand-file-name "~/Library/Spelling/")) nil utf-8)))))
+    (when (executable-find "hunspell")
+      (setq-default ispell-program-name "hunspell")
+      (setq ispell-really-hunspell t))
+    (setq ispell-dictionary "en_US"
+          flyspell-use-meta-tab nil
+          flyspell-issue-message-flag nil
+          flyspell-issue-welcome-flag nil))
 #+END_SRC
 
 *** Ivy and Flyspell
@@ -519,10 +518,8 @@ Since we're using Ivy we can use it instead of the default flyspell buffer/popup
 to change words. Which is a lot nicer, let me tell you.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package flyspell-correct
-    :commands (flyspell-correct-word-generic
-               flyspell-correct-previous-word-generic))
   (use-package flyspell-correct-ivy
+    :after flyspell
     :commands (flyspell-correct-ivy)
     :general
     (my-bindings "S" '(:ignore t :which-key "spelling")
@@ -909,3 +906,5 @@ it together with ~Evil-mode~.
     (progn
       (add-hook 'lispy-mode-hook #'lispyville-mode)))
 #+END_SRC
+* Outro
+And this is where I leave you adieu.
