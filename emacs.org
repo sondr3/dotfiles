@@ -210,17 +210,21 @@ For any and all binding goodness I'll use ~General~. It's pretty awesome.
 This is where the major stuff happens.
 
 #+BEGIN_SRC emacs-lisp
-  (general-create-definer my-bindings
+  (general-create-definer leader-keys
                           :states '(emacs normal visual motion insert)
-                          :global-prefix "C-c"
-                          :non-normal-prefix "M-SPC"
-                          :prefix "SPC")
+                          :prefix "SPC"
+                          :non-normal-prefix "M-m")
+
+  (general-create-definer major-mode-leader-keys
+                          :states '(emacs normal visual motion insert)
+                          :prefix "'"
+                          :non-normal-prefix "SPC-m")
 #+END_SRC
 
 And then we can begin to set some initial keybindings.
 
 #+BEGIN_SRC emacs-lisp
-  (my-bindings "fs" '(save-buffer :which-key "save buffer")
+  (leader-keys "fs" '(save-buffer :which-key "save buffer")
                "fS" '(save-some-buffers t :which-key "save all buffers"))
 #+END_SRC
 
@@ -444,6 +448,7 @@ this with ~Company~. It's great.
 
 #+BEGIN_SRC emacs-lisp
   (use-package company
+    :delight
     :init
     (progn
       (global-company-mode)
@@ -474,7 +479,7 @@ And then we can use ~Magit~ and install a compatibility layer for Evil.
   (use-package magit
     :delight auto-revert-mode
     :general
-    (my-bindings "g" '(:which-key "git")
+    (leader-keys "g" '(:which-key "git")
                  "gs" 'magit-status))
   (use-package evil-magit
     :after magit
@@ -529,7 +534,7 @@ to change words. Which is a lot nicer, let me tell you.
     :after flyspell
     :commands (flyspell-correct-ivy)
     :general
-    (my-bindings "S" '(:ignore t :which-key "spelling")
+    (leader-keys "S" '(:ignore t :which-key "spelling")
                  "Sb" '(flyspell-buffer :which-key "spellcheck buffer")
                  "Sc" '(flyspell-correct-previous-word-generic :which-key "correct spelling")
                  "Sn" '(flyspell-goto-next-error :which-key "next spelling error"))
@@ -563,7 +568,7 @@ glorious goodies.
   (use-package counsel
     :delight
     :general
-    (my-bindings ";" '(counsel-M-x :which-key "M-x")
+    (leader-keys ";" '(counsel-M-x :which-key "M-x")
                  "f" '(:which-key "files")
                  "ff" '(counsel-find-file :which-key "find files")
                  "fr" '(counsel-recentf :which-key "find recent"))
@@ -574,7 +579,7 @@ glorious goodies.
   (use-package ivy
     :delight
     :general
-    (my-bindings "b" '(:which-key "buffers")
+    (leader-keys "b" '(:which-key "buffers")
                  "bb" '(ivy-switch-buffer :which-key "switch buffers"))
     :config
     (progn
@@ -585,7 +590,7 @@ glorious goodies.
 
   (use-package swiper
     :general
-    (my-bindings "s" '(:which-key "search")
+    (leader-keys "s" '(:which-key "search")
                  "ss" '(swiper :which-key "search buffer")))
 #+END_SRC
 
