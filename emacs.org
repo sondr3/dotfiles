@@ -444,7 +444,8 @@ this with ~Company~. It's great.
             company-minimum-length 2
             company-require-match nil
             company-dabbrev-ignore-case nil
-            company-dabbrev-downcase nil)))
+            company-dabbrev-downcase nil
+            company-tooltip-align-annotations t)))
 #+END_SRC
 ** Git
 If you've never used ~git~, then you might actually live under a rock. It's
@@ -492,22 +493,6 @@ is and the fact that it /bloody/ works.
 ** Spell checking
 Spelling is hard yo. So we'll check that shit.
 
-*** Auto-dictionary
-A great way to automatically choose the correct dictionary to use for whatever
-document it is we're editing.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package auto-dictionary
-    :init
-    (progn
-      (defun auto-set-local-dictionary ()
-        "Set the local dictionary if not nil."
-        (when (and (fboundp 'adict-change-dictionary)
-                   ispell-local-dictionary)
-          (adict-change-dictionary ispell-local-dictionary)))
-      (add-hook 'flyspell-mode-hook #'auto-dictionary-mode)
-      (add-hook 'auto-dictionary-mode-hook #'auto-set-local-dictionary)))
-#+END_SRC
 *** Flyspell
 And then we can use Flyspell to actually check the spelling. Neato.
 
