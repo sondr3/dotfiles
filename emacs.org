@@ -217,6 +217,13 @@ This is where the major stuff happens.
                           :prefix "SPC")
 #+END_SRC
 
+And then we can begin to set some initial keybindings.
+
+#+BEGIN_SRC emacs-lisp
+  (my-bindings "fs" '(save-buffer :which-key "save buffer")
+               "fS" '(save-some-buffers t :which-key "save all buffers"))
+#+END_SRC
+
 *** Assorted rebinds
 1. Change from the default, built-in Evil-search to Swiper.
 
@@ -554,6 +561,7 @@ glorious goodies.
 
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
+    :delight
     :general
     (my-bindings ";" '(counsel-M-x :which-key "M-x")
                  "f" '(:which-key "files")
@@ -564,6 +572,7 @@ glorious goodies.
       (counsel-mode)))
 
   (use-package ivy
+    :delight
     :general
     (my-bindings "b" '(:which-key "buffers")
                  "bb" '(ivy-switch-buffer :which-key "switch buffers"))
