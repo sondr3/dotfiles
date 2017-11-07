@@ -637,6 +637,27 @@ we'll hide the information about load on the computer because it's useless.
         display-time-default-load-average nil)
   (display-time-mode t)
 #+END_SRC
+*** Spaceline
+And now we're back to stealing from Spacemacs again, this time it's the mode
+line they developed called Spaceline. And it's /gorgeous/.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package spaceline
+    :demand t)
+
+  (use-package spaceline-config
+    :ensure nil
+    :after spaceline
+    :config
+    (progn
+      (setq-default mode-line-format '("%e" (:eval (spaceline-ml-main)))
+                    powerline-default-separator 'chamfer
+                    powerline-height 20
+                    spaceline-highlight-face-func 'spaceline-highlight-face-evil-state
+                    spaceline-separator-dir-left '(left . left)
+                    spaceline-separator-dir-right '(right . right))
+      (spaceline-emacs-theme)))
+#+END_SRC
 ** Line numbers
 As an avid Evil and VIM user, not having line numbers feels wrong. And they have
 to be relative. Previously I used to use packages for this, but they all had
