@@ -180,7 +180,7 @@ This is where the major stuff happens.
 #+END_SRC
 
 2. Automatically switch between the current buffer and the last one used in this
-frame, or switch between the last used buffer and this one.
+frame.
 
 #+BEGIN_SRC emacs-lisp
   (defun my--switch-buffer (&optional window)
@@ -199,17 +199,7 @@ frame, or switch between the last used buffer and this one.
            ;; `other-buffer' honors `buffer-predicate' so no need to filter
            (other-buffer current-buffer t)))))
 
-
-  (defun my--switch-window ()
-    (interactive)
-    (let (;; switch to first window previously shown in this frame
-          (prev-window (get-mru-window nil t t)))
-      ;; Check window was not found successfully
-      (unless prev-window (user-error "Last window not found."))
-      (select-window prev-window)))
-
-  (leader-keys "TAB" '(my--switch-window :which-key "window")
-               "b TAB" '(my--switch-buffer :which-key "<->"))
+  (leader-keys "TAB" '(my--switch-window :which-key "window"))
 #+END_SRC
 ** evil-mode
 After having used Vim for quite a while doing my editing and such of basically
@@ -625,6 +615,18 @@ glorious goodies.
                  "ss" '(swiper :which-key "search buffer")))
 #+END_SRC
 
+*** Switch between buffers
+#+BEGIN_SRC emacs-lisp
+  (defun my--switch-window ()
+    (interactive)
+    (let (;; switch to first window previously shown in this frame
+          (prev-window (get-mru-window nil t t)))
+      ;; Check window was not found successfully
+      (unless prev-window (user-error "Last window not found."))
+      (select-window prev-window)))
+
+  (leader-keys "b TAB" '(my--switch-buffer :which-key "<->"))
+#+END_SRC
 * Appearance
 Emacs does indeed look like it never properly left the eighties, but you can
 configure it to be properly dashing. And I like my things ~T H I C C~. I mean
