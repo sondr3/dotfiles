@@ -127,7 +127,7 @@ Useful to spot regressions in startup time for Emacs. Also not really useful
 because who restarts Emacs.
 
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'after-init-hook (lambda () (message (concat "Booted in: " (emacs-init-time)))))
+  (add-hook 'emacs-startup-hook (lambda () (message (concat "Booted in: " (emacs-init-time)))))
 #+END_SRC
 * Keybindings
 Any and all settings related to keybindings go here, this includes configuration
