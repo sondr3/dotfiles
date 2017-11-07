@@ -178,6 +178,39 @@ This is where the major stuff happens.
 #+BEGIN_SRC emacs-lisp
   (general-nmap "/" 'swiper)
 #+END_SRC
+
+2. Automatically switch between the current buffer and the last one used in this
+frame, or switch between the last used buffer and this one.
+
+#+BEGIN_SRC emacs-lisp
+  (defun my--switch-buffer (&optional window)
+    (interactive)
+    (let ((current-buffer (window-buffer window))
+          (buffer-predicate
+           (frame-parameter (window-frame window) 'buffer-predicate)))
+      ;; switch to first buffer previously shown in this window that matches
+      ;; frame-parameter `buffer-predicate'
+      (switch-to-buffer
+       (or (cl-find-if (lambda (buffer)
+                         (and (not (eq buffer current-buffer))
+                              (or (null buffer-predicate)
+                                  (funcall buffer-predicate buffer))))
+                       (mapcar #'car (window-prev-buffers window)))
+           ;; `other-buffer' honors `buffer-predicate' so no need to filter
+           (other-buffer current-buffer t)))))
+
+
+  (defun my--switch-window ()
+    (interactive)
+    (let (;; switch to first window previously shown in this frame
+          (prev-window (get-mru-window nil t t)))
+      ;; Check window was not found successfully
+      (unless prev-window (user-error "Last window not found."))
+      (select-window prev-window)))
+
+  (leader-keys "TAB" '(my--switch-window :which-key "window")
+               "b TAB" '(my--switch-buffer :which-key "<->"))
+#+END_SRC
 ** evil-mode
 After having used Vim for quite a while doing my editing and such of basically
 anything I'm addicted to the way you move and manipulate text with it. Even
