@@ -6,13 +6,38 @@
 These are the settings and aliases and all that jazz that I use for Git. Git is
 installed via Homebrew and is always running the latest stable version. No
 ~--HEAD~ here.
+
 * ~.gitconfig~
-These are the utmost basic settings that are set for Git. My name, email and
-default way to push.
+** User
+These are the utmost basic settings that are set for Git. My name, email and the
+GPG key that I use to verify that I'm me.
 #+BEGIN_SRC sh :tangle "~/.gitconfig"
   [user]
     name = Sondre Nilsen
     email = nilsen.sondre@gmail.com
+    signingkey = 14716F42
+#+END_SRC
+
+** Push
+
+| Option       | Value  | Description                                                                            |
+|--------------+--------+----------------------------------------------------------------------------------------|
+| ~push.default~ | ~simple~ | ~git~ will refuse to push to an ~upstream~ branch that doesn't match the local branch name |
+| ~followTags~   | ~true~   | ~git~ will push any tags that are relevant and annotated                       |
+
+#+BEGIN_SRC sh :tangle "~/.gitconfig"
   [push]
     default = simple
+    followTags = true
+#+END_SRC
+
+** Commit
+
+| Option  | Value | Description         |
+|---------+-------+---------------------|
+| ~gpgsign~ | ~true~  | GPG sign my commits |
+
+#+BEGIN_SRC sh :tangle "~/.gitconfig"
+  [commit]
+    gpgsign = true
 #+END_SRC
