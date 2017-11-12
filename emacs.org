@@ -198,8 +198,6 @@ frame.
                        (mapcar #'car (window-prev-buffers window)))
            ;; `other-buffer' honors `buffer-predicate' so no need to filter
            (other-buffer current-buffer t)))))
-
-  (leader-keys "TAB" '(my--switch-window :which-key "window"))
 #+END_SRC
 ** evil-mode
 After having used Vim for quite a while doing my editing and such of basically
@@ -209,11 +207,7 @@ though I'm god awful with it. So obviously we'll use ~evil~ for good.
 #+BEGIN_SRC emacs-lisp
   (use-package evil
     :demand t
-    :config (evil-mode t)
-    :general
-    (leader-keys "f" '(:which-key "files")
-                 "fs" '(evil-write :which-key "save buffer")
-                 "fS" '(evil-write-all :which-key "save all buffers")))
+    :config (evil-mode t))
 #+END_SRC
 
 *** evil-escape
@@ -501,8 +495,9 @@ And then we can use ~Magit~ and install a compatibility layer for Evil.
   (use-package magit
     :delight auto-revert-mode
     :general
-    (leader-keys "g" '(:which-key "git")
-                 "gs" 'magit-status))
+    (general-define-key
+     "C-c C-g" '(:which-key "git")
+     "C-c C-g s" '(magit-status :which-key "git status")))
   (use-package evil-magit
     :after magit
     :init (evil-magit-init))
@@ -555,11 +550,6 @@ to change words. Which is a lot nicer, let me tell you.
   (use-package flyspell-correct-ivy
     :after flyspell
     :commands (flyspell-correct-ivy)
-    :general
-    (leader-keys "S" '(:ignore t :which-key "spelling")
-                 "Sb" '(flyspell-buffer :which-key "spellcheck buffer")
-                 "Sc" '(flyspell-correct-previous-word-generic :which-key "correct spelling")
-                 "Sn" '(flyspell-goto-next-error :which-key "next spelling error"))
     :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
 #+END_SRC
 ** Syntax checking
@@ -590,18 +580,17 @@ glorious goodies.
   (use-package counsel
     :delight
     :general
-    (leader-keys ";" '(counsel-M-x :which-key "M-x")
-                 "ff" '(counsel-find-file :which-key "find files")
-                 "fr" '(counsel-recentf :which-key "find recent"))
+    (general-define-key
+     "C-x C-f" 'counsel-find-file
+     "C-x C-r" 'counsel-recentf
+     "C-h f" 'counsel-describe-function
+     "C-h v" 'counsel-describe-variable)
     :config
     (progn
       (counsel-mode)))
 
   (use-package ivy
     :delight
-    :general
-    (leader-keys "b" '(:which-key "buffers")
-                 "bb" '(ivy-switch-buffer :which-key "switch buffers"))
     :config
     (progn
       (ivy-mode)
@@ -611,8 +600,7 @@ glorious goodies.
 
   (use-package swiper
     :general
-    (leader-keys "s" '(:which-key "search")
-                 "ss" '(swiper :which-key "search buffer")))
+    (general-define-key "C-S" 'swiper))
 #+END_SRC
 
 *** Switch between buffers
@@ -624,8 +612,6 @@ glorious goodies.
       ;; Check window was not found successfully
       (unless prev-window (user-error "Last window not found."))
       (select-window prev-window)))
-
-  (leader-keys "b TAB" '(my--switch-buffer :which-key "<->"))
 #+END_SRC
 * Appearance
 Emacs does indeed look like it never properly left the eighties, but you can
@@ -825,6 +811,16 @@ nice.
 
 #+BEGIN_SRC emacs-lisp
   (setq org-hide-emphasis-markers t)
+#+END_SRC
+
+** Agenda
+One of the killer features of Org is the Agenda feature, basically allowing you
+to organize and see your whole life in Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-directory "~/Documents/Org"
+        org-default-notes-file "~/Documents/Org/refile.org"
+        org-agenda-files '("~/Documents/Org"))
 #+END_SRC
 
 ** Functions
