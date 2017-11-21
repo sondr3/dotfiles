@@ -479,7 +479,7 @@ this with ~Company~. It's great.
 If you've never used ~git~, then you might actually live under a rock. It's
 awesome. And we'll be using the even more awesome ~Magit~ to work with it.
 
-*** Magit
+** Magit
 First off we'll enable some built-in modes that comes with ~Magit~ that we can
 use for editing various ~git~ files.
 
@@ -633,9 +633,9 @@ it.
 
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
-                      :family "Input Mono" :height 120)
+                      :family "Fira Code" :height 130)
   (set-face-attribute 'variable-pitch nil
-                      :family "Input Mono" :height 130 :weight 'regular)
+                      :family "Fira Code" :height 130 :weight 'regular)
 #+END_SRC
 ** Mode line
 The biggest offender in my opinion is the mode-line, it's ugly as sin and nearly
