@@ -259,6 +259,13 @@ Emacs is an ancient thing and as such it does indeed have a lot of cruft from
 times that have long since passed, so we'll create some settings to make it feel
 and work a bit more modern.
 
+*** Locale
+For some reason Emacs can't read the ~LOCALE~ of my computer, so I'll have to
+import them into Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (setenv "LANG" "en_US.UTF-8")
+#+END_SRC
 *** UTF-8
 We're in the 21st century so we are all using UTF-8, right?
 
@@ -859,14 +866,15 @@ norm.
     (progn
       (setq TeX-command-default "latexmk"
             TeX-command-force "latexmk"
+            TeX-engine 'lualatex
             TeX-auto-save t
             TeX-parse-self t
             TeX-save-query nil
             TeX-PDF-mode t
             TeX-syntactic-comment t
             TeX-clean-confirm t
-            TeX-source-correlate-method 'synctex
             TeX-source-correlate-mode t
+            TeX-source-correlate-method 'synctex
             TeX-source-correlate-start-server t
             LaTeX-fill-break-at-separators nil
             TeX-view-program-selection '((output-pdf "PDF Viewer"))
@@ -877,7 +885,8 @@ norm.
       (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
       (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
       (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-      (add-hook 'LaTeX-mode-hook 'flyspell-buffer)))
+      (add-hook 'LaTeX-mode-hook 'flyspell-buffer)
+      (add-hook 'LaTeX-mode-hook 'TeX-interactive-mode)))
 #+END_SRC
 
 And everyone seems to be using ~latexMK~ to automatically generate the ~PDF~-files.
