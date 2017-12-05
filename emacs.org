@@ -865,12 +865,12 @@ norm.
     :init
     (progn
       (setq TeX-command-default "latexmk"
-            TeX-command-force "latexmk"
             TeX-engine 'lualatex
             TeX-auto-save t
             TeX-parse-self t
             TeX-save-query nil
             TeX-PDF-mode t
+            TeX-show-compilation nil
             TeX-syntactic-comment t
             TeX-clean-confirm t
             TeX-source-correlate-mode t
@@ -885,8 +885,7 @@ norm.
       (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
       (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
       (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-      (add-hook 'LaTeX-mode-hook 'flyspell-buffer)
-      (add-hook 'LaTeX-mode-hook 'TeX-interactive-mode)))
+      (add-hook 'LaTeX-mode-hook 'flyspell-buffer)))
 #+END_SRC
 
 And everyone seems to be using ~latexMK~ to automatically generate the ~PDF~-files.
