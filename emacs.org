@@ -324,16 +324,6 @@ annoying.
   (setq visible-bell nil
         ring-bell-function #'ignore)
 #+END_SRC
-** OS X settings
-I use a MacBook Pro, and for some reason the $PATH variable doesn't get properly
-registered in Emacs. So we have to use a package to make sure it correctly
-loads.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package exec-path-from-shell
-    :init (when (memq window-system '(mac ns x))
-            (exec-path-from-shell-initialize)))
-#+END_SRC
 ** Core editor settings
 Then we'll configure the built-in modes and such that control how the editor
 itself works.
@@ -640,9 +630,12 @@ it.
 
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
-                      :family "Fira Code" :height 130)
+                      :family "Fira Code Retina"
+                      :height 80)
   (set-face-attribute 'variable-pitch nil
-                      :family "Fira Code" :height 130 :weight 'regular)
+                      :family "Fira Code Retina"
+                      :height 80
+                      :weight 'regular)
 #+END_SRC
 ** Mode line
 The biggest offender in my opinion is the mode-line, it's ugly as sin and nearly
@@ -751,13 +744,6 @@ feel like a Emacs newbie by using them.
   (when (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
 #+END_SRC
-** Full screen
-I'm too lazy to have to manually make Emacs full screen whenever I start it, so
-we'll just make it go full screen automatically.
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'window-setup-hook #'toggle-frame-fullscreen t)
-#+END_SRC
 ** Assorted
 And then we have the leftovers that will helps us make Emacs look good. First on
 the chopping block is setting the line spacing a bit higher than the default so
@@ -865,21 +851,22 @@ norm.
     :init
     (progn
       (setq TeX-command-default "latexmk"
-            TeX-engine 'lualatex
-            TeX-auto-save t
-            TeX-parse-self t
-            TeX-save-query nil
-            TeX-PDF-mode t
-            TeX-show-compilation nil
-            TeX-syntactic-comment t
-            TeX-clean-confirm t
-            TeX-source-correlate-mode t
-            TeX-source-correlate-method 'synctex
-            TeX-source-correlate-start-server t
-            LaTeX-fill-break-at-separators nil
-            TeX-view-program-selection '((output-pdf "PDF Viewer"))
-            TeX-view-program-list
-            '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+	    TeX-command-force "latexmk"
+	    TeX-engine 'lualatex
+	    TeX-auto-save t
+	    TeX-parse-self t
+	    TeX-save-query nil
+	    TeX-PDF-mode t
+	    TeX-show-compilation nil
+	    TeX-syntactic-comment t
+	    TeX-clean-confirm t
+	    TeX-source-correlate-mode t
+	    TeX-source-correlate-method 'synctex
+	    TeX-source-correlate-start-server t
+	    LaTeX-fill-break-at-separators nil
+	    TeX-view-program-selection '((output-pdf "PDF Viewer"))
+	    TeX-view-program-list
+	    '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
       (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
       (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
       (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
