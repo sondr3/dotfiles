@@ -15,7 +15,7 @@ GPG key that I use to verify that I'm me.
   [user]
     name = Sondre Nilsen
     email = nilsen.sondre@gmail.com
-    signingkey = 14716F42
+    signingkey = 7BCDD2AFEDB1B62C2B6E999EAC00E2AC485EF38D
 #+END_SRC
 
 ** Push
