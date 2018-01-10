@@ -1,0 +1,77 @@
+#+TITLE: Redshift settings
+#+AUTHOR: Sondre Nilsen
+#+EMAIL: nilsen.sondre@gmail.com
+
+* Introduction
+
+When I used macOS I always used a program called ~flux~ to adjust the colors on my
+screen automatically according to the time of day and of the location of where
+I'm at. This really helped with reducing strain on my eyes at night and was
+something that I really enjoyed using. Luckily for me, it's available as
+~redshift~ on Linux.
+
+* Installation
+
+Since I'm using Arch I simply ran ~sudo pacman -S redshift~, and that was that.
+
+* Configuration
+
+Redshift automatically reads it's settings from ~~/.config/redshift.conf~ at
+launch so configuration goes there.
+
+** Temperature settings
+
+First we'll set the temperature that Redshift will use at night and day. The
+defaults are ~5500~ at day and ~3500~ at night, which is slightly different from
+~flux~ which uses neutral light at day (~6500~) and even more red at night (~2300~).
+
+#+BEGIN_SRC sh :tangle "~/.config/redshift.conf"
+  [redshift]
+  temp-day=5500
+  temp-night=3500
+#+END_SRC
+
+** Transition
+
+Instead of having a hard transition where the screen just goes from neutral to
+night temperature in a split second, we'll transition slowly over time to make
+the transition less glaring.
+
+#+BEGIN_SRC sh :tangle "~/.config/redshift.conf"
+  transition=1
+#+END_SRC
+
+** Location provider
+
+You could use the automatic location provider that's builtin, but it requires an
+internet connection when the program starts and I'm fairly certain that my WiFi
+starts later than Redshift, so it'd just crash out. Instead we'll manually
+specify the location, which for the moment is Bergen.
+
+#+BEGIN_SRC sh :tangle "~/.config/redshift.conf"
+  location-provider=manual
+#+END_SRC
+
+** Adjustment method
+
+I'm fairly certain that this is the default, but the Arch Wiki recommends using
+the ~randr~ method of adjusting the screen.
+
+#+BEGIN_SRC sh :tangle "~/.config/redshift.conf"
+  adjustment-method=randr
+#+END_SRC
+
+** Location
+
+And then we can set the coordinates for Bergen
+
+#+BEGIN_SRC sh :tangle "~/.config/redshift.conf"
+  [manual]
+  lat=60.39
+  lon=5.33
+#+END_SRC
+
+* End
+
+And that's it for configuring Redshift. The configuration for it's startup is
+found in the ~xorg.org~ file.
