@@ -47,7 +47,7 @@ First off the bat though we need to set up where Emacs gets the packages from.
   (setq package-archives
         '(("gnu" . "https://elpa.gnu.org/packages/")
           ("melpa" . "https://melpa.org/packages/")
-          ("org" . "http://orgmode.org/elpa/")))
+          ("org" . "https://orgmode.org/elpa/")))
 #+END_SRC
 
 Then we can set some initial settings for packages.
@@ -575,6 +575,7 @@ glorious goodies.
 
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
+    :demand
     :delight
     :general
     (general-define-key
@@ -587,6 +588,7 @@ glorious goodies.
       (counsel-mode)))
 
   (use-package ivy
+    :demand
     :delight
     :config
     (progn
@@ -596,6 +598,7 @@ glorious goodies.
             ivy-count-format "%d%d ")))
 
   (use-package swiper
+    :demand
     :general
     (general-define-key "C-S" 'swiper))
 #+END_SRC
@@ -625,17 +628,16 @@ I like my themes to be really minimalistic and clean.
 #+END_SRC
 ** Fonts
 Probably the most important thing to change in /any/ editor in my opinion is the
-font. I'm currently repping ~Input Mono~ as my font of choice. I really enjoy
+font. I'm currently using ~Fira Mono~ as my font of choice. I really enjoy
 it.
 
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
                       :family "Fira Mono"
-                      :height 80)
+                      :height 70)
   (set-face-attribute 'variable-pitch nil
                       :family "Fira Mono"
-                      :height 80
-                      :weight 'regular)
+                      :height 70)
 #+END_SRC
 ** Mode line
 The biggest offender in my opinion is the mode-line, it's ugly as sin and nearly
@@ -754,7 +756,6 @@ the latest version, to do this with ~use-package~ you have to ensure that
 
 #+BEGIN_SRC emacs-lisp
   (use-package org
-    :pin org
     :ensure org-plus-contrib)
 #+END_SRC
 
@@ -785,6 +786,13 @@ nice.
   (setq org-hide-emphasis-markers t)
 #+END_SRC
 
+*** Org babel
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((shell . t)
+     (emacs-lisp . t)))
+#+END_SRC
 ** Agenda
 One of the killer features of Org is the Agenda feature, basically allowing you
 to organize and see your whole life in Emacs.

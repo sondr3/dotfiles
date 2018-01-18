@@ -1,17 +1,17 @@
 #+TITLE: Git settings
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
+#+PROPERTY: header-args :tangle ~/.gitconfig
 
 * Preface
 These are the settings and aliases and all that jazz that I use for Git. Git is
-installed via Homebrew and is always running the latest stable version. No
-~--HEAD~ here.
+installed via Pacman: ~pacman -S git~.
 
 * ~.gitconfig~
 ** User
 These are the utmost basic settings that are set for Git. My name, email and the
 GPG key that I use to verify that I'm me.
-#+BEGIN_SRC sh :tangle "~/.gitconfig"
+#+BEGIN_SRC shell
   [user]
     name = Sondre Nilsen
     email = nilsen.sondre@gmail.com
@@ -25,7 +25,7 @@ GPG key that I use to verify that I'm me.
 | ~push.default~ | ~simple~ | ~git~ will refuse to push to an ~upstream~ branch that doesn't match the local branch name |
 | ~followTags~   | ~true~   | ~git~ will push any tags that are relevant and annotated                       |
 
-#+BEGIN_SRC sh :tangle "~/.gitconfig"
+#+BEGIN_SRC shell
   [push]
     default = simple
     followTags = true
@@ -37,7 +37,7 @@ GPG key that I use to verify that I'm me.
 |---------+-------+---------------------|
 | ~gpgsign~ | ~true~  | GPG sign my commits |
 
-#+BEGIN_SRC sh :tangle "~/.gitconfig"
+#+BEGIN_SRC shell
   [commit]
     gpgsign = true
 #+END_SRC
