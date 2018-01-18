@@ -547,7 +547,9 @@ to change words. Which is a lot nicer, let me tell you.
   (use-package flyspell-correct-ivy
     :after flyspell
     :commands (flyspell-correct-ivy)
-    :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
+    :init (progn
+            (setq flyspell-correct-interface #'flyspell-correct-ivy)
+            (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-previous-word-generic)))
 #+END_SRC
 ** Syntax checking
 Now that we can assure ourselves that we don't make spelling mistakes anymore,
