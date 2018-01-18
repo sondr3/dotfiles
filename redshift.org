@@ -1,6 +1,7 @@
 #+TITLE: Redshift settings
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
+#+PROPERTY: header-args :tangle ~/.config/redshift.conf
 
 * Introduction
 
@@ -25,7 +26,7 @@ First we'll set the temperature that Redshift will use at night and day. The
 defaults are ~5500~ at day and ~3500~ at night, which is slightly different from
 ~flux~ which uses neutral light at day (~6500~) and even more red at night (~2300~).
 
-#+BEGIN_SRC sh :tangle "~/.config/redshift.conf"
+#+BEGIN_SRC shell
   [redshift]
   temp-day=5500
   temp-night=3500
@@ -37,7 +38,7 @@ Instead of having a hard transition where the screen just goes from neutral to
 night temperature in a split second, we'll transition slowly over time to make
 the transition less glaring.
 
-#+BEGIN_SRC sh :tangle "~/.config/redshift.conf"
+#+BEGIN_SRC shell
   transition=1
 #+END_SRC
 
@@ -48,7 +49,7 @@ internet connection when the program starts and I'm fairly certain that my WiFi
 starts later than Redshift, so it'd just crash out. Instead we'll manually
 specify the location, which for the moment is Bergen.
 
-#+BEGIN_SRC sh :tangle "~/.config/redshift.conf"
+#+BEGIN_SRC shell
   location-provider=manual
 #+END_SRC
 
@@ -57,7 +58,7 @@ specify the location, which for the moment is Bergen.
 I'm fairly certain that this is the default, but the Arch Wiki recommends using
 the ~randr~ method of adjusting the screen.
 
-#+BEGIN_SRC sh :tangle "~/.config/redshift.conf"
+#+BEGIN_SRC shell
   adjustment-method=randr
 #+END_SRC
 
@@ -65,7 +66,7 @@ the ~randr~ method of adjusting the screen.
 
 And then we can set the coordinates for Bergen
 
-#+BEGIN_SRC sh :tangle "~/.config/redshift.conf"
+#+BEGIN_SRC shell
   [manual]
   lat=60.39
   lon=5.33
@@ -74,4 +75,4 @@ And then we can set the coordinates for Bergen
 * End
 
 And that's it for configuring Redshift. The configuration for it's startup is
-found in the ~xorg.org~ file.
+found in the [[file:xorg.org][xorg.org]] file.
