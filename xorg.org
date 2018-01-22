@@ -59,7 +59,7 @@ something silly that doesn't work.
 Now, we'll have to merge the settings for fonts and applications that rely on
 their settings in ~~/.Xresources~.
 
-#+BEGIN_SRC
+#+BEGIN_SRC shell
   xrdb -merge ~/.Xresources &
 #+END_SRC
 
@@ -79,7 +79,7 @@ If you are unlucky like me you'll get a ton of screen tearing when browsing or
 doing anything at all, and for this we'll use Compton to get rid of it. And with
 it we can set shadows, fading and such awesome features.
 
-#+BEGIN_SRC
+#+BEGIN_SRC shell
   compton -b &
 #+END_SRC
 
