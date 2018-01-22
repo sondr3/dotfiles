@@ -4,21 +4,16 @@
 #+PROPERTY: header-args :tangle ~/.emacs.d/init.el
 
 * Introduction
-
-This is me Emacs configuration, there are many like it but this one is mine. I
+This is my Emacs configuration, there are many like it but this one is mine. I
 really don't recommend other people use it directly, if anything you can steal,
 copy and/or take inspiration from it.
 
 ** Version
-
-Currently I'm running off of the ~master~ branch of Emacs so I can use the new
-built in native line number functionality that was implemented. It's not only
-faster but also does relative line numbers correctly in Org mode files. I
-currently install Emacs with Homebrew: ~brew install emacs --HEAD --with-cocoa
---with-gnutls --with-imagemagick@6 --with-librsvg~.
+I'm currently running the HEAD-version of Emacs from their Git repository for
+some glorious proper line numbering. As soon as this release is out I'll be
+switching to good old regular Emacs.
 
 ** ~(begin)~
-
 And with that we can start.
 
 * Initial configuration
@@ -37,6 +32,7 @@ open a new file.
   (unless (server-running-p)
     (server-start))
 #+END_SRC
+
 ** ~use-package~
 This is the goody goodness that makes this whole thing work. It defers loading
 of packages so Emacs starts up faster, it makes configuration of packages very
