@@ -789,11 +789,23 @@ nice.
 #+END_SRC
 
 *** Org babel
+Add the languages I use to the ~org-babel~ language list so you don't get errors
+everywhere.
+
 #+BEGIN_SRC emacs-lisp
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((shell . t)
-     (emacs-lisp . t)))
+     (emacs-lisp . t)
+     (sql . t)))
+#+END_SRC
+*** Export to HTML
+Apparently you need this package to export Org documents to HTML, which I use
+for SQL to help my classmates.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package htmlize
+    :after org)
 #+END_SRC
 ** Agenda
 One of the killer features of Org is the Agenda feature, basically allowing you
