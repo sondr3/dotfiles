@@ -545,7 +545,6 @@ to change words. Which is a lot nicer, let me tell you.
 
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell-correct-ivy
-    :after flyspell
     :commands (flyspell-correct-ivy)
     :init (progn
             (setq flyspell-correct-interface #'flyspell-correct-ivy)
@@ -758,7 +757,11 @@ the latest version, to do this with ~use-package~ you have to ensure that
 
 #+BEGIN_SRC emacs-lisp
   (use-package org
-    :ensure org-plus-contrib)
+    :ensure org-plus-contrib
+    :config (progn
+              (setq org-use-sub-superscripts '{}
+                    org-export-with-sub-superscripts '{}
+                    org-export-babel-evaluate nil)))
 #+END_SRC
 
 ** Settings
@@ -806,6 +809,15 @@ for SQL to help my classmates.
 #+BEGIN_SRC emacs-lisp
   (use-package htmlize
     :after org)
+#+END_SRC
+
+And to make it look like something out of the 2000s instead of the 1980s we'll
+use ~ox-twbs~ to make it purdy.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-twbs
+    :after org
+    :commands (org-twbs-export-to-html))
 #+END_SRC
 ** Agenda
 One of the killer features of Org is the Agenda feature, basically allowing you
