@@ -202,10 +202,23 @@ though I'm god awful with it. So obviously we'll use ~evil~ for good.
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil
-    :demand t
+    :init (setq evil-want-integration nil)
     :config (evil-mode t))
 #+END_SRC
 
+*** evil-collection
+For one single organism trying to organize and create consistent keybindings is
+a daunting task, I have had this with trying to configure Vim keybindings in Emacs
+for various modes that I use. I just end up with a hodgepodge of assorted
+keybindings bound to my leader key that doesn't really make sense. This is where
+~evil-collection~ comes in, it's a community based project for configuring as much
+of Emacs as possible to consistent and good Vim keybindings.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-collection
+    :after evil
+    :config (evil-collection-init))
+#+END_SRC
 *** evil-escape
 However, if you've ever used Vim you know that using ~ESC~ to escape out of any
 mode is god awful. So we won't do that.
