@@ -8,7 +8,7 @@ This is my Emacs configuration, there are many like it but this one is mine. I
 really don't recommend other people use it directly, if anything you can steal,
 copy and/or take inspiration from it.
 
-** Table of contents                                                   :TOC:
+** Table of contents                                          :TOC:noexport:
 - [[#introduction][Introduction]]
   - [[#version][Version]]
   - [[#begin][~(begin)~]]
