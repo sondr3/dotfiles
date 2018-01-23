@@ -768,10 +768,11 @@ the latest version, to do this with ~use-package~ you have to ensure that
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :ensure org-plus-contrib
-    :config (progn
-              (setq org-use-sub-superscripts '{}
-                    org-export-with-sub-superscripts '{}
-                    org-export-use-babel nil)))
+    :config
+    (progn
+      (setq org-use-sub-superscripts '{}
+            org-export-with-sub-superscripts '{}
+            org-export-use-babel nil)))
 #+END_SRC
 
 ** Settings
@@ -987,6 +988,32 @@ it together with ~Evil-mode~.
     :config
     (progn
       (add-hook 'lispy-mode-hook #'lispyville-mode)))
+#+END_SRC
+** SQL
+There's a course at my university for databases, and I'm taking it and therefore
+am in need of using databases. Most of the time I'm doing it in Emacs with
+Org-mode, exporting the commands and results to a nice HTML-document so I can
+easily go over my homework in a really nice way. However, it does need some
+configuring.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package sql
+    :ensure nil
+    :config
+    (progn
+      (setq sql-product 'mysql)))
+#+END_SRC
+
+And then since manually writing SQL statements and functions as upper case all
+the time is really tedious we'll install a helper mode for that.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package sqlup-mode
+    :after sql
+    :config
+    (progn
+      (add-hook 'sql-mode-hook 'sqlup-mode)
+      (add-hook 'sql-interactive-mode-hook 'sqlup-mode)))
 #+END_SRC
 * Outro
 And this is where I leave you adieu.
