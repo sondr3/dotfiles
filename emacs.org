@@ -818,8 +818,7 @@ Apparently you need this package to export Org documents to HTML, which I use
 for SQL to help my classmates.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package htmlize
-    :after org)
+  (use-package htmlize)
 #+END_SRC
 
 And to make it look like something out of the 2000s instead of the 1980s we'll
@@ -827,7 +826,16 @@ use ~ox-twbs~ to make it purdy.
 
 #+BEGIN_SRC emacs-lisp
   (use-package ox-twbs
-    :after org)
+    ;; stupid hack required to make it work >:(
+    :init (require 'ox-twbs))
+#+END_SRC
+*** Table of Contents in Org-files
+This whole file has gotten a bit unwieldy in size, even though it's nowhere near
+the size of some of the configurations I've seen around. However, we'll include
+a table of contents in this file so people can easily jump around.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package toc-org)
 #+END_SRC
 ** Agenda
 One of the killer features of Org is the Agenda feature, basically allowing you
