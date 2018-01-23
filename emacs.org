@@ -525,13 +525,11 @@ this with ~Company~. It's great.
             company-dabbrev-downcase nil
             company-tooltip-align-annotations t)))
 #+END_SRC
-** Git
-If you've never used ~git~, then you might actually live under a rock. It's
-awesome. And we'll be using the even more awesome ~Magit~ to work with it.
-
 ** Magit
-First off we'll enable some built-in modes that comes with ~Magit~ that we can
-use for editing various ~git~ files.
+If you've never used ~git~, then you might actually live under a rock. It's
+awesome. And we'll be using the even more awesome ~Magit~ to work with it. First
+off we'll enable some built-in modes that comes with ~Magit~ that we can use for
+editing various ~git~ files.
 
 #+BEGIN_SRC emacs-lisp
   (use-package gitattributes-mode)
@@ -925,22 +923,22 @@ norm.
     :init
     (progn
       (setq TeX-command-default "latexmk"
-	    TeX-command-force "latexmk"
-	    TeX-engine 'lualatex
-	    TeX-auto-save t
-	    TeX-parse-self t
-	    TeX-save-query nil
-	    TeX-PDF-mode t
-	    TeX-show-compilation nil
-	    TeX-syntactic-comment t
-	    TeX-clean-confirm t
-	    TeX-source-correlate-mode t
-	    TeX-source-correlate-method 'synctex
-	    TeX-source-correlate-start-server t
-	    LaTeX-fill-break-at-separators nil
-	    TeX-view-program-selection '((output-pdf "PDF Viewer"))
-	    TeX-view-program-list
-	    '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+      TeX-command-force "latexmk"
+      TeX-engine 'lualatex
+      TeX-auto-save t
+      TeX-parse-self t
+      TeX-save-query nil
+      TeX-PDF-mode t
+      TeX-show-compilation nil
+      TeX-syntactic-comment t
+      TeX-clean-confirm t
+      TeX-source-correlate-mode t
+      TeX-source-correlate-method 'synctex
+      TeX-source-correlate-start-server t
+      LaTeX-fill-break-at-separators nil
+      TeX-view-program-selection '((output-pdf "PDF Viewer"))
+      TeX-view-program-list
+      '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
       (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
       (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
       (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
