@@ -770,7 +770,7 @@ the latest version, to do this with ~use-package~ you have to ensure that
     :config (progn
               (setq org-use-sub-superscripts '{}
                     org-export-with-sub-superscripts '{}
-                    org-export-babel-evaluate nil)))
+                    org-export-use-babel nil)))
 #+END_SRC
 
 ** Settings
