@@ -23,6 +23,7 @@ We don't want Emacs to be Eight Megabytes And Constantly Swapping.
 #+BEGIN_SRC emacs-lisp
   (setq gc-cons-threshold (* 100 1024 1024))
 #+END_SRC
+
 ** Start Emacs server
 As far as I'm aware this is a setting that sets it so that the ~emacsclient~ is
 always running in the background so you don't have to start Emacs whenever you
@@ -825,8 +826,7 @@ use ~ox-twbs~ to make it purdy.
 
 #+BEGIN_SRC emacs-lisp
   (use-package ox-twbs
-    :after org
-    :commands (org-twbs-export-to-html))
+    :after org)
 #+END_SRC
 ** Agenda
 One of the killer features of Org is the Agenda feature, basically allowing you
