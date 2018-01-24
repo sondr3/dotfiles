@@ -544,8 +544,8 @@ And then we can use ~Magit~ and install a compatibility layer for Evil.
     :delight auto-revert-mode
     :general
     (general-define-key
-     "C-c C-g" '(:which-key "git")
-     "C-c C-g s" '(magit-status :which-key "git status")))
+     "C-x g" '(:which-key "git")
+     "C-x g s" '(magit-status :which-key "git status")))
   (use-package evil-magit
     :after magit
     :init (evil-magit-init))
