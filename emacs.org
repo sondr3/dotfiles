@@ -811,7 +811,8 @@ the latest version, to do this with ~use-package~ you have to ensure that
     (progn
       (setq org-use-sub-superscripts '{}
             org-export-with-sub-superscripts '{}
-            org-export-use-babel nil)))
+            org-export-use-babel nil
+            org-latex-create-formula-image-program 'dvipng)))
 #+END_SRC
 
 ** Settings
