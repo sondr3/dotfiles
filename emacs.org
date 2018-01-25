@@ -596,9 +596,7 @@ to change words. Which is a lot nicer, let me tell you.
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell-correct-ivy
     :commands (flyspell-correct-ivy)
-    :init (progn
-            (setq flyspell-correct-interface #'flyspell-correct-ivy)
-            (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-previous-word-generic)))
+    :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
 #+END_SRC
 ** Syntax checking
 Now that we can assure ourselves that we don't make spelling mistakes anymore,
@@ -607,14 +605,14 @@ man can dream.
 
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
-    :init
+  :init
     (progn
       (global-flycheck-mode t)
-      (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
-      (setq flycheck-standard-error-navigation nil))
+      (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
     :config
     (progn
-      (setq flycheck-indication-mode 'right-fringe)))
+      (setq flycheck-standard-error-navigation nil
+            flycheck-indication-mode 'right-fringe)))
 #+END_SRC
 ** Ivy, Counsel and Swiper
 ~abo-abo~ has created an awesome set of packages to help with completions,
