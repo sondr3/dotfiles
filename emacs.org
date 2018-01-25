@@ -192,7 +192,6 @@ this idea and I'll be stealing it. Neato.
 For any and all binding goodness I'll use ~General~. It's pretty awesome.
 #+BEGIN_SRC emacs-lisp
   (use-package general
-    :demand t
     :config
     (progn
       (general-evil-setup)))
@@ -611,6 +610,7 @@ man can dream.
     :init
     (progn
       (global-flycheck-mode t)
+      (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
       (setq flycheck-standard-error-navigation nil))
     :config
     (progn
