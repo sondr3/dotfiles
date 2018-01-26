@@ -64,7 +64,8 @@ And with that we can start.
 We don't want Emacs to be Eight Megabytes And Constantly Swapping.
 
 #+BEGIN_SRC emacs-lisp
-  (setq gc-cons-threshold (* 100 1024 1024))
+  (setq gc-cons-threshold (* 100 1024 1024)
+        gc-cons-percentage 0.6)
 #+END_SRC
 
 ** Start Emacs server
@@ -161,13 +162,6 @@ idea what it does because the manual doesn't say. But newer is always better?
 
 #+BEGIN_SRC emacs-lisp
   (setq byte-compile--use-old-handlers nil)
-#+END_SRC
-** Show boot time
-Useful to spot regressions in startup time for Emacs. Also not really useful
-because who restarts Emacs.
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'emacs-startup-hook (lambda () (message (concat "Booted in: " (emacs-init-time)))))
 #+END_SRC
 * Keybindings
 Any and all settings related to keybindings go here, this includes configuration
@@ -1064,4 +1058,16 @@ the time is really tedious we'll install a helper mode for that.
       (add-hook 'sql-interactive-mode-hook 'sqlup-mode)))
 #+END_SRC
 * Outro
-And this is where I leave you adieu.
+** Late start settings
+
+And this is where I leave you adieu. But not before powering down Emacs and
+setting it up for actual usage. First I print the time it took to boot, Useful
+to spot regressions in startup time for Emacs. Also not really useful because
+who restarts Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'emacs-startup-hook
+            (lambda () (message (concat "Booted in: " (emacs-init-time))))
+            (setq gc-cons-threshold (* 100 1024)
+                  gc-cons-percentage 0.1))
+#+END_SRC
