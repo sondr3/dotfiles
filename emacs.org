@@ -678,10 +678,10 @@ it.
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
                       :family "Fira Mono"
-                      :height 70)
+                      :height 100)
   (set-face-attribute 'variable-pitch nil
                       :family "Fira Mono"
-                      :height 70)
+                      :height 100)
 #+END_SRC
 ** Mode line
 The biggest offender in my opinion is the mode-line, it's ugly as sin and nearly
@@ -806,7 +806,9 @@ the latest version, to do this with ~use-package~ you have to ensure that
       (setq org-use-sub-superscripts '{}
             org-export-with-sub-superscripts '{}
             org-export-use-babel nil
-            org-latex-create-formula-image-program 'dvipng)))
+            org-preview-latex-default-process 'dvipng
+            org-pretty-entities t
+            org-list-allow-alphabetical t)))
 #+END_SRC
 
 ** Settings
