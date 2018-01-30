@@ -975,7 +975,7 @@ directory for sweet performance gains.
     (when (equal (buffer-name)
                  (concat "emacs.org"))
       (org-babel-tangle)
-      (byte-recompile-directory (concat (expand-file-name user-emacs-directory) 0))))
+      (byte-recompile-directory (expand-file-name user-emacs-directory) 0)))
 
   (add-hook 'kill-emacs-hook #'my--tangle-byte-recompile-org)
 #+END_SRC
