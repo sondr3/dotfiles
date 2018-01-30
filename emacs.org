@@ -876,6 +876,30 @@ a table of contents in this file so people can easily jump around.
 #+BEGIN_SRC emacs-lisp
   (use-package toc-org)
 #+END_SRC
+*** Add ~$$~ to highlight list
+In Org-mode you use the dollar sign to enclose mathematical expressions, or
+things you want exported marked up as LaTeX expressions, however there's no
+syntax highlighting or hiding like with the other emphasis markers. After
+/extensive/ research online I figured out that:
+
+1. You can't extend the ~org-emphasis-alist~ anymore.
+2. Regexp is a fucking mess, took me forever to figure this out.
+3. Emacs regexp is different from all other regexps.
+
+I also figured out a more beautiful version of the syntax below, but it broke
+the highlighting in all org-mode documents, so that was fun. You can see it in
+all its beauty in the comment in the code.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-font-lock-set-keywords-hook
+            (lambda ()
+              (add-to-list 'org-font-lock-extra-keywords
+                           ;; '("\\$\\(.+?\\)\\$"
+                           '("\\(\\$\\)\\([^\n\r\t]+?\\)\\(\\$\\)"
+                             (1 '(face org-code invisible t))
+                             (2 'org-code )
+                             (3 '(face org-code invisible t))))))
+#+END_SRC
 ** Agenda
 One of the killer features of Org is the Agenda feature, basically allowing you
 to organize and see your whole life in Emacs.
