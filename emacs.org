@@ -674,16 +674,16 @@ I like my themes to be really minimalistic and clean.
 #+END_SRC
 ** Fonts
 Probably the most important thing to change in /any/ editor in my opinion is the
-font. I'm currently using ~Fira Mono~ as my font of choice. I really enjoy
-it.
+font. I'm currently using the DejaVu family as my fonts of choice. I really
+enjoy it.
 
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
-                      :family "Fira Mono"
+                      :family "DejaVu Sans Mono"
                       :height 100)
   (set-face-attribute 'variable-pitch nil
-                      :family "Fira Mono"
-                      :height 100)
+                      :family "DejaVu Sans"
+                      :height 110)
 #+END_SRC
 ** Mode line
 The biggest offender in my opinion is the mode-line, it's ugly as sin and nearly
@@ -715,8 +715,8 @@ using that. Huzzah.
   (setq-default display-line-numbers 'visual
                 display-line-numbers-current-absolute t
                 display-line-numbers-width-start t
-                display-line-numbers-width 2
-                display-line-numbers-widen nil)
+                display-line-numbers-width 4
+                display-line-numbers-widen t)
 #+END_SRC
 
 And because of this we can just disable the fringe all together.
@@ -899,6 +899,28 @@ all its beauty in the comment in the code.
                              (1 '(face org-code invisible t))
                              (2 'org-code )
                              (3 '(face org-code invisible t))))))
+#+END_SRC
+*** Set the font to a variable pitch font
+Programming in a font that is monospaced is great, but writing prose is on the
+other hand is better in a variable spaced font. So we'll configure org-mode to
+use that instead of the default monospace font, however this breaks the new line
+number mode included in Emacs 26.1 so we'll disable line numbers all together in
+org-mode.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-mode-hook
+            '(lambda ()
+               (setq display-line-numbers nil)
+               (variable-pitch-mode t)
+               (dolist (face '(org-code
+                               org-link
+                               org-block
+                               org-table
+                               org-block-begin-line
+                               org-block-end-line
+                               org-meta-line
+                               org-document-info-keyword))
+                 (set-face-attribute face nil :inherit 'fixed-pitch))))
 #+END_SRC
 ** Agenda
 One of the killer features of Org is the Agenda feature, basically allowing you
