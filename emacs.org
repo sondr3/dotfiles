@@ -886,14 +886,17 @@ syntax highlighting or hiding like with the other emphasis markers. After
 2. Regexp is a fucking mess, took me forever to figure this out.
 3. Emacs regexp is different from all other regexps.
 
-I also figured out a more beautiful version of the syntax below, but it broke
+I also figured out a more beautiful version of the regexp below, but it broke
 the highlighting in all org-mode documents, so that was fun. You can see it in
-all its beauty in the comment in the code.
+all its beauty in the comment in the code. Furthermore, I had to create a new
+face to be able to make the text inside italicized because I couldn't figure out
+how to do it normally.
 
 #+BEGIN_SRC emacs-lisp
   (defface my--org-math-highlight
     '((t :inherit org-code :slant italic))
-    "My own configuration for highlighting math blocks in org-mode")
+    "My own configuration for highlighting math blocks in org-mode"
+    :group 'org-faces)
 
   (add-hook 'org-font-lock-set-keywords-hook
             (lambda ()
@@ -917,6 +920,12 @@ org-mode.
                (setq display-line-numbers nil)
                (set-fringe-style '(16 . 16))
                (variable-pitch-mode t)
+               (custom-set-faces
+                '(diff-hl-margin-change ((t (:inherit diff-hl-change :family "DejaVu Sans Mono"))))
+                '(diff-hl-margin-insert ((t (:inherit diff-hl-change :family "DejaVu Sans Mono"))))
+                '(diff-hl-margin-delete ((t (:inherit diff-hl-change :family "DejaVu Sans Mono"))))
+                '(diff-hl-margin-ignored ((t (:inherit diff-hl-change :family "DejaVu Sans Mono"))))
+                '(diff-hl-margin-unknown ((t (:inherit diff-hl-change :family "DejaVu Sans Mono")))))
                (dolist (face '(org-code
                                org-link
                                org-block
