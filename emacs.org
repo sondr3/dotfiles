@@ -543,7 +543,7 @@ And then we can use ~Magit~ and install a compatibility layer for Evil.
     :after magit
     :init (evil-magit-init))
 #+END_SRC
-*** Diff-hl
+** Diff-hl
 Lots of people use the various ~git-gutter~ packages but I've found that
 ~diff-hl~ is far better than all of them, mostly because of how configurable it
 is and the fact that it /bloody/ works.
@@ -557,6 +557,7 @@ is and the fact that it /bloody/ works.
             '((insert . "+") (delete . "-") (change . "~")
               (unknown . "?") (ignored . "i")))
       (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+      (diff-hl-flydiff-mode)
       (diff-hl-margin-mode)
       (global-diff-hl-mode)))
 #+END_SRC
@@ -714,9 +715,8 @@ using that. Huzzah.
 #+BEGIN_SRC emacs-lisp
   (setq-default display-line-numbers 'visual
                 display-line-numbers-current-absolute t
-                display-line-numbers-width-start t
                 display-line-numbers-width 4
-                display-line-numbers-widen t)
+                display-line-numbers-widen nil)
 #+END_SRC
 
 And because of this we can just disable the fringe all together.
@@ -911,6 +911,7 @@ org-mode.
   (add-hook 'org-mode-hook
             '(lambda ()
                (setq display-line-numbers nil)
+               (set-fringe-style '(16 . 16))
                (variable-pitch-mode t)
                (dolist (face '(org-code
                                org-link
