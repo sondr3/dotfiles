@@ -891,13 +891,17 @@ the highlighting in all org-mode documents, so that was fun. You can see it in
 all its beauty in the comment in the code.
 
 #+BEGIN_SRC emacs-lisp
+  (defface my--org-math-highlight
+    '((t :inherit org-code :slant italic))
+    "My own configuration for highlighting math blocks in org-mode")
+
   (add-hook 'org-font-lock-set-keywords-hook
             (lambda ()
               (add-to-list 'org-font-lock-extra-keywords
                            ;; '("\\$\\(.+?\\)\\$"
                            '("\\(\\$\\)\\([^\n\r\t]+?\\)\\(\\$\\)"
                              (1 '(face org-code invisible t))
-                             (2 'org-code )
+                             (2 'my--org-math-highlight)
                              (3 '(face org-code invisible t))))))
 #+END_SRC
 *** Set the font to a variable pitch font
