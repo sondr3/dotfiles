@@ -714,8 +714,9 @@ using that. Huzzah.
 #+BEGIN_SRC emacs-lisp
   (setq-default display-line-numbers 'visual
                 display-line-numbers-current-absolute t
+                display-line-numbers-width-start t
                 display-line-numbers-width 2
-                display-line-numbers-widen t)
+                display-line-numbers-widen nil)
 #+END_SRC
 
 And because of this we can just disable the fringe all together.
