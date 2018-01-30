@@ -590,6 +590,8 @@ to change words. Which is a lot nicer, let me tell you.
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell-correct-ivy
     :commands (flyspell-correct-ivy)
+    :general (:keymaps 'flyspell-mode-map
+                       "C-;" 'flyspell-correct-previous-word-generic)
     :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
 #+END_SRC
 ** Syntax checking
