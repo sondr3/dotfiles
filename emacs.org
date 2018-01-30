@@ -685,6 +685,7 @@ enjoy it.
   (set-face-attribute 'variable-pitch nil
                       :family "DejaVu Sans"
                       :height 110)
+  (set-frame-font "DejaVu Sans Mono" nil t)
 #+END_SRC
 ** Mode line
 The biggest offender in my opinion is the mode-line, it's ugly as sin and nearly
@@ -947,11 +948,9 @@ to organize and see your whole life in Emacs.
 #+END_SRC
 
 ** Functions
-*** Automagical tangling
-I keep forgetting both to tangle this file when I'm working on it and to
-byte compile my home directory whenever I save this file. I'll also add a hook
-so that whenever we kill Emacs it runs this function to ensure everything is up
-to date, all the time.
+*** Automagical tangling on save
+It's hard to remember to byte recompile the generated ~init.el~ file whenever I
+edit this file, so we'll make Emacs do it for us on save. Neato.
 
 #+BEGIN_SRC emacs-lisp
   (defun my--tangle-byte-compile-org ()
@@ -960,10 +959,25 @@ to date, all the time.
     (when (equal (buffer-name)
                  (concat "emacs.org"))
       (org-babel-tangle)
-      (byte-recompile-directory (expand-file-name user-emacs-directory) 0)))
+      (byte-recompile-file (concat (expand-file-name user-emacs-directory) "init.el"))))
 
   (add-hook 'after-save-hook #'my--tangle-byte-compile-org)
-  (add-hook 'kill-emacs-hook #'my--tangle-byte-compile-org)
+#+END_SRC
+
+*** Automagical tangling on exit
+And whenever I exit Emacs we make sure to byte-recompile my whole ~.emacs.d/~
+directory for sweet performance gains.
+
+#+BEGIN_SRC emacs-lisp
+  (defun my--tangle-byte-recompile-org ()
+    "Tangles emacs.org and byte compiles ~/.emacs.d/"
+    (interactive)
+    (when (equal (buffer-name)
+                 (concat "emacs.org"))
+      (org-babel-tangle)
+      (byte-recompile-directory (concat (expand-file-name user-emacs-directory) 0))))
+
+  (add-hook 'kill-emacs-hook #'my--tangle-byte-recompile-org)
 #+END_SRC
 * Latex
 After I started studying I decided that it was finally time to learn Latex and
