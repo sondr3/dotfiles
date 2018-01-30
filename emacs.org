@@ -959,7 +959,7 @@ edit this file, so we'll make Emacs do it for us on save. Neato.
     (when (equal (buffer-name)
                  (concat "emacs.org"))
       (org-babel-tangle)
-      (byte-recompile-file (concat (expand-file-name user-emacs-directory) "init.el"))))
+      (byte-recompile-file (concat (expand-file-name user-emacs-directory) "init.el") t)))
 
   (add-hook 'after-save-hook #'my--tangle-byte-compile-org)
 #+END_SRC
