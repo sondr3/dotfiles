@@ -306,13 +306,6 @@ Emacs is an ancient thing and as such it does indeed have a lot of cruft from
 times that have long since passed, so we'll create some settings to make it feel
 and work a bit more modern.
 
-*** Locale
-For some reason Emacs can't read the ~LOCALE~ of my computer, so I'll have to
-import them into Emacs.
-
-#+BEGIN_SRC emacs-lisp
-  (setenv "LANG" "en_US.UTF-8")
-#+END_SRC
 *** UTF-8
 We're in the 21st century so we are all using UTF-8, right?
 
@@ -1035,7 +1028,12 @@ norm.
       (add-hook 'LaTeX-mode-hook #'flyspell-buffer)))
 #+END_SRC
 
-And everyone seems to be using ~latexMK~ to automatically generate the ~PDF~-files.
+*** Latexmk
+It's like Make, only for LaTeX. It's great, it automatically compiles your
+documents and keeps track of the dependencies, so if you change something in an
+image or a document that's included in a master file it'll recognize that and
+compile it enough times for it to properly work. Especially handy when working
+with references and such.
 
 #+BEGIN_SRC emacs-lisp
   (use-package auctex-latexmk
@@ -1045,8 +1043,9 @@ And everyone seems to be using ~latexMK~ to automatically generate the ~PDF~-fil
       (auctex-latexmk-setup)))
 #+END_SRC
 
-Then we'll enable ~Company~ for it so we get some decent auto completion for
-LaTeX.
+*** Auto-completion for LaTeX
+Thiis is basically just a small backend for Company to hook into so that it can
+complete LaTeX commands and such.
 
 #+BEGIN_SRC emacs-lisp
   (use-package company-auctex
@@ -1064,6 +1063,7 @@ Next, we'll add some more backends for math in LaTeX.
       (add-to-list 'company-backends 'company-latex-commands)))
 #+END_SRC
 
+*** Magic
 And finally we'll add ~magic-latex-buffer~ for some proper magic.
 
 #+BEGIN_SRC emacs-lisp
@@ -1105,6 +1105,12 @@ And then we can configure ~bibtex~.
             bibtex-align-at-equal-sign t
             bibtex-text-indentation 20
             bibtex-completion-bibliography '("~/Documents/UiB/bibliography.bib"))))
+#+END_SRC
+** Customization
+#+BEGIN_SRC emacs-lisp
+  (font-lock-add-keywords 'latex-mode '(("\\(\\$\\)\\([^\n\r\t]+?\\)\\(\\$\\)"
+                                         (1 '(face font-latex-math-face invisible t))
+                                         (3 '(face font-latex-math-face invisible t)))))
 #+END_SRC
 * Programming
 Anything related to mostly anything related to programming goes here.
