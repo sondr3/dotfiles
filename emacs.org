@@ -499,7 +499,8 @@ Anything else goes here.
                 fill-column 80)
   (setq help-window-select t
         compilation-scroll-output 'first-error
-        save-interprogram-paste-before-kill t)
+        save-interprogram-paste-before-kill t
+        max-specpdl-size 10000)
   (add-hook 'text-mode-hook #'auto-fill-mode)
 #+END_SRC
 ** Auto completion
@@ -511,13 +512,13 @@ this with ~Company~. It's great.
     :delight
     :init
     (progn
-      (global-company-mode)
       (setq company-idle-delay 0.2
             company-minimum-length 2
             company-require-match nil
             company-dabbrev-ignore-case nil
             company-dabbrev-downcase nil
-            company-tooltip-align-annotations t)))
+            company-tooltip-align-annotations t))
+    :config (add-hook 'after-init-hook #'global-company-mode))
 #+END_SRC
 ** Magit
 If you've never used ~git~, then you might actually live under a rock. It's
@@ -833,7 +834,8 @@ the latest version, to do this with ~use-package~ you have to ensure that
             org-export-use-babel nil
             org-preview-latex-default-process 'dvipng
             org-pretty-entities t
-            org-list-allow-alphabetical t)))
+            org-list-allow-alphabetical t
+            org-latex-remove-logfiles nil)))
 #+END_SRC
 
 ** Settings
@@ -1009,29 +1011,28 @@ norm.
     :ensure auctex
     :init
     (progn
+      (setq-default TeX-master nil)
       (setq TeX-command-default "latexmk"
-      TeX-command-force "latexmk"
-      TeX-engine 'lualatex
-      TeX-auto-save t
-      TeX-parse-self t
-      TeX-save-query nil
-      TeX-PDF-mode t
-      TeX-show-compilation nil
-      TeX-syntactic-comment t
-      TeX-clean-confirm t
-      TeX-source-correlate-mode t
-      TeX-source-correlate-method 'synctex
-      TeX-source-correlate-start-server t
-      LaTeX-fill-break-at-separators nil
-      TeX-view-program-selection '((output-pdf "PDF Viewer"))
-      TeX-view-program-list
-      '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
-      (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
-      (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-      (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
-      (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
-      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-      (add-hook 'LaTeX-mode-hook 'flyspell-buffer)))
+            TeX-command-force "latexmk"
+            TeX-engine 'luatex
+            TeX-auto-save t
+            TeX-parse-self t
+            TeX-save-query nil
+            TeX-PDF-mode t
+            TeX-show-compilation nil
+            TeX-syntactic-comment t
+            TeX-clean-confirm t
+            TeX-source-correlate-mode t
+            TeX-source-correlate-method 'synctex
+            TeX-source-correlate-start-server t
+            LaTeX-fill-break-at-separators nil
+            TeX-view-program-selection '((output-pdf "Okular")))
+      (add-hook 'LaTeX-mode-hook #'TeX-fold-mode)
+      (add-hook 'LaTeX-mode-hook #'LaTeX-math-mode)
+      (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode)
+      (add-hook 'LaTeX-mode-hook #'TeX-PDF-mode)
+      (add-hook 'LaTeX-mode-hook #'flyspell-mode)
+      (add-hook 'LaTeX-mode-hook #'flyspell-buffer)))
 #+END_SRC
 
 And everyone seems to be using ~latexMK~ to automatically generate the ~PDF~-files.
@@ -1049,9 +1050,18 @@ LaTeX.
 
 #+BEGIN_SRC emacs-lisp
   (use-package company-auctex
-    :init
+    :init (company-auctex-init))
+#+END_SRC
+
+Next, we'll add some more backends for math in LaTeX.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company-math
+    :config
     (progn
-      (company-auctex-init)))
+      (add-to-list 'company-backends 'company-math-symbols-latex)
+      (add-to-list 'company-backends 'company-math-symbols-unicode)
+      (add-to-list 'company-backends 'company-latex-commands)))
 #+END_SRC
 
 And finally we'll add ~magic-latex-buffer~ for some proper magic.
@@ -1060,12 +1070,12 @@ And finally we'll add ~magic-latex-buffer~ for some proper magic.
   (use-package magic-latex-buffer
     :init
     (progn
-      (add-hook 'LaTeX-mode-hook 'magic-latex-buffer)
+      (add-hook 'LaTeX-mode-hook #'magic-latex-buffer)
       (setq magic-latex-enable-block-highlight t
             magic-latex-enable-suscript t
             magic-latex-enable-pretty-symbols t
             magic-latex-enable-block-align nil
-            magic-latex-enable-inline-image nil)))
+            magic-latex-enable-inline-image t)))
 #+END_SRC
 ** RefTEX
 Whenever you are writing a document that required references you'll need
