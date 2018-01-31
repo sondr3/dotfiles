@@ -969,15 +969,9 @@ And whenever I exit Emacs we make sure to byte-recompile my whole ~.emacs.d/~
 directory for sweet performance gains.
 
 #+BEGIN_SRC emacs-lisp
-  (defun my--tangle-byte-recompile-org ()
-    "Tangles emacs.org and byte compiles ~/.emacs.d/"
-    (interactive)
-    (when (equal (buffer-name)
-                 (concat "emacs.org"))
-      (org-babel-tangle)
-      (byte-recompile-directory (expand-file-name user-emacs-directory) 0)))
-
-  (add-hook 'kill-emacs-hook #'my--tangle-byte-recompile-org)
+  (add-hook 'kill-emacs-hook
+            (lambda ()
+              (byte-recompile-directory (expand-file-name user-emacs-directory) 0)))
 #+END_SRC
 * Latex
 After I started studying I decided that it was finally time to learn Latex and
