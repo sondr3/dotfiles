@@ -186,6 +186,7 @@ this idea and I'll be stealing it. Neato.
 For any and all binding goodness I'll use ~General~. It's pretty awesome.
 #+BEGIN_SRC emacs-lisp
   (use-package general
+    :demand
     :config
     (progn
       (general-evil-setup)))
@@ -659,6 +660,26 @@ glorious goodies.
       ;; Check window was not found successfully
       (unless prev-window (user-error "Last window not found."))
       (select-window prev-window)))
+#+END_SRC
+** Avy
+~abo-abo~ also created a really neat package for quickly jumping around your
+buffer with Avy. I sadly don't use it nearly enough and still just move around
+with pressing my movement keys too much, but we'll try.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package avy
+    :commands (avy-goto-char avy-goto-line)
+    :init (unbind-key "C-'" org-mode-map)
+    :config
+    (progn
+      (general-define-key :states '(normal visual)
+                          "f" 'avy-goto-char-2)
+      (general-define-key :states '(normal visual)
+                          :keymaps 'org-mode-map
+                          "M-g f" 'avy-org-goto-heading-timer)
+      (general-define-key :states '(normal insert visual)
+                          "C-'" 'avy-goto-char
+                          "M-g g" 'avy-goto-line)))
 #+END_SRC
 * Appearance
 Emacs does indeed look like it never properly left the eighties, but you can
