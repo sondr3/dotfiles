@@ -696,10 +696,10 @@ enjoy it.
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
                       :family "DejaVu Sans Mono"
-                      :height 100)
+                      :height 120)
   (set-face-attribute 'variable-pitch nil
                       :family "DejaVu Sans"
-                      :height 110)
+                      :height 120)
   (set-frame-font "DejaVu Sans Mono" nil t)
 #+END_SRC
 ** Mode line
@@ -937,12 +937,6 @@ org-mode.
                (setq display-line-numbers nil)
                (set-fringe-style '(16 . 16))
                (variable-pitch-mode t)
-               (custom-set-faces
-                '(diff-hl-margin-change ((t (:inherit diff-hl-change :family "DejaVu Sans Mono"))))
-                '(diff-hl-margin-insert ((t (:inherit diff-hl-change :family "DejaVu Sans Mono"))))
-                '(diff-hl-margin-delete ((t (:inherit diff-hl-change :family "DejaVu Sans Mono"))))
-                '(diff-hl-margin-ignored ((t (:inherit diff-hl-change :family "DejaVu Sans Mono"))))
-                '(diff-hl-margin-unknown ((t (:inherit diff-hl-change :family "DejaVu Sans Mono")))))
                (dolist (face '(org-code
                                org-link
                                org-block
