@@ -1170,7 +1170,9 @@ install something to fix that as well.
 
 #+BEGIN_SRC emacs-lisp
   (use-package sql-indent
-    :after sql)
+    :load-path "~/Code/emacs/sql-indent"
+    :after sql
+    :init (sql-indent-mode))
 #+END_SRC
 * Outro
 ** Late start settings
