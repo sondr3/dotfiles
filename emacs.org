@@ -1012,8 +1012,9 @@ norm.
             TeX-source-correlate-mode t
             TeX-source-correlate-method 'synctex
             TeX-source-correlate-start-server t
+            LaTeX-babel-hyphen nil
             LaTeX-fill-break-at-separators nil
-            TeX-view-program-selection '((output-pdf "Okular")))
+            TeX-view-program-selection '((output-pdf "Zathura")))
       (add-hook 'LaTeX-mode-hook #'TeX-fold-mode)
       (add-hook 'LaTeX-mode-hook #'LaTeX-math-mode)
       (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode)
@@ -1100,12 +1101,6 @@ And then we can configure ~bibtex~.
             bibtex-text-indentation 20
             bibtex-completion-bibliography '("~/Documents/UiB/bibliography.bib"))))
 #+END_SRC
-** Customization
-#+BEGIN_SRC emacs-lisp
-  (font-lock-add-keywords 'latex-mode '(("\\(\\$\\)\\([^\n\r\t]+?\\)\\(\\$\\)"
-                                         (1 '(face font-latex-math-face invisible t))
-                                         (3 '(face font-latex-math-face invisible t)))))
-#+END_SRC
 * Programming
 Anything related to mostly anything related to programming goes here.
 
@@ -1135,6 +1130,14 @@ it together with ~Evil-mode~.
     (progn
       (add-hook 'lispy-mode-hook #'lispyville-mode)))
 #+END_SRC
+*** Emacs-LISP
+We'll install a small utility for checking for errors in packages that we
+develop for Emacs with ~flycheck-package~:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck-package
+    :after flycheck)
+#+END_SRC
 ** SQL
 There's a course at my university for databases, and I'm taking it and therefore
 am in need of using databases. Most of the time I'm doing it in Emacs with
@@ -1160,6 +1163,14 @@ the time is really tedious we'll install a helper mode for that.
     (progn
       (add-hook 'sql-mode-hook 'sqlup-mode)
       (add-hook 'sql-interactive-mode-hook 'sqlup-mode)))
+#+END_SRC
+
+Finally, it would be nice for it to handle indentation automatically, so we'll
+install something to fix that as well.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package sql-indent
+    :after sql)
 #+END_SRC
 * Outro
 ** Late start settings
