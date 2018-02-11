@@ -663,7 +663,7 @@ with pressing my movement keys too much, but we'll try.
 #+BEGIN_SRC emacs-lisp
   (use-package avy
     :commands (avy-goto-char avy-goto-line)
-    :init (unbind-key "C-'" org-mode-map)
+    ;; :init (unbind-key "C-'" org-mode-map)
     :config
     (progn
       (general-define-key :states '(normal visual)
@@ -1115,9 +1115,8 @@ makes, so why not try this one too.
 #+BEGIN_SRC emacs-lisp
   (use-package lispy
     :config
-    (progn
-      (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
-      (define-key lispy-mode-map-lispy (kbd "\"") nil)))
+    :hook (emacs-lisp-mode . lispy-mode)
+    :config (define-key lispy-mode-map-lispy (kbd "\"") nil))
 #+END_SRC
 
 And we'll use it together with ~Lispyville~ to provide some comfort when using
@@ -1126,9 +1125,7 @@ it together with ~Evil-mode~.
 #+BEGIN_SRC emacs-lisp
   (use-package lispyville
     :after lispy
-    :config
-    (progn
-      (add-hook 'lispy-mode-hook #'lispyville-mode)))
+    :hook (lispy-mode . lispyville-mode))
 #+END_SRC
 *** Emacs-LISP
 We'll install a small utility for checking for errors in packages that we
@@ -1159,10 +1156,7 @@ the time is really tedious we'll install a helper mode for that.
 #+BEGIN_SRC emacs-lisp
   (use-package sqlup-mode
     :after sql
-    :config
-    (progn
-      (add-hook 'sql-mode-hook 'sqlup-mode)
-      (add-hook 'sql-interactive-mode-hook 'sqlup-mode)))
+    :hook ((sql-mode sql-interactive-mode) . sqlup-mode))
 #+END_SRC
 
 Finally, it would be nice for it to handle indentation automatically, so we'll
@@ -1172,7 +1166,7 @@ install something to fix that as well.
   (use-package sql-indent
     :load-path "~/Code/emacs/sql-indent"
     :after sql
-    :init (sql-indent-mode))
+    :hook (sql-mode . sql-indent-mode))
 #+END_SRC
 * Outro
 ** Late start settings
