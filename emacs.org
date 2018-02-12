@@ -1164,9 +1164,8 @@ install something to fix that as well.
 
 #+BEGIN_SRC emacs-lisp
   (use-package sql-indent
-    :load-path "~/Code/emacs/sql-indent"
-    :after sql
-    :hook (sql-mode . sql-indent-mode))
+    :load-path "~/Code/emacs/emacs-sql-indent"
+    :hook (sql-mode . sqlind-minor-mode))
 #+END_SRC
 * Outro
 ** Late start settings
