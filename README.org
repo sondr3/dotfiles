@@ -12,22 +12,21 @@ for the most part the hardly work, even for me. So beware.
 
 * Applications
 ** Emacs
-I am currently running the latest Emacs 25.1 pretest on OS X, downloaded with
-Homebrew as ~brew install emacs --with-cocoa --with-gnutls --with-imagemagick
---devel~. My settings can be found in the
-[[https://github.com/sondr3/dotfiles/blob/master/emacs.org][emacs.org]] file.
+
+At the moment I'm running the latest development version of Emacs, but as soon
+as it's released I'll switch to the stable version. I only really use it because
+of the great new line numbering. My settings can be found in the [[https://github.com/sondr3/dotfiles/blob/master/emacs.org][emacs.org]] file.
 ** (Neo)vim
-I have completely switched over to using Neovim as my daily Vim driver. I
-install it as ~brew install neovim --HEAD~. My settings can be found in the
-[[https://github.com/sondr3/dotfiles/blob/master/vim.org][vim.org]] file.
-** Tmux
-Initially I just used the tabs in ~iTerm2~ but found somewhere that Tmux was a
-lot better. So I switched to it. This is also installed via Homebrew as ~brew
-install tmux --HEAD~. Yes, I like breaking things. Again, my settings can be
-found in [[https://github.com/sondr3/dotfiles/blob/master/tmux.org][tmux.org]].
+I use Neovim as my editor in the terminal for small changes to configuration
+files or other such small edits. It's installed via Pacman, the settings can be
+found in the [[https://github.com/sondr3/dotfiles/blob/master/vim.org][vim.org]] file.
 ** Terminal
-I run the latest nightly beta version of ~iTerm2~. Whichever that is.
-* Installation
-I seriously recommend you to not use these for yourself. Find things in them
-you like and steal those instead of just straight up copying these. They are
-made for me and only me.
+I run a small variety of terminals, at the moment my main terminal is Konsole
+with Yakuake as a drop-down terminal with Terminator on the side when I want to.
+
+* Usage
+
+If you really want to use some of my configurations I recommend you instead look
+at them and copy the sections that look helpful. I've configured my tools to my
+liking and while I can answer some questions about the settings I will not help
+with errors if you actually use them. /You have been warned./
