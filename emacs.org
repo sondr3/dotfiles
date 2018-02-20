@@ -240,7 +240,6 @@ though I'm god awful with it. So obviously we'll use ~evil~ for good.
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil
-    :init (setq evil-want-integration nil)
     :config (evil-mode t))
 #+END_SRC
 
@@ -909,7 +908,7 @@ all its beauty in the comment in the code. Furthermore, I had to create a new
 face to be able to make the text inside italicized because I couldn't figure out
 how to do it normally.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (defface my--org-math-highlight
     '((t :inherit org-code :slant italic))
     "My own configuration for highlighting math blocks in org-mode"
