@@ -866,7 +866,9 @@ everywhere.
    'org-babel-load-languages
    '((shell . t)
      (emacs-lisp . t)
-     (sql . t)))
+     (sql . t)
+     (latex . t)
+     (R . t)))
 #+END_SRC
 *** Export to HTML
 Apparently you need this package to export Org documents to HTML, which I use
@@ -1165,6 +1167,14 @@ install something to fix that as well.
   (use-package sql-indent
     :load-path "~/Code/emacs/emacs-sql-indent"
     :hook (sql-mode . sqlind-minor-mode))
+#+END_SRC
+** R
+For some reason I needed to learn and use R for my networks subject, because you
+use binomial distribution and other silly statistics to calculate some stuff.
+Fun.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ess)
 #+END_SRC
 * Outro
 ** Late start settings
