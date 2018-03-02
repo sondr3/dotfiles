@@ -57,16 +57,55 @@ are doing.
 | ~efi.canTouchEfiVariables~ | ~true~                               | Used to make sure the boot loader can touch EFI variables                |
 
 #+BEGIN_SRC nix
-    boot = {
-      kernelModules = ["applesmc"];
-      cleanTmpDir = true;
-      extraModprobeConfig = ''
-        options snd-hda-intel model=mbp101
-      '';
+  boot = {
+    kernelModules = ["applesmc"];
+    cleanTmpDir = true;
+    extraModprobeConfig = ''
+      options snd-hda-intel model=mbp101
+    '';
 
-      loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
-      };
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
+  };
+#+END_SRC
+
+** Hardware
+Nothing too out of the ordinary here, we enable Bluetooth and PulseAudio because
+who doesn't want either of those.
+
+| *Option*                    | *Value*               | *Description*                                                                                  |
+|---------------------------+---------------------+----------------------------------------------------------------------------------------------|
+| ~bluetooth.enable~          | ~true~                | Enables Bluetooth                                                                            |
+| ~pulseaudio.enable~         | ~true~                | Enable PulseAudio                                                                            |
+| ~pulseaudio.package~        | ~pkgs.pulseaudioFull~ | We have to use the ~Full~ package to enable support for Bluetooth in PulseAudio                |
+| ~cpu.intel.updateMicrocode~ | ~true~                | Include updates to the microcode for Intel processors                                        |
+| ~enableAllFirmware~         | ~true~                | Enables all the /other/ firmware, only useful if something doesn't work (but I use it anyways) |
+
+#+BEGIN_SRC nix
+  hardware = {
+    bluetooth.enable = true;
+    pulseaudio.enable = true;
+    pulseaudio.package = pkgs.pulseaudioFull;
+    cpu.intel.updateMicrocode = true;
+    enableAllFirmware = true;
+  };
+#+END_SRC
+
+** Networking
+Same as above, just a straight forward configuration of it.
+
+| *Option*            | *Value*   | *Description*                                                                |
+|-------------------+---------+----------------------------------------------------------------------------|
+| ~hostName~          | ~jupiter~ | The name of my laptop, all my electronics are named after planets or stars |
+| ~connman.enable~    | ~true~    | Use ConnMan to configure wireless connections                              |
+| ~enableB43Firmware~ | ~true~    | Must be enabled to install wireless drivers for the card in my MacBook     |
+
+#+BEGIN_SRC nix
+  networking = {
+    hostName = "jupiter";
+    connman.enable = true;
+    enableB43Firmware = true;
+  };
 #+END_SRC
