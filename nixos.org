@@ -48,13 +48,13 @@ are doing.
 #+END_SRC
 
 ** Boot
-| *Option*                   | *Value*                                | *Description*                                                              |
-|--------------------------+--------------------------------------+--------------------------------------------------------------------------|
-| ~kernelModules~            | ~"applesmc"~                           | Required to load the various sensors and controls included in Intel Macs |
-| ~cleanTmpDir~              | ~true~                                 | Cleans the ~/tmp~ directory on every boot                                  |
-| ~extraModprobeConfig~      | "options snd-hda-intel model=mbp101" | Used to make sure audio works properly on a MacBook                      |
-| ~systemd-boot.enable~      | true                                 | Use ~systemd-boot~ instead of Grub etc                                     |
-| ~efi.canTouchEfiVariables~ | true                                 | Used to make sure the boot loader can touch EFI variables                |
+| *Option*                   | *Value*                              | *Description*                                                              |
+|--------------------------+------------------------------------+--------------------------------------------------------------------------|
+| ~kernelModules~            | ~applesmc~                           | Required to load the various sensors and controls included in Intel Macs |
+| ~cleanTmpDir~              | ~true~                               | Cleans the ~/tmp~ directory on every boot                                  |
+| ~extraModprobeConfig~      | ~options snd-hda-intel model=mbp101~ | Used to make sure audio works properly on a MacBook                      |
+| ~systemd-boot.enable~      | ~true~                               | Use ~systemd-boot~ instead of Grub etc                                     |
+| ~efi.canTouchEfiVariables~ | ~true~                               | Used to make sure the boot loader can touch EFI variables                |
 
 #+BEGIN_SRC nix
     boot = {
