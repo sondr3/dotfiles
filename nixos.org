@@ -1,0 +1,72 @@
+#+TITLE: NixOS Settings
+#+AUTHOR: Sondre Nilsen
+#+PROPERTY: header-args :tangle ~/.dotfiles/nixos.nix
+
+* Introduction
+I had heard lots of great things about Nix and NixOS from both reddit and HN,
+but never really had a good opportunity to find a use case for it. I've used
+CentOS and Debian on my servers, and have tried quite a few distros over the
+years for both my old desktops and laptops. I used Arch for a few months but
+managed to completely mess it up by trying to fix some driver related issues
+with Nvidia and it just did /not/ work. So I figured now was a good a time as any
+to try something new since I had to reinstall Linux anyways. So, NixOS.
+
+I do have to say it's been a great experience, the installation was a bit
+confusing but that was mostly because I had to install it on top of an existing
+installation as I had ~/home~ partition that I didn't want to override. But some
+asking on IRC and I was off.
+
+For someone who is used to having to play around with tons of configuration
+files all over the system NixOS is amazing. When I ran Arch I would have issues
+where I'd misconfigure Xorg and it would boot to a black screen. Then you'd have
+to boot into rescue mode, find the file you edited and change it back and reboot
+and hope you did it right. With NixOS you make a change to your
+~configuration.nix~ and reboot. Doesn't work? No matter, the previous build of
+NixOS is available on the boot so you can incredibly easily roll back to your
+previous working configuration. No more worries over your system going haywire
+because of configuration mishaps!
+
+So, without further ado: my NixOS configuration.
+
+* Jupiter
+Jupiter is the name of my MacBook Pro 10,1 (Retina mid-2012) that I run NixOS
+on.
+
+** Imports and hardware
+Should be pretty self-explanatory. The hardware configuration is automatically
+created for you so you shouldn't have to edit it unless you really know what you
+are doing.
+
+#+BEGIN_SRC nix
+  { config, pkgs, ... }:
+
+  {
+    imports =
+      [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+#+END_SRC
+
+** Boot
+| *Option*                   | *Value*                                | *Description*                                                              |
+|--------------------------+--------------------------------------+--------------------------------------------------------------------------|
+| ~kernelModules~            | ~"applesmc"~                           | Required to load the various sensors and controls included in Intel Macs |
+| ~cleanTmpDir~              | ~true~                                 | Cleans the ~/tmp~ directory on every boot                                  |
+| ~extraModprobeConfig~      | "options snd-hda-intel model=mbp101" | Used to make sure audio works properly on a MacBook                      |
+| ~systemd-boot.enable~      | true                                 | Use ~systemd-boot~ instead of Grub etc                                     |
+| ~efi.canTouchEfiVariables~ | true                                 | Used to make sure the boot loader can touch EFI variables                |
+
+#+BEGIN_SRC nix
+    boot = {
+      kernelModules = ["applesmc"];
+      cleanTmpDir = true;
+      extraModprobeConfig = ''
+        options snd-hda-intel model=mbp101
+      '';
+
+      loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+      };
+    };
+#+END_SRC
