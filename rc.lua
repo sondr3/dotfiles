@@ -472,6 +472,7 @@ awful.rules.rules = {
 
         name = {
           "Event Tester",  -- xev.
+          "OpenSSH Authentication Passphrase request"
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
