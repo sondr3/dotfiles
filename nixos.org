@@ -47,6 +47,12 @@ are doing.
     ];
 #+END_SRC
 
+** NixOS version
+Select which release of NixOS to use, nothing really to explain.
+
+#+BEGIN_SRC nix
+  system.stateVersion = "17.09"; # Did you read the comment?
+#+END_SRC
 ** Boot
 | *Option*                   | *Value*                              | *Description*                                                              |
 |--------------------------+------------------------------------+--------------------------------------------------------------------------|
@@ -73,7 +79,10 @@ are doing.
 
 ** Hardware
 Nothing too out of the ordinary here, we enable Bluetooth and PulseAudio because
-who doesn't want either of those.
+who doesn't want either of those. It's worth noting however that Bluetooth and
+PulseAudio just straight up works out of the box without any hassle or
+configuration needed. On Arch this was a *huge* pain point, but with NixOS I just
+start ~bluetoothctl~ and connect and it works. Fuck yeah.
 
 | *Option*                    | *Value*               | *Description*                                                                                  |
 |---------------------------+---------------------+----------------------------------------------------------------------------------------------|
