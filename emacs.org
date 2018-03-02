@@ -1182,6 +1182,33 @@ Because we need to edit .nix files.
   (use-package company-nixos-options
     :init (add-to-list 'company-backends 'company-nixos-options))
 #+END_SRC
+** Lua
+Because I use Awesome as my WM I need a way to edit the files in Emacs, hence
+the need for ~lua-mode~.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package lua-mode
+    :mode ("\\.lua\\'" . lua-mode)
+    :interpreter ("lua" . lua-mode)
+    :init (progn
+            (setq lua-indent-level 2
+                  lua-indent-string-contents t)))
+#+END_SRC
+
+And then some auto completion via Company.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company-lua
+    :after lua-mode
+    :init (progn
+            (add-hook 'lua-mode-hook 'company-mode)
+            (defun my--lua-init ()
+              (setq-local company-backends '((company-lua
+                                              company-etags
+                                              company-dabbrev-code
+                                              company-yasnippet))))
+            (add-hook 'lua-mode-hook #'my--lua-init)))
+#+END_SRC
 * Outro
 ** Late start settings
 
