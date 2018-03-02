@@ -564,14 +564,10 @@ And then we can use Flyspell to actually check the spelling. Neato.
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell
     :init
-    (setenv "DICTIONARY" "en_US")
     (add-hook 'prog-mode-hook 'flyspell-prog-mode)
     (dolist (mode-hook '(text-mode-hook LaTeX-mode-hook))
       (add-hook mode-hook (lambda () (flyspell-mode))))
     :config
-    (when (executable-find "hunspell")
-      (setq-default ispell-program-name "hunspell")
-      (setq ispell-really-hunspell t))
     (setq ispell-dictionary "en_US"
           flyspell-use-meta-tab nil
           flyspell-issue-message-flag nil
@@ -695,10 +691,10 @@ enjoy it.
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
                       :family "DejaVu Sans Mono"
-                      :height 120)
+                      :height 80)
   (set-face-attribute 'variable-pitch nil
                       :family "DejaVu Sans"
-                      :height 120)
+                      :height 80)
   (set-frame-font "DejaVu Sans Mono" nil t)
 #+END_SRC
 ** Mode line
@@ -868,6 +864,7 @@ everywhere.
      (emacs-lisp . t)
      (sql . t)
      (latex . t)
+     (lua . t)
      (R . t)))
 #+END_SRC
 *** Export to HTML
@@ -1002,7 +999,7 @@ norm.
       (setq-default TeX-master nil)
       (setq TeX-command-default "latexmk"
             TeX-command-force "latexmk"
-            TeX-engine 'luatex
+            TeX-engine 'xetex
             TeX-auto-save t
             TeX-parse-self t
             TeX-save-query nil
@@ -1175,6 +1172,15 @@ Fun.
 
 #+BEGIN_SRC emacs-lisp
   (use-package ess)
+#+END_SRC
+** NixOS
+Because we need to edit .nix files.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package nix-mode)
+
+  (use-package company-nixos-options
+    :init (add-to-list 'company-backends 'company-nixos-options))
 #+END_SRC
 * Outro
 ** Late start settings
