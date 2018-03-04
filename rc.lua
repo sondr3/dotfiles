@@ -57,6 +57,7 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
+    awful.layout.suit.spiral,
     awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
@@ -64,12 +65,11 @@ awful.layout.layouts = {
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -235,14 +235,49 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
-              {description = "view next", group = "tag"}),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
+  awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    {description="show help", group="awesome"}),
+  awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
+    {description = "view previous", group = "tag"}),
+  awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
+    {description = "view next", group = "tag"}),
+  awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
+    {description = "go back", group = "tag"}),
+
+  awful.key({}, "XF86MonBrightnessDown", function () awful.util.spawn("light -U 5", false) end,
+    {description = "decrease monitor brightness by 5%", group = "brightness"}),
+  awful.key({}, "XF86MonBrightnessUp", function() awful.util.spawn("light -A 5", false) end,
+    {description = "increase monitor brightness by 5%", group = "brightness"}),
+  awful.key({ "Shift" }, "XF86MonBrightnessDown", function() awful.util.spawn("light -U 10", false) end,
+    {description = "decrease monitor brightness by 10%", group = "brightness"}),
+  awful.key({ "Shift" }, "XF86MonBrightnessUp", function() awful.util.spawn("light -A 10", false) end,
+    {description = "increase monitor brightness by 10%", group = "brightness"}),
+  awful.key({ modkey, "Shift" }, "XF86MonBrightnessDown", function() awful.util.spawn("light -U 100", false) end,
+    {description = "set monitor brightness to 0%", group = "brightness"}),
+  awful.key({ modkey, "Shift" }, "XF86MonBrightnessUp", function() awful.util.spawn("light -A 10", false) end,
+    {description = "set monitor brightness to 100%", group = "brightness"}),
+
+  awful.key({}, "XF86AudioPlay", function () awful.util.spawn("playerctl play-pause", false) end,
+    {description = "play/pause track", group = "media"}),
+  awful.key({}, "XF86AudioPrev", function () awful.util.spawn("playerctl previous", false) end,
+    {description = "play previous track", group = "media"}),
+  awful.key({}, "XF86AudioNext", function () awful.util.spawn("playerctl next", false) end,
+    {description = "play next track", group = "media"}),
+
+  awful.key({}, "XF86AudioMute", function () awful.util.spawn("amixer -q sset Master toggle", false) end,
+    {description = "mute audio", group = "audio"}),
+  awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 5%-", false) end,
+    {description = "decrease volume 5%", group = "audio"}),
+  awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 5%+", false) end,
+    {description = "increase volume 5%", group = "audio"}),
+  awful.key({ "Shift" }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 10%-", false) end,
+    {description = "decrease volume 10%", group = "audio"}),
+  awful.key({ "Shift" }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 10%+", false) end,
+    {description = "increase volume 10%", group = "audio"}),
+  awful.key({ modkey, "Shift" }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 0%", false) end,
+    {description = "set volume to 0%", group = "audio"}),
+  awful.key({ modkey, "Shift" }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 100%", false) end,
+    {description = "set volume to 100%", group = "audio"}),
 
     awful.key({ modkey,           }, "j",
         function ()
@@ -468,7 +503,9 @@ awful.rules.rules = {
           "Wpa_gui",
           "pinentry",
           "veromix",
-          "xtightvncviewer"},
+          "xtightvncviewer",
+          "mpv"
+        },
 
         name = {
           "Event Tester",  -- xev.
@@ -482,7 +519,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+                 }, properties = { titlebars_enabled = true }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
