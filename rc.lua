@@ -254,7 +254,7 @@ globalkeys = gears.table.join(
     {description = "increase monitor brightness by 10%", group = "brightness"}),
   awful.key({ modkey, "Shift" }, "XF86MonBrightnessDown", function() awful.util.spawn("light -U 100", false) end,
     {description = "set monitor brightness to 0%", group = "brightness"}),
-  awful.key({ modkey, "Shift" }, "XF86MonBrightnessUp", function() awful.util.spawn("light -A 10", false) end,
+  awful.key({ modkey, "Shift" }, "XF86MonBrightnessUp", function() awful.util.spawn("light -A 100", false) end,
     {description = "set monitor brightness to 100%", group = "brightness"}),
 
   awful.key({}, "XF86AudioPlay", function () awful.util.spawn("playerctl play-pause", false) end,
