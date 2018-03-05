@@ -15,6 +15,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
 -- Lain for extra fun
 local lain = require("lain")
+local markup = lain.util.markup
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -123,6 +124,19 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
+-- Create battery widget
+local mybattery = lain.widget.bat({
+    settings = function ()
+      widget:set_markup("BAT " .. bat_now.perc)
+    end
+})
+
+local cpu = lain.widget.cpu({
+    settings = function()
+        widget:set_markup("Cpu " .. cpu_now.usage)
+    end
+})
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -220,6 +234,8 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
+            mybattery.widget,
+            cpu.widget,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
@@ -529,7 +545,8 @@ awful.rules.rules = {
 
         name = {
           "Event Tester",  -- xev.
-          "OpenSSH Authentication Passphrase request"
+          "OpenSSH Authentication Passphrase request",
+          "pinentry"
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
