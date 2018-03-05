@@ -13,6 +13,8 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+-- Lain for extra fun
+local lain = require("lain")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -42,6 +44,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("~/.config/awesome/theme.lua")
+beautiful.useless_gap = 5
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
@@ -244,6 +247,7 @@ globalkeys = gears.table.join(
   awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
     {description = "go back", group = "tag"}),
 
+  -- Monitor brightness
   awful.key({}, "XF86MonBrightnessDown", function () awful.util.spawn("light -U 5", false) end,
     {description = "decrease monitor brightness by 5%", group = "brightness"}),
   awful.key({}, "XF86MonBrightnessUp", function() awful.util.spawn("light -A 5", false) end,
@@ -257,6 +261,7 @@ globalkeys = gears.table.join(
   awful.key({ modkey, "Shift" }, "XF86MonBrightnessUp", function() awful.util.spawn("light -A 100", false) end,
     {description = "set monitor brightness to 100%", group = "brightness"}),
 
+  -- Media keys
   awful.key({}, "XF86AudioPlay", function () awful.util.spawn("playerctl play-pause", false) end,
     {description = "play/pause track", group = "media"}),
   awful.key({}, "XF86AudioPrev", function () awful.util.spawn("playerctl previous", false) end,
@@ -264,6 +269,7 @@ globalkeys = gears.table.join(
   awful.key({}, "XF86AudioNext", function () awful.util.spawn("playerctl next", false) end,
     {description = "play next track", group = "media"}),
 
+  -- Volume control
   awful.key({}, "XF86AudioMute", function () awful.util.spawn("amixer -q sset Master toggle", false) end,
     {description = "mute audio", group = "audio"}),
   awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 5%-", false) end,
@@ -278,6 +284,20 @@ globalkeys = gears.table.join(
     {description = "set volume to 0%", group = "audio"}),
   awful.key({ modkey, "Shift" }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 100%", false) end,
     {description = "set volume to 100%", group = "audio"}),
+
+  -- Keyboard backlight
+  awful.key({}, "XF86KbdBrightnessUp", function () awful.util.spawn("kbdlight up 5", false) end,
+    {description = "backlight +5%", group = "kbd"}),
+  awful.key({}, "XF86KbdBrightnessDown", function () awful.util.spawn("kbdlight down 5", false) end,
+    {description = "backlight -5%", group = "kbd"}),
+  awful.key({ "Shift" }, "XF86KbdBrightnessUp", function () awful.util.spawn("kbdlight up 10", false) end,
+    {description = "backlight +10%", group = "kbd"}),
+  awful.key({ "Shift" }, "XF86KbdBrightnessDown", function () awful.util.spawn("kbdlight down 10", false) end,
+    {description = "backlight -10%", group = "kbd"}),
+  awful.key({ modkey, "Shift" }, "XF86KbdBrightnessUp", function () awful.util.spawn("kbdlight max", false) end,
+    {description = "backlight 100%", group = "kbd"}),
+  awful.key({ modkey, "Shift" }, "XF86KbdBrightnessDown", function () awful.util.spawn("kbdlight off", false) end,
+    {description = "backlight 0%", group = "kbd"}),
 
     awful.key({ modkey,           }, "j",
         function ()
