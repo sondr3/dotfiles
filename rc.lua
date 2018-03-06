@@ -192,6 +192,18 @@ local function set_wallpaper(s)
     end
 end
 
+-- set brightness and display a notification
+local function set_brightness(inc, val)
+  if not inc then
+    awful.spawn("light -U " .. val, false)
+  else
+    awful.spawn("light -A " .. val, false)
+  end
+  awful.spawn.easy_async("light -G", function (stdout)
+    naughty.notify{title = "Brightness", text = string.sub(stdout, 1, -5)}
+  end)
+end
+
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
@@ -264,55 +276,55 @@ globalkeys = gears.table.join(
     {description = "go back", group = "tag"}),
 
   -- Monitor brightness
-  awful.key({}, "XF86MonBrightnessDown", function () awful.util.spawn("light -U 5", false) end,
+  awful.key({}, "XF86MonBrightnessDown", function() set_brightness(nil, 5) end,
     {description = "decrease monitor brightness by 5%", group = "brightness"}),
-  awful.key({}, "XF86MonBrightnessUp", function() awful.util.spawn("light -A 5", false) end,
+  awful.key({}, "XF86MonBrightnessUp", function() set_brightness(true, 5) end,
     {description = "increase monitor brightness by 5%", group = "brightness"}),
-  awful.key({ "Shift" }, "XF86MonBrightnessDown", function() awful.util.spawn("light -U 10", false) end,
+  awful.key({ "Shift" }, "XF86MonBrightnessDown", function() set_brightness(nil, 10) end,
     {description = "decrease monitor brightness by 10%", group = "brightness"}),
-  awful.key({ "Shift" }, "XF86MonBrightnessUp", function() awful.util.spawn("light -A 10", false) end,
+  awful.key({ "Shift" }, "XF86MonBrightnessUp", function() set_brightness(true, 10) end,
     {description = "increase monitor brightness by 10%", group = "brightness"}),
-  awful.key({ modkey, "Shift" }, "XF86MonBrightnessDown", function() awful.util.spawn("light -U 100", false) end,
+  awful.key({ modkey }, "XF86MonBrightnessDown", function() set_brightness(nil, 100) end,
     {description = "set monitor brightness to 0%", group = "brightness"}),
-  awful.key({ modkey, "Shift" }, "XF86MonBrightnessUp", function() awful.util.spawn("light -A 100", false) end,
+  awful.key({ modkey }, "XF86MonBrightnessUp", function() set_brightness(true, 100) end,
     {description = "set monitor brightness to 100%", group = "brightness"}),
 
   -- Media keys
-  awful.key({}, "XF86AudioPlay", function () awful.util.spawn("playerctl play-pause", false) end,
+  awful.key({}, "XF86AudioPlay", function () awful.spawn("playerctl play-pause", false) end,
     {description = "play/pause track", group = "media"}),
-  awful.key({}, "XF86AudioPrev", function () awful.util.spawn("playerctl previous", false) end,
+  awful.key({}, "XF86AudioPrev", function () awful.spawn("playerctl previous", false) end,
     {description = "play previous track", group = "media"}),
-  awful.key({}, "XF86AudioNext", function () awful.util.spawn("playerctl next", false) end,
+  awful.key({}, "XF86AudioNext", function () awful.spawn("playerctl next", false) end,
     {description = "play next track", group = "media"}),
 
   -- Volume control
-  awful.key({}, "XF86AudioMute", function () awful.util.spawn("amixer -q sset Master toggle", false) end,
+  awful.key({}, "XF86AudioMute", function () awful.spawn("amixer -q sset Master toggle", false) end,
     {description = "mute audio", group = "audio"}),
-  awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 5%-", false) end,
+  awful.key({}, "XF86AudioLowerVolume", function () awful.spawn("amixer -q sset Master 5%-", false) end,
     {description = "decrease volume 5%", group = "audio"}),
-  awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 5%+", false) end,
+  awful.key({}, "XF86AudioRaiseVolume", function () awful.spawn("amixer -q sset Master 5%+", false) end,
     {description = "increase volume 5%", group = "audio"}),
-  awful.key({ "Shift" }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 10%-", false) end,
+  awful.key({ "Shift" }, "XF86AudioLowerVolume", function () awful.spawn("amixer -q sset Master 10%-", false) end,
     {description = "decrease volume 10%", group = "audio"}),
-  awful.key({ "Shift" }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 10%+", false) end,
+  awful.key({ "Shift" }, "XF86AudioRaiseVolume", function () awful.spawn("amixer -q sset Master 10%+", false) end,
     {description = "increase volume 10%", group = "audio"}),
-  awful.key({ modkey, "Shift" }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 0%", false) end,
+  awful.key({ modkey }, "XF86AudioLowerVolume", function () awful.spawn("amixer -q sset Master 0%", false) end,
     {description = "set volume to 0%", group = "audio"}),
-  awful.key({ modkey, "Shift" }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 100%", false) end,
+  awful.key({ modkey }, "XF86AudioRaiseVolume", function () awful.spawn("amixer -q sset Master 100%", false) end,
     {description = "set volume to 100%", group = "audio"}),
 
   -- Keyboard backlight
-  awful.key({}, "XF86KbdBrightnessUp", function () awful.util.spawn("kbdlight up 5", false) end,
+  awful.key({}, "XF86KbdBrightnessUp", function () awful.spawn("kbdlight up 5", false) end,
     {description = "backlight +5%", group = "kbd"}),
-  awful.key({}, "XF86KbdBrightnessDown", function () awful.util.spawn("kbdlight down 5", false) end,
+  awful.key({}, "XF86KbdBrightnessDown", function () awful.spawn("kbdlight down 5", false) end,
     {description = "backlight -5%", group = "kbd"}),
-  awful.key({ "Shift" }, "XF86KbdBrightnessUp", function () awful.util.spawn("kbdlight up 10", false) end,
+  awful.key({ "Shift" }, "XF86KbdBrightnessUp", function () awful.spawn("kbdlight up 10", false) end,
     {description = "backlight +10%", group = "kbd"}),
-  awful.key({ "Shift" }, "XF86KbdBrightnessDown", function () awful.util.spawn("kbdlight down 10", false) end,
+  awful.key({ "Shift" }, "XF86KbdBrightnessDown", function () awful.spawn("kbdlight down 10", false) end,
     {description = "backlight -10%", group = "kbd"}),
-  awful.key({ modkey, "Shift" }, "XF86KbdBrightnessUp", function () awful.util.spawn("kbdlight max", false) end,
+  awful.key({ modkey }, "XF86KbdBrightnessUp", function () awful.spawn("kbdlight max", false) end,
     {description = "backlight 100%", group = "kbd"}),
-  awful.key({ modkey, "Shift" }, "XF86KbdBrightnessDown", function () awful.util.spawn("kbdlight off", false) end,
+  awful.key({ modkey }, "XF86KbdBrightnessDown", function () awful.spawn("kbdlight off", false) end,
     {description = "backlight 0%", group = "kbd"}),
 
     awful.key({ modkey,           }, "j",
