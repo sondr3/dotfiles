@@ -327,6 +327,10 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, "XF86KbdBrightnessDown", function () awful.spawn("kbdlight off", false) end,
     {description = "backlight 0%", group = "kbd"}),
 
+  -- lock the screen
+  awful.key({ "Control", "Mod1" }, "l", function () awful.spawn("i3lock-color --blur=sigma && sleep 1", false) end,
+    {description = "locks the screen", group = "client"}),
+
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
