@@ -200,7 +200,7 @@ local function set_brightness(inc, val)
     awful.spawn("light -A " .. val, false)
   end
   awful.spawn.easy_async("light -G", function (stdout)
-    naughty.notify{title = "Brightness", text = string.sub(stdout, 1, -5)}
+    bright_id = naughty.notify({title = "Brightness", text = string.sub(stdout, 1, -5), replaces_id = bright_id}).id
   end)
 end
 
