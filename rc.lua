@@ -205,16 +205,33 @@ local function set_brightness(inc, val)
 end
 
 -- set keyboard backlight and display a notification
-local function set_backlight(inc, val)
-  if not inc then
+local function set_backlight(k, val)
+  if k == "down" then
     awful.spawn("kbdlight down " .. val, false)
-  else
+  elseif k == "up" then
     awful.spawn("kbdlight up " .. val, false)
+  elseif k == "max" then
+    awful.spawn("kbdlight max", false)
+  elseif k == "off" then
+    awful.spawn("kbdlight off", false)
   end
   awful.spawn.easy_async("kbdlight get", function (stdout)
     kbdlight_id = naughty.notify({title = "Keyboard backlight", text = stdout, position = "top_middle", timeout = 1, replaces_id = kbdlight_id}).id
   end)
 end
+
+-- set volume and display a notification
+local function set_volume(v, val)
+  if v == "toggle" then
+    awful.spawn("amixer -q sset Master toggle")
+  elseif v == "down" then
+    awful.spawn("amixer -q sset Master " .. val .. "%-")
+  elseif v == "up" then
+    awful.spawn("amixer -q sset Master " .. val .. "%+")
+  end
+  vol_id = naughty.notify({title = "Volume", text = "Changed", position = "top_middle", timeout = 1, replaces_id = vol_id}).id
+end
+
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
@@ -309,33 +326,33 @@ globalkeys = gears.table.join(
     {description = "play next track", group = "media"}),
 
   -- Volume control
-  awful.key({}, "XF86AudioMute", function () awful.spawn("amixer -q sset Master toggle", false) end,
+  awful.key({}, "XF86AudioMute", function () set_volume("toggle") end,
     {description = "mute audio", group = "audio"}),
-  awful.key({}, "XF86AudioLowerVolume", function () awful.spawn("amixer -q sset Master 5%-", false) end,
+  awful.key({}, "XF86AudioLowerVolume", function () set_volume("down", 5) end,
     {description = "decrease volume 5%", group = "audio"}),
-  awful.key({}, "XF86AudioRaiseVolume", function () awful.spawn("amixer -q sset Master 5%+", false) end,
+  awful.key({}, "XF86AudioRaiseVolume", function () set_volume("up", 5) end,
     {description = "increase volume 5%", group = "audio"}),
-  awful.key({ "Shift" }, "XF86AudioLowerVolume", function () awful.spawn("amixer -q sset Master 10%-", false) end,
+  awful.key({ "Shift" }, "XF86AudioLowerVolume", function () set_volume("down", 10) end,
     {description = "decrease volume 10%", group = "audio"}),
-  awful.key({ "Shift" }, "XF86AudioRaiseVolume", function () awful.spawn("amixer -q sset Master 10%+", false) end,
+  awful.key({ "Shift" }, "XF86AudioRaiseVolume", function () set_volume("up", 10) end,
     {description = "increase volume 10%", group = "audio"}),
-  awful.key({ modkey }, "XF86AudioLowerVolume", function () awful.spawn("amixer -q sset Master 0%", false) end,
+  awful.key({ modkey }, "XF86AudioLowerVolume", function () set_volume("down", 100) end,
     {description = "set volume to 0%", group = "audio"}),
-  awful.key({ modkey }, "XF86AudioRaiseVolume", function () awful.spawn("amixer -q sset Master 100%", false) end,
+  awful.key({ modkey }, "XF86AudioRaiseVolume", function () set_volume("up", 100) end,
     {description = "set volume to 100%", group = "audio"}),
 
   -- Keyboard backlight
-  awful.key({}, "XF86KbdBrightnessUp", function () set_backlight(true, 5) end,
+  awful.key({}, "XF86KbdBrightnessUp", function () set_backlight("up", 5) end,
     {description = "backlight +5%", group = "kbd"}),
-  awful.key({}, "XF86KbdBrightnessDown", function () set_backlight(nil, 5) end,
+  awful.key({}, "XF86KbdBrightnessDown", function () set_backlight("down", 5) end,
     {description = "backlight -5%", group = "kbd"}),
-  awful.key({ "Shift" }, "XF86KbdBrightnessUp", function () set_backlight(true, 10) end,
+  awful.key({ "Shift" }, "XF86KbdBrightnessUp", function () set_backlight("up", 10) end,
     {description = "backlight +10%", group = "kbd"}),
-  awful.key({ "Shift" }, "XF86KbdBrightnessDown", function () set_backlight(nil, 10) end,
+  awful.key({ "Shift" }, "XF86KbdBrightnessDown", function () set_backlight("down", 10) end,
     {description = "backlight -10%", group = "kbd"}),
-  awful.key({ modkey }, "XF86KbdBrightnessUp", function () awful.spawn("kbdlight max", false) end,
+  awful.key({ modkey }, "XF86KbdBrightnessUp", function () set_backlight("max") end,
     {description = "backlight 100%", group = "kbd"}),
-  awful.key({ modkey }, "XF86KbdBrightnessDown", function () awful.spawn("kbdlight off", false) end,
+  awful.key({ modkey }, "XF86KbdBrightnessDown", function () set_backlight("off") end,
     {description = "backlight 0%", group = "kbd"}),
 
   -- lock the screen
