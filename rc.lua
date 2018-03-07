@@ -204,6 +204,17 @@ local function set_brightness(inc, val)
   end)
 end
 
+-- set keyboard backlight and display a notification
+local function set_backlight(inc, val)
+  if not inc then
+    awful.spawn("kbdlight down " .. val, false)
+  else
+    awful.spawn("kbdlight up " .. val, false)
+  end
+  awful.spawn.easy_async("kbdlight get", function (stdout)
+    kbdlight_id = naughty.notify({title = "Keyboard backlight", text = stdout, position = "top_middle", timeout = 1, replaces_id = kbdlight_id}).id
+  end)
+end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
@@ -314,13 +325,13 @@ globalkeys = gears.table.join(
     {description = "set volume to 100%", group = "audio"}),
 
   -- Keyboard backlight
-  awful.key({}, "XF86KbdBrightnessUp", function () awful.spawn("kbdlight up 5", false) end,
+  awful.key({}, "XF86KbdBrightnessUp", function () set_backlight(true, 5) end,
     {description = "backlight +5%", group = "kbd"}),
-  awful.key({}, "XF86KbdBrightnessDown", function () awful.spawn("kbdlight down 5", false) end,
+  awful.key({}, "XF86KbdBrightnessDown", function () set_backlight(nil, 5) end,
     {description = "backlight -5%", group = "kbd"}),
-  awful.key({ "Shift" }, "XF86KbdBrightnessUp", function () awful.spawn("kbdlight up 10", false) end,
+  awful.key({ "Shift" }, "XF86KbdBrightnessUp", function () set_backlight(true, 10) end,
     {description = "backlight +10%", group = "kbd"}),
-  awful.key({ "Shift" }, "XF86KbdBrightnessDown", function () awful.spawn("kbdlight down 10", false) end,
+  awful.key({ "Shift" }, "XF86KbdBrightnessDown", function () set_backlight(nil, 10) end,
     {description = "backlight -10%", group = "kbd"}),
   awful.key({ modkey }, "XF86KbdBrightnessUp", function () awful.spawn("kbdlight max", false) end,
     {description = "backlight 100%", group = "kbd"}),
