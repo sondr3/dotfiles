@@ -51,6 +51,15 @@
     pulseaudio.package = pkgs.pulseaudioFull;
     cpu.intel.updateMicrocode = true;
     enableAllFirmware = true;
+    opengl = {
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        vaapiIntel libvdpau-va-gl vaapiVdpau
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        vaapiIntel libvdpau-va-gl vaapiVdpau
+      ];
+    };
   };
 
   # hardware.bluetooth.enable = true; # enable BlueTooth for wireless stuff
@@ -98,16 +107,13 @@
 
     # bspwm related
     networkmanagerapplet wmname libnotify
-    dunst rofi polybar i3lock-color
+    dunst rofi polybar i3lock-pixeled
 
     # latex
     texlive.combined.scheme-full
 
     # rust alternatives to core tools
     ripgrep exa fd
-
-    # visual
-    i3lock-color
 
     # languages
     python3Full lua mariadb
@@ -119,6 +125,9 @@
     # terminals
     termite neofetch
 
+    # useful
+    gnupg
+
     # etc
     firefox playerctl zathura sxiv pavucontrol lm_sensors
 
@@ -128,6 +137,8 @@
   ];
 
   environment.variables = {
+    VDPAU_DRIVER = "nvidia";
+    LIBVA_DRIVER_NAME = "vdpau";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     GDK_SCALE = "1";
     GDK_DPI_SCALE = "0.5";
@@ -154,16 +165,19 @@
   services = {
     xserver = {
       enable = true;
-      videoDrivers = ["nvidia"];
+      videoDrivers = [ "nvidia" ];
       dpi = 221;
       exportConfiguration = true;
 
       deviceSection = ''
-        Option  "Coolbits" "12"
+        Option "Coolbits" "12"
         Option "NoLogo"
-        Option "RegistryDwords" "EnableBrightnessControl=1; PowerMizerEnable=0x1"
+	      Option "RegistryDwords" "EnableBrightnessControl=1"
       '';
-      # Option "RegistryDwords" "PowerMizerEnable=0x1; PerfLevelSrc=0x2222; PowerMizerLevel=0x3; PowerMizerDefault=0x3; PowerMizerDefaultAC=0x3; EnableBrightnessControl=1"
+
+      screenSection = ''
+        Option "metamodes" "nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+      '';
 
       layout = "us,no";
       xkbVariant = "mac";
@@ -177,9 +191,7 @@
 
       xautolock = {
         enable = true;
-        enableNotifier = true;
-        locker = "${pkgs.i3lock-color}/bin/i3lock-color --blur=sigma";
-        notifier = "${pkgs.libnotify}/bin/notify-send 'Locking in 10 seconds'";
+        locker = "${pkgs.i3lock-pixeled}/bin/i3lock-pixeled";
         time = 10;
       };
 
@@ -275,10 +287,6 @@
 
   virtualisation = {
     docker.enable = true;
-    virtualbox = {
-      host.enable = true;
-      guest.enable = true;
-    };
   };
 
   # programs.light.enable = true;
