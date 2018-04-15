@@ -130,7 +130,7 @@
   services = {
     xserver = {
       enable = true;
-      # videoDrivers = [ "modesetting" ];
+      videoDrivers = [ "modesetting" ];
       dpi = 221;
       exportConfiguration = true;
 
@@ -163,14 +163,13 @@
 
     compton = {
       enable = true;
-      vSync = "opengl-swc";
+      backend = "glx";
+      vSync = "opengl";
       extraOptions = ''
         paint-on-overlay = true;
         glx-no-stencil = true;
-        glx-copy-from-front = false;
         glx-no-rebind-pixmap = true;
-        glx-swap-method = "exchange";
-        dbe = false;
+        glx-swap-method = "buffer-age";
         sw-opti = true;
         xrender-sync-fence = true;
       '';
