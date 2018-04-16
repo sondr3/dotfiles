@@ -145,8 +145,6 @@
 
       xautolock = {
         enable = true;
-        enableNotifier = true;
-        notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";
         locker = "${pkgs.i3lock-pixeled}/bin/i3lock-pixeled";
         time = 10;
       };
