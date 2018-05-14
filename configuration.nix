@@ -156,10 +156,6 @@
       };
     };
 
-    printing = {
-      enable = true;
-    };
-
     compton = {
       enable = true;
       backend = "glx";
@@ -184,10 +180,6 @@
       };
     };
 
-    thermald.enable = true;
-    acpid.enable = true;
-    xbanish.enable = true;
-
     mbpfan = {
       enable = true;
       minFanSpeed = 2000;
@@ -196,7 +188,14 @@
       highTemp = 60;
       maxTemp = 87;
     };
-  };
+
+    thermald.enable = true;
+    acpid.enable = true;
+    xbanish.enable = true;
+    printing.enable = true;
+    upower.enable = true;
+    fstrim.enable = true;
+ };
 
   nixpkgs.config = {
     allowUnfree = true;
