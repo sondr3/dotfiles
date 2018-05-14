@@ -37,6 +37,7 @@
     bluetooth.enable = true;
     pulseaudio.enable = true;
     pulseaudio.package = pkgs.pulseaudioFull;
+    pulseaudio.support32Bit = true;
     cpu.intel.updateMicrocode = true;
     enableAllFirmware = true;
     vgaswitcheroo.enable = true;
@@ -124,10 +125,10 @@
     GDK_SCALE = "1";
     GDK_DPI_SCALE = "0.5";
     _JAVA_AWT_WM_NONREPARTENTING = "1";
-    _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dsun.java2d.opengl=true";
   };
 
   services = {
+    locate.enable = true;
     xserver = {
       enable = true;
       videoDrivers = [ "modesetting" ];
