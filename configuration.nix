@@ -85,7 +85,7 @@
     # core tools
     coreutils gitAndTools.gitFull htop
     wget curl zip unzip tree ranger
-    acpi psmisc pciutils
+    acpi psmisc pciutils bind
 
     # bspwm related
     networkmanagerapplet wmname libnotify
@@ -95,7 +95,7 @@
     texlive.combined.scheme-full
 
     # rust alternatives to core tools
-    ripgrep exa fd
+    ripgrep exa fd tokei
 
     # languages
     python3Full lua mariadb
@@ -188,6 +188,13 @@
       highTemp = 60;
       maxTemp = 87;
     };
+
+    logind.extraConfig = ''
+      HandlePowerKey=ignore
+      HandleSuspendKey=ignore
+      HandleHibernateKey=ignore
+      HandleLidSwitch=ignore
+    '';
 
     thermald.enable = true;
     acpid.enable = true;
