@@ -174,6 +174,7 @@ this idea and I'll be stealing it. Neato.
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
     :demand t
+    :commands (which-key-mode)
     :config
     (progn
       (which-key-mode)
@@ -186,7 +187,8 @@ this idea and I'll be stealing it. Neato.
 For any and all binding goodness I'll use ~General~. It's pretty awesome.
 #+BEGIN_SRC emacs-lisp
   (use-package general
-    :demand
+    :demand t
+    :commands (general-define-key general-evil-setup)
     :config
     (progn
       (general-evil-setup)))
@@ -240,6 +242,8 @@ though I'm god awful with it. So obviously we'll use ~evil~ for good.
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil
+    :commands (evil-mode)
+    :init (setq evil-want-integration nil)
     :config (evil-mode t))
 #+END_SRC
 
@@ -254,6 +258,7 @@ of Emacs as possible to consistent and good Vim keybindings.
 #+BEGIN_SRC emacs-lisp
   (use-package evil-collection
     :after evil
+    :commands (evil-collection-init)
     :config (evil-collection-init))
 #+END_SRC
 *** evil-escape
@@ -262,6 +267,8 @@ mode is god awful. So we won't do that.
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil-escape
+    :after evil
+    :commands (evil-escape-mode)
     :delight evil-escape-mode
     :init (evil-escape-mode 1)
     :config
@@ -274,6 +281,8 @@ the delimiters surrounding something on the fly.
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil-surround
+    :after evil
+    :commands (global-evil-surround-mode)
     :init (global-evil-surround-mode 1))
 #+END_SRC
 *** evil-commentary
@@ -281,6 +290,8 @@ This is a neat package if you comment out code a lot. Like I do.
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil-commentary
+    :after evil
+    :commands (evil-commentary-mode)
     :delight evil-commentary-mode
     :init (evil-commentary-mode))
 #+END_SRC
@@ -292,9 +303,9 @@ yourself.
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil-goggles
-    :config
-    (progn
-      (evil-goggles-mode)))
+    :after evil
+    :commands (evil-goggles-mode)
+    :config (evil-goggles-mode))
 #+END_SRC
 * Core settings
 We'll configure anything that relates to how I want the core of Emacs to behave
@@ -373,6 +384,7 @@ disk, and we'll enable it globally for any buffer.
 #+BEGIN_SRC emacs-lisp
   (use-package autorevert
     :ensure nil
+    :commands (global-auto-revert-mode)
     :init
     (progn
       (setq auto-revert-verbose nil
@@ -390,6 +402,7 @@ Or even sideways.
 #+BEGIN_SRC emacs-lisp
   (use-package paren
     :ensure nil
+    :commands (show-paren-mode)
     :init (show-paren-mode 1)
     :config
     (progn
@@ -403,6 +416,7 @@ quicker to access them from the minibuffer.
 #+BEGIN_SRC emacs-lisp
   (use-package recentf
     :ensure nil
+    :commands (recentf-mode recentf-track-opened-file)
     :init
     (progn
       (add-hook 'find-file-hook (lambda () (unless recentf-mode
@@ -419,6 +433,7 @@ when you close Emacs. Not really sure why it's not enabled by default.
 #+BEGIN_SRC emacs-lisp
   (use-package savehist
     :ensure nil
+    :commands (savehist-mode)
     :init
     (progn
       (setq savehist-file (concat user-emacs-directory "savehist")
@@ -439,6 +454,7 @@ Emacs but for some reason I've never been able to make it work.
 #+BEGIN_SRC emacs-lisp
   (use-package saveplace
     :ensure nil
+    :commands (save-place-mode)
     :init
     (progn
       (setq save-place-file (concat user-emacs-directory "places"))
@@ -464,6 +480,7 @@ it's far too aggressive for my tastes, so we'll use ~ws-butler~ to fix this.
 
 #+BEGIN_SRC emacs-lisp
   (use-package ws-butler
+    :commands (ws-butler-global-mode)
     :init (ws-butler-global-mode 1))
 #+END_SRC
 *** Indentation
@@ -472,6 +489,7 @@ using ~aggressive-indent~ to do this even as I'm editing code.
 
 #+BEGIN_SRC emacs-lisp
   (use-package aggressive-indent
+    :commands (aggressive-indent-mode)
     :init (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode))
 #+END_SRC
 *** Delimiters
@@ -479,6 +497,7 @@ Some times I like my delimiters to look dashing. Like a rainbow.
 
 #+BEGIN_SRC emacs-lisp
   (use-package rainbow-delimiters
+    :commands (rainbow-delimiters-mode)
     :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+END_SRC
 *** Assorted settings
@@ -501,6 +520,7 @@ this with ~Company~. It's great.
 
 #+BEGIN_SRC emacs-lisp
   (use-package company
+    :commands (global-company-mode)
     :delight
     :init
     (progn
@@ -533,8 +553,10 @@ And then we can use ~Magit~ and install a compatibility layer for Evil.
     (general-define-key
      "C-x g" '(:which-key "git")
      "C-x g s" '(magit-status :which-key "git status")))
+
   (use-package evil-magit
     :after magit
+    :commands (evil-magit-init)
     :init (evil-magit-init))
 #+END_SRC
 ** Diff-hl
@@ -544,6 +566,7 @@ is and the fact that it /bloody/ works.
 
 #+BEGIN_SRC emacs-lisp
   (use-package diff-hl
+    :commands (diff-hl-magit-post-refresh global-diff-hl-mode)
     :init
     (progn
       (setq diff-hl-side 'left
@@ -563,6 +586,7 @@ And then we can use Flyspell to actually check the spelling. Neato.
 
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell
+    :commands (flyspell-mode flyspell-buffer)
     :init
     (add-hook 'prog-mode-hook 'flyspell-prog-mode)
     (dolist (mode-hook '(text-mode-hook LaTeX-mode-hook))
@@ -592,14 +616,17 @@ man can dream.
 
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
-  :init
+    :commands (global-flycheck-mode)
+    :init
     (progn
       (global-flycheck-mode t)
       (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
     :config
     (progn
       (setq flycheck-standard-error-navigation nil
-            flycheck-indication-mode 'right-fringe)))
+            flycheck-indication-mode 'right-fringe
+            flycheck-check-syntax-automatically '(save idle-change mode-enable)
+            flycheck-idle-change-delay 4)))
 #+END_SRC
 ** Ivy, Counsel and Swiper
 ~abo-abo~ has created an awesome set of packages to help with completions,
@@ -612,6 +639,7 @@ glorious goodies.
 
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
+    :commands (counsel-mode)
     :demand
     :delight
     :general
@@ -625,6 +653,7 @@ glorious goodies.
       (counsel-mode)))
 
   (use-package ivy
+    :commands (ivy-mode)
     :demand
     :delight
     :config
@@ -742,6 +771,7 @@ current line your cursor is on.
 #+BEGIN_SRC emacs-lisp
   (use-package hl-line
     :ensure nil
+    :commands (global-hl-line-mode)
     :init (global-hl-line-mode t)
     :config
     (progn
@@ -815,6 +845,7 @@ the latest version, to do this with ~use-package~ you have to ensure that
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :ensure org-plus-contrib
+    :commands (org-babel-do-load-languages)
     :config
     (progn
       (setq org-use-sub-superscripts '{}
@@ -994,6 +1025,7 @@ norm.
 #+BEGIN_SRC emacs-lisp
   (use-package tex
     :ensure auctex
+    :commands (TeX-source-correlate-mode TeX-PDF-mode)
     :init
     (progn
       (setq-default TeX-master nil)
@@ -1030,6 +1062,7 @@ with references and such.
 
 #+BEGIN_SRC emacs-lisp
   (use-package auctex-latexmk
+    :commands (auctex-latexmk-setup)
     :init
     (progn
       (setq auctex-latexmk-inherit-TeX-PDF-mode t)
@@ -1042,6 +1075,7 @@ complete LaTeX commands and such.
 
 #+BEGIN_SRC emacs-lisp
   (use-package company-auctex
+    :commands (company-auctex-init)
     :init (company-auctex-init))
 #+END_SRC
 
@@ -1061,6 +1095,7 @@ And finally we'll add ~magic-latex-buffer~ for some proper magic.
 
 #+BEGIN_SRC emacs-lisp
   (use-package magic-latex-buffer
+    :commands (magic-latex-buffer)
     :init
     (progn
       (add-hook 'LaTeX-mode-hook #'magic-latex-buffer)
