@@ -709,6 +709,21 @@ with pressing my movement keys too much, but we'll try.
                           "C-'" 'avy-goto-char
                           "M-g g" 'avy-goto-line)))
 #+END_SRC
+** Asynchronous Emacs
+Emacs is very single threaded and some times completely freezes because some
+process is running that blocks Emacs from painting the GUI. For example
+compilations, opening big Git repositories and so on. Using ~emacs-async~ can
+alleviate this somewhat, at least for asynchronously installing packages or
+tangling my ~emacs.org~ file, for example.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package async
+    :commands (async-start)
+    :config
+    (progn
+      (async-bytecomp-package-mode t)
+      (setq async-bytecomp-allowed-packages '(all))))
+#+END_SRC
 * Appearance
 Emacs does indeed look like it never properly left the eighties, but you can
 configure it to be properly dashing. And I like my things ~T H I C C~. I mean
@@ -998,17 +1013,23 @@ to organize and see your whole life in Emacs.
 
 ** Functions
 *** Automagical tangling on save
-It's hard to remember to byte recompile the generated ~init.el~ file whenever I
-edit this file, so we'll make Emacs do it for us on save. Neato.
+It's hard to remember to both tangle this file and compile the generated ~init.el~
+file whenever I edit the settings for Emacs, so I'll write a function that does
+all the hard lifting for us. Neat. It also does this asynchronously too, which
+is a real boon too.
 
 #+BEGIN_SRC emacs-lisp
   (defun my--tangle-byte-compile-org ()
     "Tangles emacs.org and byte compiles ~/.emacs.d/"
     (interactive)
-    (when (equal (buffer-name)
-                 (concat "emacs.org"))
-      (org-babel-tangle)
-      (byte-recompile-file (concat (expand-file-name user-emacs-directory) "init.el") t)))
+    (when (equal (buffer-name) (concat "emacs.org"))
+      (async-start
+       `(lambda ()
+          (require 'org)
+          (org-babel-tangle-file (concat (expand-file-name "~/.dotfiles/") "emacs.org")))
+       (lambda (result)
+         (byte-recompile-file (concat (expand-file-name user-emacs-directory) "init.el") t)
+         (message "Tangled and compiled emacs.org")))))
 
   (add-hook 'after-save-hook #'my--tangle-byte-compile-org)
 #+END_SRC
