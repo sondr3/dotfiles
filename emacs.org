@@ -1134,6 +1134,12 @@ And then we can configure ~bibtex~.
             bibtex-text-indentation 20
             bibtex-completion-bibliography '("~/Documents/UiB/bibliography.bib"))))
 #+END_SRC
+
+And finally, enable some decent auto-completion for RefTEX.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company-reftex)
+#+END_SRC
 * Programming
 Anything related to mostly anything related to programming goes here.
 
