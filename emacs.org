@@ -247,7 +247,7 @@ though I'm god awful with it. So obviously we'll use ~evil~ for good.
     :config (evil-mode t))
 #+END_SRC
 
-*** evil-collection
+*** ~evil-collection~
 For one single organism trying to organize and create consistent keybindings is
 a daunting task, I have had this with trying to configure Vim keybindings in Emacs
 for various modes that I use. I just end up with a hodgepodge of assorted
@@ -261,7 +261,7 @@ of Emacs as possible to consistent and good Vim keybindings.
     :commands (evil-collection-init)
     :config (evil-collection-init))
 #+END_SRC
-*** evil-escape
+*** ~evil-escape~
 However, if you've ever used Vim you know that using ~ESC~ to escape out of any
 mode is god awful. So we won't do that.
 
@@ -275,7 +275,7 @@ mode is god awful. So we won't do that.
     (progn
       (setq-default evil-escape-key-sequence "jk")))
 #+END_SRC
-*** evil-surround
+*** ~evil-surround~
 And then we'll add ~evil-surround~ because it's really neat being able to change
 the delimiters surrounding something on the fly.
 
@@ -285,7 +285,7 @@ the delimiters surrounding something on the fly.
     :commands (global-evil-surround-mode)
     :init (global-evil-surround-mode 1))
 #+END_SRC
-*** evil-commentary
+*** ~evil-commentary~
 This is a neat package if you comment out code a lot. Like I do.
 
 #+BEGIN_SRC emacs-lisp
@@ -295,7 +295,7 @@ This is a neat package if you comment out code a lot. Like I do.
     :delight evil-commentary-mode
     :init (evil-commentary-mode))
 #+END_SRC
-*** evil-goggles
+*** ~evil-goggles~
 This is a really neat extension that I found on /r/emacs, what it does is
 display visual hints when doing various actions while editing to highlight what
 changed. Really useful for both pair programming and seeing what you did
@@ -306,6 +306,16 @@ yourself.
     :after evil
     :commands (evil-goggles-mode)
     :config (evil-goggles-mode))
+#+END_SRC
+*** ~evil-matchit~
+Enables moving between matching pairs of tags incredibly easily by pressing ~%~,
+makes it really easy to jump between say ~if~-blocks of source code in a Python
+project and so on.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-matchit
+    :commands (global-evil-matchit-mode)
+    :config (global-evil-matchit-mode t))
 #+END_SRC
 * Core settings
 We'll configure anything that relates to how I want the core of Emacs to behave
