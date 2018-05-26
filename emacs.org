@@ -709,6 +709,22 @@ with pressing my movement keys too much, but we'll try.
                           "C-'" 'avy-goto-char
                           "M-g g" 'avy-goto-line)))
 #+END_SRC
+** Treemacs
+Occasionally being able to have a small sidebar with all the files in the
+current directory listed is really useful, it's useful really most of the time
+to be honest.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package treemacs
+    :commands (treemacs-follow-mode treemacs-filewatch-mode)
+    :config
+    (progn
+      (treemacs-follow-mode t)
+      (treemacs-filewatch-mode t)))
+
+  (use-package treemacs-evil
+    :after (evil treemacs))
+#+END_SRC
 ** Asynchronous Emacs
 Emacs is very single threaded and some times completely freezes because some
 process is running that blocks Emacs from painting the GUI. For example
