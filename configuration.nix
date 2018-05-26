@@ -6,6 +6,8 @@
     ./hardware-configuration.nix
     # Disable the fucking Nvidia card
     ./vgaswitcheroo.nix
+    # Custom configuration of Emacs
+    ./emacs.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -101,7 +103,7 @@
     python3Full lua mariadb
 
     # editors
-    neovim emacs 
+    neovim
     aspell aspellDicts.en aspellDicts.nb
 
     # terminals
@@ -191,9 +193,6 @@
 
     logind.extraConfig = ''
       HandlePowerKey=ignore
-      HandleSuspendKey=ignore
-      HandleHibernateKey=ignore
-      HandleLidSwitch=ignore
     '';
 
     thermald.enable = true;
