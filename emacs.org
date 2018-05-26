@@ -1027,6 +1027,21 @@ to organize and see your whole life in Emacs.
         org-agenda-files '("~/Documents/Org"))
 #+END_SRC
 
+** ~evil-org~
+Org-mode is amazing, but it's lacking a bit in evilified key-bindings, so we'll
+add a little something to help with it.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-org
+    :after org
+    :commands (evil-org-set-key-theme evil-org-agenda-set-keys)
+    :hook ((org-mode . evil-org-mode)
+           (evil-org-mode . (lambda () (evil-org-set-key-theme))))
+    :config
+    (progn
+      (require 'evil-org-agenda)
+      (evil-org-agenda-set-keys)))
+#+END_SRC
 ** Functions
 *** Automagical tangling on save
 It's hard to remember to both tangle this file and compile the generated ~init.el~
