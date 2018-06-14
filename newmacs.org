@@ -224,8 +224,11 @@ Emacs, which is a prehistoric 70.
 And then some options that don't really warrant their own little heading.
 
 #+BEGIN_SRC emacs-lisp
-  (setq-default sentence-end-double-space nil ;; no
-                vc-follow-symlinks t)         ;; yes
+  (setq-default sentence-end-double-space nil   ;; no
+                vc-follow-symlinks t)           ;; yes
+  (setq help-window-select t                    ;; focus help window when opened
+        compilation-scroll-output 'first-error  ;; stop at first error in compilation log
+        save-interprogram-paste-before-kill t)  ;; save paste history globally
 #+END_SRC
 ** Built-in modes
 There's a ton of builtin modes in Emacs that are either very useful... or not so
@@ -308,7 +311,15 @@ same place as you left.
 #+END_SRC
 * Text editing
 Settings for the various kinds of text files that we'll edit in Emacs, either
-that be Markdown, Org or LaTeX.
+that be Markdown, Org or LaTeX, or for all of them.
+** General
+*** ~auto-fill-mode~
+We set the default width of any kind of text to be wrapped at 80 characters
+wide, now we'll just enable this for any and all text modes.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook #'auto-fill-mode)
+#+END_SRC
 ** Org-mode
 Probably the best thing since sliced bread, followed by Magit and then followed
 by sliced bread. It's both a markup language for rich text editing, but also a
@@ -343,6 +354,63 @@ paragraph, because I'd write a book.
             org-export-with-sub-superscripts '{}
             org-pretty-entities t
             org-list-allow-alphabetical t)))
+#+END_SRC
+* Programming
+Any and all settings related in some way to programming, be it either
+highlighting, matching parenthesises or general configuration for languages.
+** General
+For settings that are not specific to a single language or are useful for more
+than one language.
+*** Delimiters
+Any and all settings related to delimiters, either it's making them look
+glorious (rainbows) or just show matching delimiters.
+
+**** ~paren-mode~
+Does pretty much exactly what it says, it shows matching parenthesises (and
+other delimiters as far as I'm aware too). As for settings, we'll set it so
+there's no delay for showing it's long lost sister, always highlight open
+parenthesises and show the matching pair when inside their block.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package paren
+    :commands (show-paren-mode)
+    :init (show-paren-mode t)
+    :config
+    (progn
+      (setq-default show-paren-delay 0
+                    show-paren-highlight-openparen t
+                    show-paren-when-point-inside-paren t)))
+#+END_SRC
+**** ~rainbow-delimiters~
+Pretty straight forward too, makes your rainbows dashing.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-delimiters
+    :commands (rainbow-delimiters-mode)
+    :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+END_SRC
+*** Indentation
+Indentation in programming is different to just wrapping text when it reaches
+it's maximum width, so we'll have to slightly configure it.
+**** ~aggressive-indent~
+And the first thing we'll do is to enable pretty aggressive indentation. The
+normal way it works is that it only indents the local block, if at all, and
+doesn't really care about the whole block. With this mode, in Elisp for example
+it will indent the whole file if need be. It's really useful for programming
+languages where indentation is easy to reason about.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package aggressive-indent
+    :delight
+    :commands (aggressive-indent-mode)
+    :init (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode))
+#+END_SRC
+*** ~electric-pair-mode~
+This automatically creates a closing parenthesis or bracket (etc) whenever you
+make a opening parenthesis or bracket (etc).
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'prog-mode-hook #'electric-pair-mode)
 #+END_SRC
 * Outro
 And this is finally it, we can now run the post init hook and reset back all the
