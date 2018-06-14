@@ -188,6 +188,45 @@ Or the edge. God. No.
   (setq visible-bell nil
         ring-bell-function #'ignore)
 #+END_SRC
+*** Backups
+Emacs keeps a ton of assorted backup files all over the place, either in the
+directory you're editing the file in, or in ~.emacs.d~ and so on. It's fairly
+annoying to be honest. So we'll just place all the backup files in the cache
+directory.
+
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist `(("." . ,(concat amalthea--cache-dir "saves/")))
+        auto-save-file-name-transforms `((".*" ,(concat amalthea--cache-dir "auto-save") t))
+        auto-save-list-file-name (concat amalthea--cache-dir "autosave")
+        abbrev-file-name (concat amalthea--cache-dir "abbrev_defs")
+        backup-by-copying t
+        version-control t
+        delete-old-versions t)
+#+END_SRC
+*** Indentation
+Emacs defaults to both using tabs for indentation and the width for a tab
+character is a whopping eight! That doesn't make any sense whatsoever. So we'll
+make it sane, use spaces and with a width of two.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil
+                tab-width 2)
+#+END_SRC
+*** Line wrapping
+Following the above, we'll use 80 as the default width for which to wrap text in
+all modes, because that's modern. At least more modern than the default for
+Emacs, which is a prehistoric 70.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default fill-column 80)
+#+END_SRC
+*** Assorted
+And then some options that don't really warrant their own little heading.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default sentence-end-double-space nil ;; no
+                vc-follow-symlinks t)         ;; yes
+#+END_SRC
 ** Built-in modes
 There's a ton of builtin modes in Emacs that are either very useful... or not so
 much. Mostly very useful though, so much so that we'll configure quite a few of
