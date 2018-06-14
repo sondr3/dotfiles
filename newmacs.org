@@ -188,6 +188,85 @@ Or the edge. God. No.
   (setq visible-bell nil
         ring-bell-function #'ignore)
 #+END_SRC
+** Built-in modes
+There's a ton of builtin modes in Emacs that are either very useful... or not so
+much. Mostly very useful though, so much so that we'll configure quite a few of
+them.
+
+*** ~autorevert~
+If you've ever experienced changing a file in a different program while it's
+open in Emacs (for whatever reason) and then mistakenly overwriting it again
+when you save it in Emacs because it hasn't been refreshed from disk? Worry no
+more.
+
+As for configuration, the only thing we'll change is that it doesn't just
+refresh file buffers, but also buffers that indirectly have to do with files,
+e.g. Dired buffers and such.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package autorevert
+    :commands (global-auto-revert-mode)
+    :init
+    (setq global-auto-revert-non-file-buffers t)
+    (global-auto-revert-mode))
+#+END_SRC
+*** ~recentf~
+Instead of having to work your way to the most recently edited file(s) by
+writing the path out again and again, Emacs has a built-in minor mode that keeps
+track of the most recently visited files, which we'll use in conjunction with
+Counsel to quickly be able to open recent files.
+
+The way we load it is stolen from Spacemacs, which makes it so it's lazily
+loaded when needed.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package recentf
+    :commands (recentf-mode recentf-track-opened-file)
+    :init
+    (progn
+      (add-hook 'find-file-hook (lambda () (unless recentf-mode
+                                             (recentf-mode)
+                                             (recentf-track-opened-file))))
+      (setq recentf-save-file (concat amalthea--cache-dir "recentf")
+            recentf-max-saved-items 1000
+            recentf-auto-cleanup 'never
+            recentf-filename-handlers '(abbreviate-file-name))))
+#+END_SRC
+*** ~savehist~
+This is probably one of the easier minor modes to explain, so we'll keep it
+brief: it saves a history of everything you do in a minibuffer.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package savehist
+    :commands (savehist-mode)
+    :init
+    (progn
+      (setq savehist-file (concat amalthea--cache-dir "savehist")
+            enable-recursive-minibuffers t
+            savehist-save-minibuffer-history t
+            history-length 1000
+            savehist-autosave-interval 60
+            savehist-additional-variables '(mark-ring
+                                            global-mark-ring
+                                            search-ring
+                                            regexp-search-ring
+                                            extended-command-history))
+      (savehist-mode t)))
+#+END_SRC
+*** ~saveplace~
+Mostly the same as above, instead of keeping track of the history of what you
+did in your minibuffers, it keeps track of where the cursor was last in a file
+and saves that position so that when you reopen that file you'll start at the
+same place as you left.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package saveplace
+    :commands (save-place-mode)
+    :init
+    (progn
+      (setq save-place-file (concat amalthea--cache-dir "places"))
+      (save-place-mode)))
+#+END_SRC
 * Text editing
 Settings for the various kinds of text files that we'll edit in Emacs, either
 that be Markdown, Org or LaTeX.
