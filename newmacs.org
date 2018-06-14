@@ -309,6 +309,19 @@ same place as you left.
       (setq save-place-file (concat amalthea--cache-dir "places"))
       (save-place-mode)))
 #+END_SRC
+** Async
+Emacs is famously singlethreaded, painfully so at times. ~async~ is a reasonably
+simple package that gives you some easy ways to do things asyncronously in
+Emacs, like tangling and byte compiling this file.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package async
+    :commands (async-start)
+    :config
+    (progn
+      (async-bytecomp-package-mode t)
+      (setq async-bytecomp-allowed-packages '(all))))
+#+END_SRC
 * Text editing
 Settings for the various kinds of text files that we'll edit in Emacs, either
 that be Markdown, Org or LaTeX, or for all of them.
