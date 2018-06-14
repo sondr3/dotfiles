@@ -1,0 +1,119 @@
+#+TITLE: Emacs settings
+#+AUTHOR: Sondre Nilsen
+#+EMAIL: nilsen.sondre@gmail.com
+#+PROPERTY: header-args :tangle ~/.emacs.d/new-init.el
+
+* Introduction
+This is my Emacs configuration, there are many like it but this one is mine.
+It's decently personalized, but it should be useful for either inspiration or
+just straight-up copy-pasta. My configuration is managed by [[https://github.com/emacscollective/borg][borg]], and is a bit
+weird in that the configuration lives in this directory but all the actual git
+modules lives in a separate repository ([[https://github.com/sondr3/.emacs.d][~.emacs.d~]]).
+
+I'm also running the latest major release of Emacs, which as of this writing is
+version 26.1, so unless you're running this version I cannot guarantee that
+everything works. It's also worth noting that I named my configuration
+~Amalthea~, after a random moon on Jupiter. I had my reasons for this once, but
+I can't remember why. I just think it's a cool name, so you'll see that name
+reflected in quite a few variables and functions that I use.
+
+#+BEGIN_SRC emacs-lisp
+  ;; -*- lexical-binding: t -*-
+  ;; (package-initialize)
+
+  (unless (eq emacs-major-version 26)
+    (error "Your version of Emacs isn't up-to-date"))
+#+END_SRC
+
+* Initialization
+** Startup
+First and foremost, we'll try to make Emacs load quicker by first disabling
+~file-name-handler-alist~, mostly because we don't need it at boot and it's
+really slow because it tries to look at all the files in the load path and check
+if they are something Emacs can load.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-and-compile
+    (defconst amalthea--file-name-handler-alist file-name-handler-alist
+      "Our own file-name-handler-alist, used after boot")
+    (defconst amalthea--post-init-hook nil
+      "Hook that runs after Emacs has loaded")
+    (setq file-name-handler-alist nil)
+    (add-hook 'amalthea--post-init-hook amalthea--file-name-handler-alist))
+#+END_SRC
+
+Then we can configure the various directories that we'll be using with Emacs,
+mostly for caches and assorted stuff we don't want cluttering our computer, so
+we'll put them in their own directories instead. We just need to make sure they
+exist and can be used.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-and-compile
+    (defconst amalthea--emacs-dir (expand-file-name user-emacs-directory))
+    (defconst amalthea--etc-dir (concat amalthea--emacs-dir "etc/"))
+    (defconst amalthea--cache-dir (concat amalthea--emacs-dir "cache/"))
+
+    (dolist (dir (list amalthea--emacs-dir amalthea--etc-dir amalthea--cache-dir))
+      (unless (file-directory-p dir)
+        (make-directory dir t))))
+#+END_SRC
+
+Next up we'll make the garbage collector a little less aggressive while booting
+up to save a tiny amount of speed, but then at the end we'll make sure it's set
+back to the default values.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-and-compile
+    (setq gc-cons-threshold 402653184
+          gc-cons-percentage 0.6)
+
+    (add-hook 'amalthea--post-init-hook #'(lambda ()
+                                            (message "Resetting GC values.")
+                                            (setq gc-cons-threshold 16777216
+                                                  gc-cons-percentage 0.1))))
+#+END_SRC
+** ~Borg~ and ~use-package~
+As I mentioned in the beginning of this file, I'm using Borg for managing all my
+dependencies, as opposed to just using ~use-package~. I initially did this but
+wanted to try something new. I switched to NixOS in the beginning of 2018, and
+really came around to liking a reproducible environment with it. I initially
+considered configuring Emacs with Nix, but in the end settled on using something
+else as I wanted something closer to Emacs and not my OS. Which is ironic since
+Emacs is an OS with a text editor on top.
+
+Anyhow, we'll first need to set some settings before we jump into starting up
+Borg and ~use-package~. The first two are just increases over the default since
+we are now using computers with more memory and CPU that we had in the olden
+days. Then we make sure that Emacs always loads newer files instead of the first
+it finds in case we forget to byte compile a newly updated file, finally we
+tell Emacs that we have initialize packages in the ~init.el~ file and not to
+activate packages automatically and lastly we use the newest byte codes.
+
+#+BEGIN_SRC emacs-lisp
+  (setq max-lisp-eval-depth 50000
+        max-specpdl-size 10000
+        load-prefer-newer t
+        package--init-file-ensured t
+        package-enable-at-startup nil
+        byte-compile--use-old-handlers nil)
+#+END_SRC
+
+Then we can load Borg and ~use-package~, by first adding all the various
+packages we have downloaded to the load path, then initializing and loading both
+Borg and ~use-package~, and then setting a few assorted settings for it. First
+we enable verbose loading, which shows the time it takes to load and enable
+various packages, then we compute statistics for all the packages. We can then
+view how long it took to load packages the last time we started up, making it
+easier to spot packages that makes Emacs spend too much time loading. Finally,
+we always defer the loading of packages untill they are needed.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-and-compile
+    (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
+    (require  'borg)
+    (borg-initialize)
+    (require  'use-package)
+    (setq use-package-verbose t
+          use-package-compute-statistics t
+          use-package-always-defer t))
+#+END_SRC
