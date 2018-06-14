@@ -90,6 +90,7 @@ tell Emacs that we have initialize packages in the ~init.el~ file and not to
 activate packages automatically and lastly we use the newest byte codes.
 
 #+BEGIN_SRC emacs-lisp
+  (defvar package--init-file-ensured)
   (setq max-lisp-eval-depth 50000
         max-specpdl-size 10000
         load-prefer-newer t
@@ -250,10 +251,22 @@ Emacs, which is a prehistoric 70.
 #+BEGIN_SRC emacs-lisp
   (setq-default fill-column 80)
 #+END_SRC
+*** Whitespace
+This is something that you could fix by using a builtin helper function that
+removes newlines at the end of files etc, but I prefer using something called
+~ws-butler~ which does this in a more thorough way.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ws-butler
+    :delight
+    :commands (ws-butler-global-mode)
+    :init (ws-butler-global-mode 1))
+#+END_SRC
 *** Assorted
 And then some options that don't really warrant their own little heading.
 
 #+BEGIN_SRC emacs-lisp
+  (defvar compilation-scroll-output)
   (setq-default sentence-end-double-space nil   ;; no
                 vc-follow-symlinks t)           ;; yes
   (setq help-window-select t                    ;; focus help window when opened
@@ -359,6 +372,7 @@ Emacs, like tangling and byte compiling this file.
 #+BEGIN_SRC emacs-lisp
   (use-package async
     :commands (async-start)
+    :defines async-bytecomp-allowed-packages
     :config
     (progn
       (async-bytecomp-package-mode t)
@@ -480,6 +494,7 @@ paragraph, because I'd write a book.
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :delight org-indent-mode
+    :defines org-export-with-sub-superscripts
     :config
     (progn
       (setq org-src-fontify-natively t
