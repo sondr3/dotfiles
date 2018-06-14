@@ -119,7 +119,29 @@ we always defer the loading of packages untill they are needed.
 #+END_SRC
 * Core settings
 * Text editing
+Settings for the various kinds of text files that we'll edit in Emacs, either
+that be Markdown, Org or LaTeX.
 ** Org-mode
+Probably the best thing since sliced bread, followed by Magit and then followed
+by sliced bread. It's both a markup language for rich text editing, but also a
+suite of tools for journaling, keeping an agenda, your todo-list and so much
+more. I love it.
+
+However, there's a whole buttload of configurations we can set, so I'll list
+them in a table below to explain what they do instead of trying to explain in a
+paragraph, because I'd write a book.
+
+| Setting                          | Why                                                                         |
+|----------------------------------+-----------------------------------------------------------------------------|
+| ~org-src-fontify-natively~         | Always use syntax highlighting of code blocks                               |
+| ~org-startup-with-inline-images~   | Always show images                                                          |
+| ~org-startup-indented~             | Indent text according to the current header                                 |
+| ~org-hide-emphasis-markers~        | Hides the symbols that makes text bold etc                                  |
+| ~org-use-sub-superscripts~         | Always use ~{}~ to group sub/superscript text                                 |
+| ~org-export-with-sub-superscripts~ | Export with the same syntax as above                                        |
+| ~org-pretty-entities~              | Show entities as UTF8-characters when possible                              |
+| ~org-list-allow-alphabetical~      | Makes it so lists can be something else than just 1) or just simple bullets |
+
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :delight org-indent-mode
@@ -132,8 +154,7 @@ we always defer the loading of packages untill they are needed.
             org-use-sub-superscripts '{}
             org-export-with-sub-superscripts '{}
             org-pretty-entities t
-            org-list-allow-alphabetical t
-            org-latex-remove-logfiles nil)))
+            org-list-allow-alphabetical t)))
 #+END_SRC
 * Outro
 And this is finally it, we can now run the post init hook and reset back all the
