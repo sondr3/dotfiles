@@ -117,6 +117,36 @@ we always defer the loading of packages untill they are needed.
           use-package-compute-statistics t
           use-package-always-defer t))
 #+END_SRC
+
+*** Helper packages
+Using Borg with Emacs requires using a couple extra packages to be able to use
+it to it's full potential. If you were to clone the [[https://github.com/emacscollective/emacs.g][emacs.g]] directory, which is
+commonly used as the starting point for configuring Emacs with Borg, you'd get
+quite a lot of packages included, but we don't really want most of them, just a
+couple.
+
+The first, is ~epkg~. It's a package that enables you to browse any and all
+packages available for Emacs, which is really helpful when using Borg. I've had
+it happen a few times when a package migrates but I haven't caught it and when I
+try to update the repository doesn't exist. By using this and keeping it
+refreshed I can double check that the URLs matches, or I can just use it to
+quickly view information about a package.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package epkg
+    :init (setq epkg-repository
+                (expand-file-name "var/epkgs/" user-emacs-directory)))
+#+END_SRC
+
+Then, and this isn't required per se, but I'll be using Delight to hide or
+rename the names of major and minor modes on the modeline instead of Diminish.
+Mostly because when I last checked it didn't support hiding major modes or
+renaming them without weird hacks. And now that ~use-package~ has built-in support
+for the ~:delight~ keyword, I don't really need it.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package delight)
+#+END_SRC
 * Core settings
 ** Defaults
 Emacs is nearly twice my age, and as such has a bunch of pretty funny defaults
@@ -401,6 +431,19 @@ get narrower or wider depending on the amount of lines in a file.
                 display-line-numbers-current-absolute t
                 display-line-numbers-width 4
                 display-line-numbers-widen nil)
+#+END_SRC
+** ~hl-line~
+This is basically something that I learned to use and love from Vim, it
+highlights the current line where the cursor is currently active. We enable this
+minor mode globally, and then make it so it doesn't display in inactive windows.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package hl-line
+    :commands (global-hl-line-mode)
+    :init (global-hl-line-mode t)
+    :config
+    (progn
+      (setq global-hl-line-sticky-flag nil)))
 #+END_SRC
 * Text editing
 Settings for the various kinds of text files that we'll edit in Emacs, either
