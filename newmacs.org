@@ -117,3 +117,31 @@ we always defer the loading of packages untill they are needed.
           use-package-compute-statistics t
           use-package-always-defer t))
 #+END_SRC
+* Core settings
+* Text editing
+** Org-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :delight org-indent-mode
+    :config
+    (progn
+      (setq org-src-fontify-natively t
+            org-startup-with-inline-images t
+            org-startup-indented t
+            org-hide-emphasis-markers t
+            org-use-sub-superscripts '{}
+            org-export-with-sub-superscripts '{}
+            org-pretty-entities t
+            org-list-allow-alphabetical t
+            org-latex-remove-logfiles nil)))
+#+END_SRC
+* Outro
+And this is finally it, we can now run the post init hook and reset back all the
+various settings we configured during our setup of Emacs. The last thing we need
+to add is way to display how long it took Emacs to boot.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'amalthea--post-init-hook #'(lambda ()
+                                          (message (concat "Booted in: " (emacs-init-time)))))
+  (run-hooks 'amalthea--post-init-hook)
+#+END_SRC
