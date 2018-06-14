@@ -118,6 +118,70 @@ we always defer the loading of packages untill they are needed.
           use-package-always-defer t))
 #+END_SRC
 * Core settings
+** Defaults
+Emacs is nearly twice my age, and as such has a bunch of pretty funny defaults
+that I deem necessary to change. Quite frankly, there's a lot of them and I have
+probably missed a bunch of them too.
+
+*** UTF8
+Emacs actually predates UTF8, which to my mind is kinda nuts. So we'll force
+Emacs to always use unicode characters and UTF8 everywhere.
+
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'set-charset-priority)
+    (set-charset-priority 'unicode))
+  (prefer-coding-system                   'utf-8)
+  (set-terminal-coding-system             'utf-8)
+  (set-keyboard-coding-system             'utf-8)
+  (set-selection-coding-system            'utf-8)
+  (setq locale-coding-system              'utf-8)
+  (setq-default buffer-file-coding-system 'utf-8)
+#+END_SRC
+
+*** To y or y
+Mostly to save at most two strokes and at a minimum one. Efficiency baby.
+
+#+BEGIN_SRC emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+*** Replace selected text properly
+For some reason the default behaviour for Emacs is to not replace text you
+have selected when you start typing but instead just start typing at the end of
+the selection.
+
+#+BEGIN_SRC emacs-lisp
+  (delete-selection-mode t)
+#+END_SRC
+*** Custom file
+Again, the default behaviour for Emacs is to append to the ~init.el~ file all the
+assorted custom settings and whatnot, which annoys me. So we'll just make it so
+it adds it to it's own ~custom.el~ file.
+
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file (expand-file-name (concat user-emacs-directory "custom.el")))
+  (load custom-file t t)
+#+END_SRC
+*** Startup messages
+Whenever you start Emacs you normally get a nice enough startup screen giving
+information about both Emacs, GNU and various other things. I don't like 'em so
+we'll hide it all and just startup in ~*scratch*~ instead.
+
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-message t
+        inhibit-startup-echo-area-message t)
+  (defun display-startup-echo-area-message ()
+    "Hide the startup message in the echo area.")
+#+END_SRC
+*** Disable bells
+Because who on earth enjoys the sounds of bells sounding whenever you do
+anything even remotely "wrong". Like reaching the top of a file. Or the bottom.
+Or the edge. God. No.
+
+#+BEGIN_SRC emacs-lisp
+  (setq visible-bell nil
+        ring-bell-function #'ignore)
+#+END_SRC
 * Text editing
 Settings for the various kinds of text files that we'll edit in Emacs, either
 that be Markdown, Org or LaTeX.
