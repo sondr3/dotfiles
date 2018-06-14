@@ -309,6 +309,18 @@ same place as you left.
       (setq save-place-file (concat amalthea--cache-dir "places"))
       (save-place-mode)))
 #+END_SRC
+*** ~uniquify~
+Whenever you have multiple files with the same name open, you need a way to
+differentiate between the two of them. We'll make it so that two files with the
+same name, it shows the full path instead of the default, which I quite frankly
+don't remember.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package uniquify
+    :init
+    (progn
+      (setq uniquify-buffer-name-style 'forward)))
+#+END_SRC
 ** Async
 Emacs is famously singlethreaded, painfully so at times. ~async~ is a reasonably
 simple package that gives you some easy ways to do things asyncronously in
@@ -321,6 +333,74 @@ Emacs, like tangling and byte compiling this file.
     (progn
       (async-bytecomp-package-mode t)
       (setq async-bytecomp-allowed-packages '(all))))
+#+END_SRC
+* Appearance
+Emacs is really ugly by default, at least compared to more contemporary
+offerings like VSCode. So we'll do a little something of our own to make it look
+good. I hope. I'm colorblind, so who knows.
+** Theme
+I'm a huge fan of minimalism, and given that I'm colorblind I also find that
+most themes turn into a sort of hodgepodge of colors. Which I don't like. So far
+the best theme I've found is a super simple grayscale theme called tao.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package tao-theme
+    :init (load-theme 'tao-yang t))
+#+END_SRC
+** Fonts
+Also, the default font is really bad, but then again, so are most default fonts
+that text editors use by default. So of course we'll change it. The best fone
+I've found so far is ~Fira Mono~, from Mozilla. It's just... nice.
+
+#+BEGIN_SRC emacs-lisp
+  (set-face-attribute 'default nil
+                      :family "Fira Mono"
+                      :height 80)
+  (set-frame-font "Fira Mono" nil t)
+#+END_SRC
+
+We'll also change the line spacing, giving our text a bit more breathing room.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default line-spacing 0.15)
+#+END_SRC
+** Bars, bars, bars
+The default frame for Emacs contains a menu and tool bar at the top and a scroll
+bar at the side, which we won't need since we know Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'menu-bar-mode)
+    (menu-bar-mode -1))
+  (when (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+  (when (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
+#+END_SRC
+** Assorted
+For visual settings that don't belong anywhere else or aren't worthy of their
+own little header.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default cursor-type '(bar . 2)
+                frame-title-format '("Amalthea :: %b"))
+#+END_SRC
+** Line numbers
+Starting with Emacs 26.1, Emacs has a built-in line number mode written in C
+that supports relative line numbers, like in Vim. This is awesome, because the
+previous offerings had a whole bunch of drawbacks, either being really slow, or
+not properly supporting relative line numbers in Org mode and so on. Thankfully
+we now have a proper solution.
+
+First, we set the relative line number to ~visual~, which counts the visible lines
+on the screen. Otherwise headers that are folded in Org makes the line count go
+haywire, next we set a default width for line numbers and ensure that it doesn't
+get narrower or wider depending on the amount of lines in a file.
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default display-line-numbers 'visual
+                display-line-numbers-current-absolute t
+                display-line-numbers-width 4
+                display-line-numbers-widen nil)
 #+END_SRC
 * Text editing
 Settings for the various kinds of text files that we'll edit in Emacs, either
