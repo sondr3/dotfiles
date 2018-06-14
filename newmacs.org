@@ -159,8 +159,13 @@ assorted custom settings and whatnot, which annoys me. So we'll just make it so
 it adds it to it's own ~custom.el~ file.
 
 #+BEGIN_SRC emacs-lisp
-  (setq custom-file (expand-file-name (concat user-emacs-directory "custom.el")))
-  (load custom-file t t)
+  (use-package custom
+    :no-require t
+    :config
+    (progn
+      (setq custom-file (expand-file-name (concat user-emacs-directory "custom.el")))
+      (when (file-exists-p custom-file)
+        (load custom-file t t))))
 #+END_SRC
 *** Startup messages
 Whenever you start Emacs you normally get a nice enough startup screen giving
@@ -169,9 +174,10 @@ we'll hide it all and just startup in ~*scratch*~ instead.
 
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-message t
-        inhibit-startup-echo-area-message t)
-  (defun display-startup-echo-area-message ()
-    "Hide the startup message in the echo area.")
+        inhibit-startup-buffer-menu t
+        inhibit-startup-screen t
+        inhibit-startup-echo-area-message t
+        initial-buffer-choice t)
 #+END_SRC
 *** Disable bells
 Because who on earth enjoys the sounds of bells sounding whenever you do
