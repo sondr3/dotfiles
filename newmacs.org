@@ -289,7 +289,7 @@ refresh file buffers, but also buffers that indirectly have to do with files,
 e.g. Dired buffers and such.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package autorevert
+(use-package autorevert
     :commands (global-auto-revert-mode)
     :init
     (setq global-auto-revert-non-file-buffers t)
@@ -305,14 +305,14 @@ The way we load it is stolen from Spacemacs, which makes it so it's lazily
 loaded when needed.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package recentf
+(use-package recentf
     :commands (recentf-mode recentf-track-opened-file)
     :init
     (progn
-      (add-hook 'find-file-hook (lambda () (unless recentf-mode
-                                             (recentf-mode)
-                                             (recentf-track-opened-file))))
-      (setq recentf-save-file (concat amalthea--cache-dir "recentf")
+    (add-hook 'find-file-hook (lambda () (unless recentf-mode
+                                            (recentf-mode)
+                                            (recentf-track-opened-file))))
+    (setq recentf-save-file (concat amalthea--cache-dir "recentf")
             recentf-max-saved-items 1000
             recentf-auto-cleanup 'never
             recentf-filename-handlers '(abbreviate-file-name))))
@@ -322,11 +322,11 @@ This is probably one of the easier minor modes to explain, so we'll keep it
 brief: it saves a history of everything you do in a minibuffer.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package savehist
+(use-package savehist
     :commands (savehist-mode)
     :init
     (progn
-      (setq savehist-file (concat amalthea--cache-dir "savehist")
+    (setq savehist-file (concat amalthea--cache-dir "savehist")
             enable-recursive-minibuffers t
             savehist-save-minibuffer-history t
             history-length 1000
@@ -336,7 +336,7 @@ brief: it saves a history of everything you do in a minibuffer.
                                             search-ring
                                             regexp-search-ring
                                             extended-command-history))
-      (savehist-mode t)))
+    (savehist-mode t)))
 #+END_SRC
 *** ~saveplace~
 Mostly the same as above, instead of keeping track of the history of what you
@@ -345,12 +345,12 @@ and saves that position so that when you reopen that file you'll start at the
 same place as you left.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package saveplace
+(use-package saveplace
     :commands (save-place-mode)
     :init
     (progn
-      (setq save-place-file (concat amalthea--cache-dir "places"))
-      (save-place-mode)))
+    (setq save-place-file (concat amalthea--cache-dir "places"))
+    (save-place-mode)))
 #+END_SRC
 *** ~uniquify~
 Whenever you have multiple files with the same name open, you need a way to
@@ -359,10 +359,10 @@ same name, it shows the full path instead of the default, which I quite frankly
 don't remember.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package uniquify
+(use-package uniquify
     :init
     (progn
-      (setq uniquify-buffer-name-style 'forward)))
+    (setq uniquify-buffer-name-style 'forward)))
 #+END_SRC
 ** Async
 Emacs is famously singlethreaded, painfully so at times. ~async~ is a reasonably
@@ -377,6 +377,53 @@ Emacs, like tangling and byte compiling this file.
     (progn
       (async-bytecomp-package-mode t)
       (setq async-bytecomp-allowed-packages '(all))))
+#+END_SRC
+** Ivy, Counsel and Swiper
+The default auto-completion when using ~M-x~ or ~C-x C-f~ is pretty bad in my
+opinion, especially how it shows the various items, commands or files that are
+still within the range of what you've typed. I've used Helm before, but I prefer
+the approach of Ivy a bit more. Minimalism, while still being very powerful.
+
+*** Ivy
+Ivy is the generic auto completion frontend that we'll be using for completion
+instead of the built-in mechanisms in Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy
+    :commands (ivy-mode)
+    :delight
+    :config
+    (progn
+      (ivy-mode)
+      (setq ivy-use-virtual-buffers t
+            enable-recursive-minibuffers t
+            ivy-count-format "%d/%d ")))
+#+END_SRC
+*** Counsel
+Counsel is built on top of Ivy and contains a bunch of improved interfaces for
+mechanisms in Emacs, like finding files or opening recent files and so on.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package counsel
+    :commands (counsel-mode)
+    :delight
+    :general
+    (general-define-key
+     "C-x C-f" 'counsel-find-file
+     "C-x C-r" 'counsel-recentf
+     "C-h f" 'counsel-describe-function
+     "C-h v" 'counsel-describe-variable)
+    :config (counsel-mode))
+#+END_SRC
+*** Swiper
+Swiper is a drop in replacement for the search funcionality in Emacs. It's just
+a straight upgrade, and I love it.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package swiper
+    :general
+    (general-define-key "C-s" 'swiper)
+    (general-nmap "/" 'swiper))
 #+END_SRC
 * Appearance
 Emacs is really ugly by default, at least compared to more contemporary
