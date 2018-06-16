@@ -516,6 +516,11 @@ mechanisms in Emacs, like finding files or opening recent files and so on.
      "C-x C-r" 'counsel-recentf
      "C-h f" 'counsel-describe-function
      "C-h v" 'counsel-describe-variable)
+    (amalthea--leader-key-def
+      :keymaps 'normal
+      "f" '(:which-key "files")
+      "f f" '(counsel-find-file :which-key "find file")
+      "f r" '(counsel-recentf :which-key "recent file"))
     :config (counsel-mode))
 #+END_SRC
 *** Swiper
@@ -577,7 +582,7 @@ when we commit using Magit.
     :config
     (progn
       (global-diff-hl-mode)
-      (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
+      (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh t)))
 #+END_SRC
 * Appearance
 Emacs is really ugly by default, at least compared to more contemporary
