@@ -18,8 +18,7 @@ I can't remember why. I just think it's a cool name, so you'll see that name
 reflected in quite a few variables and functions that I use.
 
 #+BEGIN_SRC emacs-lisp
-  ;; -*- lexical-binding: t -*-
-  ;; (package-initialize)
+  ;;; amalthea --- -*- lexical-binding: t -*-
 
   (unless (eq emacs-major-version 26)
     (error "Your version of Emacs isn't up-to-date"))
