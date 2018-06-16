@@ -185,7 +185,8 @@ find one second to be a bit too long to wait.
 in a slightly more advanced way than just binding keys I've found that it
 doesn't work as I would've liked it to do. Enter General: it's a whole framework
 for binding keys in a really nice and consistent manner. We'll also configure
-our leader keys using the constants we created in the introduction to keybindings.
+our leader keys using the constants we created in the introduction to
+keybindings.
 
 #+BEGIN_SRC emacs-lisp
   (use-package general
@@ -209,6 +210,41 @@ just feels so... wrong. So we'll use it. And abuse it.
   (use-package evil
     :demand t
     :config (evil-mode))
+#+END_SRC
+** Conventions and configuration
+I'm writing this mainly so I can look it up whenever I need it instead of having
+to look at my code and figure out how and why I did it. I could also look at the
+documentation for whatever I'm trying to look up, but I've already solved that
+so why do it again when I can just write it here?
+
+First off, when configuring and using the ~:general~ keyword in ~use-package~
+declarations, I'll stick to being explicit with how I write my definitions. As
+an example, when creating my ~git~ bindings, I'll explicitly write the ~:keymaps~
+out instead of using the shorter ~(amalthea--leader-key-def 'normal ...)~:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (amalthea--leader-key-def
+    :keymaps 'normal
+#+END_SRC
+
+Furthermore, since I'm using ~which-key~ to show an overview of the keybindings
+I'm going to have to expliticly name a few bindings so that they are displayed
+nicely instead of the name of the function, which can be needlessly verbose.
+Again, I'll be using the example from my bindings to git; it's bound to ~SPC g~ as
+the definer, which without setting a ~(:which-key "git")~ would display just
+~+prefix~, which isn't too helpful. By using the ~:which-key~ keyword we can control
+how ~which-key~ displays bindings:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  "g" '(:which-key "git")
+#+END_SRC
+
+Similarly, for functions and bindings that aren't prefixes we'll also make use
+of the ~:which-key~ binding, but we'll also bind a function to it. Thus, for
+showing ~magit-status~ with a different name, we'll do:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  "g s" '(magit-status :which-key "git status")
 #+END_SRC
 * Core settings and packages
 There's a lot of settings that needs to be tweaked for Emacs to be somewhat of a
