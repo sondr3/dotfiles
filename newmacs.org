@@ -528,6 +528,57 @@ a straight upgrade, and I love it.
     (general-define-key "C-s" 'swiper)
     (general-nmap "/" 'swiper))
 #+END_SRC
+** Version control
+Like pretty much everybody nowadays I'm using ~git~, and with that comes probably
+one of the absolutely best packages that exists for Emacs: [[https://magit.vc/][Magit]]! I'm pretty
+good with using git on the command line, but Magit just blows the command line
+interface for git out of the water. If you haven't tried it I highly recommend
+it.
+
+*** Magit
+The only thing we'll have to do is add some hooks for Magit to integrate better
+with Borg.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :delight auto-revert-mode
+    :general
+    (amalthea--leader-key-def
+      :keymaps 'normal
+      "g" '(:which-key "git")
+      "g s" '(magit-status :which-key "git status"))
+    :config
+    (progn
+      (magit-add-section-hook 'magit-status-sections-hook
+                              'magit-insert-modules
+                              'magit-insert-stashes
+                              'append)))
+#+END_SRC
+
+Magit by default doesn't include any Evil keybindings, which makes sense but is
+kinda required since we use Evil.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-magit
+    :after magit
+    :no-require t)
+#+END_SRC
+*** ~diff-hl~
+There's a plugin for Vim called GitGutter that is really neat, in the fringe of
+your file it shows where hunks have been changed, added and removed from the
+file. There's a similarly named plugin for Emacs, but it hasn't been updated for
+quite a while and even then, ~diff-hl~ is quite a lot better than it is. There's
+no magic here, we'll enable it globally, hook into Magit so that diff-hl updates
+when we commit using Magit.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package diff-hl
+    :commands (diff-hl-magit-post-refresh global-diff-hl-mode)
+    :config
+    (progn
+      (global-diff-hl-mode)
+      (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
+#+END_SRC
 * Appearance
 Emacs is really ugly by default, at least compared to more contemporary
 offerings like VSCode. So we'll do a little something of our own to make it look
