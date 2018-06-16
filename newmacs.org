@@ -459,6 +459,64 @@ minor mode globally, and then make it so it doesn't display in inactive windows.
     (progn
       (setq global-hl-line-sticky-flag nil)))
 #+END_SRC
+* Keybindings
+This is probably the hardest thing by far to configure and properly do in Emacs,
+at least in my opinion. I could use something like Spacemacs or Doom which has a
+proper consistent theme for keybindings, but that's no fun. Instead we'll roll
+our own built around [[https://github.com/emacs-evil/evil][Evil]], [[https://github.com/noctuid/general.el][General.el]] and [[https://github.com/justbur/emacs-which-key][which-key]]. Lastly, we'll mimick how I
+used to do things in Vim (and how Spacemacs does things) by letting ~SPC~ be our
+leader key and ~,~ be our major mode leader key.
+
+** ~which-key~
+This is a really cool package, I initially discovered this from Spacemacs (as I
+have done with a great many things). What it does is show you any and all
+keybindings you can complete from the binding you just executed. For example, if
+you are in Org-mode and run ~C-c~, ~which-key~ will show on the bottom of the screen
+and show all the keybindings you can complete from there. It's really great for
+discoverability.
+
+We won't be doing any major changes, only changing the delay timer because I
+find one second to be a bit too long to wait.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :delight
+    :commands (which-key-mode)
+    :config
+    (progn
+      (which-key-mode)
+      (setq which-key-idle-delay 0.3)))
+#+END_SRC
+** General
+~use-package~ has a built-in way of binding keys, but after having tried to use it
+in a slightly more advanced way than just binding keys I've found that it
+doesn't work as I would've liked it to do. Enter General: it's a whole framework
+for binding keys in a really nice and consistent manner. We'll also configure
+our leader keys using the constants we created in the introduction to keybindings.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :demand t
+    :commands (general-define-key general-evil-setup)
+    :config
+    (progn
+      (general-evil-setup)
+      (general-create-definer amalthea--leader-key-def
+        :prefix "SPC")
+      (general-create-definer amalthea--major-leader-key-def
+        :prefix ",")))
+#+END_SRC
+** Evil
+And finally, the secret sauce to everything. Vim keybindings. I'm not even
+remotely close to being very proficient in using Vim, but after having gotten
+used to the bindings I cannot for the life of me not use it, everything else
+just feels so... wrong. So we'll use it. And abuse it.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :demand t
+    :config (evil-mode))
+#+END_SRC
 * Text editing
 Settings for the various kinds of text files that we'll edit in Emacs, either
 that be Markdown, Org or LaTeX, or for all of them.
