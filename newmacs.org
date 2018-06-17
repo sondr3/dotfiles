@@ -75,13 +75,19 @@ really slow because it tries to look at all the files in the load path and check
 if they are something Emacs can load.
 
 #+BEGIN_SRC emacs-lisp
-  (eval-and-compile
-    (defconst amalthea--file-name-handler-alist file-name-handler-alist
-      "Our own file-name-handler-alist, used after boot")
-    (defconst amalthea--post-init-hook nil
-      "Hook that runs after Emacs has loaded")
-    (setq file-name-handler-alist nil)
-    (add-hook 'amalthea--post-init-hook amalthea--file-name-handler-alist))
+  (defconst amalthea--post-init-hook nil
+    "Hook that runs after Emacs has loaded.")
+#+END_SRC
+
+This doesn't actually work sadly, keeps throwing me errors about an invalid
+function or something. Needs to be looked at.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (defconst amalthea--file-name-handler-alist file-name-handler-alist
+    "Our own file-name-handler-alist, used after boot.")
+  (setq file-name-handler-alist nil)
+  (add-hook 'amalthea--post-init-hook
+            (setq file-name-handler-alist amalthea--file-name-handler-alist) t)
 #+END_SRC
 
 Then we can configure the various directories that we'll be using with Emacs,
@@ -112,7 +118,7 @@ back to the default values.
     (add-hook 'amalthea--post-init-hook #'(lambda ()
                                             (message "Resetting GC values.")
                                             (setq gc-cons-threshold 16777216
-                                                  gc-cons-percentage 0.1))))
+                                                  gc-cons-percentage 0.1)) t))
 #+END_SRC
 ** ~Borg~ and ~use-package~
 As I mentioned in the beginning of this file, I'm using Borg for managing all my
@@ -181,6 +187,17 @@ quickly view information about a package.
                 (expand-file-name "var/epkgs/" user-emacs-directory)))
 #+END_SRC
 
+Next up is [[https://github.com/magnars/dash.el][Dash.el]], which is a modern list library for Emacs. I don't really use
+this myself, but Borg requires it so not having it installed is a bit of a
+stupid thing to do. However, I have to say it looks very nice so I might just
+have to find a use for it.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dash
+    :commands dash-enable-font-lock
+    :config (dash-enable-font-lock))
+#+END_SRC
+
 Then, and this isn't required per se, but I'll be using Delight to hide or
 rename the names of major and minor modes on the modeline instead of Diminish.
 Mostly because when I last checked it didn't support hiding major modes or
@@ -216,6 +233,7 @@ find one second to be a bit too long to wait.
 
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
+    :demand t
     :delight
     :commands (which-key-mode)
     :config
@@ -501,6 +519,7 @@ instead of the built-in mechanisms in Emacs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
+    :demand t
     :commands (ivy-mode)
     :delight
     :config
@@ -516,6 +535,7 @@ mechanisms in Emacs, like finding files or opening recent files and so on.
 
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
+    :demand t
     :commands (counsel-mode)
     :delight
     :general
@@ -574,7 +594,7 @@ kinda required since we use Evil.
 #+BEGIN_SRC emacs-lisp
   (use-package evil-magit
     :after magit
-    :no-require t)
+    :init (evil-magit-init))
 #+END_SRC
 *** ~diff-hl~
 There's a plugin for Vim called GitGutter that is really neat, in the fringe of
@@ -587,9 +607,17 @@ when we commit using Magit.
 #+BEGIN_SRC emacs-lisp
   (use-package diff-hl
     :commands (diff-hl-magit-post-refresh global-diff-hl-mode)
+    :defines diff-hl-margin-symbols-alist
+    :init
+    (progn
+      (setq diff-hl-margin-symbols-alist
+            '((insert . "+") (delete . "-") (change . "~")
+              (unknown . "?") (ignored . "i"))))
     :config
     (progn
       (global-diff-hl-mode)
+      (diff-hl-flydiff-mode)
+      (diff-hl-margin-mode)
       (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh t)))
 #+END_SRC
 * Appearance
@@ -841,6 +869,6 @@ to add is way to display how long it took Emacs to boot.
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'amalthea--post-init-hook #'(lambda ()
-                                          (message (concat "Booted in: " (emacs-init-time)))))
+                                          (message (concat "Booted in: " (emacs-init-time)))) t)
   (run-hooks 'amalthea--post-init-hook)
 #+END_SRC
