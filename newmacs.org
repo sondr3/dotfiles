@@ -769,6 +769,39 @@ make a opening parenthesis or bracket (etc).
 #+BEGIN_SRC emacs-lisp
   (add-hook 'prog-mode-hook #'electric-pair-mode)
 #+END_SRC
+*** Auto completion
+There are many different libraries that adds auto-completion to Emacs, I've
+found that the best one by far is [[https://company-mode.github.io/][Company]]. There's not many changes we'll make,
+however I do have to bind ~TAB~ to completing a selection because for some reason
+it doesn't work out of the box for me. The next few configurations are very
+straight forward, so no need to explain.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :delight " Ⓒ"
+    :hook (prog-mode . company-mode)
+    :general
+    (:keymaps 'company-mode-map :states 'insert
+              [tab] 'company-complete)
+    :init
+    (progn
+      (setq company-idle-delay 0.2
+            company-tooltip-limit 20
+            company-show-numbers t
+            company-tooltip-align-annotations t)))
+#+END_SRC
+
+With Emacs 26.1 there's a new way to display popup frames that uses childframes
+instead of the old way, to be honest I'm not really sure what the benefits are
+but from the minor reading I did on reddit it seemed like a small upgrade and it
+works just fine, so why not?
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company-childframe
+    :after company
+    :delight
+    :commands company-childframe-mode
+#+END_SRC
 * Outro
 And this is finally it, we can now run the post init hook and reset back all the
 various settings we configured during our setup of Emacs. The last thing we need
