@@ -802,6 +802,29 @@ works just fine, so why not?
     :delight
     :commands company-childframe-mode
 #+END_SRC
+*** Syntax checking
+Flymake got a huge makeover in Emacs 26.1, and it's actually fairly useable now
+instead of being nearly useless. However, even though I tried to use it I'm
+still going to stick with [[Flycheck][Flycheck]] as I know it the best. There's no magic
+woodoo here, just install and enable.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :commands global-flycheck-mode
+    :init (global-flycheck-mode t))
+#+END_SRC
+
+However, there's this really neat package called ~flycheck-inline~ that displays
+errors underneath your cursor, instead of just at the bottom of the screen. I
+really like it, even though the error messages some times become quite messy due
+to line breaks and such.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck-inline
+    :after flycheck
+    :commands flycheck-inline-mode
+    :init (flycheck-inline-mode))
+#+END_SRC
 * Outro
 And this is finally it, we can now run the post init hook and reset back all the
 various settings we configured during our setup of Emacs. The last thing we need
