@@ -809,6 +809,7 @@ works just fine, so why not?
     :after company
     :delight
     :commands company-childframe-mode
+    :config (company-childframe-mode t))
 #+END_SRC
 *** Syntax checking
 Flymake got a huge makeover in Emacs 26.1, and it's actually fairly useable now
