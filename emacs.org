@@ -595,6 +595,7 @@ kinda required since we use Evil.
 #+BEGIN_SRC emacs-lisp
   (use-package evil-magit
     :after magit
+    :commands evil-magit-init
     :init (evil-magit-init))
 #+END_SRC
 *** ~diff-hl~
@@ -751,7 +752,7 @@ paragraph, because I'd write a book.
 #+END_SRC
 
 *** Functions
-*** Automagical tangling on save
+**** Automagical tangling on save
 It's hard to remember to both tangle this file and compile the generated ~init.el~
 file whenever I edit the settings for Emacs, so I'll write a function that does
 all the hard lifting for us. Neat. It also does this asynchronously too, which
@@ -766,9 +767,10 @@ is a real boon too.
       (async-start
        `(lambda ()
           (require 'org)
-          (org-babel-tangle-file (expand-file-name "emacs.org" user-dotfiles-dir)))
+          (org-babel-tangle-file (concat (expand-file-name "~/.dotfiles/") "emacs.org")))
        (lambda (result)
-         (byte-recompile-file (expand-file-name "init.el" amalthea--emacs-dir) t)
+         (byte-recompile-file (concat (expand-file-name user-emacs-directory) "init.el") t)
+         (message "%s" result)
          (message "Tangled and compiled emacs.org")))))
 
   (add-hook 'after-save-hook #'amalthea--tangle-byte-compile-org)
