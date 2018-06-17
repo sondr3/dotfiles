@@ -100,6 +100,7 @@ exist and can be used.
     (defconst amalthea--emacs-dir (expand-file-name user-emacs-directory))
     (defconst amalthea--etc-dir (concat amalthea--emacs-dir "etc/"))
     (defconst amalthea--cache-dir (concat amalthea--emacs-dir "cache/"))
+    (defconst user-dotfiles-dir (expand-file-name "~/.dotfiles/"))
 
     (dolist (dir (list amalthea--emacs-dir amalthea--etc-dir amalthea--cache-dir))
       (unless (file-directory-p dir)
@@ -747,6 +748,30 @@ paragraph, because I'd write a book.
             org-export-with-sub-superscripts '{}
             org-pretty-entities t
             org-list-allow-alphabetical t)))
+#+END_SRC
+
+*** Functions
+*** Automagical tangling on save
+It's hard to remember to both tangle this file and compile the generated ~init.el~
+file whenever I edit the settings for Emacs, so I'll write a function that does
+all the hard lifting for us. Neat. It also does this asynchronously too, which
+is a real boon too.
+
+#+BEGIN_SRC emacs-lisp
+  (defun amalthea--tangle-byte-compile-org ()
+    "Automatically tangles our emacs.org configuration file and
+  byte compiles the resulting init.el file."
+    (interactive)
+    (when (equal (buffer-name) (concat "emacs.org"))
+      (async-start
+       `(lambda ()
+          (require 'org)
+          (org-babel-tangle-file (expand-file-name "emacs.org" user-dotfiles-dir))
+      (lambda (result)
+        (byte-recompile-file (expand-file-name "init.el" amalthea--emacs-dir) t)
+        (message "Tangled and compiled emacs.org")))))
+
+  (add-hook 'after-save-hook #'amalthea--tangle-byte-compile-org)
 #+END_SRC
 * Programming
 Any and all settings related in some way to programming, be it either
