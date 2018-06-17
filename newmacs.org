@@ -1,7 +1,7 @@
 #+TITLE: Emacs settings
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
-#+PROPERTY: header-args :tangle ~/.emacs.d/new-init.el
+#+PROPERTY: header-args :tangle ~/.emacs.d/init.el
 
 * Introduction
 This is my Emacs configuration, there are many like it but this one is mine.
@@ -23,7 +23,50 @@ reflected in quite a few variables and functions that I use.
   (unless (eq emacs-major-version 26)
     (error "Your version of Emacs isn't up-to-date"))
 #+END_SRC
+* Conventions, configuration and rationales
+** ~use-package~ blocks
+Whenever there's more than one setting to configure, I'll wrap the ~:init~ and
+~:config~ blocks in ~(progn ...)~, this is something that I've seen in quite a few
+configuratinons and while it actually doesn't do anything I just enjoy how it
+wraps logically related code together, making it in my opinion easier to see at
+a glance what code belongs where.
+** Keybindings
+I'm writing this mainly so I can look it up whenever I need it instead of having
+to look at my code and figure out how and why I did it. I could also look at the
+documentation for whatever I'm trying to look up, but I've already solved that
+so why do it again when I can just write it here?
 
+First off, when configuring and using the ~:general~ keyword in ~use-package~
+declarations, I'll stick to being explicit with how I write my definitions. As
+an example, when creating my ~git~ bindings, I'll explicitly write the ~:keymaps~
+out instead of using the shorter ~(amalthea--leader-key-def 'normal ...)~:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (amalthea--leader-key-def
+    :keymaps 'normal
+#+END_SRC
+
+Furthermore, since I'm using ~which-key~ to show an overview of the keybindings
+I'm going to have to expliticly name a few bindings so that they are displayed
+nicely instead of the name of the function, which can be needlessly verbose.
+Again, I'll be using the example from my bindings to git; it's bound to ~SPC g~ as
+the definer, which without setting a ~(:which-key "git")~ would display just
+~+prefix~, which isn't too helpful. By using the ~:which-key~ keyword we can control
+how ~which-key~ displays bindings:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  "g" '(:ignore t :which-key "git")
+#+END_SRC
+
+As you can also see, we have to hadd ~:ignore t~, since this isn't a binding that
+actually does anything. Similarly, for functions and bindings that aren't
+prefixes we'll also make use of the ~:which-key~ binding, but we'll also bind a
+function to it instead of ignoring it. Thus, for showing ~magit-status~ with a
+different name, we'll do:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  "g s" '(magit-status :which-key "git status")
+#+END_SRC
 * Initialization
 ** Startup
 First and foremost, we'll try to make Emacs load quicker by first disabling
@@ -210,41 +253,6 @@ just feels so... wrong. So we'll use it. And abuse it.
   (use-package evil
     :demand t
     :config (evil-mode))
-#+END_SRC
-** Conventions and configuration
-I'm writing this mainly so I can look it up whenever I need it instead of having
-to look at my code and figure out how and why I did it. I could also look at the
-documentation for whatever I'm trying to look up, but I've already solved that
-so why do it again when I can just write it here?
-
-First off, when configuring and using the ~:general~ keyword in ~use-package~
-declarations, I'll stick to being explicit with how I write my definitions. As
-an example, when creating my ~git~ bindings, I'll explicitly write the ~:keymaps~
-out instead of using the shorter ~(amalthea--leader-key-def 'normal ...)~:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (amalthea--leader-key-def
-    :keymaps 'normal
-#+END_SRC
-
-Furthermore, since I'm using ~which-key~ to show an overview of the keybindings
-I'm going to have to expliticly name a few bindings so that they are displayed
-nicely instead of the name of the function, which can be needlessly verbose.
-Again, I'll be using the example from my bindings to git; it's bound to ~SPC g~ as
-the definer, which without setting a ~(:which-key "git")~ would display just
-~+prefix~, which isn't too helpful. By using the ~:which-key~ keyword we can control
-how ~which-key~ displays bindings:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  "g" '(:which-key "git")
-#+END_SRC
-
-Similarly, for functions and bindings that aren't prefixes we'll also make use
-of the ~:which-key~ binding, but we'll also bind a function to it. Thus, for
-showing ~magit-status~ with a different name, we'll do:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  "g s" '(magit-status :which-key "git status")
 #+END_SRC
 * Core settings and packages
 There's a lot of settings that needs to be tweaked for Emacs to be somewhat of a
@@ -518,7 +526,7 @@ mechanisms in Emacs, like finding files or opening recent files and so on.
      "C-h v" 'counsel-describe-variable)
     (amalthea--leader-key-def
       :keymaps 'normal
-      "f" '(:which-key "files")
+      "f" '(:ignore t :which-key "files")
       "f f" '(counsel-find-file :which-key "find file")
       "f r" '(counsel-recentf :which-key "recent file"))
     :config (counsel-mode))
@@ -550,7 +558,7 @@ with Borg.
     :general
     (amalthea--leader-key-def
       :keymaps 'normal
-      "g" '(:which-key "git")
+      "g" '(:ignore t :which-key "git")
       "g s" '(magit-status :which-key "git status"))
     :config
     (progn
