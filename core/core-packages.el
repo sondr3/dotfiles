@@ -40,7 +40,7 @@
       use-package-always-defer t)
 
 (use-package epkg
-  :init (setq epkg-repository (expand-file-name "var/epkgs/" amalthea-emacs-dir)))
+  :init (setq epkg-repository (expand-file-name "epkgs/" amalthea-cache-dir)))
 
 (provide 'core-packages)
 

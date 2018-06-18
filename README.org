@@ -1,0 +1,16 @@
+#+TITLE: Amalthea
+#+AUTHOR: Sondre Nilsen
+
+* Introduction
+This is my Emacs configuration, there are many like it but this one is mine.
+It's decently personalized, but it should be useful for either inspiration or
+just straight-up copy-pasta. My configuration is managed by [[https://github.com/emacscollective/borg][borg]], and is a bit
+weird in that the configuration lives in this directory but all the actual git
+modules lives in a separate repository ([[https://github.com/sondr3/.emacs.d][~.emacs.d~]]).
+
+I'm also running the latest major release of Emacs, which as of this writing is
+version 26.1, so unless you're running this version I cannot guarantee that
+everything works. It's also worth noting that I named my configuration
+~Amalthea~, after a random moon on Jupiter. I had my reasons for this once, but
+I can't remember why. I just think it's a cool name, so you'll see that name
+reflected in quite a few variables and functions that I use.
