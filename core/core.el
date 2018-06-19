@@ -122,14 +122,18 @@
 
 ;;; Launch
 
-(add-to-list 'load-path amalthea-core-dir)
-
 ;; Ensure directories exists before needing them
 (eval-when-compile (amalthea--ensure-core-dirs))
+
+;;; Load the core configuration
+(add-to-list 'load-path amalthea-core-dir)
 
 (require 'core-os)
 (require 'core-packages)
 (require 'core-ui)
+
+;;; Load the base configuration
+(require 'base (concat amalthea-emacs-dir "base/base"))
 
 (provide 'core)
 

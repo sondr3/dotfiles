@@ -1,4 +1,4 @@
-;;; base.el --- Base configuration -*- lexical-binding: t -*-
+;;; base-editor.el --- Base editor settings -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -21,10 +21,10 @@
 
 ;;; Code:
 
-(add-to-list 'load-path amalthea-base-dir)
+(use-package evil
+  :demand t
+  :config (evil-mode))
 
-(require 'base-editor)
+(provide 'base-editor)
 
-(provide 'base)
-
-;;; base.el ends here
+;;; base-editor.el ends here
