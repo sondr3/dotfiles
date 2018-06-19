@@ -53,6 +53,11 @@
 (defconst amalthea-cache-dir (concat amalthea-emacs-dir "cache/")
   "Storage for volatile files: caches, logs etc.")
 
+(defgroup amalthea nil
+  "Amalthea"
+  :tag 'amalthea
+  :group 'emacs)
+
 ;;; Variables
 
 (defvar amalthea-init-time nil
@@ -95,11 +100,17 @@
               ;; Directories and files
               abbrev-file-name (concat amalthea-local-dir "abbrev.el")
               backup-directory-alist (list (cons "." (concat amalthea-cache-dir "backup/")))
-              auto-save-list-file-name (concat amalthea-cache-dir "autosave"))
+              auto-save-list-file-name (concat amalthea-cache-dir "autosave")
+	      custom-file (concat amalthea-local-dir "custom.el"))
+;; Fully inhibit the initial screen
 (fset #'display-startup-echo-area-message #'ignore)
 
 ;; Mostly to save at most two strokes and at a minimum one. Efficiency baby.
 (fset #'yes-or-no-p #'y-or-n-p)
+
+;; Only load `custom.el' if it exists
+(when (file-exists-p custom-file)
+  (load custom-file t t))
 
 ;;; Functions
 
@@ -118,6 +129,7 @@
 
 (require 'core-os)
 (require 'core-packages)
+(require 'core-ui)
 
 (provide 'core)
 
