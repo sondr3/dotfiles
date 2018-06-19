@@ -92,13 +92,13 @@
               ;; Common sense
               sentence-end-double-space nil
               vc-follow-symlinks t
-	            ;; Save paste history when killing Emacs
+              ;; Save paste history when killing Emacs
               save-interprogram-paste-before-kill t
               ;; Directories and files
               abbrev-file-name (concat amalthea-local-dir "abbrev.el")
               backup-directory-alist (list (cons "." (concat amalthea-cache-dir "backup/")))
               auto-save-list-file-name (concat amalthea-cache-dir "autosave")
-	            custom-file (concat amalthea-local-dir "custom.el"))
+              custom-file (concat amalthea-local-dir "custom.el"))
 
 ;; Fully inhibit the initial screen
 (fset #'display-startup-echo-area-message #'ignore)
