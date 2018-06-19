@@ -29,6 +29,12 @@
 ;; brings with it all the goodies that `use-package' brings, like lazy loading,
 ;; easy configuring of hooks and settings and so on.
 
+;; Then, and this isn't required per se, but I'll be using Delight to hide or
+;; rename the names of major and minor modes on the modeline instead of
+;; Diminish. Mostly because when I last checked it didn't support hiding major
+;; modes or renaming them without weird hacks. And now that `use-package' has
+;; built-in support for the `:delight' keyword, I don't really need it.
+
 ;;; Code:
 
 (add-to-list 'load-path (expand-file-name "lib/borg" amalthea-emacs-dir))
@@ -41,6 +47,8 @@
 
 (use-package epkg
   :init (setq epkg-repository (expand-file-name "epkgs/" amalthea-cache-dir)))
+
+(use-package delight)
 
 (provide 'core-packages)
 
