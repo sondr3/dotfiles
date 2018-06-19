@@ -131,6 +131,7 @@
 (require 'core-os)
 (require 'core-packages)
 (require 'core-ui)
+(require 'core-keybindings)
 
 ;;; Load the base configuration
 (require 'base (concat amalthea-emacs-dir "base/base"))
