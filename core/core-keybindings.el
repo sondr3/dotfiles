@@ -63,6 +63,7 @@
 
 (use-package which-key
   :demand t
+  :delight
   :commands (which-key-mode)
   :custom
   (which-key-idle-delay 0.3 "Reduce the time before which-key pops up")
