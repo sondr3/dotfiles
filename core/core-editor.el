@@ -83,7 +83,7 @@
   :commands (show-paren-mode)
   :init (show-paren-mode t)
   :custom
-  (default show-paren-delay 0 "Show matching parenthesis without delay.")
+  (show-paren-delay 0 "Show matching parenthesis without delay.")
   (show-paren-highlight-openparen t "Always show the matching parenthesis.")
   (show-paren-when-point-inside-paren t "Show parenthesis when inside a block."))
 
