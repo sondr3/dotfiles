@@ -42,20 +42,14 @@
 
 ;;; Code:
 
-(defcustom amalthea-mono-font "Fira Mono"
-  "The default monospaced font that Amalthea uses."
-  :type 'string
-  :group 'amalthea)
+(defvar amalthea-mono-font "Fira Mono"
+  "The default monospaced font that Amalthea uses.")
 
-(defcustom amalthea-serif-font "Fira Sans"
-  "The default sans serif font that Amalthea uses."
-  :type 'string
-  :group 'amalthea)
+(defvar amalthea-serif-font "Fira Sans"
+  "The default sans serif font that Amalthea uses.")
 
-(defcustom amalthea-line-spacing 0.15
-  "The default line spacing width that Amalthea uses."
-  :type 'integer
-  :group 'amalthea)
+(defvar amalthea-line-spacing 0.15
+  "The default line spacing width that Amalthea uses.")
 
 ;;; Fonts
 

@@ -53,11 +53,6 @@
 (defconst amalthea-cache-dir (concat amalthea-emacs-dir "cache/")
   "Storage for volatile files: caches, logs etc.")
 
-(defgroup amalthea nil
-  "Amalthea"
-  :tag 'amalthea
-  :group 'emacs)
-
 ;;; Variables
 
 (defvar amalthea-init-time nil

@@ -46,15 +46,11 @@
 
 ;;; Code:
 
-(defcustom amalthea-fill-width 80
-  "The default width at which to wrap text in Amalthea."
-  :type 'integer
-  :group 'amalthea)
+(defvar amalthea-fill-width 80
+  "The default width at which to wrap text in Amalthea.")
 
-(defcustom amalthea-tab-width 2
-  "The default width for indentation (in spaces) in Amalthea."
-  :type 'integer
-  :group 'amalthea)
+(defvar amalthea-tab-width 2
+  "The default width for indentation (in spaces) in Amalthea.")
 
 (setq-default indent-tabs-mode nil
               tab-width amalthea-tab-width

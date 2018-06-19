@@ -49,15 +49,11 @@
 
 ;;; Custom bindings
 
-(defcustom amalthea-leader-key "SPC"
-  "The default leader key for Amalthea."
-  :type 'string
-  :group 'amalthea)
+(defvar amalthea-leader-key "SPC"
+  "The default leader key for Amalthea.")
 
-(defcustom amalthea-major-leader-key ","
-  "The default major mode leader key for Amalthea."
-  :type 'string
-  :group 'amalthea)
+(defvar amalthea-major-leader-key ","
+  "The default major mode leader key for Amalthea.")
 
 ;;; Packages
 
