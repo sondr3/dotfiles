@@ -27,6 +27,9 @@
 
 ;;; Code:
 
+(unless (boundp 'early-init-file)
+  (load (concat (file-name-directory load-file-name) "early-init")))
+
 (require 'core (concat user-emacs-directory "core/core"))
 
 ;; (provide 'init)

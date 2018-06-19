@@ -24,8 +24,8 @@
 ;;; Code:
 
 (eval-when-compile
-  (unless (>= emacs-major-version 27) ;; bleeding edge right here
-    (error "You are using Emacs %s, Amalthea requires version 27 or higher" emacs-version)))
+  (unless (>= emacs-major-version 26) 
+    (error "You are using Emacs %s, Amalthea requires version 26 or higher" emacs-version)))
 
 ;;; Constants
 

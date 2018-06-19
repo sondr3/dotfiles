@@ -80,6 +80,7 @@
       :prefix amalthea-major-leader-key)))
 
 ;;; Key bindings
+
 (amalthea-leader
   :keymaps 'normal
   "f" '(:ignore t :which-key "files")
