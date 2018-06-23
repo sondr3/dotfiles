@@ -37,7 +37,9 @@
 
 ;;; Code:
 
-(add-to-list 'load-path (expand-file-name "lib/borg" amalthea-emacs-dir))
+(eval-and-compile
+  (add-to-list 'load-path (expand-file-name "lib/borg" amalthea-emacs-dir)))
+
 (require 'borg)
 (borg-initialize)
 (require 'use-package)

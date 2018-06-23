@@ -120,11 +120,10 @@
 
 ;;; Launch
 
-;; Ensure directories exists before needing them
-(eval-when-compile (amalthea--ensure-core-dirs))
-
-;;; Load the core configuration
-(add-to-list 'load-path amalthea-core-dir)
+;; Ensure directories exists before needing them and load the core configuration
+(eval-and-compile
+  (amalthea--ensure-core-dirs)
+  (add-to-list 'load-path amalthea-core-dir))
 
 (require 'core-os)
 (require 'core-packages)

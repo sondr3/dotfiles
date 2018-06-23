@@ -48,7 +48,7 @@
 ;; the previous offerings had a whole bunch of drawbacks, either being really
 ;; slow, or not properly supporting relative line numbers in Org mode and so on.
 ;; Thankfully we now have a proper solution.
- 
+
 ;; First, we set the relative line number to `visual', which counts the visible
 ;; lines on the screen. Otherwise headers that are folded in Org makes the line
 ;; count go haywire, next we set a default width for line numbers and ensure
@@ -74,9 +74,9 @@
 ;; windows.
 (use-package hl-line
   :commands (global-hl-line-mode)
-  :init (global-hl-line-mode)
   :custom
-  (global-hl-line-sticky-flag nil "Don't highlight current line in inactive buffers"))
+  (global-hl-line-sticky-flag nil "Don't highlight current line in inactive buffers")
+  :init (global-hl-line-mode))
 
 (provide 'core-ui)
 

@@ -21,10 +21,9 @@
 
 ;;; Code:
 
-(add-to-list 'load-path amalthea-base-dir)
+(eval-and-compile (add-to-list 'load-path amalthea-base-dir))
 
 (require 'base-editor)
 
 (provide 'base)
-
 ;;; base.el ends here
