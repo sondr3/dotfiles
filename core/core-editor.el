@@ -34,7 +34,7 @@
 ;; character is a whopping eight! That doesn't make any sense whatsoever. So
 ;; we'll make it sane, use spaces and with a width of two.
 (defvar amalthea-tab-width 2
-  "The default width for indentation (in spaces) in Amalthea.")
+  "The default width for indentation, in spaces, in Amalthea.")
 
 (setq-default indent-tabs-mode nil
               tab-width amalthea-tab-width
@@ -74,11 +74,11 @@
 ;; parenthesises and show the matching pair when inside their block.
 (use-package paren
   :commands (show-paren-mode)
-  :init (show-paren-mode t)
   :custom
   (show-paren-delay 0 "Show matching parenthesis without delay.")
   (show-paren-highlight-openparen t "Always show the matching parenthesis.")
-  (show-paren-when-point-inside-paren t "Show parenthesis when inside a block."))
+  (show-paren-when-point-inside-paren t "Show parenthesis when inside a block.")
+  :init (show-paren-mode t))
 
 ;;; `autorevert':
 ;; If you've ever experienced changing a file in a different program while it's
@@ -149,7 +149,7 @@
 ;; frankly don't remember.
 (use-package uniquify
   :custom
-  (uniquify-buffer-name-style 'forward)) "How to name multiple buffers with the same name")
+  (uniquify-buffer-name-style 'forward "How to name multiple buffers with the same name"))
 
 (provide 'core-editor)
 
