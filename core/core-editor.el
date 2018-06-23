@@ -17,7 +17,8 @@
 
 ;;; Commentary:
 
-
+;; Contains configuration and settings for packages that are what I'd consider
+;; core to a proper usage of Emacs.
 
 ;;; Code:
 
