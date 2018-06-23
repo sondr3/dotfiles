@@ -21,6 +21,8 @@
 
 ;;; Code:
 
+(delight 'emacs-lisp-mode "Elisp" :major)
+
 (use-package auto-compile
   :delight
   :commands (auto-compile-on-load-mode auto-compile-on-save-mode)

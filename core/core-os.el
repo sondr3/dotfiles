@@ -33,5 +33,4 @@
       x-underline-at-descent-line t)
 
 (provide 'core-os)
-
 ;;; core-os.el ends here

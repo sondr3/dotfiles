@@ -136,5 +136,4 @@
 (require 'base (concat amalthea-emacs-dir "base/base"))
 
 (provide 'core)
-
 ;;; core.el ends here
