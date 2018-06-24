@@ -50,7 +50,11 @@
 (use-package epkg
   :init (setq epkg-repository (expand-file-name "epkgs/" amalthea-cache-dir)))
 
-(use-package delight)
+(use-package delight
+  :delight
+  (emacs-lisp-mode "Elisp" :major)
+  (outline-minor-mode)
+  (reveal-mode))
 
 (provide 'core-packages)
 

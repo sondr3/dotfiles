@@ -81,6 +81,7 @@
               inhibit-startup-screen t
               inhibit-startup-echo-area-message t
               initial-buffer-choice t
+              initial-major-mode 'fundamental-mode
               ;; Use the most recent byte code ops
               byte-compile--use-old-handlers nil
               ;; Recusion and lisp call limit
@@ -118,6 +119,9 @@
     (unless (file-directory-p dir)
       (make-directory dir t))))
 
+(defun amalthea--byte-compile-core-dirs ()
+  "TODO: WRITE ME, FIX ME, LOVE ME")
+
 ;;; Launch
 
 ;; Ensure directories exists before needing them and load the core configuration
@@ -132,7 +136,10 @@
 (require 'core-editor)
 
 ;;; Load the base configuration
-(require 'base (concat amalthea-emacs-dir "base/base"))
+(require 'base (concat amalthea-base-dir "base"))
+
+;;; Load all the modules
+(require 'modules (concat amalthea-modules-dir "modules"))
 
 (provide 'core)
 ;;; core.el ends here
