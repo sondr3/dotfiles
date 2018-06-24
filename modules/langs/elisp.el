@@ -21,10 +21,16 @@
 
 ;;; Code:
 
-(delight 'emacs-lisp-mode "Elisp" :major)
+(use-package emacs-lisp
+  :gfhook #'auto-compile-on-load-mode #'auto-compile-on-save-mode
+  :ghook 
+  ('emacs-lisp-mode-hook #'outline-minor-mode)
+  ('emacs-lisp-mode-hook #'reveal-mode)
+  :general
+  (:keymaps 'emacs-lisp-mode-map
+            "C-c e" 'macrostep-expand))
 
 (use-package auto-compile
-  :delight
   :commands (auto-compile-on-load-mode auto-compile-on-save-mode)
   :custom
   (auto-compile-display-buffer nil "Don't automatically show the *Compile Log* buffer")
@@ -33,10 +39,11 @@
   (auto-compile-toggle-deletes-nonlib-dest t "Delete non-library byte code")
   (auto-compile-update-autoloads t "Update autoloads after compiling")
   :config
-  (auto-compile-on-load-mode)
-  (auto-compile-on-save-mode)
-  (add-hook 'auto-compile-inhibit-compile-hook
-            'auto-compile-inhibit-compile-detached-git-head))
+  (add-hook 'auto-compile-inhibit-compile-hook 'auto-compile-inhibit-compile-detached-git-head))
+
+(use-package macrostep
+  :custom
+  (macrostep-expand-in-separate-buffer t "Show macro expansion in a new buffer"))
 
 (provide 'elisp)
 ;;; elisp.el ends here

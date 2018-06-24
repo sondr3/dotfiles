@@ -30,6 +30,9 @@
 [submodule "general"]
 	path = lib/general
 	url = git@github.com:noctuid/general.el.git
+[submodule "macrostep"]
+	path = lib/macrostep
+	url = git@github.com:joddie/macrostep.git
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
