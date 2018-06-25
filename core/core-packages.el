@@ -43,8 +43,8 @@
 (require 'borg)
 (borg-initialize)
 (require 'use-package)
-(setq use-package-verbose t
-      use-package-compute-statistics t
+(setq use-package-verbose amalthea-debug
+      use-package-compute-statistics amalthea-debug
       use-package-always-defer t)
 
 (use-package epkg

@@ -61,6 +61,9 @@
 (defvar amalthea-post-init-hook nil
   "Hook that runs after Emacs has loaded.")
 
+(defvar amalthea-debug t
+  "Whether to log and enable debugging by defalt for Amalthea.")
+
 ;;; Settings
 
 ;; Emacs actually predates UTF8, which to my mind is kinda nuts. So we'll force
