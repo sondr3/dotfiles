@@ -17,27 +17,37 @@
 
 ;;; Commentary:
 
-;; commentary
+;; Provides auto completion powered by `Company', snippet expansions powered by
+;; `Yasnippet' and `hippie-expand'.
 
 ;;; Code:
 
+;;; `Company':
+;; Instead of using something like `auto-complete' we'll use `Company' to give
+;; us auto completion for variables, functions and so on.
 (use-package company
   :delight " Ⓒ"
   :hook (prog-mode . company-mode)
   :general
   (:keymaps 'company-mode-map :states 'insert
-            [tab] 'company-complete)
-  :init
-  (progn
-    (setq company-idle-delay 0.2
-          company-tooltip-limit 20
-          company-show-numbers t
-          company-tooltip-align-annotations t
-          company-require-match nil
-          company-dabbrev-ignore-case nil
-          company-dabbrev-downcase nil
-          company-dabbrev-other-buffers t)))
+            [tab] 'company-complete
+            "C-n" 'company-select-next
+            "C-p" 'company-select-previous)
+  :custom
+  (company-idle-delay 0.2 "How long to wait before popping up")
+  (company-tooltip-limit 20 "Limit on how many options to display")
+  (company-show-numbers t "Show numbers behind options")
+  (company-tooltip-align-annotations t "Align annotations to the right")
+  (company-require-match nil "Allow free typing")
+  (company-dabbrev-ignore-case nil "Don't ignore case when completing")
+  (company-dabbrev-downcase nil "Don't automatically downcase competions")
+  (company-dabbrev-other-buffers t "Search other buffers for completion candidates"))
 
+;;; `company-box':
+;; Instead of using the default tooltip box that `Company' comes with we'll
+;; instead shell out to a different package that gives us a really nice... box.
+;; It allows for icons next to completion canditates as well as different colors
+;; for various backends if the need is there.
 (use-package company-box
   :after company
   :delight
@@ -45,6 +55,9 @@
   :custom
   (company-box-backends-colors nil "Don't use colors for the various backends"))
 
+;;; `company-quickhelp':
+;; When idling on a chosen completion candidate, show the items help in a popup
+;; box next to the completion window.
 (use-package company-quickhelp
   :after company
   :commands company-quickhelp-mode
@@ -52,6 +65,11 @@
   (company-quickhelp-use-propertized-text t "Allow text to have properties like size, color etc")
   :config (company-quickhelp-mode))
 
+;;; `company-statistics':
+;; When completing a candidate, save the candidate to a history file and sort
+;; completions accordingly next time so the candidate is ranked higher than the
+;; last time. Useful for when there are many options but you mostly select one
+;; or a few of them.
 (use-package company-statistics
   :after company
   :ghook 'company-mode-hook
