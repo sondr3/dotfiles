@@ -107,11 +107,7 @@
   (recentf-save-file (concat amalthea-cache-dir "recentf") "Location to save history of recent files")
   (recentf-max-saved-items 1000 "Total amount of saved recent files")
   (recentf-auto-cleanup 'never "Never clean the history, only append and remove the last")
-  (recentf-filename-handlers '(abbreviate-file-name))
-  :init
-  (add-hook 'find-file-hook (lambda () (unless recentf-mode
-                                         (recentf-mode)
-                                         (recentf-track-opened-file)))))
+  :init (recentf-mode))
 
 ;;; `savehist':
 ;; This is probably one of the easier minor modes to explain, so we'll keep it
