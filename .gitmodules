@@ -54,3 +54,9 @@
 [submodule "which-key"]
 	path = lib/which-key
 	url = git@github.com:justbur/emacs-which-key.git
+[submodule "yasnippet"]
+	path = lib/yasnippet
+	url = git@github.com:joaotavora/yasnippet.git
+[submodule "yasnippet-snippets"]
+	path = lib/yasnippet-snippets
+	url = git@github.com:AndreaCrotti/yasnippet-snippets.git

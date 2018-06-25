@@ -76,5 +76,10 @@
   :custom
   (company-statistics-file (concat amalthea-cache-dir "company-statistics.el") "Location to save statistics"))
 
+;;; `yasnippet':
+(use-package yasnippet
+  :delight (yas-minor-mode " ⓨ")
+  :ghook ('(text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode))
+
 (provide 'base-completion)
 ;;; base-completion.el ends here
