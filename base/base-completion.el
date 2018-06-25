@@ -77,6 +77,9 @@
   (company-statistics-file (concat amalthea-cache-dir "company-statistics.el") "Location to save statistics"))
 
 ;;; `yasnippet':
+;; Enables snippets and expansion of snippets with this package, we've also
+;; included `yasnippet-snippets' for a whole lotta snippets that you can use.
+;; TODO: This package slows down loading a lot.
 (use-package yasnippet
   :delight (yas-minor-mode " ⓨ")
   :ghook ('(text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode))
