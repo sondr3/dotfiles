@@ -7,6 +7,18 @@
 [submodule "closql"]
 	path = lib/closql
 	url = git@github.com:emacscollective/closql.git
+[submodule "company"]
+	path = lib/company
+	url = git@github.com:company-mode/company-mode.git
+[submodule "company-box"]
+	path = lib/company-box
+	url = git@github.com:sebastiencs/company-box.git
+[submodule "company-quickhelp"]
+	path = lib/company-quickhelp
+	url = git@github.com:expez/company-quickhelp.git
+[submodule "company-statistics"]
+	path = lib/company-statistics
+	url = git@github.com:company-mode/company-statistics.git
 [submodule "dash"]
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git
@@ -33,6 +45,9 @@
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
+[submodule "pos-tip"]
+	path = lib/pos-tip
+	url = git@github.com:pitkali/pos-tip.git
 [submodule "use-package"]
 	path = lib/use-package
 	url = git@github.com:jwiegley/use-package.git
