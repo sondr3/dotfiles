@@ -24,7 +24,7 @@
 ;;; Code:
 
 (eval-when-compile
-  (unless (>= emacs-major-version 26) 
+  (unless (not (version< emacs-version "26"))
     (error "You are using Emacs %s, Amalthea requires version 26 or higher" emacs-version)))
 
 ;;; Constants
@@ -61,7 +61,8 @@
 (defvar amalthea-post-init-hook nil
   "Hook that runs after Emacs has loaded.")
 
-(defvar amalthea-debug t
+(defvar init-file-debug) ;; silence warning
+(defvar amalthea-debug init-file-debug
   "Whether to log and enable debugging by defalt for Amalthea.")
 
 ;;; Settings
