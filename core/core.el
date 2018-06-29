@@ -124,7 +124,12 @@
       (make-directory dir t))))
 
 (defun amalthea--byte-compile-core-dirs ()
-  "TODO: WRITE ME, FIX ME, LOVE ME")
+  "TODO: There's probably a better way than this..."
+  (dolist (dir (list amalthea-core-dir amalthea-base-dir amalthea-utils-dir))
+    (byte-recompile-directory dir 0 t))
+  (dolist (file (list (concat amalthea-emacs-dir "init.el")
+                      (concat amalthea-emacs-dir "early-init.el")))
+    (byte-compile-file file)))
 
 ;;; Launch
 
