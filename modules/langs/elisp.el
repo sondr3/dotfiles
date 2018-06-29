@@ -41,13 +41,12 @@
 ;; Automatically compiles any `.el' files into their byte compiled version,
 ;; making sure everything is up to date.
 (use-package auto-compile
-  :custom
-  (auto-compile-display-buffer nil "Don't automatically show the *Compile Log* buffer")
-  (auto-compile-mode-line-counter t "Display number of warnings in modeline")
-  (auto-compile-source-recreate-deletes-dest t "Delete leftover byte code when recompiling")
-  (auto-compile-toggle-deletes-nonlib-dest t "Delete non-library byte code")
-  (auto-compile-update-autoloads t "Update autoloads after compiling")
   :config
+  (setq-am auto-compile-display-buffer nil "Don't automatically show the *Compile Log* buffer")
+  (setq-am auto-compile-mode-line-counter t "Display number of warnings in modeline")
+  (setq-am auto-compile-source-recreate-deletes-dest t "Delete leftover byte code when recompiling")
+  (setq-am auto-compile-toggle-deletes-nonlib-dest t "Delete non-library byte code")
+  (setq-am auto-compile-update-autoloads t "Update autoloads after compiling")
   (add-hook 'auto-compile-inhibit-compile-hook 'auto-compile-inhibit-compile-detached-git-head))
 
 ;;; `macrostep':

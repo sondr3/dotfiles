@@ -33,15 +33,15 @@
             [tab] 'company-complete
             "C-n" 'company-select-next
             "C-p" 'company-select-previous)
-  :custom
-  (company-idle-delay 0.2 "How long to wait before popping up")
-  (company-tooltip-limit 20 "Limit on how many options to display")
-  (company-show-numbers t "Show numbers behind options")
-  (company-tooltip-align-annotations t "Align annotations to the right")
-  (company-require-match nil "Allow free typing")
-  (company-dabbrev-ignore-case nil "Don't ignore case when completing")
-  (company-dabbrev-downcase nil "Don't automatically downcase competions")
-  (company-dabbrev-other-buffers t "Search other buffers for completion candidates"))
+  :init
+  (setq-am company-idle-delay 0.2 "How long to wait before popping up")
+  (setq-am company-tooltip-limit 20 "Limit on how many options to display")
+  (setq-am company-show-numbers t "Show numbers behind options")
+  (setq-am company-tooltip-align-annotations t "Align annotations to the right")
+  (setq-am company-require-match nil "Allow free typing")
+  (setq-am company-dabbrev-ignore-case nil "Don't ignore case when completing")
+  (setq-am company-dabbrev-downcase nil "Don't automatically downcase competions")
+  (setq-am company-dabbrev-other-buffers t "Search other buffers for completion candidates"))
 
 ;;; `company-box':
 ;; Instead of using the default tooltip box that `Company' comes with we'll
@@ -52,8 +52,8 @@
   :after company
   :delight
   :ghook 'company-mode-hook
-  :custom
-  (company-box-backends-colors nil "Don't use colors for the various backends"))
+  :config
+  (setq-am company-box-backends-colors nil "Don't use colors for the various backends"))
 
 ;;; `company-quickhelp':
 ;; When idling on a chosen completion candidate, show the items help in a popup
@@ -61,9 +61,10 @@
 (use-package company-quickhelp
   :after company
   :commands company-quickhelp-mode
-  :custom
-  (company-quickhelp-use-propertized-text t "Allow text to have properties like size, color etc")
-  :config (company-quickhelp-mode))
+  :config
+  (progn
+    (setq-am company-quickhelp-use-propertized-text t "Allow text to have properties like size, color etc")
+    (company-quickhelp-mode)))
 
 ;;; `company-statistics':
 ;; When completing a candidate, save the candidate to a history file and sort
@@ -73,8 +74,8 @@
 (use-package company-statistics
   :after company
   :ghook 'company-mode-hook
-  :custom
-  (company-statistics-file (concat amalthea-cache-dir "company-statistics.el") "Location to save statistics"))
+  :config
+  (setq-am company-statistics-file (concat amalthea-cache-dir "company-statistics.el") "Location to save statistics"))
 
 ;;; `yasnippet':
 ;; Enables snippets and expansion of snippets with this package, we've also
