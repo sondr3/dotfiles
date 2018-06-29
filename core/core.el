@@ -65,6 +65,18 @@
 (defvar amalthea-debug init-file-debug
   "Whether to log and enable debugging by defalt for Amalthea.")
 
+;;; Macros
+
+(defmacro setq-am (keyword value &optional _comment)
+  "A thin macro that wraps `setq' that allows us to write
+comments after the variable."
+  `(setq ,keyword ,value))
+
+(defmacro setq-default-am (keyword value &optional _comment)
+  "A thin macro that wraps `setq-default' that allows us to write
+comments after the variable."
+  `(setq-default ,keyword ,value))
+
 ;;; Settings
 
 ;; Emacs actually predates UTF8, which to my mind is kinda nuts. So we'll force
