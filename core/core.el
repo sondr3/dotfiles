@@ -67,14 +67,22 @@
 
 ;;; Macros
 
+
+;;; TODO: Write use-package keyword instead, like `:custom' but for `:init' and
+;;; `:config' instead
 (defmacro setq-am (keyword value &optional _comment)
   "A thin macro that wraps `setq' that allows us to write
-comments after the variable."
+comments after the variable. Although this forces you to write it
+a lot more instead of declaring all the variables inside a single
+`setq' block, the byte compiler readily merges them all together."
   `(setq ,keyword ,value))
 
 (defmacro setq-default-am (keyword value &optional _comment)
   "A thin macro that wraps `setq-default' that allows us to write
-comments after the variable."
+comments after the variable. Although this forces you to write it
+a lot more instead of declaring all the variables inside a single
+`setq-default' block, the byte compiler readily merges them all
+together."
   `(setq-default ,keyword ,value))
 
 ;;; Settings
@@ -98,24 +106,21 @@ comments after the variable."
               inhibit-startup-echo-area-message t
               initial-buffer-choice t
               initial-major-mode 'fundamental-mode
-              ;; Use the most recent byte code ops
-              byte-compile--use-old-handlers nil
               ;; Recusion and lisp call limit
               max-lisp-eval-depth 50000
-              max-specpdl-size 10000
-              ;; Backups
-              create-lockfiles nil
-              make-backup-files nil
-              ;; Common sense
-              sentence-end-double-space nil
-              vc-follow-symlinks t
-              ;; Save paste history when killing Emacs
-              save-interprogram-paste-before-kill t
-              ;; Directories and files
-              abbrev-file-name (concat amalthea-local-dir "abbrev.el")
+              max-specpdl-size 10000)
+;; Directories and files
+(setq-default abbrev-file-name (concat amalthea-local-dir "abbrev.el")
               backup-directory-alist (list (cons "." (concat amalthea-cache-dir "backup/")))
               auto-save-list-file-name (concat amalthea-cache-dir "autosave")
               custom-file (concat amalthea-local-dir "custom.el"))
+(setq-default-am byte-compile--use-old-handlers nil "Use the most recent byte code ops")
+(setq-default-am create-lockfiles nil "Don't create #filename# files in directories")
+(setq-default-am make-backup-files nil "Don't create backup files, we're using VC")
+(setq-default-am sentence-end-double-space nil "Sentences end with a single space")
+(setq-default-am vc-follow-symlinks t "Always follow symbolic links")
+;; Save paste history when killing Emacs
+(setq-default-am save-interprogram-paste-before-kill t "Save paste history when killing Emacs")
 
 ;; Fully inhibit the initial screen
 (fset #'display-startup-echo-area-message #'ignore)

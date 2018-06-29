@@ -15,7 +15,6 @@
 ;; For a full copy of the GNU General Public License
 ;; see <http://www.gnu.org/licenses/>.
 
-
 ;;; Commentary:
 
 ;; TODO: Currently only configured for use on Linux.
@@ -26,11 +25,11 @@
 
 ;;; Code:
 
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)
-      select-enable-clipboard t
-      select-enable-primary t
-      x-gtk-use-system-tooltips nil
-      x-underline-at-descent-line t)
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+(setq-am select-enable-clipboard t "Cut and paste from the actual clipboard")
+(setq-am select-enable-primary t "Use the primary clipboard")
+(setq-am x-gtk-use-system-tooltips nil "Use the builtin Emacs tooltips")
+(setq-am x-underline-at-descent-line t "Fix for not using GTK tooltips")
 
 (provide 'core-os)
 ;;; core-os.el ends here

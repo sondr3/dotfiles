@@ -48,9 +48,10 @@
   :demand t
   :delight
   :commands (which-key-mode)
-  :custom
-  (which-key-idle-delay 0.3 "Reduce the time before which-key pops up")
-  :config (which-key-mode))
+  :config
+  (progn
+    (setq-am which-key-idle-delay 0.3 "Reduce the time before which-key pops up")
+    (which-key-mode)))
 
 ;;; `General':
 ;; `use-package' has a built-in way of binding keys, but after having tried to

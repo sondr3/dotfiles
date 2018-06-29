@@ -43,12 +43,13 @@
 (require 'borg)
 (borg-initialize)
 (require 'use-package)
-(setq use-package-verbose amalthea-debug
-      use-package-compute-statistics amalthea-debug
-      use-package-always-defer t)
+(setq-am use-package-verbose amalthea-debug "Verbosely load packages when debugging")
+(setq-am use-package-compute-statistics amalthea-debug "Compute load times when debugging")
+(setq-am use-package-always-defer t "Always defer packages")
 
 (use-package epkg
-  :init (setq epkg-repository (expand-file-name "epkgs/" amalthea-cache-dir)))
+  :init (setq-am epkg-repository (expand-file-name "epkgs/" amalthea-cache-dir)
+                 "Save package database in our cache directory"))
 
 (use-package delight)
 
