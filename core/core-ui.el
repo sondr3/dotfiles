@@ -31,14 +31,17 @@
 (defvar amalthea-line-spacing 0.15
   "The default line spacing width that Amalthea uses.")
 
+(defvar amalthea-font-size 120
+  "The default font size for Amalthea.")
+
 ;;; Fonts
 
 (set-face-attribute 'default nil
 		                :family amalthea-mono-font
-		                :height 80)
+		                :height amalthea-font-size)
 (set-face-attribute 'variable-pitch nil
 		                :family amalthea-serif-font
-		                :height 80)
+		                :height amalthea-font-size)
 (set-frame-font amalthea-mono-font nil t)
 
 ;;; General UI settings:

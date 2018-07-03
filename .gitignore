@@ -4,3 +4,4 @@
 /elpa
 /var
 /cache
+*.elc

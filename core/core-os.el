@@ -17,19 +17,37 @@
 
 ;;; Commentary:
 
-;; TODO: Currently only configured for use on Linux.
-
 ;; Contains settings related to making Emacs work better on various operating
-;; systems. Currently only configures and enables copying and pasting between
-;; Emacs and X11 and choses the builtin tooltips over GTK.
+;; systems.
+
+;; Linux: Configures and enables copying and pasting between Emacs and X11 and
+;; choses the builtin tooltips over GTK.
+
+;; macOS: Enables emojis to be properly rendered, makes it so the titlebar is
+;; dark and not transparent and fixes a few related frame issues. Also fixes and
+;; enables smoother scrolling for macOS.
 
 ;;; Code:
 
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 (setq-am select-enable-clipboard t "Cut and paste from the actual clipboard")
 (setq-am select-enable-primary t "Use the primary clipboard")
-(setq-am x-gtk-use-system-tooltips nil "Use the builtin Emacs tooltips")
-(setq-am x-underline-at-descent-line t "Fix for not using GTK tooltips")
+
+(when (eq system-type 'darwin)
+  (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
+  (dolist (pair '((ns-transparent-titlebar . nil)
+                  (ns-appearance . dark)))
+    (push pair (alist-get 'ns window-system-default-frame-alist nil))
+    (set-frame-parameter nil (car pair) (cdr pair)))
+  (setq-am ns-use-thin-smoothing t "Use thinner strokes on macOS")
+  (setq-am pixel-scroll-mode t "Scroll pixel by pixel, smoother scrolling")
+  (setq-am mouse-wheel-flip-direction t "Change scrolling to new macOS defaults")
+  (setq-am mouse-wheel-tilt-scroll t "Change scrolling to new macOS defaults"))
+
+(defvar x-gtk-use-system-tooltips nil)
+(when (eq system-type 'gnu/linux)
+  (setq-am x-gtk-use-system-tooltips nil "Use the builtin Emacs tooltips")
+  (setq-am x-underline-at-descent-line t "Fix for not using GTK tooltips"))
 
 (provide 'core-os)
 ;;; core-os.el ends here

@@ -136,12 +136,14 @@ together."
 
 (defun amalthea--ensure-core-dirs ()
   "Ensures that all the required directories for Amalthea are created."
+  (interactive)
   (dolist (dir (list amalthea-cache-dir amalthea-local-dir))
     (unless (file-directory-p dir)
       (make-directory dir t))))
 
 (defun amalthea--byte-compile-core-dirs ()
   "TODO: There's probably a better way than this..."
+  (interactive)
   (dolist (dir (list amalthea-core-dir amalthea-base-dir amalthea-utils-dir))
     (byte-recompile-directory dir 0 t))
   (dolist (file (list (concat amalthea-emacs-dir "init.el")
