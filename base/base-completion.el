@@ -31,8 +31,8 @@
   :general
   (:keymaps 'company-mode-map :states 'insert
             [tab] 'company-complete
-            "C-n" 'company-select-next
-            "C-p" 'company-select-previous)
+            "C-j" 'company-select-next
+            "C-k" 'company-select-previous)
   :init
   (setq-am company-idle-delay 0.2 "How long to wait before popping up")
   (setq-am company-tooltip-limit 20 "Limit on how many options to display")
