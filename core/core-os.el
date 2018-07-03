@@ -39,6 +39,11 @@
                   (ns-appearance . dark)))
     (push pair (alist-get 'ns window-system-default-frame-alist nil))
     (set-frame-parameter nil (car pair) (cdr pair)))
+
+  (use-package exec-path-from-shell
+    :functions exec-path-from-shell-initialize
+    :config (exec-path-from-shell-initialize))
+
   (setq-am ns-use-thin-smoothing t "Use thinner strokes on macOS")
   (setq-am pixel-scroll-mode t "Scroll pixel by pixel, smoother scrolling")
   (setq-am mouse-wheel-flip-direction t "Change scrolling to new macOS defaults")

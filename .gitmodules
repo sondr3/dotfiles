@@ -39,6 +39,9 @@
 [submodule "evil-magit"]
 	path = lib/evil-magit
 	url = git@github.com:emacs-evil/evil-magit.git
+[submodule "exec-path-from-shell"]
+	path = lib/exec-path-from-shell
+	url = git@github.com:purcell/exec-path-from-shell.git
 [submodule "general"]
 	path = lib/general
 	url = git@github.com:noctuid/general.el.git
