@@ -51,7 +51,8 @@
   :init (setq-am epkg-repository (expand-file-name "epkgs/" amalthea-cache-dir)
                  "Save package database in our cache directory"))
 
-(use-package delight)
+(use-package delight
+  :demand t)
 
 (provide 'core-packages)
 

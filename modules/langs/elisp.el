@@ -41,7 +41,10 @@
 ;; Automatically compiles any `.el' files into their byte compiled version,
 ;; making sure everything is up to date.
 (use-package auto-compile
+  :functions (auto-compile-on-save-mode auto-compile-on-load-mode)
   :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode)
   (setq-am auto-compile-display-buffer nil "Don't automatically show the *Compile Log* buffer")
   (setq-am auto-compile-mode-line-counter t "Display number of warnings in modeline")
   (setq-am auto-compile-source-recreate-deletes-dest t "Delete leftover byte code when recompiling")
