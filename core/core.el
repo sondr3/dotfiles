@@ -157,8 +157,8 @@ together."
   (amalthea--ensure-core-dirs)
   (add-to-list 'load-path amalthea-core-dir))
 
-(require 'core-os)
 (require 'core-packages)
+(require 'core-os)
 (require 'core-ui)
 (require 'core-keybindings)
 (require 'core-editor)
