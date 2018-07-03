@@ -31,7 +31,7 @@
 (defvar amalthea-line-spacing 0.15
   "The default line spacing width that Amalthea uses.")
 
-(defvar amalthea-font-size 120
+(defvar amalthea-font-size 130
   "The default font size for Amalthea.")
 
 ;;; Fonts

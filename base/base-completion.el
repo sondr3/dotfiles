@@ -49,6 +49,7 @@
 ;; It allows for icons next to completion canditates as well as different colors
 ;; for various backends if the need is there.
 (use-package company-box
+  :disabled t
   :after company
   :delight
   :ghook 'company-mode-hook
