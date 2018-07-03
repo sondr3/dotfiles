@@ -1,4 +1,4 @@
-;;; base.el --- Base configuration -*- lexical-binding: t -*-
+;;; base-git.el --- Git -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -21,11 +21,25 @@
 
 ;;; Code:
 
-(eval-and-compile (add-to-list 'load-path amalthea-base-dir))
+(use-package magit
+  :delight auto-revert-mode
+  :general
+  (amalthea-leader
+    :keymaps 'normal
+    "g" '(:ignore t :which-key "git")
+    "g s" '(magit-status :which-key "git status"))
+  :config
+  (progn
+    (magit-add-section-hook 'magit-status-sections-hook
+                            'magit-insert-modules
+                            'magit-insert-stashes
+                            'append)))
 
-(require 'base-editor)
-(require 'base-completion)
-(require 'base-git)
+(use-package evil-magit
+  :after magit
+  :commands evil-magit-init
+  :init (evil-magit-init))
 
-(provide 'base)
-;;; base.el ends here
+(provide 'base-git)
+
+;;; base-git.el ends here
