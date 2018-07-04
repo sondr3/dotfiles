@@ -44,7 +44,7 @@
     :functions exec-path-from-shell-initialize
     :config (exec-path-from-shell-initialize))
 
-  (setq-am ns-use-thin-smoothing t "Use thinner strokes on macOS")
+  (setq-am ns-use-thin-smoothing nil "Use thinner strokes on macOS")
   (setq-am pixel-scroll-mode t "Scroll pixel by pixel, smoother scrolling")
   (setq-am mouse-wheel-flip-direction t "Change scrolling to new macOS defaults")
   (setq-am mouse-wheel-tilt-scroll t "Change scrolling to new macOS defaults"))
