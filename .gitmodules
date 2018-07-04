@@ -48,6 +48,9 @@
 [submodule "ghub"]
 	path = lib/ghub
 	url = git@github.com:magit/ghub.git
+[submodule "imenu-list"]
+	path = lib/imenu-list
+	url = git@github.com:bmag/imenu-list.git
 [submodule "macrostep"]
 	path = lib/macrostep
 	url = git@github.com:joddie/macrostep.git

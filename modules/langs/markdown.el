@@ -34,6 +34,11 @@
   (setq-am markdown-gfm-additional-languages '("sh") "Add `sh' as a language to convert")
   (setq-am markdown-fontify-code-blocks-natively t) "Highlight code using the languages major mode")
 
+(use-package imenu-list
+  :init
+  (setq-am imenu-auto-rescan t "Always automatically update buffer")
+  (setq-am imenu-list-auto-resize t "Update size after refresh"))
+
 (provide 'markdown)
 
 ;;; markdown.el ends here
