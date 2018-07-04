@@ -35,6 +35,7 @@
   (add-to-list 'load-path amalthea-modules-langs-dir))
 
 (require 'elisp)
+(require 'markdown)
 
 (provide 'modules)
 ;;; modules.el ends here
