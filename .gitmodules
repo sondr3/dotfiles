@@ -29,6 +29,9 @@
 [submodule "delight"]
 	path = lib/delight
 	url = https://git.savannah.nongnu.org/git/delight.git
+[submodule "diff-hl"]
+	path = lib/diff-hl
+	url = git@github.com:dgutov/diff-hl.git
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
