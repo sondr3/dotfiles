@@ -28,20 +28,17 @@
 (use-package company
   :delight " Ⓒ"
   :hook (prog-mode . company-mode)
-  :general
-  (:keymaps 'company-mode-map :states 'insert
-            [tab] 'company-complete
-            "C-j" 'company-select-next
-            "C-k" 'company-select-previous)
   :init
   (setq-am company-idle-delay 0.2 "How long to wait before popping up")
   (setq-am company-tooltip-limit 20 "Limit on how many options to display")
   (setq-am company-show-numbers t "Show numbers behind options")
   (setq-am company-tooltip-align-annotations t "Align annotations to the right")
   (setq-am company-require-match nil "Allow free typing")
+  (setq-am company-selection-wrap-around t "Wrap around to beginning when you hit bottom of suggestions")
   (setq-am company-dabbrev-ignore-case nil "Don't ignore case when completing")
   (setq-am company-dabbrev-downcase nil "Don't automatically downcase competions")
-  (setq-am company-dabbrev-other-buffers t "Search other buffers for completion candidates"))
+  (setq-am company-dabbrev-other-buffers t "Search other buffers for completion candidates")
+  :config (company-tng-configure-default))
 
 ;;; `company-box':
 ;; Instead of using the default tooltip box that `Company' comes with we'll
