@@ -41,16 +41,15 @@
     (set-frame-parameter nil (car pair) (cdr pair)))
 
   (use-package exec-path-from-shell
-    :functions exec-path-from-shell-initialize
+    :commands exec-path-from-shell-initialize
     :config (exec-path-from-shell-initialize))
 
-  (setq-am ns-use-thin-smoothing nil "Use thinner strokes on macOS")
-  (setq-am pixel-scroll-mode t "Scroll pixel by pixel, smoother scrolling")
+  (setq-am ns-use-thin-smoothing nil "Dont use thinner strokes on macOS")
   (setq-am mouse-wheel-flip-direction t "Change scrolling to new macOS defaults")
   (setq-am mouse-wheel-tilt-scroll t "Change scrolling to new macOS defaults"))
 
-(defvar x-gtk-use-system-tooltips nil)
 (when (eq system-type 'gnu/linux)
+  (defvar x-gtk-use-system-tooltips nil)
   (setq-am x-gtk-use-system-tooltips nil "Use the builtin Emacs tooltips")
   (setq-am x-underline-at-descent-line t "Fix for not using GTK tooltips"))
 
