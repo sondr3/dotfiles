@@ -36,6 +36,7 @@
 ;; keybindings configured to match what you'd expect from Vim/Evil.
 (use-package evil-collection
   :after evil
+  :commands evil-collection-init
   :config (evil-collection-init))
 
 ;;; General programming:
@@ -56,6 +57,15 @@
   :delight
   :commands (aggressive-indent-mode)
   :ghook ('emacs-lisp-mode-hook #'aggressive-indent-mode))
+
+;;; `ws-butler':
+;; This is something that you could fix by using a builtin helper function that
+;; removes newlines at the end of files etc, but I prefer using this package
+;; which is way more thorough.
+(use-package ws-butler
+  :delight
+  :commands (ws-butler-global-mode)
+  :init (ws-butler-global-mode))
 
 (provide 'base-editor)
 
