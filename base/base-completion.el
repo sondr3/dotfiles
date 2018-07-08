@@ -20,7 +20,62 @@
 ;; Provides auto completion powered by `Company', snippet expansions powered by
 ;; `Yasnippet' and `hippie-expand'.
 
+;; We'll also be replacing the built-in auto-completion framework that comes
+;; with Emacs, even `ido' with `Ivy'. I find that the default way that Emacs
+;; does completion of filenames and commands is pretty bad, especially compared
+;; to what `Counsel' can do. You could also use `Helm', but I like the more
+;; minimalist approach that `Ivy' has.
+
 ;;; Code:
+
+;;; `Ivy', `Counsel' and `Swiper':
+
+;;; `Ivy':
+;; Ivy is the generic auto completion frontend that we'll be using for
+;; completion instead of the built-in mechanisms in Emacs.
+(use-package ivy
+  :demand t
+  :commands ivy-mode
+  :delight
+  :config
+  (progn
+    (ivy-mode)
+    (setq ivy-use-virtual-buffers t
+          enable-recursive-minibuffers t
+          ivy-count-format "%d/%d ")))
+
+;;; `Counsel':
+;; Counsel is built on top of Ivy and contains a bunch of improved interfaces
+;; for mechanisms in Emacs, like finding files or opening recent files etc.
+(use-package counsel
+  :demand t
+  :commands (counsel-mode)
+  :delight
+  :general
+  (:keymaps 'ivy-mode-map
+            [remap find-file]                'counsel-find-file
+            [remap recentf]                  'counsel-recentf
+            [remap imenu]                    'counsel-imenu
+            [remap bookmark-jump]            'counsel-bookmark
+            [remap execute-extended-command] 'counsel-M-x
+            [remap describe-function]        'counsel-describe-function
+            [remap describe-variable]        'counsel-describe-variable
+            [remap describe-face]            'counsel-describe-face
+            [remap eshell-list-history]      'counsel-esh-history)
+  (amalthea-leader
+    :keymaps 'normal
+    "f" '(:ignore t :which-key "files")
+    "f f" '(find-file :which-key "find file")
+    "f r" '(recentf :which-key "find recent")
+    "f s" '(save-buffer :which-key "save buffer")))
+
+;;; `Swiper':
+;; This is just a straight upgrade of the default search in Emacs. Use it and
+;; love it.
+(use-package swiper
+  :general
+  (general-define-key "C-s" 'swiper)
+  (general-nmap "/" 'swiper))
 
 ;;; `Company':
 ;; Instead of using something like `auto-complete' we'll use `Company' to give
@@ -74,6 +129,8 @@
   :ghook 'company-mode-hook
   :config
   (setq-am company-statistics-file (concat amalthea-cache-dir "company-statistics.el") "Location to save statistics"))
+
+;;; Snippets
 
 ;;; `yasnippet':
 ;; Enables snippets and expansion of snippets with this package, we've also

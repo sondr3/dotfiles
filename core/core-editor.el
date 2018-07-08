@@ -43,7 +43,8 @@
 (setq-default-am word-wrap t "Wrap long lines instead of sending them outside the screen")
 (setq-default-am require-final-newline t "Always end files with a newline")
 
-;; Enable `auto-fill-mode' for any and all `text-mode' major modes.
+;; Enable `auto-fill-mode' for any and all `text-mode' major modes to enable
+;; wrapping of text at whatever width we enabled `amalthea-fill-width' to be.
 (add-hook 'text-mode-hook #'auto-fill-mode)
 
 ;; Automatically create a closing parenthesis/etc

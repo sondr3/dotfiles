@@ -71,12 +71,5 @@
     (general-create-definer amalthea-major-leader
       :prefix amalthea-major-leader-key)))
 
-;;; Key bindings
-(amalthea-leader
-  :keymaps 'normal
-  "f" '(:ignore t :which-key "files")
-  "f f" '(find-file :which-key "find file"))
-
 (provide 'core-keybindings)
-
 ;;; core-keybindings.el ends here

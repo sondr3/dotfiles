@@ -54,9 +54,15 @@
 [submodule "ghub"]
 	path = lib/ghub
 	url = git@github.com:magit/ghub.git
+[submodule "hydra"]
+	path = lib/hydra
+	url = git@github.com:abo-abo/hydra.git
 [submodule "imenu-list"]
 	path = lib/imenu-list
 	url = git@github.com:bmag/imenu-list.git
+[submodule "ivy"]
+	path = lib/ivy
+	url = git@github.com:abo-abo/swiper.git
 [submodule "macrostep"]
 	path = lib/macrostep
 	url = git@github.com:joddie/macrostep.git
