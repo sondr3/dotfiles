@@ -17,13 +17,45 @@
 
 ;;; Commentary:
 
-;; commentary
+;; Contains configuration for base packages related to editing, like emulating
+;; Vim with `Evil', and a few others.
 
 ;;; Code:
 
+;;; `Evil':
+;; Configures evil-mode.
 (use-package evil
   :demand t
+  :init (setq-am evil-want-integration nil "Don't load this, we'll be using evil-collection")
   :config (evil-mode))
+
+;;; `evil-collection':
+;; Instead of having to try to consistently create a key theme for a ton of
+;; various packages on my own, the Emacs and Evil community came together to
+;; create `evil-collection', which contains a ton of packages and modes with
+;; keybindings configured to match what you'd expect from Vim/Evil.
+(use-package evil-collection
+  :after evil
+  :config (evil-collection-init))
+
+;;; General programming:
+
+;;; `rainbow-delimiters':
+;; This is fairly straight forward, it matches pairs of parens with colors,
+;; making it easier to at a glance see blocks of code.
+(use-package rainbow-delimiters
+  :commands (rainbow-delimiters-mode)
+  :ghook ('prog-mode-hook #'rainbow-delimiters-mode))
+
+;;; `aggressive-indent':
+;; The default indentation mode for Emacs is okay, but when editing LISP you can
+;; do so much more. Since it's not whitespace sensitive you're free to
+;; manipulate it at will with packages like `smartparens' or `lispy'. This minor
+;; mode aggressively indents code whenever you change any part of a code block.
+(use-package aggressive-indent
+  :delight
+  :commands (aggressive-indent-mode)
+  :ghook ('emacs-lisp-mode-hook #'aggressive-indent-mode))
 
 (provide 'base-editor)
 

@@ -1,3 +1,6 @@
+[submodule "aggressive-indent"]
+	path = lib/aggressive-indent
+	url = git@github.com:Malabarba/aggressive-indent-mode.git
 [submodule "auto-compile"]
 	path = lib/auto-compile
 	url = git@github.com:emacscollective/auto-compile.git
@@ -36,6 +39,9 @@
 [submodule "evil"]
 	path = lib/evil
 	url = git@github.com:emacs-evil/evil.git
+[submodule "evil-collection"]
+	path = lib/evil-collection
+	url = git@github.com:emacs-evil/evil-collection.git
 [submodule "evil-magit"]
 	path = lib/evil-magit
 	url = git@github.com:emacs-evil/evil-magit.git
@@ -69,6 +75,9 @@
 [submodule "pos-tip"]
 	path = lib/pos-tip
 	url = git@github.com:pitkali/pos-tip.git
+[submodule "rainbow-delimiters"]
+	path = lib/rainbow-delimiters
+	url = git@github.com:Fanael/rainbow-delimiters.git
 [submodule "use-package"]
 	path = lib/use-package
 	url = git@github.com:jwiegley/use-package.git
