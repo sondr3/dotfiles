@@ -42,7 +42,7 @@
 
   (use-package exec-path-from-shell
     :commands exec-path-from-shell-initialize
-    :config (exec-path-from-shell-initialize))
+    :init (exec-path-from-shell-initialize))
 
   (setq-am ns-use-thin-smoothing nil "Dont use thinner strokes on macOS")
   (setq-am mouse-wheel-flip-direction t "Change scrolling to new macOS defaults")
