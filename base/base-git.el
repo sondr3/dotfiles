@@ -61,6 +61,11 @@
   :commands (diff-hl-magit-post-refresh global-diff-hl-mode)
   :functions (diff-hl-flydiff-mode diff-hl-margin-mode)
   :defines diff-hl-margin-symbols-alist
+  :general
+  (amalthea-leader
+    :keymaps 'normal
+    "g j" '(diff-hl-next-hunk :which-key "next hunk")
+    "g k" '(diff-hl-previous-hunk :which-key "previous hunk"))
   :init
   (progn
     (setq diff-hl-margin-symbols-alist
