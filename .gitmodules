@@ -13,9 +13,6 @@
 [submodule "company"]
 	path = lib/company
 	url = git@github.com:company-mode/company-mode.git
-[submodule "company-box"]
-	path = lib/company-box
-	url = git@github.com:sebastiencs/company-box.git
 [submodule "company-quickhelp"]
 	path = lib/company-quickhelp
 	url = git@github.com:expez/company-quickhelp.git

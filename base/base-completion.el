@@ -95,19 +95,6 @@
   (setq-am company-dabbrev-other-buffers t "Search other buffers for completion candidates")
   :config (company-tng-configure-default))
 
-;;; `company-box':
-;; Instead of using the default tooltip box that `Company' comes with we'll
-;; instead shell out to a different package that gives us a really nice... box.
-;; It allows for icons next to completion canditates as well as different colors
-;; for various backends if the need is there.
-(use-package company-box
-  :disabled t
-  :after company
-  :delight
-  :ghook 'company-mode-hook
-  :config
-  (setq-am company-box-backends-colors nil "Don't use colors for the various backends"))
-
 ;;; `company-quickhelp':
 ;; When idling on a chosen completion candidate, show the items help in a popup
 ;; box next to the completion window.
