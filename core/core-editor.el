@@ -46,6 +46,7 @@
 ;; Enable `auto-fill-mode' for any and all `text-mode' major modes to enable
 ;; wrapping of text at whatever width we enabled `amalthea-fill-width' to be.
 (add-hook 'text-mode-hook #'auto-fill-mode)
+(delight 'auto-fill-function nil t)
 
 ;; Automatically create a closing parenthesis/etc
 (add-hook 'prog-mode-hook #'electric-pair-mode)
