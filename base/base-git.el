@@ -43,6 +43,11 @@
                             'magit-insert-stashes
                             'append)))
 
+;;; `git-modes':
+;; A few minor major modes for editing `.gitignore', `.gitattributes' and
+;; `.gitconfig' files.
+(use-package git-modes)
+
 ;;; `evil-magit':
 ;; Magit by default doesn't include any Evil keybindings, which makes sense but
 ;; is kinda required since we use Evil.
