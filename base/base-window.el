@@ -31,6 +31,8 @@
 (amalthea-leader
   :keymaps 'normal
   "w" '(:ignore t :which-key "windows")
+  "w f" '(toggle-frame-fullscreen :which-key "fill screen")
+  "w m" '(toggle-frame-maximized :which-key "maximize")
   "w z" '(hydra-zoom/body :which-key "zoom"))
 
 (provide 'base-window)
