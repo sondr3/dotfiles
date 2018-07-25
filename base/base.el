@@ -26,6 +26,7 @@
 (require 'base-editor)
 (require 'base-completion)
 (require 'base-git)
+(require 'base-checking)
 
 (provide 'base)
 ;;; base.el ends here
