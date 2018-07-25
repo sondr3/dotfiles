@@ -30,6 +30,7 @@
 ;; extra functions and hooks to work better with Borg.
 (use-package magit
   :delight auto-revert-mode
+  :commands magit-add-section-hook
   :general
   (amalthea-leader
     :keymaps 'normal
@@ -70,13 +71,11 @@
   (progn
     (setq diff-hl-margin-symbols-alist
           '((insert . "+") (delete . "-") (change . "~")
-            (unknown . "?") (ignored . "i"))))
-  :config
-  (progn
+            (unknown . "?") (ignored . "i")))
     (global-diff-hl-mode)
-    (diff-hl-flydiff-mode)
     (diff-hl-margin-mode)
-    (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh t)))
+    (diff-hl-flydiff-mode)
+    (general-add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
 
 (provide 'base-git)
 
