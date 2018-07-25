@@ -1,4 +1,4 @@
-;;; base.el --- Base configuration -*- lexical-binding: t -*-
+;;; base-ui.el --- UI configuration -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -17,18 +17,15 @@
 
 ;;; Commentary:
 
-;; commentary
+;; Configuration of the Emacs interface with external packages.
 
 ;;; Code:
 
-(eval-and-compile (add-to-list 'load-path amalthea-base-dir))
+;;; Theme
+;; You should probably change this, I have a very weird taste in themes.
+(use-package tao-theme
+  :init (load-theme 'tao-yang t))
 
-(require 'base-editor)
-(require 'base-completion)
-(require 'base-git)
-(require 'base-checking)
-(require 'base-window)
-(require 'base-ui)
+(provide 'base-ui)
 
-(provide 'base)
-;;; base.el ends here
+;;; base-ui.el ends here
