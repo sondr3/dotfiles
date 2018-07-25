@@ -1,4 +1,4 @@
-;;; base.el --- Base configuration -*- lexical-binding: t -*-
+;;; base-window.el --- Window management -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -17,17 +17,22 @@
 
 ;;; Commentary:
 
-;; commentary
+;; Windows 10
 
 ;;; Code:
 
-(eval-and-compile (add-to-list 'load-path amalthea-base-dir))
+(defhydra hydra-zoom (:color red :hint nil)
+  "zoom"
+  ("k" text-scale-increase "in")
+  ("j" text-scale-decrease "out")
+  ("r" (text-scale-adjust 0) "reset" :color blue)
+  ("q" nil "quit" :color blue))
 
-(require 'base-editor)
-(require 'base-completion)
-(require 'base-git)
-(require 'base-checking)
-(require 'base-window)
+(amalthea-leader
+  :keymaps 'normal
+  "w" '(:ignore t :which-key "windows")
+  "w z" '(hydra-zoom/body :which-key "zoom"))
 
-(provide 'base)
-;;; base.el ends here
+(provide 'base-window)
+
+;;; base-window.el ends here
