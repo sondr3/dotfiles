@@ -51,6 +51,8 @@
   :config
   (progn
     (setq-am which-key-idle-delay 0.3 "Reduce the time before which-key pops up")
+    (setq which-key-allow-evil-operators t
+          which-key-sort-order 'which-key-key-order-alpha)
     (which-key-mode)))
 
 ;;; `General':
