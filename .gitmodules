@@ -45,6 +45,9 @@
 [submodule "evil-commentary"]
 	path = lib/evil-commentary
 	url = git@github.com:linktohack/evil-commentary.git
+[submodule "evil-escape"]
+	path = lib/evil-escape
+	url = git@github.com:syl20bnr/evil-escape.git
 [submodule "evil-goggles"]
 	path = lib/evil-goggles
 	url = git@github.com:edkolev/evil-goggles.git
