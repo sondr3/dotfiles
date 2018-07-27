@@ -90,6 +90,9 @@
 [submodule "rainbow-delimiters"]
 	path = lib/rainbow-delimiters
 	url = git@github.com:Fanael/rainbow-delimiters.git
+[submodule "system-packages"]
+	path = lib/system-packages
+	url = git@gitlab.com:jabranham/system-packages.git
 [submodule "tao-theme"]
 	path = lib/tao-theme
 	url = git@github.com:11111000000/tao-theme-emacs.git
