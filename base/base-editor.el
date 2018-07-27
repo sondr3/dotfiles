@@ -26,7 +26,8 @@
 ;; Configures evil-mode.
 (use-package evil
   :demand t
-  :init (setq-am evil-want-integration nil "Don't load this, we'll be using evil-collection")
+  :init (setq evil-want-integration nil     ;; Don't load this, we'll be using evil-collection
+              evil-search-module 'swiper)   ;; Use Swiper for searches
   :config (evil-mode))
 
 ;;; `evil-collection':
@@ -39,13 +40,43 @@
   :commands evil-collection-init
   :config (evil-collection-init))
 
+;;; `evil-lion':
+;; Ever wanted to align a long bunch of variables at their equal signs? Look no
+;; further, because that is exactly what this does.
+(use-package evil-lion
+  :commands evil-lion-mode
+  :config (evil-lion-mode))
+
+;;; `evil-commentary':
+;; Quickly comment out a single line or a region. It's really neat.
+(use-package evil-commentary
+  :delight
+  :commands evil-commentary-mode
+  :config (evil-commentary-mode))
+
+;;; `evil-surround':
+;; Incredibly handy package, if you want to change what surrounds a text you can
+;; use this to easily do that. Change `[' and it's closing brother to a pair of
+;; `()'? `cs[(' and you're done.
+(use-package evil-surround
+  :commands global-evil-surround-mode
+  :config (global-evil-surround-mode))
+
+;;; `evil-goggles':
+;; Show visual hints for what the action you just did. It's hard to tell without
+;; explaining it, I recommend you check out the README on GitHub.
+(use-package evil-goggles
+  :delight
+  :commands evil-goggles-mode
+  :config (evil-goggles-mode))
+
 ;;; General programming:
 
 ;;; `rainbow-delimiters':
 ;; This is fairly straight forward, it matches pairs of parens with colors,
 ;; making it easier to at a glance see blocks of code.
 (use-package rainbow-delimiters
-  :commands (rainbow-delimiters-mode)
+  :commands rainbow-delimiters-mode
   :ghook ('prog-mode-hook #'rainbow-delimiters-mode))
 
 ;;; `aggressive-indent':
@@ -55,7 +86,7 @@
 ;; mode aggressively indents code whenever you change any part of a code block.
 (use-package aggressive-indent
   :delight
-  :commands (aggressive-indent-mode)
+  :commands aggressive-indent-mode
   :ghook ('emacs-lisp-mode-hook #'aggressive-indent-mode))
 
 ;;; `ws-butler':
@@ -64,7 +95,7 @@
 ;; which is way more thorough.
 (use-package ws-butler
   :delight
-  :commands (ws-butler-global-mode)
+  :commands ws-butler-global-mode
   :init (ws-butler-global-mode))
 
 (provide 'base-editor)

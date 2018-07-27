@@ -42,9 +42,21 @@
 [submodule "evil-collection"]
 	path = lib/evil-collection
 	url = git@github.com:emacs-evil/evil-collection.git
+[submodule "evil-commentary"]
+	path = lib/evil-commentary
+	url = git@github.com:linktohack/evil-commentary.git
+[submodule "evil-goggles"]
+	path = lib/evil-goggles
+	url = git@github.com:edkolev/evil-goggles.git
+[submodule "evil-lion"]
+	path = lib/evil-lion
+	url = git@github.com:edkolev/evil-lion.git
 [submodule "evil-magit"]
 	path = lib/evil-magit
 	url = git@github.com:emacs-evil/evil-magit.git
+[submodule "evil-surround"]
+	path = lib/evil-surround
+	url = git@github.com:emacs-evil/evil-surround.git
 [submodule "exec-path-from-shell"]
 	path = lib/exec-path-from-shell
 	url = git@github.com:purcell/exec-path-from-shell.git
