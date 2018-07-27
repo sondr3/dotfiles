@@ -25,6 +25,8 @@
 
 ;;; Code:
 
+;;; `git-hydra':
+;; Quickly move between hunks in your document.
 (defhydra hydra-git (:color pink)
   "git"
   ("k" diff-hl-previous-hunk "prev hunk")
