@@ -64,6 +64,10 @@
             [remap eshell-list-history]      'counsel-esh-history)
   (amalthea-leader
     :keymaps 'normal
+    "A" '(:ignore t :which-key "assorted")
+    "A u" '(counsel-unicode-char :which-key "find unicode symbol")
+    "b" '(:ignore t :which-key "buffers")
+    "b b" '(ivy-switch-buffer :which-key "change buffer")
     "f" '(:ignore t :which-key "files")
     "f f" '(find-file :which-key "find file")
     "f r" '(recentf :which-key "find recent")
