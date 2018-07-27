@@ -42,7 +42,6 @@
   :general
   (amalthea-leader
     :keymaps 'normal
-    "g" '(:ignore t :which-key "git")
     "g h" '(hydra-git/body :which-key "hydra")
     "g s" '(magit-status :which-key "git status"))
   :config

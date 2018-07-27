@@ -62,7 +62,6 @@ lyspell:
   :general
   (amalthea-leader
     :keymaps 'normal
-    "S" '(:ignore t :which-key "spelling")
     "S s" '(hydra-spelling/body :which-key "hydra")
     "S b" '(flyspell-buffer :which-key "spell check buffer")
     "S n" '(flyspell-goto-next-error :which-key "next spelling error"))

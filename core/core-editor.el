@@ -62,7 +62,6 @@
   :general
   (amalthea-leader
     :keymaps 'normal
-    "h" '(:ignore t :which-key "help")
     "h f" '(describe-function :which-key "describe function")
     "h v" '(describe-variable :which-key "describe variable"))
   :init (temp-buffer-resize-mode)

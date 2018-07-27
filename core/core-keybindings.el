@@ -73,5 +73,18 @@
     (general-create-definer amalthea-major-leader
       :prefix amalthea-major-leader-key)))
 
+;;; Default `which-key' prefixes
+;; This keeps all the main menus in one place instead of spread throughout the
+;; whole project.
+(amalthea-leader
+  :keymaps 'normal
+  "a" '(:ignore t :which-key "assorted")
+  "b" '(:ignore t :which-key "buffers")
+  "f" '(:ignore t :which-key "files")
+  "g" '(:ignore t :which-key "git")
+  "h" '(:ignore t :which-key "help")
+  "S" '(:ignore t :which-key "spelling")
+  "w" '(:ignore t :which-key "windows"))
+
 (provide 'core-keybindings)
 ;;; core-keybindings.el ends here
