@@ -17,9 +17,10 @@
 
 ;;; Commentary:
 
-;; Syntax and spell checking or both programming and regular languages, using
+;; Syntax and spell checking for both programming and regular languages, using
 ;; `flyspell' and `flycheck' to configure them. Requirements are that you need
-;; to have `aspell' installed for this to work out of the box.
+;; to have `hunspell' installed for this to work, though `use-package' will try
+;; to install it for you.
 
 ;;; Code:
 
@@ -30,6 +31,7 @@
 ;; enable the regular version for `text-mode' buffers.
 (use-package flyspell
   :commands (flyspell-mode flyspell-prog-mode)
+  :ensure-system-package hunspell
   :delight " Ⓢ"
   :general
   (amalthea-leader
@@ -38,11 +40,13 @@
     "S b" '(flyspell-buffer :which-key "spell check buffer")
     "S n" '(flyspell-goto-next-error :which-key "next spelling error"))
   :init
+  (setenv "DICPATH" (concat (getenv "HOME") "/Library/Spelling"))
   (general-add-hook 'prog-mode-hook #'flyspell-prog-mode)
   (dolist (mode-hook '(text-mode-hook))
     (general-add-hook mode-hook #'flyspell-mode))
   (progn
-    (setq ispell-program-name "aspell"
+    (setq ispell-program-name "hunspell"
+          ispell-really-hunspell t
           ispell-local-dictionary "en_US"
           flyspell-use-meta-tab nil
           flyspell-issue-message-flag nil
@@ -51,20 +55,16 @@
 ;;; `flyspell-correct':
 ;; The default correction window for Flyspell is awful, terribly so actually, so
 ;; we'll use a package to fix this. This creates a generic way of correcting
-;; words and then later we'll use a Ivy-minibuffer to correct wording.
-(use-package flyspell-correct
+;; words and we'll use a Ivy-minibuffer to correct wording.
+(use-package flyspell-correct-ivy
+  :after flyspell
   :commands (flyspell-correct-word-generic
+             flyspell-correct-ivy
              flyspell-correct-previous-word-generic)
   :general
   (amalthea-leader
     :keymaps 'normal
-    "S c" '(flyspell-correct-previous-word-generic :which-key "correct word")))
-
-;;; `flyspell-correct-ivy':
-;; Uses Ivy to correct spelling.
-(use-package flyspell-correct-ivy
-  :commands flyspell-correct-ivy
-  :general
+    "S c" '(flyspell-correct-previous-word-generic :which-key "correct word"))
   :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
 (provide 'base-checking)
