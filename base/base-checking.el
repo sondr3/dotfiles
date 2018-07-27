@@ -24,6 +24,31 @@
 
 ;;; Code:
 
+;;; `spelling-hydra':
+;; A hydra for quickly moving through your buffer, moving from one error to the
+;; other, checking and correcting them as you go. Also enables toggling of
+;; either straight up `flyspell' or of it's `prog-mode'.
+;;
+;; Ever so lightly stolen from rmberYou
+(defhydra hydra-spelling (:color blue)
+  "
+  ^
+  ^Errors^            ^Checker^            ^Mode^
+  ^──────^────────────^───────^────────────^────^─────────
+  _k_: previous       _f_: check           _m_: mode
+  _j_: next           _c_: correction      _p_: prog mode
+  ^^                  _d_: dictionary      ^^
+  ^^                  ^^                   ^^
+  "
+  ("q" nil "quit")
+  ("k" flyspell-correct-previous :color pink)
+  ("j" flyspell-correct-next :color pink)
+  ("c" ispell)
+  ("d" ispell-change-dictionary)
+  ("f" flyspell-buffer)
+  ("m" flyspell-mode)
+  ("p" flyspell-prog-mode))
+
 ;;; `flyspell':
 ;; The builtin spell checker for Emacs, this is a really nice little package
 ;; that automatically does it's magic whenever it's needed. For programming
@@ -37,6 +62,7 @@
   (amalthea-leader
     :keymaps 'normal
     "S" '(:ignore t :which-key "spelling")
+    "S s" '(hydra-spelling/body :which-key "hydra")
     "S b" '(flyspell-buffer :which-key "spell check buffer")
     "S n" '(flyspell-goto-next-error :which-key "next spelling error"))
   :init
