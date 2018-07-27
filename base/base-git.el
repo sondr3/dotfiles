@@ -25,6 +25,12 @@
 
 ;;; Code:
 
+(defhydra hydra-git (:color pink)
+  "git"
+  ("k" diff-hl-previous-hunk "prev hunk")
+  ("j" diff-hl-next-hunk "next hunk")
+  ("q" nil "quit" :color blue))
+
 ;;; `Magit':
 ;; Enable and appreciate it! The only thing we'll really change is adding a few
 ;; extra functions and hooks to work better with Borg.
@@ -35,6 +41,7 @@
   (amalthea-leader
     :keymaps 'normal
     "g" '(:ignore t :which-key "git")
+    "g h" '(hydra-git/body :which-key "hydra")
     "g s" '(magit-status :which-key "git status"))
   :config
   (progn

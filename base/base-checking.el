@@ -32,9 +32,10 @@
 ;; Ever so lightly stolen from rmberYou
 (defhydra hydra-spelling (:color blue)
   "
+lyspell:
   ^
   ^Errors^            ^Checker^            ^Mode^
-  ^──────^────────────^───────^────────────^────^─────────
+  ^──────^─────────── ^───────^─────────── ^────^─────────
   _k_: previous       _f_: check           _m_: mode
   _j_: next           _c_: correction      _p_: prog mode
   ^^                  _d_: dictionary      ^^
