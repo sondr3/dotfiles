@@ -26,16 +26,24 @@
 (defconst amalthea-modules-langs-dir (concat amalthea-modules-dir "langs/")
   "Path to configuration of languages in Amalthea.")
 
+(defconst amalthea-modules-tools-dir (concat amalthea-modules-dir "tools/")
+  "Path to configuration of tools in Amalthea.")
+
 ;;; Functions
 (defun amalthea--byte-compile-module-dirs ()
   "TODO")
 
 ;;; Add all the languages to the load path
 (eval-and-compile
-  (add-to-list 'load-path amalthea-modules-langs-dir))
+  (add-to-list 'load-path amalthea-modules-langs-dir)
+  (add-to-list 'load-path amalthea-modules-tools-dir))
 
+;;; Languages
 (require 'elisp)
 (require 'markdown)
+
+;;; Tools
+(require 'docker)
 
 (provide 'modules)
 ;;; modules.el ends here
