@@ -45,6 +45,7 @@
 ;;; Tools
 (require 'configuration)
 (require 'docker)
+(require 'nginx)
 
 (provide 'modules)
 ;;; modules.el ends here

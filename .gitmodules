@@ -13,6 +13,9 @@
 [submodule "company"]
 	path = lib/company
 	url = git@github.com:company-mode/company-mode.git
+[submodule "company-nginx"]
+	path = lib/company-nginx
+	url = git@github.com:stardiviner/company-nginx.git
 [submodule "company-quickhelp"]
 	path = lib/company-quickhelp
 	url = git@github.com:expez/company-quickhelp.git
@@ -99,6 +102,9 @@
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
+[submodule "nginx-mode"]
+	path = lib/nginx-mode
+	url = git@github.com:ajc/nginx-mode.git
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
