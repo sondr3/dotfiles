@@ -26,18 +26,17 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init
-  (setq-am markdown-command "pandoc --from=markdown --to=html --standalone --mathjax"
-           "Use pandoc to convert documents from markdown to HTML")
-  (setq-am markdown-enable-wiki-links t "Syntax highlighting for wiki links")
-  (setq-am markdown-italic-underscore t "Use underscores for italic text")
-  (setq-am markdown-make-gfm-checkboxes-buttons t "Make checkboxes into buttons you can interact with")
-  (setq-am markdown-gfm-additional-languages '("sh") "Add `sh' as a language to convert")
-  (setq-am markdown-fontify-code-blocks-natively t) "Highlight code using the languages major mode")
+  (setq markdown-command "pandoc --from=markdown --to=html --standalone --mathjax" ;; Use pandoc to convert documents from markdown to HTML
+        markdown-enable-wiki-links t                                               ;; Syntax highlighting for wiki links
+        markdown-italic-underscore t                                               ;; Use underscores for italic text
+        markdown-make-gfm-checkboxes-buttons t                                     ;; Make checkboxes into buttons you can interact with
+        markdown-gfm-additional-languages '("sh")                                  ;; Add `sh' as a language to convert
+        markdown-fontify-code-blocks-natively t))                                  ;; Highlight code using the languages major mode
 
-(use-package imenu-list
-  :init
-  (setq-am imenu-auto-rescan t "Always automatically update buffer")
-  (setq-am imenu-list-auto-resize t "Update size after refresh"))
+  (use-package imenu-list
+    :init
+    (setq imenu-auto-rescan t        ;; Always automatically update buffer
+          imenu-list-auto-resize t)) ;; Update size after refresh
 
 (provide 'markdown)
 
