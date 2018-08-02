@@ -43,6 +43,7 @@
 (require 'markdown)
 
 ;;; Tools
+(require 'configuration)
 (require 'docker)
 
 (provide 'modules)
