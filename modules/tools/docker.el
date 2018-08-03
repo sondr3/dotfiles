@@ -31,7 +31,7 @@
     :keymaps 'dockerfile-mode-map
     "b" 'dockerfile-build-buffer
     "B" 'dockerfile-build-no-cache-buffer)
-  :init (dockerfile-mode))
+  :mode "\\Dockerfile\\'")
 
 (provide 'docker)
 ;;; docker.el ends here
