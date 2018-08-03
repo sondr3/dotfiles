@@ -126,7 +126,11 @@
 ;; TODO: This package slows down loading a lot.
 (use-package yasnippet
   :delight (yas-minor-mode " ⓨ")
-  :ghook ('(text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode))
+  :ghook ('(text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode)
+  :general
+  (amalthea-major-leader 'normal
+    "Y" '(:ignore t :which-key "Yasnippet")
+    "Y e" '(yas-expand :which-key "expand")))
 
 (provide 'base-completion)
 ;;; base-completion.el ends here
