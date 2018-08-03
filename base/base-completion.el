@@ -62,8 +62,7 @@
             [remap describe-variable]        'counsel-describe-variable
             [remap describe-face]            'counsel-describe-face
             [remap eshell-list-history]      'counsel-esh-history)
-  (amalthea-leader
-    :keymaps 'normal
+  (amalthea-leader 'normal
     "A u" '(counsel-unicode-char :wk "find unicode symbol")
     "b b" '(ivy-switch-buffer :wk "change buffer")
     "f f" '(find-file :wk "find file")

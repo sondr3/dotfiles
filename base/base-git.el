@@ -40,8 +40,7 @@
   :delight auto-revert-mode
   :commands magit-add-section-hook
   :general
-  (amalthea-leader
-    :keymaps 'normal
+  (amalthea-leader 'normal
     "g h" '(hydra-git/body :wk "hydra")
     "g s" '(magit-status :wk "git status"))
   :config
@@ -76,8 +75,7 @@
   :functions (diff-hl-flydiff-mode diff-hl-margin-mode)
   :defines diff-hl-margin-symbols-alist
   :general
-  (amalthea-leader
-    :keymaps 'normal
+  (amalthea-leader 'normal
     "g j" '(diff-hl-next-hunk :wk "next hunk")
     "g k" '(diff-hl-previous-hunk :wk "previous hunk"))
   :init

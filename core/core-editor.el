@@ -60,8 +60,7 @@
 (use-package help
   :commands temp-buffer-resize-mode
   :general
-  (amalthea-leader
-    :keymaps 'normal
+  (amalthea-leader 'normal
     "h f" '(describe-function :wk "describe function")
     "h v" '(describe-variable :wk "describe variable"))
   :init (temp-buffer-resize-mode)

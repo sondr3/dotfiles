@@ -76,8 +76,7 @@
 ;;; Default `which-key' prefixes
 ;; This keeps all the main menus in one place instead of spread throughout the
 ;; whole project.
-(amalthea-leader
-  :keymaps 'normal
+(amalthea-leader 'normal
   "a" '(:ignore t :wk "assorted")
   "b" '(:ignore t :wk "buffers")
   "f" '(:ignore t :wk "files")

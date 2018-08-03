@@ -60,8 +60,7 @@ lyspell:
   :ensure-system-package hunspell
   :delight " Ⓢ"
   :general
-  (amalthea-leader
-    :keymaps 'normal
+  (amalthea-leader 'normal
     "S s" '(hydra-spelling/body :wk "hydra")
     "S b" '(flyspell-buffer :wk "spell check buffer")
     "S n" '(flyspell-goto-next-error :wk "next spelling error"))
@@ -88,8 +87,7 @@ lyspell:
              flyspell-correct-ivy
              flyspell-correct-previous-word-generic)
   :general
-  (amalthea-leader
-    :keymaps 'normal
+  (amalthea-leader 'normal
     "S c" '(flyspell-correct-previous-word-generic :wk "correct word"))
   :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
