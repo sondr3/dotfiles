@@ -42,8 +42,8 @@
   :general
   (amalthea-leader
     :keymaps 'normal
-    "g h" '(hydra-git/body :which-key "hydra")
-    "g s" '(magit-status :which-key "git status"))
+    "g h" '(hydra-git/body :wk "hydra")
+    "g s" '(magit-status :wk "git status"))
   :config
   (progn
     (magit-add-section-hook 'magit-status-sections-hook
@@ -78,8 +78,8 @@
   :general
   (amalthea-leader
     :keymaps 'normal
-    "g j" '(diff-hl-next-hunk :which-key "next hunk")
-    "g k" '(diff-hl-previous-hunk :which-key "previous hunk"))
+    "g j" '(diff-hl-next-hunk :wk "next hunk")
+    "g k" '(diff-hl-previous-hunk :wk "previous hunk"))
   :init
   (progn
     (setq diff-hl-margin-symbols-alist

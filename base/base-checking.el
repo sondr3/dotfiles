@@ -62,9 +62,9 @@ lyspell:
   :general
   (amalthea-leader
     :keymaps 'normal
-    "S s" '(hydra-spelling/body :which-key "hydra")
-    "S b" '(flyspell-buffer :which-key "spell check buffer")
-    "S n" '(flyspell-goto-next-error :which-key "next spelling error"))
+    "S s" '(hydra-spelling/body :wk "hydra")
+    "S b" '(flyspell-buffer :wk "spell check buffer")
+    "S n" '(flyspell-goto-next-error :wk "next spelling error"))
   :init
   (setenv "DICPATH" (concat (getenv "HOME") "/Library/Spelling"))
   (general-add-hook 'prog-mode-hook #'flyspell-prog-mode)
@@ -90,7 +90,7 @@ lyspell:
   :general
   (amalthea-leader
     :keymaps 'normal
-    "S c" '(flyspell-correct-previous-word-generic :which-key "correct word"))
+    "S c" '(flyspell-correct-previous-word-generic :wk "correct word"))
   :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
 (provide 'base-checking)

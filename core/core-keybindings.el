@@ -78,13 +78,13 @@
 ;; whole project.
 (amalthea-leader
   :keymaps 'normal
-  "a" '(:ignore t :which-key "assorted")
-  "b" '(:ignore t :which-key "buffers")
-  "f" '(:ignore t :which-key "files")
-  "g" '(:ignore t :which-key "git")
-  "h" '(:ignore t :which-key "help")
-  "S" '(:ignore t :which-key "spelling")
-  "w" '(:ignore t :which-key "windows"))
+  "a" '(:ignore t :wk "assorted")
+  "b" '(:ignore t :wk "buffers")
+  "f" '(:ignore t :wk "files")
+  "g" '(:ignore t :wk "git")
+  "h" '(:ignore t :wk "help")
+  "S" '(:ignore t :wk "spelling")
+  "w" '(:ignore t :wk "windows"))
 
 (provide 'core-keybindings)
 ;;; core-keybindings.el ends here

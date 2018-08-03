@@ -64,11 +64,11 @@
             [remap eshell-list-history]      'counsel-esh-history)
   (amalthea-leader
     :keymaps 'normal
-    "A u" '(counsel-unicode-char :which-key "find unicode symbol")
-    "b b" '(ivy-switch-buffer :which-key "change buffer")
-    "f f" '(find-file :which-key "find file")
-    "f r" '(recentf :which-key "find recent")
-    "f s" '(save-buffer :which-key "save buffer")))
+    "A u" '(counsel-unicode-char :wk "find unicode symbol")
+    "b b" '(ivy-switch-buffer :wk "change buffer")
+    "f f" '(find-file :wk "find file")
+    "f r" '(recentf :wk "find recent")
+    "f s" '(save-buffer :wk "save buffer")))
 
 ;;; `Swiper':
 ;; This is just a straight upgrade of the default search in Emacs. Use it and
@@ -129,8 +129,8 @@
   :ghook ('(text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode)
   :general
   (amalthea-major-leader 'normal
-    "Y" '(:ignore t :which-key "Yasnippet")
-    "Y e" '(yas-expand :which-key "expand")))
+    "Y" '(:ignore t :wk "Yasnippet")
+    "Y e" '(yas-expand :wk "expand")))
 
 (provide 'base-completion)
 ;;; base-completion.el ends here
