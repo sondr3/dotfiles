@@ -90,5 +90,9 @@
     "S c" '(flyspell-correct-previous-word-generic :wk "correct word"))
   :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
+;;; `flycheck':
+(use-package flycheck
+  :delight " Ⓒ")
+
 (provide 'base-checking)
 ;;; base-checking.el ends here
