@@ -82,7 +82,7 @@
 ;; Instead of using something like `auto-complete' we'll use `Company' to give
 ;; us auto completion for variables, functions and so on.
 (use-package company
-  :delight " Ⓒ"
+  :delight " Ⓐ"
   :ghook 'prog-mode-hook
   :init
   (setq company-idle-delay 0.2              ;; How long to wait before popping up
