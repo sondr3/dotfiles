@@ -40,7 +40,7 @@
 
 ;;; Languages
 (require 'elisp)
-(require 'haskell-lang "haskell.el")
+(require 'haskell-lang)
 (require 'markdown)
 
 ;;; Tools

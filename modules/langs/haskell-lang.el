@@ -1,4 +1,4 @@
-;;; haskell.el --- Haskell support -*- lexical-binding: t -*-
+;;; haskell-lang.el --- Haskell support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -17,7 +17,8 @@
 
 ;;; Commentary:
 
-;; commentary
+;; Configuration for the Haskell language, this package requires you to have
+;; `stack' installed, as `intero' uses it.
 
 ;;; Code:
 
@@ -33,4 +34,4 @@
   :init (intero-global-mode))
 
 (provide 'haskell-lang)
-;;; haskell.el ends here
+;;; haskell-lang.el ends here
