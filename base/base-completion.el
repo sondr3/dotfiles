@@ -63,7 +63,7 @@
             [remap describe-face]            'counsel-describe-face
             [remap eshell-list-history]      'counsel-esh-history)
   (amalthea-leader
-    "A u" '(counsel-unicode-char :wk "find unicode symbol")
+    "a u" '(counsel-unicode-char :wk "find unicode symbol")
     "b b" '(ivy-switch-buffer :wk "change buffer")
     "f f" '(find-file :wk "find file")
     "f r" '(recentf :wk "find recent")
