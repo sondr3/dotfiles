@@ -83,7 +83,7 @@
 ;; us auto completion for variables, functions and so on.
 (use-package company
   :delight " Ⓒ"
-  :hook (prog-mode . company-mode)
+  :ghook ('prog-mode-hook #'company-mode-hook)
   :init
   (setq company-idle-delay 0.2              ;; How long to wait before popping up
         company-tooltip-limit 20            ;; Limit on how many options to displa
