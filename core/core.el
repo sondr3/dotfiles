@@ -120,10 +120,10 @@
     (unless (file-directory-p dir)
       (make-directory dir t))))
 
-(defun amalthea--byte-compile-core-dirs ()
+(defun amalthea--byte-compile-amalthea ()
   "TODO: There's probably a better way than this..."
   (interactive)
-  (dolist (dir (list amalthea-core-dir amalthea-base-dir amalthea-utils-dir))
+  (dolist (dir (list amalthea-core-dir amalthea-base-dir amalthea-utils-dir amalthea-modules-dir))
     (byte-recompile-directory dir 0 t))
   (dolist (file (list (concat amalthea-emacs-dir "init.el")
                       (concat amalthea-emacs-dir "early-init.el")))
