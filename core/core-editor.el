@@ -67,7 +67,7 @@
   :config (setq help-window-select t)) ;; Automatically go to help window
 
 ;;; `paren':
-;; Does pretty much exactly what it says, it shows matching parenthesises (and
+;; Does pretty much exactly what it says, it shows matching parenthesizes (and
 ;; other delimiters as far as I'm aware too). As for settings, we'll set it so
 ;; there's no delay for showing it's long lost sister, always highlight open
 ;; parenthesises and show the matching pair when inside their block.
@@ -119,7 +119,6 @@
   :init
   (progn 
     (setq savehist-file (concat amalthea-cache-dir "savehist")       ;; Location to save history of minibuffer usage
-          enable-recursive-minibuffers t                             ;; Allow minibuffer commands in the minibuffer
           savehist-save-minibuffer-history t                         ;; Save history from minibuffer too
           history-length 1000                                        ;; Total amount of history to save
           savehist-autosave-interval 60                              ;; Save every minute
