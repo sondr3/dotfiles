@@ -23,7 +23,8 @@
 ;; Instead we'll roll our own built around `Evil', `General.el' and `which-key'.
 ;; Lastly, we'll mimick how I used to do things in Vim (and how Spacemacs and
 ;; others does things) by letting `SPC' be our leader key and `,' be our major
-;; mode leader key.
+;; mode leader key. If you are in the `insert' state, you can use `C-SPC' for
+;; the leader key and `M-,' for the major mode leader key.
 
 ;;; Code:
 
@@ -32,8 +33,14 @@
 (defvar amalthea-leader-key "SPC"
   "The default leader key for Amalthea.")
 
+(defvar amalthea-leader-secondary-key "C-SPC"
+  "The secondary leader key for Amalthea.")
+
 (defvar amalthea-major-leader-key ","
   "The default major mode leader key for Amalthea.")
+
+(defvar amalthea-major-leader-secondary-key "M-,"
+  "The secondary major mode leader key for Amalthea.")
 
 ;;; Packages
 
@@ -64,19 +71,24 @@
 ;; to keybindings.
 (use-package general
   :demand t
-  :commands (general-define-key general-evil-setup)
+  :commands (general-define-key general-evil-setup general--simulate-keys)
   :config
   (progn
     (general-evil-setup)
     (general-create-definer amalthea-leader
-      :prefix amalthea-leader-key)
+      :states '(normal insert emacs)
+      :prefix amalthea-leader-key
+      :non-normal-prefix amalthea-leader-secondary-key)
     (general-create-definer amalthea-major-leader
-      :prefix amalthea-major-leader-key)))
+      :states '(normal insert emacs)
+      :prefix amalthea-major-leader-key
+      :non-normal-prefix amalthea-major-leader-secondary-key)
+    (general-nmap "SPC m" (general-simulate-key "," :which-key "major mode"))))
 
 ;;; Default `which-key' prefixes
 ;; This keeps all the main menus in one place instead of spread throughout the
 ;; whole project.
-(amalthea-leader 'normal
+(amalthea-leader
   "a" '(:ignore t :wk "assorted")
   "b" '(:ignore t :wk "buffers")
   "f" '(:ignore t :wk "files")

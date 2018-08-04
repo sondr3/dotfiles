@@ -26,7 +26,7 @@
 (use-package dockerfile-mode
   :commands dockerfile-mode
   :general
-  (amalthea-major-leader 'normal dockerfile-mode-map
+  (amalthea-major-leader dockerfile-mode-map
     "b" 'dockerfile-build-buffer
     "B" 'dockerfile-build-no-cache-buffer)
   :mode "\\Dockerfile\\'")

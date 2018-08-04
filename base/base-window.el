@@ -28,7 +28,7 @@
   ("r" (text-scale-adjust 0) "reset" :color blue)
   ("q" nil "quit" :color blue))
 
-(amalthea-leader 'normal
+(amalthea-leader
   "w f" '(toggle-frame-fullscreen :wk "fill screen")
   "w m" '(toggle-frame-maximized :wk "maximize")
   "w z" '(hydra-zoom/body :wk "zoom"))

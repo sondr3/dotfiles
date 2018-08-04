@@ -62,7 +62,7 @@
             [remap describe-variable]        'counsel-describe-variable
             [remap describe-face]            'counsel-describe-face
             [remap eshell-list-history]      'counsel-esh-history)
-  (amalthea-leader 'normal
+  (amalthea-leader
     "A u" '(counsel-unicode-char :wk "find unicode symbol")
     "b b" '(ivy-switch-buffer :wk "change buffer")
     "f f" '(find-file :wk "find file")
@@ -128,7 +128,7 @@
   :delight (yas-minor-mode " ⓨ")
   :ghook ('(text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode)
   :general
-  (amalthea-major-leader 'normal
+  (amalthea-major-leader
     "Y" '(:ignore t :wk "Yasnippet")
     "Y e" '(yas-expand :wk "expand")))
 
