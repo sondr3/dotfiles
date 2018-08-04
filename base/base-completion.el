@@ -75,7 +75,8 @@
 (use-package swiper
   :general
   (general-define-key "C-s" 'swiper)
-  (general-nmap "/" 'swiper))
+  (general-nmap "/" 'swiper)
+  (amalthea-leader "/" 'swiper))
 
 ;;; `Company':
 ;; Instead of using something like `auto-complete' we'll use `Company' to give
