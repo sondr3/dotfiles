@@ -66,6 +66,9 @@
 [submodule "exec-path-from-shell"]
 	path = lib/exec-path-from-shell
 	url = git@github.com:purcell/exec-path-from-shell.git
+[submodule "flycheck"]
+	path = lib/flycheck
+	url = git@github.com:flycheck/flycheck.git
 [submodule "flyspell-correct"]
 	path = lib/flyspell-correct
 	url = git@github.com:d12frosted/flyspell-correct.git
@@ -78,12 +81,19 @@
 [submodule "git-modes"]
 	path = lib/git-modes
 	url = git@github.com:magit/git-modes.git
+[submodule "haskell-mode"]
+	path = lib/haskell-mode
+	url = git@github.com:haskell/haskell-mode.git
 [submodule "hydra"]
 	path = lib/hydra
 	url = git@github.com:abo-abo/hydra.git
 [submodule "imenu-list"]
 	path = lib/imenu-list
 	url = git@github.com:bmag/imenu-list.git
+[submodule "intero"]
+	path = lib/intero
+	url = git@github.com:commercialhaskell/intero.git
+	load-path = elisp
 [submodule "ivy"]
 	path = lib/ivy
 	url = git@github.com:abo-abo/swiper.git
