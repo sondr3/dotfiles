@@ -85,15 +85,15 @@
   :delight " Ⓒ"
   :hook (prog-mode . company-mode)
   :init
-  (setq-am company-idle-delay 0.2 "How long to wait before popping up")
-  (setq-am company-tooltip-limit 20 "Limit on how many options to display")
-  (setq-am company-show-numbers t "Show numbers behind options")
-  (setq-am company-tooltip-align-annotations t "Align annotations to the right")
-  (setq-am company-require-match nil "Allow free typing")
-  (setq-am company-selection-wrap-around t "Wrap around to beginning when you hit bottom of suggestions")
-  (setq-am company-dabbrev-ignore-case nil "Don't ignore case when completing")
-  (setq-am company-dabbrev-downcase nil "Don't automatically downcase competions")
-  (setq-am company-dabbrev-other-buffers t "Search other buffers for completion candidates")
+  (setq company-idle-delay 0.2              ;; How long to wait before popping up
+        company-tooltip-limit 20            ;; Limit on how many options to displa
+        company-show-numbers t              ;; Show numbers behind options
+        company-tooltip-align-annotations t ;; Align annotations to the right
+        company-require-match nil           ;; Allow free typing
+        company-selection-wrap-around t     ;; Wrap around to beginning when you hit bottom of suggestions
+        company-dabbrev-ignore-case nil     ;; Don't ignore case when completing
+        company-dabbrev-downcase nil        ;; Don't automatically downcase competions
+        company-dabbrev-other-buffers t)    ;; Search other buffers for completion candidates
   :config (company-tng-configure-default))
 
 ;;; `company-quickhelp':
@@ -104,7 +104,7 @@
   :commands company-quickhelp-mode
   :config
   (progn
-    (setq-am company-quickhelp-use-propertized-text t "Allow text to have properties like size, color etc")
+    (setq company-quickhelp-use-propertized-text t) ;; Allow text to have properties like size, color etc
     (company-quickhelp-mode)))
 
 ;;; `company-statistics':
@@ -116,7 +116,7 @@
   :after company
   :ghook 'company-mode-hook
   :config
-  (setq-am company-statistics-file (concat amalthea-cache-dir "company-statistics.el") "Location to save statistics"))
+  (setq company-statistics-file (concat amalthea-cache-dir "company-statistics.el"))) ;; Location to save statistics
 
 ;;; Snippets
 

@@ -29,9 +29,9 @@
 
 ;;; Code:
 
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-(setq-am select-enable-clipboard t "Cut and paste from the actual clipboard")
-(setq-am select-enable-primary t "Use the primary clipboard")
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING) ;; Magic voodoo
+      select-enable-clipboard t                                      ;; Cut and paste from the actual clipboard
+      select-enable-primary t)                                       ;; Use the primary clipboard
 
 (when (eq system-type 'darwin)
   (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
@@ -44,14 +44,14 @@
     :commands exec-path-from-shell-initialize
     :init (exec-path-from-shell-initialize))
 
-  (setq-am ns-use-thin-smoothing nil "Dont use thinner strokes on macOS")
-  (setq-am mouse-wheel-flip-direction t "Change scrolling to new macOS defaults")
-  (setq-am mouse-wheel-tilt-scroll t "Change scrolling to new macOS defaults"))
+  (setq ns-use-thin-smoothing nil    ;; Dont use thinner strokes on macOS
+        mouse-wheel-flip-direction t ;; Change scrolling to new macOS defaults
+        mouse-wheel-tilt-scroll t)   ;; Change scrolling to new macOS defaults
 
-(when (eq system-type 'gnu/linux)
-  (defvar x-gtk-use-system-tooltips nil)
-  (setq-am x-gtk-use-system-tooltips nil "Use the builtin Emacs tooltips")
-  (setq-am x-underline-at-descent-line t "Fix for not using GTK tooltips"))
+  (when (eq system-type 'gnu/linux)
+    (defvar x-gtk-use-system-tooltips nil)
+    (setq x-gtk-use-system-tooltips nil    ;; Use the builtin Emacs tooltips
+          x-underline-at-descent-line t))) ;; Fix for not using GTK tooltips
 
 (provide 'core-os)
 ;;; core-os.el ends here

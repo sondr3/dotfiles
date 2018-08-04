@@ -36,12 +36,12 @@
 (defvar amalthea-tab-width 2
   "The default width for indentation, in spaces, in Amalthea.")
 
-(setq-default-am indent-tabs-mode nil "Don't use tabs, use spaces")
-(setq-default-am tab-width amalthea-tab-width "Set our tab width")
-(setq-default-am fill-column amalthea-fill-width "Automatically wrap lines after this point")
-(setq-default-am compilation-scroll-output 'first-error "Stop at the first error in compilation log")
-(setq-default-am word-wrap t "Wrap long lines instead of sending them outside the screen")
-(setq-default-am require-final-newline t "Always end files with a newline")
+(setq-default indent-tabs-mode nil                   ;; Don't use tabs, use spaces
+              tab-width amalthea-tab-width           ;; Set our tab width
+              fill-column amalthea-fill-width        ;; Automatically wrap lines after this point
+              compilation-scroll-output 'first-error ;; Stop at the first error in compilation log
+              word-wrap t                            ;; Wrap long lines instead of sending them outside the scree
+              require-final-newline t)               ;; Always end files with a newline
 
 ;; Enable `auto-fill-mode' for any and all `text-mode' major modes to enable
 ;; wrapping of text at whatever width we enabled `amalthea-fill-width' to be.
@@ -64,7 +64,7 @@
     "h f" '(describe-function :wk "describe function")
     "h v" '(describe-variable :wk "describe variable"))
   :init (temp-buffer-resize-mode)
-  :config (setq-am help-window-select t "Automatically go to help window"))
+  :config (setq help-window-select t)) ;; Automatically go to help window
 
 ;;; `paren':
 ;; Does pretty much exactly what it says, it shows matching parenthesises (and
@@ -76,9 +76,9 @@
   :init (show-paren-mode t)
   :config
   (progn
-    (setq-default-am show-paren-delay 0 "Show matching parenthesis without delay.")
-    (setq-default-am show-paren-highlight-openparen t "Always show the matching parenthesis.")
-    (setq-default-am show-paren-when-point-inside-paren t "Show parenthesis when inside a block.")))
+    (setq-default show-paren-delay 0                      ;; Show matching parenthesis without delay.
+                  show-paren-highlight-openparen t        ;; Always show the matching parenthesis.
+                  show-paren-when-point-inside-paren t))) ;; Show parenthesis when inside a block.
 
 ;;; `autorevert':
 ;; If you've ever experienced changing a file in a different program while it's
@@ -91,8 +91,8 @@
   :commands (global-auto-revert-mode)
   :init
   (progn
-    (setq-am global-auto-revert-non-file-buffers t "Refresh any buffer that implement autorevert")
-    (setq-am auto-revert-verbose nil "Be silent when refreshing a buffer")
+    (setq global-auto-revert-non-file-buffers t ;; Refresh any buffer that implement autorevert
+          auto-revert-verbose nil)              ;; Be silent when refreshing a buffer
     (global-auto-revert-mode)))
 
 ;;; `recentf':
@@ -106,9 +106,9 @@
   :commands (recentf-mode recentf-track-opened-file)
   :init
   (progn
-    (setq-am recentf-save-file (concat amalthea-cache-dir "recentf") "Location to save history of recent files")
-    (setq-am recentf-max-saved-items 1000 "Total amount of saved recent files")
-    (setq-am recentf-auto-cleanup 'never "Never clean the history, only append and remove the last")
+    (setq recentf-save-file (concat amalthea-cache-dir "recentf") ;; Location to save history of recent files
+          recentf-max-saved-items 1000                            ;; Total amount of saved recent files
+          recentf-auto-cleanup 'never)                            ;;  Never clean the history, only append and remove the last
     (recentf-mode)))
 
 ;;; `savehist':
@@ -118,16 +118,16 @@
   :commands (savehist-mode)
   :init
   (progn 
-    (setq-am savehist-file (concat amalthea-cache-dir "savehist") "Location to save history of minibuffer usage")
-    (setq-am enable-recursive-minibuffers t "Allow minibuffer commands in the minibuffer")
-    (setq-am savehist-save-minibuffer-history t "Save history from minibuffer too")
-    (setq-am history-length 1000 "Total amount of history to save")
-    (setq-am savehist-autosave-interval 60 "Save every minute")
-    (setq-am savehist-additional-variables '(mark-ring
-                                             global-mark-ring
-                                             search-ring
-                                             regexp-search-ring
-                                             extended-command-history) "Additional variables to save")
+    (setq savehist-file (concat amalthea-cache-dir "savehist")       ;; Location to save history of minibuffer usage
+          enable-recursive-minibuffers t                             ;; Allow minibuffer commands in the minibuffer
+          savehist-save-minibuffer-history t                         ;; Save history from minibuffer too
+          history-length 1000                                        ;; Total amount of history to save
+          savehist-autosave-interval 60                              ;; Save every minute
+          savehist-additional-variables '(mark-ring                  ;; Additional variables to save
+                                          global-mark-ring
+                                          search-ring
+                                          regexp-search-ring
+                                          extended-command-history))
     (savehist-mode t)))
 
 ;;; `saveplace':
@@ -139,7 +139,7 @@
   :commands (save-place-mode)
   :init
   (progn
-    (setq-am save-place-file (concat amalthea-cache-dir "places") "Location to save history of cursor")
+    (setq save-place-file (concat amalthea-cache-dir "places")) ;; Location to save history of cursor
     (save-place-mode)))
 
 ;;; `uniquify':
@@ -149,7 +149,7 @@
 ;; frankly don't remember.
 (use-package uniquify
   :init
-  (setq-am uniquify-buffer-name-style 'forward "How to name multiple buffers with the same name"))
+  (setq uniquify-buffer-name-style 'forward)) ;; How to name multiple buffers with the same name
 
 (provide 'core-editor)
 

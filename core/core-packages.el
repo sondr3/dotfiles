@@ -49,8 +49,7 @@
 (setq use-package-always-defer t)                    ;; Always defer packages
 
 (use-package epkg
-  :init (setq-am epkg-repository (expand-file-name "epkgs/" amalthea-cache-dir)
-                 "Save package database in our cache directory"))
+  :init (setq epkg-repository (expand-file-name "epkgs/" amalthea-cache-dir))) ;; Save package database in our cache directory
 
 (use-package delight
   :demand t)

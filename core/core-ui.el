@@ -60,14 +60,14 @@
 
 ;; Finally, we disable the visible and audible bell that is enabled by default
 ;; because it's bloody annoying.
-(setq-default-am line-spacing amalthea-line-spacing "Give lines some breathing room")
-(setq-default-am frame-title-format '("Amalthea :: %b") "Name the Emacs window")
-(setq-default-am display-line-numbers 'visual "Count the visible line numbers, not the actual number")
-(setq-default-am display-line-numbers-current-absolute t "Show line number of current line instead of 0")
-(setq-default-am display-line-numbers-width 4 "Enough space for huge files")
-(setq-default-am display-line-numbers-widen nil "Disable dynamic sizing of line number width")
-(setq-default-am visible-bell nil "No bells")
-(setq-default-am ring-bell-function #'ignore "NO BELLS")
+(setq-default line-spacing amalthea-line-spacing      ;; Give lines some breathing room
+              frame-title-format '("Amalthea :: %b")  ;; Name the Emacs window
+              display-line-numbers 'visual            ;; Count the visible line numbers, not the actual number
+              display-line-numbers-current-absolute t ;; Show line number of current line instead of 0
+              display-line-numbers-width 4            ;; Enough space for huge files
+              display-line-numbers-widen nil          ;; Disable dynamic sizing of line number width
+              visible-bell nil                        ;; No bells
+              ring-bell-function #'ignore)            ;; NO BELLS
 
 ;;; `hl-line':
 ;; This is basically something that I learned to use and love from Vim, it
@@ -78,7 +78,7 @@
   :commands (global-hl-line-mode)
   :init (global-hl-line-mode)
   :config
-  (setq-am global-hl-line-sticky-flag nil "Don't highlight current line in inactive buffers"))
+  (setq global-hl-line-sticky-flag nil)) ;; Don't highlight current line in inactive buffers
 
 (provide 'core-ui)
 
