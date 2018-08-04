@@ -28,15 +28,11 @@
   :demand t
   :init (setq evil-want-integration nil     ;; Don't load this, we'll be using evil-collection
               evil-search-module 'swiper)   ;; Use Swiper for searches
+  :general
+  (general-imap "j"  (general-key-dispatch 'self-insert-command
+                       :timeout 0.25
+                       "k" 'evil-normal-state))
   :config (evil-mode))
-
-;;; `evil-escape':
-;; ESC is a hard key to hit, let's make it easier. With say... `jk'.
-(use-package evil-escape
-  :delight
-  :commands evil-escape-mode
-  :init (setq-default evil-escape-key-sequence "jk")
-  :config (evil-escape-mode))
 
 ;;; `evil-collection':
 ;; Instead of having to try to consistently create a key theme for a ton of
