@@ -32,7 +32,15 @@
   :gfhook #'auto-compile-on-load-mode #'auto-compile-on-save-mode
   :ghook 
   ('emacs-lisp-mode-hook #'outline-minor-mode)
-  ('emacs-lisp-mode-hook #'reveal-mode))
+  ('emacs-lisp-mode-hook #'reveal-mode)
+  :general
+  (amalthea-major-leader 'emacs-lisp-mode-map
+    "C" 'emacs-lisp-byte-compile
+    "e" '(:ignore t :wk "eval")
+    "e b" 'eval-buffer
+    "e f" 'eval-defun
+    "e r" 'eval-reqion
+    "e e" 'eval-last-sexp))
 
 ;;; `auto-compile':
 ;; Automatically compiles any `.el' files into their byte compiled version,
@@ -50,6 +58,9 @@
   (add-hook 'auto-compile-inhibit-compile-hook 'auto-compile-inhibit-compile-detached-git-head))
 
 ;;; `macrostep':
+;; This is a hydra that we'll use together with the package itself, this makes
+;; it really easy to quickly work your way through macros as you are working on
+;; them or using them.
 (defhydra hydra-macrostep (:color pink)
   "macrostep"
   ("q" macrostep-collapse-all "collapse all macros" :color blue)
