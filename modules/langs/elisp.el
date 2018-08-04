@@ -32,30 +32,36 @@
   :gfhook #'auto-compile-on-load-mode #'auto-compile-on-save-mode
   :ghook 
   ('emacs-lisp-mode-hook #'outline-minor-mode)
-  ('emacs-lisp-mode-hook #'reveal-mode)
-  :general
-  (:keymaps 'emacs-lisp-mode-map
-            "C-c e" 'macrostep-expand))
+  ('emacs-lisp-mode-hook #'reveal-mode))
 
 ;;; `auto-compile':
 ;; Automatically compiles any `.el' files into their byte compiled version,
 ;; making sure everything is up to date.
 (use-package auto-compile
-  :functions (auto-compile-on-save-mode auto-compile-on-load-mode)
+  :commands (auto-compile-on-save-mode auto-compile-on-load-mode)
   :config
   (auto-compile-on-load-mode)
   (auto-compile-on-save-mode)
-  (setq-am auto-compile-display-buffer nil "Don't automatically show the *Compile Log* buffer")
-  (setq-am auto-compile-mode-line-counter t "Display number of warnings in modeline")
-  (setq-am auto-compile-source-recreate-deletes-dest t "Delete leftover byte code when recompiling")
-  (setq-am auto-compile-toggle-deletes-nonlib-dest t "Delete non-library byte code")
-  (setq-am auto-compile-update-autoloads t "Update autoloads after compiling")
+  (setq auto-compile-display-buffer nil             ;; Don't automatically show the *Compile Log* buffer
+        auto-compile-mode-line-counter t            ;; Display number of warnings in modeline
+        auto-compile-source-recreate-deletes-dest t ;; Delete leftover byte code when recompiling
+        auto-compile-toggle-deletes-nonlib-dest t   ;; Delete non-library byte code
+        auto-compile-update-autoloads t)            ;; Update autoloads after compiling
   (add-hook 'auto-compile-inhibit-compile-hook 'auto-compile-inhibit-compile-detached-git-head))
 
 ;;; `macrostep':
+(defhydra hydra-macrostep (:color pink)
+  "macrostep"
+  ("q" macrostep-collapse-all "collapse all macros" :color blue)
+  ("c" macrostep-collapse "collapse macro")
+  ("e" macrostep-expand "expand macro")
+  ("j" macrostep-next-macro "next macro")
+  ("k" macrostep-prev-macro "prev macro"))
+
 (use-package macrostep
-  :custom
-  (macrostep-expand-in-separate-buffer t "Show macro expansion in a new buffer"))
+  :general
+  (amalthea-major-leader 'emacs-lisp-mode-map
+    "m" 'hydra-macrostep/body))
 
 ;;; Hide some minor modes and rename the major mode
 (delight '((emacs-lisp-mode "Elisp" :major)
