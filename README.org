@@ -4,13 +4,14 @@
 * Introduction
 This is my Emacs configuration, there are many like it but this one is mine.
 It's decently personalized, but it should be useful for either inspiration or
-just straight-up copy-pasta. My configuration is managed by [[https://github.com/emacscollective/borg][borg]], and is a bit
-weird in that the configuration lives in this directory but all the actual git
-modules lives in a separate repository ([[https://github.com/sondr3/.emacs.d][~.emacs.d~]]).
+just straight-up copy-pasta. My configuration is managed by [[https://github.com/emacscollective/borg][borg]], which is a
+really nice and simple way of managing your Emacs packages by version.
 
-I'm also running the latest major release of Emacs, which as of this writing is
-version 26.1, so unless you're running this version I cannot guarantee that
-everything works. It's also worth noting that I named my configuration
-~Amalthea~, after a random moon on Jupiter. I had my reasons for this once, but
-I can't remember why. I just think it's a cool name, so you'll see that name
-reflected in quite a few variables and functions that I use.
+At the moment I'm running Emacs from the latest revision of the master branch,
+which means the version is 27.0, I'm using this because of the ~early-init.el~
+file, but this configuration will work with versions below 27.0 too as it
+concatenates the ~early-init.el~ file into the ~init.el~ file.
+
+I've named my Emacs configuration ~Amalthea~, I have no recollection of why
+anymore, other than the fact that I still think it's a cool name. It's named
+after one of the minor moons of Jupiter.
