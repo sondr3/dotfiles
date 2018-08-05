@@ -80,6 +80,7 @@
 ;; The default correction window for Flyspell is awful, terribly so actually, so
 ;; we'll use a package to fix this. This creates a generic way of correcting
 ;; words and we'll use a Ivy-minibuffer to correct wording.
+;; TODO Find a better way to get to the Ivy menu in Flyspell
 (use-package flyspell-correct-ivy
   :after flyspell
   :commands (flyspell-correct-word-generic

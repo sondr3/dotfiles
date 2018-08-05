@@ -26,6 +26,10 @@
 ;; mode leader key. If you are in the `insert' state, you can use `C-SPC' for
 ;; the leader key and `M-,' for the major mode leader key.
 
+;;; Todos and fixes:
+
+;; TODO Create a hydra to toggle major/minor modes
+
 ;;; Code:
 
 ;;; Custom bindings
