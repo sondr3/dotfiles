@@ -56,7 +56,10 @@
 (use-package evil-collection
   :after evil
   :commands evil-collection-init
-  :init (evil-collection-init))
+  :init
+  (progn
+    (setq evil-collection-setup-minibuffer t)
+    (evil-collection-init)))
 
 ;;; `evil-lion':
 ;; Ever wanted to align a long bunch of variables at their equal signs? Look no
