@@ -84,6 +84,9 @@
 [submodule "haskell-mode"]
 	path = lib/haskell-mode
 	url = git@github.com:haskell/haskell-mode.git
+[submodule "hl-todo"]
+	path = lib/hl-todo
+	url = git@github.com:tarsius/hl-todo.git
 [submodule "hydra"]
 	path = lib/hydra
 	url = git@github.com:abo-abo/hydra.git

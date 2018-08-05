@@ -88,6 +88,14 @@
     (diff-hl-flydiff-mode)
     (general-add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
 
+;;; `hl-todo':
+;; This is a really simple mode that highlights things that are marked as TODO,
+;; FIXME and so on. It's quite useful if you like to litter your project with
+;; them.
+(use-package hl-todo
+  :commands global-hl-todo-mode
+  :init (global-hl-todo-mode))
+
 (provide 'base-git)
 
 ;;; base-git.el ends here
