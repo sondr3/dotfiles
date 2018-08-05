@@ -74,6 +74,18 @@
   :commands evil-goggles-mode
   :config (evil-goggles-mode))
 
+;;; `undo-tree':
+;; This is essentially the undo command on steroids, it creates a tree of
+;; changes that you can revert back and from with, meaning you can undo
+;; something, change your mind, go back to the parent node and start from there
+;; and then go back to the previous "branch" again if you change your mind...
+;; again
+(use-package undo-tree
+  :commands global-undo-tree-mode
+  :delight
+  :config
+  (global-undo-tree-mode))
+
 ;;; General programming:
 
 ;;; `rainbow-delimiters':

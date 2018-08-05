@@ -102,6 +102,9 @@
 ;; conjunction with Counsel to quickly be able to open recent files. The way we
 ;; load it is stolen from Spacemacs, which makes it so it's lazily loaded when
 ;; needed.
+
+;; If you add paths or files to `recentf-exclude', you need to run
+;; `recentf-cleanup' to remove excluded items from the existing list.
 (use-package recentf
   :commands (recentf-mode recentf-track-opened-file)
   :init

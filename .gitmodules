@@ -130,6 +130,9 @@
 [submodule "tao-theme"]
 	path = lib/tao-theme
 	url = git@github.com:11111000000/tao-theme-emacs.git
+[submodule "undo-tree"]
+	path = lib/undo-tree
+	url = git@github.com:emacsorphanage/undo-tree.git
 [submodule "use-package"]
 	path = lib/use-package
 	url = git@github.com:jwiegley/use-package.git
