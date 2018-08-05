@@ -38,13 +38,15 @@
 ;; Configures evil-mode.
 (use-package evil
   :demand t
-  :init (setq evil-want-integration nil     ;; Don't load this, we'll be using evil-collection
-              evil-search-module 'swiper)   ;; Use Swiper for searches
+  :init
+  (progn
+    (setq evil-want-integration nil     ;; Don't load this, we'll be using evil-collection
+          evil-search-module 'swiper)   ;; Use Swiper for searches
+    (evil-mode))
   :general
   (general-imap "j"  (general-key-dispatch 'self-insert-command
                        :timeout 0.25
-                       "k" 'evil-normal-state))
-  :config (evil-mode))
+                       "k" 'evil-normal-state)))
 
 ;;; `evil-collection':
 ;; Instead of having to try to consistently create a key theme for a ton of
@@ -54,7 +56,7 @@
 (use-package evil-collection
   :after evil
   :commands evil-collection-init
-  :config (evil-collection-init))
+  :init (evil-collection-init))
 
 ;;; `evil-lion':
 ;; Ever wanted to align a long bunch of variables at their equal signs? Look no
@@ -68,7 +70,7 @@
 (use-package evil-commentary
   :delight
   :commands evil-commentary-mode
-  :config (evil-commentary-mode))
+  :init (evil-commentary-mode))
 
 ;;; `evil-surround':
 ;; Incredibly handy package, if you want to change what surrounds a text you can
@@ -76,7 +78,7 @@
 ;; `()'? `cs[(' and you're done.
 (use-package evil-surround
   :commands global-evil-surround-mode
-  :config (global-evil-surround-mode))
+  :init (global-evil-surround-mode))
 
 ;;; `evil-goggles':
 ;; Show visual hints for what the action you just did. It's hard to tell without
@@ -84,7 +86,7 @@
 (use-package evil-goggles
   :delight
   :commands evil-goggles-mode
-  :config (evil-goggles-mode))
+  :init (evil-goggles-mode))
 
 ;;; `undo-tree':
 ;; This is essentially the undo command on steroids, it creates a tree of
@@ -95,8 +97,7 @@
 (use-package undo-tree
   :commands global-undo-tree-mode
   :delight
-  :config
-  (global-undo-tree-mode))
+  :init (global-undo-tree-mode))
 
 ;;; General programming:
 

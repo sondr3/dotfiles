@@ -93,8 +93,7 @@
         company-selection-wrap-around t     ;; Wrap around to beginning when you hit bottom of suggestions
         company-dabbrev-ignore-case nil     ;; Don't ignore case when completing
         company-dabbrev-downcase nil        ;; Don't automatically downcase competions
-        company-dabbrev-other-buffers t)    ;; Search other buffers for completion candidates
-  :config (company-tng-configure-default))
+        company-dabbrev-other-buffers t))    ;; Search other buffers for completion candidates
 
 ;;; `company-quickhelp':
 ;; When idling on a chosen completion candidate, show the items help in a popup
