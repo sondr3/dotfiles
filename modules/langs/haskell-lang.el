@@ -25,7 +25,15 @@
 (use-package haskell-mode
   :ensure-system-package
   (brittany . "stack install brittany")
-  :ghook ('haskell-mode-hook #'interactive-haskell-mode))
+  :ghook ('haskell-mode-hook #'interactive-haskell-mode)
+  :init (add-to-list 'recentf-exclude (expand-file-name "~/.stack/global-project/.stack-work/")) ;; Exclude Intero REPL from recentf
+  :config
+  (setq haskell-compile-cabal-build-command "stack build --fast" ;; We're using Stack instead of Cabal due to Intero
+        haskell-process-type 'stack-ghci                         ;; Always use Stack with GHCi
+        haskell-process-suggest-remove-import-lines t            ;; Suggest removing imports
+        haskell-process-auto-import-loaded-modules t             ;; Automatically load modules
+        haskell-interactive-popup-errors nil                     ;; Unnecessary because of Flycheck
+        haskell-process-show-overlays nil))                      ;; Same as above
 
 (use-package intero
   :after haskell-mode
