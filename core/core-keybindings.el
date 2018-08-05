@@ -75,9 +75,11 @@
 ;; to keybindings.
 (use-package general
   :demand t
-  :commands (general-define-key general-evil-setup general--simulate-keys)
+  :commands (general-define-key general-override-mode general-evil-setup general--simulate-keys)
   :config
   (progn
+    (setq general-override-states '(insert emacs hybrid normal visual motion operator replace))
+    (general-override-mode)
     (general-evil-setup)
     (general-create-definer amalthea-leader
       :states '(normal insert emacs)
