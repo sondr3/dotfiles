@@ -23,6 +23,7 @@
 
 (eval-and-compile (add-to-list 'load-path amalthea-base-dir))
 
+(require 'base-evil)
 (require 'base-editor)
 (require 'base-completion)
 (require 'base-git)
