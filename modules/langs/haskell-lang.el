@@ -23,8 +23,7 @@
 ;;; Code:
 
 (use-package haskell-mode
-  :ensure-system-package
-  (brittany . "stack install brittany")
+  :ensure-system-package (brittany . "stack install brittany")
   :delight (subword-mode)
   :ghook ('haskell-mode-hook (list #'interactive-haskell-mode #'subword-mode))
   :init
@@ -46,6 +45,14 @@
 (use-package flycheck-haskell
   :commands flycheck-haskell-configure
   :ghook ('flycheck-mode-hook #'flycheck-haskell-configure))
+
+(use-package hlint-refactor
+  :ensure-system-package (hlint . "stack install hlint")
+  :general
+  (amalthea-major-leader 'haskell-mode-map
+    "r" '(:ignore t :wk "refactor")
+    "r b" '(hlint-refactor-refactor-buffer :wk "refactor buffer")
+    "r r" '(hlint-refactor-refactor-at-point :wk "refactor at point")))
 
 (provide 'haskell-lang)
 ;;; haskell-lang.el ends here

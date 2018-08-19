@@ -96,6 +96,9 @@
 [submodule "hl-todo"]
 	path = lib/hl-todo
 	url = git@github.com:tarsius/hl-todo.git
+[submodule "hlint-refactor"]
+	path = lib/hlint-refactor
+	url = git@github.com:mpickering/hlint-refactor-mode.git
 [submodule "hydra"]
 	path = lib/hydra
 	url = git@github.com:abo-abo/hydra.git
