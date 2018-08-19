@@ -25,8 +25,10 @@
 (use-package haskell-mode
   :ensure-system-package
   (brittany . "stack install brittany")
-  :ghook ('haskell-mode-hook #'interactive-haskell-mode)
-  :init (add-to-list 'recentf-exclude (expand-file-name "~/.stack/global-project/.stack-work/")) ;; Exclude Intero REPL from recentf
+  :delight (subword-mode)
+  :ghook ('haskell-mode-hook (list #'interactive-haskell-mode #'subword-mode))
+  :init
+  (add-to-list 'recentf-exclude (expand-file-name "~/.stack/global-project/.stack-work/")) ;; Exclude Intero REPL from recentf
   :config
   (setq haskell-compile-cabal-build-command "stack build --fast" ;; We're using Stack instead of Cabal due to Intero
         haskell-process-type 'stack-ghci                         ;; Always use Stack with GHCi
