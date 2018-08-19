@@ -43,7 +43,7 @@
   :init (intero-global-mode))
 
 (use-package flycheck-haskell
-  :after flycheck
+  :after (intero flycheck)
   :commands (flycheck-haskell-configure flycheck-add-next-checker)
   :ghook ('flycheck-mode-hook #'flycheck-haskell-configure)
   :init (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
