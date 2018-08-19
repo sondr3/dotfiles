@@ -25,7 +25,7 @@
 (use-package haskell-mode
   :ensure-system-package (brittany . "stack install brittany")
   :delight (subword-mode)
-  :ghook ('haskell-mode-hook (list #'interactive-haskell-mode #'subword-mode))
+  :ghook ('haskell-mode-hook (list #'interactive-haskell-mode #'subword-mode #'haskell-auto-insert-module-template))
   :init
   (add-to-list 'recentf-exclude (expand-file-name "~/.stack/global-project/.stack-work/")) ;; Exclude Intero REPL from recentf
   :config
@@ -43,11 +43,15 @@
   :init (intero-global-mode))
 
 (use-package flycheck-haskell
-  :commands flycheck-haskell-configure
-  :ghook ('flycheck-mode-hook #'flycheck-haskell-configure))
+  :after flycheck
+  :commands (flycheck-haskell-configure flycheck-add-next-checker)
+  :ghook ('flycheck-mode-hook #'flycheck-haskell-configure)
+  :init (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
 
 (use-package hlint-refactor
-  :ensure-system-package (hlint . "stack install hlint")
+  :ensure-system-package
+  ((hlint . "stack install hlint")
+   (refactor . "stack --resolver=nightly install apply-refact"))
   :general
   (amalthea-major-leader 'haskell-mode-map
     "r" '(:ignore t :wk "refactor")
