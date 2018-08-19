@@ -43,5 +43,9 @@
   :delight " λ"
   :init (intero-global-mode))
 
+(use-package flycheck-haskell
+  :commands flycheck-haskell-configure
+  :ghook ('flycheck-mode-hook #'flycheck-haskell-configure))
+
 (provide 'haskell-lang)
 ;;; haskell-lang.el ends here

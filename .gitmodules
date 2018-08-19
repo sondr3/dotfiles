@@ -75,6 +75,9 @@
 [submodule "flycheck"]
 	path = lib/flycheck
 	url = git@github.com:flycheck/flycheck.git
+[submodule "flycheck-haskell"]
+	path = lib/flycheck-haskell
+	url = git@github.com:flycheck/flycheck-haskell.git
 [submodule "flyspell-correct"]
 	path = lib/flyspell-correct
 	url = git@github.com:d12frosted/flyspell-correct.git
