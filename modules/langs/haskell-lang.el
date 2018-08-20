@@ -30,11 +30,16 @@
   :ensure-system-package (brittany . "stack install brittany")
   :delight (subword-mode)
   :ghook ('haskell-mode-hook (list #'interactive-haskell-mode #'subword-mode #'haskell-auto-insert-module-template))
+  :general
+  (amalthea-major-leader 'haskell-mode-map
+    "f" '(haskell-mode-stylish-buffer :wk "format buffer"))
   :init
   (add-to-list 'recentf-exclude (expand-file-name "~/.stack/global-project/.stack-work/")) ;; Exclude Intero REPL from recentf
   :config
   (setq haskell-compile-cabal-build-command "stack build --fast" ;; We're using Stack instead of Cabal due to Intero
         haskell-process-type 'stack-ghci                         ;; Always use Stack with GHCi
+        haskell-mode-stylish-haskell-path "brittany"             ;; Format files with Brittany instead of Stylish
+        haskell-stylish-on-save t                                ;; Format buffer with Brittany on save
         haskell-process-suggest-remove-import-lines t            ;; Suggest removing imports
         haskell-process-auto-import-loaded-modules t             ;; Automatically load modules
         haskell-interactive-popup-errors nil                     ;; Unnecessary because of Flycheck
