@@ -25,6 +25,9 @@
 [submodule "company-statistics"]
 	path = lib/company-statistics
 	url = git@github.com:company-mode/company-statistics.git
+[submodule "counsel-projectile"]
+	path = lib/counsel-projectile
+	url = git@github.com:ericdanan/counsel-projectile.git
 [submodule "dash"]
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git

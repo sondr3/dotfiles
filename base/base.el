@@ -27,6 +27,7 @@
 (require 'base-editor)
 (require 'base-completion)
 (require 'base-git)
+(require 'base-projectile)
 (require 'base-checking)
 (require 'base-window)
 (require 'base-ui)
