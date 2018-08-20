@@ -22,6 +22,10 @@
 
 ;;; Code:
 
+;;; `haskell-mode':
+;; The main focal point of the Haskell editing experience, there's no magic
+;; here. All it does is add some modes to `haskell-mode', exclude some project
+;; files from `recentf' and set a few common sense settings.
 (use-package haskell-mode
   :ensure-system-package (brittany . "stack install brittany")
   :delight (subword-mode)
@@ -36,18 +40,31 @@
         haskell-interactive-popup-errors nil                     ;; Unnecessary because of Flycheck
         haskell-process-show-overlays nil))                      ;; Same as above
 
+;;; `intero':
+;; The main workhorse for working with Haskell, Intero is both a Haskell program
+;; and a Emacs mode. It gives you a way to load your code into the REPL, work
+;; inside the REPL, send code back and so on. It's similar to SLIME for Common
+;; Lisp.
 (use-package intero
   :after haskell-mode
   :commands intero-global-mode
   :delight " λ"
   :init (intero-global-mode))
 
+;;; `flycheck-haskell':
+;; We obviously need some kind of error correction, for this we'll use `hlint',
+;; which is a linter for Haskell code. We need to manually add this as a warning
+;; to Flycheck, but this is done after both Intero and Flycheck has loaded.
 (use-package flycheck-haskell
   :after (intero flycheck)
   :commands (flycheck-haskell-configure flycheck-add-next-checker)
   :ghook ('flycheck-mode-hook #'flycheck-haskell-configure)
   :init (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
 
+;;; `hlint-refactor':
+;; A lot of the time `hlint' can also apply fixes to our code for us, this is
+;; done via this package. We install the required dependencies and add a few
+;; keybindings for it.
 (use-package hlint-refactor
   :ensure-system-package
   ((hlint . "stack install hlint")

@@ -22,6 +22,8 @@
 
 ;;; Code:
 
+;;; `org':
+;; Some very minor configuration for org-mode.
 (use-package org
   :delight org-indent-mode
   :defines (org-export-with-sub-superscripts org-babel-do-load-languages)
