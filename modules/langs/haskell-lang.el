@@ -30,7 +30,7 @@
   :ensure-system-package
   ((brittany . "stack install brittany")
    (hoogle . "stack install hoogle"))
-  :ghook ('haskell-mode-hook (list #'interactive-haskell-mode #'subword-mode #'haskell-auto-insert-module-template))
+  :ghook ('haskell-mode-hook (list #'subword-mode #'haskell-auto-insert-module-template))
   :general
   (amalthea-major-leader 'haskell-mode-map
     "f" '(haskell-mode-stylish-buffer :wk "format buffer"))
