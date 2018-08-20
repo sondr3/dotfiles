@@ -27,7 +27,9 @@
 ;; here. All it does is add some modes to `haskell-mode', exclude some project
 ;; files from `recentf' and set a few common sense settings.
 (use-package haskell-mode
-  :ensure-system-package (brittany . "stack install brittany")
+  :ensure-system-package
+  ((brittany . "stack install brittany")
+   (hoogle . "stack install hoogle"))
   :delight (subword-mode)
   :ghook ('haskell-mode-hook (list #'interactive-haskell-mode #'subword-mode #'haskell-auto-insert-module-template))
   :general
@@ -54,6 +56,13 @@
   :after haskell-mode
   :commands intero-global-mode
   :delight " λ"
+  :general
+  (amalthea-major-leader 'haskell-mode-map
+    "t" '(intero-type-at :wk "type info")
+    "i" '(intero-info :wk "info")
+    "l" '(intero-repl-load :wk "REPL")
+    "e" '(intero-repl-eval-region :wk "eval region")
+    "a" '(intero-apply-suggestions :wk "apply suggestions"))
   :init (intero-global-mode))
 
 ;;; `flycheck-haskell':
