@@ -15,15 +15,19 @@
 ;; For a full copy of the GNU General Public License
 ;; see <http://www.gnu.org/licenses/>.
 
-
 ;;; Commentary:
 
-;; commentary
+;; Gives you super powered searching via `ripgrep' and `deadgrep'.
 
 ;;; Code:
 
+;;; `deadgrep':
+;; Sweet, sweet searching.
 (use-package deadgrep
-  :ensure-system-package (rg . ripgrep))
+  :ensure-system-package (rg . ripgrep)
+  :general
+  (amalthea-leader
+    "a s" '(deadgrep :wk "ripgrep")))
 
 (provide 'base-search)
 ;;; base-search.el ends here

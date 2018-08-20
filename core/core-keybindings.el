@@ -95,7 +95,7 @@
 ;; This keeps all the main menus in one place instead of spread throughout the
 ;; whole project.
 (amalthea-leader
-  "a" '(:ignore t :wk "assorted")
+  "a" '(:ignore t :wk "applications")
   "b" '(:ignore t :wk "buffers")
   "f" '(:ignore t :wk "files")
   "g" '(:ignore t :wk "git")
