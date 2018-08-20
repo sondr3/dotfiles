@@ -127,6 +127,13 @@
 [submodule "nginx-mode"]
 	path = lib/nginx-mode
 	url = git@github.com:ajc/nginx-mode.git
+[submodule "lib/org"]
+	path = lib/org
+	url = https://code.orgmode.org/bzg/org-mode.git
+	build-step = make
+	load-path = lisp
+	load-path = contrib/lisp
+	info-path = doc
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
