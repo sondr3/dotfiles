@@ -30,6 +30,7 @@
 (require 'base-checking)
 (require 'base-window)
 (require 'base-ui)
+(require 'base-help)
 (require 'base-search)
 
 (provide 'base)
