@@ -25,10 +25,10 @@
 ;;; `org':
 ;; Some very minor configuration for org-mode.
 (use-package org
-  :delight org-indent-mode
-  :defines (org-export-with-sub-superscripts org-babel-do-load-languages)
+  :defines (org-export-with-sub-superscripts org-babel-do-load-languages org-babel-do-load-languages)
   :config
   (progn
+    (delight 'org-indent-mode)
     (setq org-src-fontify-natively t           ;; Always use syntax highlighting of code blocks
           org-startup-with-inline-images t     ;; Always show images
           org-startup-indented t               ;; Indent text according to the current header
@@ -36,7 +36,15 @@
           org-use-sub-superscripts '{}         ;; Always use {} to group sub/superscript text
           org-export-with-sub-superscripts '{} ;; Export with the same syntax as above
           org-pretty-entities t                ;; Show entities as UTF8-characters when possible
-          org-list-allow-alphabetical t)))     ;; Allow lists to be a), etc
+          org-list-allow-alphabetical t)       ;; Allow lists to be a), etc
+
+    ;; Configure which languages we can use in Org Babel code blocks
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((shell . t)
+       (emacs-lisp . t)
+       (latex . t)
+       (java . t)))))
 
 (provide 'org-mode)
 ;;; org.el ends here
