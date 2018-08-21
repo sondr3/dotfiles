@@ -257,7 +257,7 @@
 
 ;;; `prettify':
 ;; Enables us to use ligatures in Emacs. It's awesome.
-(global-prettify-symbols-mode +1)
+(global-prettify-symbols-mode t)
 
 (provide 'pragmatapro)
 ;;; pragmatapro.el ends here
