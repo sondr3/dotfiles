@@ -148,5 +148,8 @@
 ;;; Load all the modules
 (require 'modules (concat amalthea-modules-dir "modules"))
 
+;; Load the utilities
+(require 'utils (concat amalthea-utils-dir "utils"))
+
 (provide 'core)
 ;;; core.el ends here

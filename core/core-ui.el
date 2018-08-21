@@ -22,16 +22,16 @@
 
 ;;; Code:
 
-(defvar amalthea-mono-font "Fira Mono"
+(defvar amalthea-mono-font "PragmataPro Mono"
   "The default monospaced font that Amalthea uses.")
 
-(defvar amalthea-serif-font "Fira Sans"
+(defvar amalthea-serif-font "PragmataPro"
   "The default sans serif font that Amalthea uses.")
 
 (defvar amalthea-line-spacing 0.15
   "The default line spacing width that Amalthea uses.")
 
-(defvar amalthea-font-size 130
+(defvar amalthea-font-size 140
   "The default font size for Amalthea.")
 
 ;;; Fonts
@@ -81,5 +81,4 @@
   (setq global-hl-line-sticky-flag nil)) ;; Don't highlight current line in inactive buffers
 
 (provide 'core-ui)
-
 ;;; core-ui.el ends here
