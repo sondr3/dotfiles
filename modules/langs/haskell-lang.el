@@ -33,7 +33,8 @@
   :ghook ('haskell-mode-hook (list #'subword-mode #'haskell-auto-insert-module-template))
   :general
   (amalthea-major-leader 'haskell-mode-map
-    "f" '(haskell-mode-stylish-buffer :wk "format buffer"))
+    "f" '(haskell-mode-stylish-buffer :wk "format buffer")
+    "F" '(haskell-mode-format-imports :wk "format imports"))
   :init
   (add-to-list 'recentf-exclude (expand-file-name "~/.stack/global-project/.stack-work/")) ;; Exclude Intero REPL from recentf
   :config
@@ -57,11 +58,20 @@
   :delight " λ"
   :general
   (amalthea-major-leader 'haskell-mode-map
+    "." '(intero-goto-definition :wk "goto definition")
+    "?" '(intero-uses-at :wk "show usage")
     "t" '(intero-type-at :wk "type info")
     "i" '(intero-info :wk "info")
-    "l" '(intero-repl-load :wk "REPL")
+    "l" '(intero-repl-load :wk "load into REPL")
     "e" '(intero-repl-eval-region :wk "eval region")
-    "a" '(intero-apply-suggestions :wk "apply suggestions"))
+    "E" '(intero-expand-splice-at-point :wk "expand splice")
+    "a" '(intero-apply-suggestions :wk "apply suggestions")
+    "s" '(intero-repl :wk "switch to REPL")
+    "h" '(hoogle :wk "hoogle")
+    "H" '(hayoo :wk "hayoo"))
+  (amalthea-major-leader 'intero-repl-mode-map
+    "s" '(intero-repl-switch-back :wk "switch back")
+    "l" '(intero-repl-clear-buffer :wk "clear REPL"))
   :init (intero-global-mode))
 
 ;;; `flycheck-haskell':
