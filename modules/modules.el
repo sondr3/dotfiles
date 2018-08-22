@@ -45,18 +45,18 @@
   (add-to-list 'load-path amalthea-modules-org-dir))
 
 ;;; Languages
-(require 'elisp)
-(require 'haskell-lang)
-(require 'markdown)
-(require 'shell)
+(require 'lang-elisp)
+(require 'lang-haskell)
+(require 'lang-markdown)
+(require 'lang-shell)
 
 ;;; Tools
-(require 'configuration)
-(require 'docker)
-(require 'nginx)
+(require 'tool-configuration)
+(require 'tool-docker)
+(require 'tool-nginx)
 
 ;;; Org
-(require 'org-mode)
+(require 'org-org)
 
 (provide 'modules)
 ;;; modules.el ends here

@@ -1,4 +1,4 @@
-;;; markdown.el --- Markdown support -*- lexical-binding: t -*-
+;;; lang-markdown.el --- Markdown support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -38,6 +38,5 @@
     (setq imenu-auto-rescan t        ;; Always automatically update buffer
           imenu-list-auto-resize t)) ;; Update size after refresh
 
-(provide 'markdown)
-
-;;; markdown.el ends here
+(provide 'lang-markdown)
+;;; lang-markdown.el ends here

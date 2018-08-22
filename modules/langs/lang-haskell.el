@@ -1,4 +1,4 @@
-;;; haskell-lang.el --- Haskell support -*- lexical-binding: t -*-
+;;; lang-haskell.el --- Haskell support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -99,5 +99,5 @@
     "r b" '(hlint-refactor-refactor-buffer :wk "refactor buffer")
     "r r" '(hlint-refactor-refactor-at-point :wk "refactor at point")))
 
-(provide 'haskell-lang)
-;;; haskell-lang.el ends here
+(provide 'lang-haskell)
+;;; lang-haskell.el ends here

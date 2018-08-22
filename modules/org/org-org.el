@@ -1,4 +1,4 @@
-;;; org-mode.el --- Org mode support -*- lexical-binding: t -*-
+;;; org-org.el --- Org mode support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -46,5 +46,5 @@
        (latex . t)
        (java . t)))))
 
-(provide 'org-mode)
-;;; org.el ends here
+(provide 'org-org)
+;;; org-org.el ends here

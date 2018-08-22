@@ -1,4 +1,4 @@
-;;; elisp.el --- Configuration for Elisp code -*- lexical-binding: t -*-
+;;; lang-elisp.el --- Configuration for Elisp code -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -80,5 +80,5 @@
            (outline-minor-mode nil "outline")
            (reveal-mode nil "reveal")))
 
-(provide 'elisp)
-;;; elisp.el ends here
+(provide 'lang-elisp)
+;;; lang-elisp.el ends here

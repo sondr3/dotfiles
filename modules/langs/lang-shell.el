@@ -1,4 +1,4 @@
-;;; shell.el --- Amalthea support for shell scripting -*- lexical-binding: t -*-
+;;; lang-shell.el --- Amalthea support for shell scripting -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -28,7 +28,8 @@
 ;; the same keys that are under `C-c'.
 (use-package sh-script
   :ensure-system-package shellcheck
-  :ghook ('sh-mode-hook #'subword-mode)
+  :ghook ('sh-mode-hook (list #'subword-mode #'flycheck-mode))
+  :init (add-hook 'sh-mode-hook #'flycheck-mode)
   :general
   (amalthea-major-leader 'sh-mode-map
     "a" '(sh-add :wk "add")
@@ -54,6 +55,7 @@
 ;;; `company-shell':
 ;; Adds auto completion for shell scripting to Company.
 (use-package company-shell
+  :after company
   :init (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
 
 ;;; `flycheck-bashate':
@@ -73,11 +75,11 @@
   :ensure-system-package checkbashisms
   :after flycheck
   :commands flycheck-checkbashisms-setup
-  :init (flycheck-checkbashisms-setup)
+  :ghook ('sh-mode-hook #'flycheck-checkbashisms-setup)
   :config
   (progn
     (setq flycheck-checkbashisms-newline t
           flycheck-checkbashisms-posix t)))
 
-(provide 'shell)
-;;; shell.el ends here
+(provide 'lang-shell)
+;;; lang-shell.el ends here

@@ -1,4 +1,4 @@
-;;; docker.el --- Docker support -*- lexical-binding: t -*-
+;;; tool-configuration.el --- Configuration languages -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -17,19 +17,11 @@
 
 ;;; Commentary:
 
-;; Docker configurations.
+;; Configures configuration languages (yo), YAML, TOML, INI and so on.
 
 ;;; Code:
 
-;;; `dockerfile-mode':
-;; Gives you syntax highlighting and completion for Docker.
-(use-package dockerfile-mode
-  :commands dockerfile-mode
-  :general
-  (amalthea-major-leader dockerfile-mode-map
-    "b" 'dockerfile-build-buffer
-    "B" 'dockerfile-build-no-cache-buffer)
-  :mode "\\Dockerfile\\'")
+(use-package yaml-mode)
 
-(provide 'docker)
-;;; docker.el ends here
+(provide 'tool-configuration)
+;;; tool-configuration.el ends here

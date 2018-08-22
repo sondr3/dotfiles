@@ -1,4 +1,4 @@
-;;; nginx.el --- Nginx configuration -*- lexical-binding: t -*-
+;;; tool-nginx.el --- Nginx configuration -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -27,5 +27,5 @@
   :after nginx-mode
   :ghook ('nginx-mode-hook #'company-nginx-keywords))
 
-(provide 'nginx)
-;;; nginx.el ends here
+(provide 'tool-nginx)
+;;; tool-nginx.el ends here
