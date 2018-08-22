@@ -34,6 +34,7 @@
     "h F" '(helpful-function :wk "helpful function")
     "h k" '(describe-key :wk "describe key")
     "h m" '(helpful-macro :wk "describe macro")
+    "h M" '(describe-mode :wk "describe mode")
     "h v" '(describe-variable :wk "describe variable"))
   (:keymaps 'override
             [remap describe-function] 'helpful-callable
