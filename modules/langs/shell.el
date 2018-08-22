@@ -28,6 +28,7 @@
 ;; the same keys that are under `C-c'.
 (use-package sh-script
   :ensure-system-package shellcheck
+  :ghook ('sh-mode-hook #'subword-mode)
   :general
   (amalthea-major-leader 'sh-mode-map
     "a" '(sh-add :wk "add")
