@@ -46,6 +46,7 @@
 (require 'elisp)
 (require 'haskell-lang)
 (require 'markdown)
+(require 'shell)
 
 ;;; Tools
 (require 'configuration)

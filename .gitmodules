@@ -22,6 +22,9 @@
 [submodule "company-quickhelp"]
 	path = lib/company-quickhelp
 	url = git@github.com:expez/company-quickhelp.git
+[submodule "company-shell"]
+	path = lib/company-shell
+	url = git@github.com:Alexander-Miller/company-shell.git
 [submodule "company-statistics"]
 	path = lib/company-statistics
 	url = git@github.com:company-mode/company-statistics.git
@@ -84,6 +87,12 @@
 [submodule "flycheck"]
 	path = lib/flycheck
 	url = git@github.com:flycheck/flycheck.git
+[submodule "flycheck-bashate"]
+	path = lib/flycheck-bashate
+	url = git@github.com:alexmurray/flycheck-bashate.git
+[submodule "flycheck-checkbashisms"]
+	path = lib/flycheck-checkbashisms
+	url = git@github.com:Gnouc/flycheck-checkbashisms.git
 [submodule "flycheck-haskell"]
 	path = lib/flycheck-haskell
 	url = git@github.com:flycheck/flycheck-haskell.git
