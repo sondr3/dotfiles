@@ -44,14 +44,15 @@
     :commands exec-path-from-shell-initialize
     :init (exec-path-from-shell-initialize))
 
-  (setq ns-use-thin-smoothing nil    ;; Dont use thinner strokes on macOS
-        mouse-wheel-flip-direction t ;; Change scrolling to new macOS defaults
-        mouse-wheel-tilt-scroll t)   ;; Change scrolling to new macOS defaults
+  (setq ns-use-thin-smoothing nil                    ;; Dont use thinner strokes on macOS
+        mouse-wheel-flip-direction t                 ;; Change scrolling to new macOS defaults
+        mouse-wheel-tilt-scroll t                    ;; Change scrolling to new macOS defaults
+        system-packages-package-manager 'brew))      ;; Just in case
 
-  (when (eq system-type 'gnu/linux)
-    (defvar x-gtk-use-system-tooltips nil)
-    (setq x-gtk-use-system-tooltips nil    ;; Use the builtin Emacs tooltips
-          x-underline-at-descent-line t))) ;; Fix for not using GTK tooltips
+(when (eq system-type 'gnu/linux)
+  (defvar x-gtk-use-system-tooltips nil)
+  (setq x-gtk-use-system-tooltips nil    ;; Use the builtin Emacs tooltips
+        x-underline-at-descent-line t))  ;; Fix for not using GTK tooltips
 
 (provide 'core-os)
 ;;; core-os.el ends here
