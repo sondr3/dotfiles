@@ -69,6 +69,16 @@
     "f r" '(recentf :wk "find recent")
     "f s" '(save-buffer :wk "save buffer")))
 
+;;; `amx':
+;; If you've ever heard of `smex', `amx' is an actually updated and maintained
+;; fork of that. It's basically a much better `M-x' that also works with Ivy. It
+;; also retains history of previously run commands, which is really useful.
+(use-package amx
+  :commands amx-mode
+  :after ivy
+  :init (amx-mode)
+  :config (setq amx-save-file (concat amalthea-cache-dir "amx-save")))
+
 ;;; `Swiper':
 ;; This is just a straight upgrade of the default search in Emacs. Use it and
 ;; love it.

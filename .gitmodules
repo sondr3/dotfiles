@@ -1,6 +1,9 @@
 [submodule "aggressive-indent"]
 	path = lib/aggressive-indent
 	url = git@github.com:Malabarba/aggressive-indent-mode.git
+[submodule "amx"]
+	path = lib/amx
+	url = git@github.com:DarwinAwardWinner/amx.git
 [submodule "async"]
 	path = lib/async
 	url = git@github.com:jwiegley/emacs-async.git
