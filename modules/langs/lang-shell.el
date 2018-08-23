@@ -57,14 +57,5 @@
   :after company
   :init (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
 
-;;; `flycheck-bashate':
-;; Bashate is essentially PEP8 for Bash scripts, so we'll add that to Flycheck
-;; to get error messages.
-(use-package flycheck-bashate
-  :ensure-system-package (bashate . "pip3 install bashate")
-  :after flycheck
-  :commands flycheck-bashate-setup
-  :init (flycheck-bashate-setup))
-
 (provide 'lang-shell)
 ;;; lang-shell.el ends here

@@ -93,9 +93,6 @@
 [submodule "flycheck"]
 	path = lib/flycheck
 	url = git@github.com:flycheck/flycheck.git
-[submodule "flycheck-bashate"]
-	path = lib/flycheck-bashate
-	url = git@github.com:alexmurray/flycheck-bashate.git
 [submodule "flycheck-haskell"]
 	path = lib/flycheck-haskell
 	url = git@github.com:flycheck/flycheck-haskell.git
