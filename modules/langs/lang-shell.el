@@ -66,19 +66,5 @@
   :commands flycheck-bashate-setup
   :init (flycheck-bashate-setup))
 
-;;; `flycheck-checkbashisms':
-;; `checkbashisms' is a package that is used by Debian developers to ensure that
-;; they don't to silly things while writing shell scripts, so we'll enable that
-;; as well for our shell scripts.
-(use-package flycheck-checkbashisms
-  :ensure-system-package checkbashisms
-  :after flycheck
-  :commands flycheck-checkbashisms-setup
-  :init (flycheck-checkbashisms-setup)
-  :config
-  (progn
-    (setq flycheck-checkbashisms-newline t
-          flycheck-checkbashisms-posix t)))
-
 (provide 'lang-shell)
 ;;; lang-shell.el ends here
