@@ -120,6 +120,9 @@
 [submodule "hlint-refactor"]
 	path = lib/hlint-refactor
 	url = git@github.com:mpickering/hlint-refactor-mode.git
+[submodule "htmlize"]
+	path = lib/htmlize
+	url = git@github.com:hniksic/emacs-htmlize.git
 [submodule "hydra"]
 	path = lib/hydra
 	url = git@github.com:abo-abo/hydra.git
