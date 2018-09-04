@@ -47,5 +47,8 @@
        (latex . t)
        (java . t)))))
 
+(use-package org-indent
+  :delight)
+
 (provide 'org-org)
 ;;; org-org.el ends here
