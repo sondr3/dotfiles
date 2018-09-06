@@ -39,6 +39,7 @@
           org-preview-latex-default-process 'dvisvgm       ;; Use DVI for LaTeX fragments, not PNG
           org-format-latex-options
           (plist-put org-format-latex-options :scale 1.25) ;; Make the preview a little larger
+          org-startup-with-latex-preview t                 ;; Preview LaTeX fragments on startop
           org-pretty-entities t                            ;; Show entities as UTF8-characters when possible
           org-list-allow-alphabetical t)                   ;; Allow lists to be a), etc
 
@@ -64,8 +65,7 @@
                                (2 'amalthea--org-math-highlight)
                                (3 '(face org-code invisible t))))))))
 
-(use-package org-indent
-  :delight)
+(use-package org-indent :delight)
 
 (provide 'org-org)
 ;;; org-org.el ends here
