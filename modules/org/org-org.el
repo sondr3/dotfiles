@@ -15,21 +15,21 @@
 ;; For a full copy of the GNU General Public License
 ;; see <http://www.gnu.org/licenses/>.
 
-
 ;;; Commentary:
 
-;; Minor configuration for org-mode.
+;; Use org-mode, it's awesome.
 
 ;;; Code:
 
 ;;; `org':
-;; Some very minor configuration for org-mode.
+;; Org-mode is an amazing piece of work, it can more or less do everything that
+;; you can think of, spread sheets, interactive coding, notes, exporting to
+;; everything under the sun and so on
 (use-package org
   :defines (org-export-with-sub-superscripts org-babel-do-load-languages)
   :commands org-babel-do-load-languages
   :config
   (progn
-    (delight 'org-indent-mode)
     (setq org-src-fontify-natively t                       ;; Always use syntax highlighting of code blocks
           org-startup-with-inline-images t                 ;; Always show images
           org-startup-indented t                           ;; Indent text according to the current header
@@ -44,13 +44,16 @@
           org-list-allow-alphabetical t)                   ;; Allow lists to be a), etc
 
     ;; Configure which languages we can use in Org Babel code blocks
+    ;; NOTE: This slows down the startup of Org-mode a little bit
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((shell . t)
        (emacs-lisp . t)
-       (latex . t)
        (java . t)))
 
+    ;; For some reason math in between $...$ isn't highlighted in any way, and
+    ;; that annoys me. After some major regexp-fu I was able to hack this
+    ;; together, it now uses the same kind of highlighting as code
     (defface amalthea--org-math-highlight
       '((t :inherit org-code :slant italic))
       "My own configuration for highlighting math blocks in org-mode"
@@ -65,7 +68,8 @@
                                (2 'amalthea--org-math-highlight)
                                (3 '(face org-code invisible t))))))))
 
-(use-package org-indent :delight)
+;; I don't want the mode line to show that org-indent-mode is active
+(use-package org-indent :after org :delight)
 
 (provide 'org-org)
 ;;; org-org.el ends here
