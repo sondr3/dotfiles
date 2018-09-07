@@ -2,7 +2,7 @@
 
 ;; Author: Fabrizio Schiavi
 ;; Maintainer: Fabrizio Schiavi
-;; Version: 0.826
+;; Version: 0.827
 ;; Package-Requires: ()
 ;; Homepage: https://www.fsd.it/shop/fonts/pragmatapro/
 ;; Keywords: font
@@ -188,6 +188,10 @@
             ("<==>"      #XE9F3)
             ("<|-"       #XE9F4)
             ("<<|"       #XE9F5)
+            ("<-<"       #XE9F7)
+            ("<-->"      #XE9F8)
+            ("<<=="      #XE9F9)
+            ("<=="       #XE9FA)
             ("==<"       #XEA00)
             ("=="        #XEA01)
             ("==="       #XEA02)
@@ -196,6 +200,8 @@
             ("=~"        #XEA05)
             ("=>>"       #XEA06)
             ("=/="       #XEA07)
+            ("=~="       #XEA08)
+            ("==>>"      #XEA09)
             ("≡≡"        #XEA10)
             ("≡≡≡"       #XEA11)
             ("≡:≡"       #XEA12)
@@ -209,6 +215,7 @@
             (">>^"       #XEA27)
             (">>|"       #XEA28)
             (">!="       #XEA29)
+            (">->"       #XEA2A)
             ("??"        #XEA40)
             ("?~"        #XEA41)
             ("?="        #XEA42)
@@ -239,6 +246,8 @@
             ("|<<"       #XEA6A)
             ("||>"       #XEA6B)
             ("|>>"       #XEA6C)
+            ("|-"        #XEA6D)
+            ("||-"       #XEA6E)
             ("~="        #XEA70)
             ("~>"        #XEA71)
             ("~~>"       #XEA72)
@@ -246,7 +255,7 @@
             ("[["        #XEA80)
             ("]]"        #XEA81)
             ("\">"       #XEA90)
-            )))
+            ("_|_"       #XEA97))))
 
 (defun add-pragmatapro-prettify-symbols-alist ()
   (dolist (alias pragmatapro-prettify-symbols-alist)

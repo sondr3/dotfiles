@@ -99,5 +99,7 @@
     "r b" '(hlint-refactor-refactor-buffer :wk "refactor buffer")
     "r r" '(hlint-refactor-refactor-at-point :wk "refactor at point")))
 
+(delight '((haskell-mode "" :major)))
+
 (provide 'lang-haskell)
 ;;; lang-haskell.el ends here
