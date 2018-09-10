@@ -23,8 +23,8 @@
 
 ;;; Theme
 ;; You should probably change this, I have a very weird taste in themes.
-(use-package tao-theme
-  :init (load-theme 'tao-yang t))
+(use-package apropospriate-theme
+  :init (load-theme 'apropospriate-light t))
 
 (provide 'base-ui)
 

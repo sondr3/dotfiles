@@ -4,6 +4,9 @@
 [submodule "amx"]
 	path = lib/amx
 	url = git@github.com:DarwinAwardWinner/amx.git
+[submodule "apropospriate-theme"]
+	path = lib/apropospriate-theme
+	url = git@github.com:waymondo/apropospriate-theme.git
 [submodule "async"]
 	path = lib/async
 	url = git@github.com:jwiegley/emacs-async.git
@@ -191,9 +194,6 @@
 [submodule "system-packages"]
 	path = lib/system-packages
 	url = git@gitlab.com:jabranham/system-packages.git
-[submodule "tao-theme"]
-	path = lib/tao-theme
-	url = git@github.com:11111000000/tao-theme-emacs.git
 [submodule "undo-tree"]
 	path = lib/undo-tree
 	url = git@github.com:emacsorphanage/undo-tree.git
