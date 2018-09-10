@@ -134,7 +134,7 @@
 ;; included `yasnippet-snippets' for a whole lotta snippets that you can use.
 ;; TODO: This package slows down loading a lot.
 (use-package yasnippet
-  :delight (yas-minor-mode " ⓨ")
+  :delight (yas-minor-mode " Ⓨ")
   :ghook ('(text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode)
   :general
   (amalthea-major-leader
