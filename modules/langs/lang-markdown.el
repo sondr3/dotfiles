@@ -33,10 +33,5 @@
         markdown-gfm-additional-languages '("sh")                                  ;; Add `sh' as a language to convert
         markdown-fontify-code-blocks-natively t))                                  ;; Highlight code using the languages major mode
 
-  (use-package imenu-list
-    :init
-    (setq imenu-auto-rescan t        ;; Always automatically update buffer
-          imenu-list-auto-resize t)) ;; Update size after refresh
-
 (provide 'lang-markdown)
 ;;; lang-markdown.el ends here
