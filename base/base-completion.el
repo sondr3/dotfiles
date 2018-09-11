@@ -139,7 +139,14 @@
   :general
   (amalthea-major-leader
     "Y" '(:ignore t :wk "Yasnippet")
+    "Y p" '(ivy-yasnippet :wk "preview")
     "Y e" '(yas-expand :wk "expand")))
+
+;;; `ivy-yasnippet':
+;; This gives you an Ivy-powered way to preview your snippets by interactively
+;; seeing how they would look.
+(use-package ivy-yasnippet
+  :after yasnippet)
 
 (provide 'base-completion)
 ;;; base-completion.el ends here

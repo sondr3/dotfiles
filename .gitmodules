@@ -139,6 +139,9 @@
 [submodule "ivy"]
 	path = lib/ivy
 	url = git@github.com:abo-abo/swiper.git
+[submodule "ivy-yasnippet"]
+	path = lib/ivy-yasnippet
+	url = git@github.com:mkcms/ivy-yasnippet.git
 [submodule "json-mode"]
 	path = lib/json-mode
 	url = git@github.com:joshwnj/json-mode.git

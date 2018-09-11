@@ -21,6 +21,9 @@
 
 ;;; Code:
 
+;;; `json-mode':
+;; This is really nothing fancy, we bind some keys and set the indentation to
+;; it's proper size.
 (use-package json-mode
   :general
   (amalthea-major-leader 'json-mode-map
