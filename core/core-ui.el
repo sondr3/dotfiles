@@ -42,9 +42,6 @@
 (set-face-attribute 'variable-pitch nil
 		                :family amalthea-serif-font
 		                :height amalthea-font-size)
-(set-face-attribute 'mode-line nil
-                    :family amalthea-serif-font
-                    :height amalthea-font-size)
 (set-frame-font amalthea-mono-font nil t)
 
 ;;; General UI settings:
