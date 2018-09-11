@@ -139,6 +139,15 @@
 [submodule "ivy"]
 	path = lib/ivy
 	url = git@github.com:abo-abo/swiper.git
+[submodule "json-mode"]
+	path = lib/json-mode
+	url = git@github.com:joshwnj/json-mode.git
+[submodule "json-reformat"]
+	path = lib/json-reformat
+	url = git@github.com:gongo/json-reformat.git
+[submodule "json-snatcher"]
+	path = lib/json-snatcher
+	url = git@github.com:Sterlingg/json-snatcher.git
 [submodule "lib/org"]
 	path = lib/org
 	url = https://code.orgmode.org/bzg/org-mode.git

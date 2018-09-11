@@ -49,6 +49,7 @@
 (require 'lang-haskell)
 (require 'lang-markdown)
 (require 'lang-shell)
+(require 'lang-json)
 
 ;;; Tools
 (require 'tool-configuration)
