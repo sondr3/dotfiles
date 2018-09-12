@@ -34,6 +34,12 @@
 [submodule "company-statistics"]
 	path = lib/company-statistics
 	url = git@github.com:company-mode/company-statistics.git
+[submodule "company-web"]
+	path = lib/company-web
+	url = git@github.com:osv/company-web.git
+[submodule "counsel-css"]
+	path = lib/counsel-css
+	url = git@github.com:hlissner/emacs-counsel-css.git
 [submodule "counsel-projectile"]
 	path = lib/counsel-projectile
 	url = git@github.com:ericdanan/counsel-projectile.git
@@ -60,6 +66,9 @@
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
 	no-byte-compile = emacsql-pg.el
+[submodule "emmet-mode"]
+	path = lib/emmet-mode
+	url = git@github.com:smihica/emmet-mode.git
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
@@ -185,12 +194,18 @@
 [submodule "pos-tip"]
 	path = lib/pos-tip
 	url = git@github.com:pitkali/pos-tip.git
+[submodule "prettier-js"]
+	path = lib/prettier-js
+	url = git@github.com:prettier/prettier-emacs.git
 [submodule "projectile"]
 	path = lib/projectile
 	url = git@github.com:bbatsov/projectile.git
 [submodule "rainbow-delimiters"]
 	path = lib/rainbow-delimiters
 	url = git@github.com:Fanael/rainbow-delimiters.git
+[submodule "rainbow-mode"]
+	path = lib/rainbow-mode
+	url = git@github.com:emacsmirror/rainbow-mode.git
 [submodule "s"]
 	path = lib/s
 	url = git@github.com:magnars/s.el.git
@@ -209,6 +224,12 @@
 [submodule "use-package"]
 	path = lib/use-package
 	url = git@github.com:jwiegley/use-package.git
+[submodule "web-completion-data"]
+	path = lib/web-completion-data
+	url = git@github.com:osv/web-completion-data.git
+[submodule "web-mode"]
+	path = lib/web-mode
+	url = git@github.com:fxbois/web-mode.git
 [submodule "which-key"]
 	path = lib/which-key
 	url = git@github.com:justbur/emacs-which-key.git

@@ -50,6 +50,7 @@
 (require 'lang-markdown)
 (require 'lang-shell)
 (require 'lang-json)
+(require 'lang-web)
 
 ;;; Tools
 (require 'tool-configuration)
