@@ -29,8 +29,8 @@
 (defconst amalthea-modules-tools-dir (concat amalthea-modules-dir "tools/")
   "Path to configuration of tools in Amalthea.")
 
-(defconst amalthea-modules-org-dir (concat amalthea-modules-dir "org/")
-  "Path to Org mode configuration in Amalthea.")
+(defconst amalthea-modules-text-dir (concat amalthea-modules-dir "text/")
+  "Path to configuration of text editing tools in Amalthea.")
 
 ;;; Functions
 (defun amalthea--byte-compile-module-dirs ()
@@ -57,9 +57,8 @@
 (require 'tool-docker)
 (require 'tool-nginx)
 
-;;; Org
-(require 'org-org)
 ;;; Text editing
+(require 'text-org)
 (require 'text-latex)
 
 (provide 'modules)
