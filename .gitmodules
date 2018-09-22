@@ -10,6 +10,18 @@
 [submodule "async"]
 	path = lib/async
 	url = git@github.com:jwiegley/emacs-async.git
+[submodule "auctex"]
+	path = lib/auctex
+	url = https://git.savannah.gnu.org/git/auctex.git
+	info-path = doc
+	build-step = ./autogen.sh
+	build-step = ./configure --without-texmf-dir
+	build-step = make
+  build-step = borg-update-autoloads
+	build-step = borg-makeinfo
+[submodule "auctex-latexmk"]
+	path = lib/auctex-latexmk
+	url = git@github.com:tom-tan/auctex-latexmk.git
 [submodule "auto-compile"]
 	path = lib/auto-compile
 	url = git@github.com:emacscollective/auto-compile.git
@@ -22,12 +34,21 @@
 [submodule "company"]
 	path = lib/company
 	url = git@github.com:company-mode/company-mode.git
+[submodule "company-auctex"]
+	path = lib/company-auctex
+	url = git@github.com:alexeyr/company-auctex.git
+[submodule "company-math"]
+	path = lib/company-math
+	url = git@github.com:vspinu/company-math.git
 [submodule "company-nginx"]
 	path = lib/company-nginx
 	url = git@github.com:stardiviner/company-nginx.git
 [submodule "company-quickhelp"]
 	path = lib/company-quickhelp
 	url = git@github.com:expez/company-quickhelp.git
+[submodule "company-reftex"]
+	path = lib/company-reftex
+	url = git@github.com:TheBB/company-reftex.git
 [submodule "company-shell"]
 	path = lib/company-shell
 	url = git@github.com:Alexander-Miller/company-shell.git
@@ -170,6 +191,9 @@
 [submodule "macrostep"]
 	path = lib/macrostep
 	url = git@github.com:joddie/macrostep.git
+[submodule "magic-latex-buffer"]
+	path = lib/magic-latex-buffer
+	url = git@github.com:zk-phi/magic-latex-buffer.git
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
@@ -179,6 +203,9 @@
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
+[submodule "math-symbol-lists"]
+	path = lib/math-symbol-lists
+	url = git@github.com:vspinu/math-symbol-lists.git
 [submodule "nginx-mode"]
 	path = lib/nginx-mode
 	url = git@github.com:ajc/nginx-mode.git

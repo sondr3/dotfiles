@@ -42,7 +42,7 @@
 (eval-and-compile
   (add-to-list 'load-path amalthea-modules-langs-dir)
   (add-to-list 'load-path amalthea-modules-tools-dir)
-  (add-to-list 'load-path amalthea-modules-org-dir))
+  (add-to-list 'load-path amalthea-modules-text-dir))
 
 ;;; Languages
 (require 'lang-elisp)
@@ -59,6 +59,8 @@
 
 ;;; Org
 (require 'org-org)
+;;; Text editing
+(require 'text-latex)
 
 (provide 'modules)
 ;;; modules.el ends here
