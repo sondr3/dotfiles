@@ -61,8 +61,8 @@
 ;; mode aggressively indents code whenever you change any part of a code block.
 (use-package aggressive-indent
   :delight
-  :commands aggressive-indent-mode
-  :ghook ('emacs-lisp-mode-hook #'aggressive-indent-mode))
+  :commands global-aggressive-indent-mode
+  :init (global-aggressive-indent-mode t))
 
 ;;; `ws-butler':
 ;; This is something that you could fix by using a builtin helper function that
