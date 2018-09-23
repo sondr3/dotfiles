@@ -21,17 +21,13 @@
 
 ;;; Code:
 
-(use-package auctex
-  :load tex-site
-  :mode ("\\.tex\\'" . TeX-latex-mode)
+(use-package tex
   :commands (TeX-source-correlate-mode TeX-PDF-mode)
   :functions LaTeX-math-mode
   :ghook ('LaTeX-mode-hook (list #'TeX-fold-mode #'LaTeX-math-mode #'TeX-source-correlate-mode #'TeX-PDF-mode #'flyspell-mode))
   :init
   (progn
-    (setq-default TeX-master nil
-                  TeX-lisp-directory (concat amalthea-emacs-dir "lib/auctex")
-                  TeX-data-directory (concat amalthea-emacs-dir "lib/auctex"))
+    (setq-default TeX-master nil)
     (setq TeX-command-default "latexmk"
           TeX-command-force "latexmk"
           TeX-engine 'lualatex
@@ -47,14 +43,14 @@
           TeX-source-correlate-start-server t
           LaTeX-babel-hyphen nil
           LaTeX-fill-break-at-separators nil
-          TeX-view-program-selection '((output-pdf "Skim"))))
+          TeX-view-program-selection '((output-pdf "Skim")))))
 
-  (use-package auctex-latexmk
-    :commands auctex-latexmk-setup
-    :init
-    (progn
-      (setq auctex-latexmk-inherit-TeX-PDF-mode t)
-      (auctex-latexmk-setup))))
+(use-package auctex-latexmk
+  :commands auctex-latexmk-setup
+  :init
+  (progn
+    (setq auctex-latexmk-inherit-TeX-PDF-mode t)
+    (auctex-latexmk-setup)))
 
 (use-package company-auctex
   :commands company-auctex-init

@@ -15,9 +15,9 @@
 	url = https://git.savannah.gnu.org/git/auctex.git
 	info-path = doc
 	build-step = ./autogen.sh
-	build-step = ./configure --without-texmf-dir
+	build-step = ./configure
 	build-step = make
-  build-step = borg-update-autoloads
+	build-step = "(borg-update-autoloads \"auctex\")"
 	build-step = borg-makeinfo
 [submodule "auctex-latexmk"]
 	path = lib/auctex-latexmk
