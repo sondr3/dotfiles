@@ -62,7 +62,8 @@
 (use-package aggressive-indent
   :delight
   :commands global-aggressive-indent-mode
-  :init (global-aggressive-indent-mode t))
+  :init (global-aggressive-indent-mode t)
+  :config (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode))
 
 ;;; `ws-butler':
 ;; This is something that you could fix by using a builtin helper function that
