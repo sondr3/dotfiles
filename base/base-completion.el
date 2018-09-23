@@ -132,7 +132,7 @@
 ;;; `yasnippet':
 ;; Enables snippets and expansion of snippets with this package, we've also
 ;; included `yasnippet-snippets' for a whole lotta snippets that you can use.
-;; TODO: This package slows down loading a lot.
+;; TODO: This package slows down start-up a lot.
 (use-package yasnippet
   :delight (yas-minor-mode " Ⓨ")
   :ghook ('(text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode)
@@ -140,7 +140,14 @@
   (amalthea-major-leader
     "Y" '(:ignore t :wk "Yasnippet")
     "Y p" '(ivy-yasnippet :wk "preview")
-    "Y e" '(yas-expand :wk "expand")))
+    "Y e" '(yas-expand :wk "expand")
+    "Y r" '(yas-reload-all :wk "reload")))
+
+;;; `yasnippet-snippets':
+;; Minor tweak to allow it to automatically load snippets, but only after the
+;; actual package has been loaded. Otherwise it doesn't load personal snippets.
+(use-package yasnippet-snippets
+  :after yasnippet)
 
 ;;; `ivy-yasnippet':
 ;; This gives you an Ivy-powered way to preview your snippets by interactively
