@@ -25,6 +25,9 @@
   :commands (TeX-source-correlate-mode TeX-PDF-mode)
   :functions LaTeX-math-mode
   :ghook ('LaTeX-mode-hook (list #'TeX-fold-mode #'LaTeX-math-mode #'TeX-source-correlate-mode #'TeX-PDF-mode #'flyspell-mode))
+  :general
+  (amalthea-major-leader 'LaTeX-mode-map
+    "TAB" '(align-current :wk "align"))
   :init
   (progn
     (setq-default TeX-master nil)
@@ -64,6 +67,7 @@
     (add-to-list 'company-backends 'company-latex-commands)))
 
 (use-package magic-latex-buffer
+  :disabled
   :commands magic-latex-buffer
   :ghook ('LaTeX-mode-hook #'magix-latex-buffer)
   :init
