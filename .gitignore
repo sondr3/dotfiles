@@ -6,3 +6,4 @@
 /cache
 /local
 *.elc
+.yas-compiled-snippets.el
