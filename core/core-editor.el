@@ -48,9 +48,6 @@
 (add-hook 'text-mode-hook #'auto-fill-mode)
 (delight 'auto-fill-function nil t)
 
-;; Automatically create a closing parenthesis/etc
-(add-hook 'prog-mode-hook #'electric-pair-mode)
-
 ;;; Help:
 ;; Emacs has amazing documentation and builtin help pages and functions and
 ;; everything, it explains more or less anything that you need to know.

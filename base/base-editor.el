@@ -65,6 +65,14 @@
   :init (global-aggressive-indent-mode t)
   :config (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode))
 
+;;; `smartparens`:
+;; Like `electric-pair-mode`, but better. This is a minor mode for working with
+;; pairs of delimiters, not just parentheses as the name implies. It's supposed
+;; to be a superset of `paredit` and `electric-pair-mode`.
+(use-package smartparens
+  :delight
+  :ghook ('prog-mode-hook #'smartparens-mode))
+
 ;;; `ws-butler':
 ;; This is something that you could fix by using a builtin helper function that
 ;; removes newlines at the end of files etc, but I prefer using this package

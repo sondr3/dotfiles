@@ -78,5 +78,12 @@
   :commands evil-goggles-mode
   :init (evil-goggles-mode))
 
+;;; `evil-smartparens`:
+;; Whenever we use `smartparens` we also want to ensure that we enable the
+;; corresponding evil counterpart so things works as we expect.
+(use-package evil-smartparens
+  :delight
+  :ghook ('smartparens-enabled-hook #'evil-smartparens-mode))
+
 (provide 'base-evil)
 ;;; base-evil.el ends here
