@@ -24,7 +24,7 @@
 (use-package tex
   :commands (TeX-source-correlate-mode TeX-PDF-mode)
   :functions LaTeX-math-mode
-  :ghook ('LaTeX-mode-hook (list #'TeX-fold-mode #'LaTeX-math-mode #'TeX-source-correlate-mode #'TeX-PDF-mode #'flyspell-mode))
+  :ghook ('LaTeX-mode-hook (list #'TeX-fold-mode #'LaTeX-math-mode #'TeX-source-correlate-mode #'TeX-PDF-mode #'flyspell-mode #'company-mode))
   :general
   (amalthea-major-leader 'LaTeX-mode-map
     "TAB" '(align-current :wk "align"))
@@ -46,7 +46,8 @@
           TeX-source-correlate-start-server t
           LaTeX-babel-hyphen nil
           LaTeX-fill-break-at-separators nil
-          TeX-view-program-selection '((output-pdf "Skim")))))
+          TeX-view-program-selection '((output-pdf "PDF Viewer"))
+          TeX-view-program-list '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))))
 
 (use-package auctex-latexmk
   :commands auctex-latexmk-setup
@@ -78,6 +79,10 @@
           magic-latex-enable-block-align nil
           magic-latex-enable-inline-image t)))
 
+(use-package latex-extra
+  :commands latex-extra-mode
+  :ghook ('LaTeX-mode-hook #'latex-extra-mode))
+
 (use-package reftex
   :commands (turn-on-reftex reftex-mode)
   :ghook ('LaTeX-mode-hook #'turn-on-reftex)
@@ -85,7 +90,8 @@
   (progn
     (setq reftex-plug-into-AUCTeX t
           reftex-use-fonts t
-          reftex-default-bibliography '("~/Documents/UiB/bibliography.bib")
+          reftex-cite-prompt-optional-args t
+          reftex-default-bibliography '("~/UiB/bibliography.bib")
           reftex-toc-split-windows-fraction 0.2)))
 
 (use-package company-reftex)
@@ -96,7 +102,7 @@
     (setq bibtex-dialect 'biblatex
           bibtex-align-at-equal-sign t
           bibtex-text-indentation 20
-          bibtex-completion-bibliography '("~/Documents/UiB/bibliography.bib"))))
+          bibtex-completion-bibliography '("~/UiB/bibliography.bib"))))
 
 (provide 'text-latex)
 ;;; text-latex.el ends here

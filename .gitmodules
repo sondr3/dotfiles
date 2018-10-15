@@ -184,6 +184,9 @@
 [submodule "json-snatcher"]
 	path = lib/json-snatcher
 	url = git@github.com:Sterlingg/json-snatcher.git
+[submodule "latex-extra"]
+	path = lib/latex-extra
+	url = git@github.com:Malabarba/latex-extra.git
 [submodule "lib/org"]
 	path = lib/org
 	url = https://code.orgmode.org/bzg/org-mode.git
