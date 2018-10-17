@@ -215,6 +215,9 @@
 [submodule "math-symbol-lists"]
 	path = lib/math-symbol-lists
 	url = git@github.com:vspinu/math-symbol-lists.git
+[submodule "nasm-mode"]
+	path = lib/nasm-mode
+	url = git@github.com:skeeto/nasm-mode.git
 [submodule "nginx-mode"]
 	path = lib/nginx-mode
 	url = git@github.com:ajc/nginx-mode.git
