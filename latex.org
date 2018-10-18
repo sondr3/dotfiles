@@ -1,0 +1,54 @@
+#+TITLE: LaTeX settings
+#+AUTHOR: Sondre Nilsen
+#+EMAIL: nilsen.sondre@gmail.com
+
+* Installation
+There's no magic here, install the latest version available of LiveTex for
+either you macOS machine or from your distributions package manager. Then,
+install Zotero for managing your bibliography.
+* =latexmk=
+:PROPERTIES:
+:header-args: :tangle ~/.latexmkrc-test
+:END:
+This is the bread and butter of creating and working with LaTeX documents, it
+does everything. If you update references it will make sure everything is
+properly refreshed, if you update an image that's referenced in your document
+it'll update that too. And you essentially fire and forget it.
+
+First, we configure it to use LuaLaTeX instead of the regular ol' PDFLaTeX. We
+enable SyncTeX so we can jump from the source code to the corresponding line in
+the created PDF and set it so that it'll require no interaction from us, so if
+we encounter errors it'll just parse straight through them but not update the
+PDF.
+
+#+BEGIN_SRC shell
+  $lualatex='lualatex -interaction=nonstopmode -synctex=1 %O %S';
+#+END_SRC
+
+Then set it up to always preview and run, even when encountering errors and
+warnings.
+
+#+BEGIN_SRC shell
+  $preview_continuous_mode = 1;
+#+END_SRC
+
+And configure how it generates PDFs, there are a few different settings here but
+since we are using LuaLaTeX as our choice of LaTeX parser, we need to set this
+setting to 4 so it understands that we'll be using it for generating the PDFs.
+
+#+BEGIN_SRC shell
+  $pdf_mode = 4;
+#+END_SRC
+
+Next up we configure the PDF viewer that we'll be using:
+
+#+BEGIN_SRC shell
+  $pdf_previewer = 'open -a skim';
+#+END_SRC
+
+And finally, since we're using SyncTeX, when we want to clean out unnecessary
+files we also want the SyncTeX sources to be cleaned out:
+
+#+BEGIN_SRC shell
+  @generated_exts = (@generated_exts, 'synctex.gz');
+#+END_SRC
