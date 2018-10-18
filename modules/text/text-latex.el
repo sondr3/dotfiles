@@ -24,7 +24,8 @@
 (use-package tex
   :commands (TeX-source-correlate-mode TeX-PDF-mode)
   :functions LaTeX-math-mode
-  :ghook ('LaTeX-mode-hook (list #'TeX-fold-mode #'LaTeX-math-mode #'TeX-source-correlate-mode #'TeX-PDF-mode #'flyspell-mode #'company-mode))
+  :ghook ('LaTeX-mode-hook (list #'TeX-fold-mode #'LaTeX-math-mode #'TeX-source-correlate-mode
+                                 #'TeX-PDF-mode #'flyspell-mode #'company-mode #'rainbow-delimiters-mode))
   :general
   (amalthea-major-leader 'LaTeX-mode-map
     "TAB" '(align-current :wk "align"))
@@ -41,6 +42,9 @@
           TeX-show-compilation nil
           TeX-syntactic-comment t
           TeX-clean-confirm t
+          TeX-electric-escape t
+          TeX-electric-math t
+          TeX-electric-sub-and-superscript t
           TeX-source-correlate-mode t
           TeX-source-correlate-method 'synctex
           TeX-source-correlate-start-server t
@@ -91,18 +95,27 @@
     (setq reftex-plug-into-AUCTeX t
           reftex-use-fonts t
           reftex-cite-prompt-optional-args t
-          reftex-default-bibliography '("~/UiB/bibliography.bib")
+          reftex-default-bibliography '("~/Code/UiB/bibliography.bib")
           reftex-toc-split-windows-fraction 0.2)))
 
-(use-package company-reftex)
+(use-package company-reftex
+  :config
+  (progn
+    (add-to-list 'company-backends 'company-reftex-labels)
+    (add-to-list 'company-backends 'company-reftex-citations)))
 
-(use-package bibtex
+(use-package ivy-bibtex
+  :init
+  (progn
+    (setq ivy-re-builders-alist
+          '((ivy-bibtex . ivy--regex-ignore-order)
+            (t . ivy--regex-plus))))
   :config
   (progn
     (setq bibtex-dialect 'biblatex
           bibtex-align-at-equal-sign t
           bibtex-text-indentation 20
-          bibtex-completion-bibliography '("~/UiB/bibliography.bib"))))
+          bibtex-completion-bibliography '("~/Code/UiB/bibliography.bib"))))
 
 (provide 'text-latex)
 ;;; text-latex.el ends here
