@@ -42,7 +42,6 @@
           TeX-show-compilation nil
           TeX-syntactic-comment t
           TeX-clean-confirm t
-          TeX-electric-escape t
           TeX-electric-math t
           TeX-electric-sub-and-superscript t
           TeX-source-correlate-mode t
@@ -117,8 +116,22 @@
     (setq bibtex-dialect 'biblatex
           bibtex-align-at-equal-sign t
           bibtex-text-indentation 20
+          bibtex-autokey-year-length 4
+          bibtex-autokey-name-year-separator ""
+          bibtex-autokey-year-title-separator ""
+          bibtex-autokey-titleword-separator ""
+          bibtex-autokey-titlewords 4
+          bibtex-autokey-titlewords-stretch 2
+          bibtex-autokey-titleword-length t
+          bibtex-autokey-titleword-case-convert-function 'identity
           ivy-bibtex-default-action 'bibtex-completion-insert-citation
           bibtex-completion-bibliography '("~/Code/UiB/bibliography.bib"))))
+
+(use-package ebib
+  :config
+  (progn
+    (setq ebib-bibtex-dialect 'biblatex
+          ebib-preload-bib-files '("~/Code/UiB/bibliography.bib"))))
 
 (provide 'text-latex)
 ;;; text-latex.el ends here

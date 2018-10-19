@@ -83,6 +83,9 @@
 [submodule "dockerfile-mode"]
 	path = lib/dockerfile-mode
 	url = git@github.com:spotify/dockerfile-mode.git
+[submodule "ebib"]
+	path = lib/ebib
+	url = git@github.com:joostkremers/ebib.git
 [submodule "elisp-refs"]
 	path = lib/elisp-refs
 	url = git@github.com:Wilfred/elisp-refs.git
