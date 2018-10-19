@@ -84,10 +84,12 @@
           magic-latex-enable-inline-image t)))
 
 (use-package latex-extra
+  :delight
   :commands latex-extra-mode
   :ghook ('LaTeX-mode-hook #'latex-extra-mode))
 
 (use-package reftex
+  :delight
   :commands (turn-on-reftex reftex-mode)
   :ghook ('LaTeX-mode-hook #'turn-on-reftex)
   :init
@@ -115,6 +117,7 @@
     (setq bibtex-dialect 'biblatex
           bibtex-align-at-equal-sign t
           bibtex-text-indentation 20
+          ivy-bibtex-default-action 'bibtex-completion-insert-citation
           bibtex-completion-bibliography '("~/Code/UiB/bibliography.bib"))))
 
 (provide 'text-latex)
