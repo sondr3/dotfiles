@@ -51,6 +51,7 @@
 (require 'lang-shell)
 (require 'lang-json)
 (require 'lang-web)
+(require 'lang-rust)
 
 ;;; Tools
 (require 'tool-configuration)
