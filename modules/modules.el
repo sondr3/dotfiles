@@ -54,7 +54,6 @@
 (require 'lang-markdown)
 (require 'lang-shell)
 (require 'lang-json)
-(require 'lang-web)
 (require 'lang-rust)
 
 ;;; Tools
