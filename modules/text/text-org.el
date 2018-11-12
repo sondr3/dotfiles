@@ -41,6 +41,17 @@
           (plist-put org-format-latex-options :scale 1.25) ;; Make the preview a little larger
           org-startup-with-latex-preview t                 ;; Preview LaTeX fragments on startop
           org-latex-listings t                             ;; Make SRC blocks export to code blocks in LaTeX
+          org-babel-inline-result-wrap "%s"
+          org-latex-listings-options
+          '(("frame" "tb")
+            ("breaklines" "true")
+            ("breakatwhitespace" "true")
+            ("keepspaces" "true")
+            ("columns" "fullflexible")
+            ("showspaces" "false")
+            ("showstringspaces" "false")
+            ("showtabs" "false")
+            ("basicstyle" "\\ttfamily\\footnotesize"))
           org-latex-pdf-process (list "latexmk -pvc- %f")  ;; Use `latexmk' to generate PDF
           org-pretty-entities t                            ;; Show entities as UTF8-characters when possible
           org-list-allow-alphabetical t)                   ;; Allow lists to be a), etc
@@ -53,6 +64,8 @@
        (emacs-lisp . t)
        (java . t)))
 
+    (add-to-list 'org-latex-listings-langs
+                 '(java "Java"))
     (add-to-list 'org-latex-classes
                  '("memoir"
                    "\\documentclass[12pt,a4paper,oneside,article]{memoir}
@@ -66,7 +79,7 @@
                     \\usepackage[final]{microtype}
                     \\setmainfont{Linux Libertine O}
                     \\setsansfont{Linux Biolinum O}
-                    \\setmonofont{DejaVu Sans Mono}
+                    \\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
 
                     \\usepackage{subfiles}
                     \\usepackage{tabulary}
@@ -88,27 +101,15 @@
                     [PACKAGES]
 
                     \\hypersetup{colorlinks = true}
-                    \\lstset{language=Java,frame=tb,
-                      breaklines=true,
-                      breakatwhitespace=true,
-                      keepspaces=true,
-                      columns=fullflexible,
-                      showspaces=false,
-                      showstringspaces=false,
-                      showtabs=false,
-                      basicstyle=\\ttfamily\\footnotesize
-                    }
-
-                    \\usepackage{chngcntr}
                     \\counterwithin{table}{section}
                     \\numberwithin{equation}{chapter}
                     \\counterwithin{figure}{section}
                     \\setenumerate[0]{label= (\\alph*)}
                     \\AtBeginDocument{\\counterwithin{lstlisting}{section}}
                     \\counterwithout{section}{chapter}
-
                     \\chapterstyle{hangnum}
                     \\pagestyle{ruled}
+
                     [EXTRA]"
                    ("\\subsection{%s}" . "\\subsection*{%s}")
                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
