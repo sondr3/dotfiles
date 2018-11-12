@@ -59,7 +59,6 @@
 
                     [PACKAGES]
 
-                    \\hypersetup{colorlinks = true}
                     \\chapterstyle{veelo}
                     \\headstyles{memman}
                     \\pagestyle{ruled}
@@ -99,7 +98,6 @@
 
                     [PACKAGES]
 
-                    \\hypersetup{colorlinks = true}
                     \\counterwithin{table}{section}
                     \\numberwithin{equation}{chapter}
                     \\counterwithin{figure}{section}
@@ -131,7 +129,8 @@
             ("showspaces" "false")
             ("showstringspaces" "false")
             ("showtabs" "false")
-            ("basicstyle" "\\ttfamily\\footnotesize")))))
+            ("basicstyle" "\\ttfamily\\footnotesize"))
+          org-latex-hyperref-template "\\hypersetup{\n colorlinks=true,\n pdfauthor={%a},\n pdftitle={%t},\n pdfkeywords={%k},\n pdfsubject={%d},\n pdfcreator={%c},\n pdflang={%L}}\n")))
 
 (provide 'org-latex-export)
 ;;; org-latex-export.el ends here
