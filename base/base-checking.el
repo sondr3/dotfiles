@@ -85,11 +85,10 @@
   :after flyspell
   :commands (flyspell-correct-word-generic
              flyspell-correct-ivy
-             flyspell-correct-previous-word-generic)
+             flyspell-correct-previous)
   :general
   (amalthea-leader
-    "S c" '(flyspell-correct-previous-word-generic :wk "correct word"))
-  :init (setq flyspell-correct-interface #'flyspell-correct-ivy))
+    "S c" '(flyspell-correct-wrapper :wk "correct word")))
 
 ;;; `flycheck':
 (use-package flycheck
