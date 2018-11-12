@@ -72,8 +72,11 @@
 ;; Org-mode has some really amazing exporting options, LaTeX included, but I
 ;; find the default configuration fairly lacking, so we'll add a bunch of
 ;; changes and add a custom LaTeX class.
-(eval-after-load 'ox-latex
+(use-package ox-latex
+  :config
   (progn
+    (unless (boundp 'org-latex-classes)
+      (setq org-latex-classes nil))
     ;; Add out default LaTeX class before referencing it
     (add-to-list 'org-latex-classes
                  '("memoir"
@@ -91,9 +94,6 @@
                     \\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
 
                     \\usepackage{subfiles}
-                    \\usepackage{tabulary}
-                    \\usepackage{tabu}
-                    \\usepackage{booktabs}
                     \\usepackage{multirow}
                     \\usepackage{float}
                     \\usepackage{amsmath,amsfonts,amssymb}
@@ -105,7 +105,6 @@
                     \\usepackage{xcolor, colortbl, array}
                     \\usepackage{listings}
                     \\usepackage{color}
-                    \\usepackage{chngcntr}
 
                     [PACKAGES]
 
@@ -124,21 +123,20 @@
                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
                    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-    (setq
-     org-latex-default-class "memoir"                   ;; Use my own class by default
-     org-latex-default-table-environment "tabulary"     ;; Use a better table formatter
-     org-latex-listings t                               ;; Make SRC blocks export to code blocks in LaTeX
-     org-latex-listings-options                         ;; Configure source code exporting
-     '(("frame" "tb")
-       ("breaklines" "true")
-       ("breakatwhitespace" "true")
-       ("keepspaces" "true")
-       ("columns" "fullflexible")
-       ("showspaces" "false")
-       ("showstringspaces" "false")
-       ("showtabs" "false")
-       ("basicstyle" "\\ttfamily\\footnotesize"))
-     org-latex-pdf-process (list "latexmk -pvc- %f")))) ;; Use `latexmk' to generate PDF
+    (setq org-latex-default-class "memoir"                   ;; Use my own class by default
+          org-latex-default-table-environment "tabularx"     ;; Use a better table formatter
+          org-latex-listings t                               ;; Make SRC blocks export to code blocks in LaTeX
+          org-latex-pdf-process (list "latexmk -pvc- %f")    ;; Use `latexmk' to generate PDF
+          org-latex-listings-options                         ;; Configure source code exporting
+          '(("frame" "tb")
+            ("breaklines" "true")
+            ("breakatwhitespace" "true")
+            ("keepspaces" "true")
+            ("columns" "fullflexible")
+            ("showspaces" "false")
+            ("showstringspaces" "false")
+            ("showtabs" "false")
+            ("basicstyle" "\\ttfamily\\footnotesize")))))
 
 ;; I don't want the mode line to show that org-indent-mode is active
 (use-package org-indent :after org :delight)
