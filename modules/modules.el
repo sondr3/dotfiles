@@ -32,6 +32,9 @@
 (defconst amalthea-modules-text-dir (concat amalthea-modules-dir "text/")
   "Path to configuration of text editing tools in Amalthea.")
 
+(defconst amalthea-modules-org-dir (concat amalthea-modules-dir "org/")
+  "Path to configuration of org-mode and related packages in Amalthea.")
+
 ;;; Functions
 (defun amalthea--byte-compile-module-dirs ()
   (interactive)
@@ -42,7 +45,8 @@
 (eval-and-compile
   (add-to-list 'load-path amalthea-modules-langs-dir)
   (add-to-list 'load-path amalthea-modules-tools-dir)
-  (add-to-list 'load-path amalthea-modules-text-dir))
+  (add-to-list 'load-path amalthea-modules-text-dir)
+  (add-to-list 'load-path amalthea-modules-org-dir))
 
 ;;; Languages
 (require 'lang-elisp)
@@ -58,8 +62,10 @@
 (require 'tool-docker)
 (require 'tool-nginx)
 
+;;; Org
+(require 'org-org)
+
 ;;; Text editing
-(require 'text-org)
 (require 'text-latex)
 
 (provide 'modules)
