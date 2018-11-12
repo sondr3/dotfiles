@@ -118,6 +118,7 @@
     (setq org-latex-compiler "lualatex"                      ;; Use a modern LaTeX compiler
           org-latex-default-class "memoir"                   ;; Use my own class by default
           org-latex-default-table-environment "tabularx"     ;; Use a better table formatter
+          org-latex-tables-booktabs t                        ;; Always use booktabs for better looking tables
           org-latex-listings t                               ;; Make SRC blocks export to code blocks in LaTeX
           org-latex-pdf-process (list "latexmk -pvc- %f")    ;; Use `latexmk' to generate PDF
           org-latex-listings-options                         ;; Configure source code exporting
