@@ -75,6 +75,7 @@
 (eval-after-load 'ox-latex
   (progn
     (setq
+     org-latex-default-table-environment "tabulary"   ;; Use a better table formatter
      org-latex-listings t                             ;; Make SRC blocks export to code blocks in LaTeX
      org-latex-listings-options                       ;; Configure source code exporting
      '(("frame" "tb")
