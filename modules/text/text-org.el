@@ -40,6 +40,7 @@
           org-format-latex-options
           (plist-put org-format-latex-options :scale 1.25) ;; Make the preview a little larger
           org-startup-with-latex-preview t                 ;; Preview LaTeX fragments on startop
+          org-highlight-latex-and-related 'latex           ;; Highlight LaTeX fragments, snippets etc
           org-pretty-entities t                            ;; Show entities as UTF8-characters when possible
           org-list-allow-alphabetical t)                   ;; Allow lists to be a), etc
 
