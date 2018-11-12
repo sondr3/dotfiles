@@ -53,6 +53,68 @@
        (emacs-lisp . t)
        (java . t)))
 
+    (add-to-list 'org-latex-classes
+                 '("memoir"
+                   "\\documentclass[12pt,a4paper,oneside,article]{memoir}
+                    [NO-DEFAULT-PACKAGES]
+                    \\usepackage{polyglossia}
+                    \\setdefaultlanguage{english}
+                    \\usepackage{fontspec}
+
+                    \\defaultfontfeatures{Ligatures=TeX}
+                    \\newfontfeature{Microtype}{protrusion=default;expansion=default}
+                    \\usepackage[final]{microtype}
+                    \\setmainfont{Linux Libertine O}
+                    \\setsansfont{Linux Biolinum O}
+                    \\setmonofont{DejaVu Sans Mono}
+
+                    \\usepackage{subfiles}
+                    \\usepackage{tabulary}
+                    \\usepackage{tabu}
+                    \\usepackage{booktabs}
+                    \\usepackage{multirow}
+                    \\usepackage{float}
+                    \\usepackage{amsmath,amsfonts,amssymb}
+                    \\usepackage{mathtools}
+                    \\usepackage[shortlabels]{enumitem}
+                    \\usepackage{xcolor}
+                    \\usepackage{graphicx}
+                    \\usepackage{hyperref}
+                    \\usepackage{xcolor, colortbl, array}
+                    \\usepackage{listings}
+                    \\usepackage{color}
+                    \\usepackage{chngcntr}
+
+                    [PACKAGES]
+
+                    \\hypersetup{colorlinks = true}
+                    \\lstset{language=Java,frame=tb,
+                      breaklines=true,
+                      breakatwhitespace=true,
+                      keepspaces=true,
+                      columns=fullflexible,
+                      showspaces=false,
+                      showstringspaces=false,
+                      showtabs=false,
+                      basicstyle=\\ttfamily\\footnotesize
+                    }
+
+                    \\usepackage{chngcntr}
+                    \\counterwithin{table}{section}
+                    \\numberwithin{equation}{chapter}
+                    \\counterwithin{figure}{section}
+                    \\setenumerate[0]{label= (\\alph*)}
+                    \\AtBeginDocument{\\counterwithin{lstlisting}{section}}
+                    \\counterwithout{section}{chapter}
+
+                    \\chapterstyle{hangnum}
+                    \\pagestyle{ruled}
+                    [EXTRA]"
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
     ;; For some reason math in between $$...$$ isn't highlighted in any way, and
     ;; that annoys me. After some major regexp-fu I was able to hack this
     ;; together, it now uses the same kind of highlighting as code
