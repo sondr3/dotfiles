@@ -50,24 +50,7 @@
      'org-babel-load-languages
      '((shell . t)
        (emacs-lisp . t)
-       (java . t)))
-
-    ;; For some reason math in between $$...$$ isn't highlighted in any way, and
-    ;; that annoys me. After some major regexp-fu I was able to hack this
-    ;; together, it now uses the same kind of highlighting as code
-    (defface amalthea--org-math-highlight
-      '((t :inherit org-code :slant italic))
-      "My own configuration for highlighting math blocks in org-mode"
-      :group 'org-faces)
-
-    (add-hook 'org-font-lock-set-keywords-hook
-              (lambda ()
-                (add-to-list 'org-font-lock-extra-keywords
-                             ;; '("\\$\\$\\(.+?\\)\\$\\$"
-                             '("\\(\\$\\$\\)\\([^\n\r\t]+?\\)\\(\\$\\$\\)"
-                               (1 '(face org-code invisible t))
-                               (2 'amalthea--org-math-highlight)
-                               (3 '(face org-code invisible t))))))))
+       (java . t)))))
 
 ;; I don't want the mode line to show that org-indent-mode is active
 (use-package org-indent :after org :delight)
