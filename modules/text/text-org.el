@@ -41,6 +41,7 @@
           (plist-put org-format-latex-options :scale 1.25) ;; Make the preview a little larger
           org-startup-with-latex-preview t                 ;; Preview LaTeX fragments on startop
           org-latex-listings t                             ;; Make SRC blocks export to code blocks in LaTeX
+          org-latex-pdf-process (list "latexmk -pvc- %f")  ;; Use `latexmk' to generate PDF
           org-pretty-entities t                            ;; Show entities as UTF8-characters when possible
           org-list-allow-alphabetical t)                   ;; Allow lists to be a), etc
 
