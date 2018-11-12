@@ -40,7 +40,7 @@
           org-format-latex-options
           (plist-put org-format-latex-options :scale 1.25) ;; Make the preview a little larger
           org-startup-with-latex-preview t                 ;; Preview LaTeX fragments on startop
-          org-highlight-latex-and-related 'latex           ;; Highlight LaTeX fragments, snippets etc
+          org-highlight-latex-and-related '(latex)         ;; Highlight LaTeX fragments, snippets etc
           org-pretty-entities t                            ;; Show entities as UTF8-characters when possible
           org-list-allow-alphabetical t)                   ;; Allow lists to be a), etc
 
@@ -80,6 +80,46 @@
       (setq org-latex-classes nil))
     ;; Add out default LaTeX class before referencing it
     (add-to-list 'org-latex-classes
+                 '("memoir-book"
+                   "\\documentclass[12pt,a4paper,oneside]{memoir}
+                    [NO-DEFAULT-PACKAGES]
+                    \\usepackage{polyglossia}
+                    \\setdefaultlanguage{english}
+                    \\usepackage{fontspec}
+
+                    \\defaultfontfeatures{Ligatures=TeX}
+                    \\newfontfeature{Microtype}{protrusion=default;expansion=default}
+                    \\usepackage[final]{microtype}
+                    \\setmainfont{Linux Libertine O}
+                    \\setsansfont{Linux Biolinum O}
+                    \\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+
+                    \\usepackage{subfiles}
+                    \\usepackage{multirow}
+                    \\usepackage{float}
+                    \\usepackage{amsmath,amsfonts,amssymb}
+                    \\usepackage{mathtools}
+                    \\usepackage[shortlabels]{enumitem}
+                    \\usepackage{graphicx}
+                    \\usepackage{hyperref}
+                    \\usepackage{color, xcolor, colortbl, array}
+                    \\usepackage{listings}
+
+                    [PACKAGES]
+
+                    \\hypersetup{colorlinks = true}
+                    \\chapterstyle{veelo}
+                    \\headstyles{memman}
+                    \\pagestyle{ruled}
+
+                    [EXTRA]"
+                   ("\\chapter{%s}" . "\\chapter*{%s}")
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+    (add-to-list 'org-latex-classes
                  '("memoir"
                    "\\documentclass[12pt,a4paper,oneside,article]{memoir}
                     [NO-DEFAULT-PACKAGES]
@@ -100,12 +140,10 @@
                     \\usepackage{amsmath,amsfonts,amssymb}
                     \\usepackage{mathtools}
                     \\usepackage[shortlabels]{enumitem}
-                    \\usepackage{xcolor}
                     \\usepackage{graphicx}
                     \\usepackage{hyperref}
-                    \\usepackage{xcolor, colortbl, array}
+                    \\usepackage{color, xcolor, colortbl, array}
                     \\usepackage{listings}
-                    \\usepackage{color}
 
                     [PACKAGES]
 
@@ -116,7 +154,9 @@
                     \\setenumerate[0]{label= (\\alph*)}
                     \\AtBeginDocument{\\counterwithin{lstlisting}{section}}
                     \\counterwithout{section}{chapter}
-                    \\chapterstyle{hangnum}
+                    \\settocdepth{subsection}
+                    \\setsecnumdepth{subsection}
+                    \\headstyles{memman}
                     \\pagestyle{ruled}
 
                     [EXTRA]"
@@ -125,7 +165,8 @@
                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
                    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-    (setq org-latex-default-class "memoir"                   ;; Use my own class by default
+    (setq org-latex-compiler "lualatex"                      ;; Use a modern LaTeX compiler
+          org-latex-default-class "memoir"                   ;; Use my own class by default
           org-latex-default-table-environment "tabularx"     ;; Use a better table formatter
           org-latex-listings t                               ;; Make SRC blocks export to code blocks in LaTeX
           org-latex-pdf-process (list "latexmk -pvc- %f")    ;; Use `latexmk' to generate PDF
