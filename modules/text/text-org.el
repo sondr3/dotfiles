@@ -40,19 +40,6 @@
           org-format-latex-options
           (plist-put org-format-latex-options :scale 1.25) ;; Make the preview a little larger
           org-startup-with-latex-preview t                 ;; Preview LaTeX fragments on startop
-          org-latex-listings t                             ;; Make SRC blocks export to code blocks in LaTeX
-          org-babel-inline-result-wrap "%s"
-          org-latex-listings-options
-          '(("frame" "tb")
-            ("breaklines" "true")
-            ("breakatwhitespace" "true")
-            ("keepspaces" "true")
-            ("columns" "fullflexible")
-            ("showspaces" "false")
-            ("showstringspaces" "false")
-            ("showtabs" "false")
-            ("basicstyle" "\\ttfamily\\footnotesize"))
-          org-latex-pdf-process (list "latexmk -pvc- %f")  ;; Use `latexmk' to generate PDF
           org-pretty-entities t                            ;; Show entities as UTF8-characters when possible
           org-list-allow-alphabetical t)                   ;; Allow lists to be a), etc
 
@@ -64,6 +51,42 @@
        (emacs-lisp . t)
        (java . t)))
 
+    ;; For some reason math in between $$...$$ isn't highlighted in any way, and
+    ;; that annoys me. After some major regexp-fu I was able to hack this
+    ;; together, it now uses the same kind of highlighting as code
+    (defface amalthea--org-math-highlight
+      '((t :inherit org-code :slant italic))
+      "My own configuration for highlighting math blocks in org-mode"
+      :group 'org-faces)
+
+    (add-hook 'org-font-lock-set-keywords-hook
+              (lambda ()
+                (add-to-list 'org-font-lock-extra-keywords
+                             ;; '("\\$\\$\\(.+?\\)\\$\\$"
+                             '("\\(\\$\\$\\)\\([^\n\r\t]+?\\)\\(\\$\\$\\)"
+                               (1 '(face org-code invisible t))
+                               (2 'amalthea--org-math-highlight)
+                               (3 '(face org-code invisible t))))))))
+
+;;; `org-latex'
+;; Org-mode has some really amazing exporting options, LaTeX included, but I
+;; find the default configuration fairly lacking, so we'll add a bunch of
+;; changes and add a custom LaTeX class.
+(eval-after-load 'ox-latex
+  (progn
+    (setq
+     org-latex-listings t                             ;; Make SRC blocks export to code blocks in LaTeX
+     org-latex-listings-options                       ;; Configure source code exporting
+     '(("frame" "tb")
+       ("breaklines" "true")
+       ("breakatwhitespace" "true")
+       ("keepspaces" "true")
+       ("columns" "fullflexible")
+       ("showspaces" "false")
+       ("showstringspaces" "false")
+       ("showtabs" "false")
+       ("basicstyle" "\\ttfamily\\footnotesize"))
+     org-latex-pdf-process (list "latexmk -pvc- %f"))  ;; Use `latexmk' to generate PDF
     (add-to-list 'org-latex-listings-langs
                  '(java "Java"))
     (add-to-list 'org-latex-classes
@@ -114,24 +137,7 @@
                    ("\\subsection{%s}" . "\\subsection*{%s}")
                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-    ;; For some reason math in between $$...$$ isn't highlighted in any way, and
-    ;; that annoys me. After some major regexp-fu I was able to hack this
-    ;; together, it now uses the same kind of highlighting as code
-    (defface amalthea--org-math-highlight
-      '((t :inherit org-code :slant italic))
-      "My own configuration for highlighting math blocks in org-mode"
-      :group 'org-faces)
-
-    (add-hook 'org-font-lock-set-keywords-hook
-              (lambda ()
-                (add-to-list 'org-font-lock-extra-keywords
-                             ;; '("\\$\\$\\(.+?\\)\\$\\$"
-                             '("\\(\\$\\$\\)\\([^\n\r\t]+?\\)\\(\\$\\$\\)"
-                               (1 '(face org-code invisible t))
-                               (2 'amalthea--org-math-highlight)
-                               (3 '(face org-code invisible t))))))))
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
 
 ;; I don't want the mode line to show that org-indent-mode is active
 (use-package org-indent :after org :delight)
