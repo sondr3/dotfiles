@@ -88,7 +88,9 @@
              flyspell-correct-previous)
   :general
   (amalthea-leader
-    "S c" '(flyspell-correct-wrapper :wk "correct word")))
+    "S c" '(flyspell-correct-previous :wk "correct prev word")
+    "S C" '(flyspell-correct-next :wk "correct next word")
+    :init (setq flyspell-correct-interface #'flyspell-correct-ivy)))
 
 ;;; `flycheck':
 (use-package flycheck
