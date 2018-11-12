@@ -74,22 +74,7 @@
 ;; changes and add a custom LaTeX class.
 (eval-after-load 'ox-latex
   (progn
-    (setq
-     org-latex-default-table-environment "tabulary"   ;; Use a better table formatter
-     org-latex-listings t                             ;; Make SRC blocks export to code blocks in LaTeX
-     org-latex-listings-options                       ;; Configure source code exporting
-     '(("frame" "tb")
-       ("breaklines" "true")
-       ("breakatwhitespace" "true")
-       ("keepspaces" "true")
-       ("columns" "fullflexible")
-       ("showspaces" "false")
-       ("showstringspaces" "false")
-       ("showtabs" "false")
-       ("basicstyle" "\\ttfamily\\footnotesize"))
-     org-latex-pdf-process (list "latexmk -pvc- %f"))  ;; Use `latexmk' to generate PDF
-    (add-to-list 'org-latex-listings-langs
-                 '(java "Java"))
+    ;; Add out default LaTeX class before referencing it
     (add-to-list 'org-latex-classes
                  '("memoir"
                    "\\documentclass[12pt,a4paper,oneside,article]{memoir}
@@ -138,7 +123,22 @@
                    ("\\subsection{%s}" . "\\subsection*{%s}")
                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+    (setq
+     org-latex-default-class "memoir"                   ;; Use my own class by default
+     org-latex-default-table-environment "tabulary"     ;; Use a better table formatter
+     org-latex-listings t                               ;; Make SRC blocks export to code blocks in LaTeX
+     org-latex-listings-options                         ;; Configure source code exporting
+     '(("frame" "tb")
+       ("breaklines" "true")
+       ("breakatwhitespace" "true")
+       ("keepspaces" "true")
+       ("columns" "fullflexible")
+       ("showspaces" "false")
+       ("showstringspaces" "false")
+       ("showtabs" "false")
+       ("basicstyle" "\\ttfamily\\footnotesize"))
+     org-latex-pdf-process (list "latexmk -pvc- %f")))) ;; Use `latexmk' to generate PDF
 
 ;; I don't want the mode line to show that org-indent-mode is active
 (use-package org-indent :after org :delight)
