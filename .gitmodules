@@ -224,6 +224,9 @@
 [submodule "nginx-mode"]
 	path = lib/nginx-mode
 	url = git@github.com:ajc/nginx-mode.git
+[submodule "org-ref"]
+	path = lib/org-ref
+	url = git@github.com:jkitchin/org-ref.git
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
@@ -233,6 +236,9 @@
 [submodule "pcre2el"]
 	path = lib/pcre2el
 	url = git@github.com:joddie/pcre2el.git
+[submodule "pdf-tools"]
+	path = lib/pdf-tools
+	url = git@github.com:politza/pdf-tools.git
 [submodule "pkg-info"]
 	path = lib/pkg-info
 	url = git@github.com:lunaryorn/pkg-info.el.git
@@ -266,6 +272,9 @@
 [submodule "system-packages"]
 	path = lib/system-packages
 	url = git@gitlab.com:jabranham/system-packages.git
+[submodule "tablist"]
+	path = lib/tablist
+	url = git@github.com:politza/tablist.git
 [submodule "treepy"]
 	path = lib/treepy
 	url = git@github.com:volrath/treepy.el.git
