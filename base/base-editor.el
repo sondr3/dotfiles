@@ -71,7 +71,8 @@
 ;; to be a superset of `paredit` and `electric-pair-mode`.
 (use-package smartparens
   :delight
-  :ghook ('prog-mode-hook #'smartparens-mode))
+  :init (require 'smartparens-config)
+  :ghook ('prog-mode-hook #'smartparens-strict-mode))
 
 ;;; `ws-butler':
 ;; This is something that you could fix by using a builtin helper function that
