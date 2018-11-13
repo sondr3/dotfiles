@@ -30,3 +30,6 @@ However, make sure you make a backup of your local configuration before doing
 this as it'll completely overwrite whatever you have in your configuration. I
 have also never actually attempted to bootstrap my editor again, so there's a
 fair chance it'll go completely tits up, fair warning.
+
+*NOTE:* As Borg is built around git submodules you are required to have an account
+on both Github and Gitlab that can clone with SSH, otherwise you'll get errors.
