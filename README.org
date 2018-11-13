@@ -15,3 +15,18 @@ concatenates the ~early-init.el~ file into the ~init.el~ file.
 I've named my Emacs configuration ~Amalthea~, I have no recollection of why
 anymore, other than the fact that I still think it's a cool name. It's named
 after one of the minor moons of Jupiter.
+* Installation
+I am currently using [[https://github.com/emacscollective/borg][Borg]] to manage my dependencies, and as such installing and
+trying out my configuration is very easy:
+
+#+BEGIN_SRC shell
+  git clone git@github.com:sondr3/amalthea.git ~/.emacs.d
+  cd ~/.emacs.d/
+  make bootstrap-borg
+  make bootstrap
+#+END_SRC
+
+However, make sure you make a backup of your local configuration before doing
+this as it'll completely overwrite whatever you have in your configuration. I
+have also never actually attempted to bootstrap my editor again, so there's a
+fair chance it'll go completely tits up, fair warning.
