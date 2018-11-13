@@ -27,8 +27,9 @@
   :demand t
   :init
   (progn
-    (setq evil-want-integration nil     ;; Don't load this, we'll be using evil-collection
-          evil-search-module 'swiper)   ;; Use Swiper for searches
+    (setq evil-want-integration t     ;; Compatibility settings for `evil-collection'
+          evil-want-keybinding nil    ;; Same as above
+          evil-search-module 'swiper) ;; Use Swiper for searches
     (evil-mode))
   :general
   (general-imap "j"  (general-key-dispatch 'self-insert-command
