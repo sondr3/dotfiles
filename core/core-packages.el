@@ -43,13 +43,13 @@
 (require 'borg)
 (borg-initialize)
 (require 'use-package)
-(require 'use-package-ensure-system-package)         ;; Automatically install missing system packages
-(setq use-package-verbose amalthea-debug)            ;; Verbosely load packages when debugging
-(setq use-package-compute-statistics amalthea-debug) ;; Compute load times when debugging
-(setq use-package-always-defer t)                    ;; Always defer packages
+(require 'use-package-ensure-system-package)        ;; Automatically install missing system packages
+(setq use-package-verbose amalthea-debug            ;; Verbosely load packages when debugging
+      use-package-compute-statistics amalthea-debug ;; Compute load times when debugging(
+      use-package-always-defer t)                   ;; Always defer packages
 
 (use-package epkg
-  :init (setq epkg-repository amalthea-cache-dir)) ;; Save package database in our cache directory
+  :init (setq epkg-repository (concat amalthea-cache-dir "epkgs"))) ;; Save package database in our cache directory
 
 (use-package delight
   :demand t)

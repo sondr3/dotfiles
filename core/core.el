@@ -116,7 +116,7 @@
 (defun amalthea--ensure-core-dirs ()
   "Ensures that all the required directories for Amalthea are created."
   (interactive)
-  (dolist (dir (list amalthea-cache-dir amalthea-local-dir))
+  (dolist (dir (list amalthea-cache-dir amalthea-local-dir (concat amalthea-cache-dir "epkgs")))
     (unless (file-directory-p dir)
       (make-directory dir t))))
 
