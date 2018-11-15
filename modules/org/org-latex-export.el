@@ -52,8 +52,11 @@
                     \\usepackage{amsmath,amsfonts,amssymb}
                     \\usepackage{mathtools}
                     \\usepackage[shortlabels]{enumitem}
-                    \\usepackage{graphicx}
                     \\usepackage{hyperref}
+
+                    \\usepackage{tikz}
+                    \\usepackage[edges]{forest}
+                    \\usepackage{graphicx}
                     \\usepackage{color, xcolor, colortbl, array}
                     \\usepackage{listings}
 
@@ -91,8 +94,11 @@
                     \\usepackage{amsmath,amsfonts,amssymb}
                     \\usepackage{mathtools}
                     \\usepackage[shortlabels]{enumitem}
-                    \\usepackage{graphicx}
                     \\usepackage{hyperref}
+
+                    \\usepackage{tikz}
+                    \\usepackage[edges]{forest}
+                    \\usepackage{graphicx}
                     \\usepackage{color, xcolor, colortbl, array}
                     \\usepackage{listings}
 
