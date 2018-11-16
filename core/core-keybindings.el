@@ -95,6 +95,7 @@
 ;; This keeps all the main menus in one place instead of spread throughout the
 ;; whole project.
 (amalthea-leader
+  "SPC" '(counsel-M-x :wk "M-x")
   "a" '(:ignore t :wk "applications")
   "b" '(:ignore t :wk "buffers")
   "f" '(:ignore t :wk "files")
