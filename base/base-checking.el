@@ -58,6 +58,8 @@
   :commands (flyspell-mode flyspell-prog-mode)
   :ensure-system-package hunspell
   :delight " Ⓢ"
+  :ghook ('prog-mode-hook #'flyspell-prog-mode)
+  :ghook ('text-mode-hook #'flyspell-mode)
   :general
   (amalthea-leader
     "S s" '(hydra-spelling/body :wk "hydra")
@@ -65,12 +67,9 @@
     "S n" '(flyspell-goto-next-error :wk "next spelling error"))
   :init
   (setenv "DICPATH" (concat (getenv "HOME") "/Library/Spelling"))
-  (general-add-hook 'prog-mode-hook #'flyspell-prog-mode)
-  (dolist (mode-hook '(text-mode-hook))
-    (general-add-hook mode-hook #'flyspell-mode))
   (progn
-    (setq ispell-program-name "hunspell"
-          ispell-really-hunspell t
+    (setq ispell-program-name "aspell"
+          ;; ispell-really-hunspell t
           ispell-local-dictionary "en_US"
           flyspell-use-meta-tab nil
           flyspell-issue-message-flag nil
