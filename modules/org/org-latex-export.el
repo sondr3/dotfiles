@@ -28,65 +28,59 @@
 (use-package ox-latex
   :config
   (progn
-    (unless (boundp 'org-latex-classes)
-      (setq org-latex-classes nil))
-    ;; Add out default LaTeX class before referencing it
-    (add-to-list 'org-latex-classes
-                 '("memoir-book"
-                   "\\documentclass[12pt,a4paper,oneside]{memoir}
-                    [DEFAULT-PACKAGES]
+    (setq org-latex-classes
+          '(("memoir-book"
+             "\\documentclass[12pt,a4paper,oneside]{memoir}
+              [DEFAULT-PACKAGES]
 
-                    \\setdefaultlanguage{english}
-                    \\defaultfontfeatures{Ligatures=TeX}
-                    \\newfontfeature{Microtype}{protrusion=default;expansion=default}
-                    \\setmainfont{Linux Libertine O}
-                    \\setsansfont{Linux Biolinum O}
-                    \\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+              \\defaultfontfeatures{Ligatures=TeX}
+              \\newfontfeature{Microtype}{protrusion=default;expansion=default}
+              \\setmainfont{Linux Libertine O}
+              \\setsansfont{Linux Biolinum O}
+              \\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
 
-                    [PACKAGES]
+              [PACKAGES]
 
-                    \\chapterstyle{veelo}
-                    \\headstyles{memman}
-                    \\pagestyle{ruled}
+              \\chapterstyle{veelo}
+              \\headstyles{memman}
+              \\pagestyle{ruled}
 
-                    [EXTRA]"
-                   ("\\chapter{%s}" . "\\chapter*{%s}")
-                   ("\\section{%s}" . "\\section*{%s}")
-                   ("\\subsection{%s}" . "\\subsection*{%s}")
-                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-    (add-to-list 'org-latex-classes
-                 '("memoir"
-                   "\\documentclass[12pt,a4paper,oneside,article]{memoir}
-                    [DEFAULT-PACKAGES]
+              [EXTRA]"
+             ("\\chapter{%s}" . "\\chapter*{%s}")
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+            ("memoir"
+             "\\documentclass[12pt,a4paper,oneside,article]{memoir}
+              [DEFAULT-PACKAGES]
 
-                    \\setdefaultlanguage{english}
-                    \\defaultfontfeatures{Ligatures=TeX}
-                    \\newfontfeature{Microtype}{protrusion=default;expansion=default}
-                    \\setmainfont{Linux Libertine O}
-                    \\setsansfont{Linux Biolinum O}
-                    \\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+              \\defaultfontfeatures{Ligatures=TeX}
+              \\newfontfeature{Microtype}{protrusion=default;expansion=default}
+              \\setmainfont{Linux Libertine O}
+              \\setsansfont{Linux Biolinum O}
+              \\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
 
-                    [PACKAGES]
+              [PACKAGES]
 
-                    \\counterwithin{table}{section}
-                    \\numberwithin{equation}{chapter}
-                    \\counterwithin{figure}{section}
-                    \\setenumerate[0]{label= (\\alph*)}
-                    \\AtBeginDocument{\\counterwithin{lstlisting}{section}}
-                    \\counterwithout{section}{chapter}
-                    \\settocdepth{subsection}
-                    \\setsecnumdepth{subsection}
-                    \\headstyles{memman}
-                    \\pagestyle{ruled}
+              \\counterwithin{table}{section}
+              \\numberwithin{equation}{chapter}
+              \\counterwithin{figure}{section}
+              \\setenumerate[0]{label= (\\alph*)}
+              \\AtBeginDocument{\\counterwithin{lstlisting}{section}}
+              \\counterwithout{section}{chapter}
+              \\settocdepth{subsection}
+              \\setsecnumdepth{subsection}
+              \\headstyles{memman}
+              \\pagestyle{ruled}
 
-                    [EXTRA]"
-                   ("\\section{%s}" . "\\section*{%s}")
-                   ("\\subsection{%s}" . "\\subsection*{%s}")
-                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+              [EXTRA]"
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
     (setq org-latex-compiler "lualatex"                      ;; Use a modern LaTeX compiler
           org-latex-default-class "memoir"                   ;; Use my own class by default
           org-latex-default-table-environment "tabularx"     ;; Use a better table formatter
@@ -108,16 +102,20 @@
             ("showtabs" "false")
             ("basicstyle" "\\ttfamily\\footnotesize"))
           org-latex-default-packages-alist
-          '(("" "polyglossia" t)
+          '(("AUTO" "polyglossia" t)
             ("" "fontspec" t)
             ("final" "microtype" t)
+            ("" "geometry" t)
             ("" "subfiles" t)
             ("" "multirow" t)
             ("" "float" t)
             ("" "amsmath" t)
             ("" "amsfonts" t)
             ("" "amssymb" t)
+            ("" "mathtools" t)
             ("shortlabels" "enumitem" t)
+            ("" "multirow" t)
+            ("" "tabularx" t)
             ("" "hyperref" t)
             ("" "tikz" t)
             ("edges" "forest" t)
@@ -127,6 +125,9 @@
             ("" "colortbl" t)
             ("" "array" t)
             ("" "listings" t))
+          org-latex-packages-alist
+          '(("autostyle,strict,autopunct" "csquotes" t)
+          ("style=ieee,backend=biber" "biblatex" t))
           org-latex-hyperref-template "\\hypersetup{\n colorlinks=true,\n pdfauthor={%a},\n pdftitle={%t},\n pdfkeywords={%k},\n pdfsubject={%d},\n pdfcreator={%c},\n pdflang={%L}}\n")))
 
 (provide 'org-latex-export)
