@@ -31,6 +31,7 @@
   :general
   (amalthea-major-leader 'org-mode-map
     "t" '(:ignore t :wk "table")
+    "t a" '(org-table-align :wk "align table")
     "t c" '(org-table-create :wk "create table")
     "t C" '(org-table-create-or-convert-from-region :wk "create from region")
     "t i" '(:ignore t :wk "insert")
