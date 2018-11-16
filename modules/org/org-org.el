@@ -30,6 +30,9 @@
   :commands org-babel-do-load-languages
   :general
   (amalthea-major-leader 'org-mode-map
+    "h" '(:ignore t :wk "headings")
+    "h p" '(org-promote-subtree :wk "promote subtree")
+    "h d" '(org-demote-subtree :wk "demote subtree")
     "t" '(:ignore t :wk "table")
     "t a" '(org-table-align :wk "align table")
     "t c" '(org-table-create :wk "create table")

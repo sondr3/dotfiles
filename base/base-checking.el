@@ -31,7 +31,7 @@
 ;;
 ;; Ever so lightly stolen from rmberYou
 (defhydra hydra-spelling (:color blue)
-  "flyspell:
+  "
   ^
   ^Errors^            ^Checker^            ^Mode^
   ^──────^─────────── ^───────^─────────── ^────^─────────
