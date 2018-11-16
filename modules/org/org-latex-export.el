@@ -34,31 +34,14 @@
     (add-to-list 'org-latex-classes
                  '("memoir-book"
                    "\\documentclass[12pt,a4paper,oneside]{memoir}
-                    [NO-DEFAULT-PACKAGES]
-                    \\usepackage{polyglossia}
-                    \\setdefaultlanguage{english}
-                    \\usepackage{fontspec}
+                    [DEFAULT-PACKAGES]
 
+                    \\setdefaultlanguage{english}
                     \\defaultfontfeatures{Ligatures=TeX}
                     \\newfontfeature{Microtype}{protrusion=default;expansion=default}
-                    \\usepackage[final]{microtype}
                     \\setmainfont{Linux Libertine O}
                     \\setsansfont{Linux Biolinum O}
                     \\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
-
-                    \\usepackage{subfiles}
-                    \\usepackage{multirow}
-                    \\usepackage{float}
-                    \\usepackage{amsmath,amsfonts,amssymb}
-                    \\usepackage{mathtools}
-                    \\usepackage[shortlabels]{enumitem}
-                    \\usepackage{hyperref}
-
-                    \\usepackage{tikz}
-                    \\usepackage[edges]{forest}
-                    \\usepackage{graphicx}
-                    \\usepackage{color, xcolor, colortbl, array}
-                    \\usepackage{listings}
 
                     [PACKAGES]
 
@@ -76,31 +59,14 @@
     (add-to-list 'org-latex-classes
                  '("memoir"
                    "\\documentclass[12pt,a4paper,oneside,article]{memoir}
-                    [NO-DEFAULT-PACKAGES]
-                    \\usepackage{polyglossia}
-                    \\setdefaultlanguage{english}
-                    \\usepackage{fontspec}
+                    [DEFAULT-PACKAGES]
 
+                    \\setdefaultlanguage{english}
                     \\defaultfontfeatures{Ligatures=TeX}
                     \\newfontfeature{Microtype}{protrusion=default;expansion=default}
-                    \\usepackage[final]{microtype}
                     \\setmainfont{Linux Libertine O}
                     \\setsansfont{Linux Biolinum O}
                     \\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
-
-                    \\usepackage{subfiles}
-                    \\usepackage{multirow}
-                    \\usepackage{float}
-                    \\usepackage{amsmath,amsfonts,amssymb}
-                    \\usepackage{mathtools}
-                    \\usepackage[shortlabels]{enumitem}
-                    \\usepackage{hyperref}
-
-                    \\usepackage{tikz}
-                    \\usepackage[edges]{forest}
-                    \\usepackage{graphicx}
-                    \\usepackage{color, xcolor, colortbl, array}
-                    \\usepackage{listings}
 
                     [PACKAGES]
 
@@ -129,7 +95,8 @@
           '(table image src-block special-block)             ;; Put captions below everything
           org-latex-prefer-user-labels t                     ;; Prefer labels I make myself please
           org-latex-listings t                               ;; Make SRC blocks export to code blocks in LaTeX
-          org-latex-pdf-process (list "latexmk -pvc- %f")    ;; Use `latexmk' to generate PDF
+          org-latex-pdf-process
+          (list "latexmk -pvc- %f -cd %o")            ;; Use `latexmk' to generate PDF
           org-latex-listings-options                         ;; Configure source code exporting
           '(("frame" "tb")
             ("breaklines" "true")
@@ -140,6 +107,26 @@
             ("showstringspaces" "false")
             ("showtabs" "false")
             ("basicstyle" "\\ttfamily\\footnotesize"))
+          org-latex-default-packages-alist
+          '(("" "polyglossia" t)
+            ("" "fontspec" t)
+            ("final" "microtype" t)
+            ("" "subfiles" t)
+            ("" "multirow" t)
+            ("" "float" t)
+            ("" "amsmath" t)
+            ("" "amsfonts" t)
+            ("" "amssymb" t)
+            ("shortlabels" "enumitem" t)
+            ("" "hyperref" t)
+            ("" "tikz" t)
+            ("edges" "forest" t)
+            ("" "graphicx" t)
+            ("" "color" t)
+            ("" "xcolor" t)
+            ("" "colortbl" t)
+            ("" "array" t)
+            ("" "listings" t))
           org-latex-hyperref-template "\\hypersetup{\n colorlinks=true,\n pdfauthor={%a},\n pdftitle={%t},\n pdfkeywords={%k},\n pdfsubject={%d},\n pdfcreator={%c},\n pdflang={%L}}\n")))
 
 (provide 'org-latex-export)

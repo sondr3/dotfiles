@@ -53,7 +53,7 @@
           org-hide-emphasis-markers t                      ;; Hides the symbols that makes text bold, italics etc
           org-use-sub-superscripts '{}                     ;; Always use {} to group sub/superscript text
           org-export-with-sub-superscripts '{}             ;; Export with the same syntax as above
-          org-preview-latex-default-process 'dvisvgm       ;; Use DVI for LaTeX fragments, not PNG
+          org-preview-latex-default-process 'imagemagick   ;; Use imagemagick for LaTeX fragments
           org-format-latex-options
           (plist-put org-format-latex-options :scale 1.25) ;; Make the preview a little larger
           org-catch-invisible-edits 'smart                 ;; Smart editing of hidden regions
@@ -69,6 +69,7 @@
      '((shell . t)
        (emacs-lisp . t)
        (dot . t)
+       (latex . t)
        (java . t)))))
 
 ;; I don't want the mode line to show that org-indent-mode is active
