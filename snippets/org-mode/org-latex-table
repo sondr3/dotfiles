@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: org-mode LaTeX table
+# key: <tl
+# --
+#+NAME: ${1:label for table}
+#+CAPTION: ${2:caption for table}
+#+ATTR_LATEX: :width ${3:width of table} :align ${4:alignment of cells}
+| ${5:column 1} | ${6: column 2} | ${7: column 2} | ${8: column 2} |
+|---------------+----------------+----------------+----------------|
