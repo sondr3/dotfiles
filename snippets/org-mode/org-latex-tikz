@@ -3,10 +3,12 @@
 # key: <lt
 # --
 
-#+BEGIN_SRC latex :exports results :results output raw :file ${1:filename} :cache yes :imagemagick yes :fit yes :iminoptions -density 600
+#+NAME: ${1:name of source}
+#+BEGIN_SRC latex :exports results :results output raw :file ${2:filename} :cache yes :imagemagick yes :fit yes :iminoptions -density 600
 $0
 #+END_SRC
 
-#+NAME: ${2:label for export}
-#+ATTR_LATEX: :width ${3:width of graphic}
-#+CAPTION: ${4:caption}.
+#+NAME: ${3:label for export}
+#+ATTR_LATEX: :width ${4:width of graphic}
+#+CAPTION: ${5:caption}.
+#+RESULTS: $1
