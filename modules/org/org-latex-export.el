@@ -41,6 +41,7 @@
 
               [PACKAGES]
 
+              \\addbibresource{/Users/sondre/Code/UiB/bibliography.bib}
               \\chapterstyle{veelo}
               \\headstyles{memman}
               \\pagestyle{ruled}
@@ -53,7 +54,7 @@
              ("\\paragraph{%s}" . "\\paragraph*{%s}")
              ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
             ("memoir"
-             "\\documentclass[12pt,a4paper,oneside,article]{memoir}
+             "\\documentclass[12pt,a4paper,oneside]{memoir}
               [DEFAULT-PACKAGES]
 
               \\defaultfontfeatures{Ligatures=TeX}
@@ -64,6 +65,7 @@
 
               [PACKAGES]
 
+              \\addbibresource{/Users/sondre/Code/UiB/bibliography.bib}
               \\counterwithin{table}{section}
               \\numberwithin{equation}{chapter}
               \\counterwithin{figure}{section}
@@ -81,54 +83,79 @@
              ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
              ("\\paragraph{%s}" . "\\paragraph*{%s}")
              ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
-    (setq org-latex-compiler "lualatex"                      ;; Use a modern LaTeX compiler
-          org-latex-default-class "memoir"                   ;; Use my own class by default
-          org-latex-default-table-environment "tabularx"     ;; Use a better table formatter
-          org-latex-tables-booktabs t                        ;; Always use booktabs for better looking tables
+    (setq org-format-latex-header
+          "\\documentclass[12pt,a4paper,oneside]{memoir}
+           [DEFAULT-PACKAGES]
+           [NO-PACKAGES]
+           \\defaultfontfeatures{Ligatures=TeX}
+           \\newfontfeature{Microtype}{protrusion=default;expansion=default}
+           \\setmainfont{Linux Libertine O}
+           \\setsansfont{Linux Biolinum O}
+           \\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+           \\pagestyle{empty}             % do not remove
+           % The settings below are copied from fullpage.sty
+           \\setlength{\\textwidth}{\\paperwidth}
+           \\addtolength{\\textwidth}{-3cm}
+           \\setlength{\\oddsidemargin}{1.5cm}
+           \\addtolength{\\oddsidemargin}{-2.54cm}
+           \\setlength{\\evensidemargin}{\\oddsidemargin}
+           \\setlength{\\textheight}{\\paperheight}
+           \\addtolength{\\textheight}{-\\headheight}
+           \\addtolength{\\textheight}{-\\headsep}
+           \\addtolength{\\textheight}{-\\footskip}
+           \\addtolength{\\textheight}{-3cm}
+           \\setlength{\\topmargin}{1.5cm}
+           \\addtolength{\\topmargin}{-2.54cm}")
+    (setq org-latex-compiler "lualatex"                  ;; Use a modern LaTeX compiler
+          org-latex-default-class "memoir"               ;; Use my own class by default
+          org-latex-default-table-environment "tabularx" ;; Use a better table formatter
+          org-latex-tables-booktabs t                    ;; Always use booktabs for better looking tables
           org-latex-caption-above
-          '(table image src-block special-block)             ;; Put captions below everything
-          org-latex-prefer-user-labels t                     ;; Prefer labels I make myself please
-          org-latex-listings t                               ;; Make SRC blocks export to code blocks in LaTeX
+          '(table image src-block special-block)         ;; Put captions below everything
+          org-latex-prefer-user-labels t                 ;; Prefer labels I make myself please
+          org-latex-listings t                           ;; Make SRC blocks export to code blocks in LaTeX
           org-latex-pdf-process
-          (list "latexmk -pvc- %f -cd %o")            ;; Use `latexmk' to generate PDF
-          org-latex-listings-options                         ;; Configure source code exporting
-          '(("frame" "tb")
-            ("breaklines" "true")
-            ("breakatwhitespace" "true")
-            ("keepspaces" "true")
-            ("columns" "fullflexible")
-            ("showspaces" "false")
-            ("showstringspaces" "false")
-            ("showtabs" "false")
-            ("basicstyle" "\\ttfamily\\footnotesize"))
-          org-latex-default-packages-alist
-          '(("AUTO" "polyglossia" t)
-            ("" "fontspec" t)
-            ("final" "microtype" t)
-            ("" "geometry" t)
-            ("" "subfiles" t)
-            ("" "multirow" t)
-            ("" "float" t)
-            ("" "amsmath" t)
-            ("" "amsfonts" t)
-            ("" "amssymb" t)
-            ("" "mathtools" t)
-            ("shortlabels" "enumitem" t)
-            ("" "multirow" t)
-            ("" "tabularx" t)
-            ("" "hyperref" t)
-            ("" "tikz" t)
-            ("edges" "forest" t)
-            ("" "graphicx" t)
-            ("" "color" t)
-            ("" "xcolor" t)
-            ("" "colortbl" t)
-            ("" "array" t)
-            ("" "listings" t))
-          org-latex-packages-alist
-          '(("autostyle,strict,autopunct" "csquotes" t)
-          ("style=ieee,backend=biber" "biblatex" t))
-          org-latex-hyperref-template "\\hypersetup{\n colorlinks=true,\n pdfauthor={%a},\n pdftitle={%t},\n pdfkeywords={%k},\n pdfsubject={%d},\n pdfcreator={%c},\n pdflang={%L}}\n")))
+          (list "latexmk -pvc- %f -cd %o")               ;; Use `latexmk' to generate PDF
+          org-latex-listings-options                     ;; Configure source code exporting
+          '(("frame" "tb")                               ;; Single lines at the top and bottom of frame
+            ("columns" "fullflexible")                   ;; Fix spacing in source code
+            ("flexiblecolumns" "true")                   ;; Same as above
+            ("numbers" "left")                           ;; Show line numbers on the left
+            ("stepnumber" "5")                           ;; But only every five lines
+            ("showstringspaces" "false")                 ;; Don't show spaces in strings as underlines
+            ("basicstyle" "\\ttfamily\\footnotesize"))   ;; Use footnote sized monospace font
+          org-latex-default-packages-alist               ;; Configure default packages inserted into LaTeX classes
+          '(("AUTO" "polyglossia" t)                     ;; Polyglossia for language settings, automatically configured
+            ("" "fontspec" t)                            ;; Fancy fonts for OpenType fonts in LuaLaTeX
+            ("" "microtype" t)                           ;; Micro-typography, for when you need even more typography
+            ("" "geometry" t)                            ;; Enable configuring the geometry of the pages
+            ("" "subfiles" t)                            ;; Enables splitting up large .tex files into smaller parts
+            ("" "float" t)                               ;; Float environments in LaTeX
+            ("" "amsfonts" t)                            ;; Math fonts
+            ("" "amssymb" t)                             ;; Math symbols
+            ("" "mathtools" t)                           ;; Extra math tools
+            ("shortlabels" "enumitem" t)                 ;; Enumerate environment with an option to change numbering quickly
+            ("" "multirow" t)                            ;; Lines that span multiple columns etc in tables
+            ("" "tabularx" t)                            ;; A better table environment
+            ("" "hyperref" t)                            ;; Links inside the generated PDFs
+            ("" "tikz" t)                                ;; Awesome technical diagrams and everything in between
+            ("edges" "forest" t)                         ;; Quick and really easy way to draw graphs
+            ("" "graphicx" t)                            ;; Embed graphics in LaTeX documents
+            ("" "xcolor" t)                              ;; Color utility for text etc
+            ("" "colortbl" t)                            ;; Color rows and columns in tables
+            ("" "array" t)                               ;; Arrays, like tables, but not
+            ("" "listings" t))                           ;; Display source code in LaTeX-documents
+          org-latex-packages-alist                       ;; Extra packages that we load after the default ones
+          '(("autostyle,strict,autopunct" "csquotes" t)  ;; Quoting and citing made easy
+            ("style=ieee,backend=biber" "biblatex" t))   ;; Bibliography and citing
+          org-latex-hyperref-template "\\hypersetup{\n colorlinks=true,\n pdfauthor={%a},\n pdftitle={%t},\n pdfkeywords={%k},\n pdfsubject={%d},\n pdfcreator={%c},\n pdflang={%L}}\n"))
+
+  ;;; `by-backend':
+  ;; This is a really neat macro that allows us to use different export settings
+  ;; for different exports, i.e. export some LaTeX-code as an image when
+  ;; exporting to HTML but stay as LaTeX when exporting to LaTeX.
+  (defmacro by-backend (&rest body)
+    `(case org-export-current-backend ,@body)))
 
 (provide 'org-latex-export)
 ;;; org-latex-export.el ends here
