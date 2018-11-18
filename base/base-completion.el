@@ -139,11 +139,11 @@
   :general
   (amalthea-major-leader
     "Y" '(:ignore t :wk "Yasnippet")
-    "Y p" '(ivy-yasnippet :wk "preview")
+    "Y c" '(yas-new-snippet :wk "create")
     "Y e" '(yas-expand :wk "expand")
     "Y i" '(yas-insert-snippet :wk "insert")
+    "Y p" '(ivy-yasnippet :wk "preview")
     "Y r" '(yas-reload-all :wk "reload")
-    "Y c" '(yas-new-snippet :wk "create")
     "Y v" '(yas-visit-snippet-file :wk "edit")))
 
 ;;; `yasnippet-snippets':
