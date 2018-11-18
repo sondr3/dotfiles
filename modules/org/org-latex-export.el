@@ -110,8 +110,7 @@
           org-latex-default-class "memoir"               ;; Use my own class by default
           org-latex-default-table-environment "tabularx" ;; Use a better table formatter
           org-latex-tables-booktabs t                    ;; Always use booktabs for better looking tables
-          org-latex-caption-above
-          '(table image src-block special-block)         ;; Put captions below everything
+          org-latex-caption-above t                      ;; Put captions below everything
           org-latex-prefer-user-labels t                 ;; Prefer labels I make myself please
           org-latex-listings t                           ;; Make SRC blocks export to code blocks in LaTeX
           org-latex-pdf-process
