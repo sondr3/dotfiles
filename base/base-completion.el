@@ -141,7 +141,10 @@
     "Y" '(:ignore t :wk "Yasnippet")
     "Y p" '(ivy-yasnippet :wk "preview")
     "Y e" '(yas-expand :wk "expand")
-    "Y r" '(yas-reload-all :wk "reload")))
+    "Y i" '(yas-insert-snippet :wk "insert")
+    "Y r" '(yas-reload-all :wk "reload")
+    "Y c" '(yas-new-snippet :wk "create")
+    "Y v" '(yas-visit-snippet-file :wk "edit")))
 
 ;;; `yasnippet-snippets':
 ;; Minor tweak to allow it to automatically load snippets, but only after the
