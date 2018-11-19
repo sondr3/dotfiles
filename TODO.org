@@ -1,0 +1,10 @@
+* TODO Convert to nix-derivation [0/5]
+- [ ] Add ~:ensure-system-packages~ to ~emacs.nix~ file to ensure that they are
+  always installed together with Emacs.
+- [ ] Fix with-editor crapping out because it cannot find a suitable emacslient
+- [ ] Figure out how to always copy Emacs to ~/Applications/~
+- [ ] Stuff Amalthea back into my ~.dotfiles~ repo
+- [ ] Write documentation for attempting to use this configuration with Nix and
+  not Borg
+* TODO Other stuff [0/1]
+- [ ] Figure out how to make ~amalthea-debug~ works
