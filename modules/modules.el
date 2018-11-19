@@ -43,10 +43,10 @@
 
 ;;; Add all the languages to the load path
 (eval-and-compile
-  (add-to-list 'load-path amalthea-modules-langs-dir)
-  (add-to-list 'load-path amalthea-modules-tools-dir)
-  (add-to-list 'load-path amalthea-modules-text-dir)
-  (add-to-list 'load-path amalthea-modules-org-dir))
+  (add-to-list 'load-path amalthea-modules-langs-dir t)
+  (add-to-list 'load-path amalthea-modules-tools-dir t)
+  (add-to-list 'load-path amalthea-modules-text-dir t)
+  (add-to-list 'load-path amalthea-modules-org-dir t))
 
 ;;; Languages
 (require 'lang-elisp)

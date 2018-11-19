@@ -134,7 +134,7 @@
 ;; Ensure directories exists before needing them and load the core configuration
 (eval-and-compile
   (amalthea--ensure-core-dirs)
-  (add-to-list 'load-path amalthea-core-dir))
+  (add-to-list 'load-path amalthea-core-dir t))
 
 (require 'core-packages)
 (require 'core-os)

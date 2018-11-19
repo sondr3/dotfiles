@@ -23,7 +23,7 @@
 
 ;;; Add path to `load-path'
 (eval-and-compile
-  (add-to-list 'load-path amalthea-utils-dir))
+  (add-to-list 'load-path amalthea-utils-dir t))
 
 ;;; FONTS
 (require 'pragmatapro)

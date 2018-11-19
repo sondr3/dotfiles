@@ -21,7 +21,8 @@
 
 ;;; Code:
 
-(eval-and-compile (add-to-list 'load-path amalthea-base-dir))
+(eval-and-compile
+  (add-to-list 'load-path amalthea-base-dir t))
 
 (require 'base-evil)
 (require 'base-editor)
