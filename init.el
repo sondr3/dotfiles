@@ -23,14 +23,22 @@
 
 ;;; Commentary:
 
-;; commentary
+;; Isn't the view from here beautiful?
 
 ;;; Code:
 
+;; Compatibility with versions 26 and below.
 (unless (boundp 'early-init-file)
   (load (concat (file-name-directory load-file-name) "early-init")))
 
+;; Load Amalthea
 (require 'core (concat user-emacs-directory "core/core"))
+
+;; And once all is said and done, start emacsclient in the background so that we
+;; can connect to it from other windows or the terminal.
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 ;; (provide 'init)
 ;;; init.el ends here
