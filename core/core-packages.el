@@ -37,22 +37,15 @@
 
 ;;; Code:
 
-(eval-and-compile
-  (add-to-list 'load-path (expand-file-name "lib/borg" amalthea-emacs-dir)))
+(eval-when-compile
+  (require 'use-package))
 
-(require 'borg)
-(borg-initialize)
-(require 'use-package)
-(require 'use-package-ensure-system-package)        ;; Automatically install missing system packages
-(setq use-package-verbose amalthea-debug            ;; Verbosely load packages when debugging
-      use-package-compute-statistics amalthea-debug ;; Compute load times when debugging(
-      use-package-always-defer t)                   ;; Always defer packages
+(setq use-package-ensure-function 'ignore ;; We don't want to install packages with `use-package'
+      use-package-verbose t               ;; Verbosely load packages when debugging
+      use-package-compute-statistics t    ;; Compute load times when debugging(
+      use-package-always-defer t)         ;; Always defer packages
 
-(use-package epkg
-  :init (setq epkg-repository (concat amalthea-cache-dir "epkgs"))) ;; Save package database in our cache directory
-
-(use-package delight
-  :demand t)
+(use-package delight :demand t)
 
 (provide 'core-packages)
 
