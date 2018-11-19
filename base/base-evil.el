@@ -25,16 +25,16 @@
 ;; Configures evil-mode.
 (use-package evil
   :demand t
+  :general
+  (general-imap "j"  (general-key-dispatch 'self-insert-command
+                       :timeout 0.25
+                       "k" 'evil-normal-state))
   :init
   (progn
     (setq evil-want-integration t     ;; Compatibility settings for `evil-collection'
           evil-want-keybinding nil    ;; Same as above
-          evil-search-module 'swiper) ;; Use Swiper for searches
-    (evil-mode))
-  :general
-  (general-imap "j"  (general-key-dispatch 'self-insert-command
-                       :timeout 0.25
-                       "k" 'evil-normal-state)))
+          evil-search-module 'swiper)) ;; Use Swiper for searches
+  :config (evil-mode))
 
 ;;; `evil-collection':
 ;; Instead of having to try to consistently create a key theme for a ton of
@@ -44,10 +44,8 @@
 (use-package evil-collection
   :after evil
   :commands evil-collection-init
-  :init
-  (progn
-    (setq evil-collection-setup-minibuffer t)
-    (evil-collection-init)))
+  :init (setq evil-collection-setup-minibuffer t)
+  :config (evil-collection-init))
 
 ;;; `evil-lion':
 ;; Ever wanted to align a long bunch of variables at their equal signs? Look no
