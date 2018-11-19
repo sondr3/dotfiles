@@ -53,11 +53,12 @@
 
 (add-hook 'emacs-startup-hook #'amalthea--early-init)
 
-(defvar package--init-file-ensured)
-(setq user-emacs-directory (file-name-directory load-file-name)
-      load-prefer-newer t
-      package-enable-at-startup nil
-      package--init-file-ensured t)
+(require 'package)
+(setq load-prefer-newer t
+      package--init-file-ensured t
+      package-archives nil
+      package-enable-at-startup nil)
+(package-initialize)
 
 (if (fboundp 'menu-bar-mode)
     (menu-bar-mode -1))
