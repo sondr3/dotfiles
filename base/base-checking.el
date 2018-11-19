@@ -56,7 +56,6 @@
 ;; enable the regular version for `text-mode' buffers.
 (use-package flyspell
   :commands (flyspell-mode flyspell-prog-mode)
-  :ensure-system-package hunspell
   :delight " Ⓢ"
   :ghook ('prog-mode-hook #'flyspell-prog-mode)
   :ghook ('text-mode-hook #'flyspell-mode)

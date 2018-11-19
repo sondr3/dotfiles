@@ -24,7 +24,6 @@
 ;;; `deadgrep':
 ;; Sweet, sweet searching.
 (use-package deadgrep
-  :ensure-system-package (rg . ripgrep)
   :general
   (amalthea-leader
     "a s" '(deadgrep :wk "ripgrep")))

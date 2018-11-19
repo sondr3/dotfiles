@@ -27,7 +27,6 @@
 ;; a bunch of key bindings to `sh-mode' for easier access, these are essentially
 ;; the same keys that are under `C-c'.
 (use-package sh-script
-  :ensure-system-package shellcheck
   :ghook ('sh-mode-hook (list #'subword-mode #'flycheck-mode))
   :general
   (amalthea-major-leader 'sh-mode-map

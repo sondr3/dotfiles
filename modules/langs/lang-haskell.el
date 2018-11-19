@@ -27,9 +27,6 @@
 ;; here. All it does is add some modes to `haskell-mode', exclude some project
 ;; files from `recentf' and set a few common sense settings.
 (use-package haskell-mode
-  :ensure-system-package
-  ((brittany . "stack install brittany")
-   (hoogle . "stack install hoogle"))
   :ghook ('haskell-mode-hook (list #'subword-mode #'haskell-auto-insert-module-template))
   :general
   (amalthea-major-leader 'haskell-mode-map
@@ -90,9 +87,6 @@
 ;; done via this package. We install the required dependencies and add a few
 ;; keybindings for it.
 (use-package hlint-refactor
-  :ensure-system-package
-  ((hlint . "stack install hlint")
-   (refactor . "stack --resolver=nightly install apply-refact"))
   :general
   (amalthea-major-leader 'haskell-mode-map
     "r" '(:ignore t :wk "refactor")
