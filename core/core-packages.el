@@ -37,7 +37,7 @@
 
 ;;; Code:
 
-(eval-when-compile
+(eval-and-compile
   (require 'use-package))
 
 (setq use-package-ensure-function 'ignore ;; We don't want to install packages with `use-package'
