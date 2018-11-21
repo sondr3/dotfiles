@@ -40,7 +40,9 @@
 
 ;;; Code:
 
+;; Silence byte compiler warnings
 (defvar amalthea--file-name-handler-alist file-name-handler-alist)
+;; Straight up stolen from Doom Emacs' hints on speeding up booting
 (setq gc-cons-threshold 402653184
       gc-cons-percentage 1.0
       file-name-handler-alist nil)
@@ -51,15 +53,18 @@
         gc-cons-threshold 16777216
         gc-cons-percentage 0.15))
 
+;; Reset the values we stole from Doom back to normal
 (add-hook 'emacs-startup-hook #'amalthea--early-init)
 
+;; Initialize packaging, required for how we use `Nix'.
 (require 'package)
-(setq load-prefer-newer t
-      package--init-file-ensured t
-      package-archives nil
-      package-enable-at-startup nil)
+(setq load-prefer-newer t            ;; Always load the newest file between `.el' and `.elc'
+      package--init-file-ensured t   ;; We do initialize our packages, yes
+      package-archives nil           ;; But we do not use `package.el' for installation, so disable it
+      package-enable-at-startup nil) ;; Don't enable installed packages on boot
 (package-initialize)
 
+;; HIDE ALL THE THINGS!
 (if (fboundp 'menu-bar-mode)
     (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode)
