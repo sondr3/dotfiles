@@ -2,34 +2,40 @@
 #+AUTHOR: Sondre Nilsen
 
 * Introduction
-This is my Emacs configuration, there are many like it but this one is mine.
-It's decently personalized, but it should be useful for either inspiration or
-just straight-up copy-pasta. My configuration is managed by [[https://github.com/emacscollective/borg][borg]], which is a
-really nice and simple way of managing your Emacs packages by version.
+Throughout the eons, there have been many Emacs configurations, but this one is
+mine. I've been on a long journey from copy-pasting random snippets off of Stack
+Overflow, to attempting my own configurations, to [[http://spacemacs.org/][Spacemacs]], back again to my
+own [[https://github.com/sondr3/dotfiles/blob/master/emacs.org][Org mode powered configuration]] and finally back to this... [[https://en.wikipedia.org/wiki/Amalthea_(moon)][Amalthea!]]
 
+I'm a big fan of the [[https://en.wikipedia.org/wiki/KISS_principle][KISS principle]], though calling Emacs simple might be
+stretching it a little. This configuration tries to stay clean and simple, there
+are no crazy macro or function shenanigans and I try to make sure everything is
+well documented.
+
+For a rough overview over how this configuration works, it is configured into
+three (well, four) separate layers. The ~core~ layer is where packages and
+configuration that everything else relies on is, package management, key
+bindings and configuration of the core of Amalthea. The ~base~ layer is
+essentially what makes my configuration into what it is, here is [[https://github.com/emacs-evil/evil][Evil]], [[https://github.com/company-mode/company-mode][Company]],
+[[https://github.com/bbatsov/projectile][Projectile]], [[https://github.com/abo-abo/swiper][Ivy]] and more is configured. Second to last, the ~modules~ layer is
+where configuration for specific modes resides, Org mode, LaTeX, Haskell and so
+on. Finally, the ~utils~ layer contains... utilities.
+
+As an addendum, for those who wonder why I named my Emacs Amalthea... I have no
+recollection of why anymore, other than the fact that I still think it's a cool
+name. It's named after one of the minor moons of Jupiter.
+* Installation
+Don't, it'll only end in pain. Take what you want from my configuration instead.
+* Inspiration
 At the moment I'm running Emacs from the latest revision of the master branch,
 which means the version is 27.0, I'm using this because of the ~early-init.el~
-file, but this configuration will work with versions below 27.0 too as it
+file, but this configuration will work with versions 26 and above too as it
 concatenates the ~early-init.el~ file into the ~init.el~ file.
 
-I've named my Emacs configuration ~Amalthea~, I have no recollection of why
-anymore, other than the fact that I still think it's a cool name. It's named
-after one of the minor moons of Jupiter.
-* Installation
-I am currently using [[https://github.com/emacscollective/borg][Borg]] to manage my dependencies, and as such installing and
-trying out my configuration is very easy:
+To configure Emacs and the packages I require I am currently using [[https://nixos.org/nix/][Nix]] to list
+and automatically install everything. You can see my ~emacs.nix~ file [[https://github.com/sondr3/dotfiles/blob/master/emacs.nix][here]]. As
+such, there is no way to install the packages I use from inside Emacs (I have
+even disabled the ~:ensure~ functionality of ~use-package~).
 
-#+BEGIN_SRC shell
-  git clone git@github.com:sondr3/amalthea.git ~/.emacs.d
-  cd ~/.emacs.d/
-  make bootstrap-borg
-  make bootstrap
-#+END_SRC
-
-However, make sure you make a backup of your local configuration before doing
-this as it'll completely overwrite whatever you have in your configuration. I
-have also never actually attempted to bootstrap my editor again, so there's a
-fair chance it'll go completely tits up, fair warning.
-
-*NOTE:* As Borg is built around git submodules you are required to have an account
-on both Github and Gitlab that can clone with SSH, otherwise you'll get errors.
+But feel free to copy and take whatever parts of the configuration you want to
+try out.

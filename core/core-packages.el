@@ -15,28 +15,23 @@
 ;; For a full copy of the GNU General Public License
 ;; see <http://www.gnu.org/licenses/>.
 
-
 ;;; Commentary:
 
 ;; There's a ton of different ways of doing package management in Emacs, most of
 ;; which nowadays revolve around `use-package'. There's also `quelpa',
-;; `straight.el', and some even resort to manually listing all the packages they
-;; want and then installing them that way. I've tried a bunch of them but in the
-;; end I really fell for `Borg' because of it's simplicity but also because it
-;; handles reproducability really well since every package is a git submodule.
+;; `straight.el', `Borg' and a bunch more. I've tried them all, but there is
+;; always some minute thing about them that bothers me. In the end I've ended up
+;; configuring the packages I need in a `Nix' expression, allowing me to
+;; declarative install dependencies.
 
-;; It also makes it really easy to integrate it with `use-package' that too
-;; brings with it all the goodies that `use-package' brings, like lazy loading,
-;; easy configuring of hooks and settings and so on.
-
-;; Then, and this isn't required per se, but I'll be using Delight to hide or
-;; rename the names of major and minor modes on the modeline instead of
-;; Diminish. Mostly because when I last checked it didn't support hiding major
-;; modes or renaming them without weird hacks. And now that `use-package' has
-;; built-in support for the `:delight' keyword, I don't really need it.
+;; I still use `use-package' to configure my installed packages, but the
+;; `:ensure' functionality of it is disabled. This gives me the best of both
+;; worlds, all the great functionality and integration of `use-package' and the
+;; declarative packaging that you would have with `straight.el' or `Borg'.
 
 ;;; Code:
 
+;; Require `use-package', need I say more?
 (eval-and-compile
   (require 'use-package))
 
@@ -45,8 +40,12 @@
       use-package-compute-statistics t    ;; Compute load times when debugging(
       use-package-always-defer t)         ;; Always defer packages
 
+;;; `delight':
+;; Though you could use `diminish' for making the modeline look better,
+;; `delight' is a much better package. Not only can you change the names or hide
+;; major-modes from the modeline, you can also nest what minor-mode you want to
+;; hide instead of having to do it one at a time.
 (use-package delight :demand t)
 
 (provide 'core-packages)
-
 ;;; core-packages.el ends here

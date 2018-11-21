@@ -1,10 +1,16 @@
-* TODO Convert to nix-derivation [0/5]
+* TODO Convert to nix-derivation [2/8]
 - [ ] Add ~:ensure-system-packages~ to ~emacs.nix~ file to ensure that they are
   always installed together with Emacs.
-- [ ] Fix with-editor crapping out because it cannot find a suitable emacslient
-- [ ] Figure out how to always copy Emacs to ~/Applications/~
+- [X] Fix with-editor crapping out because it cannot find a suitable emacslient
+  - Fixed by doing ~nix-env -f emacs.nix --install~ and not just ~nix-build
+    emacs.nix~
+- [X] Figure out how to always copy Emacs to ~/Applications/~
+- [ ] Configure Async again to byte compile stuff asynchronously
 - [ ] Stuff Amalthea back into my ~.dotfiles~ repo
 - [ ] Write documentation for attempting to use this configuration with Nix and
   not Borg
-* TODO Other stuff [0/1]
+- [ ] Move what packages I can over to Melpa stable instead of unstable
+- [ ] Fix spellchecker not working properly
+* TODO Other stuff [0/2]
 - [ ] Figure out how to make ~amalthea-debug~ works
+- [ ] Why can't I use ~q~ anymore to exit temporary buffers?!
