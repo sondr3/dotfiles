@@ -76,7 +76,5 @@ in
     org
     org-plus-contrib
   ]) ++ [
-    pkgs.aspell
-    pkgs.aspellDicts.en
-    pkgs.aspellDicts.nb
+
   ])
