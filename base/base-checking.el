@@ -65,9 +65,10 @@
     "S b" '(flyspell-buffer :wk "spell check buffer")
     "S n" '(flyspell-goto-next-error :wk "next spelling error"))
   :init
-  (setenv "DICPATH" (concat (getenv "HOME") "/Library/Spelling"))
+  ;; (setenv "DICPATH" (concat (getenv "HOME") "/.nix-profile/lib/aspell/"))
   (progn
     (setq ispell-program-name "aspell"
+          ;; TODO: Make this work later
           ;; ispell-really-hunspell t
           ispell-local-dictionary "en_US"
           flyspell-use-meta-tab nil

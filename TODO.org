@@ -1,4 +1,4 @@
-* TODO Convert to nix-derivation [2/8]
+* TODO Convert to nix-derivation [4/8]
 - [ ] Add ~:ensure-system-packages~ to ~emacs.nix~ file to ensure that they are
   always installed together with Emacs.
 - [X] Fix with-editor crapping out because it cannot find a suitable emacslient
@@ -7,10 +7,12 @@
 - [X] Figure out how to always copy Emacs to ~/Applications/~
 - [ ] Configure Async again to byte compile stuff asynchronously
 - [ ] Stuff Amalthea back into my ~.dotfiles~ repo
-- [ ] Write documentation for attempting to use this configuration with Nix and
+- [X] Write documentation for attempting to use this configuration with Nix and
   not Borg
 - [ ] Move what packages I can over to Melpa stable instead of unstable
-- [ ] Fix spellchecker not working properly
-* TODO Other stuff [0/2]
+- [X] Fix spellchecker not working properly
+  - It is really wonky, had to create my own overlay and shit
+* TODO Other stuff [0/3]
 - [ ] Figure out how to make ~amalthea-debug~ works
 - [ ] Why can't I use ~q~ anymore to exit temporary buffers?!
+- [ ] Contribute Norwegian dictionaries to Hunspell in Nix
