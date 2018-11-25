@@ -48,26 +48,11 @@
   (add-to-list 'load-path amalthea-modules-text-dir t)
   (add-to-list 'load-path amalthea-modules-org-dir t))
 
-;;; Languages
-(require 'lang-elisp)
-(require 'lang-haskell)
-(require 'lang-markdown)
-(require 'lang-shell)
-(require 'lang-json)
-(require 'lang-rust)
-(require 'lang-java)
-(require 'lang-nix)
-
-;;; Tools
-(require 'tool-configuration)
-(require 'tool-docker)
-(require 'tool-nginx)
-
-;;; Org
+;;; Load modules
+(require 'langs)
+(require 'tools)
 (require 'org-org)
-
-;;; Text editing
-(require 'text-latex)
+(require 'text)
 
 (provide 'modules)
 ;;; modules.el ends here
