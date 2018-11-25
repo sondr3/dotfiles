@@ -1,6 +1,7 @@
 * TODO Convert to nix-derivation [4/8]
 - [ ] Add ~:ensure-system-packages~ to ~emacs.nix~ file to ensure that they are
   always installed together with Emacs.
+  - This turned out to be a major pain in the ass with =aspell=, maybe reconsider?
 - [X] Fix with-editor crapping out because it cannot find a suitable emacslient
   - Fixed by doing ~nix-env -f emacs.nix --install~ and not just ~nix-build
     emacs.nix~
@@ -16,3 +17,12 @@
 - [ ] Figure out how to make ~amalthea-debug~ works
 - [ ] Why can't I use ~q~ anymore to exit temporary buffers?!
 - [ ] Contribute Norwegian dictionaries to Hunspell in Nix
+* TODO Packages to explore [0/4]
+- [ ] [[https://github.com/vermiculus/magithub][magithub]]
+- [ ] [[https://github.com/abo-abo/avy][avy]]
+- [ ] [[https://github.com/emacscollective/no-littering][no-littering]]
+- [ ] [[https://github.com/IvanMalison/org-projectile][org-projectile]]
+* TODO Personal packages [0/2]
+- [ ] Rewrite ~ox-twbs~ with the latest version of Bootstrap
+- [ ] Either configure the fuck out of ~ox-latex~ or write my own little thing
+  with it
