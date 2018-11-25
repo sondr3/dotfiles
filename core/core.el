@@ -90,16 +90,13 @@
               max-lisp-eval-depth 50000
               max-specpdl-size 10000)
 ;; Directories and files
-(setq-default abbrev-file-name (concat amalthea-local-dir "abbrev.el")                       ;; Abbreviations, used for auto correction
-              backup-directory-alist (list (cons "." (concat amalthea-cache-dir "backup/"))) ;; Location for backup files
-              auto-save-list-file-name (concat amalthea-cache-dir "autosave")                ;; Autosave directories
-              custom-file (concat amalthea-local-dir "custom.el")                            ;; Custom file location
-              byte-compile--use-old-handlers nil                                             ;; Use the most recent byte code ops
-              create-lockfiles nil                                                           ;; Don't create #filename# files in directories
-              make-backup-files nil                                                          ;; Don't create backup files, we're using VC
-              sentence-end-double-space nil                                                  ;; Sentences end with a single space
-              vc-follow-symlinks t                                                           ;; Always follow symbolic links
-              save-interprogram-paste-before-kill t)                                         ;; Save paste history when killing Emacs)
+(setq-default  custom-file (concat amalthea-local-dir "custom.el") ;; Custom file location
+               byte-compile--use-old-handlers nil                  ;; Use the most recent byte code ops
+               create-lockfiles nil                                ;; Don't create #filename# files in directories
+               make-backup-files nil                               ;; Don't create backup files, we're using VC
+               sentence-end-double-space nil                       ;; Sentences end with a single space
+               vc-follow-symlinks t                                ;; Always follow symbolic links
+               save-interprogram-paste-before-kill t)              ;; Save paste history when killing Emacs)
 
 ;; Fully inhibit the initial screen
 (fset #'display-startup-echo-area-message #'ignore)
@@ -116,7 +113,7 @@
 (defun amalthea--ensure-core-dirs ()
   "Ensures that all the required directories for Amalthea are created."
   (interactive)
-  (dolist (dir (list amalthea-cache-dir amalthea-local-dir (concat amalthea-cache-dir "epkgs")))
+  (dolist (dir (list amalthea-cache-dir amalthea-local-dir))
     (unless (file-directory-p dir)
       (make-directory dir t))))
 

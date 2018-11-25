@@ -102,10 +102,13 @@
   :commands (recentf-mode recentf-track-opened-file)
   :init
   (progn
-    (setq recentf-save-file (concat amalthea-cache-dir "recentf") ;; Location to save history of recent files
-          recentf-max-saved-items 1000                            ;; Total amount of saved recent files
+    (setq recentf-max-saved-items 1000                            ;; Total amount of saved recent files
           recentf-auto-cleanup 'never)                            ;;  Never clean the history, only append and remove the last
-    (recentf-mode)))
+    (recentf-mode))
+  :config
+  (progn
+    (add-to-list 'recentf-exclude no-littering-var-directory)   ;; Don't put litter in `recentf'
+    (add-to-list 'recentf-exclude no-littering-etc-directory))) ;; Don't put litter in `recentf'
 
 ;;; `savehist':
 ;; This is probably one of the easier minor modes to explain, so we'll keep it
@@ -114,8 +117,7 @@
   :commands (savehist-mode)
   :init
   (progn 
-    (setq savehist-file (concat amalthea-cache-dir "savehist")       ;; Location to save history of minibuffer usage
-          savehist-save-minibuffer-history t                         ;; Save history from minibuffer too
+    (setq savehist-save-minibuffer-history t                         ;; Save history from minibuffer too
           history-length 1000                                        ;; Total amount of history to save
           savehist-autosave-interval 60                              ;; Save every minute
           savehist-additional-variables '(mark-ring                  ;; Additional variables to save
@@ -132,10 +134,7 @@
 ;; at the same place as you left.
 (use-package saveplace
   :commands (save-place-mode)
-  :init
-  (progn
-    (setq save-place-file (concat amalthea-cache-dir "places")) ;; Location to save history of cursor
-    (save-place-mode)))
+  :init (save-place-mode))
 
 ;;; `uniquify':
 ;; Whenever you have multiple files with the same name open, you need a way to

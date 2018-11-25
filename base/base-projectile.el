@@ -30,11 +30,9 @@
   :delight " Ⓟ"
   :init
   (progn
-    (setq projectile-completion-system 'ivy                                                      ;; Use Ivy for completion
-          projectile-sort-order 'recentf                                                         ;; Sort by using `recentf'
-          projectile-enable-caching t                                                            ;; Enable caching to speed up searching, finding files
-          projectile-cache-file (concat amalthea-cache-dir "projectile.cache")                   ;; Save cache file in cache dir
-          projectile-known-projects-file (concat amalthea-cache-dir "projectile-bookmarks.eld")) ;; Save projects in cache dir
+    (setq projectile-completion-system 'ivy ;; Use Ivy for completion
+          projectile-sort-order 'recentf    ;; Sort by using `recentf'
+          projectile-enable-caching t)      ;; Enable caching to speed up searching, finding files
     (projectile-mode)))
 
 ;;; `counsel-projectile':

@@ -76,8 +76,7 @@
 (use-package amx
   :commands amx-mode
   :after ivy
-  :init (amx-mode)
-  :config (setq amx-save-file (concat amalthea-cache-dir "amx-save")))
+  :init (amx-mode))
 
 ;;; `Swiper':
 ;; This is just a straight upgrade of the default search in Emacs. Use it and
@@ -123,9 +122,7 @@
 ;; or a few of them.
 (use-package company-statistics
   :after company
-  :ghook 'company-mode-hook
-  :config
-  (setq company-statistics-file (concat amalthea-cache-dir "company-statistics.el"))) ;; Location to save statistics
+  :ghook 'company-mode-hook)
 
 ;;; Snippets
 
