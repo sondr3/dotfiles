@@ -63,7 +63,10 @@
   :delight
   :commands global-aggressive-indent-mode
   :init (global-aggressive-indent-mode t)
-  :config (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode))
+  :config
+  (progn
+    (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
+    (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)))
 
 ;;; `smartparens`:
 ;; Like `electric-pair-mode`, but better. This is a minor mode for working with
