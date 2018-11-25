@@ -6,17 +6,26 @@ let
 in
   emacsWithPackages (epkgs: (with epkgs.elpaPackages; [
     delight
-    async
     undo-tree
     aggressive-indent
     auctex
+  ]) ++ (with epkgs.melpaStablePackages; [
+    async
+    magit
+    company
+    no-littering
+    auto-compile
+    hl-todo
+    markdown-mode
     hydra
+    yasnippet
+    projectile
+    macrostep
   ]) ++ (with epkgs.melpaPackages; [
     use-package
     which-key
     general
     exec-path-from-shell
-    projectile
     counsel-projectile
     evil
     evil-collection
@@ -26,9 +35,7 @@ in
     evil-commentary
     evil-smartparens
     evil-magit
-    magit
     diff-hl
-    hl-todo
     helpful
     rainbow-delimiters
     smartparens
@@ -37,10 +44,8 @@ in
     counsel
     swiper
     amx
-    company
     company-quickhelp
     company-statistics
-    yasnippet
     yasnippet-snippets
     ivy-yasnippet
     deadgrep
@@ -53,11 +58,8 @@ in
     yaml-mode
     dockerfile-mode
     nasm-mode
-    auto-compile
-    macrostep
     rust-mode
     json-mode
-    markdown-mode
     auctex-latexmk
     company-auctex
     company-math
