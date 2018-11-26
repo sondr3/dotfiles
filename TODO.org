@@ -63,7 +63,7 @@
 - [X] base-ui.el
 - [X] base-window.el
 - [X] base.el
-*** TODO modules/ [3/5]
+*** TODO modules/ [4/5]
 **** DONE langs [10/10]
 - [X] lang-assembly.el
 - [X] lang-elisp.el
@@ -78,9 +78,9 @@
 **** DONE org [2/2]
 - [X] org-latex-export.el
 - [X] org-org.el
-**** TODO text [0/2]
-- [ ] text-latex.el
-- [ ] text.el
+**** DONE text [2/2]
+- [X] text-latex.el
+- [X] text.el
 **** TODO tools [0/4]
 - [ ] tool-configuration.el
 - [ ] tool-docker.el
