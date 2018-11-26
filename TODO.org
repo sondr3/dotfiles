@@ -1,4 +1,5 @@
-* TODO Convert to nix-derivation [8/11]
+* TODO Emacs [0/6]
+** TODO Convert to nix-derivation [8/11]
 - [ ] Add ~:ensure-system-packages~ to ~emacs.nix~ file to ensure that they are
   always installed together with Emacs.
   - This turned out to be a major pain in the ass with =aspell=, maybe reconsider?
@@ -17,41 +18,42 @@
 - [X] Seems like something happened with ~evil-collection~ and ~evil~, when I byte
   compile I get warnings...
 - [X] ~git-modes~ are not installed, fix.
-* TODO Other stuff [0/6]
+** TODO Other stuff [1/6]
 - [ ] Figure out how to make ~amalthea-debug~ works
 - [ ] Why can't I use ~q~ anymore to exit temporary buffers?!
 - [ ] Contribute Norwegian dictionaries to Hunspell in Nix
 - [ ] Fix byte compilation warnings for escaping insert mode in Evil
-- [ ] [[file:modules/langs/lang-elisp.el][Macrostep]] fuckery needs a fixin'
+- [X] [[file:modules/langs/lang-elisp.el][Macrostep]] fuckery needs a fixin'
 - [ ] Fix theme making shit smaller
-* TODO Latex [0/3]
+** TODO Latex [0/3]
 - [ ] Configure Beamer and org-mode
 - [ ] Find a theme:
   - [ ] [[https://github.com/matze/mtheme]]
   - [ ] [[https://github.com/ivan-cukic/latex-beamer-theme-elegance]]
   - [ ] [[https://github.com/elauksap/focus-beamertheme]]
 - [ ] How to present Beamer presentations
-* TODO Packages to explore [1/5]
+** TODO Packages to explore [1/6]
 - [ ] [[https://github.com/vermiculus/magithub][magithub]]
 - [ ] [[https://github.com/abo-abo/avy][avy]]
 - [X] [[https://github.com/emacscollective/no-littering][no-littering]]
 - [ ] [[https://github.com/IvanMalison/org-projectile][org-projectile]]
 - [ ] [[https://github.com/abo-abo/lispy][lispy]]
-* TODO Personal packages [0/3]
+- [ ] Alternatives to ~smartparens~, it's starting to really grind my gears
+** TODO Personal packages [0/3]
 - [ ] Rewrite ~ox-twbs~ with the latest version of Bootstrap
 - [ ] Either configure the fuck out of ~ox-latex~ or write my own little thing
   with it
 - [ ] Look into using [[https://github.com/purcell/flycheck-package][flycheck-package]] and [[https://github.com/alphapapa/emacs-package-dev-handbook][this]] to help
-* TODO HOLY SHIT WHAT AM I DOING [0/3]
-** TODO Remove ~use-package~ and change ~concat~ [4/4]
-*** DONE core/ [6/6]
+** TODO HOLY SHIT WHAT AM I DOING [0/3]
+*** TODO Remove ~use-package~ and change ~concat~ [4/4]
+**** DONE core/ [6/6]
 - [X] core-editor.el
 - [X] core-keybindings.el
 - [X] core-os.el
 - [X] core-packages.el
 - [X] core-ui.el
 - [X] core.el
-*** DONE base/ [11/11]
+**** DONE base/ [11/11]
 - [X] base-checking.el
 - [X] base-completion.el
 - [X] base-editor.el
@@ -63,8 +65,8 @@
 - [X] base-ui.el
 - [X] base-window.el
 - [X] base.el
-*** DONE modules/ [5/5]
-**** DONE langs [10/10]
+**** DONE modules/ [5/5]
+***** DONE langs [10/10]
 - [X] lang-assembly.el
 - [X] lang-elisp.el
 - [X] lang-haskell.el
@@ -75,22 +77,22 @@
 - [X] lang-rust.el
 - [X] lang-shell.el
 - [X] langs.el
-**** DONE org [2/2]
+***** DONE org [2/2]
 - [X] org-latex-export.el
 - [X] org-org.el
-**** DONE text [2/2]
+***** DONE text [2/2]
 - [X] text-latex.el
 - [X] text.el
-**** DONE tools [4/4]
+***** DONE tools [4/4]
 - [X] tool-configuration.el
 - [X] tool-docker.el
 - [X] tool-nginx.el
 - [X] tools.el
-**** DONE modules.el
-*** DONE utils/ [2/2]
+***** DONE modules.el
+**** DONE utils/ [2/2]
 - [X] pragmatapro.el
 - [X] utils.el
-** TODO OH GOD NO [2/5]
+*** TODO OH GOD NO [2/5]
 - [X] Fix ~amalthea--byte-compile-amalthea~, when calling ~byte-recompile-directory~
   is goes from top to bottom alphabetically which fucks up ~no-littering~.
 - [X] Remove ~use-package~ from Amalthea.
