@@ -24,7 +24,6 @@ in
     gitconfig-mode
     gitignore-mode
   ]) ++ (with epkgs.melpaPackages; [
-    use-package
     which-key
     general
     exec-path-from-shell
