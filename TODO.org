@@ -17,12 +17,13 @@
 - [X] Seems like something happened with ~evil-collection~ and ~evil~, when I byte
   compile I get warnings...
 - [X] ~git-modes~ are not installed, fix.
-* TODO Other stuff [0/5]
+* TODO Other stuff [0/6]
 - [ ] Figure out how to make ~amalthea-debug~ works
 - [ ] Why can't I use ~q~ anymore to exit temporary buffers?!
 - [ ] Contribute Norwegian dictionaries to Hunspell in Nix
 - [ ] Fix byte compilation warnings for escaping insert mode in Evil
 - [ ] [[file:modules/langs/lang-elisp.el][Macrostep]] fuckery needs a fixin'
+- [ ] Fix theme making shit smaller
 * TODO Latex [0/3]
 - [ ] Configure Beamer and org-mode
 - [ ] Find a theme:
@@ -62,7 +63,7 @@
 - [X] base-ui.el
 - [X] base-window.el
 - [X] base.el
-*** TODO modules/ [2/5]
+*** TODO modules/ [3/5]
 **** DONE langs [10/10]
 - [X] lang-assembly.el
 - [X] lang-elisp.el
@@ -74,9 +75,9 @@
 - [X] lang-rust.el
 - [X] lang-shell.el
 - [X] langs.el
-**** TODO org [0/2]
-- [ ] org-latex-export.el
-- [ ] org-org.el
+**** DONE org [2/2]
+- [X] org-latex-export.el
+- [X] org-org.el
 **** TODO text [0/2]
 - [ ] text-latex.el
 - [ ] text.el
