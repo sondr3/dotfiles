@@ -20,6 +20,9 @@ in
     yasnippet
     projectile
     macrostep
+    gitattributes-mode
+    gitconfig-mode
+    gitignore-mode
   ]) ++ (with epkgs.melpaPackages; [
     use-package
     which-key
