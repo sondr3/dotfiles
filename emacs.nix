@@ -10,7 +10,6 @@ in
     aggressive-indent
     auctex
   ]) ++ (with epkgs.melpaStablePackages; [
-    async
     magit
     company
     no-littering
