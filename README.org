@@ -34,8 +34,7 @@ concatenates the ~early-init.el~ file into the ~init.el~ file.
 
 To configure Emacs and the packages I require I am currently using [[https://nixos.org/nix/][Nix]] to list
 and automatically install everything. You can see my ~emacs.nix~ file [[https://github.com/sondr3/dotfiles/blob/master/emacs.nix][here]]. As
-such, there is no way to install the packages I use from inside Emacs (I have
-even disabled the ~:ensure~ functionality of ~use-package~).
+such, there is no way to install the packages I use from inside Emacs.
 
 But feel free to copy and take whatever parts of the configuration you want to
 try out.

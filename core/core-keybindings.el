@@ -64,12 +64,9 @@
         which-key-sort-order 'which-key-key-order-alpha)) ;; Sort things properly alphabetical
 
 ;;; `General':
-;; `use-package' has a built-in way of binding keys, but after having tried to
-;; use it in a slightly more advanced way than just binding keys I've found that
-;; it doesn't work as I would've liked it to do. Enter General: it's a whole
-;; framework for binding keys in a really nice and consistent manner. We'll also
-;; configure our leader keys using the constants we created in the introduction
-;; to keybindings.
+;; This is a whole framework for binding keys in a really nice and consistent
+;; manner. It also enables us to configure our leader keys using the constants
+;; we created in the introduction to keybindings.
 (require 'general)
 (with-eval-after-load 'general
   (setq general-override-states '(insert emacs hybrid normal visual motion operator replace))

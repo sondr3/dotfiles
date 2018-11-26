@@ -22,23 +22,10 @@
 ;; `straight.el', `Borg' and a bunch more. I've tried them all, but there is
 ;; always some minute thing about them that bothers me. In the end I've ended up
 ;; configuring the packages I need in a `Nix' expression, allowing me to
-;; declarative install dependencies.
-
-;; I still use `use-package' to configure my installed packages, but the
-;; `:ensure' functionality of it is disabled. This gives me the best of both
-;; worlds, all the great functionality and integration of `use-package' and the
-;; declarative packaging that you would have with `straight.el' or `Borg'.
+;; declarative install dependencies and configure them without even using
+;; `use-package'.
 
 ;;; Code:
-
-;; Require `use-package', need I say more?
-(eval-and-compile
-  (require 'use-package))
-
-(setq use-package-ensure-function 'ignore ;; We don't want to install packages with `use-package'
-      use-package-verbose nil               ;; Verbosely load packages when debugging
-      use-package-compute-statistics nil    ;; Compute load times when debugging(
-      use-package-always-defer t)         ;; Always defer packages
 
 ;;; `delight':
 ;; Though you could use `diminish' for making the modeline look better,

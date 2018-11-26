@@ -18,9 +18,7 @@
 ;;; Commentary:
 
 ;; Syntax and spell checking for both programming and regular languages, using
-;; `flyspell' and `flycheck' to configure them. Requirements are that you need
-;; to have `hunspell' installed for this to work, though `use-package' will try
-;; to install it for you.
+;; `flyspell' and `flycheck' to configure them.
 
 ;;; Code:
 

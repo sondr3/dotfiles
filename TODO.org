@@ -90,10 +90,10 @@
 *** DONE utils/ [2/2]
 - [X] pragmatapro.el
 - [X] utils.el
-** TODO OH GOD NO [1/5]
+** TODO OH GOD NO [2/5]
 - [X] Fix ~amalthea--byte-compile-amalthea~, when calling ~byte-recompile-directory~
   is goes from top to bottom alphabetically which fucks up ~no-littering~.
-- [ ] Remove ~use-package~ from Amalthea.
+- [X] Remove ~use-package~ from Amalthea.
 - [ ] Steal and ~defalias~ =general.el= function for ~setq~, ~hook~ and so on
 - [ ] Create a customization thingy and whatnot, it seems fancy
 - [ ] Don't ~(require)~ things that are not actually required, they are still in
