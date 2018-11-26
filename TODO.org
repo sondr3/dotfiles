@@ -43,7 +43,7 @@
   with it
 - [ ] Look into using [[https://github.com/purcell/flycheck-package][flycheck-package]] and [[https://github.com/alphapapa/emacs-package-dev-handbook][this]] to help
 * TODO HOLY SHIT WHAT AM I DOING [0/3]
-** TODO Remove ~use-package~ and change ~concat~ [3/4]
+** TODO Remove ~use-package~ and change ~concat~ [4/4]
 *** DONE core/ [6/6]
 - [X] core-editor.el
 - [X] core-keybindings.el
@@ -63,7 +63,7 @@
 - [X] base-ui.el
 - [X] base-window.el
 - [X] base.el
-*** TODO modules/ [4/5]
+*** DONE modules/ [5/5]
 **** DONE langs [10/10]
 - [X] lang-assembly.el
 - [X] lang-elisp.el
@@ -81,18 +81,19 @@
 **** DONE text [2/2]
 - [X] text-latex.el
 - [X] text.el
-**** TODO tools [0/4]
-- [ ] tool-configuration.el
-- [ ] tool-docker.el
-- [ ] tool-nginx.el
-- [ ] tools.el
+**** DONE tools [4/4]
+- [X] tool-configuration.el
+- [X] tool-docker.el
+- [X] tool-nginx.el
+- [X] tools.el
 **** DONE modules.el
 *** DONE utils/ [2/2]
 - [X] pragmatapro.el
 - [X] utils.el
-** TODO OH GOD NO [1/4]
+** TODO OH GOD NO [1/5]
 - [X] Fix ~amalthea--byte-compile-amalthea~, when calling ~byte-recompile-directory~
   is goes from top to bottom alphabetically which fucks up ~no-littering~.
+- [ ] Remove ~use-package~ from Amalthea.
 - [ ] Steal and ~defalias~ =general.el= function for ~setq~, ~hook~ and so on
 - [ ] Create a customization thingy and whatnot, it seems fancy
 - [ ] Don't ~(require)~ things that are not actually required, they are still in

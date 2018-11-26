@@ -21,7 +21,6 @@
 
 ;;; Code:
 
-(require 'tool-configuration)
 (require 'tool-docker)
 (require 'tool-nginx)
 

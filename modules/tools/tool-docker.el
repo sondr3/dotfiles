@@ -23,13 +23,11 @@
 
 ;;; `dockerfile-mode':
 ;; Gives you syntax highlighting and completion for Docker.
-(use-package dockerfile-mode
-  :commands dockerfile-mode
-  :general
+(add-to-list 'auto-mode-alist '("\\Dockerfile\\'" . dockerfile-mode))
+(with-eval-after-load 'dockerfile-mode
   (amalthea-major-leader dockerfile-mode-map
     "b" 'dockerfile-build-buffer
-    "B" 'dockerfile-build-no-cache-buffer)
-  :mode "\\Dockerfile\\'")
+    "B" 'dockerfile-build-no-cache-buffer))
 
 (provide 'tool-docker)
 ;;; tool-docker.el ends here

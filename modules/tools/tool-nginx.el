@@ -21,11 +21,8 @@
 
 ;;; Code:
 
-(use-package nginx-mode)
-
-(use-package company-nginx
-  :after nginx-mode
-  :ghook ('nginx-mode-hook #'company-nginx-keywords))
+(with-eval-after-load 'nginx-mode
+  (general-add-hook 'nginx-mode-hook #'company-nginx-keywords))
 
 (provide 'tool-nginx)
 ;;; tool-nginx.el ends here
