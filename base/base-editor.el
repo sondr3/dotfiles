@@ -22,18 +22,6 @@
 
 ;;; Code:
 
-;;; `Async':
-;; Emacs is famously single threaded, painfully so at times. This is a package
-;; that tries to help that by giving you some asynchronous ways of doing things
-;; in Emacs.
-(use-package async
-  :commands async-start
-  :defines async-bytecomp-allowed-packages
-  :config
-  (progn
-    (async-bytecomp-package-mode t)
-    (setq async-bytecomp-allowed-packages '(all)))) ;; Asynchronously compile all the packages
-
 ;;; `undo-tree':
 ;; This is essentially the undo command on steroids, it creates a tree of
 ;; changes that you can revert back and from with, meaning you can undo

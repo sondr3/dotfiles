@@ -1,4 +1,4 @@
-* TODO Convert to nix-derivation [5/9]
+* TODO Convert to nix-derivation [6/9]
 - [ ] Add ~:ensure-system-packages~ to ~emacs.nix~ file to ensure that they are
   always installed together with Emacs.
   - This turned out to be a major pain in the ass with =aspell=, maybe reconsider?
@@ -6,7 +6,7 @@
   - Fixed by doing ~nix-env -f emacs.nix --install~ and not just ~nix-build
     emacs.nix~
 - [X] Figure out how to always copy Emacs to ~/Applications/~
-- [ ] Configure Async again to byte compile stuff asynchronously
+- [X] Remove async, it sucks ass
 - [ ] Stuff Amalthea back into my ~.dotfiles~ repo
 - [X] Write documentation for attempting to use this configuration with Nix and
   not Borg
