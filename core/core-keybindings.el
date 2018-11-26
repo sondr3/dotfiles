@@ -58,7 +58,7 @@
 (require 'which-key)
 (which-key-mode)
 (with-eval-after-load 'which-key
-  (delight 'which-key-mode)
+  (delight 'which-key-mode nil "which-key")
   (setq which-key-idle-delay 0.3                          ;; Reduce the time before which-key pops up
         which-key-allow-evil-operators t                  ;; Show evil keybindings for assorted key
         which-key-sort-order 'which-key-key-order-alpha)) ;; Sort things properly alphabetical
