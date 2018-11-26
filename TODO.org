@@ -38,14 +38,14 @@
   with it
 - [ ] Look into using [[https://github.com/purcell/flycheck-package][flycheck-package]] and [[https://github.com/alphapapa/emacs-package-dev-handbook][this]] to help
 * TODO HOLY SHIT WHAT AM I DOING [0/3]
-** TODO Remove ~use-package~ [0/5]
-*** TODO core/ [1/6]
+** TODO Remove ~use-package~ and change ~concat~ [0/5]
+*** TODO core/ [2/6]
 - [ ] core-editor.el
 - [X] core-keybindings.el
 - [ ] core-os.el
 - [ ] core-packages.el
 - [ ] core-ui.el
-- [ ] core.el
+- [X] core.el
 *** TODO base/ [0/11]
 - [ ] base-checking.el
 - [ ] base-completion.el
@@ -85,6 +85,8 @@
 *** TODO utils/ [0/2]
 - [ ] pragmatapro.el
 - [ ] utils.el
-** TODO OH GOD NO [0/2]
+** TODO OH GOD NO [1/3]
+- [X] Fix ~amalthea--byte-compile-amalthea~, when calling ~byte-recompile-directory~
+  is goes from top to bottom alphabetically which fucks up ~no-littering~.
 - [ ] Steal and ~defalias~ =general.el= function for ~setq~, ~hook~ and so on
 - [ ] Create a customization thingy and whatnot, it seems fancy

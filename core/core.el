@@ -35,23 +35,17 @@
 (defconst amalthea-emacs-dir (eval-when-compile (file-truename user-emacs-directory))
   "Path to the current Emacs directory.")
 
-(defconst amalthea-core-dir (concat amalthea-emacs-dir "core/")
+(defconst amalthea-core-dir (expand-file-name amalthea-emacs-dir "core/")
   "Core functionality and packages live in this directory.")
 
-(defconst amalthea-base-dir (concat amalthea-emacs-dir "base/")
+(defconst amalthea-base-dir (expand-file-name amalthea-emacs-dir "base/")
   "Base functionality that isn't a core part of Amalthea.")
 
-(defconst amalthea-modules-dir (concat amalthea-emacs-dir "modules/")
+(defconst amalthea-modules-dir (expand-file-name amalthea-emacs-dir "modules/")
   "Modules for languages, features and the world lives here.")
 
-(defconst amalthea-utils-dir (concat amalthea-emacs-dir "utils/")
+(defconst amalthea-utils-dir (expand-file-name amalthea-emacs-dir "utils/")
   "Utility functions and packages for Amalthea.")
-
-(defconst amalthea-local-dir (concat amalthea-emacs-dir "local/")
-  "Storage for non-volatile files: custom.el, spelling updates etc.")
-
-(defconst amalthea-cache-dir (concat amalthea-emacs-dir "cache/")
-  "Storage for volatile files: caches, logs etc.")
 
 ;;; Variables
 
@@ -88,15 +82,12 @@
               initial-major-mode 'fundamental-mode
               ;; Recusion and lisp call limit
               max-lisp-eval-depth 50000
-              max-specpdl-size 10000)
-;; Directories and files
-(setq-default  custom-file (concat amalthea-local-dir "custom.el") ;; Custom file location
-               byte-compile--use-old-handlers nil                  ;; Use the most recent byte code ops
-               create-lockfiles nil                                ;; Don't create #filename# files in directories
-               make-backup-files nil                               ;; Don't create backup files, we're using VC
-               sentence-end-double-space nil                       ;; Sentences end with a single space
-               vc-follow-symlinks t                                ;; Always follow symbolic links
-               save-interprogram-paste-before-kill t)              ;; Save paste history when killing Emacs)
+              max-specpdl-size 10000
+              ;; Set some common sense settings
+              byte-compile--use-old-handlers nil     ;; Use the most recent byte code ops
+              sentence-end-double-space nil          ;; Sentences end with a single space
+              vc-follow-symlinks t                   ;; Always follow symbolic links
+              save-interprogram-paste-before-kill t) ;; Save paste history when killing Emacs)
 
 ;; Fully inhibit the initial screen
 (fset #'display-startup-echo-area-message #'ignore)
@@ -109,19 +100,11 @@
   (load custom-file t t))
 
 ;;; Functions
-
-(defun amalthea--ensure-core-dirs ()
-  "Ensures that all the required directories for Amalthea are created."
-  (interactive)
-  (dolist (dir (list amalthea-cache-dir amalthea-local-dir))
-    (unless (file-directory-p dir)
-      (make-directory dir t))))
-
 (defun amalthea--byte-compile-amalthea ()
   "Byte compile all files and directories used in Amalthea."
   (interactive)
-  (dolist (file (list (concat amalthea-emacs-dir "early-init.el")
-                      (concat amalthea-emacs-dir "init.el")))
+  (dolist (file (list (expand-file-name amalthea-emacs-dir "early-init.el")
+                      (expand-file-name amalthea-emacs-dir "init.el")))
     (byte-compile-file file))
   (dolist (dir (list amalthea-core-dir amalthea-base-dir amalthea-utils-dir amalthea-modules-dir))
     (byte-recompile-directory dir 0 t)))
@@ -130,7 +113,6 @@
 
 ;; Ensure directories exists before needing them and load the core configuration
 (eval-and-compile
-  (amalthea--ensure-core-dirs)
   (add-to-list 'load-path amalthea-core-dir t))
 
 (require 'core-packages)
@@ -140,13 +122,13 @@
 (require 'core-editor)
 
 ;;; Load the base configuration
-(require 'base (concat amalthea-base-dir "base"))
+(require 'base (expand-file-name amalthea-base-dir "base"))
 
 ;;; Load all the modules
-(require 'modules (concat amalthea-modules-dir "modules"))
+(require 'modules (expand-file-name amalthea-modules-dir "modules"))
 
 ;; Load the utilities
-(require 'utils (concat amalthea-utils-dir "utils"))
+(require 'utils (expand-file-name amalthea-utils-dir "utils"))
 
 (provide 'core)
 ;;; core.el ends here
