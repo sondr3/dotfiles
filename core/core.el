@@ -35,16 +35,16 @@
 (defconst amalthea-emacs-dir (eval-when-compile (file-truename user-emacs-directory))
   "Path to the current Emacs directory.")
 
-(defconst amalthea-core-dir (expand-file-name amalthea-emacs-dir "core/")
+(defconst amalthea-core-dir (expand-file-name "core/" amalthea-emacs-dir)
   "Core functionality and packages live in this directory.")
 
-(defconst amalthea-base-dir (expand-file-name amalthea-emacs-dir "base/")
+(defconst amalthea-base-dir (expand-file-name "base/" amalthea-emacs-dir)
   "Base functionality that isn't a core part of Amalthea.")
 
-(defconst amalthea-modules-dir (expand-file-name amalthea-emacs-dir "modules/")
+(defconst amalthea-modules-dir (expand-file-name "modules/" amalthea-emacs-dir)
   "Modules for languages, features and the world lives here.")
 
-(defconst amalthea-utils-dir (expand-file-name amalthea-emacs-dir "utils/")
+(defconst amalthea-utils-dir (expand-file-name "utils/" amalthea-emacs-dir)
   "Utility functions and packages for Amalthea.")
 
 ;;; Variables
@@ -84,6 +84,7 @@
               max-lisp-eval-depth 50000
               max-specpdl-size 10000
               ;; Set some common sense settings
+              custom-file (expand-file-name "custom.el" amalthea-emacs-dir)
               byte-compile--use-old-handlers nil     ;; Use the most recent byte code ops
               sentence-end-double-space nil          ;; Sentences end with a single space
               vc-follow-symlinks t                   ;; Always follow symbolic links
@@ -103,8 +104,8 @@
 (defun amalthea--byte-compile-amalthea ()
   "Byte compile all files and directories used in Amalthea."
   (interactive)
-  (dolist (file (list (expand-file-name amalthea-emacs-dir "early-init.el")
-                      (expand-file-name amalthea-emacs-dir "init.el")))
+  (dolist (file (list (expand-file-name "early-init" amalthea-emacs-dir)
+                      (expand-file-name "init.el" amalthea-emacs-dir)))
     (byte-compile-file file))
   (dolist (dir (list amalthea-core-dir amalthea-base-dir amalthea-utils-dir amalthea-modules-dir))
     (byte-recompile-directory dir 0 t)))
@@ -122,13 +123,13 @@
 (require 'core-editor)
 
 ;;; Load the base configuration
-(require 'base (expand-file-name amalthea-base-dir "base"))
+(require 'base (expand-file-name "base" amalthea-base-dir))
 
 ;;; Load all the modules
-(require 'modules (expand-file-name amalthea-modules-dir "modules"))
+(require 'modules (expand-file-name "modules" amalthea-modules-dir))
 
 ;; Load the utilities
-(require 'utils (expand-file-name amalthea-utils-dir "utils"))
+(require 'utils (expand-file-name "utils" amalthea-utils-dir))
 
 (provide 'core)
 ;;; core.el ends here

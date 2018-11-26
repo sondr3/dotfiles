@@ -3,6 +3,7 @@
 /cache
 /local
 /etc
+custom.el
 
 # Created by https://www.gitignore.io/api/emacs,macos,linux
 # Edit at https://www.gitignore.io/?templates=emacs,macos,linux

@@ -29,10 +29,10 @@
 
 ;; Compatibility with versions 26 and below.
 (unless (boundp 'early-init-file)
-  (load (concat (file-name-directory load-file-name) "early-init")))
+  (load (expand-file-name "early-init" user-emacs-directory)))
 
 ;; Load Amalthea
-(require 'core (concat user-emacs-directory "core/core"))
+(require 'core (expand-file-name "core/core" user-emacs-directory))
 
 ;; And once all is said and done, start emacsclient in the background so that we
 ;; can connect to it from other windows or the terminal.
