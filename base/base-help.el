@@ -25,8 +25,12 @@
 ;; The name basically tells you what it does, it makes the help buffer show a
 ;; lot more information. We bind the `helpful' functions that have no
 ;; counterpart in Emacs and remap those that do.
-(use-package helpful
-  :general
+(require 'helpful)
+(with-eval-after-load 'helpful
+  (general-def override
+    [remap describe-function] 'helpful-callable
+    [remap describe-key] 'helpful-key
+    [remap describe-variable] 'helpful-variable)
   (amalthea-leader
     "h c" '(helpful-command :wk "describe command")
     "h d" '(helpful-at-point :wk "describe at point")
@@ -35,11 +39,7 @@
     "h k" '(describe-key :wk "describe key")
     "h m" '(helpful-macro :wk "describe macro")
     "h M" '(describe-mode :wk "describe mode")
-    "h v" '(describe-variable :wk "describe variable"))
-  (:keymaps 'override
-            [remap describe-function] 'helpful-callable
-            [remap describe-key] 'helpful-key
-            [remap describe-variable] 'helpful-variable))
+    "h v" '(describe-variable :wk "describe variable")))
 
 (provide 'base-help)
 ;;; base-help.el ends here

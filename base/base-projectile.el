@@ -25,26 +25,21 @@
 ;; Projectile is a program for working with projects in Emacs, it supports a ton
 ;; of features out of the box that are awesome and useful, like searching for
 ;; files only in the current project, recent files in current project and so on.
-(use-package projectile
-  :commands projectile-mode
-  :delight " Ⓟ"
-  :init
-  (progn
-    (setq projectile-completion-system 'ivy ;; Use Ivy for completion
-          projectile-sort-order 'recentf    ;; Sort by using `recentf'
-          projectile-enable-caching t)      ;; Enable caching to speed up searching, finding files
-    (projectile-mode)))
+(setq projectile-completion-system 'ivy ;; Use Ivy for completion
+      projectile-sort-order 'recentf    ;; Sort by using `recentf'
+      projectile-enable-caching t)      ;; Enable caching to speed up searching, finding files
+(require 'projectile)
+(projectile-mode)
+(with-eval-after-load 'projectile
+  (delight 'projectile-mode " Ⓟ" "projectile"))
 
 ;;; `counsel-projectile':
 ;; Even though we've configured Projectile to use Ivy, we can extend it even
 ;; more by also using Counsel too.
-(use-package counsel-projectile
-  :after projectile
-  :commands counsel-projectile-mode
-  :general
-  (amalthea-leader
-    "p" '(projectile-command-map :wk "project"))
-  :init (counsel-projectile-mode))
+(require 'counsel-projectile)
+(with-eval-after-load 'projectile
+  (counsel-projectile-mode)
+  (amalthea-leader "p" '(projectile-command-map :wk "project")))
 
 (provide 'base-projectile)
 ;;; base-projectile.el ends here

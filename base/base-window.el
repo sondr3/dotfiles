@@ -34,5 +34,4 @@
   "w z" '(hydra-zoom/body :wk "zoom"))
 
 (provide 'base-window)
-
 ;;; base-window.el ends here

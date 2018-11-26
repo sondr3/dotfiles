@@ -23,8 +23,8 @@
 
 ;;; Theme
 ;; You should probably change this, I have a very weird taste in themes.
-(use-package apropospriate-theme
-  :init (load-theme 'apropospriate-light t))
+(require 'apropospriate)
+(load-theme 'apropospriate-light t)
 
 ;; We need to change the font after we load the theme for some reason
 (set-face-attribute 'mode-line nil
@@ -32,5 +32,4 @@
 		                :height amalthea-font-size)
 
 (provide 'base-ui)
-
 ;;; base-ui.el ends here

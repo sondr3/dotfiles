@@ -36,32 +36,26 @@
 ;;; `Magit':
 ;; Enable and appreciate it! The only thing we'll really change is adding a few
 ;; extra functions and hooks to work better with Borg.
-(use-package magit
-  :delight auto-revert-mode
-  :commands magit-add-section-hook
-  :general
+(require 'magit)
+(with-eval-after-load 'magit
+  (delight 'auto-revert-mode nil "magit")
   (amalthea-leader
     "g h" '(hydra-git/body :wk "hydra")
-    "g s" '(magit-status :wk "git status"))
-  :config
-  (progn
-    (magit-add-section-hook 'magit-status-sections-hook
-                            'magit-insert-modules
-                            'magit-insert-stashes
-                            'append)))
+    "g s" '(magit-status :wk "git status")))
 
 ;;; `git-modes':
 ;; A few minor major modes for editing `.gitignore', `.gitattributes' and
 ;; `.gitconfig' files.
-(use-package git-modes)
+(require 'gitignore-mode)
+(require 'gitattributes-mode)
+(require 'gitconfig-mode)
 
 ;;; `evil-magit':
 ;; Magit by default doesn't include any Evil keybindings, which makes sense but
 ;; is kinda required since we use Evil.
-(use-package evil-magit
-  :after magit
-  :commands evil-magit-init
-  :init (evil-magit-init))
+(require 'evil-magit)
+(with-eval-after-load 'magit
+  (evil-magit-init))
 
 ;;; `diff-hl':
 ;; There's a plugin for Vim called GitGutter that is really neat, in the fringe
@@ -70,32 +64,25 @@
 ;; updated for quite a while and even then, `diff-hl' is quite a lot better than
 ;; it is. There's no magic here, we'll enable it globally, hook into Magit so
 ;; that diff-hl updates when we commit using Magit.
-(use-package diff-hl
-  :commands (diff-hl-magit-post-refresh global-diff-hl-mode)
-  :functions (diff-hl-flydiff-mode diff-hl-margin-mode)
-  :defines diff-hl-margin-symbols-alist
-  :general
+(setq diff-hl-margin-symbols-alist
+      '((insert . "+") (delete . "-") (change . "~")
+        (unknown . "?") (ignored . "i")))
+(require 'diff-hl)
+(with-eval-after-load 'diff-hl
+  (general-add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
   (amalthea-leader
     "g j" '(diff-hl-next-hunk :wk "next hunk")
     "g k" '(diff-hl-previous-hunk :wk "previous hunk"))
-  :init
-  (progn
-    (setq diff-hl-margin-symbols-alist
-          '((insert . "+") (delete . "-") (change . "~")
-            (unknown . "?") (ignored . "i")))
-    (global-diff-hl-mode)
-    (diff-hl-margin-mode)
-    (diff-hl-flydiff-mode)
-    (general-add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
+  (global-diff-hl-mode)
+  (diff-hl-margin-mode)
+  (diff-hl-flydiff-mode))
 
 ;;; `hl-todo':
 ;; This is a really simple mode that highlights things that are marked as TODO,
 ;; FIXME and so on. It's quite useful if you like to litter your project with
 ;; them.
-(use-package hl-todo
-  :commands global-hl-todo-mode
-  :init (global-hl-todo-mode))
+(require 'hl-todo)
+(global-hl-todo-mode)
 
 (provide 'base-git)
-
 ;;; base-git.el ends here

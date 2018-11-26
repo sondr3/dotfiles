@@ -1,11 +1,11 @@
-* TODO Convert to nix-derivation [6/9]
+* TODO Convert to nix-derivation [8/11]
 - [ ] Add ~:ensure-system-packages~ to ~emacs.nix~ file to ensure that they are
   always installed together with Emacs.
   - This turned out to be a major pain in the ass with =aspell=, maybe reconsider?
 - [X] Fix with-editor crapping out because it cannot find a suitable emacslient
   - Fixed by doing ~nix-env -f emacs.nix --install~ and not just ~nix-build
     emacs.nix~
-- [X] Figure out how to always copy Emacs to ~/Applications/~
+- [ ] Figure out how to always copy Emacs to ~/Applications/~
 - [X] Remove async, it sucks ass
 - [ ] Stuff Amalthea back into my ~.dotfiles~ repo
 - [X] Write documentation for attempting to use this configuration with Nix and
@@ -13,12 +13,15 @@
 - [X] Move what packages I can over to Melpa stable instead of unstable
 - [X] Fix spellchecker not working properly
   - It is really wonky, had to create my own overlay and shit
-- [ ] Seems like something happened with ~evil-collection~ and ~evil~, when I byte
+- [X] Remove leftover spellchecker stuffs
+- [X] Seems like something happened with ~evil-collection~ and ~evil~, when I byte
   compile I get warnings...
-* TODO Other stuff [0/3]
+- [X] ~git-modes~ are not installed, fix.
+* TODO Other stuff [0/4]
 - [ ] Figure out how to make ~amalthea-debug~ works
 - [ ] Why can't I use ~q~ anymore to exit temporary buffers?!
 - [ ] Contribute Norwegian dictionaries to Hunspell in Nix
+- [ ] Fix byte compilation warnings for escaping insert mode in Evil
 * TODO Latex [0/3]
 - [ ] Configure Beamer and org-mode
 - [ ] Find a theme:
@@ -38,7 +41,7 @@
   with it
 - [ ] Look into using [[https://github.com/purcell/flycheck-package][flycheck-package]] and [[https://github.com/alphapapa/emacs-package-dev-handbook][this]] to help
 * TODO HOLY SHIT WHAT AM I DOING [0/3]
-** TODO Remove ~use-package~ and change ~concat~ [1/4]
+** TODO Remove ~use-package~ and change ~concat~ [3/4]
 *** DONE core/ [6/6]
 - [X] core-editor.el
 - [X] core-keybindings.el
@@ -46,18 +49,18 @@
 - [X] core-packages.el
 - [X] core-ui.el
 - [X] core.el
-*** TODO base/ [0/11]
-- [ ] base-checking.el
-- [ ] base-completion.el
-- [ ] base-editor.el
-- [ ] base-evil.el
-- [ ] base-git.el
-- [ ] base-help.el
-- [ ] base-projectile.el
-- [ ] base-search.el
-- [ ] base-ui.el
-- [ ] base-window.el
-- [ ] base.el
+*** DONE base/ [11/11]
+- [X] base-checking.el
+- [X] base-completion.el
+- [X] base-editor.el
+- [X] base-evil.el
+- [X] base-git.el
+- [X] base-help.el
+- [X] base-projectile.el
+- [X] base-search.el
+- [X] base-ui.el
+- [X] base-window.el
+- [X] base.el
 *** TODO modules/ [0/4]
 **** TODO langs [0/11]
 - [ ] lang-assembly.el
@@ -82,9 +85,9 @@
 - [ ] tool-docker.el
 - [ ] tool-nginx.el
 - [ ] tools.el
-*** TODO utils/ [0/2]
-- [ ] pragmatapro.el
-- [ ] utils.el
+*** DONE utils/ [2/2]
+- [X] pragmatapro.el
+- [X] utils.el
 ** TODO OH GOD NO [1/3]
 - [X] Fix ~amalthea--byte-compile-amalthea~, when calling ~byte-recompile-directory~
   is goes from top to bottom alphabetically which fucks up ~no-littering~.

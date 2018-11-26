@@ -33,35 +33,29 @@
 ;;; `Ivy':
 ;; Ivy is the generic auto completion frontend that we'll be using for
 ;; completion instead of the built-in mechanisms in Emacs.
-(use-package ivy
-  :demand t
-  :commands ivy-mode
-  :delight
-  :config
-  (progn
-    (ivy-mode)
-    (setq ivy-use-virtual-buffers t
-          enable-recursive-minibuffers t
-          ivy-count-format "%d/%d ")))
+(require 'ivy)
+(with-eval-after-load 'ivy
+  (delight 'ivy-mode nil "ivy")
+  (setq ivy-use-virtual-buffers t
+        enable-recursive-minibuffers t
+        ivy-count-format "%d/%d "))
+(ivy-mode)
 
 ;;; `Counsel':
 ;; Counsel is built on top of Ivy and contains a bunch of improved interfaces
 ;; for mechanisms in Emacs, like finding files or opening recent files etc.
-(use-package counsel
-  :demand t
-  :commands (counsel-mode)
-  :delight
-  :general
-  (:keymaps 'ivy-mode-map
-            [remap find-file]                'counsel-find-file
-            [remap recentf]                  'counsel-recentf
-            [remap imenu]                    'counsel-imenu
-            [remap bookmark-jump]            'counsel-bookmark
-            [remap execute-extended-command] 'counsel-M-x
-            [remap describe-function]        'counsel-describe-function
-            [remap describe-variable]        'counsel-describe-variable
-            [remap describe-face]            'counsel-describe-face
-            [remap eshell-list-history]      'counsel-esh-history)
+(require 'counsel)
+(with-eval-after-load 'counsel
+  (general-def ivy-mode-map
+    [remap find-file]                'counsel-find-file
+    [remap recentf]                  'counsel-recentf
+    [remap imenu]                    'counsel-imenu
+    [remap bookmark-jump]            'counsel-bookmark
+    [remap execute-extended-command] 'counsel-M-x
+    [remap describe-function]        'counsel-describe-function
+    [remap describe-variable]        'counsel-describe-variable
+    [remap describe-face]            'counsel-describe-face
+    [remap eshell-list-history]      'counsel-esh-history)
   (amalthea-leader
     "a u" '(counsel-unicode-char :wk "find unicode symbol")
     "b b" '(ivy-switch-buffer :wk "change buffer")
@@ -73,56 +67,57 @@
 ;; If you've ever heard of `smex', `amx' is an actually updated and maintained
 ;; fork of that. It's basically a much better `M-x' that also works with Ivy. It
 ;; also retains history of previously run commands, which is really useful.
-(use-package amx
-  :commands amx-mode
-  :after ivy
-  :init (amx-mode))
+(require 'amx)
+(with-eval-after-load 'ivy
+  (amx-mode))
 
 ;;; `Swiper':
 ;; This is just a straight upgrade of the default search in Emacs. Use it and
 ;; love it.
-(use-package swiper
-  :general
+(require 'swiper)
+(with-eval-after-load 'swiper
   (general-define-key "C-s" 'swiper)
   (general-nmap "/" 'swiper)
-  (amalthea-leader "/" 'swiper))
+  (amalthea-leader "/" 'swiper) )
+
+;;; `hydra':
+;; Extremely useful package for when you want to be able to be able to call
+;; commands in succession without quitting whatever it is you're doing.
+(require 'hydra)
 
 ;;; `Company':
 ;; Instead of using something like `auto-complete' we'll use `Company' to give
 ;; us auto completion for variables, functions and so on.
-(use-package company
-  :delight " Ⓐ"
-  :ghook 'prog-mode-hook
-  :init
-  (setq company-idle-delay 0.2              ;; How long to wait before popping up
-        company-tooltip-limit 20            ;; Limit on how many options to displa
-        company-show-numbers t              ;; Show numbers behind options
-        company-tooltip-align-annotations t ;; Align annotations to the right
-        company-require-match nil           ;; Allow free typing
-        company-selection-wrap-around t     ;; Wrap around to beginning when you hit bottom of suggestions
-        company-dabbrev-ignore-case nil     ;; Don't ignore case when completing
-        company-dabbrev-downcase nil        ;; Don't automatically downcase competions
-        company-dabbrev-other-buffers t))    ;; Search other buffers for completion candidates
+(setq company-idle-delay 0.2              ;; How long to wait before popping up
+      company-tooltip-limit 20            ;; Limit on how many options to displa
+      company-show-numbers t              ;; Show numbers behind options
+      company-tooltip-align-annotations t ;; Align annotations to the right
+      company-require-match nil           ;; Allow free typing
+      company-selection-wrap-around t     ;; Wrap around to beginning when you hit bottom of suggestions
+      company-dabbrev-ignore-case nil     ;; Don't ignore case when completing
+      company-dabbrev-downcase nil        ;; Don't automatically downcase completions
+      company-dabbrev-other-buffers t)    ;; Search other buffers for completion candidates
+(require 'company)
+(with-eval-after-load 'company
+  (delight 'company-mode " Ⓐ" "company")
+  (general-add-hook 'prog-mode-hook #'company-mode))
 
 ;;; `company-quickhelp':
 ;; When idling on a chosen completion candidate, show the items help in a popup
 ;; box next to the completion window.
-(use-package company-quickhelp
-  :after company
-  :commands company-quickhelp-mode
-  :config
-  (progn
-    (setq company-quickhelp-use-propertized-text t) ;; Allow text to have properties like size, color etc
-    (company-quickhelp-mode)))
+(require 'company-quickhelp)
+(with-eval-after-load 'company
+  (setq company-quickhelp-use-propertized-text t) ;; Allow text to have properties like size, color etc
+  (company-quickhelp-mode))
 
 ;;; `company-statistics':
 ;; When completing a candidate, save the candidate to a history file and sort
 ;; completions accordingly next time so the candidate is ranked higher than the
 ;; last time. Useful for when there are many options but you mostly select one
 ;; or a few of them.
-(use-package company-statistics
-  :after company
-  :ghook 'company-mode-hook)
+(require 'company-statistics)
+(with-eval-after-load 'company
+  (general-add-hook 'company-mode-hook #'company-statistics-mode))
 
 ;;; Snippets
 
@@ -130,10 +125,10 @@
 ;; Enables snippets and expansion of snippets with this package, we've also
 ;; included `yasnippet-snippets' for a whole lotta snippets that you can use.
 ;; TODO: This package slows down start-up a lot.
-(use-package yasnippet
-  :delight (yas-minor-mode " Ⓨ")
-  :ghook ('(text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode)
-  :general
+(require 'yasnippet)
+(with-eval-after-load 'yasnippet
+  (delight 'yas-minor-mode " Ⓨ" "yasnippet")
+  (general-add-hook '(list text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode)
   (amalthea-major-leader
     "Y" '(:ignore t :wk "Yasnippet")
     "Y c" '(yas-new-snippet :wk "create")
@@ -143,17 +138,11 @@
     "Y r" '(yas-reload-all :wk "reload")
     "Y v" '(yas-visit-snippet-file :wk "edit")))
 
-;;; `yasnippet-snippets':
-;; Minor tweak to allow it to automatically load snippets, but only after the
-;; actual package has been loaded. Otherwise it doesn't load personal snippets.
-(use-package yasnippet-snippets
-  :after yasnippet)
-
-;;; `ivy-yasnippet':
-;; This gives you an Ivy-powered way to preview your snippets by interactively
-;; seeing how they would look.
-(use-package ivy-yasnippet
-  :after yasnippet)
+;;; `yasnippet-snippets' and `ivy-yasnippet':
+;; Loading of snippets and being able to search through them with `ivy'.
+(with-eval-after-load 'yasnippet
+  (require 'yasnippet-snippets)
+  (require 'ivy-yasnippet))
 
 (provide 'base-completion)
 ;;; base-completion.el ends here

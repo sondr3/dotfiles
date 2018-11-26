@@ -54,46 +54,33 @@
 ;; that automatically does it's magic whenever it's needed. For programming
 ;; modes we use the builtin `prog-mode' version of Flyspell, and we then just
 ;; enable the regular version for `text-mode' buffers.
-(use-package flyspell
-  :commands (flyspell-mode flyspell-prog-mode)
-  :delight " Ⓢ"
-  :ghook ('prog-mode-hook #'flyspell-prog-mode)
-  :ghook ('text-mode-hook #'flyspell-mode)
-  :general
-  (amalthea-leader
-    "S s" '(hydra-spelling/body :wk "hydra")
-    "S b" '(flyspell-buffer :wk "spell check buffer")
-    "S n" '(flyspell-goto-next-error :wk "next spelling error"))
-  :init
-  ;; (setenv "DICPATH" (concat (getenv "HOME") "/.nix-profile/lib/aspell/"))
-  (progn
-    (setq ispell-program-name "aspell"
-          ;; TODO: Make this work later
-          ;; ispell-really-hunspell t
-          ispell-local-dictionary "en_US"
-          flyspell-use-meta-tab nil
-          flyspell-issue-message-flag nil
-          flyspell-issue-welcome-flag nil)))
+(setq ispell-program-name "aspell"
+      ispell-local-dictionary "en_US"
+      flyspell-use-meta-tab nil
+      flyspell-issue-message-flag nil
+      flyspell-issue-welcome-flag nil)
+(delight 'flyspell-mode " Ⓢ" "flyspell")
+(general-add-hook 'prog-mode-hook #'flyspell-prog-mode)
+(general-add-hook 'text-mode-hook #'flyspell-mode)
+(amalthea-leader
+  "S s" '(hydra-spelling/body :wk "hydra")
+  "S b" '(flyspell-buffer :wk "spell check buffer")
+  "S n" '(flyspell-goto-next-error :wk "next spelling error"))
 
 ;;; `flyspell-correct':
 ;; The default correction window for Flyspell is awful, terribly so actually, so
 ;; we'll use a package to fix this. This creates a generic way of correcting
 ;; words and we'll use a Ivy-minibuffer to correct wording.
 ;; TODO Find a better way to get to the Ivy menu in Flyspell
-(use-package flyspell-correct-ivy
-  :after flyspell
-  :commands (flyspell-correct-word-generic
-             flyspell-correct-ivy
-             flyspell-correct-previous)
-  :general
+(setq flyspell-correct-interface #'flyspell-correct-ivy)
+(with-eval-after-load 'flyspell
+  (require 'flyspell-correct-ivy)
   (amalthea-leader
     "S c" '(flyspell-correct-previous :wk "correct prev word")
-    "S C" '(flyspell-correct-next :wk "correct next word")
-    :init (setq flyspell-correct-interface #'flyspell-correct-ivy)))
+    "S C" '(flyspell-correct-next :wk "correct next word")))
 
 ;;; `flycheck':
-(use-package flycheck
-  :delight " Ⓒ")
+(delight 'flycheck-mode " Ⓒ" "flycheck")
 
 (provide 'base-checking)
 ;;; base-checking.el ends here

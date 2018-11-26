@@ -23,66 +23,61 @@
 
 ;;; `Evil':
 ;; Configures evil-mode.
-(use-package evil
-  :demand t
-  :general
-  (general-imap "j"  (general-key-dispatch 'self-insert-command
-                       :timeout 0.25
-                       "k" 'evil-normal-state))
-  :init
-  (progn
-    (setq evil-want-integration t     ;; Compatibility settings for `evil-collection'
-          evil-want-keybinding nil    ;; Same as above
-          evil-search-module 'swiper)) ;; Use Swiper for searches
-  :config (evil-mode))
+(general-imap "j" (general-key-dispatch 'self-insert-command
+                    :timeout 0.25
+                    "k" 'evil-normal-state))
+(setq evil-want-keybinding nil            ;; Same as above
+      evil-search-module 'swiper          ;; Use Swiper for searches
+      evil-collection-setup-minibuffer t) ;; Evil bindings in the minibuffer
+(require 'evil)
+(evil-mode)
 
 ;;; `evil-collection':
 ;; Instead of having to try to consistently create a key theme for a ton of
 ;; various packages on my own, the Emacs and Evil community came together to
 ;; create `evil-collection', which contains a ton of packages and modes with
 ;; keybindings configured to match what you'd expect from Vim/Evil.
-(use-package evil-collection
-  :after evil
-  :commands evil-collection-init
-  :init (setq evil-collection-setup-minibuffer t)
-  :config (evil-collection-init))
+(require 'evil-collection)
+(with-eval-after-load 'evil
+  (evil-collection-init))
 
 ;;; `evil-lion':
 ;; Ever wanted to align a long bunch of variables at their equal signs? Look no
 ;; further, because that is exactly what this does.
-(use-package evil-lion
-  :commands evil-lion-mode
-  :config (evil-lion-mode))
+(require 'evil-lion)
+(with-eval-after-load 'evil
+  (evil-lion-mode))
 
 ;;; `evil-commentary':
 ;; Quickly comment out a single line or a region. It's really neat.
-(use-package evil-commentary
-  :delight
-  :commands evil-commentary-mode
-  :init (evil-commentary-mode))
+(require 'evil-commentary)
+(with-eval-after-load 'evil
+  (delight 'evil-commentary-mode nil "evil-commentary")
+  (evil-commentary-mode))
 
 ;;; `evil-surround':
 ;; Incredibly handy package, if you want to change what surrounds a text you can
 ;; use this to easily do that. Change `[' and it's closing brother to a pair of
 ;; `()'? `cs[(' and you're done.
-(use-package evil-surround
-  :commands global-evil-surround-mode
-  :init (global-evil-surround-mode))
+(require 'evil-surround)
+(with-eval-after-load 'evil
+  (global-evil-surround-mode))
 
 ;;; `evil-goggles':
 ;; Show visual hints for what the action you just did. It's hard to tell without
 ;; explaining it, I recommend you check out the README on GitHub.
-(use-package evil-goggles
-  :delight
-  :commands evil-goggles-mode
-  :init (evil-goggles-mode))
+(require 'evil-goggles)
+(with-eval-after-load 'evil
+  (delight 'evil-goggles-mode nil "evil-goggles")
+  (evil-goggles-mode))
 
 ;;; `evil-smartparens`:
 ;; Whenever we use `smartparens` we also want to ensure that we enable the
 ;; corresponding evil counterpart so things works as we expect.
-(use-package evil-smartparens
-  :delight
-  :ghook ('smartparens-enabled-hook #'evil-smartparens-mode))
+(require 'evil-smartparens)
+(with-eval-after-load 'evil
+  (delight 'evil-smartparens-mode nil "evil-smartparens")
+  (general-add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
 
 (provide 'base-evil)
 ;;; base-evil.el ends here
