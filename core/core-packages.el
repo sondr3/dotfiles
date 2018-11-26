@@ -36,8 +36,8 @@
   (require 'use-package))
 
 (setq use-package-ensure-function 'ignore ;; We don't want to install packages with `use-package'
-      use-package-verbose t               ;; Verbosely load packages when debugging
-      use-package-compute-statistics t    ;; Compute load times when debugging(
+      use-package-verbose nil               ;; Verbosely load packages when debugging
+      use-package-compute-statistics nil    ;; Compute load times when debugging(
       use-package-always-defer t)         ;; Always defer packages
 
 ;;; `delight':
