@@ -45,17 +45,15 @@
 ;; `delight' is a much better package. Not only can you change the names or hide
 ;; major-modes from the modeline, you can also nest what minor-mode you want to
 ;; hide instead of having to do it one at a time.
-(use-package delight :demand t)
+(require 'delight)
 
 ;;; `no-littering':
 ;; While this package is not strictly a core requirement, it's recommended to
 ;; load this package as early as possible to make sure all other packages adhere
 ;; to the littering rules, and as such we configure and load it here.
-(use-package no-littering
-  :init
-  (progn
-    (setq no-littering-var-directory amalthea-cache-dir         ;; Persistent cache files for packages
-          no-littering-etc-directory amalthea-local-dir)))      ;; Configuration files for packages
+(setq no-littering-var-directory amalthea-cache-dir  ;; Persistent cache files for packages
+      no-littering-etc-directory amalthea-local-dir) ;; Configuration files for packages
+(require 'no-littering)
 
 (provide 'core-packages)
 ;;; core-packages.el ends here

@@ -1,4 +1,4 @@
-* TODO Convert to nix-derivation [4/8]
+* TODO Convert to nix-derivation [5/9]
 - [ ] Add ~:ensure-system-packages~ to ~emacs.nix~ file to ensure that they are
   always installed together with Emacs.
   - This turned out to be a major pain in the ass with =aspell=, maybe reconsider?
@@ -10,19 +10,81 @@
 - [ ] Stuff Amalthea back into my ~.dotfiles~ repo
 - [X] Write documentation for attempting to use this configuration with Nix and
   not Borg
-- [ ] Move what packages I can over to Melpa stable instead of unstable
+- [X] Move what packages I can over to Melpa stable instead of unstable
 - [X] Fix spellchecker not working properly
   - It is really wonky, had to create my own overlay and shit
+- [ ] Seems like something happened with ~evil-collection~ and ~evil~, when I byte
+  compile I get warnings...
 * TODO Other stuff [0/3]
 - [ ] Figure out how to make ~amalthea-debug~ works
 - [ ] Why can't I use ~q~ anymore to exit temporary buffers?!
 - [ ] Contribute Norwegian dictionaries to Hunspell in Nix
-* TODO Packages to explore [0/4]
+* TODO Latex [0/3]
+- [ ] Configure Beamer and org-mode
+- [ ] Find a theme:
+  - [ ] [[https://github.com/matze/mtheme]]
+  - [ ] [[https://github.com/ivan-cukic/latex-beamer-theme-elegance]]
+  - [ ] [[https://github.com/elauksap/focus-beamertheme]]
+- [ ] How to present Beamer presentations
+* TODO Packages to explore [1/5]
 - [ ] [[https://github.com/vermiculus/magithub][magithub]]
 - [ ] [[https://github.com/abo-abo/avy][avy]]
-- [ ] [[https://github.com/emacscollective/no-littering][no-littering]]
+- [X] [[https://github.com/emacscollective/no-littering][no-littering]]
 - [ ] [[https://github.com/IvanMalison/org-projectile][org-projectile]]
-* TODO Personal packages [0/2]
+- [ ] [[https://github.com/abo-abo/lispy][lispy]]
+* TODO Personal packages [0/3]
 - [ ] Rewrite ~ox-twbs~ with the latest version of Bootstrap
 - [ ] Either configure the fuck out of ~ox-latex~ or write my own little thing
   with it
+- [ ] Look into using [[https://github.com/purcell/flycheck-package][flycheck-package]] and [[https://github.com/alphapapa/emacs-package-dev-handbook][this]] to help
+* TODO HOLY SHIT WHAT AM I DOING [0/3]
+** TODO Remove ~use-package~ [0/5]
+*** TODO core/ [1/6]
+- [ ] core-editor.el
+- [X] core-keybindings.el
+- [ ] core-os.el
+- [ ] core-packages.el
+- [ ] core-ui.el
+- [ ] core.el
+*** TODO base/ [0/11]
+- [ ] base-checking.el
+- [ ] base-completion.el
+- [ ] base-editor.el
+- [ ] base-evil.el
+- [ ] base-git.el
+- [ ] base-help.el
+- [ ] base-projectile.el
+- [ ] base-search.el
+- [ ] base-ui.el
+- [ ] base-window.el
+- [ ] base.el
+*** TODO modules/ [0/4]
+**** TODO langs [0/11]
+- [ ] lang-assembly.el
+- [ ] lang-elisp.el
+- [ ] lang-haskell.el
+- [ ] lang-java.el
+- [ ] lang-json.el
+- [ ] lang-markdown.el
+- [ ] lang-nix.el
+- [ ] lang-rust.el
+- [ ] lang-shell.el
+- [ ] langs.el
+- [ ] modules.el
+**** TODO org [0/2]
+- [ ] org-latex-export.el
+- [ ] org-org.el
+**** TODO text [0/2]
+- [ ] text-latex.el
+- [ ] text.el
+**** TODO tools [0/4]
+- [ ] tool-configuration.el
+- [ ] tool-docker.el
+- [ ] tool-nginx.el
+- [ ] tools.el
+*** TODO utils/ [0/2]
+- [ ] pragmatapro.el
+- [ ] utils.el
+** TODO OH GOD NO [0/2]
+- [ ] Steal and ~defalias~ =general.el= function for ~setq~, ~hook~ and so on
+- [ ] Create a customization thingy and whatnot, it seems fancy
