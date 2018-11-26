@@ -64,6 +64,13 @@
       package-enable-at-startup nil) ;; Don't enable installed packages on boot
 (package-initialize)
 
+;;; `no-littering':
+;; Yes, we load it this early. And that is purely because the function that byte
+;; compiles Amalthea is really stupid, so we load this before doing anything.
+(setq no-littering-var-directory amalthea-cache-dir  ;; Persistent cache files for packages
+      no-littering-etc-directory amalthea-local-dir) ;; Configuration files for packages
+(require 'no-littering)
+
 ;; HIDE ALL THE THINGS!
 (if (fboundp 'menu-bar-mode)
     (menu-bar-mode -1))

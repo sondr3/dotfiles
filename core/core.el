@@ -120,11 +120,11 @@
 (defun amalthea--byte-compile-amalthea ()
   "Byte compile all files and directories used in Amalthea."
   (interactive)
+  (dolist (file (list (concat amalthea-emacs-dir "early-init.el")
+                      (concat amalthea-emacs-dir "init.el")))
+    (byte-compile-file file))
   (dolist (dir (list amalthea-core-dir amalthea-base-dir amalthea-utils-dir amalthea-modules-dir))
-    (byte-recompile-directory dir 0 t))
-  (dolist (file (list (concat amalthea-emacs-dir "init.el")
-                      (concat amalthea-emacs-dir "early-init.el")))
-    (byte-compile-file file)))
+    (byte-recompile-directory dir 0 t)))
 
 ;;; Launch
 
