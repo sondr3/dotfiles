@@ -38,13 +38,13 @@
   with it
 - [ ] Look into using [[https://github.com/purcell/flycheck-package][flycheck-package]] and [[https://github.com/alphapapa/emacs-package-dev-handbook][this]] to help
 * TODO HOLY SHIT WHAT AM I DOING [0/3]
-** TODO Remove ~use-package~ and change ~concat~ [0/5]
-*** TODO core/ [2/6]
-- [ ] core-editor.el
+** TODO Remove ~use-package~ and change ~concat~ [1/4]
+*** DONE core/ [6/6]
+- [X] core-editor.el
 - [X] core-keybindings.el
-- [ ] core-os.el
-- [ ] core-packages.el
-- [ ] core-ui.el
+- [X] core-os.el
+- [X] core-packages.el
+- [X] core-ui.el
 - [X] core.el
 *** TODO base/ [0/11]
 - [ ] base-checking.el

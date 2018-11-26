@@ -74,10 +74,8 @@
 ;; highlights the current line where the cursor is currently active. We enable
 ;; this minor mode globally, and then make it so it doesn't display in inactive
 ;; windows.
-(use-package hl-line
-  :commands (global-hl-line-mode)
-  :init (global-hl-line-mode)
-  :config
+(global-hl-line-mode)
+(with-eval-after-load 'hl-line
   (setq global-hl-line-sticky-flag nil)) ;; Don't highlight current line in inactive buffers
 
 (provide 'core-ui)
