@@ -118,7 +118,7 @@
       (make-directory dir t))))
 
 (defun amalthea--byte-compile-amalthea ()
-  "TODO: There's probably a better way than this..."
+  "Byte compile all files and directories used in Amalthea."
   (interactive)
   (dolist (dir (list amalthea-core-dir amalthea-base-dir amalthea-utils-dir amalthea-modules-dir))
     (byte-recompile-directory dir 0 t))
