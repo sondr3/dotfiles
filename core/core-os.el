@@ -20,12 +20,12 @@
 ;; Contains settings related to making Emacs work better on various operating
 ;; systems.
 
-;; Linux: Configures and enables copying and pasting between Emacs and X11 and
-;; choses the builtin tooltips over GTK.
-
 ;; macOS: Enables emojis to be properly rendered, makes it so the titlebar is
 ;; dark and not transparent and fixes a few related frame issues. Also fixes and
 ;; enables smoother scrolling for macOS.
+
+;; Linux: Configures and enables copying and pasting between Emacs and X11 and
+;; choses the builtin tooltips over GTK.
 
 ;;; Code:
 
@@ -33,26 +33,27 @@
       select-enable-clipboard t                                      ;; Cut and paste from the actual clipboard
       select-enable-primary t)                                       ;; Use the primary clipboard
 
-(when (eq system-type 'darwin)
-  (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
-  (dolist (pair '((ns-transparent-titlebar . nil)
-                  (ns-appearance . dark)))
-    (push pair (alist-get 'ns window-system-default-frame-alist nil))
-    (set-frame-parameter nil (car pair) (cdr pair)))
+(cond
+ ((eq system-type 'darwin) ;; macOS configuration
+  (progn
+    (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
+    (dolist (pair '((ns-transparent-titlebar . nil)
+                    (ns-appearance . dark)))
+      (push pair (alist-get 'ns window-system-default-frame-alist nil))
+      (set-frame-parameter nil (car pair) (cdr pair)))
 
-  (use-package exec-path-from-shell
-    :commands exec-path-from-shell-initialize
-    :init (exec-path-from-shell-initialize))
+    (require 'exec-path-from-shell)
+    (exec-path-from-shell-initialize)  ;; Make sure $PATH is correct on macOS
 
-  (setq ns-use-thin-smoothing nil                    ;; Dont use thinner strokes on macOS
-        mouse-wheel-flip-direction t                 ;; Change scrolling to new macOS defaults
-        mouse-wheel-tilt-scroll t                    ;; Change scrolling to new macOS defaults
-        system-packages-package-manager 'brew))      ;; Just in case
+    (setq ns-use-thin-smoothing nil    ;; Don't use thinner strokes on macOS
+          mouse-wheel-flip-direction t ;; Change scrolling to new macOS defaults
+          mouse-wheel-tilt-scroll t))) ;; Change scrolling to new macOS defaults
 
-(when (eq system-type 'gnu/linux)
-  (defvar x-gtk-use-system-tooltips nil)
-  (setq x-gtk-use-system-tooltips nil    ;; Use the builtin Emacs tooltips
-        x-underline-at-descent-line t))  ;; Fix for not using GTK tooltips
+ ((eq system-type 'gnu/linux) ;; Linux configuration
+  (progn
+    (defvar x-gtk-use-system-tooltips nil)
+    (setq x-gtk-use-system-tooltips nil     ;; Use the builtin Emacs tooltips
+          x-underline-at-descent-line t)))) ;; Fix for not using GTK tooltips
 
 (provide 'core-os)
 ;;; core-os.el ends here
