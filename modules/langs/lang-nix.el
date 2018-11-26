@@ -26,8 +26,7 @@
 ;;; `nix-mode':
 ;; Adds support for editing and working with Nix expressions, we don't even need
 ;; configuration for this! Set it and forget it.
-(use-package nix-mode
-  :mode "\\.nix\\'")
+(add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
 
 (provide 'lang-nix)
 ;;; lang-nix.el ends here

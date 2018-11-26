@@ -27,7 +27,6 @@
 (require 'lang-markdown)
 (require 'lang-shell)
 (require 'lang-json)
-(require 'lang-rust)
 (require 'lang-java)
 (require 'lang-nix)
 

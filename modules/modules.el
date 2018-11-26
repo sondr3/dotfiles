@@ -23,16 +23,16 @@
 
 ;;; Constants
 
-(defconst amalthea-modules-langs-dir (concat amalthea-modules-dir "langs/")
+(defconst amalthea-modules-langs-dir (expand-file-name "langs/" amalthea-modules-dir)
   "Path to configuration of languages in Amalthea.")
 
-(defconst amalthea-modules-tools-dir (concat amalthea-modules-dir "tools/")
+(defconst amalthea-modules-tools-dir (expand-file-name "tools/" amalthea-modules-dir)
   "Path to configuration of tools in Amalthea.")
 
-(defconst amalthea-modules-text-dir (concat amalthea-modules-dir "text/")
+(defconst amalthea-modules-text-dir (expand-file-name "text/" amalthea-modules-dir)
   "Path to configuration of text editing tools in Amalthea.")
 
-(defconst amalthea-modules-org-dir (concat amalthea-modules-dir "org/")
+(defconst amalthea-modules-org-dir (expand-file-name "org/" amalthea-modules-dir)
   "Path to configuration of org-mode and related packages in Amalthea.")
 
 ;;; Functions

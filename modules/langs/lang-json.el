@@ -24,13 +24,12 @@
 ;;; `json-mode':
 ;; This is really nothing fancy, we bind some keys and set the indentation to
 ;; it's proper size.
-(use-package json-mode
-  :general
+(setq js-indent-level 2)
+(with-eval-after-load 'json-mode
   (amalthea-major-leader 'json-mode-map
     "r" '(json-mode-beautify :wk "reformat buffer")
     "p" '(json-mode-show-path :wk "show JSON keys")
-    "P" '(json-mode-kill-path :wk "yank JSON keys"))
-  :init (setq js-indent-level 2))
+    "P" '(json-mode-kill-path :wk "yank JSON keys")))
 
 (provide 'lang-json)
 ;;; lang-json.el ends here

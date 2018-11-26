@@ -21,17 +21,15 @@
 
 ;;; Code:
 
-(use-package markdown-mode
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init
-  (setq markdown-command "pandoc --from=markdown --to=html --standalone --mathjax" ;; Use pandoc to convert documents from markdown to HTML
-        markdown-enable-wiki-links t                                               ;; Syntax highlighting for wiki links
-        markdown-italic-underscore t                                               ;; Use underscores for italic text
-        markdown-make-gfm-checkboxes-buttons t                                     ;; Make checkboxes into buttons you can interact with
-        markdown-gfm-additional-languages '("sh")                                  ;; Add `sh' as a language to convert
-        markdown-fontify-code-blocks-natively t))                                  ;; Highlight code using the languages major mode
+(setq markdown-command "pandoc --from=markdown --to=html --standalone --mathjax" ;; Use pandoc to convert documents from markdown to HTML
+      markdown-enable-wiki-links t                                               ;; Syntax highlighting for wiki links
+      markdown-italic-underscore t                                               ;; Use underscores for italic text
+      markdown-make-gfm-checkboxes-buttons t                                     ;; Make checkboxes into buttons you can interact with
+      markdown-gfm-additional-languages '("sh")                                  ;; Add `sh' as a language to convert
+      markdown-fontify-code-blocks-natively t)                                   ;; Highlight code using the languages major mode
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\'" . markdown-mode))
 
 (provide 'lang-markdown)
 ;;; lang-markdown.el ends here

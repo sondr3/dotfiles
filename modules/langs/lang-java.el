@@ -23,8 +23,7 @@
 
 ;;; Code:
 
-(use-package java
-  :ghook ('java-mode-hook #'electric-pair-local-mode))
+(general-add-hook 'java-mode-hook #'electric-pair-local-mode)
 
 (provide 'lang-java)
 ;;; lang-java.el ends here

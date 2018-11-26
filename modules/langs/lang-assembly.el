@@ -21,7 +21,7 @@
 
 ;;; Code:
 
-(use-package nasm-mode)
+(add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
 
 (provide 'lang-assembly)
 ;;; lang-assembly.el ends here
