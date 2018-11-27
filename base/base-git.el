@@ -68,14 +68,14 @@
       '((insert . "+") (delete . "-") (change . "~")
         (unknown . "?") (ignored . "i")))
 (require 'diff-hl)
+(global-diff-hl-mode)
+(diff-hl-margin-mode)
+(diff-hl-flydiff-mode)
 (with-eval-after-load 'diff-hl
   (general-add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
   (amalthea-leader
     "g j" '(diff-hl-next-hunk :wk "next hunk")
-    "g k" '(diff-hl-previous-hunk :wk "previous hunk"))
-  (global-diff-hl-mode)
-  (diff-hl-margin-mode)
-  (diff-hl-flydiff-mode))
+    "g k" '(diff-hl-previous-hunk :wk "previous hunk")))
 
 ;;; `hl-todo':
 ;; This is a really simple mode that highlights things that are marked as TODO,
