@@ -18,20 +18,21 @@
 - [X] Seems like something happened with ~evil-collection~ and ~evil~, when I byte
   compile I get warnings...
 - [X] ~git-modes~ are not installed, fix.
-** TODO Other stuff [1/6]
+** TODO Other stuff [2/6]
 - [ ] Figure out how to make ~amalthea-debug~ works
-- [ ] Why can't I use ~q~ anymore to exit temporary buffers?!
+- [X] Why can't I use ~q~ anymore to exit temporary buffers?!
 - [ ] Contribute Norwegian dictionaries to Hunspell in Nix
 - [ ] Fix byte compilation warnings for escaping insert mode in Evil
 - [X] [[file:modules/langs/lang-elisp.el][Macrostep]] fuckery needs a fixin'
 - [ ] Fix theme making shit smaller
-** TODO Latex [0/3]
-- [ ] Configure Beamer and org-mode
-- [ ] Find a theme:
-  - [ ] [[https://github.com/matze/mtheme]]
-  - [ ] [[https://github.com/ivan-cukic/latex-beamer-theme-elegance]]
-  - [ ] [[https://github.com/elauksap/focus-beamertheme]]
+** TODO Latex [2/3]
+- [X] Configure Beamer and org-mode
+- [X] Find a theme:
+  - [X] [[https://github.com/matze/mtheme]]
+  - [X] [[https://github.com/ivan-cukic/latex-beamer-theme-elegance]]
+  - [X] [[https://github.com/elauksap/focus-beamertheme]]
 - [ ] How to present Beamer presentations
+  - [ ] How do I stop the slides from being blurry?
 ** TODO Packages to explore [1/6]
 - [ ] [[https://github.com/vermiculus/magithub][magithub]]
 - [ ] [[https://github.com/abo-abo/avy][avy]]
@@ -43,9 +44,11 @@
 - [ ] Rewrite ~ox-twbs~ with the latest version of Bootstrap
 - [ ] Either configure the fuck out of ~ox-latex~ or write my own little thing
   with it
+  - [ ] Write my own ~ox-latex~ for LuaLaTeX and memoir
+  - [ ] Write my own ~ox-beamer~ for the same reasons
 - [ ] Look into using [[https://github.com/purcell/flycheck-package][flycheck-package]] and [[https://github.com/alphapapa/emacs-package-dev-handbook][this]] to help
-** TODO HOLY SHIT WHAT AM I DOING [0/3]
-*** TODO Remove ~use-package~ and change ~concat~ [4/4]
+** TODO HOLY SHIT WHAT AM I DOING [1/2]
+*** DONE Remove ~use-package~ and change ~concat~ [4/4]
 **** DONE core/ [6/6]
 - [X] core-editor.el
 - [X] core-keybindings.el
@@ -100,3 +103,4 @@
 - [ ] Create a customization thingy and whatnot, it seems fancy
 - [ ] Don't ~(require)~ things that are not actually required, they are still in
   the load path and should only be used in ~with-eval-and-load~.
+- [ ] Holy shit, the byte compiler hates me!
