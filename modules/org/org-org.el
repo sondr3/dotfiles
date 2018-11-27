@@ -60,12 +60,14 @@
         org-ref-completion-library 'org-ref-ivy-bibtex)
   ;; Configure which languages we can use in Org Babel code blocks
   ;; NOTE: This slows down the startup of Org-mode a little bit
+  (setq org-babel-python-command "python3")
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((shell . t)
      (emacs-lisp . t)
      (dot . t)
      (latex . t)
+     (python . t)
      (java . t)))
 
   ;; I don't want the mode line to show that org-indent-mode is active
