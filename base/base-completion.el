@@ -126,9 +126,10 @@
 ;; included `yasnippet-snippets' for a whole lotta snippets that you can use.
 ;; TODO: This package slows down start-up a lot.
 (require 'yasnippet)
+(setq yas-snippet-dirs (list (expand-file-name "snippets" amalthea-emacs-dir)))
+(yas-global-mode)
 (with-eval-after-load 'yasnippet
   (delight 'yas-minor-mode " Ⓨ" "yasnippet")
-  (general-add-hook '(list text-mode-hook prog-mode-hook snippet-mode-hook) #'yas-minor-mode)
   (amalthea-major-leader
     "Y" '(:ignore t :wk "Yasnippet")
     "Y c" '(yas-new-snippet :wk "create")
