@@ -34,6 +34,8 @@
                 \\usepackage{tabularx}
                 \\usepackage{booktabs}
                 \\usepackage{listings}
+                \\usepackage{pgfpages}
+                \\setbeameroption{show notes on second screen=right}
                 [NO-DEFAULT-PACKAGES]
                 [NO-PACKAGES]
                 [EXTRA]"
