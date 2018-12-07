@@ -143,6 +143,7 @@
 ;; Loading of snippets and being able to search through them with `ivy'.
 (with-eval-after-load 'yasnippet
   (require 'yasnippet-snippets)
+  (yasnippet-snippets-initialize)
   (require 'ivy-yasnippet))
 
 (provide 'base-completion)

@@ -1,4 +1,4 @@
-* TODO Emacs [0/6]
+* TODO Emacs [1/6]
 ** TODO Convert to nix-derivation [8/11]
 - [ ] Add ~:ensure-system-packages~ to ~emacs.nix~ file to ensure that they are
   always installed together with Emacs.
@@ -18,21 +18,22 @@
 - [X] Seems like something happened with ~evil-collection~ and ~evil~, when I byte
   compile I get warnings...
 - [X] ~git-modes~ are not installed, fix.
-** TODO Other stuff [2/6]
+** TODO Other stuff [3/7]
 - [ ] Figure out how to make ~amalthea-debug~ works
 - [X] Why can't I use ~q~ anymore to exit temporary buffers?!
 - [ ] Contribute Norwegian dictionaries to Hunspell in Nix
 - [ ] Fix byte compilation warnings for escaping insert mode in Evil
 - [X] [[file:modules/langs/lang-elisp.el][Macrostep]] fuckery needs a fixin'
 - [ ] Fix theme making shit smaller
-** TODO Latex [2/3]
+- [X] ~yasnippet~ doesn't load anything but personal snippets anymore???
+** DONE Latex [3/3]
 - [X] Configure Beamer and org-mode
 - [X] Find a theme:
   - [X] [[https://github.com/matze/mtheme]]
   - [X] [[https://github.com/ivan-cukic/latex-beamer-theme-elegance]]
   - [X] [[https://github.com/elauksap/focus-beamertheme]]
-- [ ] How to present Beamer presentations
-  - [ ] How do I stop the slides from being blurry?
+- [X] How to present Beamer presentations
+  - [X] How do I stop the slides from being blurry?
 ** TODO Packages to explore [1/6]
 - [ ] [[https://github.com/vermiculus/magithub][magithub]]
 - [ ] [[https://github.com/abo-abo/avy][avy]]
