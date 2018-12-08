@@ -26,6 +26,17 @@
 ;; `use-package'.
 
 ;;; Code:
+(require 'cl-lib)
+
+(defmacro csetq (&rest body)
+  "A simple and better version of `setq' that also respects if a
+  variable has a `custom-set' property. Works just like the good
+  old version, but better, because you can also add comments to
+  assignments."
+  `(progn
+     ,@(cl-loop for (var val _) on body by 'cdddr
+                collect `(funcall (or (get ',var 'custom-set) #'set)
+                                  ',var ,val))))
 
 ;;; `delight':
 ;; Though you could use `diminish' for making the modeline look better,
