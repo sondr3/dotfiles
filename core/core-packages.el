@@ -28,6 +28,8 @@
 ;;; Code:
 (require 'cl-lib)
 
+;;; `csetq'
+;; A small macro wrapper around `setq' and `custom-set'.
 (defmacro csetq (&rest body)
   "A simple and better version of `setq' that also respects if a
   variable has a `custom-set' property. Works just like the good
@@ -37,6 +39,22 @@
      ,@(cl-loop for (var val _) on body by 'cdddr
                 collect `(funcall (or (get ',var 'custom-set) #'set)
                                   ',var ,val))))
+
+;;; `configure-package'
+;; A stupid little helper macro for configuring packages heavily inspired by
+;; `use-package'.
+(cl-defmacro configure-package (name &key
+                                     disabled
+                                     after
+                                     hook
+                                     bind
+                                     pre
+                                     post)
+  (declare (indent defun))
+  (unless disabled
+    `(with-eval-after-load ',name
+       (progn ,pre)
+       (progn ,post))))
 
 ;;; `delight':
 ;; Though you could use `diminish' for making the modeline look better,
