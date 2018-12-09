@@ -39,7 +39,7 @@
   old version, but better, because you can also add comments to
   assignments."
   `(progn
-     ,@(cl-loop for (var val _) on body by 'cdddr
+     ,@(cl-loop for (var val) on body by 'cddr
                 collect `(funcall (or (get ',var 'custom-set) #'set)
                                   ',var ,val))))
 
