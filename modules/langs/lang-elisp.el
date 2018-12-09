@@ -70,6 +70,7 @@
   ("k" macrostep-prev-macro "prev macro"))
 
 (use-package macrostep
+  :defines (macrostep-collapse-all macrostep-collapse macrostep-next-macro macrostep-prev-macro)
   :general
   (amalthea-major-leader 'emacs-lisp-mode-map
     "m" 'hydra-macrostep/body))

@@ -106,7 +106,7 @@
 ;; better handling of `auto-fill-mode'.
 (use-package latex-extra
   :delight
-  :commands latex-extra-mode
+  :functions latex-extra-mode
   :ghook ('LaTeX-mode-hook #'latex-extra-mode))
 
 ;;; `reftex':
