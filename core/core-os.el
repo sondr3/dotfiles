@@ -29,9 +29,9 @@
 
 ;;; Code:
 
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING) ;; Magic voodoo
-      select-enable-clipboard t                                      ;; Cut and paste from the actual clipboard
-      select-enable-primary t)                                       ;; Use the primary clipboard
+(csetq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING) ;; Magic voodoo
+       select-enable-clipboard t                                      ;; Cut and paste from the actual clipboard
+       select-enable-primary t)                                       ;; Use the primary clipboard
 
 (cond
  ((eq system-type 'darwin) ;; macOS configuration
@@ -42,18 +42,19 @@
       (push pair (alist-get 'ns window-system-default-frame-alist nil))
       (set-frame-parameter nil (car pair) (cdr pair)))
 
-    (require 'exec-path-from-shell)
-    (exec-path-from-shell-initialize)  ;; Make sure $PATH is correct on macOS
+    (use-package exec-path-from-shell
+      :commands exec-path-from-shell-initialize
+      :init (exec-path-from-shell-initialize)) ;; Make sure $PATH is correct on macOS
 
-    (setq ns-use-thin-smoothing nil    ;; Don't use thinner strokes on macOS
-          mouse-wheel-flip-direction t ;; Change scrolling to new macOS defaults
-          mouse-wheel-tilt-scroll t))) ;; Change scrolling to new macOS defaults
+    (csetq ns-use-thin-smoothing nil    ;; Don't use thinner strokes on macOS
+           mouse-wheel-flip-direction t ;; Change scrolling to new macOS defaults
+           mouse-wheel-tilt-scroll t))) ;; Change scrolling to new macOS defaults
 
  ((eq system-type 'gnu/linux) ;; Linux configuration
   (progn
     (defvar x-gtk-use-system-tooltips nil)
-    (setq x-gtk-use-system-tooltips nil     ;; Use the builtin Emacs tooltips
-          x-underline-at-descent-line t)))) ;; Fix for not using GTK tooltips
+    (csetq x-gtk-use-system-tooltips nil     ;; Use the builtin Emacs tooltips
+           x-underline-at-descent-line t)))) ;; Fix for not using GTK tooltips
 
 (provide 'core-os)
 ;;; core-os.el ends here

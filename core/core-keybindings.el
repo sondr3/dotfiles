@@ -55,32 +55,38 @@
 ;; if you are in Org-mode and run `C-c', `which-key' will show on the bottom of
 ;; the screen and show all the keybindings you can complete from there. It's
 ;; really great for discoverability.
-(require 'which-key)
-(which-key-mode)
-(with-eval-after-load 'which-key
-  (delight 'which-key-mode nil "which-key")
-  (setq which-key-idle-delay 0.3                          ;; Reduce the time before which-key pops up
-        which-key-allow-evil-operators t                  ;; Show evil keybindings for assorted key
-        which-key-sort-order 'which-key-key-order-alpha)) ;; Sort things properly alphabetical
+(use-package which-key
+  :demand t
+  :delight
+  :commands (which-key-mode)
+  :init (which-key-mode)
+  :config
+  (progn
+    (csetq which-key-idle-delay 0.2                           ;; Reduce the time before which-key pops up
+           which-key-allow-evil-operators t                   ;; Show evil keybindings
+           which-key-sort-order 'which-key-key-order-alpha))) ;; Sort things properly alphabetical
 
 ;;; `General':
 ;; This is a whole framework for binding keys in a really nice and consistent
 ;; manner. It also enables us to configure our leader keys using the constants
 ;; we created in the introduction to keybindings.
-(require 'general)
-(with-eval-after-load 'general
-  (setq general-override-states '(insert emacs hybrid normal visual motion operator replace))
-  (general-override-mode)
-  (general-evil-setup)
-  (general-create-definer amalthea-leader
-    :states '(normal insert emacs)
-    :prefix amalthea-leader-key
-    :non-normal-prefix amalthea-leader-secondary-key)
-  (general-create-definer amalthea-major-leader
-    :states '(normal insert emacs)
-    :prefix amalthea-major-leader-key
-    :non-normal-prefix amalthea-major-leader-secondary-key)
-  (general-nmap "SPC m" (general-simulate-key "," :which-key "major mode")))
+(use-package general
+  :demand t
+  :commands (general-define-key general-override-mode general-evil-setup general--simulate-keys)
+  :config
+  (progn
+    (csetq general-override-states '(insert emacs hybrid normal visual motion operator replace))
+    (general-override-mode)
+    (general-evil-setup)
+    (general-create-definer amalthea-leader
+      :states '(normal insert emacs)
+      :prefix amalthea-leader-key
+      :non-normal-prefix amalthea-leader-secondary-key)
+    (general-create-definer amalthea-major-leader
+      :states '(normal insert emacs)
+      :prefix amalthea-major-leader-key
+      :non-normal-prefix amalthea-major-leader-secondary-key)
+    (general-nmap "SPC m" (general-simulate-key "," :which-key "major mode"))))
 
 ;;; Default `which-key' prefixes
 ;; This keeps all the main menus in one place instead of spread throughout the

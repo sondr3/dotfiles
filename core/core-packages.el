@@ -22,11 +22,14 @@
 ;; `straight.el', `Borg' and a bunch more. I've tried them all, but there is
 ;; always some minute thing about them that bothers me. In the end I've ended up
 ;; configuring the packages I need in a `Nix' expression, allowing me to
-;; declarative install dependencies and configure them without even using
-;; `use-package'.
+;; declarative install dependencies.
+
+;; I still use `use-package' to configure my installed packages, but the
+;; `:ensure' functionality of it is disabled. This gives me the best of both
+;; worlds, all the great functionality and integration of `use-package' and the
+;; declarative packaging that you would have with `straight.el' or `Borg'.
 
 ;;; Code:
-(require 'cl-lib)
 
 ;;; `csetq'
 ;; A small macro wrapper around `setq' and `custom-set'.
@@ -40,28 +43,20 @@
                 collect `(funcall (or (get ',var 'custom-set) #'set)
                                   ',var ,val))))
 
-;;; `configure-package'
-;; A stupid little helper macro for configuring packages heavily inspired by
-;; `use-package'.
-(cl-defmacro configure-package (name &key
-                                     disabled
-                                     after
-                                     hook
-                                     bind
-                                     pre
-                                     post)
-  (declare (indent defun))
-  (unless disabled
-    `(with-eval-after-load ',name
-       (progn ,pre)
-       (progn ,post))))
+;; Require `use-package', need I say more?
+(eval-and-compile
+  (require 'use-package))
+
+(csetq use-package-ensure-function 'ignore ;; We don't want to install packages with `use-package'
+       use-package-expand-minimally t      ;; Expand the `use-package' with no bells or whistles
+       use-package-always-defer t)         ;; Always defer packages
 
 ;;; `delight':
 ;; Though you could use `diminish' for making the modeline look better,
 ;; `delight' is a much better package. Not only can you change the names or hide
 ;; major-modes from the modeline, you can also nest what minor-mode you want to
 ;; hide instead of having to do it one at a time.
-(require 'delight)
+(use-package delight :demand t)
 
 (provide 'core-packages)
 ;;; core-packages.el ends here
