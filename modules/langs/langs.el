@@ -24,7 +24,6 @@
 
 (require 'lang-elisp)
 (require 'lang-haskell)
-(require 'lang-markdown)
 (require 'lang-shell)
 (require 'lang-json)
 (require 'lang-java)

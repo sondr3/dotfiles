@@ -22,6 +22,7 @@
 ;;; Code:
 
 (require 'text-latex)
+(require 'text-markdown)
 
 (provide 'text)
 ;;; text.el ends here
