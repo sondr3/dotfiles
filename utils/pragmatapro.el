@@ -28,7 +28,7 @@
 
 ;;; Code:
 
-(setq prettify-symbols-unprettify-at-point 'right-edge)
+(csetq prettify-symbols-unprettify-at-point 'right-edge)
 
 (defconst pragmatapro-prettify-symbols-alist
   (mapcar (lambda (s)

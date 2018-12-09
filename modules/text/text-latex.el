@@ -42,24 +42,24 @@
   :init
   (progn
     (setq-default TeX-master nil)                                 ;; Always ask which file is the master TeX file
-    (setq TeX-command-default "latexmk"                           ;; Use `latexmk' to compile documents
-          TeX-command-force "latexmk"                             ;; REALLY use `latexmk' to compile documents
-          TeX-engine 'lualatex                                    ;; The default engine of choice is `lualatex'
-          TeX-auto-save t                                         ;; Save documents automatically when running commands on them
-          TeX-parse-self t                                        ;; Don't really know, everyone sets it to `t'
-          TeX-save-query nil                                      ;; Don't ask for permission when saving
-          TeX-PDF-mode t                                          ;; Compile documents to PDF
-          TeX-show-compilation nil                                ;; Don't pop up the compilation buffer, use C-c C-l to show it
-          TeX-syntactic-comment t                                 ;; No idea either, no documentation for it
-          TeX-clean-confirm t                                     ;; Ask before cleaning temporary files
-          TeX-electric-math t                                     ;; Electric opening and closing of math environments
-          TeX-electric-sub-and-superscript t                      ;; Same with sub and superscript
-          TeX-source-correlate-mode t                             ;; Enable correlation between source and output
-          TeX-source-correlate-method 'synctex                    ;; Use `synctex' to sync cursor location to PDF viewer
-          TeX-source-correlate-start-server t ; Start the server by default
-          LaTeX-babel-hyphen nil                                  ;; Don't aid in hyphenation
-          TeX-view-program-selection '((output-pdf "PDF Viewer")) ;; View compiled PDFs in this program
-          TeX-view-program-list '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))))
+    (csetq TeX-command-default "latexmk"                           ;; Use `latexmk' to compile documents
+           TeX-command-force "latexmk"                             ;; REALLY use `latexmk' to compile documents
+           TeX-engine 'lualatex                                    ;; The default engine of choice is `lualatex'
+           TeX-auto-save t                                         ;; Save documents automatically when running commands on them
+           TeX-parse-self t                                        ;; Don't really know, everyone sets it to `t'
+           TeX-save-query nil                                      ;; Don't ask for permission when saving
+           TeX-PDF-mode t                                          ;; Compile documents to PDF
+           TeX-show-compilation nil                                ;; Don't pop up the compilation buffer, use C-c C-l to show it
+           TeX-syntactic-comment t                                 ;; No idea either, no documentation for it
+           TeX-clean-confirm t                                     ;; Ask before cleaning temporary files
+           TeX-electric-math t                                     ;; Electric opening and closing of math environments
+           TeX-electric-sub-and-superscript t                      ;; Same with sub and superscript
+           TeX-source-correlate-mode t                             ;; Enable correlation between source and output
+           TeX-source-correlate-method 'synctex                    ;; Use `synctex' to sync cursor location to PDF viewer
+           TeX-source-correlate-start-server t ; Start the server by default
+           LaTeX-babel-hyphen nil                                  ;; Don't aid in hyphenation
+           TeX-view-program-selection '((output-pdf "PDF Viewer")) ;; View compiled PDFs in this program
+           TeX-view-program-list '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))))
 
 ;;; `auctex-latexmk':
 ;; Adds support for `latexmk' to `auctex', mostly useful for making sure that
@@ -69,7 +69,7 @@
   :commands auctex-latexmk-setup
   :init
   (progn
-    (setq auctex-latexmk-inherit-TeX-PDF-mode t) ;; Tell `auctex' that we're compiling to a PDF
+    (csetq auctex-latexmk-inherit-TeX-PDF-mode t) ;; Tell `auctex' that we're compiling to a PDF
     (auctex-latexmk-setup)))
 
 ;;; `company-auctex':
@@ -90,16 +90,15 @@
 ;;; `magic-latex-buffer':
 ;; Literally magic. This makes buffers really nice.
 (use-package magic-latex-buffer
-  :disabled
   :commands magic-latex-buffer
   :ghook ('LaTeX-mode-hook #'magix-latex-buffer)
   :init
   (progn
-    (setq magic-latex-enable-block-highlight t ;; Prettify blocks that change their font size
-          magic-latex-enable-suscript t        ;; Prettify sub and super script blocks
-          magic-latex-enable-pretty-symbols t  ;; Convert latex variables into their UTF8 symbol
-          magic-latex-enable-block-align nil   ;; Don't make \centering blocks appear centered in the LaTeX buffer
-          magic-latex-enable-inline-image t))) ;; Display images inline in the LaTeX document
+    (csetq magic-latex-enable-block-highlight t ;; Prettify blocks that change their font size
+           magic-latex-enable-suscript t        ;; Prettify sub and super script blocks
+           magic-latex-enable-pretty-symbols t  ;; Convert latex variables into their UTF8 symbol
+           magic-latex-enable-block-align nil   ;; Don't make \centering blocks appear centered in the LaTeX buffer
+           magic-latex-enable-inline-image t))) ;; Display images inline in the LaTeX document
 
 ;;; `latex-extra':
 ;; This package adds a bunch of small but nice quality of life enhancements to
@@ -120,9 +119,9 @@
   :ghook ('LaTeX-mode-hook #'turn-on-reftex)
   :init
   (progn
-    (setq reftex-plug-into-AUCTeX t                                       ;; Enable the integration with `auctex'
-          reftex-use-fonts t                                              ;; Prettify things
-          reftex-default-bibliography '("~/Code/UiB/bibliography.bib")))) ;; Default location of references
+    (csetq reftex-plug-into-AUCTeX t                                       ;; Enable the integration with `auctex'
+           reftex-use-fonts t                                              ;; Prettify things
+           reftex-default-bibliography '("~/Code/UiB/bibliography.bib")))) ;; Default location of references
 
 ;;; `company-reftex':
 ;; Enable auto completion for reftex in Company.
@@ -139,29 +138,29 @@
 (use-package ivy-bibtex
   :init
   (progn
-    (setq ivy-re-builders-alist ;; Required for using this package
-          '((ivy-bibtex . ivy--regex-ignore-order)
-            (t . ivy--regex-plus))))
+    (csetq ivy-re-builders-alist ;; Required for using this package
+           '((ivy-bibtex . ivy--regex-ignore-order)
+             (t . ivy--regex-plus))))
   :config
   (progn
-    (setq bibtex-dialect 'biblatex     ;; Use a new and "modern" BibTeX format
-          bibtex-align-at-equal-sign t ;; Align entries in our `.bib' file at `='
+    (csetq bibtex-dialect 'biblatex     ;; Use a new and "modern" BibTeX format
+           bibtex-align-at-equal-sign t ;; Align entries in our `.bib' file at `='
 
-          ;; Configuration for how to format keys for bibliography entries, I've
-          ;; changed this to be like how `zotero' does it. I can't remember how
-          ;; the default looks, but with how this is configured they keys will
-          ;; look like this: `munroe2015PublicKey'. Author name first, then year
-          ;; and then name of paper/book etc.
-          bibtex-autokey-year-length 4                                       ;; Use full years
-          bibtex-autokey-name-year-separator ""                              ;; Don't separate the year and author
-          bibtex-autokey-year-title-separator ""                             ;; Or the year and title
-          bibtex-autokey-titleword-separator ""                              ;; Or the words in the title
-          bibtex-autokey-titlewords 4                                        ;; The key should be four words
-          bibtex-autokey-titlewords-stretch 2                                ;; With two extra words from the title
-          bibtex-autokey-titleword-length t                                  ;; Use all characters from title
-          bibtex-autokey-titleword-case-convert-function 'identity           ;; Preserve casing on title
-          ivy-bibtex-default-action 'bibtex-completion-insert-citation       ;; Automatically insert citation
-          bibtex-completion-bibliography '("~/Code/UiB/bibliography.bib")))) ;; Default location of bibliography
+           ;; Configuration for how to format keys for bibliography entries, I've
+           ;; changed this to be like how `zotero' does it. I can't remember how
+           ;; the default looks, but with how this is configured they keys will
+           ;; look like this: `munroe2015PublicKey'. Author name first, then year
+           ;; and then name of paper/book etc.
+           bibtex-autokey-year-length 4                                       ;; Use full years
+           bibtex-autokey-name-year-separator ""                              ;; Don't separate the year and author
+           bibtex-autokey-year-title-separator ""                             ;; Or the year and title
+           bibtex-autokey-titleword-separator ""                              ;; Or the words in the title
+           bibtex-autokey-titlewords 4                                        ;; The key should be four words
+           bibtex-autokey-titlewords-stretch 2                                ;; With two extra words from the title
+           bibtex-autokey-titleword-length t                                  ;; Use all characters from title
+           bibtex-autokey-titleword-case-convert-function 'identity           ;; Preserve casing on title
+           ivy-bibtex-default-action 'bibtex-completion-insert-citation       ;; Automatically insert citation
+           bibtex-completion-bibliography '("~/Code/UiB/bibliography.bib")))) ;; Default location of bibliography
 
 ;;; `ebib':
 ;; On the other side of the same coin, `ebib' makes managing and editing your
@@ -171,8 +170,8 @@
 (use-package ebib
   :config
   (progn
-    (setq ebib-bibtex-dialect 'biblatex                              ;; Use same dialect as BibTeX
-          ebib-preload-bib-files '("~/Code/UiB/bibliography.bib")))) ;; Default location of bibliography
+    (csetq ebib-bibtex-dialect 'biblatex                              ;; Use same dialect as BibTeX
+           ebib-preload-bib-files '("~/Code/UiB/bibliography.bib")))) ;; Default location of bibliography
 
 (provide 'text-latex)
 ;;; text-latex.el ends here

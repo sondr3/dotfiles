@@ -1,4 +1,4 @@
-* TODO Emacs [1/6]
+* TODO Emacs [2/6]
 ** TODO Convert to nix-derivation [8/11]
 - [ ] Add ~:ensure-system-packages~ to ~emacs.nix~ file to ensure that they are
   always installed together with Emacs.
@@ -18,8 +18,8 @@
 - [X] Seems like something happened with ~evil-collection~ and ~evil~, when I byte
   compile I get warnings...
 - [X] ~git-modes~ are not installed, fix.
-** TODO Other stuff [3/7]
-- [ ] Figure out how to make ~amalthea-debug~ works
+** TODO Other stuff [4/7]
+- [X] Figure out how to make ~amalthea-debug~ works
 - [X] Why can't I use ~q~ anymore to exit temporary buffers?!
 - [ ] Contribute Norwegian dictionaries to Hunspell in Nix
 - [ ] Fix byte compilation warnings for escaping insert mode in Evil
@@ -48,7 +48,7 @@
   - [ ] Write my own ~ox-latex~ for LuaLaTeX and memoir
   - [ ] Write my own ~ox-beamer~ for the same reasons
 - [ ] Look into using [[https://github.com/purcell/flycheck-package][flycheck-package]] and [[https://github.com/alphapapa/emacs-package-dev-handbook][this]] to help
-** TODO HOLY SHIT WHAT AM I DOING [1/2]
+** DONE HOLY SHIT WHAT AM I DOING [2/2]
 *** DONE Remove ~use-package~ and change ~concat~ [4/4]
 **** DONE core/ [6/6]
 - [X] core-editor.el
@@ -96,12 +96,12 @@
 **** DONE utils/ [2/2]
 - [X] pragmatapro.el
 - [X] utils.el
-*** TODO OH GOD NO [2/5]
+*** DONE OH GOD NO [6/6]
 - [X] Fix ~amalthea--byte-compile-amalthea~, when calling ~byte-recompile-directory~
   is goes from top to bottom alphabetically which fucks up ~no-littering~.
 - [X] Remove ~use-package~ from Amalthea.
-- [ ] Steal and ~defalias~ =general.el= function for ~setq~, ~hook~ and so on
-- [ ] Create a customization thingy and whatnot, it seems fancy
-- [ ] Don't ~(require)~ things that are not actually required, they are still in
+- [X] Steal and ~defalias~ =general.el= function for ~setq~, ~hook~ and so on
+- [X] Create a customization thingy and whatnot, it seems fancy
+- [X] Don't ~(require)~ things that are not actually required, they are still in
   the load path and should only be used in ~with-eval-and-load~.
-- [ ] Holy shit, the byte compiler hates me!
+- [X] Holy shit, the byte compiler hates me!

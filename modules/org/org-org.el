@@ -80,8 +80,8 @@
 (use-package org-ref
   :init
   (progn
-    (setq reftex-default-bibliography '("~/Code/UiB/bibliography.bib")
-          org-ref-completion-library 'org-ref-ivy-bibtex)))
+    (csetq reftex-default-bibliography '("~/Code/UiB/bibliography.bib")
+           org-ref-completion-library 'org-ref-ivy-bibtex)))
 
 ;; Load the rest of the org-mode configuration
 (require 'org-latex-export)
