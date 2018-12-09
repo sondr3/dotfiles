@@ -23,8 +23,8 @@
 
 ;;; `deadgrep':
 ;; Sweet, sweet searching.
-(require 'deadgrep)
-(with-eval-after-load 'deadgrep
+(use-package deadgrep
+  :general
   (amalthea-leader
     "a s" '(deadgrep :wk "ripgrep")))
 

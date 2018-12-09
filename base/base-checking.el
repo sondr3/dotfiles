@@ -52,33 +52,43 @@
 ;; that automatically does it's magic whenever it's needed. For programming
 ;; modes we use the builtin `prog-mode' version of Flyspell, and we then just
 ;; enable the regular version for `text-mode' buffers.
-(setq ispell-program-name "aspell"
-      ispell-local-dictionary "en_US"
-      flyspell-use-meta-tab nil
-      flyspell-issue-message-flag nil
-      flyspell-issue-welcome-flag nil)
-(delight 'flyspell-mode " Ⓢ" "flyspell")
-(general-add-hook 'prog-mode-hook #'flyspell-prog-mode)
-(general-add-hook 'text-mode-hook #'flyspell-mode)
-(amalthea-leader
-  "S s" '(hydra-spelling/body :wk "hydra")
-  "S b" '(flyspell-buffer :wk "spell check buffer")
-  "S n" '(flyspell-goto-next-error :wk "next spelling error"))
+(use-package flyspell
+  :commands (flyspell-mode flyspell-prog-mode)
+  :delight " Ⓢ"
+  :ghook ('prog-mode-hook #'flyspell-prog-mode)
+  :ghook ('text-mode-hook #'flyspell-mode)
+  :general
+  (amalthea-leader
+    "S s" '(hydra-spelling/body :wk "hydra")
+    "S b" '(flyspell-buffer :wk "spell check buffer")
+    "S n" '(flyspell-goto-next-error :wk "next spelling error"))
+  :init
+  (progn
+    (csetq ispell-program-name "aspell"
+           ispell-local-dictionary "en_US"
+           flyspell-use-meta-tab nil
+           flyspell-issue-message-flag nil
+           flyspell-issue-welcome-flag nil)))
 
 ;;; `flyspell-correct':
 ;; The default correction window for Flyspell is awful, terribly so actually, so
 ;; we'll use a package to fix this. This creates a generic way of correcting
 ;; words and we'll use a Ivy-minibuffer to correct wording.
 ;; TODO Find a better way to get to the Ivy menu in Flyspell
-(setq flyspell-correct-interface #'flyspell-correct-ivy)
-(with-eval-after-load 'flyspell
-  (require 'flyspell-correct-ivy)
+(use-package flyspell-correct-ivy
+  :after flyspell
+  :commands (flyspell-correct-word-generic
+             flyspell-correct-ivy
+             flyspell-correct-previous)
+  :general
   (amalthea-leader
     "S c" '(flyspell-correct-previous :wk "correct prev word")
-    "S C" '(flyspell-correct-next :wk "correct next word")))
+    "S C" '(flyspell-correct-next :wk "correct next word")
+    :init (csetq flyspell-correct-interface #'flyspell-correct-ivy)))
 
 ;;; `flycheck':
-(delight 'flycheck-mode " Ⓒ" "flycheck")
+(use-package flycheck
+  :delight " Ⓒ")
 
 (provide 'base-checking)
 ;;; base-checking.el ends here

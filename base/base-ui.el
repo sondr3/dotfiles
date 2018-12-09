@@ -23,8 +23,8 @@
 
 ;;; Theme
 ;; You should probably change this, I have a very weird taste in themes.
-(require 'apropospriate)
-(load-theme 'apropospriate-light t)
+(use-package apropospriate-theme
+  :init (load-theme 'apropospriate-light t))
 
 ;; We need to change the font after we load the theme for some reason
 (set-face-attribute 'mode-line nil
