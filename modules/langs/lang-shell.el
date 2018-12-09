@@ -26,8 +26,9 @@
 ;; Make sure we have the `shellcheck' package for linting of shell files and add
 ;; a bunch of key bindings to `sh-mode' for easier access, these are essentially
 ;; the same keys that are under `C-c'.
-(with-eval-after-load 'sh
-  (general-add-hook 'sh-mode-hook (list #'subword-mode #'flycheck-mode))
+(use-package sh-script
+  :ghook ('sh-mode-hook (list #'subword-mode #'flycheck-mode))
+  :general
   (amalthea-major-leader 'sh-mode-map
     "a" '(sh-add :wk "add")
     "i" '(:ignore t :wk "insert")
@@ -51,8 +52,9 @@
 
 ;;; `company-shell':
 ;; Adds auto completion for shell scripting to Company.
-(with-eval-after-load 'company
-  (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
+(use-package company-shell
+  :after company
+  :init (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
 
 (provide 'lang-shell)
 ;;; lang-shell.el ends here

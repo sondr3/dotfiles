@@ -28,39 +28,39 @@
 ;; exists a newer version of it, adds `outline-minor-mode' and `reveal-mode' to
 ;; this mode and allows us to use `C-c e' to expand any code that contains
 ;; macros.
-(with-eval-after-load 'lisp-mode
-  (general-add-hook 'emacs-lisp-mode-hook (list #'auto-compile-on-load-mode #'auto-compile-on-save-mode))
+(use-package emacs-lisp
+  :gfhook #'auto-compile-on-load-mode #'auto-compile-on-save-mode
+  :ghook
+  ('emacs-lisp-mode-hook #'outline-minor-mode)
+  ('emacs-lisp-mode-hook #'reveal-mode)
+  :general
   (amalthea-major-leader 'emacs-lisp-mode-map
     "C" 'emacs-lisp-byte-compile
     "e" '(:ignore t :wk "eval")
     "e b" 'eval-buffer
     "e f" 'eval-defun
     "e r" 'eval-reqion
-    "e e" 'eval-last-sexp
-    "m" 'hydra-macrostep/body))
+    "e e" 'eval-last-sexp))
 
 ;;; `auto-compile':
 ;; Automatically compiles any `.el' files into their byte compiled version,
 ;; making sure everything is up to date.
-(autoload #'auto-compile-on-load-mode "auto-compile")
-(autoload #'auto-compile-on-save-mode "auto-compile")
-(with-eval-after-load 'auto-compile
-  (setq auto-compile-display-buffer nil             ;; Don't automatically show the *Compile Log* buffer
-        auto-compile-mode-line-counter t            ;; Display number of warnings in modeline
-        auto-compile-source-recreate-deletes-dest t ;; Delete leftover byte code when recompiling
-        auto-compile-toggle-deletes-nonlib-dest t   ;; Delete non-library byte code
-        auto-compile-update-autoloads t)            ;; Update autoloads after compiling
-  (general-add-hook 'auto-compile-inhibit-compile-hook #'auto-compile-inhibit-compile-detached-git-head))
+(use-package auto-compile
+  :commands (auto-compile-on-save-mode auto-compile-on-load-mode)
+  :ghook ('auto-compile-inhibit-compile-hook #'auto-compile-inhibit-compile-detached-git-head)
+  :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode)
+  (csetq auto-compile-display-buffer nil             ;; Don't automatically show the *Compile Log* buffer
+         auto-compile-mode-line-counter t            ;; Display number of warnings in modeline
+         auto-compile-source-recreate-deletes-dest t ;; Delete leftover byte code when recompiling
+         auto-compile-toggle-deletes-nonlib-dest t   ;; Delete non-library byte code
+         auto-compile-update-autoloads t))           ;; Update autoloads after compiling
 
 ;;; `macrostep':
 ;; This is a hydra that we'll use together with the package itself, this makes
 ;; it really easy to quickly work your way through macros as you are working on
 ;; them or using them.
-(declare-function macrostep-collapse-all "macrostep" nil)
-(declare-function macrostep-collapse "macrostep" nil)
-(declare-function macrostep-expand "macrostep" nil)
-(declare-function macrostep-next-macro "macrostep" nil)
-(declare-function macrostep-prev-macro "macrostep" nil)
 (defhydra hydra-macrostep (:color pink)
   "macrostep"
   ("q" macrostep-collapse-all "collapse all macros" :color blue)
@@ -68,6 +68,11 @@
   ("e" macrostep-expand "expand macro")
   ("j" macrostep-next-macro "next macro")
   ("k" macrostep-prev-macro "prev macro"))
+
+(use-package macrostep
+  :general
+  (amalthea-major-leader 'emacs-lisp-mode-map
+    "m" 'hydra-macrostep/body))
 
 ;;; Hide some minor modes and rename the major mode
 (delight '((emacs-lisp-mode "Elisp" :major)
