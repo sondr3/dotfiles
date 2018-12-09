@@ -24,7 +24,8 @@
 ;; We need our own class for Beamer because the builtin one is ugly and
 ;; doesn't support LuaLaTeX, we just need to make sure not to include any of
 ;; the default packages.
-(with-eval-after-load 'ox-latex
+(use-package ox-latex
+  :config
   (add-to-list 'org-latex-classes
                '("beamer"
                  "\\documentclass[presentation]{beamer}
@@ -44,9 +45,10 @@
 		             ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
                t))
 
-(with-eval-after-load 'ox-beamer
-  (setq org-beamer-theme "metropolis" ;; Use the `metropolis' theme
-        org-beamer-frame-level 2))    ;; Give the slides some more depth
+(use-package ox-beamer
+  :config
+  (csetq org-beamer-theme "metropolis" ;; Use the `metropolis' theme
+         org-beamer-frame-level 2))    ;; Give the slides some more depth
 
 (provide 'org-beamer-export)
 ;;; org-beamer-export.el ends here
