@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: org-mode source code
+# key: <ss
+# --
+
+#+NAME: ${1:label}
+#+CAPTION: ${2:caption}
+#+BEGIN_SRC ${3:language}
+$0
+#+END_SRC
