@@ -13,13 +13,17 @@ are no crazy macro or function shenanigans and I try to make sure everything is
 well documented.
 
 For a rough overview over how this configuration works, it is configured into
-three (well, four) separate layers. The ~core~ layer is where packages and
+three (well, four) separate "layers". The ~core~ layer is where packages and
 configuration that everything else relies on is, package management, key
 bindings and configuration of the core of Amalthea. The ~base~ layer is
 essentially what makes my configuration into what it is, here is [[https://github.com/emacs-evil/evil][Evil]], [[https://github.com/company-mode/company-mode][Company]],
 [[https://github.com/bbatsov/projectile][Projectile]], [[https://github.com/abo-abo/swiper][Ivy]] and more is configured. Second to last, the ~modules~ layer is
 where configuration for specific modes resides, Org mode, LaTeX, Haskell and so
 on. Finally, the ~utils~ layer contains... utilities.
+
+The biggest difference is that these layers are baked into my ~init.el~ file,
+which I'm editing using a [[https://github.com/alphapapa/outshine][outshine]], so I can move around the file as if I'm
+editing a Org-mode document.
 
 As an addendum, for those who wonder why I named my Emacs Amalthea... I have no
 recollection of why anymore, other than the fact that I still think it's a cool
