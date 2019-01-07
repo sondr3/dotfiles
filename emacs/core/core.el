@@ -47,6 +47,9 @@
 (defconst amalthea-utils-dir (expand-file-name "utils/" amalthea-emacs-dir)
   "Utility functions and packages for Amalthea.")
 
+(defconst amalthea-dotfiles-dir (expand-file-name ".dotfiles" (getenv "HOME"))
+  "Location of dotfiles for Amalthea.")
+
 ;;; Variables
 
 (defvar amalthea-init-time nil
