@@ -1,4 +1,25 @@
-;; -*- lexical-binding: t -*-
+;;; early-init.el --- I heard you like init -*- lexical-binding: t -*-
+
+;; Author: Sondre Nilsen
+;; Maintainer: Sondre Nilsen
+;; Version: 0.1
+;; Package-Requires: ((emacs "27"))
+;; Homepage: https://github.com/sondr3/amalthea
+
+;; This file is not part of GNU Emacs
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 3, or (at your option)
+;; any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; For a full copy of the GNU General Public License see
+;; <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
@@ -43,7 +64,7 @@
       package-enable-at-startup nil) ;; Don't enable installed packages on boot
 (package-initialize)
 
-;; `no-littering':
+;;; `no-littering':
 ;; Yes, we load it this early. And that is purely because the function that byte
 ;; compiles Amalthea is really stupid, so we load this before doing anything.
 (require 'no-littering)
