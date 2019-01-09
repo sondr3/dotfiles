@@ -91,7 +91,7 @@
 ;; Literally magic. This makes buffers really nice.
 (use-package magic-latex-buffer
   :commands magic-latex-buffer
-  :ghook ('LaTeX-mode-hook #'magix-latex-buffer)
+  :ghook ('LaTeX-mode-hook #'magic-latex-buffer)
   :init
   (progn
     (csetq magic-latex-enable-block-highlight t ;; Prettify blocks that change their font size
