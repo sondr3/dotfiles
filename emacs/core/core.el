@@ -50,6 +50,9 @@
 (defconst amalthea-dotfiles-dir (expand-file-name ".dotfiles" (getenv "HOME"))
   "Location of dotfiles for Amalthea.")
 
+(defconst amalthea-org-files (expand-file-name ".org" (getenv "HOME"))
+  "Location of my life.")
+
 ;;; Variables
 
 (defvar amalthea-init-time nil
