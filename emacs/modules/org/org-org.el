@@ -86,6 +86,7 @@
 ;; Load the rest of the org-mode configuration
 (require 'org-latex-export)
 (require 'org-beamer-export)
+(require 'ox-agenda)
 
 (provide 'org-org)
 ;;; org-org.el ends here

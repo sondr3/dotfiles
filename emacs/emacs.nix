@@ -21,6 +21,7 @@ in
     magit
     markdown-mode
     no-littering
+    org-super-agenda
     projectile
     yasnippet
   ]) ++ (with epkgs.melpaPackages; [
