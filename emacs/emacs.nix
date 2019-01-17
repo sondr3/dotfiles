@@ -29,6 +29,7 @@ in
     apropospriate-theme
     auctex-latexmk
     company-auctex
+    company-lsp
     company-math
     company-nginx
     company-quickhelp
@@ -63,16 +64,20 @@ in
     ivy-yasnippet
     json-mode
     latex-extra
+    lsp-mode
+    lsp-ui
     magic-latex-buffer
     nasm-mode
     nginx-mode
     nix-mode
     org-ref
     outshine
+    prettier-js
     rainbow-delimiters
     rust-mode
     smartparens
     swiper
+    typescript-mode
     use-package
     which-key
     ws-butler

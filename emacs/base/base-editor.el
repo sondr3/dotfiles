@@ -53,8 +53,8 @@
   :init (global-aggressive-indent-mode t)
   :config
   (progn
-    (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
-    (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)))
+    (dolist (mode '(haskell-mode nix-mode typescript-mode))
+      (add-to-list 'aggressive-indent-excluded-modes mode))))
 
 ;;; `smartparens`:
 ;; Like `electric-pair-mode`, but better. This is a minor mode for working with

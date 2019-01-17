@@ -28,6 +28,7 @@
 (require 'lang-json)
 (require 'lang-java)
 (require 'lang-nix)
+(require 'lang-typescript)
 
 (provide 'langs)
 ;;; langs.el ends here

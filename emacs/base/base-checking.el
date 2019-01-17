@@ -88,7 +88,9 @@
 
 ;;; `flycheck':
 (use-package flycheck
-  :delight " Ⓒ")
+  :delight " Ⓒ"
+  :commands global-flycheck-mode
+  :init (global-flycheck-mode))
 
 (provide 'base-checking)
 ;;; base-checking.el ends here
