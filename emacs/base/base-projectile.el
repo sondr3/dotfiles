@@ -28,6 +28,9 @@
 (use-package projectile
   :commands projectile-mode
   :delight " Ⓟ"
+  :general
+  (amalthea-leader
+    "p" '(projectile-command-map :wk "project"))
   :init
   (progn
     (csetq projectile-completion-system 'ivy ;; Use Ivy for completion
@@ -41,9 +44,6 @@
 (use-package counsel-projectile
   :after projectile
   :commands counsel-projectile-mode
-  :general
-  (amalthea-leader
-    "p" '(projectile-command-map :wk "project"))
   :init (counsel-projectile-mode))
 
 (provide 'base-projectile)
