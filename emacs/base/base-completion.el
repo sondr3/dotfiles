@@ -94,7 +94,7 @@
 ;; Instead of using something like `auto-complete' we'll use `Company' to give
 ;; us auto completion for variables, functions and so on.
 (use-package company
-  :delight " Ⓐ"
+  :delight "Ⓐ"
   :ghook 'prog-mode-hook
   :init
   (csetq company-idle-delay 0.2              ;; How long to wait before popping up
@@ -133,7 +133,7 @@
 ;; TODO: This package slows down start-up a lot.
 (use-package yasnippet
   :commands (yas-global-mode)
-  :delight (yas-minor-mode " Ⓨ")
+  :delight (yas-minor-mode "Ⓨ")
   :init
   (progn
     (csetq yas-snippet-dirs (list (expand-file-name "snippets" amalthea-emacs-dir)))

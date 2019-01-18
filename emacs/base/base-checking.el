@@ -54,7 +54,7 @@
 ;; enable the regular version for `text-mode' buffers.
 (use-package flyspell
   :commands (flyspell-mode flyspell-prog-mode)
-  :delight " Ⓢ"
+  :delight "Ⓢ"
   :ghook ('prog-mode-hook #'flyspell-prog-mode)
   :ghook ('text-mode-hook #'flyspell-mode)
   :general
@@ -88,7 +88,7 @@
 
 ;;; `flycheck':
 (use-package flycheck
-  :delight " Ⓒ"
+  :delight "Ⓒ"
   :commands global-flycheck-mode
   :init (global-flycheck-mode))
 

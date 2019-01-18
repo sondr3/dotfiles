@@ -26,10 +26,14 @@
 (use-package apropospriate-theme
   :init (load-theme 'apropospriate-light t))
 
-;; We need to change the font after we load the theme for some reason
-(set-face-attribute 'mode-line nil
-		                :family amalthea-serif-font
-		                :height amalthea-font-size)
+;; Fix the spacing between the major mode name and all the minor modes.
+(catch 'done
+  (mapc (lambda (x)
+          (when (and (consp x)
+                     (equal (cadr x) '("" minor-mode-alist)))
+            (setcar (cadr x) " ∷ ")
+            (throw 'done t)))
+        mode-line-modes))
 
 (provide 'base-ui)
 ;;; base-ui.el ends here
