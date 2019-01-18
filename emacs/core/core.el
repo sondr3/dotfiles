@@ -53,17 +53,12 @@
 (defconst amalthea-org-files (expand-file-name ".org" (getenv "HOME"))
   "Location of my life.")
 
-;;; Variables
+;;; Amalthea group
 
-(defvar amalthea-init-time nil
-  "Displays the time it took for Amalthea to launch.")
-
-(defvar amalthea-post-init-hook nil
-  "Hook that runs after Emacs has loaded.")
-
-(defvar init-file-debug) ;; silence warning
-(defvar amalthea-debug init-file-debug
-  "Whether to log and enable debugging by defalt for Amalthea.")
+(defgroup amalthea nil
+  "Amalthea settings and configurations."
+  :group 'convenience
+  :prefix "amalthea")
 
 ;;; Settings
 

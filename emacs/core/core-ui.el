@@ -22,17 +22,25 @@
 
 ;;; Code:
 
-(defvar amalthea-mono-font "PragmataPro Mono Liga"
-  "The default monospaced font that Amalthea uses.")
+(defcustom amalthea-mono-font "PragmataPro Mono Liga"
+  "The default monospaced font that Amalthea uses."
+  :type 'string
+  :group 'amalthea)
 
-(defvar amalthea-serif-font "PragmataPro Liga"
-  "The default sans serif font that Amalthea uses.")
+(defcustom amalthea-serif-font "PragmataPro Liga"
+  "The default sans serif font that Amalthea uses."
+  :type 'string
+  :group 'amalthea)
 
-(defvar amalthea-line-spacing 0.15
-  "The default line spacing width that Amalthea uses.")
+(defcustom amalthea-line-spacing 0.15
+  "The default line spacing width that Amalthea uses."
+  :type 'number
+  :group 'amalthea)
 
-(defvar amalthea-font-size 140
-  "The default font size for Amalthea.")
+(defcustom amalthea-font-size 140
+  "The default font size for Amalthea."
+  :type 'number
+  :group 'amalthea)
 
 ;;; Fonts
 
