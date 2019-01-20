@@ -69,7 +69,7 @@
 ;; Finally, we disable the visible and audible bell that is enabled by default
 ;; because it's bloody annoying.
 (setq-default line-spacing amalthea-line-spacing      ;; Give lines some breathing room
-              frame-title-format '("Amalthea :: %b")  ;; Name the Emacs window
+              frame-title-format '("Amalthea ∷ %b")  ;; Name the Emacs window
               display-line-numbers 'visual            ;; Count the visible line numbers, not the actual number
               display-line-numbers-current-absolute t ;; Show line number of current line instead of 0
               display-line-numbers-width 4            ;; Enough space for huge files
