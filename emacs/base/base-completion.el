@@ -161,4 +161,5 @@
   :after yasnippet)
 
 (provide 'base-completion)
+
 ;;; base-completion.el ends here
