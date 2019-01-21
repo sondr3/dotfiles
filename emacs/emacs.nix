@@ -70,7 +70,6 @@ in
     nasm-mode
     nginx-mode
     nix-mode
-    org-projectile
     org-ref
     outshine
     prettier-js
