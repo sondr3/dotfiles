@@ -51,7 +51,7 @@
 ;;; Load modules
 (require 'langs)
 (require 'tools)
-(require 'org-org)
+(require 'amlthea-org)
 (require 'text)
 
 (provide 'modules)

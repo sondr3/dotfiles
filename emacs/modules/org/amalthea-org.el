@@ -1,4 +1,4 @@
-;;; org-org.el --- Org mode support -*- lexical-binding: t -*-
+;;; amalthea-org.el --- Org mode support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -28,6 +28,7 @@
 (use-package org
   :defines (org-export-with-sub-superscripts org-babel-do-load-languages)
   :commands org-babel-do-load-languages
+  :ghook ('org-capture-mode-hook #'evil-insert-state)
   :general
   (amalthea-major-leader 'org-mode-map
     "E" '(org-export-dispatch :wk "export")
@@ -84,9 +85,11 @@
            org-ref-completion-library 'org-ref-ivy-bibtex)))
 
 ;; Load the rest of the org-mode configuration
-(require 'org-latex-export)
-(require 'org-beamer-export)
-(require 'ox-agenda)
+(require '+agenda)
+(require '+bindings)
+(require '+beamer)
+(require '+latex)
 
-(provide 'org-org)
-;;; org-org.el ends here
+(provide 'amalthea-org)
+
+;;; amalthea-org.el ends here

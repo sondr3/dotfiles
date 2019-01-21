@@ -1,4 +1,4 @@
-;;; org-beamer-export.el --- Org-mode Beamer export configuration -*- lexical-binding: t -*-
+;;; +beamer.el --- Org-mode Beamer export configuration -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -50,5 +50,6 @@
   (csetq org-beamer-theme "metropolis" ;; Use the `metropolis' theme
          org-beamer-frame-level 2))    ;; Give the slides some more depth
 
-(provide 'org-beamer-export)
-;;; org-beamer-export.el ends here
+(provide '+beamer)
+
+;;; +beamer.el ends here

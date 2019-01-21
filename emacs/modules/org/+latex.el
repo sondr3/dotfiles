@@ -1,4 +1,4 @@
-;;; org-latex-export.el --- Org-mode LaTeX export support -*- lexical-binding: t -*-
+;;; +latex.el --- Org-mode LaTeX export support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -158,5 +158,6 @@
 (defmacro by-backend (&rest body)
   `(case org-export-current-backend ,@body))
 
-(provide 'org-latex-export)
-;;; org-latex-export.el ends here
+(provide '+latex)
+
+;;; +latex.el ends here

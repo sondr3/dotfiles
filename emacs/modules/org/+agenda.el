@@ -1,4 +1,4 @@
-;;; org-agenda.el --- Configuration for my life -*- lexical-binding: t -*-
+;;; +agenda.el --- Configuration for my life -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -34,5 +34,6 @@
 (use-package org-super-agenda
   :after org)
 
-(provide 'ox-agenda)
-;;; org-agenda.el ends here
+(provide '+agenda)
+
+;;; +agenda.el ends here
