@@ -40,7 +40,8 @@
     "e b" 'eval-buffer
     "e f" 'eval-defun
     "e r" 'eval-reqion
-    "e e" 'eval-last-sexp))
+    "e e" 'eval-last-sexp)
+  :init (csetq flycheck-emacs-lisp-load-path 'inherit))
 
 ;;; `auto-compile':
 ;; Automatically compiles any `.el' files into their byte compiled version,
@@ -70,7 +71,7 @@
   ("k" macrostep-prev-macro "prev macro"))
 
 (use-package macrostep
-  :defines (macrostep-collapse-all macrostep-collapse macrostep-next-macro macrostep-prev-macro)
+  :functions (macrostep-collapse-all macrostep-collapse macrostep-next-macro macrostep-prev-macro)
   :general
   (amalthea-major-leader 'emacs-lisp-mode-map
     "m" 'hydra-macrostep/body))
@@ -82,4 +83,5 @@
            (reveal-mode nil "reveal")))
 
 (provide 'lang-elisp)
+
 ;;; lang-elisp.el ends here
