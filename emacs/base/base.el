@@ -28,7 +28,7 @@
 (require 'base-editor)
 (require 'base-completion)
 (require 'base-git)
-(require 'base-projectile)
+(require 'base-projects)
 (require 'base-checking)
 (require 'base-window)
 (require 'base-ui)
@@ -36,4 +36,5 @@
 (require 'base-search)
 
 (provide 'base)
+
 ;;; base.el ends here

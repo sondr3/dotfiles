@@ -1,4 +1,4 @@
-;;; base-projectile.el --- Configuration for Projectile -*- lexical-binding: t -*-
+;;; base-projects.el --- Project configuration -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -46,5 +46,6 @@
   :commands counsel-projectile-mode
   :init (counsel-projectile-mode))
 
-(provide 'base-projectile)
-;;; base-projectile.el ends here
+(provide 'base-projects)
+
+;;; base-projects.el ends here
