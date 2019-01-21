@@ -28,7 +28,6 @@
 (use-package org
   :defines (org-export-with-sub-superscripts org-babel-do-load-languages)
   :commands org-babel-do-load-languages
-  :ghook ('org-capture-mode-hook #'evil-insert-state)
   :general
   (amalthea-major-leader 'org-mode-map
     "E" '(org-export-dispatch :wk "export")
@@ -87,6 +86,7 @@
 ;; Load the rest of the org-mode configuration
 (require '+agenda)
 (require '+bindings)
+(require '+capture)
 (require '+beamer)
 (require '+latex)
 
