@@ -67,7 +67,7 @@
     neovim
 
     # useful
-    gnupg
+    gnupg unzip
 
     # emacs
     (import ./emacs/emacs.nix { inherit pkgs; })
