@@ -1,7 +1,10 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  amalthea = pkgs.emacs;
+  amalthea = (pkgs.emacs.override {
+    withGTK3 = true;
+    withGTK2 = false;
+  });
   emacsWithPackages = (pkgs.emacsPackagesNgGen amalthea).emacsWithPackages;
 in
   emacsWithPackages (epkgs: (with epkgs.elpaPackages; [
@@ -21,7 +24,6 @@ in
     magit
     markdown-mode
     no-littering
-    org-super-agenda
     projectile
     yasnippet
   ]) ++ (with epkgs.melpaPackages; [
@@ -71,6 +73,7 @@ in
     nginx-mode
     nix-mode
     org-ref
+    org-super-agenda
     outshine
     prettier-js
     rainbow-delimiters

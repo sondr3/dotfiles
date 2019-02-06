@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./neptune-hardware.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -68,6 +68,9 @@
 
     # useful
     gnupg
+
+    # emacs
+    (import ./emacs/emacs.nix { inherit pkgs; })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
