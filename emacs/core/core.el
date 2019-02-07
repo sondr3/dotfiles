@@ -135,7 +135,7 @@
   (add-to-list 'load-path amalthea-core-dir t))
 
 (require 'core-packages)
-(require 'core-os)
+(require 'core-system)
 (require 'core-ui)
 (require 'core-keybindings)
 (require 'core-editor)
