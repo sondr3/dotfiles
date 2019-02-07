@@ -50,12 +50,32 @@
 (defconst amalthea-dotfiles-dir (expand-file-name ".dotfiles" (getenv "HOME"))
   "Location of dotfiles for Amalthea.")
 
-;;; Amalthea group
+;;; Amalthea group and customizations
 
 (defgroup amalthea nil
   "Amalthea settings and configurations."
   :group 'convenience
   :prefix "amalthea")
+
+(defcustom amalthea-mono-font "PragmataPro Mono Liga"
+  "The default monospaced font that Amalthea uses."
+  :type 'string
+  :group 'amalthea)
+
+(defcustom amalthea-serif-font "PragmataPro Liga"
+  "The default sans serif font that Amalthea uses."
+  :type 'string
+  :group 'amalthea)
+
+(defcustom amalthea-line-spacing 0.15
+  "The default line spacing width that Amalthea uses."
+  :type 'number
+  :group 'amalthea)
+
+(defcustom amalthea-font-size 140
+  "The default font size for Amalthea."
+  :type 'number
+  :group 'amalthea)
 
 ;;; Settings
 
