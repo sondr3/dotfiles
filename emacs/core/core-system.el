@@ -1,4 +1,4 @@
-;;; core-os.el --- OS configuration -*- lexical-binding: t -*-
+;;; core-system.el --- System configuration -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -20,12 +20,12 @@
 ;; Contains settings related to making Emacs work better on various operating
 ;; systems.
 
-;; macOS: Enables emojis to be properly rendered, makes it so the titlebar is
-;; dark and not transparent and fixes a few related frame issues. Also fixes and
-;; enables smoother scrolling for macOS.
+;; Jupiter (macOS): Enables emojis to be properly rendered, makes it so the
+;; titlebar is dark and not transparent and fixes a few related frame issues.
+;; Also fixes and enables smoother scrolling for macOS.
 
-;; Linux: Configures and enables copying and pasting between Emacs and X11 and
-;; choses the builtin tooltips over GTK.
+;; Neptune (NixOS): Configures and enables copying and pasting between Emacs and
+;; X11 and choses the builtin tooltips over GTK.
 
 ;;; Code:
 
@@ -34,7 +34,7 @@
        select-enable-primary t)                                       ;; Use the primary clipboard
 
 (cond
- ((eq system-type 'darwin) ;; macOS configuration
+ ((string= (system-name) "jupiter") ;; macOS configuration
   (progn
     (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
     (dolist (pair '((ns-transparent-titlebar . nil)
@@ -50,11 +50,13 @@
            mouse-wheel-flip-direction t ;; Change scrolling to new macOS defaults
            mouse-wheel-tilt-scroll t))) ;; Change scrolling to new macOS defaults
 
- ((eq system-type 'gnu/linux) ;; Linux configuration
+ ((string= (system-name) "neptune") ;; Linux configuration
   (progn
     (defvar x-gtk-use-system-tooltips nil)
     (csetq x-gtk-use-system-tooltips nil     ;; Use the builtin Emacs tooltips
-           x-underline-at-descent-line t)))) ;; Fix for not using GTK tooltips
+           x-underline-at-descent-line t     ;; Fix for not using GTK tooltips
+           amalthea-font-size 120            ;; Make the font smaller on Neptune
+           amalthea-line-spacing 0.10))))    ;; And the spacing a little less
 
-(provide 'core-os)
-;;; core-os.el ends here
+(provide 'core-system)
+;;; core-system.el ends here
