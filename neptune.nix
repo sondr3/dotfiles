@@ -94,7 +94,6 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.pulseaudio.support32Bit = true;
@@ -106,7 +105,7 @@
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.layout = "us,no";
-  services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.xkbOptions = "grp:alt_caps_toggle";
 
   services.redshift.enable = true;
   services.redshift.provider = "geoclue2";
@@ -131,7 +130,7 @@
   users.users.sondre = {
     isNormalUser = true;
     description = "Sondre Nilsen";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" ];
     shell = pkgs.fish;
   };
 
