@@ -96,6 +96,7 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.pulseaudio.support32Bit = true;
 
   # OpenGL
@@ -106,6 +107,14 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.layout = "us,no";
   services.xserver.xkbOptions = "eurosign:e";
+
+  services.redshift.enable = true;
+  services.redshift.provider = "geoclue2";
+  services.redshift.temperature.day = 5500;
+  services.redshift.temperature.night = 3500;
+
+  services.fstrim.enable = true;
+
 
   # Enable touchpad support.
   # services.xserver.libinput.enable = true;
