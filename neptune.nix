@@ -94,6 +94,7 @@
   # services.printing.enable = true;
 
   # Enable sound.
+  sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.pulseaudio.support32Bit = true;
@@ -109,9 +110,6 @@
 
   services.redshift.enable = true;
   services.redshift.provider = "geoclue2";
-  services.redshift.temperature.day = 5500;
-  services.redshift.temperature.night = 3500;
-
   services.fstrim.enable = true;
 
 
@@ -130,7 +128,7 @@
   users.users.sondre = {
     isNormalUser = true;
     description = "Sondre Nilsen";
-    extraGroups = [ "wheel" "networkmanager" "audio" ];
+    extraGroups = [ "wheel" "networkmanager" ];
     shell = pkgs.fish;
   };
 
