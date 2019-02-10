@@ -69,9 +69,6 @@
     # useful
     gnupg unzip
 
-    # plasma
-    redshift-plasma-applet
-
     # emacs
     (import ./emacs/emacs.nix { inherit pkgs; })
   ];
