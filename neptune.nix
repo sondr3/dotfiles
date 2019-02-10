@@ -69,6 +69,9 @@
     # useful
     gnupg unzip
 
+    # plasma
+    redshift-plasma-applet
+
     # emacs
     (import ./emacs/emacs.nix { inherit pkgs; })
   ];
@@ -94,7 +97,6 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.pulseaudio.support32Bit = true;
@@ -109,7 +111,10 @@
   services.xserver.xkbOptions = "grp:alt_caps_toggle";
 
   services.redshift.enable = true;
-  services.redshift.provider = "geoclue2";
+  services.redshift.longitude = "63.39";
+  services.redshift.latitude = "5.33";
+  services.redshift.temperature.day = 6500;
+  services.redshift.temperature.night = 3500;
   services.fstrim.enable = true;
 
 
