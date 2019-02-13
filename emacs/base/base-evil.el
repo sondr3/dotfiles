@@ -31,8 +31,7 @@
                        "k" 'evil-normal-state))
   :init
   (progn
-    (csetq evil-want-integration nil    ;; Compatibility settings for `evil-collection'
-           evil-want-keybinding nil     ;; Same as above
+    (csetq evil-want-keybinding nil     ;; Same as above
            evil-search-module 'swiper)) ;; Use Swiper for searches
   :config (evil-mode))
 
@@ -44,10 +43,8 @@
 (use-package evil-collection
   :after evil
   :commands evil-collection-init
-  :init
-  (progn
-    (csetq evil-collection-setup-minibuffer t)
-    (evil-collection-init)))
+  :init (csetq evil-collection-setup-minibuffer t)
+  :config (evil-collection-init))
 
 ;;; `evil-lion':
 ;; Ever wanted to align a long bunch of variables at their equal signs? Look no
