@@ -108,8 +108,8 @@
   services.xserver.xkbOptions = "grp:alt_caps_toggle";
 
   services.redshift.enable = true;
-  services.redshift.longitude = "63.39";
-  services.redshift.latitude = "5.33";
+  services.redshift.latitude = "63.39";
+  services.redshift.longitude = "5.33";
   services.redshift.temperature.day = 6500;
   services.redshift.temperature.night = 3500;
   services.fstrim.enable = true;
