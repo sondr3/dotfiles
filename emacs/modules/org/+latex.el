@@ -111,6 +111,7 @@
          org-latex-tables-booktabs t                         ;; Always use booktabs for better looking tables
          org-latex-prefer-user-labels t                      ;; Prefer labels I make myself please
          org-latex-listings t                                ;; Make SRC blocks export to code blocks in LaTeX
+         org-export-with-smart-quotes t                      ;; Export quotes smartly
          org-latex-pdf-process
          (list "latexmk -pvc- %f -cd %o")                    ;; Use `latexmk' to generate PDF
          org-latex-listings-options                          ;; Configure source code exporting
@@ -152,12 +153,13 @@
   (add-to-list 'org-latex-listings-langs '(java "Java") t))
 
 ;;; `by-backend':
-;; This is a really neat macro that allows us to use different export settings
-;; for different exports, i.e. export some LaTeX-code as an image when
-;; exporting to HTML but stay as LaTeX when exporting to LaTeX.
 (defmacro by-backend (&rest body)
+  "Change output depending on which exporter is used.
+
+For example, if BODY is `latex', then export it as LaTeX code but
+if BODY is `html' then convert it to a PNG to allow easy
+embedding in web pages."
   `(case org-export-current-backend ,@body))
 
 (provide '+latex)
-
 ;;; +latex.el ends here
