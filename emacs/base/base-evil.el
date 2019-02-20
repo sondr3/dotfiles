@@ -31,8 +31,7 @@
                        "k" 'evil-normal-state))
   :init
   (progn
-    (csetq evil-want-integration nil    ;; Compatibility settings for `evil-collection'
-           evil-want-keybinding nil     ;; Same as above
+    (csetq evil-want-keybinding nil     ;; Same as above
            evil-search-module 'swiper)) ;; Use Swiper for searches
   :config (evil-mode))
 
