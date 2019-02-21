@@ -66,7 +66,7 @@
   (require '+latex)
   (require '+markdown))
 (progn ;; Load personal configuration
-  (require 'amalthea-org))
+  (require '+org))
 
 (provide 'modules)
 ;;; modules.el ends here

@@ -1,4 +1,4 @@
-;;; amalthea-org.el --- Org mode support -*- lexical-binding: t -*-
+;;; +org.el --- Org mode support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -90,6 +90,5 @@
 (require '+beamer)
 (require '+latex)
 
-(provide 'amalthea-org)
-
-;;; amalthea-org.el ends here
+(provide '+org)
+;;; +org.el ends here
