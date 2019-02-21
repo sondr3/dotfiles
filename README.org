@@ -2,30 +2,24 @@
 #+AUTHOR: Sondre Nilsen
 #+EMAIL: nilsen.sondre@gmail.com
 
-I'm in the process of converting all my dotfiles into Org mode files that will
-tangle them into their respective files, but it's slow moving because I'm a lazy
-sod.
+#+BEGIN_QUOTE
+These are my dotfiles, there are many like them but these ones are mine.
 
-* ~dotfiles~
-These are my dotfiles. There are many like them but these ones are mine. And
-for the most part the hardly work, even for me. So beware.
+    -- Dotfiles Creed
+#+END_QUOTE
 
 * Applications
 ** Emacs
-
-At the moment I'm running the latest development version of Emacs, but as soon
-as it's released I'll switch to the stable version. I only really use it because
-of the great new line numbering. My settings can be found in the [[https://github.com/sondr3/dotfiles/blob/master/emacs.org][emacs.org]] file.
-** (Neo)vim
-I use Neovim as my editor in the terminal for small changes to configuration
-files or other such small edits. It's installed via Pacman, the settings can be
-found in the [[https://github.com/sondr3/dotfiles/blob/master/vim.org][vim.org]] file.
+I'm currently running the latest stable release of Emacs, you find my
+distribution of Emacs called Amalthea in the ~emacs~ directory or you can [[file:emacs/README.org][read the
+README.]]
+** Neovim
+I'm really not using this at all besides very small and quick fixes to
+configuration files, so my configuration is really out of date...
 ** Terminal
 I run a small variety of terminals, at the moment my main terminal is Konsole
-with Yakuake as a drop-down terminal with Terminator on the side when I want to.
-
+with Yakuake as a drop-down terminal.
 * Usage
-
 If you really want to use some of my configurations I recommend you instead look
 at them and copy the sections that look helpful. I've configured my tools to my
 liking and while I can answer some questions about the settings I will not help
