@@ -85,8 +85,8 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 8000 ];
+  networking.firewall.allowedUDPPorts = [ ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -108,8 +108,8 @@
   services.xserver.xkbOptions = "grp:alt_caps_toggle";
 
   services.redshift.enable = true;
-  services.redshift.longitude = "63.39";
-  services.redshift.latitude = "5.33";
+  services.redshift.latitude = "63.39";
+  services.redshift.longitude = "5.33";
   services.redshift.temperature.day = 6500;
   services.redshift.temperature.night = 3500;
   services.fstrim.enable = true;
