@@ -1,0 +1,32 @@
+#+TITLE: Amalthea modules
+#+AUTHOR: Sondre Nilsen
+#+DATE: 2019-02-21
+
+* What
+This directory and its various sub-directories contains all the various ~modules~
+that are bundled with Amalthea. A module is simply some piece of configuration
+around a specific language, tool and so on. This is done very similar to how
+Spacemacs and Doom does theirs, mostly because some of the issues I've ran into
+were solved by their system without me realizing.
+
+** Naming system
+Most everything is simply ~+<thing>.el~, and this is probably the biggest thing
+I've stolen from the two above distributions of Emacs. I ran into naming issues
+constantly, initially I had a problem with my shell scripting configuration --
+called ~shell.el~ not working when I started Emacs but it worked when I evaluated
+its buffer. After some time bashing my head against the wall I figured out the
+reason was that I was doing ~(require 'shell)~ in my ~modules.el~ file, which loaded
+an unrelated ~shell.el~ file instead of mine, so I switched to calling everything
+~folder-<thing>~, which solved it, mostly.
+
+It did not solve my issues for Org-mode. Org modules are creatively called
+~org-<name>~ or ~ox-<name>~, which I ran into when configuring my agenda, I could
+just switch things up, and call things that started with ~ox-~ for ~org-~ and vice
+versa, but that felt kinda dirty.
+
+This is where I realized why Spacemacs and Doom called all their modules for
+~+<name>~, there wouldn't be any collisions with anything! Neat. So that's how I'm
+doing things as well.
+** Excluding, including...
+Because of the system above, if some module is behaving funky or you don't want
+to use it, simply disable it from loading in ~modules.el~, it's that easy.
