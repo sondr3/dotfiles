@@ -1,4 +1,4 @@
-;;; text-latex.el --- LaTeX support -*- lexical-binding: t -*-
+;;; +latex.el --- LaTeX support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -173,5 +173,5 @@
     (csetq ebib-bibtex-dialect 'biblatex                              ;; Use same dialect as BibTeX
            ebib-preload-bib-files '("~/Code/UiB/bibliography.bib")))) ;; Default location of bibliography
 
-(provide 'text-latex)
-;;; text-latex.el ends here
+(provide '+latex)
+;;; +latex.el ends here

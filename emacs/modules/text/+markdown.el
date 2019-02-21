@@ -1,4 +1,4 @@
-;;; text-markdown.el --- Markdown support -*- lexical-binding: t -*-
+;;; +markdown.el --- Markdown support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -33,5 +33,5 @@
          markdown-gfm-additional-languages '("sh")                                  ;; Add `sh' as a language to convert
          markdown-fontify-code-blocks-natively t))                                  ;; Highlight code using the languages major mode
 
-(provide 'text-markdown)
-;;; lang-markdown.el ends here
+(provide '+markdown)
+;;; +markdown.el ends here

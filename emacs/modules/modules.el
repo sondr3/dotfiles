@@ -50,7 +50,7 @@
   (add-to-list 'load-path amalthea-modules-org-dir t))
 
 ;;; Load modules
-(progn ;; Load all languages
+(progn ;; Load language modules
   (require '+assembly)
   (require '+elisp)
   (require '+haskell)
@@ -61,7 +61,9 @@
   (require '+typescript))
 (require 'tools)
 (require 'amalthea-org)
-(require 'text)
+(progn ;; Load text editing modules
+  (require '+latex)
+  (require '+markdown))
 
 (provide 'modules)
 ;;; modules.el ends here
