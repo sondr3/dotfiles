@@ -1,4 +1,4 @@
-;;; lang-lsp.el --- Language Server Protocol -*- lexical-binding: t -*-
+;;; +lsp.el --- Language Server Protocol -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -44,5 +44,5 @@
   :commands company-lsp
   :init (push 'company-lsp company-backends))
 
-(provide 'lang-lsp)
-;;; lang-lsp.el ends here
+(provide '+lsp)
+;;; +lsp.el ends here

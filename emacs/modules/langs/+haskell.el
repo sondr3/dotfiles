@@ -1,4 +1,4 @@
-;;; lang-haskell.el --- Haskell support -*- lexical-binding: t -*-
+;;; +haskell.el --- Haskell support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -95,5 +95,5 @@
 
 (delight '((haskell-mode "" :major)))
 
-(provide 'lang-haskell)
-;;; lang-haskell.el ends here
+(provide '+haskell)
+;;; +haskell.el ends here

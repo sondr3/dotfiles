@@ -1,4 +1,4 @@
-;;; lang-shell.el --- Amalthea support for shell scripting -*- lexical-binding: t -*-
+;;; +shell.el --- Amalthea support for shell scripting -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -56,5 +56,5 @@
   :after company
   :init (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
 
-(provide 'lang-shell)
-;;; lang-shell.el ends here
+(provide '+shell)
+;;; +shell.el ends here

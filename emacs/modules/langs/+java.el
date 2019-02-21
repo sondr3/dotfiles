@@ -1,4 +1,4 @@
-;;; lang-assembly.el --- Assembly code for Amalthea -*- lexical-binding: t -*-
+;;; +java.el --- Rudimentary Java support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -17,11 +17,13 @@
 
 ;;; Commentary:
 
-;; Adds support for `nasm-mode' to supercede the builtin `asm-mode'.
+;; Because fuck me, right? No, I only use it so that indentation and
+;; auto-completion works when taking notes, I would never, ever write Java in
+;; Emacs. I don't hate myself /that/ much.
 
 ;;; Code:
 
-(add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
+(general-add-hook 'java-mode-hook #'electric-pair-local-mode)
 
-(provide 'lang-assembly)
-;;; lang-assembly.el ends here
+(provide '+java)
+;;; +java.el ends here

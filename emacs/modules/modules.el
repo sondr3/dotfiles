@@ -33,10 +33,11 @@
   "Path to configuration of text editing tools in Amalthea.")
 
 (defconst amalthea-modules-org-dir (expand-file-name "org/" amalthea-modules-dir)
-  "Path to configuration of org-mode and related packages in Amalthea.")
+  "Path to configuration of org-mode' and related packages in Amalthea.")
 
 ;;; Functions
 (defun amalthea--byte-compile-module-dirs ()
+  "Byte compile all modules that Amalthea bundles."
   (interactive)
   (byte-recompile-directory amalthea-modules-dir 0 t)
   (byte-compile-file buffer-file-name))
@@ -49,7 +50,15 @@
   (add-to-list 'load-path amalthea-modules-org-dir t))
 
 ;;; Load modules
-(require 'langs)
+(progn ;; Load all languages
+  (require '+assembly)
+  (require '+elisp)
+  (require '+haskell)
+  (require '+shell)
+  (require '+json)
+  (require '+java)
+  (require '+nix)
+  (require '+typescript))
 (require 'tools)
 (require 'amalthea-org)
 (require 'text)

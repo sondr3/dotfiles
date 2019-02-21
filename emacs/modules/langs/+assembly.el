@@ -1,4 +1,4 @@
-;;; lang-json.el --- JSON support for Amalthea -*- lexical-binding: t -*-
+;;; +assembly.el --- Assembly code for Amalthea -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -17,20 +17,11 @@
 
 ;;; Commentary:
 
-;; Simple configuration for editing and viewing JSON files.
+;; Adds support for `nasm-mode' to supercede the builtin `asm-mode'.
 
 ;;; Code:
 
-;;; `json-mode':
-;; This is really nothing fancy, we bind some keys and set the indentation to
-;; it's proper size.
-(use-package json-mode
-  :general
-  (amalthea-major-leader 'json-mode-map
-    "r" '(json-mode-beautify :wk "reformat buffer")
-    "p" '(json-mode-show-path :wk "show JSON keys")
-    "P" '(json-mode-kill-path :wk "yank JSON keys"))
-  :init (csetq js-indent-level 2))
+(add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
 
-(provide 'lang-json)
-;;; lang-json.el ends here
+(provide '+assembly)
+;;; +assembly.el ends here

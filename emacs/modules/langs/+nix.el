@@ -1,4 +1,4 @@
-;;; langs.el --- Programming language support for Amalthea -*- lexical-binding: t -*-
+;;; +nix.el --- Nix support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -17,18 +17,16 @@
 
 ;;; Commentary:
 
-;; Loads the configurations for all the various programming languages that
-;; Amalthea supports.
+;; Nix language support for Emacs, for more information, see
+;; `https://nixos.org/'. This adds support for indenting and auto completion for
+;; both `.nix' configuration files and NixOS services, programs etc.
 
 ;;; Code:
 
-(require 'lang-elisp)
-(require 'lang-haskell)
-(require 'lang-shell)
-(require 'lang-json)
-(require 'lang-java)
-(require 'lang-nix)
-(require 'lang-typescript)
+;;; `nix-mode':
+;; Adds support for editing and working with Nix expressions, we don't even need
+;; configuration for this! Set it and forget it.
+(use-package nix-mode)
 
-(provide 'langs)
-;;; langs.el ends here
+(provide '+nix)
+;;; +nix.el ends here

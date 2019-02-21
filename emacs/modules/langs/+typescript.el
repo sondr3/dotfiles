@@ -1,4 +1,4 @@
-;;; lang-typescript.el --- TypeScript support -*- lexical-binding: t -*-
+;;; +typescript.el --- TypeScript support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -23,7 +23,7 @@
 
 ;;; `lsp':
 ;; Load LSP and the associated packages so that it can be used with TypeScript.
-(require 'lang-lsp)
+(require '+lsp)
 
 ;;; `prettier-js':
 ;; Automatically prettify buffers.
@@ -37,5 +37,5 @@
   :init (csetq typescript-indent-level amalthea-tab-width
                js-indent-level amalthea-tab-width))
 
-(provide 'lang-typescript)
-;;; lang-typescript.el ends here
+(provide '+typescript)
+;;; +typescript.el ends here

@@ -1,4 +1,4 @@
-;;; lang-java.el --- Rudimentary Java support -*- lexical-binding: t -*-
+;;; +json.el --- JSON support for Amalthea -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -17,13 +17,20 @@
 
 ;;; Commentary:
 
-;; Because fuck me, right? No, I only use it so that indentation and
-;; auto-completion works when taking notes, I would never, ever write Java in
-;; Emacs. I don't hate myself /that/ much.
+;; Simple configuration for editing and viewing JSON files.
 
 ;;; Code:
 
-(general-add-hook 'java-mode-hook #'electric-pair-local-mode)
+;;; `json-mode':
+;; This is really nothing fancy, we bind some keys and set the indentation to
+;; it's proper size.
+(use-package json-mode
+  :general
+  (amalthea-major-leader 'json-mode-map
+    "r" '(json-mode-beautify :wk "reformat buffer")
+    "p" '(json-mode-show-path :wk "show JSON keys")
+    "P" '(json-mode-kill-path :wk "yank JSON keys"))
+  :init (csetq js-indent-level 2))
 
-(provide 'lang-java)
-;;; lang-java.el ends here
+(provide '+json)
+;;; +json.el ends here
