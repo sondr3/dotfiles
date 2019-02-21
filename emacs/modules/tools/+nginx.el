@@ -1,4 +1,4 @@
-;;; tool-docker.el --- Docker support -*- lexical-binding: t -*-
+;;; +nginx.el --- Nginx configuration -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -17,19 +17,17 @@
 
 ;;; Commentary:
 
-;; Docker configurations.
+;; Configuration for Nginx config files.
 
 ;;; Code:
 
-;;; `dockerfile-mode':
-;; Gives you syntax highlighting and completion for Docker.
-(use-package dockerfile-mode
-  :commands dockerfile-mode
-  :general
-  (amalthea-major-leader dockerfile-mode-map
-    "b" 'dockerfile-build-buffer
-    "B" 'dockerfile-build-no-cache-buffer)
-  :mode "\\Dockerfile\\'")
+(use-package nginx-mode)
 
-(provide 'tool-docker)
-;;; tool-docker.el ends here
+(use-package company-nginx
+  :after nginx-mode
+  :ghook ('nginx-mode-hook #'company-nginx-keywords))
+(with-eval-after-load 'nginx-mode
+  (general-add-hook 'nginx-mode-hook #'company-nginx-keywords))
+
+(provide '+nginx)
+;;; +nginx.el ends here

@@ -59,11 +59,14 @@
   (require '+java)
   (require '+nix)
   (require '+typescript))
-(require 'tools)
-(require 'amalthea-org)
+(progn ;; Load assorted tools
+  (require '+docker)
+  (require '+nginx))
 (progn ;; Load text editing modules
   (require '+latex)
   (require '+markdown))
+(progn ;; Load personal configuration
+  (require 'amalthea-org))
 
 (provide 'modules)
 ;;; modules.el ends here

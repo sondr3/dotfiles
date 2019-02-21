@@ -1,4 +1,4 @@
-;;; tools.el --- Tools configuration -*- lexical-binding: t -*-
+;;; +docker.el --- Docker support -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -17,12 +17,19 @@
 
 ;;; Commentary:
 
-;; Configuration for tools, utilities and such things.
+;; Docker configurations.
 
 ;;; Code:
 
-(require 'tool-docker)
-(require 'tool-nginx)
+;;; `dockerfile-mode':
+;; Gives you syntax highlighting and completion for Docker.
+(use-package dockerfile-mode
+  :commands dockerfile-mode
+  :general
+  (amalthea-major-leader dockerfile-mode-map
+    "b" 'dockerfile-build-buffer
+    "B" 'dockerfile-build-no-cache-buffer)
+  :mode "\\Dockerfile\\'")
 
-(provide 'tools)
-;;; tools.el ends here
+(provide '+docker)
+;;; +docker.el ends here
