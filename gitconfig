@@ -1,0 +1,13 @@
+[user]
+	name = Sondre Nilsen
+	email = nilsen.sondre@gmail.com
+	signingkey = F10616FD7E9D2C84 
+[push]
+	default = current
+	followTags = true
+[commit]
+	gpgsign = true
+[alias]
+	lg = log --color --graph --oneline --decorate
+[pull]
+	default = current
