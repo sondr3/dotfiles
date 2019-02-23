@@ -12,24 +12,12 @@ in
     auctex
     delight
     undo-tree
-  ]) ++ (with epkgs.melpaStablePackages; [
-    auto-compile
-    company
-    gitattributes-mode
-    gitconfig-mode
-    gitignore-mode
-    hl-todo
-    hydra
-    macrostep
-    magit
-    markdown-mode
-    no-littering
-    projectile
-    yasnippet
   ]) ++ (with epkgs.melpaPackages; [
     amx
     apropospriate-theme
     auctex-latexmk
+    auto-compile
+    company
     company-auctex
     company-lsp
     company-math
@@ -57,9 +45,14 @@ in
     flycheck-haskell
     flyspell-correct-ivy
     general
+    gitattributes-mode
+    gitconfig-mode
+    gitignore-mode
     haskell-mode
     helpful
+    hl-todo
     hlint-refactor
+    hydra
     intero
     ivy
     ivy-bibtex
@@ -68,14 +61,19 @@ in
     latex-extra
     lsp-mode
     lsp-ui
+    macrostep
     magic-latex-buffer
+    magit
+    markdown-mode
     nasm-mode
     nginx-mode
     nix-mode
+    no-littering
     org-ref
     org-super-agenda
     outshine
     prettier-js
+    projectile
     rainbow-delimiters
     rust-mode
     smartparens
@@ -85,6 +83,7 @@ in
     which-key
     ws-butler
     yaml-mode
+    yasnippet
     yasnippet-snippets
   ]) ++ (with epkgs.orgPackages; [
     org
