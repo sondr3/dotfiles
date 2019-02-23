@@ -39,8 +39,7 @@
 (defun amalthea--byte-compile-module-dirs ()
   "Byte compile all modules that Amalthea bundles."
   (interactive)
-  (byte-recompile-directory amalthea-modules-dir 0 t)
-  (byte-compile-file buffer-file-name))
+  (byte-recompile-directory amalthea-modules-dir 0 t))
 
 ;;; Add all the languages to the load path
 (eval-and-compile
