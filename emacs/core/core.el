@@ -29,25 +29,25 @@
 
 ;;; Constants
 
-(defconst amalthea-version "0.1.0"
+(defvar amalthea-version "0.1.0"
   "Current version of Amalthea.")
 
-(defconst amalthea-emacs-dir (eval-when-compile (file-truename user-emacs-directory))
+(defvar amalthea-emacs-dir (eval-when-compile (file-truename user-emacs-directory))
   "Path to the current Emacs directory.")
 
-(defconst amalthea-core-dir (expand-file-name "core/" amalthea-emacs-dir)
+(defvar amalthea-core-dir (expand-file-name "core/" amalthea-emacs-dir)
   "Core functionality and packages live in this directory.")
 
-(defconst amalthea-base-dir (expand-file-name "base/" amalthea-emacs-dir)
+(defvar amalthea-base-dir (expand-file-name "base/" amalthea-emacs-dir)
   "Base functionality that isn't a core part of Amalthea.")
 
-(defconst amalthea-modules-dir (expand-file-name "modules/" amalthea-emacs-dir)
+(defvar amalthea-modules-dir (expand-file-name "modules/" amalthea-emacs-dir)
   "Modules for languages, features and the world lives here.")
 
-(defconst amalthea-utils-dir (expand-file-name "utils/" amalthea-emacs-dir)
+(defvar amalthea-utils-dir (expand-file-name "utils/" amalthea-emacs-dir)
   "Utility functions and packages for Amalthea.")
 
-(defconst amalthea-dotfiles-dir (expand-file-name ".dotfiles" (getenv "HOME"))
+(defvar amalthea-dotfiles-dir (expand-file-name ".dotfiles" (getenv "HOME"))
   "Location of dotfiles for Amalthea.")
 
 ;;; Amalthea group and customizations
@@ -131,8 +131,7 @@
 ;;; Launch
 
 ;; Ensure directories exists before needing them and load the core configuration
-(eval-and-compile
-  (add-to-list 'load-path amalthea-core-dir t))
+(add-to-list 'load-path amalthea-core-dir t)
 
 (require 'core-packages)
 (require 'core-system)
