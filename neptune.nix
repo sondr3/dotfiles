@@ -69,6 +69,9 @@
     # useful
     gnupg unzip
 
+    # development
+    binutils gcc gnumake openssl pkgconfig
+
     # emacs
     (import ./emacs/emacs.nix { inherit pkgs; })
   ];
@@ -111,7 +114,7 @@
   services.redshift.latitude = "63.39";
   services.redshift.longitude = "5.33";
   services.redshift.temperature.day = 6500;
-  services.redshift.temperature.night = 3500;
+  services.redshift.temperature.night = 2300;
   services.fstrim.enable = true;
 
 
