@@ -88,8 +88,13 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 8000 ];
-  networking.firewall.allowedUDPPorts = [ 34197 ];
+  networking.firewall.allowedTCPPorts = [ 
+    8000 # Assorted web stuff
+    3000 # React
+  ];
+  networking.firewall.allowedUDPPorts = [ 
+    34197 # Factorio
+  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
