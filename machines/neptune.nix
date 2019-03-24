@@ -145,6 +145,8 @@
 
   home-manager.users.sondre = { pkgs, ... }: {
     imports = [
+      # Common settings
+      ../configuration/home/common.nix
       # Git configuration
       ../configuration/home/git.nix
       # Fish shell
