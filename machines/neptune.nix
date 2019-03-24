@@ -145,6 +145,10 @@
   };
 
   home-manager.users.sondre = { pkgs, ... }: {
+    imports = [
+      # Git configuration
+      ../configuration/home/git.nix
+    ];
     home.packages = with pkgs; [
       httpie
     ];
