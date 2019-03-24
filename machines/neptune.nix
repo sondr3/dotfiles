@@ -151,6 +151,8 @@
       ../configuration/home/git.nix
       # Fish shell
       ../configuration/home/fish.nix
+      # JetBrains products
+      ../configuration/home/jetbrains.nix
     ];
     home.packages = with pkgs; [
       httpie
