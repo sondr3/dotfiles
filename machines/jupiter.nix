@@ -5,9 +5,9 @@
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     # Disable the fucking Nvidia card
-    ./vgaswitcheroo.nix
+    ../modules/vgaswitcheroo.nix
     # Custom configuration of Emacs
-    ./emacs.nix
+    ../emacs/emacs.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
