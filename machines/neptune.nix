@@ -141,13 +141,14 @@
     isNormalUser = true;
     description = "Sondre Nilsen";
     extraGroups = [ "wheel" "networkmanager" ];
-    shell = pkgs.fish;
   };
 
   home-manager.users.sondre = { pkgs, ... }: {
     imports = [
       # Git configuration
       ../configuration/home/git.nix
+      # Fish shell
+      ../configuration/home/fish.nix
     ];
     home.packages = with pkgs; [
       httpie
