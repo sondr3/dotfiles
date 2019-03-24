@@ -8,6 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./neptune-hardware.nix
+      # Add home-manager module
+      "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz}/nixos"
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -140,6 +142,12 @@
     description = "Sondre Nilsen";
     extraGroups = [ "wheel" "networkmanager" ];
     shell = pkgs.fish;
+  };
+
+  home-manager.users.sondre = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      httpie
+    ];
   };
 
   # This value determines the NixOS release with which your system is to be
