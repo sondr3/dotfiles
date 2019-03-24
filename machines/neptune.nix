@@ -155,6 +155,8 @@
       ../configuration/home/jetbrains.nix
       # MPV
       ../configuration/home/mpv.nix
+      # LaTeX
+      ../configuration/home/latex.nix
     ];
     home.packages = with pkgs; [
       httpie
