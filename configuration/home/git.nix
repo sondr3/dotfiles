@@ -11,6 +11,8 @@
     };
 
     aliases = {
+      s = "status";
+      b = "branch -v";
       lg = "log --color --graph --oneline --decorate";
     };
 
