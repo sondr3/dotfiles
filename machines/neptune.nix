@@ -153,6 +153,8 @@
       ../configuration/home/fish.nix
       # JetBrains products
       ../configuration/home/jetbrains.nix
+      # MPV
+      ../configuration/home/mpv.nix
     ];
     home.packages = with pkgs; [
       httpie
