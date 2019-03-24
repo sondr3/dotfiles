@@ -75,7 +75,7 @@
     binutils gcc gnumake openssl pkgconfig
 
     # emacs
-    (import ./emacs/emacs.nix { inherit pkgs; })
+    (import ../emacs/emacs.nix { inherit pkgs; })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
