@@ -8,19 +8,29 @@ These are my dotfiles, there are many like them but these ones are mine.
     -- Dotfiles Creed
 #+END_QUOTE
 
-* Applications
-** Emacs
-I'm currently running the latest stable release of Emacs, you find my
-distribution of Emacs called Amalthea in the ~emacs~ directory or you can [[file:emacs/README.org][read the
-README.]]
-** Neovim
-I'm really not using this at all besides very small and quick fixes to
-configuration files, so my configuration is really out of date...
-** Terminal
-I run a small variety of terminals, at the moment my main terminal is Konsole
-with Yakuake as a drop-down terminal.
-* Usage
-If you really want to use some of my configurations I recommend you instead look
-at them and copy the sections that look helpful. I've configured my tools to my
-liking and while I can answer some questions about the settings I will not help
-with errors if you actually use them. /You have been warned./
+
+* Why
+For the longest time I've struggled with dotfiles and their management, ranging
+from attempts of just adding them to this repository and symlinking them to
+their correct place, to trying to document them and configure the package in the
+same file using Emacs' org-mode and tangling the output but then I cannot keep
+up with documenting and using them... up to the point where I discovered NixOS.
+
+NixOS allows you to declaratively configure your whole system, specifying
+packages, settings and users from one or more configuration files and then
+building out the whole system for you. This was a revelation for me with regards
+to managing a Linux system, no more finding some module header on Arch Wiki,
+setting and then subsequently forgetting where I set it and how to find it
+again, everything is built from a single source.
+
+Once you fall in love with this way of configuring your system, finding
+home-manager is not a long jump. It is what NixOS is to Linux what GNU Stow is
+to managing dotfiles.
+* Structure
+This repository is configured and managed by folders that I think make sense, at
+least to me.
+
+- ~machines~ :: Machine or host specific configuration
+- ~configuration~ :: Configuration of software, machines, services etc
+- ~modules~ :: Packages or services that requires their own configuration module
+- ~scripts~ :: Bash scripts that might be useful
