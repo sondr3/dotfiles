@@ -141,23 +141,15 @@
     isNormalUser = true;
     description = "Sondre Nilsen";
     extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.fish;
   };
 
   home-manager.users.sondre = { pkgs, ... }: {
     imports = [
-      # Common settings
-      ../configuration/home/common.nix
-      # Git configuration
-      ../configuration/home/git.nix
-      # Fish shell
-      ../configuration/home/fish.nix
-      # JetBrains products
-      ../configuration/home/jetbrains.nix
-      # MPV
-      ../configuration/home/mpv.nix
-      # LaTeX
-      ../configuration/home/latex.nix
+      # Import all home configurations
+      ../configuration/module-list.nix
     ];
+
     home.packages = with pkgs; [
       httpie
     ];
