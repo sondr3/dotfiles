@@ -46,5 +46,20 @@
       "typescript.updateImportsOnFileMove.enabled" = "always";
       "update.channel" = "none";
     };
+    extensions = [
+      # cmstead.jsrefactor
+      # CoenraadS.bracket-pair-colorizer
+      # Compulim.compulim-vscode-closetag
+      # dbaeumer.vscode-eslint
+      # esbenp.prettier-vscode
+      # formulahendry.auto-rename-tag
+      # jpoissonnier.vscode-styled-components
+      # mgmcdermott.vscode-language-babel
+      # naumovs.color-highlight
+      # shinnn.stylelint
+      # silvenon.mdx
+      # vscode-icons-team.vscode-icons
+      # vscodevim.vim
+    ];
   };
 }
