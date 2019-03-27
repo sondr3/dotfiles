@@ -40,11 +40,14 @@
         }
       ];
       "explorer.confirmDelete" = false;
+      "workbench.statusBar.feedback.visible" = false;
       "workbench.colorTheme" = "Default Light+";
       "workbench.iconTheme" = "vscode-icons";
+      "search.showLineNumbers" = true;
       "javascript.updateImportsOnFileMove.enabled" = "always";
       "typescript.updateImportsOnFileMove.enabled" = "always";
       "update.channel" = "none";
+      "telemetry.enableTelemetry" = false;
     };
     extensions = [
       # cmstead.jsrefactor
