@@ -1,11 +1,13 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
+  home.packages = if !pkgs.stdenv.isDarwin
+  then (with pkgs; [
     jetbrains.webstorm
     jetbrains.pycharm-professional
     jetbrains.clion
-  ];
+  ]) else [];
+
   home.file.".ideavimrc".text = ''
     set surround
     set hlsearch
