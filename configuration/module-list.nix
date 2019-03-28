@@ -8,7 +8,7 @@
     ./home/jetbrains.nix
     ./home/latex.nix
     ./home/mpv.nix
-    ./home/neovim/default.nix
+    ./home/neovim.nix
     ./home/vscode.nix
   ];
 }
