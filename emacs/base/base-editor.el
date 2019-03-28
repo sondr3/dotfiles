@@ -49,12 +49,7 @@
 ;; mode aggressively indents code whenever you change any part of a code block.
 (use-package aggressive-indent
   :delight
-  :commands global-aggressive-indent-mode
-  :init (global-aggressive-indent-mode t)
-  :config
-  (progn
-    (dolist (mode '(haskell-mode nix-mode typescript-mode))
-      (add-to-list 'aggressive-indent-excluded-modes mode))))
+  :ghook ('emacs-lisp-mode-hook #'aggressive-indent-mode))
 
 ;;; `ws-butler':
 ;; This is something that you could fix by using a builtin helper function that
