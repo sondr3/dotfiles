@@ -38,7 +38,6 @@ in
     evil-goggles
     evil-lion
     evil-magit
-    evil-smartparens
     evil-surround
     exec-path-from-shell
     flycheck
@@ -76,7 +75,6 @@ in
     projectile
     rainbow-delimiters
     rust-mode
-    smartparens
     swiper
     typescript-mode
     use-package

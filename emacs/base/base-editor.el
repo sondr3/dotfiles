@@ -56,15 +56,6 @@
     (dolist (mode '(haskell-mode nix-mode typescript-mode))
       (add-to-list 'aggressive-indent-excluded-modes mode))))
 
-;;; `smartparens`:
-;; Like `electric-pair-mode`, but better. This is a minor mode for working with
-;; pairs of delimiters, not just parentheses as the name implies. It's supposed
-;; to be a superset of `paredit` and `electric-pair-mode`.
-(use-package smartparens
-  :delight
-  :init (require 'smartparens-config)
-  :ghook ('prog-mode-hook #'smartparens-strict-mode))
-
 ;;; `ws-butler':
 ;; This is something that you could fix by using a builtin helper function that
 ;; removes newlines at the end of files etc, but I prefer using this package

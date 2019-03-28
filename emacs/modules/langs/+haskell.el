@@ -53,7 +53,7 @@
   :after haskell-mode
   :commands intero-global-mode
   :delight " λ"
-  :ghook ('intero-repl-mode-hook (list #'add-pragmatapro-prettify-symbols-alist #'smartparens-mode))
+  :ghook ('intero-repl-mode-hook (list #'add-pragmatapro-prettify-symbols-alist))
   :general
   (amalthea-major-leader 'haskell-mode-map
     "." '(intero-goto-definition :wk "goto definition")
