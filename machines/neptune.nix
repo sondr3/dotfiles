@@ -9,7 +9,10 @@
     [ # Include the results of the hardware scan.
       ./neptune-hardware.nix
       # Add home-manager module
-      "${builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz}/nixos"
+      "${builtins.fetchGit {
+        ref = "master";
+        url = "https://github.com/rycee/home-manager";
+      }}/nixos"
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -134,7 +137,7 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-  };  
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sondre = {

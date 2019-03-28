@@ -5,7 +5,7 @@ let
 in
 {
   programs.neovim = {
-    enable = true;
+    enable = if pkgs.stdenv.isDarwin then true else false;
     viAlias = true;
     vimAlias = true;
     withNodeJs = true;
@@ -14,7 +14,7 @@ in
       packages.myVimPackage = with vimPlugins; {
         start = [
           coc-nvim
-	];
+	      ];
       };
     };
   };
