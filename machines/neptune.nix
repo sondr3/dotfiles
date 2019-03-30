@@ -10,7 +10,7 @@
       ./neptune-hardware.nix
       # Add home-manager module
       "${builtins.fetchGit {
-        ref = "master";
+        ref = "release-18.09";
         url = "https://github.com/rycee/home-manager";
       }}/nixos"
     ];
@@ -76,9 +76,6 @@
 
     # development
     binutils gcc gnumake openssl pkgconfig
-
-    # emacs
-    (import ../emacs/emacs.nix { inherit pkgs; })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

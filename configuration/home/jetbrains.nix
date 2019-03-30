@@ -6,6 +6,7 @@
     jetbrains.webstorm
     jetbrains.pycharm-professional
     jetbrains.clion
+    jetbrains.idea-ultimate
   ]) else [];
 
   home.file.".ideavimrc".text = ''
