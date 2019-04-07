@@ -22,6 +22,11 @@
 
 ;;; Code:
 
+;;; `fish-mode':
+;; Because Fish is the superior shell.
+(use-package fish-mode
+  :init (csetq fish-indent-offset amalthea-tab-width))
+
 ;;; `sh-script':
 ;; Make sure we have the `shellcheck' package for linting of shell files and add
 ;; a bunch of key bindings to `sh-mode' for easier access, these are essentially

@@ -44,6 +44,7 @@ in
       evil-smartparens
       evil-surround
       exec-path-from-shell
+      fish-mode
       flycheck
       flycheck-haskell
       flyspell-correct-ivy
