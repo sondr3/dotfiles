@@ -4,7 +4,7 @@
   imports = [
     ./home/common.nix
     ./home/emacs.nix
-    ./home/fish.nix
+    ./home/fish
     ./home/git.nix
     ./home/jetbrains.nix
     ./home/latex.nix

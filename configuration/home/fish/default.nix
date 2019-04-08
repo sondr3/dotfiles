@@ -13,4 +13,6 @@
       end
       '';
   };
+  # funcs = builtins.attrNames (builtins.readDir ./functions);
+  # funcFiles = map (file: xdg.configFile."fish/functions/${file}.text" = (file: builtins.toPath ./functions + "/${file}")) funcs;
 }
