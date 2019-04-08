@@ -1,4 +1,4 @@
-;;; base.el --- Base configuration -*- lexical-binding: t -*-
+;;; base-shell.el --- Shell configuration -*- lexical-binding: t -*-
 
 ;; This file is not part of GNU Emacs
 
@@ -21,21 +21,17 @@
 
 ;;; Code:
 
-(eval-and-compile
-  (add-to-list 'load-path amalthea-base-dir t))
+(defun vterm-init ()
+  "Initialize vterm properly."
+  (interactive "P")
+  (toggle-truncate-lines t)
+  (visual-line-mode 0))
 
-(require 'base-evil)
-(require 'base-editor)
-(require 'base-completion)
-(require 'base-git)
-(require 'base-projects)
-(require 'base-checking)
-(require 'base-window)
-(require 'base-ui)
-(require 'base-help)
-(require 'base-search)
-(require 'base-shell)
+(use-package vterm
+  :commands (vterm)
+  :ghook ('vterm-mode-hook (lambda ()
+                             (toggle-truncate-lines t))))
 
-(provide 'base)
+(provide 'base-shell)
 
-;;; base.el ends here
+;;; base-shell.el ends here

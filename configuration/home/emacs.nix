@@ -92,8 +92,8 @@ in
     ]) ++ (with epkgs.orgPackages; [
       org
       org-plus-contrib
-    ]) ++ [
-  
-    ]);
+    ]) ++ (with epkgs; [
+      emacs-libvterm
+    ]));
   };
 }
