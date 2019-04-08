@@ -1,4 +1,4 @@
-set -g __amalthea_nix_symbol ""
+set -g __amalthea_nix_symbol "❆"
 
 function fish_right_prompt
   if test -n "$IN_NIX_SHELL"
