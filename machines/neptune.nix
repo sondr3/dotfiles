@@ -6,13 +6,13 @@
       ./neptune-hardware.nix
       # Add home-manager module
       "${builtins.fetchGit {
-        ref = "release-18.09";
+        ref = "release-19.03";
         url = "https://github.com/rycee/home-manager";
       }}/nixos"
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.kernelPackages = pkgs.linuxPackages_4_19;
+  boot.kernelPackages = pkgs.linuxPackages_5_0;
   boot.kernelModules = [ "amdgpu.dc=1" ];
   boot.cleanTmpDir = true;
   boot.plymouth.enable = true;
@@ -155,6 +155,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "18.09"; # Did you read the comment?
-
+  system.stateVersion = "19.03"; # Did you read the comment?
 }
