@@ -1,5 +1,11 @@
 { pkgs, lib, ... }:
 
+# let
+#   # Fully persisted and backed up links
+#   mkPersistentLink = path: pkgs.runCommand "persistent-link" {} ''
+#     ln -s ${path} $out
+#   '';
+# in
 {
   programs.fish = {
     enable = true;
@@ -13,6 +19,7 @@
       end
       '';
   };
-  # funcs = builtins.attrNames (builtins.readDir ./functions);
-  # funcFiles = map (file: xdg.configFile."fish/functions/${file}.text" = (file: builtins.toPath ./functions + "/${file}")) funcs;
+
+  # xdg.configFile."fish/functions/fish_prompt.fish".source = mkPersistentLink ./functions/fish_prompt.fish;
+  # xdg.configFile."fish/functions/fish_right_prompt.fish".source = mkPersistentLink ./functions/fish_right_prompt.fish;
 }
