@@ -1,4 +1,5 @@
-set -g __amalthea_prompt_symbol "λ"
+# set -g __amalthea_prompt_symbol "❯"
+set -g __amalthea_prompt_symbol ">"
 set -g __amalthea_git_symbol ""
 set -g __amalthea_username "sondre"
 
@@ -20,7 +21,7 @@ function fish_prompt
     echo -n $USER@
   end
 
-  echo -ne "  "(prompt_pwd) " "
+  echo -ne " " (prompt_pwd) " "
 
   set_color normal
 
@@ -28,6 +29,8 @@ function fish_prompt
     set_color yellow
     echo -n $__amalthea_git_symbol $git_status
   end
+
+  set_color normal
 
   echo ""
 
