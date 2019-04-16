@@ -10,6 +10,7 @@
     ./home/latex.nix
     ./home/mpv.nix
     ./home/neovim.nix
+    ./home/programming.nix
     ./home/vscode.nix
   ];
 }
