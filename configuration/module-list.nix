@@ -12,6 +12,7 @@
     ./home/mpv.nix
     ./home/neovim.nix
     ./home/programming.nix
+    ./home/terminal.nix
     ./home/vscode.nix
   ];
 }
