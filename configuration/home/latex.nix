@@ -1,7 +1,10 @@
-{ ...}:
+{ pkgs, ...}:
 
 {
   # TODO: Add LaTeX packages
+  home.packages = with pkgs; [
+    zathura
+  ];
   home.file.".latexmkrc".text = ''
     # Use LuaLaTeX
     $lualatex='lualatex -interaction=nonstopmode -synctex=1 %O %S';
