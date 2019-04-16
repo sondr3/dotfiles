@@ -148,6 +148,8 @@
     imports = [
       # Import all home configurations
       ../configuration/module-list.nix
+      # We can game on this machine
+      ../configuration/home/gaming.nix
     ];
 
     home.packages = with pkgs; [
