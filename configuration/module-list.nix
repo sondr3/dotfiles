@@ -3,6 +3,7 @@
 {
   imports = [
     ./home/common.nix
+    ./home/desktop.nix
     ./home/emacs.nix
     ./home/fish
     ./home/git.nix
