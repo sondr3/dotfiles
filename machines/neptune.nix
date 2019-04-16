@@ -103,6 +103,10 @@
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.pulseaudio.support32Bit = true;
+  hardware.pulseaudio.extraConfig = ''
+    set-default-sink alsa_output.usb-Schiit_Schiit_USB_Audio_Device-00.analog-stereo
+    set-default-source alsa_output.usb-Schiit_Schiit_USB_Audio_Device-00.analog-stereo
+  '';
 
   # OpenGL
   hardware.opengl.driSupport32Bit = true;
@@ -144,8 +148,6 @@
     imports = [
       # Import all home configurations
       ../configuration/module-list.nix
-      # Neptune specific home configurations
-      ../configuration/home/neptune.nix
     ];
 
     home.packages = with pkgs; [
