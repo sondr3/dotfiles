@@ -144,6 +144,8 @@
     imports = [
       # Import all home configurations
       ../configuration/module-list.nix
+      # Neptune specific home configurations
+      ../configuration/home/neptune.nix
     ];
 
     home.packages = with pkgs; [
