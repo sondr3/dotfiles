@@ -109,10 +109,16 @@
               save-interprogram-paste-before-kill t) ;; Save paste history when killing Emacs)
 
 ;; Hide the backup files inside `no-littering' directories.
-(csetq auto-save-file-name-transforms
-       `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))
+(csetq backup-by-copying t            ;; Don't clobber symlinks
+       delete-old-versions t          ;; Silently delete old files
+       delete-by-moving-to-trash t    ;; And move them into the trash can
+       kept-new-versions 6            ;; Keep some new versions around
+       kept-old-versions 2            ;; But just a few old ones
+       version-control t              ;; use versioned backups
+       auto-save-file-name-transforms
+       `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)) ;; Store auto save files in `no-littering'
        backup-directory-alist
-       `((".*" ,(no-littering-expand-var-file-name "backup/") t)))
+       `((".*" . ,(no-littering-expand-var-file-name "backup/"))))   ;; Store backups in `no-littering'
 
 ;; Fully inhibit the initial screen
 (fset #'display-startup-echo-area-message #'ignore)
