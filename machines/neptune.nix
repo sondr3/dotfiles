@@ -104,8 +104,8 @@
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.pulseaudio.support32Bit = true;
   hardware.pulseaudio.extraConfig = ''
-    set-default-sink alsa_output.usb-Schiit_Schiit_USB_Audio_Device-00.analog-stereo
-    set-default-source alsa_output.usb-Schiit_Schiit_USB_Audio_Device-00.analog-stereo
+    # Required because it keeps switching to HDMI all the fucking time
+    unload-module module-switch-on-port-available
   '';
 
   # OpenGL
