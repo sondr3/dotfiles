@@ -32,28 +32,7 @@
 ;; a bunch of key bindings to `sh-mode' for easier access, these are essentially
 ;; the same keys that are under `C-c'.
 (use-package sh-script
-  :ghook ('sh-mode-hook (list #'subword-mode #'flycheck-mode))
-  :general
-  (amalthea-major-leader 'sh-mode-map
-    "a" '(sh-add :wk "add")
-    "i" '(:ignore t :wk "insert")
-    "i c" '(sh-case :wk "case")
-    "i i" '(sh-if :wk "if")
-    "i f" '(sh-function :wk "function")
-    "i o" '(sh-for :wk "for")
-    "i e" '(sh-indexed-loop :wk "indexed for")
-    "i w" '(sh-while :wk "while")
-    "i r" '(sh-repeat :wk "repeat")
-    "i s" '(sh-select :wk "select")
-    "i u" '(sh-until :wk "until")
-    "i g" '(sh-while-getopts :wk "getopts")
-    "s" '(:ignore t :wk "shell")
-    "s d" '(sh-cd-here :wk "open shell in $DIR")
-    "s s" '(sh-set-shell :wk "set shell")
-    "s z" '(sh-show-shell :wk "show shell")
-    "e" '(executable-interpret :wk "eval")
-    "t" '(sh-tmp-file :wk "tmp")
-    "\\" '(sh-backslash-region :wk "comment")))
+  :ghook ('sh-mode-hook (list #'subword-mode #'flycheck-mode)))
 
 ;;; `company-shell':
 ;; Adds auto completion for shell scripting to Company.

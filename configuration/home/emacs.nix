@@ -36,7 +36,6 @@ in
       dockerfile-mode
       ebib
       evil
-      evil-collection
       evil-commentary
       evil-goggles
       evil-lion

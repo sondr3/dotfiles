@@ -25,10 +25,6 @@
 ;; Gives you syntax highlighting and completion for Docker.
 (use-package dockerfile-mode
   :commands dockerfile-mode
-  :general
-  (amalthea-major-leader dockerfile-mode-map
-    "b" 'dockerfile-build-buffer
-    "B" 'dockerfile-build-no-cache-buffer)
   :mode "\\Dockerfile\\'")
 
 (provide '+docker)

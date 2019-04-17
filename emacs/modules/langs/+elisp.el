@@ -33,14 +33,6 @@
   :ghook
   ('emacs-lisp-mode-hook #'outline-minor-mode)
   ('emacs-lisp-mode-hook #'reveal-mode)
-  :general
-  (amalthea-major-leader 'emacs-lisp-mode-map
-    "C" 'emacs-lisp-byte-compile
-    "e" '(:ignore t :wk "eval")
-    "e b" 'eval-buffer
-    "e f" 'eval-defun
-    "e r" 'eval-reqion
-    "e e" 'eval-last-sexp)
   :init (csetq flycheck-emacs-lisp-load-path 'inherit))
 
 ;;; `auto-compile':
@@ -73,8 +65,8 @@
 (use-package macrostep
   :functions (macrostep-collapse-all macrostep-collapse macrostep-next-macro macrostep-prev-macro)
   :general
-  (amalthea-major-leader 'emacs-lisp-mode-map
-    "m" 'hydra-macrostep/body))
+  (emacs-lisp-mode-map
+   "C-c m" 'hydra-macrostep/body))
 
 ;;; Hide some minor modes and rename the major mode
 (delight '((emacs-lisp-mode "Elisp" :major)

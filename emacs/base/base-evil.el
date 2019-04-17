@@ -36,17 +36,6 @@
            evil-search-module 'swiper)) ;; Use Swiper for searches
   :config (evil-mode))
 
-;;; `evil-collection':
-;; Instead of having to try to consistently create a key theme for a ton of
-;; various packages on my own, the Emacs and Evil community came together to
-;; create `evil-collection', which contains a ton of packages and modes with
-;; keybindings configured to match what you'd expect from Vim/Evil.
-(use-package evil-collection
-  :after evil
-  :commands evil-collection-init
-  :init (csetq evil-collection-setup-minibuffer t)
-  :config (evil-collection-init))
-
 ;;; `evil-lion':
 ;; Ever wanted to align a long bunch of variables at their equal signs? Look no
 ;; further, because that is exactly what this does.

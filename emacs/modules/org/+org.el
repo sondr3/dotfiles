@@ -28,23 +28,6 @@
 (use-package org
   :defines (org-export-with-sub-superscripts org-babel-do-load-languages)
   :commands org-babel-do-load-languages
-  :general
-  (amalthea-major-leader 'org-mode-map
-    "E" '(org-export-dispatch :wk "export")
-    "h" '(:ignore t :wk "headings")
-    "h d" '(org-demote-subtree :wk "demote subtree")
-    "h p" '(org-promote-subtree :wk "promote subtree")
-    "t" '(:ignore t :wk "table")
-    "t a" '(org-table-align :wk "align table")
-    "t c" '(org-table-create :wk "create table")
-    "t C" '(org-table-create-or-convert-from-region :wk "create from region")
-    "t i" '(:ignore t :wk "insert")
-    "t i c" '(org-table-insert-column :wk "insert column")
-    "t i h" '(org-table-insert-hline :wk "insert hline")
-    "t i r" '(org-table-insert-row :wk "insert row")
-    "t r" '(:ignore t :wk "remove")
-    "t r c" '(org-table-delete-column :wk "delete column")
-    "t r r" '(org-table-kill-row :wk "delete row"))
   :config
   (progn
     (csetq org-src-fontify-natively t                       ;; Always use syntax highlighting of code blocks

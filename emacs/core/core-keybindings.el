@@ -40,12 +40,6 @@
 (defvar amalthea-leader-secondary-key "C-SPC"
   "The secondary leader key for Amalthea.")
 
-(defvar amalthea-major-leader-key ","
-  "The default major mode leader key for Amalthea.")
-
-(defvar amalthea-major-leader-secondary-key "M-,"
-  "The secondary major mode leader key for Amalthea.")
-
 ;;; Packages
 
 ;;; `which-key':
@@ -58,7 +52,7 @@
 (use-package which-key
   :demand t
   :delight
-  :commands (which-key-mode)
+  :commands which-key-mode
   :init (which-key-mode)
   :config
   (progn
@@ -72,21 +66,14 @@
 ;; we created in the introduction to keybindings.
 (use-package general
   :demand t
-  :commands (general-define-key general-override-mode general-evil-setup general--simulate-keys)
+  :commands general-evil-setup
   :config
   (progn
-    (csetq general-override-states '(insert emacs hybrid normal visual motion operator replace))
-    (general-override-mode)
     (general-evil-setup)
     (general-create-definer amalthea-leader
       :states '(normal insert emacs)
       :prefix amalthea-leader-key
-      :non-normal-prefix amalthea-leader-secondary-key)
-    (general-create-definer amalthea-major-leader
-      :states '(normal insert emacs)
-      :prefix amalthea-major-leader-key
-      :non-normal-prefix amalthea-major-leader-secondary-key)
-    (general-nmap "SPC m" (general-simulate-key "," :which-key "major mode"))))
+      :non-normal-prefix amalthea-leader-secondary-key)))
 
 ;;; Default `which-key' prefixes
 ;; This keeps all the main menus in one place instead of spread throughout the

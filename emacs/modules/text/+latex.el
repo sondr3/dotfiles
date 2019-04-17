@@ -36,9 +36,6 @@
   ;; Enable some extra modes for editing, spelling, auto completion etc
   :ghook ('LaTeX-mode-hook (list #'TeX-fold-mode #'LaTeX-math-mode #'TeX-source-correlate-mode
                                  #'TeX-PDF-mode #'flyspell-mode #'company-mode #'rainbow-delimiters-mode))
-  :general
-  (amalthea-major-leader 'LaTeX-mode-map
-    "TAB" '(align-current :wk "align"))
   :init
   (progn
     (setq-default TeX-master nil)                                 ;; Always ask which file is the master TeX file
@@ -106,7 +103,9 @@
 ;; better handling of `auto-fill-mode'.
 (use-package latex-extra
   :delight
+  ;; This fucking thing just wont shut up
   :commands latex-extra-mode
+  :functions latex-extra-mode
   :ghook ('LaTeX-mode-hook #'latex-extra-mode))
 
 ;;; `reftex':
