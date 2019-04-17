@@ -108,6 +108,12 @@
               vc-follow-symlinks t                   ;; Always follow symbolic links
               save-interprogram-paste-before-kill t) ;; Save paste history when killing Emacs)
 
+;; Hide the backup files inside `no-littering' directories.
+(csetq auto-save-file-name-transforms
+       `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))
+       backup-directory-alist
+       `((".*" ,(no-littering-expand-var-file-name "backup/") t)))
+
 ;; Fully inhibit the initial screen
 (fset #'display-startup-echo-area-message #'ignore)
 
