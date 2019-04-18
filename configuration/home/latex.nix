@@ -14,9 +14,12 @@
     $bibtex_use = 2;
     # Create PDFs with LuaLaTeX
     $pdf_mode = 4;
-    # TODO: Switch based on OS
-    $pdf_previewer = 'open -a skim';
     # Remove SyncTeX generated stuff
     @generated_exts = (@generated_exts, 'synctex.gz');
-  '';
+    # Automatically open generated PDFs
+    '' + (if pkgs.stdenv.isDarwin then ''
+    $pdf_previewer = 'open -a skim';
+    '' else ''
+    $pdf_previewer = 'zathura';
+    '');
 }
