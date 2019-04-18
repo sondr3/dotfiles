@@ -4,6 +4,7 @@
   # TODO: Add LaTeX packages
   home.packages = with pkgs; [
     zathura
+    texlive.combined.scheme-full
   ];
   home.file.".latexmkrc".text = ''
     # Use LuaLaTeX
