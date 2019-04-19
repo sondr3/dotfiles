@@ -132,6 +132,10 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
+  # Enable Docker
+  virtualisation.docker.enable = true;
+  virtualisation.docker.enableOnBoot = false;
+
   nixpkgs.config = {
     allowUnfree = true;
   };
@@ -140,7 +144,7 @@
   users.users.sondre = {
     isNormalUser = true;
     description = "Sondre Nilsen";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.fish;
   };
 
