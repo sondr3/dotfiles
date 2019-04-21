@@ -12,22 +12,45 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.kernelPackages = pkgs.linuxPackages_5_0;
-  boot.kernelModules = [ "amdgpu.dc=1" ];
-  boot.cleanTmpDir = true;
-  boot.plymouth.enable = true;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_5_0;
+    kernelModules = [ "amdgpu.dc=1" ];
+    cleanTmpDir = true;
+    plymouth.enable = true;
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+  };
 
-  hardware.cpu.amd.updateMicrocode = true;
+  hardware = {
+    cpu.amd.updateMicrocode = true;
 
-  networking.hostName = "neptune"; # Define your hostname.
-  networking.networkmanager.enable = true;
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    # Enable sound.
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+      support32Bit = true;
+      extraConfig = ''
+        # Required because it keeps switching to HDMI all the fucking time
+        unload-module module-switch-on-port-available
+      '';
+    };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    # OpenGL
+    opengl.driSupport32Bit = true;
+  };
+
+  networking = {
+    hostName = "neptune";
+    networkmanager.enable = true;
+
+    firewall.allowedTCPPorts = [
+      8000 # Assorted web stuff
+      3000 # React
+    ];
+    firewall.allowedUDPPorts = [
+      34197 # Factorio
+    ];
+  };
 
   # Select internationalisation properties.
   i18n = {
@@ -76,65 +99,49 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-  programs.fish.enable = true;
+  programs = {
+    fish.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    mtr.enable = true;
+  };
 
-  # List services that you want to enable:
+  services = {
+    # Enable the OpenSSH daemon.
+    openssh.enable = true;
+    # Enable CUPS to print documents.
+    printing.enable = true;
+    # Enable FSTrim for SSH health
+    fstrim.enable = true;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+    redshift.enable = true;
+    redshift.latitude = "63.39";
+    redshift.longitude = "5.33";
+    redshift.temperature.day = 6500;
+    redshift.temperature.night = 2300;
 
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [
-    8000 # Assorted web stuff
-    3000 # React
-  ];
-  networking.firewall.allowedUDPPorts = [
-    34197 # Factorio
-  ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+    # Enable the X11 windowing system.
+    xserver = {
+      enable = true;
+      videoDrivers = [ "amdgpu" ];
+      layout = "us,no";
+      xkbOptions = "grp:alt_caps_toggle";
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
-  hardware.pulseaudio.support32Bit = true;
-  hardware.pulseaudio.extraConfig = ''
-    # Required because it keeps switching to HDMI all the fucking time
-    unload-module module-switch-on-port-available
-  '';
-
-  # OpenGL
-  hardware.opengl.driSupport32Bit = true;
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  services.xserver.layout = "us,no";
-  services.xserver.xkbOptions = "grp:alt_caps_toggle";
-
-  services.redshift.enable = true;
-  services.redshift.latitude = "63.39";
-  services.redshift.longitude = "5.33";
-  services.redshift.temperature.day = 6500;
-  services.redshift.temperature.night = 2300;
-  services.fstrim.enable = true;
-
-
-  # Enable touchpad support.
-  # services.xserver.libinput.enable = true;
-
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+      # Enable the KDE Desktop Environment.
+      displayManager.sddm.enable = true;
+      desktopManager.plasma5.enable = true;
+    };
+  };
 
   # Enable Docker
-  virtualisation.docker.enable = true;
-  virtualisation.docker.enableOnBoot = false;
+  virtualisation = {
+    docker = {
+      enable = true;
+      enableOnBoot = true;
+    };
+  };
 
   nixpkgs.config = {
     allowUnfree = true;
