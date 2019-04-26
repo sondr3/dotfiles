@@ -1,13 +1,14 @@
 { pkgs, ... }:
 
 {
-  home.packages = if !pkgs.stdenv.isDarwin
-  then (with pkgs; [
+  home.packages = [
+
+  ] ++ (with pkgs; stdenv.lib.optionals stdenv.isLinux [
     jetbrains.webstorm
     jetbrains.pycharm-professional
     jetbrains.clion
     jetbrains.idea-ultimate
-  ]) else [];
+  ]);
 
   home.file.".ideavimrc".text = ''
     set surround
