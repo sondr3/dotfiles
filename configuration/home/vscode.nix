@@ -39,6 +39,9 @@
           "autoFix" = true;
         }
       ];
+      "[typescriptreact]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
       "explorer.confirmDelete" = false;
       "workbench.statusBar.feedback.visible" = false;
       "workbench.colorTheme" = "Default Light+";
@@ -46,7 +49,7 @@
       "search.showLineNumbers" = true;
       "javascript.updateImportsOnFileMove.enabled" = "always";
       "typescript.updateImportsOnFileMove.enabled" = "always";
-      "update.channel" = "none";
+      "update.mode" = "none";
       "telemetry.enableTelemetry" = false;
     };
     extensions = [
