@@ -13,5 +13,6 @@
     ripgrep
     tokei
     xorg.xkill
+    (aspellWithDicts(dicts: with dicts; [ en nb ]))
   ];
 }
