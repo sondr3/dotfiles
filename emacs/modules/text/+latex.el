@@ -31,6 +31,7 @@
 ;; Emacs comes bundled with a very simply TeX-mode, however we want to enhance
 ;; this by using `auctex' to add a bunch of really nice quality of life changes.
 (use-package tex
+  :delight iimage-mode
   :commands (TeX-source-correlate-mode TeX-PDF-mode)
   :functions LaTeX-math-mode
   ;; Enable some extra modes for editing, spelling, auto completion etc
@@ -53,10 +54,9 @@
            TeX-electric-sub-and-superscript t                      ;; Same with sub and superscript
            TeX-source-correlate-mode t                             ;; Enable correlation between source and output
            TeX-source-correlate-method 'synctex                    ;; Use `synctex' to sync cursor location to PDF viewer
-           TeX-source-correlate-start-server t ; Start the server by default
+           TeX-source-correlate-start-server t                     ;; Start the server by default
            LaTeX-babel-hyphen nil                                  ;; Don't aid in hyphenation
-           TeX-view-program-selection '((output-pdf "PDF Viewer")) ;; View compiled PDFs in this program
-           TeX-view-program-list '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))))
+           TeX-view-program-selection '((output-pdf "Zathura"))))) ;; View compiled PDFs in this program
 
 ;;; `auctex-latexmk':
 ;; Adds support for `latexmk' to `auctex', mostly useful for making sure that
@@ -88,6 +88,7 @@
 ;; Literally magic. This makes buffers really nice.
 (use-package magic-latex-buffer
   :commands magic-latex-buffer
+  :delight magic-latex-buffer
   :ghook ('LaTeX-mode-hook #'magic-latex-buffer)
   :init
   (progn
