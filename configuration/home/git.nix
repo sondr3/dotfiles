@@ -14,7 +14,7 @@
     aliases = {
       s = "status";
       b = "branch -v";
-      lg = "log --color --graph --oneline --decorate";
+      lg = "log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
     };
 
     extraConfig = {
@@ -24,6 +24,10 @@
       };
       pull = {
         default = "current";
+        rebase = "true";
+      };
+      rebase = {
+        autosquash = "true";
       };
     };
   };
