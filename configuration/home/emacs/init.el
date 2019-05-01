@@ -80,10 +80,8 @@
     (byte-compile-file file)))
 
 (defmacro csetq (&rest body)
-  "A simple and better version of `setq' that also respects if a
-  variable has a `custom-set' property. Works just like the good
-  old version, but better, because you can also add comments to
-  assignments."
+  "A `setq' macro that works with `custom-set' properties. The
+BODY is a list of the variables to be set."
   `(progn
      ,@(cl-loop for (var val) on body by 'cddr
                 collect `(funcall (or (get ',var 'custom-set) #'set)
@@ -130,7 +128,8 @@
        auto-save-file-name-transforms
        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)) ;; Store auto save files in `no-littering'
        backup-directory-alist
-       `((".*" . ,(no-littering-expand-var-file-name "backup/"))))   ;; Store backups in `no-littering'
+       `((".*" . ,(no-littering-expand-var-file-name "backup/")))    ;; Store backups in `no-littering'
+       ad-redefinition-action 'accept) ;; Don't give warnings for things out of my control
 
 ;; Fully inhibit the initial screen
 (fset #'display-startup-echo-area-message #'ignore)
@@ -484,6 +483,7 @@
   :demand t
   :delight
   :general
+  (general-define-key "C-x C-r" 'recentf)
   (:keymaps 'ivy-mode-map
             [remap find-file]                'counsel-find-file
             [remap recentf]                  'counsel-recentf
@@ -647,6 +647,9 @@
 (use-package projectile
   :commands projectile-mode
   :delight " Ⓟ"
+  :general
+  (general-def projectile-mode-map
+    "C-c p" 'projectile-command-map)
   :init
   (progn
     (csetq projectile-completion-system 'ivy ;; Use Ivy for completion
@@ -736,6 +739,10 @@
   ("j" text-scale-decrease "out")
   ("r" (text-scale-adjust 0) "reset" :color blue)
   ("q" nil "quit" :color blue))
+
+(general-define-key
+ "C-x w" '(toggle-frame-maximized :wk "maximize")
+ "C-x W" '(toggle-frame-fullscreen :wk "fill screen"))
 
 ;;;;; UI
 ;;; Theme
@@ -831,8 +838,7 @@
 (use-package emacs-lisp
   :gfhook #'auto-compile-on-load-mode #'auto-compile-on-save-mode
   :ghook
-  ('emacs-lisp-mode-hook #'reveal-mode)
-  :init (csetq flycheck-emacs-lisp-load-path 'inherit))
+  ('emacs-lisp-mode-hook #'reveal-mode))
 
 ;;; `outshine':
 ;; Gives you programs the goodies of navigating and folding headers like in
@@ -1227,7 +1233,7 @@
   :init
   (progn
     (csetq reftex-default-bibliography '("~/Code/UiB/bibliography.bib")
-           org-ref-completion-library 'org-ref-ivy-bibtex)))
+           org-ref-completion-library 'org-ref-ivy-cite)))
 
 ;;;;;; Agenda
 (use-package org-agenda
