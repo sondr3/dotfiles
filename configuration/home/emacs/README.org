@@ -12,28 +12,35 @@ stretching it a little. This configuration tries to stay clean and simple, there
 are no crazy macro or function shenanigans and I try to make sure everything is
 well documented.
 
-For a rough overview over how this configuration works, it is configured into
-three (well, four) separate layers. The ~core~ layer is where packages and
-configuration that everything else relies on is, package management, key
-bindings and configuration of the core of Amalthea. The ~base~ layer is
-essentially what makes my configuration into what it is, here is [[https://github.com/emacs-evil/evil][Evil]], [[https://github.com/company-mode/company-mode][Company]],
-[[https://github.com/bbatsov/projectile][Projectile]], [[https://github.com/abo-abo/swiper][Ivy]] and more is configured. Second to last, the ~modules~ layer is
-where configuration for specific modes resides, Org mode, LaTeX, Haskell and so
-on. Finally, the ~utils~ layer contains... utilities.
-
 As an addendum, for those who wonder why I named my Emacs Amalthea... I have no
 recollection of why anymore, other than the fact that I still think it's a cool
 name. It's named after one of the minor moons of Jupiter.
+
+** History
+As a small aside, my configuration has gone through a whole bunch of changes --
+what you might call evolutions -- and as such the current state doesn't really
+properly reflect the hows, whys and whats. Quick history, I moved to Emacs a
+long while ago and mostly just copy-pasted configuration to get it to work, then
+I tried out having a Org-mode configuration with Babel, Spacemacs, regular
+~init.el~ and a bunch of switches between these configurations in between,
+I've probably declared Emacs bankruptcy nearly ten times now.
+
+I switched to a configuration that somewhat emulated the Spacemacs and Doom
+configuration with layers that you imported, which worked fine but felt overly
+complex for a personal configuration. In the end I moved from both Evil and a
+multi-file based configuration to one with just the ~init~ files. The organization
+of the configuration is still in many ways "modular" in the sense that it
+follows a very similar structure to my previous one, but I simply use [[https://github.com/alphapapa/outshine][Outshine]]
+to move around and manipulate the file as if it was a Org-mode Emacs LISP file.
 * Installation
 Don't, it'll only end in pain. Take what you want from my configuration instead.
-* Inspiration
 At the moment I'm running Emacs from the latest revision of the master branch,
 which means the version is 27.0, I'm using this because of the ~early-init.el~
 file, but this configuration will work with versions 26 and above too as it
 concatenates the ~early-init.el~ file into the ~init.el~ file.
 
 To configure Emacs and the packages I require I am currently using [[https://nixos.org/nix/][Nix]] to list
-and automatically install everything. You can see my ~emacs.nix~ file [[https://github.com/sondr3/dotfiles/blob/master/emacs.nix][here]]. As
+and automatically install everything. You can see my ~emacs.nix~ file [[https://github.com/sondr3/dotfiles/blob/master/configuration/home/emacs/default.nix][here]]. As
 such, there is no way to install the packages I use from inside Emacs.
 
 But feel free to copy and take whatever parts of the configuration you want to
