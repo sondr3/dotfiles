@@ -35,13 +35,6 @@ in
       diff-hl
       dockerfile-mode
       ebib
-      evil
-      evil-commentary
-      evil-goggles
-      evil-lion
-      evil-magit
-      evil-smartparens
-      evil-surround
       exec-path-from-shell
       fish-mode
       flycheck

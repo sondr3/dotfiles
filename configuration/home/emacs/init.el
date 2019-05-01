@@ -261,18 +261,8 @@
 ;; This is probably the hardest thing by far to configure and properly do in
 ;; Emacs, at least in my opinion. I could use something like Spacemacs or Doom
 ;; which has a proper consistent theme for keybindings, but that's no fun.
-;; Instead we'll roll our own built around `Evil', `General.el' and `which-key'.
-;; Lastly, we'll mimick how I used to do things in Vim (and how Spacemacs and
-;; others does things) by letting `SPC' be our leader key and `,' be our major
-;; mode leader key. If you are in the `insert' state, you can use `C-SPC' for
-;; the leader key and `M-,' for the major mode leader key.
-
-;; Custom bindings
-(defvar amalthea-leader-key "SPC"
-  "The default leader key for Amalthea.")
-
-(defvar amalthea-leader-secondary-key "C-SPC"
-  "The secondary leader key for Amalthea.")
+;; Instead we'll roll our own built around `General.el' and `which-key', but
+;; based on the default Emacs experience and configuration.
 
 ;;; `which-key':
 ;; This is a really cool package, I initially discovered this from Spacemacs (as
@@ -289,36 +279,12 @@
   :config
   (progn
     (csetq which-key-idle-delay 0.2                           ;; Reduce the time before which-key pops up
-           which-key-allow-evil-operators t                   ;; Show evil keybindings
            which-key-sort-order 'which-key-key-order-alpha))) ;; Sort things properly alphabetical
 
 ;;; `General':
 ;; This is a whole framework for binding keys in a really nice and consistent
-;; manner. It also enables us to configure our leader keys using the constants
-;; we created in the introduction to keybindings.
-(use-package general
-  :demand t
-  :commands general-evil-setup
-  :config
-  (progn
-    (general-evil-setup)
-    (general-create-definer amalthea-leader
-      :states '(normal insert emacs)
-      :prefix amalthea-leader-key
-      :non-normal-prefix amalthea-leader-secondary-key)))
-
-;; Default `which-key' prefixes
-;; This keeps all the main menus in one place instead of spread throughout the
-;; whole project.
-(amalthea-leader
-  "SPC" '(counsel-M-x :wk "M-x")
-  "a" '(:ignore t :wk "applications")
-  "b" '(:ignore t :wk "buffers")
-  "f" '(:ignore t :wk "files")
-  "g" '(:ignore t :wk "git")
-  "h" '(:ignore t :wk "help")
-  "S" '(:ignore t :wk "spelling")
-  "w" '(:ignore t :wk "windows"))
+;; manner.
+(use-package general :demand t)
 
 ;;;;; Editor
 ;; Contains configuration and settings for packages that are what I'd consider
@@ -444,54 +410,6 @@
   :init
   (csetq uniquify-buffer-name-style 'forward)) ;; How to name multiple buffers with the same name
 
-;;;;; Evil
-;; Configures `Evil' and all it's ilk.
-
-;;; `Evil':
-;; Configures evil-mode.
-(use-package evil
-  :demand t
-  :general
-  (general-imap "j"  (general-key-dispatch 'self-insert-command
-                       :timeout 0.25
-                       "k" 'evil-normal-state))
-  :init
-  (progn
-    (csetq evil-want-integration t      ;; `evil-collection' compatability fix
-           evil-want-keybinding nil     ;; Same as above
-           evil-search-module 'swiper)) ;; Use Swiper for searches
-  :config (evil-mode))
-
-;;; `evil-lion':
-;; Ever wanted to align a long bunch of variables at their equal signs? Look no
-;; further, because that is exactly what this does.
-(use-package evil-lion
-  :commands evil-lion-mode
-  :config (evil-lion-mode))
-
-;;; `evil-commentary':
-;; Quickly comment out a single line or a region. It's really neat.
-(use-package evil-commentary
-  :delight
-  :commands evil-commentary-mode
-  :init (evil-commentary-mode))
-
-;;; `evil-surround':
-;; Incredibly handy package, if you want to change what surrounds a text you can
-;; use this to easily do that. Change `[' and it's closing brother to a pair of
-;; `()'? `cs[(' and you're done.
-(use-package evil-surround
-  :commands global-evil-surround-mode
-  :init (global-evil-surround-mode))
-
-;;; `evil-goggles':
-;; Show visual hints for what the action you just did. It's hard to tell without
-;; explaining it, I recommend you check out the README on GitHub.
-(use-package evil-goggles
-  :delight
-  :commands evil-goggles-mode
-  :init (evil-goggles-mode))
-
 ;;;;; Editor (base)
 ;; Configures base editor settings, mostly with packages that I consider to be
 ;; useful for everyday configuration for all editing needs.
@@ -575,13 +493,7 @@
             [remap describe-function]        'counsel-describe-function
             [remap describe-variable]        'counsel-describe-variable
             [remap describe-face]            'counsel-describe-face
-            [remap eshell-list-history]      'counsel-esh-history)
-  (amalthea-leader
-    "a u" '(counsel-unicode-char :wk "find unicode symbol")
-    "b b" '(ivy-switch-buffer :wk "change buffer")
-    "f f" '(find-file :wk "find file")
-    "f r" '(recentf :wk "find recent")
-    "f s" '(save-buffer :wk "save buffer")))
+            [remap eshell-list-history]      'counsel-esh-history))
 
 ;;; `amx':
 ;; If you've ever heard of `smex', `amx' is an actually updated and maintained
@@ -598,13 +510,12 @@
 (use-package swiper
   :general
   (general-define-key "C-s" 'swiper)
-  (general-nmap "/" 'swiper)
-  (amalthea-leader "/" 'swiper))
+  (general-nmap "/" 'swiper))
 
 ;;; `hydra':
 ;; Extremely useful package for when you want to be able to be able to call
 ;; commands in succession without quitting whatever it is you're doing.
-(use-package hydra)
+(use-package hydra :demand t)
 
 ;;; `Company':
 ;; Instead of using something like `auto-complete' we'll use `Company' to give
@@ -687,11 +598,7 @@
 ;; extra functions and hooks to work better with Borg.
 (use-package magit
   :delight auto-revert-mode
-  :commands magit-add-section-hook
-  :general
-  (amalthea-leader
-    "g h" '(hydra-git/body :wk "hydra")
-    "g s" '(magit-status :wk "git status")))
+  :commands magit-add-section-hook)
 
 ;;; `git-modes':
 ;; A few minor major modes for editing `.gitignore', `.gitattributes' and
@@ -699,14 +606,6 @@
 (use-package gitignore-mode)
 (use-package gitattributes-mode)
 (use-package gitconfig-mode)
-
-;;; `evil-magit':
-;; Magit by default doesn't include any Evil keybindings, which makes sense but
-;; is kinda required since we use Evil.
-(use-package evil-magit
-  :after magit
-  :commands evil-magit-init
-  :init (evil-magit-init))
 
 ;;; `diff-hl':
 ;; There's a plugin for Vim called GitGutter that is really neat, in the fringe
@@ -719,10 +618,6 @@
   :commands (diff-hl-magit-post-refresh global-diff-hl-mode)
   :functions (diff-hl-flydiff-mode diff-hl-margin-mode)
   :defines diff-hl-margin-symbols-alist
-  :general
-  (amalthea-leader
-    "g j" '(diff-hl-next-hunk :wk "next hunk")
-    "g k" '(diff-hl-previous-hunk :wk "previous hunk"))
   :init
   (progn
     (csetq diff-hl-margin-symbols-alist
@@ -751,9 +646,6 @@
 (use-package projectile
   :commands projectile-mode
   :delight " Ⓟ"
-  :general
-  (amalthea-leader
-    "p" '(projectile-command-map :wk "project"))
   :init
   (progn
     (csetq projectile-completion-system 'ivy ;; Use Ivy for completion
@@ -808,11 +700,6 @@
   :delight "Ⓢ"
   :ghook ('prog-mode-hook #'flyspell-prog-mode)
   :ghook ('text-mode-hook #'flyspell-mode)
-  :general
-  (amalthea-leader
-    "S s" '(hydra-spelling/body :wk "hydra")
-    "S b" '(flyspell-buffer :wk "spell check buffer")
-    "S n" '(flyspell-goto-next-error :wk "next spelling error"))
   :init
   (progn
     (csetq ispell-program-name "aspell"
@@ -831,11 +718,7 @@
   :commands (flyspell-correct-word-generic
              flyspell-correct-ivy
              flyspell-correct-previous)
-  :general
-  (amalthea-leader
-    "S c" '(flyspell-correct-previous :wk "correct prev word")
-    "S C" '(flyspell-correct-next :wk "correct next word")
-    :init (csetq flyspell-correct-interface #'flyspell-correct-ivy)))
+  :init (csetq flyspell-correct-interface #'flyspell-correct-ivy))
 
 ;;; `flycheck':
 (use-package flycheck
@@ -852,11 +735,6 @@
   ("j" text-scale-decrease "out")
   ("r" (text-scale-adjust 0) "reset" :color blue)
   ("q" nil "quit" :color blue))
-
-(amalthea-leader
-  "w f" '(toggle-frame-fullscreen :wk "fill screen")
-  "w m" '(toggle-frame-maximized :wk "maximize")
-  "w z" '(hydra-zoom/body :wk "zoom"))
 
 ;;;;; UI
 ;;; Theme
@@ -882,15 +760,6 @@
 ;; counterpart in Emacs and remap those that do.
 (use-package helpful
   :general
-  (amalthea-leader
-    "h c" '(helpful-command :wk "describe command")
-    "h d" '(helpful-at-point :wk "describe at point")
-    "h f" '(describe-function :wk "describe function")
-    "h F" '(helpful-function :wk "helpful function")
-    "h k" '(describe-key :wk "describe key")
-    "h m" '(helpful-macro :wk "describe macro")
-    "h M" '(describe-mode :wk "describe mode")
-    "h v" '(describe-variable :wk "describe variable"))
   (:keymaps 'override
             [remap describe-function] 'helpful-callable
             [remap describe-key] 'helpful-key
@@ -901,10 +770,7 @@
 
 ;;; `deadgrep':
 ;; Sweet, sweet searching.
-(use-package deadgrep
-  :general
-  (amalthea-leader
-    "a s" '(deadgrep :wk "ripgrep")))
+(use-package deadgrep)
 
 ;;;;; Shell
 (defun vterm-init ()
@@ -1377,23 +1243,6 @@
   :after org)
 
 ;;;;;; Bindings
-;;; vim-like confirm/abort for capture and src
-;;; Taken from mwillsey (Max Willsey) on https://github.com/syl20bnr/spacemacs/pull/7400
-(with-eval-after-load 'org-capture
-  (define-key org-capture-mode-map [remap evil-save-and-close]          'org-capture-finalize)
-  (define-key org-capture-mode-map [remap evil-save-modified-and-close] 'org-capture-finalize)
-  (define-key org-capture-mode-map [remap evil-quit]                    'org-capture-kill))
-
-(with-eval-after-load 'org-src
-  (define-key org-src-mode-map [remap evil-save-and-close]              'org-edit-src-exit)
-  (define-key org-src-mode-map [remap evil-save-modified-and-close]     'org-edit-src-exit)
-  (define-key org-src-mode-map [remap evil-quit]                        'org-edit-src-abort))
-
-(with-eval-after-load 'org-table
-  (define-key org-table-fedit-map [remap evil-save-and-close]           'org-table-fedit-finish)
-  (define-key org-table-fedit-map [remap evil-save-modified-and-close]  'org-table-fedit-finish)
-  (define-key org-table-fedit-map [remap evil-quit]                     'org-table-fedit-abort))
-
 ;;;;;; Capture
 ;; Capturing of todos and fixmes and so on in projects and in regular life. Uses
 ;; `counsel-projectile-org-capture' to automatically put them in their correct
@@ -1415,9 +1264,6 @@
   :group 'amalthea)
 
 (use-package org-capture
-  :ghook ('org-capture-mode-hook #'evil-insert-state)
-  :general
-  (amalthea-leader "c" '(counsel-projectile-org-capture :wk "capture"))
   :init
   (progn
     (csetq org-capture-templates '(("t" "Personal TODO" entry
