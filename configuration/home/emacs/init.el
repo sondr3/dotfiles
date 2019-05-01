@@ -971,7 +971,8 @@
 ;; Gives you programs the goodies of navigating and folding headers like in
 ;; Org-mode.
 (use-package outshine
-  :delight " Ⓞ"
+  :delight "Ⓞ"
+  :init (defvar outline-minor-mode-prefix "\M-#")
   :ghook ('emacs-lisp-mode-hook #'outshine-mode))
 
 ;;; `auto-compile':
