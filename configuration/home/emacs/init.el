@@ -646,7 +646,7 @@ BODY is a list of the variables to be set."
 ;; files only in the current project, recent files in current project and so on.
 (use-package projectile
   :commands projectile-mode
-  :delight " Ⓟ"
+  :delight "Ⓟ"
   :general
   (general-def projectile-mode-map
     "C-c p" 'projectile-command-map)
@@ -728,7 +728,8 @@ BODY is a list of the variables to be set."
 (use-package flycheck
   :delight "Ⓒ"
   :commands global-flycheck-mode
-  :init (global-flycheck-mode))
+  :init (global-flycheck-mode)
+  :config (csetq flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
 ;;;;; Window
 ;; Windows 10
@@ -743,6 +744,7 @@ BODY is a list of the variables to be set."
 (general-define-key
  "C-x w" '(toggle-frame-maximized :wk "maximize")
  "C-x W" '(toggle-frame-fullscreen :wk "fill screen"))
+
 
 ;;;;; UI
 ;;; Theme
@@ -803,7 +805,7 @@ BODY is a list of the variables to be set."
 ;; Flymake because we're using Flycheck instead.
 (use-package lsp-mode
   :commands lsp
-  :delight " Ⓛ"
+  :delight "Ⓛ"
   :init (csetq lsp-prefer-flymake nil))
 
 ;;; `lsp-ui':
@@ -836,9 +838,7 @@ BODY is a list of the variables to be set."
 ;; this mode and allows us to use `C-c e' to expand any code that contains
 ;; macros.
 (use-package emacs-lisp
-  :gfhook #'auto-compile-on-load-mode #'auto-compile-on-save-mode
-  :ghook
-  ('emacs-lisp-mode-hook #'reveal-mode))
+  :ghook #'reveal-mode)
 
 ;;; `outshine':
 ;; Gives you programs the goodies of navigating and folding headers like in
@@ -847,21 +847,6 @@ BODY is a list of the variables to be set."
   :delight "Ⓞ"
   :init (defvar outline-minor-mode-prefix "\M-#")
   :ghook ('emacs-lisp-mode-hook #'outshine-mode))
-
-;;; `auto-compile':
-;; Automatically compiles any `.el' files into their byte compiled version,
-;; making sure everything is up to date.
-(use-package auto-compile
-  :commands (auto-compile-on-save-mode auto-compile-on-load-mode)
-  :ghook ('auto-compile-inhibit-compile-hook #'auto-compile-inhibit-compile-detached-git-head)
-  :config
-  (auto-compile-on-load-mode)
-  (auto-compile-on-save-mode)
-  (csetq auto-compile-display-buffer nil             ;; Don't automatically show the *Compile Log* buffer
-         auto-compile-mode-line-counter t            ;; Display number of warnings in modeline
-         auto-compile-source-recreate-deletes-dest t ;; Delete leftover byte code when recompiling
-         auto-compile-toggle-deletes-nonlib-dest t   ;; Delete non-library byte code
-         auto-compile-update-autoloads t))           ;; Update autoloads after compiling
 
 ;;; `macrostep':
 ;; This is a hydra that we'll use together with the package itself, this makes
@@ -917,7 +902,7 @@ BODY is a list of the variables to be set."
 (use-package intero
   :after haskell-mode
   :commands intero-global-mode
-  :delight " λ"
+  :delight "λ"
   :init (intero-global-mode))
 
 ;;; `flycheck-haskell':
@@ -990,7 +975,7 @@ BODY is a list of the variables to be set."
 
 ;;; `prettier-js':
 ;; Automatically prettify buffers.
-(use-package prettier-js :delight " Ⓟ")
+(use-package prettier-js)
 
 ;;; `typescript-mode':
 ;; Quick configuration for TypeScript, setting the indentation and enabling

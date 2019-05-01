@@ -19,7 +19,6 @@ in
       amx
       apropospriate-theme
       auctex-latexmk
-      auto-compile
       company
       company-auctex
       company-lsp
