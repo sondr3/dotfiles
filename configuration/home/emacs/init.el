@@ -1692,5 +1692,8 @@ embedding in web pages."
 (unless (server-running-p)
   (server-start))
 
+;; Byte compile the whole thing on shutdown
+(general-add-hook 'kill-emacs-hook #'amalthea--byte-compile-amalthea t)
+
 ;; (provide 'init)
 ;;; init.el ends here
