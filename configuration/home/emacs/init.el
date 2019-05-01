@@ -598,7 +598,8 @@
 ;; extra functions and hooks to work better with Borg.
 (use-package magit
   :delight auto-revert-mode
-  :commands magit-add-section-hook)
+  :commands magit-add-section-hook
+  :general (general-define-key "C-x g" 'magit-status))
 
 ;;; `git-modes':
 ;; A few minor major modes for editing `.gitignore', `.gitattributes' and
