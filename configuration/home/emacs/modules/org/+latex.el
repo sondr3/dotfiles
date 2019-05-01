@@ -26,7 +26,7 @@
 ;; find the default configuration fairly lacking, so we'll add a bunch of
 ;; changes and add a custom LaTeX class.
 (use-package ox-latex
-  :config
+  :init
   (csetq org-latex-classes
          '(("memoir-book"
             "\\documentclass[12pt,a4paper,oneside]{memoir}
