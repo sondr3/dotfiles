@@ -31,9 +31,15 @@
 (use-package emacs-lisp
   :gfhook #'auto-compile-on-load-mode #'auto-compile-on-save-mode
   :ghook
-  ('emacs-lisp-mode-hook #'outline-minor-mode)
   ('emacs-lisp-mode-hook #'reveal-mode)
   :init (csetq flycheck-emacs-lisp-load-path 'inherit))
+
+;;; `outshine':
+;; Gives you programs the goodies of navigating and folding headers like in
+;; Org-mode.
+(use-package outshine
+  :delight " Ⓞ"
+  :ghook ('emacs-lisp-mode-hook #'outshine-mode))
 
 ;;; `auto-compile':
 ;; Automatically compiles any `.el' files into their byte compiled version,
