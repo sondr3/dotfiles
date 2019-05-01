@@ -525,6 +525,7 @@ BODY is a list of the variables to be set."
   :ghook 'prog-mode-hook
   :init
   (csetq company-idle-delay 0.2              ;; How long to wait before popping up
+         company-minimum-prefix-length 1     ;; Show the menu after one key press
          company-tooltip-limit 20            ;; Limit on how many options to displa
          company-show-numbers t              ;; Show numbers behind options
          company-tooltip-align-annotations t ;; Align annotations to the right
@@ -532,7 +533,8 @@ BODY is a list of the variables to be set."
          company-selection-wrap-around t     ;; Wrap around to beginning when you hit bottom of suggestions
          company-dabbrev-ignore-case nil     ;; Don't ignore case when completing
          company-dabbrev-downcase nil        ;; Don't automatically downcase completions
-         company-dabbrev-other-buffers t))   ;; Search other buffers for completion candidates
+         company-dabbrev-other-buffers t)    ;; Search other buffers for completion candidates
+  :config (company-tng-configure-default))   ;; Configure tab 'n go for Company
 
 ;;; `company-quickhelp':
 ;; When idling on a chosen completion candidate, show the items help in a popup
