@@ -2,8 +2,6 @@
 
 ;; Author: Sondre Nilsen
 ;; Maintainer: Sondre Nilsen
-;; Version: 0.1
-;; Package-Requires: ((emacs "27"))
 ;; Homepage: https://github.com/sondr3/amalthea
 
 ;; This file is not part of GNU Emacs
