@@ -18,6 +18,7 @@ in
 
     # Rust
     cargo-edit
+    cargo-outdated
     rustup
   ];
 }

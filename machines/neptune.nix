@@ -156,6 +156,9 @@
   };
 
   home-manager.users.sondre = { pkgs, ... }: {
+
+    nixpkgs.overlays = [ (import ../pkgs/default.nix) ];
+
     imports = [
       # Import all home configurations
       ../configuration/module-list.nix

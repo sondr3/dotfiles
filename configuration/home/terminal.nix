@@ -4,7 +4,6 @@
 with pkgs;
 
 {
-  nixpkgs.overlays = [ (import ../../pkgs/default.nix) ];
   home.packages = [
     alacritty
     jq
