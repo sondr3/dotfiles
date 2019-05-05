@@ -33,4 +33,5 @@ least to me.
 - ~machines~ :: Machine or host specific configuration
 - ~configuration~ :: Configuration of software, machines, services etc
 - ~modules~ :: Packages or services that requires their own configuration module
+- ~pkgs~ :: Contains overlays of packages that are not (yet) in ~nixpkgs~
 - ~scripts~ :: Bash scripts that might be useful
