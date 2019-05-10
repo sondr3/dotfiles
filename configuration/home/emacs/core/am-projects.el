@@ -28,8 +28,8 @@
   :commands projectile-mode
   :delight "Ⓟ"
   :general
-  (general-def projectile-mode-map
-    "C-c p" 'projectile-command-map)
+  (amalthea-leader
+    "p" '(projectile-command-map :wk "project"))
   :init
   (progn
     (csetq projectile-completion-system 'ivy ;; Use Ivy for completion

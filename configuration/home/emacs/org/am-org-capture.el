@@ -38,6 +38,9 @@
   :group 'amalthea)
 
 (use-package org-capture
+  :ghook ('org-capture-mode-hook #'evil-insert-state)
+  :general
+  (amalthea-leader "c" '(counsel-projectile-org-capture :wk "capture"))
   :init
   (progn
     (csetq org-capture-templates '(("t" "Personal TODO" entry

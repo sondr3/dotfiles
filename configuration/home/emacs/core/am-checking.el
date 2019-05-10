@@ -56,6 +56,11 @@
   :delight "Ⓢ"
   :ghook ('prog-mode-hook #'flyspell-prog-mode)
   :ghook ('text-mode-hook #'flyspell-mode)
+  :general
+  (amalthea-leader
+    "S s" '(hydra-spelling/body :wk "hydra")
+    "S b" '(flyspell-buffer :wk "spell check buffer")
+    "S n" '(flyspell-goto-next-error :wk "next spelling error"))
   :init
   (progn
     (csetq ispell-program-name "aspell"
@@ -74,6 +79,10 @@
   :commands (flyspell-correct-word-generic
              flyspell-correct-ivy
              flyspell-correct-previous)
+  :general
+  (amalthea-leader
+    "S c" '(flyspell-correct-previous :wk "correct prev word")
+    "S C" '(flyspell-correct-next :wk "correct next word"))
   :init (csetq flyspell-correct-interface #'flyspell-correct-ivy))
 
 ;;; `flycheck':

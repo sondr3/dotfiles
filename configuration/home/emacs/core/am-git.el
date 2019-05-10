@@ -38,7 +38,10 @@
 (use-package magit
   :delight auto-revert-mode
   :commands magit-add-section-hook
-  :general (general-define-key "C-x g" 'magit-status))
+  :general
+  (amalthea-leader
+    "g h" '(hydra-git/body :wk "hydra")
+    "g s" '(magit-status :wk "git status")))
 
 ;;; `evil-magit':
 ;; Magit by default doesn't include any Evil keybindings, which makes sense but
@@ -74,7 +77,11 @@
     (global-diff-hl-mode)
     (diff-hl-margin-mode)
     (diff-hl-flydiff-mode)
-    (general-add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
+    (general-add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+  :general
+  (amalthea-leader
+    "g j" '(diff-hl-next-hunk :wk "next hunk")
+    "g k" '(diff-hl-previous-hunk :wk "previous hunk")))
 
 ;;; `hl-todo':
 ;; This is a really simple mode that highlights things that are marked as TODO,

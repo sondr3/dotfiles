@@ -70,7 +70,7 @@
   "g" '(:ignore t :wk "git")
   "h" '(:ignore t :wk "help")
   "S" '(:ignore t :wk "spelling")
-  "w" '(:ignore t :wk "windows"))
+  "w" '(:ignore t :wk "windows")) 
 
 (provide 'am-keybindings)
 

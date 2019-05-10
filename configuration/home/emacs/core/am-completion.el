@@ -47,7 +47,6 @@
   :demand t
   :delight
   :general
-  (general-define-key "C-x C-r" 'recentf)
   (:keymaps 'ivy-mode-map
             [remap find-file]                'counsel-find-file
             [remap recentf]                  'counsel-recentf
@@ -57,7 +56,13 @@
             [remap describe-function]        'counsel-describe-function
             [remap describe-variable]        'counsel-describe-variable
             [remap describe-face]            'counsel-describe-face
-            [remap eshell-list-history]      'counsel-esh-history))
+            [remap eshell-list-history]      'counsel-esh-history)
+    (amalthea-leader
+    "a u" '(counsel-unicode-char :wk "find unicode symbol")
+    "b b" '(ivy-switch-buffer :wk "change buffer")
+    "f f" '(find-file :wk "find file")
+    "f r" '(recentf :wk "find recent")
+    "f s" '(save-buffer :wk "save buffer")))
 
 ;;; `amx':
 ;; If you've ever heard of `smex', `amx' is an actually updated and maintained
@@ -74,7 +79,8 @@
 (use-package swiper
   :general
   (general-define-key "C-s" 'swiper)
-  (general-nmap "/" 'swiper))
+  (general-nmap "/" 'swiper)
+  (amalthea-leader "/" 'swiper))
 
 ;;; `hydra':
 ;; Extremely useful package for when you want to be able to be able to call

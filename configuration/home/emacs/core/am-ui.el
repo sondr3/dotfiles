@@ -74,9 +74,11 @@
   ("r" (text-scale-adjust 0) "reset" :color blue)
   ("q" nil "quit" :color blue))
 
-(general-define-key
- "C-x w" '(toggle-frame-maximized :wk "maximize")
- "C-x W" '(toggle-frame-fullscreen :wk "fill screen"))
+;;; Keybindings for windows
+(amalthea-leader
+  "w f" '(toggle-frame-fullscreen :wk "fill screen")
+  "w m" '(toggle-frame-maximized :wk "maximize")
+  "w z" '(hydra-zoom/body :wk "zoom"))
 
 ;;; Theme
 ;; You should probably change this, I have a very weird taste in themes.

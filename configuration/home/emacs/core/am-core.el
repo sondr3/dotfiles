@@ -165,9 +165,9 @@ BODY is a list of the variables to be set."
 
 (require 'am-packages)
 (require 'am-system)
-(require 'am-ui)
 (require 'am-keybindings)
 (require 'am-evil)
+(require 'am-ui)
 (require 'am-editor)
 (require 'am-completion)
 (require 'am-git)

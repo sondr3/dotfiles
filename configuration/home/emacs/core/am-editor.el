@@ -63,6 +63,15 @@
 ;; counterpart in Emacs and remap those that do.
 (use-package helpful
   :general
+  (amalthea-leader
+    "h c" '(helpful-command :wk "describe command")
+    "h d" '(helpful-at-point :wk "describe at point")
+    "h f" '(describe-function :wk "describe function")
+    "h F" '(helpful-function :wk "helpful function")
+    "h k" '(describe-key :wk "describe key")
+    "h m" '(helpful-macro :wk "describe macro")
+    "h M" '(describe-mode :wk "describe mode")
+    "h v" '(describe-variable :wk "describe variable"))
   (:keymaps 'override
             [remap describe-function] 'helpful-callable
             [remap describe-key] 'helpful-key
@@ -190,7 +199,10 @@
 ;;; `deadgrep':
 ;; Gives you super powered searching via `ripgrep' and `deadgrep'. Sweet, sweet
 ;; searching.
-(use-package deadgrep)
+(use-package deadgrep
+  :general
+  (amalthea-leader
+    "a s" '(deadgrep :wk "ripgrep")))
 
 ;;; Shell
 (defun vterm-init ()
