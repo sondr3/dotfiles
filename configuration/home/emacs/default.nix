@@ -19,6 +19,7 @@ in
       amx
       apropospriate-theme
       auctex-latexmk
+      auto-compile
       company
       company-auctex
       company-lsp
@@ -34,6 +35,14 @@ in
       diff-hl
       dockerfile-mode
       ebib
+      evil
+      evil-collection
+      evil-commentary
+      evil-goggles
+      evil-lion
+      evil-magit
+      evil-smartparens
+      evil-surround
       exec-path-from-shell
       fish-mode
       flycheck
@@ -66,7 +75,6 @@ in
       no-littering
       org-ref
       org-super-agenda
-      outshine
       prettier-js
       projectile
       rainbow-delimiters

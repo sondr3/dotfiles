@@ -35,20 +35,32 @@
   (unless (not (version< emacs-version "26"))
     (error "You are using Emacs %s, Amalthea requires version 26 or higher" emacs-version)))
 
-;;; Core configuration
-
-(defvar amalthea-emacs-dir (eval-when-compile (file-truename user-emacs-directory))
-  "Path to the current Emacs directory.")
-
-(defvar amalthea-dotfiles-dir (expand-file-name ".dotfiles" (getenv "HOME"))
-  "Location of dotfiles for Amalthea.")
-
 ;;; Amalthea group and customizations
 
 (defgroup amalthea nil
   "Amalthea settings and configurations."
   :group 'convenience
   :prefix "amalthea")
+
+(defcustom amalthea-emacs-dir (eval-when-compile (file-truename user-emacs-directory))
+  "Path to the current Emacs directory."
+  :type 'directory
+  :group 'amalthea)
+
+(defcustom amalthea-dotfiles-dir (expand-file-name ".dotfiles" (getenv "HOME"))
+  "Location of dotfiles for Amalthea."
+  :type 'directory
+  :group 'amalthea)
+
+(defcustom amalthea-leader-key "SPC"
+  "The default leader key for Amalthea."
+  :type 'string
+  :group 'amalthea)
+
+(defcustom amalthea-leader-secondary-key "C-SPC"
+  "The secondary leader key for Amalthea."
+  :type 'string
+  :group 'amalthea)
 
 (defcustom amalthea-mono-font "PragmataPro Mono Liga"
   "The default monospaced font that Amalthea uses."
@@ -260,8 +272,11 @@ BODY is a list of the variables to be set."
 ;; This is probably the hardest thing by far to configure and properly do in
 ;; Emacs, at least in my opinion. I could use something like Spacemacs or Doom
 ;; which has a proper consistent theme for keybindings, but that's no fun.
-;; Instead we'll roll our own built around `General.el' and `which-key', but
-;; based on the default Emacs experience and configuration.
+;; Instead we'll roll our own built around `Evil', `General.el' and `which-key'.
+;; Lastly, we'll mimick how I used to do things in Vim (and how Spacemacs and
+;; others does things) by letting `SPC' be our leader key and `,' be our major
+;; mode leader key. If you are in the `insert' state, you can use `C-SPC' for
+;; the leader key and `M-,' for the major mode leader key.
 
 ;;;; `which-key':
 ;; This is a really cool package, I initially discovered this from Spacemacs (as
@@ -283,8 +298,86 @@ BODY is a list of the variables to be set."
 ;;;; `General':
 ;; This is a whole framework for binding keys in a really nice and consistent
 ;; manner.
-(use-package general :demand t)
+(use-package general
+  :demand t
+  :commands general-evil-setup
+  :config
+  (progn
+    (general-evil-setup)
+    (general-create-definer amalthea-leader
+      :states '(normal insert emacs)
+      :prefix amalthea-leader-key
+      :non-normal-prefix amalthea-leader-secondary-key)))
 
+;;;; Global bindings
+;; Default `which-key' prefixes
+;; This keeps all the main menus in one place instead of spread throughout the
+;; whole project.
+(amalthea-leader
+  "SPC" '(counsel-M-x :wk "M-x")
+  "a" '(:ignore t :wk "applications")
+  "b" '(:ignore t :wk "buffers")
+  "f" '(:ignore t :wk "files")
+  "g" '(:ignore t :wk "git")
+  "h" '(:ignore t :wk "help")
+  "S" '(:ignore t :wk "spelling")
+  "w" '(:ignore t :wk "windows"))
+
+;;; Evil
+;; Configures `Evil' and all it's ilk.
+
+;;;; `Evil':
+;; Configures evil-mode.
+(use-package evil
+  :demand t
+  :general
+  (general-imap "j"  (general-key-dispatch 'self-insert-command
+                       :timeout 0.25
+                       "k" 'evil-normal-state))
+  :init
+  (progn
+    (csetq evil-want-integration t      ;; `evil-collection' compatability fix
+           evil-want-keybinding nil     ;; Same as above
+           evil-search-module 'swiper)) ;; Use Swiper for searches
+  :config (evil-mode))
+
+;;;; `evil-collection':
+;; A collective effort to create keybindings for various packages that work with
+;; Evil, probably the best thing since Evil.
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
+;;;; `evil-lion':
+;; Ever wanted to align a long bunch of variables at their equal signs? Look no
+;; further, because that is exactly what this does.
+(use-package evil-lion
+  :commands evil-lion-mode
+  :config (evil-lion-mode))
+
+;;;; `evil-commentary':
+;; Quickly comment out a single line or a region. It's really neat.
+(use-package evil-commentary
+  :delight
+  :commands evil-commentary-mode
+  :init (evil-commentary-mode))
+
+;;;; `evil-surround':
+;; Incredibly handy package, if you want to change what surrounds a text you can
+;; use this to easily do that. Change `[' and it's closing brother to a pair of
+;; `()'? `cs[(' and you're done.
+(use-package evil-surround
+  :commands global-evil-surround-mode
+  :init (global-evil-surround-mode))
+
+;;;; `evil-goggles':
+;; Show visual hints for what the action you just did. It's hard to tell without
+;; explaining it, I recommend you check out the README on GitHub.
+(use-package evil-goggles
+  :delight
+  :commands evil-goggles-mode
+  :init (evil-goggles-mode))
 ;;; Editor
 ;; Contains configuration and settings for packages that are what I'd consider
 ;; core to a proper usage of Emacs.
