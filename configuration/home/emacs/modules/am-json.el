@@ -25,6 +25,11 @@
 ;; This is really nothing fancy, we bind some keys and set the indentation to
 ;; it's proper size.
 (use-package json-mode
+  :general
+  (amalthea-major-leader 'json-mode-map
+    "r" '(json-mode-beautify :wk "reformat buffer")
+    "p" '(json-mode-show-path :wk "show JSON keys")
+    "P" '(json-mode-kill-path :wk "yank JSON keys"))
   :init (csetq js-indent-level 2))
 
 (provide 'am-json)

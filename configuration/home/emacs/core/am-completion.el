@@ -131,6 +131,15 @@
 (use-package yasnippet
   :commands (yas-global-mode)
   :delight (yas-minor-mode "Ⓨ")
+  :general
+  (amalthea-major-leader
+   "Y" '(:ignore t :wk "Yasnippet")
+   "Y c" '(yas-new-snippet :wk "create")
+   "Y e" '(yas-expand :wk "expand")
+   "Y i" '(yas-insert-snippet :wk "insert")
+   "Y p" '(ivy-yasnippet :wk "preview")
+   "Y r" '(yas-reload-all :wk "reload")
+   "Y v" '(yas-visit-snippet-file :wk "edit"))
   :init
   (progn
     (csetq yas-snippet-dirs (list (expand-file-name "snippets" amalthea-emacs-dir)))

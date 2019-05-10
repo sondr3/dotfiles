@@ -28,6 +28,7 @@
   :group 'convenience
   :prefix "amalthea")
 
+;;;; Directories
 (defcustom amalthea-emacs-dir (eval-when-compile (file-truename user-emacs-directory))
   "Path to the current Emacs directory."
   :type 'directory
@@ -58,6 +59,7 @@
   :type 'directory
   :group 'amalthea)
 
+;;;; Keybindings
 (defcustom amalthea-leader-key "SPC"
   "The default leader key for Amalthea."
   :type 'string
@@ -68,6 +70,17 @@
   :type 'string
   :group 'amalthea)
 
+(defcustom amalthea-major-leader-key ","
+  "The default major mode leader key for Amalthea."
+  :type 'string
+  :group 'amalthea)
+
+(defcustom amalthea-major-leader-secondary-key "M-,"
+  "The secondary major mode leader key for Amalthea."
+  :type 'string
+  :group 'amalthea)
+
+;;;; Assorted
 (defcustom amalthea-mono-font "PragmataPro Mono Liga"
   "The default monospaced font that Amalthea uses."
   :type 'string

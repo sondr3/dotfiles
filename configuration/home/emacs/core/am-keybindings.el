@@ -52,11 +52,17 @@
   :commands general-evil-setup
   :config
   (progn
+    (general-override-mode)
     (general-evil-setup)
     (general-create-definer amalthea-leader
       :states '(normal insert emacs)
       :prefix amalthea-leader-key
-      :non-normal-prefix amalthea-leader-secondary-key)))
+      :non-normal-prefix amalthea-leader-secondary-key)
+    (general-create-definer amalthea-major-leader
+      :states '(normal insert emacs)
+      :prefix amalthea-major-leader-key
+      :non-normal-prefix amalthea-major-leader-secondary-key)
+    (general-nmap "SPC m" (general-simulate-key "," :which-key "major mode"))))
 
 ;;; Global bindings
 ;; Default `which-key' prefixes

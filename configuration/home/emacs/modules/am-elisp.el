@@ -29,7 +29,15 @@
 ;; macros.
 (use-package emacs-lisp
   :gfhook #'auto-compile-on-load-mode #'auto-compile-on-save-mode
-  :ghook #'reveal-mode)
+  :ghook #'reveal-mode
+  :general
+  (amalthea-major-leader 'emacs-lisp-mode-map
+    "C" 'emacs-lisp-byte-compile
+    "e" '(:ignore t :wk "eval")
+    "e b" 'eval-buffer
+    "e f" 'eval-defun
+    "e r" 'eval-reqion
+    "e e" 'eval-last-sexp))
 
 ;;; `auto-compile':
 ;; Automatically compiles any `.el' files into their byte compiled version,
@@ -61,8 +69,8 @@
 (use-package macrostep
   :functions (macrostep-collapse-all macrostep-collapse macrostep-next-macro macrostep-prev-macro)
   :general
-  (emacs-lisp-mode-map
-   "C-c m" 'hydra-macrostep/body))
+  (amalthea-major-leader 'emacs-lisp-mode-map
+    "m" 'hydra-macrostep/body))
 
 (defhydra hydra-macrostep (:color pink)
   "macrostep"

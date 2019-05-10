@@ -27,6 +27,10 @@
 ;; files from `recentf' and set a few common sense settings.
 (use-package haskell-mode
   :ghook ('haskell-mode-hook (list #'subword-mode #'haskell-auto-insert-module-template))
+  :general
+  (amalthea-major-leader 'haskell-mode-map
+    "f" '(haskell-mode-stylish-buffer :wk "format buffer")
+    "F" '(haskell-mode-format-imports :wk "format imports"))
   :init
   (add-to-list 'recentf-exclude (expand-file-name "~/.stack/global-project/.stack-work/")) ;; Exclude Intero REPL from recentf
   :config
@@ -48,6 +52,22 @@
   :after haskell-mode
   :commands intero-global-mode
   :delight "λ"
+  :general
+  (amalthea-major-leader 'haskell-mode-map
+    "." '(intero-goto-definition :wk "goto definition")
+    "?" '(intero-uses-at :wk "show usage")
+    "t" '(intero-type-at :wk "type info")
+    "i" '(intero-info :wk "info")
+    "l" '(intero-repl-load :wk "load into REPL")
+    "e" '(intero-repl-eval-region :wk "eval region")
+    "E" '(intero-expand-splice-at-point :wk "expand splice")
+    "a" '(intero-apply-suggestions :wk "apply suggestions")
+    "s" '(intero-repl :wk "switch to REPL")
+    "h" '(hoogle :wk "hoogle")
+    "H" '(hayoo :wk "hayoo"))
+  (amalthea-major-leader 'intero-repl-mode-map
+    "s" '(intero-repl-switch-back :wk "switch back")
+    "l" '(intero-repl-clear-buffer :wk "clear REPL"))
   :init (intero-global-mode))
 
 ;;; `flycheck-haskell':
@@ -64,7 +84,12 @@
 ;; A lot of the time `hlint' can also apply fixes to our code for us, this is
 ;; done via this package. We install the required dependencies and add a few
 ;; keybindings for it.
-(use-package hlint-refactor)
+(use-package hlint-refactor
+  :general
+  (amalthea-major-leader 'haskell-mode-map
+    "r" '(:ignore t :wk "refactor")
+    "r b" '(hlint-refactor-refactor-buffer :wk "refactor buffer")
+    "r r" '(hlint-refactor-refactor-at-point :wk "refactor at point")))
 
 (delight '((haskell-mode "" :major)))
 
