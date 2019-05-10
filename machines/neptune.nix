@@ -147,11 +147,17 @@
     allowUnfree = true;
   };
 
+  environment.etc."fuse.conf".text = ''
+    # Allow non-root users to specify the 'allow_other' or 'allow_root'
+    # mount options.
+    user_allow_other
+  '';
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sondre = {
     isNormalUser = true;
     description = "Sondre Nilsen";
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "fuse" ];
     shell = pkgs.fish;
   };
 
