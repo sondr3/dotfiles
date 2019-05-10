@@ -75,6 +75,7 @@ in
       no-littering
       org-ref
       org-super-agenda
+      outshine
       prettier-js
       projectile
       rainbow-delimiters

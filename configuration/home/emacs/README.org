@@ -25,13 +25,13 @@ I tried out having a Org-mode configuration with Babel, Spacemacs, regular
 ~init.el~ and a bunch of switches between these configurations in between,
 I've probably declared Emacs bankruptcy nearly ten times now.
 
-I switched to a configuration that somewhat emulated the Spacemacs and Doom
-configuration with layers that you imported, which worked fine but felt overly
-complex for a personal configuration. In the end I moved from both Evil and a
-multi-file based configuration to one with just the ~init~ files. The organization
-of the configuration is still in many ways "modular" in the sense that it
-follows a very similar structure to my previous one, but I simply use [[https://github.com/alphapapa/outshine][Outshine]]
-to move around and manipulate the file as if it was a Org-mode Emacs LISP file.
+The configuration is split into four parts, but the main meat of the
+configuration is in the ~core~ directory, this is where we actually configure
+Emacs and set it up how I like it. In the ~modules~ directory I configure
+everything that is not essential to Emacs, i.e. programming languages, text
+editing and so on. ~org~ contains my Org-mode configuration, shocker. This has its
+own directory because it is probably the largest module of my configuration.
+Finally, in ~utils~ I simply have utility stuff.
 * Installation
 Don't, it'll only end in pain. Take what you want from my configuration instead.
 At the moment I'm running Emacs from the latest revision of the master branch,
