@@ -40,6 +40,14 @@
   :commands magit-add-section-hook
   :general (general-define-key "C-x g" 'magit-status))
 
+;;; `evil-magit':
+;; Magit by default doesn't include any Evil keybindings, which makes sense but
+;; is kinda required since we use Evil.
+(use-package evil-magit
+  :after magit
+  :commands evil-magit-init
+  :init (evil-magit-init))
+
 ;;; `git-modes':
 ;; A few minor major modes for editing `.gitignore', `.gitattributes' and
 ;; `.gitconfig' files.
