@@ -6,16 +6,17 @@ with pkgs;
 {
   home.packages = [
     alacritty
+    (aspellWithDicts(dicts: with dicts; [ en nb ]))
     jq
     jump
-    lm_sensors
     neofetch
     nix-prefetch-git
     nix-prefetch-github
     pandoc
     ripgrep
     tokei
+  ] ++ (with pkgs; stdenv.lib.optionals stdenv.isLinux [
+    lm_sensors
     xorg.xkill
-    (aspellWithDicts(dicts: with dicts; [ en nb ]))
-  ];
+  ]);
 }
