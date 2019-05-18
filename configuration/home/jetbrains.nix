@@ -1,14 +1,12 @@
 { pkgs, ... }:
 
 {
-  home.packages = [
-
-  ] ++ (with pkgs; stdenv.lib.optionals stdenv.isLinux [
+  home.packages = with pkgs; [
     jetbrains.webstorm
     jetbrains.pycharm-professional
     jetbrains.clion
     jetbrains.idea-ultimate
-  ]);
+  ];
 
   home.file.".ideavimrc".text = ''
     set surround
