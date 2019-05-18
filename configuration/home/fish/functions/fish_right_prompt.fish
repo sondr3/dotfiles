@@ -1,5 +1,4 @@
-# set -g __amalthea_nix_symbol "❆"
-set -g __amalthea_nix_symbol "(S)"
+set -g __amalthea_nix_symbol "❆"
 
 function __amalthea_nix_prompt --description "Add Nix icon if inside Nix shell"
   [ -z "$IN_NIX_SHELL" ]; and return

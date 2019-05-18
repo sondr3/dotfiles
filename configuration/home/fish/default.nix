@@ -13,13 +13,15 @@
       # TODO: Create better greeting
       set fish_greeting
 
-      status is-interactive; and . (jump shell | psub)
       '' + lib.optionalString pkgs.stdenv.isDarwin ''
       if test -e '/Users/sondre/.nix-profile/etc/profile.d/nix.sh'
         bass source '/Users/sondre/.nix-profile/etc/profile.d/nix.sh'
         bass source '/Users/sondre/.config/fish/nix.sh'
       end
-      '';
+    '';
+    interactiveShellInit = ''
+      source (jump shell | psub)
+    '';
   };
 
   # xdg.configFile."fish/functions/fish_prompt.fish".source = mkPersistentLink ./functions/fish_prompt.fish;

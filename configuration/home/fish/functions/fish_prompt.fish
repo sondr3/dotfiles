@@ -1,5 +1,4 @@
-# set -g __amalthea_prompt_symbol "❯"
-set -g __amalthea_prompt_symbol ">"
+set -g __amalthea_prompt_symbol "❯"
 set -g __amalthea_git_symbol ""
 set -g __amalthea_username "sondre"
 
