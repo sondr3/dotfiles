@@ -2,10 +2,11 @@
 
 {
   # TODO: Add LaTeX packages
-  home.packages = with pkgs; [
+  home.packages = with pkgs; stdenv.lib.optionals stdenv.isLinux [
     zathura
     texlive.combined.scheme-full
   ];
+
   home.file.".latexmkrc".text = ''
     # Use LuaLaTeX
     $lualatex='lualatex -interaction=nonstopmode -synctex=1 %O %S';

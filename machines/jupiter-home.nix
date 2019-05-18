@@ -12,6 +12,7 @@
     ../configuration/home/fish
     ../configuration/home/git.nix
     ../configuration/home/jetbrains.nix
+    ../configuration/home/latex.nix
     ../configuration/home/mpv.nix
     ../configuration/home/neovim.nix
     ../configuration/home/terminal.nix
