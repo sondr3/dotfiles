@@ -57,8 +57,14 @@
            TeX-source-correlate-mode t                             ;; Enable correlation between source and output
            TeX-source-correlate-method 'synctex                    ;; Use `synctex' to sync cursor location to PDF viewer
            TeX-source-correlate-start-server t                     ;; Start the server by default
-           LaTeX-babel-hyphen nil                                  ;; Don't aid in hyphenation
-           TeX-view-program-selection '((output-pdf "Zathura"))))) ;; View compiled PDFs in this program
+           LaTeX-babel-hyphen nil)                                 ;; Don't aid in hyphenation
+    ;; View compiled PDFs in either Zathura or Skim depending on OS
+    (cond
+     ((eq system-type 'darwin)
+      (csetq TeX-view-program-selection '((output-pdf "Skim"))
+             TeX-view-program-list '(("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b"))))
+     ((eq system-type 'gnu/linux)
+      (csetq TeX-view-program-selection '((output-pdf "Zathura")))))))
 
 ;;; `auctex-latexmk':
 ;; Adds support for `latexmk' to `auctex', mostly useful for making sure that
