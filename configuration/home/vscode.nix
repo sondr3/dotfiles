@@ -11,6 +11,7 @@
       "editor.lineNumbers" = "relative";
       "editor.formatOnSave" = true;
       "editor.formatOnPaste" = true;
+      "editor.suggestSelection" = "first";
       "workbench.settings.useSplitJSON" = true;
       "workbench.settings.editor" = "json";
       "vim.leader" = "<space>";
