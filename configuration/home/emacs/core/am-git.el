@@ -49,6 +49,7 @@
 (use-package evil-magit
   :after magit
   :commands evil-magit-init
+  :ghook ('git-commit-mode-hook #'evil-insert-state)
   :init (evil-magit-init))
 
 ;;; `git-modes':
