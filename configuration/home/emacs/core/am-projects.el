@@ -25,6 +25,7 @@
 ;; of features out of the box that are awesome and useful, like searching for
 ;; files only in the current project, recent files in current project and so on.
 (use-package projectile
+  :demand t
   :commands projectile-mode
   :delight "Ⓟ"
   :general
