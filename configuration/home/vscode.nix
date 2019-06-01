@@ -40,6 +40,8 @@
           "autoFix" = true;
         }
       ];
+      "prettier.eslintIntegration" = true;
+      "prettier.stylelintIntegration" = true;
       "[typescriptreact]" = {
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
       };
