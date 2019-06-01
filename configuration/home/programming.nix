@@ -21,4 +21,9 @@ in
     cargo-outdated
     rustup
   ];
+
+  home.file.".yarnrc".text = ''
+    disable-self-update-check true
+    --install.frozen-lockfile true
+  '';
 }
