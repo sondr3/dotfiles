@@ -22,8 +22,7 @@ in
     rustup
   ];
 
-  home.file.".yarnrc".text = ''
-    disable-self-update-check true
-    --install.frozen-lockfile true
+  home.file.".npmrc".text = ''
+    prefix = /home/sondre/.npm/
   '';
 }
