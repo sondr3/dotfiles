@@ -11,6 +11,7 @@
       "editor.lineNumbers" = "relative";
       "editor.formatOnSave" = true;
       "editor.formatOnPaste" = true;
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "editor.suggestSelection" = "first";
       "workbench.settings.useSplitJSON" = true;
       "workbench.settings.editor" = "json";
@@ -42,9 +43,6 @@
       ];
       "prettier.eslintIntegration" = true;
       "prettier.stylelintIntegration" = true;
-      "[typescriptreact]" = {
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-      };
       "explorer.confirmDelete" = false;
       "workbench.statusBar.feedback.visible" = false;
       "workbench.colorTheme" = "Default Light+";
