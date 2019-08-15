@@ -2,8 +2,9 @@
 
 {
   home.packages = with pkgs; [
-    git-ignore
+    gitAndTools.git-ignore
   ];
+
   programs.git = {
     enable = true;
     userName = "Sondre Nilsen";
