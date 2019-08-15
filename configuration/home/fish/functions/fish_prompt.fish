@@ -1,5 +1,6 @@
 set -g __amalthea_prompt_symbol "❯"
 set -g __amalthea_git_symbol ""
+set -g __amalthea_nix_symbol ""
 set -g __amalthea_username "sondre"
 
 function __amalthea_git_branch --description "Show the current branch"
@@ -29,9 +30,17 @@ function fish_prompt
     echo -n $__amalthea_git_symbol $git_status
   end
 
+  echo -ne " "
   set_color normal
 
-  echo ""
+  if test -n "$IN_NIX_SHELL"
+    set_color cyan
+    echo -n $__amalthea_nix_symbol
+  end
+
+  set_color normal
+
+  echo " "
 
   set_color cyan
   echo -n "$__amalthea_prompt_symbol "
