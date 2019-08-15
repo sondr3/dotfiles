@@ -20,7 +20,7 @@
       end
     '';
     interactiveShellInit = ''
-      source (jump shell | psub)
+      source (jump shell fish | psub)
     '';
   };
 
