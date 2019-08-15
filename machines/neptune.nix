@@ -13,8 +13,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot = {
-    kernelPackages = pkgs.linuxPackages_5_1;
-    kernelModules = [ "amdgpu.dc=1" ];
+    kernelPackages = pkgs.linuxPackages_5_2;
     cleanTmpDir = true;
     plymouth.enable = true;
     loader.systemd-boot.enable = true;
