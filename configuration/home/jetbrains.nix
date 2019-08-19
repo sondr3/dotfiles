@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; stdenv.lib.optionals stdenv.isLinux [
+  home.packages = with pkgs; [
     jetbrains.webstorm
     jetbrains.pycharm-professional
     jetbrains.clion

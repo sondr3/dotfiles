@@ -15,8 +15,7 @@ with pkgs;
     pandoc
     ripgrep
     tokei
-  ] ++ (stdenv.lib.optionals stdenv.isLinux [
     lm_sensors
     xorg.xkill
-  ]);
+  ];
 }

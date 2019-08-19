@@ -2,7 +2,7 @@
 
 {
   # TODO: Add LaTeX packages
-  home.packages = with pkgs; stdenv.lib.optionals stdenv.isLinux [
+  home.packages = with pkgs; [
     zathura
     texlive.combined.scheme-full
   ];
@@ -17,10 +17,7 @@
     $pdf_mode = 4;
     # Remove SyncTeX generated stuff
     @generated_exts = (@generated_exts, 'synctex.gz');
-    # Automatically open generated PDFs
-    '' + (if pkgs.stdenv.isDarwin then ''
-    $pdf_previewer = 'open -a skim';
-    '' else ''
+    # Automatically open generated PDFs;
     $pdf_previewer = 'zathura';
-    '');
+    '';
 }
