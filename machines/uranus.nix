@@ -51,7 +51,14 @@
     # Enable firmware updating
     fwupd.enable = true;
     # Use libinput for touchpad
-    xserver.libinput.enable = true;
+    xserver.libinput = {
+      enable = true;
+      disableWhileTyping = true;
+      naturalScrolling = true;
+      additionalOptions = ''
+        Option "PalmDetection" "True"
+      '';
+    };
   };
 
   powerManagement = {
