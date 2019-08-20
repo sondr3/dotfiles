@@ -32,6 +32,7 @@ in
       counsel
       counsel-projectile
       deadgrep
+      dante
       diff-hl
       dockerfile-mode
       ebib
@@ -57,12 +58,12 @@ in
       hl-todo
       hlint-refactor
       hydra
-      intero
       ivy
       ivy-bibtex
       ivy-yasnippet
       json-mode
       latex-extra
+      lsp-haskell
       lsp-mode
       lsp-ui
       macrostep

@@ -39,12 +39,12 @@
 (require 'am-java)
 (require 'am-json)
 (require 'am-latex)
+(require 'am-lsp)
 (require 'am-markdown)
 (require 'am-nginx)
 (require 'am-nix)
 (require 'am-shell)
 (require 'am-typescript)
-
 
 (provide 'am-modules)
 
