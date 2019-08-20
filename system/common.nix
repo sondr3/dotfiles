@@ -29,6 +29,7 @@
     acpi
     bind
     binutils
+    cachix
     coreutils
     curl
     gitAndTools.gitFull
