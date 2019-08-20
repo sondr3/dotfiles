@@ -18,6 +18,7 @@
       enable = true;
       layout = "us,no";
       xkbOptions = "grp:alt_caps_toggle";
+      exportConfiguration = true;
 
       # Enable the KDE Desktop Environment.
       displayManager.sddm.enable = true;
