@@ -36,6 +36,7 @@ in
       diff-hl
       dockerfile-mode
       ebib
+      ess
       evil
       evil-collection
       evil-commentary
