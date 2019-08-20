@@ -2,7 +2,6 @@
 
 # TODO: Remove all of the <unstable> once Brittany works on stable
 let
-  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
   unstableTarball =
     fetchTarball
       https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
@@ -25,10 +24,10 @@ in
     nodejs-11_x
 
     # Haskell
-    (all-hies.selection { selector = p: { inherit (p) ghc864; }; })
-    cabal-install
     ghc
     hlint
+    stack
+    stack2nix
     unstable.haskellPackages.brittany
 
     # Python
