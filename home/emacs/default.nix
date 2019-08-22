@@ -33,6 +33,7 @@ in
       counsel-projectile
       deadgrep
       diff-hl
+      direnv
       dockerfile-mode
       ebib
       ess

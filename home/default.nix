@@ -5,6 +5,7 @@
     ./common.nix
     ./desktop.nix
     ./emacs
+    ./direnv.nix
     ./fish
     ./git.nix
     ./jetbrains.nix

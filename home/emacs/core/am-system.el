@@ -33,6 +33,17 @@
        amalthea-font-size 120                                         ;; Make the font smaller on Neptune
        amalthea-line-spacing 0.10)                                    ;; And the spacing a little less
 
+;;; `direnv':
+;; A really useful tool that will automatically load and update your `load-path`
+;; and environment variables based on `shell.nix' etc.
+(use-package direnv
+  :commands direnv-mode
+  :general
+  (amalthea-leader
+    "a d" '(direnv-update-environment :wk "update direnv"))
+  :config
+  (direnv-mode))
+
 (provide 'am-system)
 
 ;;; am-system.el ends here
