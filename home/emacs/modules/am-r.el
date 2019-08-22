@@ -23,7 +23,7 @@
 ;;; Code:
 ;;; `ess':
 ;; Emacs Speaks Statistics
-(use-package ess
+(use-package ess-site
   :config
   (progn
     (csetq ess-use-flymake nil
@@ -33,6 +33,10 @@
            ess-expression-offset 2
            ess-nuke-trailing-whitespace-p t
            ess-default-style 'DEFAULT)))
+
+(use-package poly-markdown)
+(use-package poly-R
+  :mode (("\\.Rmd" . poly-markdown+R-mode)))
 
 (provide 'am-r)
 

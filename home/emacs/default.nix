@@ -78,6 +78,9 @@ in
       org-ref
       org-super-agenda
       outshine
+      poly-markdown
+      poly-R
+      polymode
       prettier-js
       projectile
       rainbow-delimiters
