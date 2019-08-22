@@ -43,6 +43,7 @@
 (require 'am-markdown)
 (require 'am-nginx)
 (require 'am-nix)
+(require 'am-r)
 (require 'am-shell)
 (require 'am-typescript)
 

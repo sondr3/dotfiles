@@ -37,9 +37,6 @@ in
     cargo-edit
     cargo-outdated
     rustup
-
-    # R
-    R
   ];
 
   home.file.".npmrc".text = ''
