@@ -17,6 +17,11 @@ in
   };
 
   home.packages = with pkgs; [
+    # C, C++ and so on
+    gcc9
+    gnumake
+    clang-tools
+
     # Go
     go
 
