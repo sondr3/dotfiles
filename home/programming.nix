@@ -36,6 +36,7 @@ in
     unstable.haskellPackages.brittany
 
     # Python
+    python37
     python37Packages.ipython
 
     # Rust
