@@ -8,5 +8,6 @@
       enableSSHSupport = true;
     };
     mtr.enable = true;
+    vim.defaultEditor = true;
   };
 }
