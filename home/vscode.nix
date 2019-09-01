@@ -13,6 +13,8 @@
       "editor.formatOnPaste" = true;
       "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "editor.suggestSelection" = "first";
+      "explorer.confirmDelete" = false;
+      "javascript.updateImportsOnFileMove.enabled" = "always";
       "workbench.settings.useSplitJSON" = true;
       "workbench.settings.editor" = "json";
       "vim.leader" = "<space>";
@@ -43,30 +45,35 @@
       ];
       "prettier.eslintIntegration" = true;
       "prettier.stylelintIntegration" = true;
-      "explorer.confirmDelete" = false;
-      "workbench.statusBar.feedback.visible" = false;
-      "workbench.colorTheme" = "Default Light+";
-      "workbench.iconTheme" = "vscode-icons";
       "search.showLineNumbers" = true;
-      "javascript.updateImportsOnFileMove.enabled" = "always";
+      "stylelint.autoFixOnSave" = true;
+      "telemetry.enableTelemetry" = false;
       "typescript.updateImportsOnFileMove.enabled" = "always";
       "update.mode" = "none";
-      "telemetry.enableTelemetry" = false;
+      "workbench.colorTheme" = "Default Light+";
+      "workbench.iconTheme" = "vscode-icons";
+      "workbench.statusBar.feedback.visible" = false;
     };
     extensions = [
+      # bbenoist.Nix
+      # bungcip.better-toml
       # cmstead.jsrefactor
       # CoenraadS.bracket-pair-colorizer
       # Compulim.compulim-vscode-closetag
       # dbaeumer.vscode-eslint
+      # EditorConfig.EditorConfig
       # esbenp.prettier-vscode
+      # formulahendry.auto-close-tag
       # formulahendry.auto-rename-tag
+      # hex-ci.stylelint-plus
       # jpoissonnier.vscode-styled-components
       # mgmcdermott.vscode-language-babel
       # naumovs.color-highlight
-      # shinnn.stylelint
       # silvenon.mdx
+      # VisualStudioExptTeam.vscodeintellicode
       # vscode-icons-team.vscode-icons
       # vscodevim.vim
+      # Zignd.html-css-class-completion
     ];
   };
 }
