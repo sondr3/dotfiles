@@ -5,6 +5,8 @@ let
   unstableTarball =
     fetchTarball
       https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+  # Link Yarn against latest Node instead of stable
+  yarn = pkgs.yarn.override { nodejs = pkgs.nodejs-11_x; };
 in
 {
 
@@ -26,6 +28,7 @@ in
     go
 
     # Node
+    yarn
     nodejs-11_x
 
     # Haskell
