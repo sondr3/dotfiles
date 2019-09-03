@@ -2,10 +2,11 @@
 
 {
   home.packages = with pkgs; [
-    jetbrains.webstorm
-    jetbrains.pycharm-professional
     jetbrains.clion
+    jetbrains.goland
     jetbrains.idea-ultimate
+    jetbrains.pycharm-professional
+    jetbrains.webstorm
   ];
 
   home.file.".ideavimrc".text = ''

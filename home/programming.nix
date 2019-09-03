@@ -25,7 +25,7 @@ in
     clang-tools
 
     # Go
-    go
+    go_1_12
 
     # Node
     yarn
