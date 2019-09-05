@@ -95,7 +95,7 @@
 ;; Rename and hide some modes
 (delight '((haskell-mode "" :major)
            (interactive-haskell-mode nil "haskell")
-           (haskell-collapse-mode nil "haskell")
+           (haskell-collapse-mode nil "haskell-collapse")
            (subword-mode nil "subword")))
 
 (provide 'am-haskell)
