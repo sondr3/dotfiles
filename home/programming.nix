@@ -36,6 +36,7 @@ in
     hlint
     stack
     stack2nix
+    haskellPackages.apply-refact
     unstable.haskellPackages.brittany
 
     # Python
