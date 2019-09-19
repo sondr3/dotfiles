@@ -13,6 +13,10 @@
       "editor.formatOnPaste" = true;
       "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "editor.suggestSelection" = "first";
+      "emmet.includeLanguages" = {
+        "javascript" = "javascriptreact";
+        "typescript" = "javascriptreact";
+      };
       "explorer.confirmDelete" = false;
       "javascript.updateImportsOnFileMove.enabled" = "always";
       "workbench.settings.useSplitJSON" = true;
@@ -43,8 +47,6 @@
           "autoFix" = true;
         }
       ];
-      "prettier.eslintIntegration" = true;
-      "prettier.stylelintIntegration" = true;
       "search.showLineNumbers" = true;
       "stylelint.autoFixOnSave" = true;
       "telemetry.enableTelemetry" = false;
