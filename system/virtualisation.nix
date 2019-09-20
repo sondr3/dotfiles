@@ -6,10 +6,10 @@
       enableOnBoot = false;
     };
 
-    # virtualbox = {
-    #   host.enable = true;
-    #   host.enableExtensionPack = true;
-    #   guest.enable = true;
-    # };
+    virtualbox = {
+      host.enable = true;
+      host.enableExtensionPack = true;
+      # guest.enable = true;
+    };
   };
 }
