@@ -11,6 +11,10 @@
   # Set your time zone.
   time.timeZone = "Europe/Oslo";
 
+  nix = {
+    autoOptimiseStore = true;
+  };
+
   nixpkgs.config = {
     allowUnfree = true;
   };
