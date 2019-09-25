@@ -15,9 +15,13 @@
     };
 
     aliases = {
-      s = "status";
       b = "branch -v";
+      d = "diff";
+      dc = "diff --cached";
+      gam = "commit --amend --no-edit";
       lg = "log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
+      r = "remote -v";
+      s = "status";
     };
 
     extraConfig = {

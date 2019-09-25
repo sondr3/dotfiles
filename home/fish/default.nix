@@ -16,6 +16,10 @@
     interactiveShellInit = ''
       source (jump shell fish | psub)
     '';
+    shellAliases = {
+      pbcopy = "xclip -selection clipboard";
+      pbpaste = "xclip -o -selection clipboard";
+    };
   };
 
   # xdg.configFile."fish/functions/fish_prompt.fish".source = mkPersistentLink ./functions/fish_prompt.fish;

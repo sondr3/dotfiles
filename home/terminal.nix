@@ -17,6 +17,7 @@ with pkgs;
     pandoc
     ripgrep
     tokei
+    xclip
     xorg.xkill
   ];
 }
