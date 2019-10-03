@@ -7,6 +7,11 @@ let
       https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
   # Link Yarn against latest Node instead of stable
   yarn = pkgs.yarn.override { nodejs = pkgs.nodejs-11_x; };
+  pypacks = python-packages: with python-packages; [
+    ipython
+    requests
+  ];
+  python-with-packages = pkgs.python37.withPackages pypacks;
 in
 {
 
@@ -40,8 +45,7 @@ in
     unstable.haskellPackages.brittany
 
     # Python
-    python37
-    python37Packages.ipython
+    python-with-packages
 
     # Rust
     cargo-edit
