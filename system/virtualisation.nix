@@ -7,9 +7,9 @@
     };
 
     virtualbox = {
-      host.enable = true;
-      host.enableExtensionPack = true;
-      # guest.enable = true;
+      host.enable = false;
+      host.enableExtensionPack = false;
+      guest.enable = false;
     };
   };
 }

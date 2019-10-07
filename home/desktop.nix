@@ -10,5 +10,7 @@
     spectacle
 
     spotify
+
+    skype
   ];
 }
