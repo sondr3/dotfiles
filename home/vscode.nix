@@ -13,10 +13,7 @@
       "editor.formatOnPaste" = true;
       "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "editor.suggestSelection" = "first";
-      "emmet.includeLanguages" = {
-        "javascript" = "javascriptreact";
-        "typescript" = "javascriptreact";
-      };
+      "emmet.showExpandedAbbreviation" = "never";
       "explorer.confirmDelete" = false;
       "javascript.updateImportsOnFileMove.enabled" = "always";
       "workbench.settings.useSplitJSON" = true;
