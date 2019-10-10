@@ -8,8 +8,6 @@
     fstrim.enable = true;
 
     redshift.enable = true;
-    redshift.latitude = "63.39";
-    redshift.longitude = "5.33";
     redshift.temperature.day = 6500;
     redshift.temperature.night = 2300;
 
