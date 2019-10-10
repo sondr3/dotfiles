@@ -6,7 +6,7 @@
       ./neptune-hardware.nix
       # Add home-manager module
       "${builtins.fetchGit {
-        ref = "release-19.03";
+        ref = "release-19.09";
         url = "https://github.com/rycee/home-manager";
       }}/nixos"
       ../system

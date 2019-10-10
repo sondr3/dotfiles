@@ -8,11 +8,5 @@ in
     enable = true;
     viAlias = true;
     vimAlias = true;
-
-    configure = {
-      packages.myVimPackage = with vimPlugins; {
-        start = [];
-      };
-    };
   };
 }
