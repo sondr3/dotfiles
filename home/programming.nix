@@ -1,12 +1,8 @@
 { config, pkgs, ... }:
 
-# TODO: Remove all of the <unstable> once Brittany works on stable
 let
-  unstableTarball =
-    fetchTarball
-      https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
   # Link Yarn against latest Node instead of stable
-  yarn = pkgs.yarn.override { nodejs = pkgs.nodejs-11_x; };
+  yarn = pkgs.yarn.override { nodejs = pkgs.nodejs-12_x; };
   pypacks = python-packages: with python-packages; [
     ipython
     requests
@@ -14,15 +10,6 @@ let
   python-with-packages = pkgs.python37.withPackages pypacks;
 in
 {
-
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-    };
-  };
-
   home.packages = with pkgs; [
     # C, C++ and so on
     gcc9
@@ -30,25 +17,25 @@ in
     clang-tools
 
     # Go
-    go_1_12
+    go
 
     # Node
     yarn
-    nodejs-11_x
+    nodejs-12_x
 
     # Haskell
     ghc
     hlint
     stack
-    stack2nix
     haskellPackages.apply-refact
-    unstable.haskellPackages.brittany
+    haskellPackages.brittany
 
     # Python
     python-with-packages
 
     # Rust
-    cargo-edit
+    # TODO Fix in nixpkgs
+    # cargo-edit
     cargo-outdated
     rustup
   ];
