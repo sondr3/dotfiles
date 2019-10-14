@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     gitAndTools.git-ignore
-    gitAndTools.git-hub
+    gitAndTools.hub
   ];
 
   programs.git = {
