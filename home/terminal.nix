@@ -19,5 +19,6 @@ with pkgs;
     tokei
     xclip
     xorg.xkill
+    xsv
   ];
 }
