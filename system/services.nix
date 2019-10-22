@@ -6,6 +6,8 @@
     printing.enable = true;
     # Enable FSTrim for SSH health
     fstrim.enable = true;
+    # Enable Dropbox
+    dropbox.enable = true;
 
     redshift.enable = true;
     redshift.temperature.day = 6500;
