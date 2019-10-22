@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../modules
     ./audio.nix
     ./boot.nix
     ./cachix.nix
