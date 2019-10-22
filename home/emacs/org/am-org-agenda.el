@@ -28,10 +28,9 @@
   :init (add-to-list 'org-modules 'org-habit t)
   :config
   (progn
-    (csetq org-agenda-files '("~/.org/routine.org"
-                              "~/.org/school.org"
-                              "~/.org/work.org"
-                              "~/.org/workouts.org"))))
+    (csetq org-agenda-files '("~/Dropbox/org/routine.org"
+                              "~/Dropbox/org/school.org"
+                              "~/Dropbox/org/work.org"))))
 
 (use-package org-super-agenda
   :after org)

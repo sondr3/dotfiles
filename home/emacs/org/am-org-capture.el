@@ -22,17 +22,17 @@
 ;; projects and if not puts them in my inbox.
 
 ;;; Code:
-(defcustom amalthea-capture-projects "~/.org/projects.org"
+(defcustom amalthea-capture-projects "~/Dropbox/org/projects.org"
   "Inbox file for project related tasks."
   :type 'string
   :group 'amalthea)
 
-(defcustom amalthea-capture-inbox "~/.org/inbox.org"
+(defcustom amalthea-capture-inbox "~/Dropbox/org/inbox.org"
   "Inbox for personal tasks, reminders and so on."
   :type 'string
   :group 'amalthea)
 
-(defcustom amalthea-capture-notes "~/.org/notes.org"
+(defcustom amalthea-capture-notes "~/Dropbox/org/notes.org"
   "Location of notes file for assorted things that I want to remark on."
   :type 'string
   :group 'amalthea)
