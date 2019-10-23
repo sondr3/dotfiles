@@ -36,6 +36,10 @@
         vaapiIntel vaapiVdpau libvdpau-va-gl
       ];
     };
+
+    pulseaudio.extraModules = with pkgs; [
+      pulseaudio-modules-bt
+    ];
   };
 
   networking.hostName = "uranus";
