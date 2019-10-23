@@ -12,5 +12,8 @@
     spotify
 
     skype
+
+    # Super easily create gifs
+    peek
   ];
 }
