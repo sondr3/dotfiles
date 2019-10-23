@@ -4,11 +4,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./uranus-hardware.nix
-      # Add home-manager module
-      "${builtins.fetchGit {
-        ref = "release-19.09";
-        url = "https://github.com/rycee/home-manager";
-      }}/nixos"
       ../system
     ];
 
