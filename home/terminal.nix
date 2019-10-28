@@ -12,6 +12,7 @@ with pkgs;
     jump
     lm_sensors
     neofetch
+    nixpkgs-fmt
     nix-prefetch-git
     nix-prefetch-github
     pandoc
