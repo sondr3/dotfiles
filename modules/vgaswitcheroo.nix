@@ -1,10 +1,11 @@
-{config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.hardware.vgaswitcheroo;
-in {
+in
+{
   options.hardware.vgaswitcheroo = {
     enable = mkOption {
       type = types.bool;

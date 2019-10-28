@@ -2,7 +2,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./uranus-hardware.nix
       ../system
     ];
@@ -32,7 +33,9 @@
     # OpenGL
     opengl = {
       extraPackages = with pkgs; [
-        vaapiIntel vaapiVdpau libvdpau-va-gl
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
       ];
     };
 

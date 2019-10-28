@@ -27,8 +27,8 @@
       "vim.hlsearch" = true;
       "vim.insertModeKeyBindings" = [
         {
-          "before" = ["j" "k"];
-          "after" = ["<Esc>"];
+          "before" = [ "j" "k" ];
+          "after" = [ "<Esc>" ];
         }
       ];
       "eslint.autoFixOnSave" = true;

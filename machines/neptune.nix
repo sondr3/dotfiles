@@ -1,19 +1,19 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./neptune-hardware.nix
-      ../system
-      ../system/gaming.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./neptune-hardware.nix
+    ../system
+    ../system/gaming.nix
+  ];
 
   hardware = {
     cpu.amd.updateMicrocode = true;
     pulseaudio.extraConfig = ''
-        # Required because it keeps switching to HDMI all the fucking time
-        unload-module module-switch-on-port-available
-      '';
+      # Required because it keeps switching to HDMI all the fucking time
+      unload-module module-switch-on-port-available
+    '';
   };
 
   networking.hostName = "neptune";

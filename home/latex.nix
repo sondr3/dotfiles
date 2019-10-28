@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 
 {
   # TODO: Add LaTeX packages
@@ -19,5 +19,5 @@
     @generated_exts = (@generated_exts, 'synctex.gz');
     # Automatically open generated PDFs;
     $pdf_previewer = 'zathura';
-    '';
+  '';
 }

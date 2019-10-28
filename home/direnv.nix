@@ -14,6 +14,6 @@
   } + "/direnvrc";
 
   xdg.configFile."direnv/direnvrc".text = ''
-   source $XDG_CONFIG_HOME/direnv/usenixrc
+    source $XDG_CONFIG_HOME/direnv/usenixrc
   '';
 }

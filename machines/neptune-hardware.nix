@@ -5,25 +5,28 @@
 
 {
   imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+    [
+      <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = [];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
+    {
+      device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
       options = [ "subvol=nixos" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/boot";
+    {
+      device = "/dev/disk/by-label/boot";
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  swapDevices = [];
 
   nix.maxJobs = lib.mkDefault 12;
 }

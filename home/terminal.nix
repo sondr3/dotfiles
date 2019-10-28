@@ -6,7 +6,7 @@ with pkgs;
 {
   home.packages = [
     alacritty
-    (aspellWithDicts(ps: with ps; [ en nb ]))
+    (aspellWithDicts (ps: with ps; [ en nb ]))
     httpie
     jq
     jump
