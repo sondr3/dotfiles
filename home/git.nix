@@ -1,9 +1,14 @@
 { pkgs, ... }:
 
+let
+  unstable = import <unstable> {};
+in
 {
   home.packages = with pkgs; [
     gitAndTools.git-ignore
     gitAndTools.hub
+    # TODO remove once in stable
+    unstable.gitAndTools.lefthook
   ];
 
   programs.git = {
