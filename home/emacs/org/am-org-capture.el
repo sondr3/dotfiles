@@ -37,6 +37,11 @@
   :type 'string
   :group 'amalthea)
 
+(defcustom amalthea-capture-school "~/Dropbox/org/school.org"
+  "Location of school file for reminders about subjects, volunteering etc."
+  :type 'string
+  :group 'amalthea)
+
 (use-package org-capture
   :ghook ('org-capture-mode-hook #'evil-insert-state)
   :general
@@ -48,7 +53,10 @@
                                     "* TODO %?\n  %u\n  %a")
                                    ("n" "Personal note" entry
                                     (file+headline amalthea-capture-notes "Inbox")
-                                    "* %?\n  %u\n  %a"))
+                                    "* %?\n  %u\n  %a")
+                                   ("s" "School TODO" entry
+                                    (file+headline amalthea-capture-school "Inbox")
+                                    "* TODO %?"))
            counsel-projectile-org-capture-templates '(("pt" "[${name}] TODO" entry
                                                        (file+headline amalthea-capture-projects "Inbox")
                                                        "* TODO %?\n  %u\n  %a")
