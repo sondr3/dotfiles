@@ -1,5 +1,8 @@
 { pkgs, ... }:
 
+let
+  unstable = import <unstable> {};
+in
 {
   # Select internationalisation properties.
   i18n = {
@@ -44,6 +47,7 @@
     gitAndTools.gitFull
     gnupg
     htop
+    unstable.niv
     neovim
     pciutils
     psmisc
