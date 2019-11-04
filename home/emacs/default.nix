@@ -64,12 +64,12 @@ in
           hl-todo
           hlint-refactor
           hydra
-          intero
           ivy
           ivy-bibtex
           ivy-yasnippet
           json-mode
           latex-extra
+          lsp-haskell
           lsp-mode
           lsp-ui
           macrostep

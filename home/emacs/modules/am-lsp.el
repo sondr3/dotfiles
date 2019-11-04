@@ -27,7 +27,8 @@
 (use-package lsp-mode
   :commands lsp
   :delight "Ⓛ"
-  :init (csetq lsp-prefer-flymake nil))
+  :init (csetq lsp-prefer-flymake nil
+               lsp-auto-guess-root t))
 
 ;;; `lsp-ui':
 ;; Gives us some goodies while browsing the code.
@@ -36,7 +37,7 @@
   :commands lsp-ui-mode
   :ghook ('lsp-mode-hook #'lsp-ui-mode)
   :config
-  (csetq lsp-ui-sideline-enable nil
+  (csetq lsp-ui-sideline-enable t
          lsp-enable-completion-at-point t
          lsp-ui-doc-position 'bottom
          lsp-ui-doc-include-signature t))

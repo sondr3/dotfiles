@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let
+  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
   # Link Yarn against latest Node instead of stable
   yarn = pkgs.yarn.override { nodejs = pkgs.nodejs-12_x; };
   pypacks = python-packages: with python-packages; [
@@ -27,6 +28,7 @@ in
     ghc
     hlint
     stack
+    (all-hies.selection { selector = p: { inherit (p) ghc865; }; })
     haskellPackages.apply-refact
     haskellPackages.brittany
 

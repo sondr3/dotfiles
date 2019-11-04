@@ -44,32 +44,12 @@
          haskell-interactive-popup-errors nil                     ;; Unnecessary because of Flycheck
          haskell-process-show-overlays nil))                      ;; Same as above
 
-;;; `intero':
-;; The main workhorse for working with Haskell, Intero is both a Haskell program
-;; and a Emacs mode. It gives you a way to load your code into the REPL, work
-;; inside the REPL, send code back and so on. It's similar to SLIME for Common
-;; Lisp.
-(use-package intero
-  :after haskell-mode
-  :commands intero-global-mode
-  :delight "λ"
-  :general
-  (amalthea-major-leader 'haskell-mode-map
-    "." '(intero-goto-definition :wk "goto definition")
-    "?" '(intero-uses-at :wk "show usage")
-    "t" '(intero-type-at :wk "type info")
-    "i" '(intero-info :wk "info")
-    "l" '(intero-repl-load :wk "load into REPL")
-    "e" '(intero-repl-eval-region :wk "eval region")
-    "E" '(intero-expand-splice-at-point :wk "expand splice")
-    "a" '(intero-apply-suggestions :wk "apply suggestions")
-    "s" '(intero-repl :wk "switch to REPL")
-    "h" '(hoogle :wk "hoogle")
-    "H" '(hayoo :wk "hayoo"))
-  (amalthea-major-leader 'intero-repl-mode-map
-    "s" '(intero-repl-switch-back :wk "switch back")
-    "l" '(intero-repl-clear-buffer :wk "clear REPL"))
-  :init (intero-global-mode))
+;;; `lsp-haskell':
+;; Intero has been sunset and as such we migrate to the next big thing; language
+;; servers. We're using HIE (Haskell IDE Engine) with LSP.
+(use-package lsp-haskell
+  :ghook ('haskell-mode-hook #'lsp)
+  :init (csetq lsp-haskell-process-path-hie "/home/sondre/.nix-profile/bin/hie-wrapper"))
 
 ;;; `flycheck-haskell':
 ;; We obviously need some kind of error correction, for this we'll use `hlint',
