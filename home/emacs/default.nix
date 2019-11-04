@@ -79,6 +79,7 @@ in
           json-mode
           latex-extra
           lsp-haskell
+          lsp-ivy
           lsp-mode
           lsp-ui
           macrostep
