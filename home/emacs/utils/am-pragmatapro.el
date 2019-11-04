@@ -297,7 +297,7 @@
                      (nth 3 (syntax-ppss))))))))
 
 ;;; Add the ligatures to all programming modes
-(general-add-hook '(prog-mode-hook intero-repl-mode-hook)
+(general-add-hook '(prog-mode-hook)
                   (list #'add-pragmatapro-prettify-symbols-alist #'setup-compose-predicate))
 
 ;;; `prettify':

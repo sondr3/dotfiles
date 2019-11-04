@@ -18,8 +18,6 @@
 
 
 ;;; Commentary:
-;; Configuration for the Haskell language, this package requires you to have
-;; `stack' installed, as `intero' uses it.
 
 ;;; Code:
 ;;; `haskell-mode':
@@ -27,39 +25,41 @@
 ;; here. All it does is add some modes to `haskell-mode', exclude some project
 ;; files from `recentf' and set a few common sense settings.
 (use-package haskell-mode
-  :ghook ('haskell-mode-hook (list #'subword-mode #'haskell-auto-insert-module-template #'haskell-collapse-mode))
+  :ghook ('haskell-mode-hook (list #'subword-mode
+                                   #'haskell-auto-insert-module-template
+                                   #'haskell-collapse-mode
+                                   #'interactive-haskell-mode))
+  :ghook ('haskell-interactive-moe-hook #'evil-insert-state)
   :general
   (amalthea-major-leader 'haskell-mode-map
     "f" '(haskell-mode-stylish-buffer :wk "format buffer")
     "F" '(haskell-mode-format-imports :wk "format imports"))
-  :init
-  (add-to-list 'recentf-exclude (expand-file-name "~/.stack/global-project/.stack-work/")) ;; Exclude Intero REPL from recentf
+  :init (require 'lsp-haskell)
   :config
-  (csetq haskell-compile-cabal-build-command "stack build --fast" ;; We're using Stack instead of Cabal due to Intero
-         haskell-process-type 'stack-ghci                         ;; Always use Stack with GHCi
-         haskell-mode-stylish-haskell-path "brittany"             ;; Format files with Brittany instead of Stylish
-         haskell-stylish-on-save t                                ;; Format buffer with Brittany on save
-         haskell-process-suggest-remove-import-lines t            ;; Suggest removing imports
-         haskell-process-auto-import-loaded-modules t             ;; Automatically load modules
-         haskell-interactive-popup-errors nil                     ;; Unnecessary because of Flycheck
-         haskell-process-show-overlays nil))                      ;; Same as above
+  (progn
+    (csetq
+     haskell-mode-stylish-haskell-path "brittany"  ;; Format files with Brittany instead of Stylish
+     haskell-stylish-on-save t                     ;; Format buffer with Brittany on save
+     haskell-process-suggest-remove-import-lines t ;; Suggest removing imports
+     haskell-process-auto-import-loaded-modules t  ;; Automatically load modules
+     haskell-interactive-popup-errors nil          ;; Unnecessary because of Flycheck
+     haskell-process-show-overlays nil)))          ;; Same as above
 
 ;;; `lsp-haskell':
 ;; Intero has been sunset and as such we migrate to the next big thing; language
 ;; servers. We're using HIE (Haskell IDE Engine) with LSP.
 (use-package lsp-haskell
-  :ghook ('haskell-mode-hook #'lsp)
-  :init (csetq lsp-haskell-process-path-hie "/home/sondre/.nix-profile/bin/hie-wrapper"))
+  :after haskell-mode
+  :ghook ('haskell-mode-hook #'lsp))
 
 ;;; `flycheck-haskell':
 ;; We obviously need some kind of error correction, for this we'll use `hlint',
 ;; which is a linter for Haskell code. We need to manually add this as a warning
-;; to Flycheck, but this is done after both Intero and Flycheck has loaded.
+;; to Flycheck, but this is done after Flycheck has loaded.
 (use-package flycheck-haskell
-  :after (intero flycheck)
-  :commands (flycheck-haskell-configure flycheck-add-next-checker)
-  :ghook ('flycheck-mode-hook #'flycheck-haskell-configure)
-  :init (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
+  :after flycheck
+  :commands (flycheck-haskell-setup)
+  :ghook ('flycheck-mode-hook #'flycheck-haskell-setup))
 
 ;;; `hlint-refactor':
 ;; A lot of the time `hlint' can also apply fixes to our code for us, this is
