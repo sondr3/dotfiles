@@ -29,7 +29,9 @@
                                    #'haskell-auto-insert-module-template
                                    #'haskell-collapse-mode
                                    #'interactive-haskell-mode))
-  :ghook ('haskell-interactive-moe-hook #'evil-insert-state)
+  :ghook ('haskell-interactive-mode-hook (list #'evil-insert-state
+                                               #'add-pragmatapro-prettify-symbols-alist
+                                               #'setup-compose-predicate))
   :general
   (amalthea-major-leader 'haskell-mode-map
     "f" '(haskell-mode-stylish-buffer :wk "format buffer")
