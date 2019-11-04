@@ -18,8 +18,10 @@ in
     autoOptimiseStore = true;
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
   };
 
   location = {
