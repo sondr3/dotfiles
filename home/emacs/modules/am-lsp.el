@@ -37,17 +37,14 @@
   :commands lsp-ui-mode
   :ghook ('lsp-mode-hook #'lsp-ui-mode)
   :config
-  (csetq lsp-ui-sideline-enable t
+  (csetq lsp-ui-sideline-show-code-actions nil
          lsp-enable-completion-at-point t
-         lsp-ui-doc-position 'bottom
          lsp-ui-doc-include-signature t))
 
 ;;; `company-lsp':
 ;; Enables auto-completion for languages that use LSP.
 (use-package company-lsp
-  :after (company lsp)
-  :commands company-lsp
-  :config (push 'company-lsp company-backends))
+  :after (company lsp))
 
 (provide 'am-lsp)
 
