@@ -25,12 +25,16 @@ in
     nodejs-12_x
 
     # Haskell
-    ghc
-    hlint
-    stack
     (all-hies.selection { selector = p: { inherit (p) ghc865; }; })
+    cabal-install
+    cabal2nix
+    ghc
+    ghcid
     haskellPackages.apply-refact
     haskellPackages.brittany
+    haskellPackages.hoogle
+    hlint
+    stack
 
     # Python
     python-with-packages
