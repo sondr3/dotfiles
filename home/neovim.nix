@@ -29,4 +29,24 @@ in
     rev = "68fef9c2fd9d4a21b500cc2249b6711a71c6fb9f";
     sha256 = "0azmnxq82frs375k5b9yjdvsjfmzjv92ifqnmniar19d96yh6swa";
   } + "/plug.vim";
+
+  xdg.configFile."nvim/coc-settings.json".text = (
+    builtins.toJSON {
+      languageserver = {
+        haskell = {
+          command = "hie-wrapper";
+          filetypes = [ "hs" "lhs" "haskell" ];
+          initializationOptions = {};
+          rootPatterns = [ ".stack.yaml" "cabal.config" "package.yaml" ];
+          settings = {
+            languageServerHaskell = {
+              completionSnippetsOn = true;
+              hlintOn = true;
+              maxNumberOfProblems = 25;
+            };
+          };
+        };
+      };
+    }
+  );
 }
