@@ -14,12 +14,19 @@ in
     withPython3 = true;
 
     extraConfig = ''
-      call plug#begin(expand('~/.config/nvim/plugged'))
+      filetype off
+
+      call plug#begin(stdpath('data') . '/plugged')
 
       Plug 'sheerun/vim-polyglot'
       Plug 'neoclide/coc.nvim', {'branch': 'release'}
+      Plug 'jacoborus/tender.vim'
 
       call plug#end()
+
+      set termguicolors
+      syntax enable
+      colorscheme tender
     '';
   };
 
