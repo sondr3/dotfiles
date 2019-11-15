@@ -16,6 +16,9 @@ in
     extraConfig = ''
       call plug#begin(expand('~/.config/nvim/plugged'))
 
+      Plug 'sheerun/vim-polyglot'
+      Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
       call plug#end()
     '';
   };
