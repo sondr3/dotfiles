@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
+  options.mine.audio.enable = lib.mkEnableOption "audio";
+
   # Enable sound with PulseAudio
   hardware = {
     pulseaudio = {
