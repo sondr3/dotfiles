@@ -2,10 +2,13 @@
 
 with lib;
 
+let
+  cfg = options.mine.sondre;
+in
 {
   options.mine.sondre.enable = mkEnableOption "Enable me";
 
-  config = mkIf options.mine.sondre.enable {
+  config = mkIf cfg.enable {
     users.users.sondre = {
       isNormalUser = true;
       description = "Sondre Nilsen";

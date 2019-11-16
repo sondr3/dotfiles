@@ -2,11 +2,14 @@
 
 with lib;
 
+let
+  cfg = config.mine.boot;
+in
 {
-  options.mine.boot.enable = mkEnableOption "boot?";
+  options.mine.boot.enable = mkEnableOption "Boot with systemd-boot";
 
   # Use the systemd-boot EFI boot loader.
-  config = mkIf config.mine.boot.enable {
+  config = mkIf cfg.enable {
     boot = {
       kernelPackages = pkgs.linuxPackages_latest;
       cleanTmpDir = true;

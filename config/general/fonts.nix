@@ -2,10 +2,13 @@
 
 with lib;
 
+let
+  cfg = options.mine.fonts;
+in
 {
   options.mine.fonts.enable = mkEnableOption "fonts";
 
-  config = mkIf options.mine.fonts.enable {
+  config = mkIf cfg.enable {
     fonts = {
       enableFontDir = true;
       enableGhostscriptFonts = true;
