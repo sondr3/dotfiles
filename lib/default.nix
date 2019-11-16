@@ -31,7 +31,10 @@ let
           (dirFiles dir)
       );
 
+  utilPackages = map (m: callPackage (import m) {}) (recImport ./.);
+
 in
-{
-  inherit getDir dirFiles recImport;
-}
+foldl' (x: y: x // y)
+  {
+    inherit getDir dirFiles recImport;
+  } utilPackages
