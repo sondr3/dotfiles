@@ -30,13 +30,14 @@ to managing dotfiles.
 This repository is configured and managed by folders that I think make sense, at
 least to me.
 
-- ~home~ :: My dotfiles and configuration for my user
-- ~machines~ :: Machine or host specific configuration
+- ~bin~ :: Bash scripts that might be useful
+- ~hosts~ :: Machine or host specific configuration
+- ~config~ :: Contains all the configurations... as one would expect.
+  - ~home~ :: My dotfiles and configuration for my user
+  - ~nixos~ :: Configuration of the core NixOS experience
+  - ~pkgs~ :: Contains overlays of packages that are not (yet) in ~nixpkgs~
+  - ~modules~ :: Packages or services that requires their own configuration module
 - ~media~ :: Artwork and so on
-- ~modules~ :: Packages or services that requires their own configuration module
-- ~pkgs~ :: Contains overlays of packages that are not (yet) in ~nixpkgs~
-- ~scripts~ :: Bash scripts that might be useful
-- ~system~ :: Configuration of the core NixOS experience
 * How
 1. Install NixOS on any machine and then clone these dotfiles, I put them in
    ~$HOME/.dotfiles~.
