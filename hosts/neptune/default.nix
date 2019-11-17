@@ -3,9 +3,8 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./neptune-hardware.nix
-    ../system
-    ../system/gaming.nix
+    ./hardware.nix
+    ../../config
   ];
 
   hardware = {
