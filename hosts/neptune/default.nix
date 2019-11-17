@@ -3,9 +3,9 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./neptune-hardware.nix
-    ../system
-    ../system/gaming.nix
+    ./hardware.nix
+    ../../config/nixos
+    ../../config/nixos/gaming.nix
   ];
 
   hardware = {
@@ -23,7 +23,7 @@
   home-manager.users.sondre = { pkgs, ... }: {
     imports = [
       # We can game on this machine
-      ../home/gaming.nix
+      ../../config/home/gaming.nix
     ];
   };
 

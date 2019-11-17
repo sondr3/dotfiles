@@ -2,7 +2,6 @@
 
 {
   imports = [
-    # Add home-manager module
     "${builtins.fetchGit {
       ref = "release-19.09";
       url = "https://github.com/rycee/home-manager";
