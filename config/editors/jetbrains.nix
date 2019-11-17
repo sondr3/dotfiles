@@ -1,31 +1,40 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
+with lib;
+
+let
+  cfg = options.mine.editors.jetbrains;
+in
 {
-  home.packages = with pkgs; [
-    jetbrains.clion
-    jetbrains.goland
-    jetbrains.idea-ultimate
-    jetbrains.pycharm-professional
-    jetbrains.webstorm
-  ];
+  options.mine.editors.jetbrains.enable = mkEnableOption "JetBrains products";
 
-  home.file.".ideavimrc".text = ''
-    set surround
-    set hlsearch
-    set incsearch
-    set ignorecase
-    set smartcase
-    set incsearch
-    set showmode
-    set number
-    set relativenumber
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      jetbrains.clion
+      jetbrains.goland
+      jetbrains.idea-ultimate
+      jetbrains.pycharm-professional
+      jetbrains.webstorm
+    ];
 
-    let mapleader = " "
+    home.file.".ideavimrc".text = ''
+      set surround
+      set hlsearch
+      set incsearch
+      set ignorecase
+      set smartcase
+      set incsearch
+      set showmode
+      set number
+      set relativenumber
 
-    imap jk <esc>
+      let mapleader = " "
 
-    nmap <leader>r :action Run<cr>
-    nmap <leader>t :action Refactorings.QuickListPopupAction<cr>
-    nmap <leader>b :action CompileDirty<cr>
-  '';
+      imap jk <esc>
+
+      nmap <leader>r :action Run<cr>
+      nmap <leader>t :action Refactorings.QuickListPopupAction<cr>
+      nmap <leader>b :action CompileDirty<cr>
+    '';
+  };
 }
