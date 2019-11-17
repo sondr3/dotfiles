@@ -1,10 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
+
+with lib;
 
 let
+  cfg = options.mine.userPackages;
   unstable = import <unstable> {};
 in
-
 {
+  options.mine.userPackages.enable = mkEnableOption "User packages";
+
   # TODO: Clean this up, use `home-manager`
   programs = {
     fish.enable = true;
@@ -25,12 +29,33 @@ in
     curl
     gitAndTools.gitFull
     htop
-    unstable.niv
+    httpie
+    jq
+    lm_sensors
     pciutils
     psmisc
+    ripgrep
+    tokei
     tree
     unzip
     wget
+    xsv
     zip
   ];
+
+  config = mkIf cfg.enable {
+    home.packages = [
+      (aspellWithDicts (ps: with ps; [ en nb ]))
+      alacritty
+      jump
+      neofetch
+      nix-prefetch-git
+      nix-prefetch-github
+      nixpkgs-fmt
+      pandoc
+      unstable.niv
+      xclip
+      xorg.xkill
+    ];
+  };
 }

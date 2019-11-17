@@ -6,7 +6,7 @@ let
   cfg = config.mine.audio;
 in
 {
-  options.mine.audio.enable = lib.mkEnableOption "audio";
+  options.mine.audio.enable = mkEnableOption "audio";
 
   # Enable sound with PulseAudio
   config = mkIf cfg.enable {
