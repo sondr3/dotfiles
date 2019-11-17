@@ -1,19 +1,21 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
 {
-  home.packages = with pkgs; [
-    firefox
-    google-chrome
+  config = lib.mkIf config.options.mine.xorg.enable {
+    home.packages = with pkgs; [
+      firefox
+      google-chrome
 
-    kcharselect
-    pavucontrol
-    spectacle
+      kcharselect
+      pavucontrol
+      spectacle
 
-    spotify
+      spotify
 
-    skype
+      skype
 
-    # Super easily create gifs
-    peek
-  ];
+      # Super easily create gifs
+      peek
+    ];
+  };
 }

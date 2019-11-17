@@ -1,10 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
 {
-  home.packages = with pkgs; [
-    discord
-    slack
-    tdesktop
-    weechat
-  ];
+  config = lib.mkIf config.options.mine.xorg.enable {
+    home.packages = with pkgs; [
+      discord
+      slack
+      tdesktop
+      weechat
+    ];
+  };
 }
