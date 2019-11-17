@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.mine.development.go;
+  cfg = options.mine.development.go;
 in
 {
   options.mine.development.go.enable = mkEnableOption "Go";

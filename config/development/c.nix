@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.mine.development.c;
+  cfg = options.mine.development.c;
 in
 {
   options.mine.development.c.enable = mkEnableOption "C, C++";

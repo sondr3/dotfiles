@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.mine.boot;
+  cfg = options.mine.boot;
 in
 {
   options.mine.boot.enable = mkEnableOption "Boot with systemd-boot";

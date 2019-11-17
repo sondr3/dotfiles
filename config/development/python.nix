@@ -8,7 +8,7 @@ let
     requests
   ];
   python-with-packages = pkgs.python37.withPackages pypacks;
-  cfg = config.mine.development.python;
+  cfg = options.mine.development.python;
 in
 {
   options.mine.development.python.enable = mkEnableOption "Python";

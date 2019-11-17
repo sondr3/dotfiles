@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.mine.development.rust;
+  cfg = options.mine.development.rust;
 in
 {
   options.mine.development.rust.enable = mkEnableOption "Rust";

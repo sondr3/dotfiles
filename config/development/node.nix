@@ -4,7 +4,7 @@ with lib;
 
 let
   yarn = pkgs.yarn.override { nodejs = pkgs.nodejs-12_x; };
-  cfg = config.mine.development.node;
+  cfg = options.mine.development.node;
 in
 {
   options.mine.development.node.enable = mkEnableOption "Node";

@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.mine.audio;
+  cfg = options.mine.audio;
 in
 {
   options.mine.audio.enable = mkEnableOption "audio";

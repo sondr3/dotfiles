@@ -4,7 +4,7 @@ with lib;
 
 let
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
-  cfg = config.mine.development.haskell;
+  cfg = options.mine.development.haskell;
 in
 {
   options.mine.development.haskell.enable = mkEnableOption "Haskell";

@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.mine.editors.vscode;
+  cfg = options.mine.editors.vscode;
 in
 {
   options.mine.editors.vscode.enable = mkEnableOption "Visual Studio Code";
