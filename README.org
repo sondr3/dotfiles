@@ -32,21 +32,25 @@ least to me.
 
 - ~bin~ :: Bash scripts that might be useful
 - ~hosts~ :: Machine or host specific configuration
+- ~lib~ :: Contains a few useful functions used in this configuration.
 - ~config~ :: Contains all the configurations... as one would expect.
   - ~home~ :: My dotfiles and configuration for my user
   - ~nixos~ :: Configuration of the core NixOS experience
   - ~pkgs~ :: Contains overlays of packages that are not (yet) in ~nixpkgs~
   - ~modules~ :: Packages or services that requires their own configuration module
+  - ~variables.nix~ :: Defines an attribute set containing variables available
+       across the whole configuration, used for stuff like hostnames etc.
 - ~media~ :: Artwork and so on
 * How
-1. Install NixOS on any machine and then clone these dotfiles, I put them in
-   ~$HOME/.dotfiles~.
-2. Create a symbolic link from the machine specific configuration into
-   ~/etc/nixos/configuration.nix~, e.g.: ~sudo ln -s ~/.dotfiles/neptune.nix
-   configuration.nix~.
-3. Add the ~unstable~ Nix channel: ~sudo nix-channel --add
-   https://nixos.org/channels/nixos-unstable unstable~ and update your package
-   list ~sudo nix-channel --update~.
+1. Install NixOS on any machine and then clone these dotfiles into ~/etc/nixos/~.
+2. Add the required channels:
+   #+begin_src sh
+     sudo nix-channel --add https://nixos.org/channels/nixos-unstable unstable
+     sudo nix-channel --add https://github.com/rycee/home-manager/archive/release-19.09.tar.gz home-manager
+     sudo nix-channel --update
+   #+end_src
+3. Set the path to the host configuration: ~export
+   NIXOS_CONFIG=/etc/config/hosts/<host>/default.nix~.
 4. Build the configuration and cross your fingers, ~sudo nixos-rebuild switch~.
 5. ???
 6. Profit!
@@ -55,11 +59,5 @@ This will configure a system (specifically my desktop system) with all packages
 and ~$HOME~ configuration ready and running, it is stupid simple. Took me about 30
 minutes when I got my latest laptop to go from a TTY to a fully configured and
 ready Linux desktop.
-
-Finally, there are some minor things that (currently) needs to be manually
-symbolically linked:
-
-1. Emacs: ~ln -s ~/.dotfiles/home/emacs/ .emacs.d~
-2. Fish: ~ln -s ~/.dotfiles/home/fish/functions/fish_prompt.fish .~
 * License
 All code is licensed under the MIT license.
