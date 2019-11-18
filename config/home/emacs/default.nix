@@ -1,4 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+
+with import ../../../lib;
 
 let
   amalthea = (
@@ -119,4 +121,6 @@ in
       )
     );
   };
+
+  home.activation.emacs = execute ''emacs --batch -l ~/.emacs.d/init.el --eval "(amalthea--byte-compile-amalthea)"'';
 }
