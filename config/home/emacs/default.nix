@@ -122,5 +122,8 @@ in
     );
   };
 
-  home.activation.emacs = execute ''emacs --batch -l ~/.emacs.d/init.el --eval "(amalthea--byte-compile-amalthea)"'';
+  home.activation.emacs = execute ''
+    ln -sf /etc/nixos/config/home/emacs/ ~/.emacs.d
+    emacs --batch -l ~/.emacs.d/init.el --eval "(amalthea--byte-compile-amalthea)"
+  '';
 }

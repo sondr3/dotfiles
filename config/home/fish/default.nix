@@ -19,5 +19,5 @@ with import ../../../lib;
     };
   };
 
-  home.activation.fish = symlink "~/.dotfiles/config/home/fish/functions/fish_prompt.fish" "~/.config/fish/functions/";
+  home.activation.fish = symlink "/etc/nixos/config/home/fish/functions/fish_prompt.fish" "~/.config/fish/functions/";
 }
