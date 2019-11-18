@@ -59,5 +59,18 @@ This will configure a system (specifically my desktop system) with all packages
 and ~$HOME~ configuration ready and running, it is stupid simple. Took me about 30
 minutes when I got my latest laptop to go from a TTY to a fully configured and
 ready Linux desktop.
+* Inspiration
+Huge thanks to the extremely helpful people in ~#nixos~ on Freenode, they've been
+a great help with not only helping me learn Nix and more NixOS but also general
+Linux stuff.
+
+I've taken a bunch of inspiration from the following NixOS configurations:
+
+- [[https://github.com/kalbasit/shabka][kalbasit/shabka]]
+- [[https://github.com/gmarmstrong/dotfiles][gmarmstrong/dotfiles]]
+- [[https://github.com/Infinisil/system][Infinisil/system]]
+- [[https://github.com/kmein/niveum][kmein/niveum]]
+- [[https://github.com/cleverca22/nixos-configs][cleverca22/nixos-configs]]
+- ...and a bunch of other people I've forgotten about.
 * License
 All code is licensed under the MIT license.
