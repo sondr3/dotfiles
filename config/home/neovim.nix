@@ -1,4 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+
+with import ../../lib;
 
 let
   unstable = import <unstable> {};
@@ -56,4 +58,6 @@ in
       };
     }
   );
+
+  home.activation.neovim = execute "vim +'PlugInstall --sync' +qa";
 }
