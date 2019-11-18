@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, variables, ... }:
 
 let
   unstable = import <unstable> {};
@@ -16,6 +16,11 @@ in
 
   nix = {
     autoOptimiseStore = true;
+    nixPath = [
+      "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+      "nixos-config=/etc/nixos/hosts/${variables.hostname}/default.nix"
+      "/nix/var/nix/profiles/per-user/root/channels"
+    ];
   };
 
   nixpkgs = {

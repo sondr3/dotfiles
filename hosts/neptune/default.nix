@@ -1,12 +1,18 @@
-{ config, pkgs, ... }:
+{ config, pkgs, variables, ... }:
 
+let
+  hostname = "neptune";
+in
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware.nix
+    ../../config/variables.nix
     ../../config/nixos
     ../../config/nixos/gaming.nix
   ];
+
+  variables.hostname = hostname;
 
   hardware = {
     cpu.amd.updateMicrocode = true;
@@ -16,7 +22,7 @@
     '';
   };
 
-  networking.hostName = "neptune";
+  networking.hostName = variables.hostname;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
