@@ -4,8 +4,8 @@
   imports =
     [
       # Include the results of the hardware scan.
-      ./uranus-hardware.nix
-      ../system
+      ./hardware.nix
+      ../../config/nixos
     ];
 
   # Use the systemd-boot EFI boot loader.

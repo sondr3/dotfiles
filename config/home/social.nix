@@ -6,5 +6,6 @@
     slack
     tdesktop
     weechat
+    # skype
   ];
 }

@@ -1,11 +1,8 @@
 { pkgs, lib, ... }:
 
-# let
-#   # Fully persisted and backed up links
-#   mkPersistentLink = path: pkgs.runCommand "persistent-link" {} ''
-#     ln -s ${path} $out
-#   '';
-# in
+with lib;
+with import ../../../lib;
+
 {
   programs.fish = {
     enable = true;
@@ -22,6 +19,5 @@
     };
   };
 
-  # xdg.configFile."fish/functions/fish_prompt.fish".source = mkPersistentLink ./functions/fish_prompt.fish;
-  # xdg.configFile."fish/functions/fish_right_prompt.fish".source = mkPersistentLink ./functions/fish_right_prompt.fish;
+  home.activation.fish = symlink "~/.dotfiles/config/home/fish/functions/fish_prompt.fish" "~/.config/fish/functions/";
 }
