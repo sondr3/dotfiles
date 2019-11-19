@@ -9,10 +9,10 @@ in
     ./hardware.nix
     ../../config/variables.nix
     ../../config/nixos
-    ../../config/nixos/gaming.nix
   ];
 
   variables.hostname = hostname;
+  variables.canGame = true;
 
   hardware = {
     cpu.amd.updateMicrocode = true;
@@ -25,13 +25,6 @@ in
   networking.hostName = variables.hostname;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
-
-  home-manager.users.sondre = { pkgs, ... }: {
-    imports = [
-      # We can game on this machine
-      ../../config/home/gaming.nix
-    ];
-  };
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
