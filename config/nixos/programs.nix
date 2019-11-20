@@ -3,10 +3,6 @@
   # started in user sessions.
   programs = {
     fish.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
     mtr.enable = true;
     vim.defaultEditor = true;
   };

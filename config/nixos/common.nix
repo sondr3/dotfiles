@@ -52,7 +52,6 @@ in
     coreutils
     curl
     gitAndTools.gitFull
-    gnupg
     htop
     unstable.niv
     neovim
