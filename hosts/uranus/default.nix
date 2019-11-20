@@ -1,12 +1,18 @@
 { config, pkgs, ... }:
 
+let
+  hostname = "uranus";
+in
 {
   imports =
     [
-      # Include the results of the hardware scan.
       ./hardware.nix
+      ../../config/variables.nix
       ../../config/nixos
     ];
+
+  variables.hostname = "uranus";
+  variables.canGame = false;
 
   # Use the systemd-boot EFI boot loader.
   boot = {
