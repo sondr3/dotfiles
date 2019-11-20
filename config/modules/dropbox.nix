@@ -18,10 +18,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      # dropbox - we don't need this in the environment. systemd unit pulls it in
-      dropbox-cli
-    ];
+    home-manager.users.sondre = {
+      home.packages = with pkgs; [
+        # dropbox - we don't need this in the environment. systemd unit pulls it in
+        dropbox-cli
+      ];
+    };
 
     networking.firewall = {
       allowedTCPPorts = [ 17500 ];
