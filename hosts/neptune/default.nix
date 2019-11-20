@@ -12,7 +12,7 @@ in
   ];
 
   variables.hostname = hostname;
-  variables.canGame = true;
+  mine.gaming.enable = true;
 
   hardware = {
     cpu.amd.updateMicrocode = true;

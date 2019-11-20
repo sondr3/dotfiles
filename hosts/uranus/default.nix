@@ -12,7 +12,6 @@ in
     ];
 
   variables.hostname = "uranus";
-  variables.canGame = false;
 
   # Use the systemd-boot EFI boot loader.
   boot = {

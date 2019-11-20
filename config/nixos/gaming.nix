@@ -2,8 +2,13 @@
 
 with lib;
 
+let
+  cfg = config.mine.gaming;
+in
 {
-  config = mkIf variables.canGame {
+  options.mine.gaming.enable = mkEnableOption "Gaming";
+
+  config = mkIf cfg.enable {
     # OpenGL support for Steam etc
     hardware = {
       opengl.driSupport32Bit = true;
