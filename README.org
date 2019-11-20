@@ -59,6 +59,9 @@ This will configure a system (specifically my desktop system) with all packages
 and ~$HOME~ configuration ready and running, it is stupid simple. Took me about 30
 minutes when I got my latest laptop to go from a TTY to a fully configured and
 ready Linux desktop.
+
+Once you've rebooted you ought to ~chown~ the files so that your user owns them,
+in my case the user is called ~sondre~: ~sudo chown sondre:users /etc/nixos~.
 * Inspiration
 Huge thanks to the extremely helpful people in ~#nixos~ on Freenode, they've been
 a great help with not only helping me learn Nix and more NixOS but also general
