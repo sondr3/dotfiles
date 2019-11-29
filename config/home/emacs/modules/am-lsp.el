@@ -27,8 +27,7 @@
 (use-package lsp-mode
   :commands lsp
   :delight "Ⓛ"
-  :init (csetq lsp-prefer-flymake nil
-               lsp-auto-guess-root t))
+  :init (csetq lsp-prefer-flymake nil))
 
 ;;; `lsp-ui':
 ;; Gives us some goodies while browsing the code.
@@ -39,12 +38,16 @@
   :config
   (csetq lsp-ui-sideline-show-code-actions nil
          lsp-enable-completion-at-point t
-         lsp-ui-doc-include-signature t))
+         lsp-ui-doc-include-signature nil
+         lsp-ui-flycheck-enable t))
 
 ;;; `company-lsp':
 ;; Enables auto-completion for languages that use LSP.
 (use-package company-lsp
-  :after (company lsp))
+  :after (company lsp)
+  :config
+  (csetq company-lsp-async t
+         company-lsp-cache-candidates 'auto))
 
 (provide 'am-lsp)
 

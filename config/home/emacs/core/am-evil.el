@@ -30,11 +30,13 @@
                        :timeout 0.25
                        "k" 'evil-normal-state))
   :init
+  (csetq evil-want-integration t     ;; `evil-collection' compatability fix
+         evil-want-keybinding nil    ;; Same as above
+         evil-search-module 'swiper) ;; Use Swiper for searches
+  :config
   (progn
-    (csetq evil-want-integration t      ;; `evil-collection' compatability fix
-           evil-want-keybinding nil     ;; Same as above
-           evil-search-module 'swiper)) ;; Use Swiper for searches
-  :config (evil-mode))
+    (evil-mode)
+    (require 'evil-collection)))
 
 ;;; `evil-collection':
 ;; A collective effort to create keybindings for various packages that work with
