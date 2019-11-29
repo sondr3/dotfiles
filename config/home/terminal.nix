@@ -5,16 +5,17 @@ with pkgs;
 
 {
   home.packages = [
-    alacritty
     (aspellWithDicts (ps: with ps; [ en nb ]))
+    alacritty
+    fd
     httpie
     jq
     jump
     lm_sensors
     neofetch
-    nixpkgs-fmt
     nix-prefetch-git
     nix-prefetch-github
+    nixpkgs-fmt
     pandoc
     ripgrep
     tokei
