@@ -30,6 +30,7 @@ in
     haskellPackages.hoogle
     hlint
     stack
+    stylish-cabal
 
     # Python
     python-with-packages
