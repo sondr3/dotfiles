@@ -28,7 +28,8 @@
   :ghook ('haskell-mode-hook (list #'subword-mode
                                    #'haskell-auto-insert-module-template
                                    #'haskell-collapse-mode
-                                   #'interactive-haskell-mode))
+                                   #'interactive-haskell-mode
+                                   #'direnv-update-environment))
   :ghook ('haskell-interactive-mode-hook (list #'evil-insert-state
                                                #'add-pragmatapro-prettify-symbols-alist
                                                #'setup-compose-predicate))
@@ -39,13 +40,13 @@
   :init (require 'lsp-haskell)
   :config
   (progn
-    (csetq
-     haskell-mode-stylish-haskell-path "brittany"  ;; Format files with Brittany instead of Stylish
-     haskell-stylish-on-save t                     ;; Format buffer with Brittany on save
-     haskell-process-suggest-remove-import-lines t ;; Suggest removing imports
-     haskell-process-auto-import-loaded-modules t  ;; Automatically load modules
-     haskell-interactive-popup-errors nil          ;; Unnecessary because of Flycheck
-     haskell-process-show-overlays nil)))          ;; Same as above
+    (csetq haskell-process-type 'cabal-new-repl          ;; Use the new Cabal REPL
+           haskell-mode-stylish-haskell-path "brittany"  ;; Format files with Brittany instead of Stylish
+           haskell-stylish-on-save t                     ;; Format buffer with Brittany on save
+           haskell-process-suggest-remove-import-lines t ;; Suggest removing imports
+           haskell-process-auto-import-loaded-modules t  ;; Automatically load modules
+           haskell-interactive-popup-errors nil          ;; Unnecessary because of Flycheck
+           haskell-process-show-overlays nil)))          ;; Same as above
 
 ;;; `lsp-haskell':
 ;; Intero has been sunset and as such we migrate to the next big thing; language
