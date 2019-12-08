@@ -13,6 +13,9 @@ with import ../../../lib;
     interactiveShellInit = ''
       source (jump shell fish | psub)
     '';
+    shellAliases = {
+      serve = "nix run nixpkgs.caddy -c caddy -host 0.0.0.0 -port 8000 browse";
+    };
     shellAbbrs = {
       pbcopy = "xclip -selection clipboard";
       pbpaste = "xclip -o -selection clipboard";
