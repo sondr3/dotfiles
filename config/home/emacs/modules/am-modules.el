@@ -33,6 +33,7 @@
 
 ;;; Load modules
 (require 'am-assembly)
+(require 'am-dhall)
 (require 'am-docker)
 (require 'am-elisp)
 (require 'am-haskell)

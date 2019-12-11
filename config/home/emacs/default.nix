@@ -49,6 +49,7 @@ in
           counsel
           counsel-projectile
           deadgrep
+          dhall-mode
           diff-hl
           direnv
           dockerfile-mode
