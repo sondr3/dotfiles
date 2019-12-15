@@ -58,11 +58,11 @@
                                     (file+headline amalthea-capture-school "Inbox")
                                     "* TODO %?"))
            counsel-projectile-org-capture-templates '(("pt" "[${name}] TODO" entry
-                                                       (file+headline amalthea-capture-projects "Inbox")
-                                                       "* TODO %?\n  %u\n  %a")
+                                                       (file+headline amalthea-capture-projects "${name}")
+                                                       "* TODO %? %u\n")
                                                       ("pf" "[${name}] FIXME" entry
-                                                       (file+headline amalthea-capture-projects "Inbox")
-                                                       "* FIXME %?\n  %u\n  %a")))))
+                                                       (file+headline amalthea-capture-projects "${name}")
+                                                       "* FIXME %? %t\n")))))
 
 (provide 'am-org-capture)
 
