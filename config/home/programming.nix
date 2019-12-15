@@ -20,7 +20,7 @@ in
     nodejs-12_x
 
     # Haskell
-    (all-hies.bios.selection { selector = p: { inherit (p) ghc865; }; })
+    (all-hies.selection { selector = p: { inherit (p) ghc865; }; })
     cabal-install
     cabal2nix
     ghc
