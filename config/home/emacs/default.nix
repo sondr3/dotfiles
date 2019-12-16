@@ -9,6 +9,24 @@ let
       withGTK2 = false;
     }
   );
+  ra-emacs-lsp = pkgs.emacsPackages.melpaBuild {
+    pname = "ra-emacs-lsp";
+    version = "20191120";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "rust-analyzer";
+      repo = "rust-analyzer";
+      rev = "0ef8ace012b19b76ee99b283801d0d17a3b72b4b";
+      sha256 = "0qv73z2dllxb3lcd43ls8iwjxr7b6f13ir6m5ickpqib13b4yw72";
+    };
+
+    packageRequires = with pkgs; with emacsPackages; [ lsp-mode dash ht ];
+    recipe = builtins.toFile "ra-emacs-lsp-recipe" ''
+      (ra-emacs-lsp :repo "rust-analyzer/rust-analyzer"
+                    :fetcher github
+                    :files ("editors/emacs/ra-emacs-lsp.el"))
+    '';
+  };
 in
 {
   nixpkgs.overlays = [
@@ -37,6 +55,7 @@ in
           apropospriate-theme
           auctex-latexmk
           auto-compile
+          cargo
           company
           company-auctex
           company-lsp
@@ -100,8 +119,10 @@ in
           projectile
           rainbow-delimiters
           rust-mode
+          rustic
           smartparens
           swiper
+          toml-mode
           typescript-mode
           use-package
           which-key
@@ -118,6 +139,10 @@ in
       ) ++ (
         with epkgs; [
           emacs-libvterm
+        ]
+      ) ++ (
+        [
+          ra-emacs-lsp
         ]
       )
     );

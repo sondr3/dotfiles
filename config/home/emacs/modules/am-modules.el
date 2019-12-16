@@ -44,6 +44,7 @@
 (require 'am-markdown)
 (require 'am-nginx)
 (require 'am-nix)
+(require 'am-rust)
 (require 'am-shell)
 (require 'am-typescript)
 
