@@ -44,6 +44,11 @@
   :config
   (direnv-mode))
 
+;;; `exec-path-from-shell`:
+;; Fish shell, $PATH and Emacs sitting in a tree. `file' not found.
+(use-package exec-path-from-shell
+  :init (exec-path-from-shell-initialize))
+
 (provide 'am-system)
 
 ;;; am-system.el ends here
