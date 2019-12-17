@@ -118,7 +118,6 @@ in
           prettier-js
           projectile
           rainbow-delimiters
-          rust-mode
           rustic
           smartparens
           swiper

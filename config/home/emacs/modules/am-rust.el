@@ -25,7 +25,7 @@
 (use-package toml-mode)
 
 (use-package rustic
-  :mode ("\\.rs$" . rustic-mode)
+  :commands rustic-mode-hook
   :ghook #'lsp
   :config
   (progn
@@ -33,7 +33,7 @@
            rustic-format-trigger 'on-save)))
 
 (use-package cargo
-  :after rust-mode
+  :after rustic-mode
   :ghook #'rustic-mode-hook)
 
 (provide 'am-rust)
