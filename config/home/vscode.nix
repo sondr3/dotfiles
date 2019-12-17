@@ -13,6 +13,9 @@
       "editor.formatOnPaste" = true;
       "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "editor.suggestSelection" = "first";
+      "editor.codeActionsOnSave" = {
+        "source.fixAll" = true;
+      };
       "emmet.showExpandedAbbreviation" = "never";
       "explorer.confirmDelete" = false;
       "javascript.updateImportsOnFileMove.enabled" = "always";
@@ -31,27 +34,12 @@
           "after" = [ "<Esc>" ];
         }
       ];
-      "eslint.autoFixOnSave" = true;
-      "eslint.validate" = [
-        "javascript"
-        "javascriptreact"
-        {
-          "language" = "typescript";
-          "autoFix" = true;
-        }
-        {
-          "language" = "typescriptreact";
-          "autoFix" = true;
-        }
-      ];
       "search.showLineNumbers" = true;
-      "stylelint.autoFixOnSave" = true;
       "telemetry.enableTelemetry" = false;
       "typescript.updateImportsOnFileMove.enabled" = "always";
       "update.mode" = "none";
       "workbench.colorTheme" = "Default Light+";
       "workbench.iconTheme" = "vscode-icons";
-      "workbench.statusBar.feedback.visible" = false;
     };
     extensions = [
       # bbenoist.Nix
