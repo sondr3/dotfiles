@@ -11,7 +11,8 @@ in
       ../../config/nixos
     ];
 
-  variables.hostname = "uranus";
+  variables.hostname = hostname;
+  mine.gaming.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot = {
