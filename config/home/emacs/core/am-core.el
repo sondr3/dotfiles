@@ -177,8 +177,8 @@ BODY is a list of the variables to be set."
 (add-to-list 'load-path amalthea-core-dir t)
 
 (require 'am-packages)
-(require 'am-system)
 (require 'am-keybindings)
+(require 'am-system)
 (require 'am-evil)
 (require 'am-ui)
 (require 'am-editor)
