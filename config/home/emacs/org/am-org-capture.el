@@ -60,6 +60,9 @@
            counsel-projectile-org-capture-templates '(("pt" "[${name}] TODO" entry
                                                        (file+headline amalthea-capture-projects "${name}")
                                                        "* TODO %? %u\n")
+                                                      ("pl" "[${name}] TODO" entry
+                                                       (file+headline amalthea-capture-projects "${name}")
+                                                       "* TODO %? %u\n%a")
                                                       ("pf" "[${name}] FIXME" entry
                                                        (file+headline amalthea-capture-projects "${name}")
                                                        "* FIXME %? %t\n")))))

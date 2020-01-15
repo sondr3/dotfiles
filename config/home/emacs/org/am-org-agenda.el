@@ -23,14 +23,21 @@
 ;;; Code:
 
 ;;; Agenda
+(defvar agenda-files '("~/Dropbox/org/routine.org"
+                       "~/Dropbox/org/work.org"
+                       "~/Dropbox/org/school.org"
+                       "~/Dropbox/org/projects.org"
+                       "~/Dropbox/org/notes.org"
+                       "~/Dropbox/org/work.org"))
+
 (use-package org-agenda
   :after org
   :init (add-to-list 'org-modules 'org-habit t)
   :config
   (progn
-    (csetq org-agenda-files '("~/Dropbox/org/routine.org"
-                              "~/Dropbox/org/school.org"
-                              "~/Dropbox/org/work.org"))))
+    (csetq org-agenda-files agenda-files
+           org-refile-targets '((nil :maxlevel . 3)
+                                (agenda-files :maxlevel . 2)))))
 
 (use-package org-super-agenda
   :after org)
