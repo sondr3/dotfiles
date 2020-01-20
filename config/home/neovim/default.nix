@@ -8,7 +8,7 @@ with import ../../../lib;
     package = pkgs.neovim-unwrapped;
     viAlias = true;
     vimAlias = true;
-    withNodeJs = false;
+    withNodeJs = true;
     withPython = false;
     withPython3 = true;
   };
@@ -21,7 +21,7 @@ with import ../../../lib;
   } + "/plug.vim";
 
   home.activation.neovim = execute ''
-    ln -sfT /etc/nixos/config/home/neovim/init.vim ~/.config/nvim/init.vim
+    ln -sfT /etc/nixos/config/home/neovim/ ~/.config/nvim
     vim +'PlugInstall --sync' +qa
   '';
 }
