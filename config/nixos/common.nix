@@ -1,14 +1,13 @@
 { pkgs, variables, ... }:
 
-let
-  unstable = import <unstable> {};
-in
 {
   # Select internationalisation properties.
   i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
+  };
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
   };
 
   # Set your time zone.
@@ -53,7 +52,7 @@ in
     curl
     gitAndTools.gitFull
     htop
-    unstable.niv
+    niv
     neovim
     pciutils
     psmisc

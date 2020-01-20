@@ -2,13 +2,10 @@
 
 with import ../../lib;
 
-let
-  unstable = import <unstable> {};
-in
 {
   programs.neovim = {
     enable = true;
-    package = unstable.neovim-unwrapped;
+    package = pkgs.neovim-unwrapped;
     viAlias = true;
     vimAlias = true;
     withNodeJs = true;
