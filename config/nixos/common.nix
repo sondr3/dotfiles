@@ -23,7 +23,6 @@
   };
 
   nixpkgs = {
-    overlays = [ (import ../pkgs/neovim.nix) ];
     config = {
       allowUnfree = true;
     };
@@ -54,7 +53,6 @@
     gitAndTools.gitFull
     htop
     niv
-    neovim
     pciutils
     psmisc
     ranger
