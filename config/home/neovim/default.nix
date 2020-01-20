@@ -13,6 +13,8 @@ with import ../../../lib;
     withPython3 = true;
   };
 
+  home.packages = with pkgs; [ maple ];
+
   xdg.dataFile."nvim/site/autoload/plug.vim".source = pkgs.fetchFromGitHub {
     owner = "junegunn";
     repo = "vim-plug";

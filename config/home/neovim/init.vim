@@ -6,8 +6,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'jacoborus/tender.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fannheyward/coc-rust-analyzer', {'do': 'yarn install --frozen-lockfile'}
+Plug 'liuchengxu/vim-clap'
 
 call plug#end()
+
 
 set termguicolors
 syntax enable
