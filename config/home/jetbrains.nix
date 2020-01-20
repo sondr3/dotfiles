@@ -3,10 +3,9 @@
 {
   home.packages = with pkgs; [
     jetbrains.clion
-    jetbrains.goland
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
-    jetbrains.webstorm
+    jetbrains.datagrip
   ];
 
   home.file.".ideavimrc".text = ''
