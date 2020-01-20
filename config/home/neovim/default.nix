@@ -20,5 +20,8 @@ with import ../../../lib;
     sha256 = "0azmnxq82frs375k5b9yjdvsjfmzjv92ifqnmniar19d96yh6swa";
   } + "/plug.vim";
 
-  home.activation.neovim = execute "vim +'PlugInstall --sync' +qa";
+  home.activation.neovim = execute ''
+    ln -sfT /etc/nixos/config/home/neovim/init.vim ~/.config/nvim/init.vim
+    vim +'PlugInstall --sync' +qa
+  '';
 }
