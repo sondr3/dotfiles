@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    streamlink
     youtube-dl
   ];
 
