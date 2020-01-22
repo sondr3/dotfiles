@@ -25,6 +25,11 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
+      packageOverrides = pkgs: {
+        snix = import (builtins.fetchTarball "https://github.com/sondr3/nix-expressions/archive/master.tar.gz") {
+          inherit pkgs;
+        };
+      };
     };
   };
 

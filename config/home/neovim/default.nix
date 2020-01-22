@@ -2,6 +2,11 @@
 
 with import ../../../lib;
 
+let
+  snix = import (builtins.fetchTarball "https://github.com/sondr3/nix-expressions/archive/master.tar.gz") {
+    inherit pkgs;
+  };
+in
 {
   programs.neovim = {
     enable = true;
@@ -13,7 +18,7 @@ with import ../../../lib;
     withPython3 = true;
   };
 
-  home.packages = with pkgs; [ maple ];
+  home.packages = with pkgs; [ snix.maple ];
 
   xdg.dataFile."nvim/site/autoload/plug.vim".source = pkgs.fetchFromGitHub {
     owner = "junegunn";
