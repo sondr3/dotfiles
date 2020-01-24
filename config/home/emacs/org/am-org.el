@@ -71,7 +71,8 @@
        (dot . t)
        (latex . t)
        (python .t)
-       (java . t)))))
+       (java . t)
+       (sql . t)))))
 
 ;; I don't want the mode line to show that org-indent-mode is active
 (use-package org-indent :after org :delight)
