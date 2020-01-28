@@ -26,10 +26,7 @@
     config.allowUnfree = true;
   };
 
-  location = {
-    latitude = 63.39;
-    longitude = 5.33;
-  };
+  location.provider = "geoclue2";
 
   networking = {
     networkmanager.enable = true;

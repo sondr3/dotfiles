@@ -6,12 +6,6 @@
     printing.enable = true;
     # Enable FSTrim for SSH health
     fstrim.enable = true;
-    # Enable Dropbox
-    dropbox.enable = true;
-
-    redshift.enable = true;
-    redshift.temperature.day = 6500;
-    redshift.temperature.night = 2300;
 
     # Enable the X11 windowing system.
     xserver = {
@@ -19,10 +13,6 @@
       layout = "us,no";
       xkbOptions = "grp:alt_caps_toggle";
       exportConfiguration = true;
-
-      # Enable the KDE Desktop Environment.
-      displayManager.sddm.enable = true;
-      desktopManager.plasma5.enable = true;
     };
   };
 }
