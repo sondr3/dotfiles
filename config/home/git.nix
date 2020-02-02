@@ -38,5 +38,7 @@
       };
       rebase = { autosquash = "true"; };
     };
+
+    ignores = [ ".envrc" ".direnv/" ];
   };
 }
