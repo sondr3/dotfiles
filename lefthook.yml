@@ -2,4 +2,4 @@ pre-commit:
   commands:
     fmt:
       glob: "*.nix"
-      run: nixpkgs-fmt --check {staged_files}
+      run: nixfmt --check {staged_files}

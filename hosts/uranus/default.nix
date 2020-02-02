@@ -1,15 +1,8 @@
 { config, pkgs, ... }:
 
-let
-  hostname = "uranus";
-in
-{
-  imports =
-    [
-      ./hardware.nix
-      ../../config/variables.nix
-      ../../config/nixos
-    ];
+let hostname = "uranus";
+in {
+  imports = [ ./hardware.nix ../../config/variables.nix ../../config/nixos ];
 
   variables.hostname = hostname;
   mine.gaming.enable = true;
@@ -38,16 +31,10 @@ in
 
     # OpenGL
     opengl = {
-      extraPackages = with pkgs; [
-        vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
-      ];
+      extraPackages = with pkgs; [ vaapiIntel vaapiVdpau libvdpau-va-gl ];
     };
 
-    pulseaudio.extraModules = with pkgs; [
-      pulseaudio-modules-bt
-    ];
+    pulseaudio.extraModules = with pkgs; [ pulseaudio-modules-bt ];
   };
 
   networking.hostName = "uranus";

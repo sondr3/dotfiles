@@ -17,7 +17,6 @@ with lib;
     };
   };
 
-  environment.systemPackages = mkIf config.virtualisation.docker.enable [
-    pkgs.docker-compose
-  ];
+  environment.systemPackages =
+    mkIf config.virtualisation.docker.enable [ pkgs.docker-compose ];
 }

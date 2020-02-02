@@ -1,9 +1,7 @@
 { config, pkgs, variables, ... }:
 
-let
-  hostname = "neptune";
-in
-{
+let hostname = "neptune";
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware.nix

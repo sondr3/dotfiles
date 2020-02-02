@@ -2,10 +2,8 @@
 
 with lib;
 
-let
-  cfg = config.mine.gaming;
-in
-{
+let cfg = config.mine.gaming;
+in {
   options.mine.gaming.enable = mkEnableOption "Gaming";
 
   config = mkIf cfg.enable {
@@ -17,10 +15,7 @@ in
     };
 
     home-manager.users.sondre = {
-      home.packages = with pkgs; [
-        minecraft
-        steam
-      ];
+      home.packages = with pkgs; [ minecraft steam ];
     };
   };
 }

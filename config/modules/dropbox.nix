@@ -2,10 +2,8 @@
 
 with lib;
 
-let
-  cfg = config.services.dropbox;
-in
-{
+let cfg = config.services.dropbox;
+in {
   options.services.dropbox = {
     enable = mkOption {
       type = types.bool;
@@ -19,10 +17,11 @@ in
 
   config = mkIf cfg.enable {
     home-manager.users.sondre = {
-      home.packages = with pkgs; [
-        # dropbox - we don't need this in the environment. systemd unit pulls it in
-        dropbox-cli
-      ];
+      home.packages = with pkgs;
+        [
+          # dropbox - we don't need this in the environment. systemd unit pulls it in
+          dropbox-cli
+        ];
     };
 
     networking.firewall = {
@@ -34,8 +33,10 @@ in
       description = "Dropbox";
       wantedBy = [ "graphical-session.target" ];
       environment = {
-        QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
-        QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
+        QT_PLUGIN_PATH = "/run/current-system/sw/"
+          + pkgs.qt5.qtbase.qtPluginPrefix;
+        QML2_IMPORT_PATH = "/run/current-system/sw/"
+          + pkgs.qt5.qtbase.qtQmlPrefix;
       };
       serviceConfig = {
         ExecStart = "${pkgs.dropbox.out}/bin/dropbox";

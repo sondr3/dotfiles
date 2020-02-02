@@ -3,8 +3,5 @@
 with import ../../lib;
 
 {
-  imports = [
-    <home-manager/nixos>
-    ../modules
-  ] ++ recImport ./.;
+  imports = [ <home-manager/nixos> ../modules ] ++ recImport ./.;
 }

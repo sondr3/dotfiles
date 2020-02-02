@@ -21,7 +21,8 @@
       d = "diff";
       dc = "diff --cached";
       cam = "commit --amend --no-edit";
-      lg = "log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
+      lg =
+        "log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
       r = "remote -v";
       s = "status";
     };
@@ -35,9 +36,7 @@
         default = "current";
         rebase = "true";
       };
-      rebase = {
-        autosquash = "true";
-      };
+      rebase = { autosquash = "true"; };
     };
   };
 }

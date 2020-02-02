@@ -1,7 +1,5 @@
 { pkgs, lib, ... }:
 
 {
-  imports = [
-    ./dropbox.nix
-  ];
+  imports = [ ./dropbox.nix ];
 }

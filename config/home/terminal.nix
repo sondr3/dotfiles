@@ -38,8 +38,7 @@ with pkgs;
     neofetch
     nix-prefetch-git
     nix-prefetch-github
-    nixpkgs-fmt
-    niv
+    nixfmt
     pandoc
     ripgrep
     tokei

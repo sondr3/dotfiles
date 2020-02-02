@@ -13,9 +13,7 @@
       "editor.formatOnPaste" = true;
       "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "editor.suggestSelection" = "first";
-      "editor.codeActionsOnSave" = {
-        "source.fixAll" = true;
-      };
+      "editor.codeActionsOnSave" = { "source.fixAll" = true; };
       "emmet.showExpandedAbbreviation" = "never";
       "explorer.confirmDelete" = false;
       "javascript.updateImportsOnFileMove.enabled" = "always";
@@ -28,12 +26,10 @@
       "vim.useSystemClipboard" = true;
       "vim.useCtrlKeys" = true;
       "vim.hlsearch" = true;
-      "vim.insertModeKeyBindings" = [
-        {
-          "before" = [ "j" "k" ];
-          "after" = [ "<Esc>" ];
-        }
-      ];
+      "vim.insertModeKeyBindings" = [{
+        "before" = [ "j" "k" ];
+        "after" = [ "<Esc>" ];
+      }];
       "search.showLineNumbers" = true;
       "telemetry.enableTelemetry" = false;
       "typescript.updateImportsOnFileMove.enabled" = "always";

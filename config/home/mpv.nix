@@ -1,10 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    streamlink
-    youtube-dl
-  ];
+  home.packages = with pkgs; [ streamlink youtube-dl ];
 
   programs.mpv = {
     enable = true;
