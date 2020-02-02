@@ -1,6 +1,7 @@
 { pkgs, variables, builtins, ... }:
 
-{
+let sources = import ../../nix/sources.nix;
+in {
   # Select internationalisation properties.
   i18n = { defaultLocale = "en_US.UTF-8"; };
   console = {
@@ -14,14 +15,14 @@
   nix = {
     autoOptimiseStore = true;
     nixPath = [
-      "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+      "nixpkgs=${toString sources.nixpkgs}"
       "nixos-config=/etc/nixos/hosts/${variables.hostname}/default.nix"
-      "/nix/var/nix/profiles/per-user/root/channels"
     ];
   };
 
   nixpkgs = {
-    config.allowUnfree = true;
+    overlays = [ (self: super: rec { inherit sources; }) ];
+    config = { allowUnfree = true; };
   };
 
   location.provider = "geoclue2";

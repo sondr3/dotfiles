@@ -2,6 +2,7 @@
 
 with import ../../lib;
 
-{
-  imports = [ <home-manager/nixos> ../modules ] ++ recImport ./.;
+let sources = import ../../nix/sources.nix;
+in {
+  imports = [ "${sources.home-manager}/nixos" ../modules ] ++ recImport ./.;
 }
