@@ -2,15 +2,26 @@ filetype off
 
 call plug#begin(stdpath('data') . '/plugged')
 
+" Collection of language
 Plug 'sheerun/vim-polyglot'
+" Color themes
 Plug 'junegunn/seoul256.vim'
 Plug 'jacoborus/tender.vim'
+" Auto-completion framework
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fannheyward/coc-rust-analyzer', {'do': 'yarn install --frozen-lockfile'}
+" A really neat generic finder
 Plug 'liuchengxu/vim-clap'
+" Linting, formatting etc
 Plug 'dense-analysis/ale'
+" Git gutters
 Plug 'mhinz/vim-signify'
+" Auto creating and closing pairs of things
 Plug 'tmsvg/pear-tree'
+" Show nice colors where you can #eee
+Plug 'norcalli/nvim-colorizer.lua'
+" A somewhat nice git interface
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -95,6 +106,14 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 " ale configuration
-
 let b:ale_fixers = {'haskell': ['brittany', 'hlint'], 'nix': ['nixpkgs-fmt']}
 let g:ale_fix_on_save = 1
+
+" Lua configuration
+lua require'colorizer'.setup()
+
+" pear-tree
+let g:pear_tree_ft_disabled = ['clap_input'] " don't break vim-clap
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
