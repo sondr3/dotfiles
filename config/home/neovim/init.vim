@@ -10,6 +10,7 @@ Plug 'jacoborus/tender.vim'
 " Auto-completion framework
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fannheyward/coc-rust-analyzer', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 " A really neat generic finder
 Plug 'liuchengxu/vim-clap'
 " Linting, formatting etc
@@ -106,7 +107,7 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 " ale configuration
-let b:ale_fixers = {'haskell': ['brittany', 'hlint'], 'nix': ['nixpkgs-fmt']}
+let b:ale_fixers = {'haskell': ['brittany', 'hlint'], 'nix': ['nixpkgs-fmt'], 'rust': ['rustfmt']}
 let g:ale_fix_on_save = 1
 
 " Lua configuration
