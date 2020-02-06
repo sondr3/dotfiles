@@ -37,7 +37,7 @@ in
 
     # Rust
     # TODO Fix in nixpkgs
-    # cargo-edit
+    cargo-edit
     cargo-expand
     cargo-outdated
     rustup
