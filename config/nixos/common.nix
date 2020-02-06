@@ -50,11 +50,9 @@
     curl
     gitAndTools.gitFull
     htop
-    niv
     pciutils
     psmisc
     ranger
-    tree
     unzip
     wget
     zip
