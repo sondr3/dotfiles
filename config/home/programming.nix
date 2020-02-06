@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+  ghcide = import (fetchTarball "https://github.com/cachix/ghcide-nix/tarball/master") {};
   # Link Yarn against latest Node instead of stable
   yarn = pkgs.yarn.override { nodejs = pkgs.nodejs-12_x; };
   pypacks = python-packages: with python-packages; [
@@ -20,11 +20,11 @@ in
     nodejs-12_x
 
     # Haskell
-    (all-hies.selection { selector = p: { inherit (p) ghc865; }; })
     cabal-install
     cabal2nix
     ghc
     ghcid
+    ghcide.ghcide-ghc865
     haskellPackages.apply-refact
     haskellPackages.brittany
     haskellPackages.hoogle

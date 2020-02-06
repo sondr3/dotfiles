@@ -3,17 +3,19 @@ filetype off
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/seoul256.vim'
 Plug 'jacoborus/tender.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fannheyward/coc-rust-analyzer', {'do': 'yarn install --frozen-lockfile'}
 Plug 'liuchengxu/vim-clap'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
 
 set termguicolors
 syntax enable
-colorscheme tender
+colo tender
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -86,3 +88,8 @@ nmap <leader>rn <Plug>(coc-rename)
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
+" ale configuration
+
+let b:ale_fixers = {'haskell': ['brittany', 'hlint']}
+let g:ale_fix_on_save = 1

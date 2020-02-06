@@ -1,23 +1,25 @@
 {
+  "suggest.enablePreview":true,
+  "diagnostic.displayByAle": true,
   "languageserver": {
     "haskell": {
-      "command": "hie-wrapper",
-      "args": ["--lsp"],
+      "command": "ghcide",
+      "args": [
+        "--lsp"
+      ],
       "rootPatterns": [
         "*.cabal",
         "stack.yaml",
+        ".hie-bios",
         "cabal.project",
+        "cabal.config",
         "package.yaml"
       ],
       "filetypes": [
         "hs",
         "lhs",
         "haskell"
-      ],
-      "initializationOptions": {
-        "languageServerHaskell": {
-        }
-      }
+      ]
     }
   }
 }
