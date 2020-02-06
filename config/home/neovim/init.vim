@@ -9,9 +9,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fannheyward/coc-rust-analyzer', {'do': 'yarn install --frozen-lockfile'}
 Plug 'liuchengxu/vim-clap'
 Plug 'dense-analysis/ale'
+Plug 'mhinz/vim-signify'
+Plug 'tmsvg/pear-tree'
 
 call plug#end()
-
 
 set termguicolors
 syntax enable
@@ -24,11 +25,15 @@ set hidden
 set nobackup
 set nowritebackup
 
+" relative line numbers, highlight current line
+set relativenumber
+set cursorline
+
 " Better display for messages
-set cmdheight=2
+" set cmdheight=2
 
 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
+set updatetime=250
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
