@@ -107,7 +107,7 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 " ale configuration
-let b:ale_fixers = {'haskell': ['brittany', 'hlint'], 'nix': ['nixpkgs-fmt'], 'rust': ['rustfmt']}
+let g:ale_fixers = {'haskell': ['brittany', 'hlint'], 'nix': ['nixpkgs-fmt'], 'rust': ['rustfmt']}
 let g:ale_fix_on_save = 1
 
 " Lua configuration
