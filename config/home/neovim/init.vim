@@ -91,5 +91,5 @@ nmap <leader>f  <Plug>(coc-format-selected)
 
 " ale configuration
 
-let b:ale_fixers = {'haskell': ['brittany', 'hlint']}
+let b:ale_fixers = {'haskell': ['brittany', 'hlint'], 'nix': ['nixpkgs-fmt']}
 let g:ale_fix_on_save = 1
