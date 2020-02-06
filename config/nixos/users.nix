@@ -10,7 +10,14 @@
   };
 
   home-manager.users.sondre = { pkgs, ... }: {
-    nixpkgs.overlays = [ (import ../pkgs) ];
+    nixpkgs = {
+      overlays = [ (import ../pkgs) ];
+      config.packageOverrides = pkgs: {
+        mine = import (fetchTarball "https://github.com/sondr3/nix-expressions/archive/master.tar.gz") {
+          inherit pkgs;
+        };
+      };
+    };
     imports = [
       # Import all home configurations
       ../home
