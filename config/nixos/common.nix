@@ -15,7 +15,8 @@ in {
   nix = {
     autoOptimiseStore = true;
     nixPath = [
-      "nixpkgs=${toString sources.nixpkgs}"
+      "nixpkgs=${sources.unstable}"
+      "stable=${sources.stable}"
       "nixos-config=/etc/nixos/hosts/${variables.hostname}/default.nix"
     ];
   };
