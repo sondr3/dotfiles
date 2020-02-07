@@ -18,3 +18,5 @@ places
 
 # Ignore test dir
 test
+.env*
+.direnv/

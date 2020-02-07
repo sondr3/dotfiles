@@ -13,6 +13,7 @@
       layout = "us,no";
       xkbOptions = "grp:alt_caps_toggle";
       exportConfiguration = true;
+      displayManager.lightdm = { enable = true; };
     };
   };
 }
