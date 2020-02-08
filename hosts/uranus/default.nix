@@ -2,9 +2,8 @@
 
 let hostname = "uranus";
 in {
-  imports = [ ./hardware.nix ../../config/variables.nix ../../config/nixos ];
+  imports = [ ./hardware.nix ../../config/nixos ];
 
-  variables.hostname = hostname;
   mine.gaming.enable = true;
 
   # Use the systemd-boot EFI boot loader.
@@ -37,7 +36,7 @@ in {
     pulseaudio.extraModules = with pkgs; [ pulseaudio-modules-bt ];
   };
 
-  networking.hostName = "uranus";
+  networking.hostName = hostname;
 
   services = {
     # Enable TLP for power saving

@@ -26,7 +26,6 @@ with pkgs;
   };
   home.packages = [
     (aspellWithDicts (ps: with ps; [ en nb ]))
-    alacritty
     broot
     exa
     fd
@@ -34,6 +33,7 @@ with pkgs;
     jq
     jump
     lazygit
+    kitty
     lm_sensors
     neofetch
     nix-prefetch-git

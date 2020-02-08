@@ -1,15 +1,13 @@
-{ config, pkgs, variables, ... }:
+{ config, pkgs, ... }:
 
 let hostname = "neptune";
 in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware.nix
-    ../../config/variables.nix
     ../../config/nixos
   ];
 
-  variables.hostname = hostname;
   mine.gaming.enable = true;
 
   hardware = {
@@ -20,7 +18,7 @@ in {
     '';
   };
 
-  networking.hostName = variables.hostname;
+  networking.hostName = hostname;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 

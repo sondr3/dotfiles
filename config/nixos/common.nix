@@ -1,4 +1,4 @@
-{ pkgs, variables, builtins, ... }:
+{ pkgs, config, ... }:
 
 let sources = import ../../nix/sources.nix;
 in {
@@ -17,7 +17,7 @@ in {
     nixPath = [
       "nixpkgs=${sources.unstable}"
       "stable=${sources.stable}"
-      "nixos-config=/etc/nixos/hosts/${variables.hostname}/default.nix"
+      "nixos-config=/etc/nixos/hosts/${config.networking.hostName}}/default.nix"
     ];
   };
 
