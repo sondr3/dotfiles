@@ -17,6 +17,13 @@ in {
 
   programs.rofi.enable = true;
 
+  services = {
+    redshift = {
+      enable = true;
+      provider = "geoclue2";
+    };
+  };
+
   home.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
     GDK_SCALE = "1";
