@@ -11,6 +11,12 @@
     };
   };
 
+  sessionVariables = {
+    GDK_SCALE = "1";
+    GDK_DPI_SCALE = "0.5";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+  };
+
   services = {
     # taffybar.enable = true;
     # status-notifier-watcher.enable = true;
