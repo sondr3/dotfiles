@@ -17,7 +17,7 @@ in {
     nixPath = [
       "nixpkgs=${sources.unstable}"
       "stable=${sources.stable}"
-      "nixos-config=/etc/nixos/hosts/${config.networking.hostName}}/default.nix"
+      "nixos-config=/etc/nixos/hosts/${config.networking.hostName}/default.nix"
     ];
   };
 
