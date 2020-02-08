@@ -18,7 +18,7 @@
         lightdm = { enable = true; };
         session = [{
           name = "home-manager";
-          manage = "desktop";
+          manage = "window";
           start = ''
             ${pkgs.runtimeShell} $HOME/.hm-xsession &
             waitPID=$!
