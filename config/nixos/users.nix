@@ -21,6 +21,7 @@
     imports = [
       # Import all home configurations
       ../home
+      ../home/desktop/taffybar.nix
     ];
   };
 }

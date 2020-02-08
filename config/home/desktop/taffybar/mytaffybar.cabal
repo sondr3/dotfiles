@@ -1,0 +1,10 @@
+name:               mytaffybar
+version:            0.1.0.0
+author:             Sondre Nilsen
+maintainer:         nilsen.sondre@gmail.com
+cabal-version:      >= 2.0
+
+executable mytaffybar
+  main-is:          MyTaffybar.hs
+  build-depends:    base, X11 >= 1.8, containers, directory, filepath, gtk3, taffybar
+  default-language: Haskell2010
