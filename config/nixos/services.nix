@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   services = {
     # Enable the OpenSSH daemon.
@@ -12,8 +14,17 @@
       enable = true;
       layout = "us,no";
       xkbOptions = "grp:alt_caps_toggle";
-      exportConfiguration = true;
-      displayManager.lightdm = { enable = true; };
+      displayManager = {
+        lightdm = { enable = true; };
+        session = [{
+          name = "home-manager";
+          manage = "desktop";
+          start = ''
+            ${pkgs.runtimeShell} $HOME/.hm-xsession &
+            waitPID=$!
+          '';
+        }];
+      };
     };
   };
 }
