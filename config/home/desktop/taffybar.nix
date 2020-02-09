@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 with lib;
+with import ../../../lib;
 
 let cfg = config.mine.taffybar;
 in {
@@ -34,6 +35,12 @@ in {
 
         Install = { WantedBy = [ "graphical-session.target" ]; };
       };
+
+      xsession.importedVariables = [ "GDK_PIXBUF_MODULE_FILE" ];
+
+      home.activation.xmonad = execute ''
+        ln -sfT /etc/nixos/config/home/desktop/taffybar/ ~/.config/taffybar
+      '';
     }
 
     (mkIf (cfg.config != null) {

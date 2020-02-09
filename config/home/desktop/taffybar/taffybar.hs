@@ -1,21 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
------------------------------------------------------------------------------
--- |
--- Module      : System.Taffybar.Example
--- Copyright   : (c) Ivan A. Malison
--- License     : BSD3-style (see LICENSE)
---
--- Maintainer  : Ivan A. Malison
--- Stability   : unstable
--- Portability : unportable
------------------------------------------------------------------------------
 module Main where
-
--- XXX: in an actual taffybar.hs configuration file, you will need the module
--- name to be Main, and you would need to have a main function defined at the
--- top level, e.g.
---
--- > main = dyreTaffybar exampleTaffybarConfig
 
 import System.Taffybar
 import System.Taffybar.Context (TaffybarConfig(..))
@@ -86,7 +70,7 @@ exampleTaffybarConfig =
       windowsW = windowsNew defaultWindowsConfig
       -- See https://github.com/taffybar/gtk-sni-tray#statusnotifierwatcher
       -- for a better way to set up the sni tray
-      tray = sniTrayThatStartsWatcherEvenThoughThisIsABadWayToDoIt
+      tray = sniTrayNew
       myConfig = defaultSimpleTaffyConfig
         { startWidgets =
             workspaces : map (>>= buildContentsBox) [ layout, windowsW ]
@@ -96,11 +80,9 @@ exampleTaffybarConfig =
           , tray
           , cpu
           , mem
-          , net
           , mpris2New
           ]
         , barPosition = Top
-        , barPadding = 10
         , barHeight = 50
         , widgetSpacing = 0
         }

@@ -22,6 +22,7 @@ in {
       enable = true;
       provider = "geoclue2";
     };
+    status-notifier-watcher.enable = true;
   };
 
   home.sessionVariables = {
