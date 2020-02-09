@@ -30,7 +30,7 @@
        select-enable-primary t                                        ;; Use the primary clipboard
        x-gtk-use-system-tooltips nil                                  ;; Use the builtin Emacs tooltips
        x-underline-at-descent-line t                                  ;; Fix for not using GTK tooltips
-       amalthea-font-size 120                                         ;; Make the font smaller on Neptune
+       amalthea-font-size 60                                          ;; Make the font smaller on Neptune
        amalthea-line-spacing 0.10)                                    ;; And the spacing a little less
 
 ;;; `direnv':
