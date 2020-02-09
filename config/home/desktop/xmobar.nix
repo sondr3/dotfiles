@@ -25,17 +25,12 @@ in {
 
         Service = {
           ExecStart =
-            "${pkgs.xmobar}/bin/xmobar $XDG_CONFIG_HOME/xmobar/xmobar.hs";
+            "${pkgs.xmobar}/bin/xmobar /etc/nixos/config/home/desktop/xmobar.hs";
           Restart = "on-failure";
         };
 
         Install = { WantedBy = [ "graphical-session.target" ]; };
       };
-
-      home.activation.xmonad = execute ''
-        mkdir $HOME/.config/xmobar/
-        ln -sfT /etc/nixos/config/home/desktop/xmobar.hs $HOME/.config/xmobar/xmobar.hs
-      '';
     }
 
     (mkIf (cfg.config != null) {

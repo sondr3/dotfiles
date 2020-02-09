@@ -18,15 +18,6 @@
 
 import Xmobar
 
--- Example user-defined plugin
-
-data HelloWorld = HelloWorld
-    deriving (Read, Show)
-
-instance Exec HelloWorld where
-    alias HelloWorld = "hw"
-    run   HelloWorld = return "<fc=red>Hello World!!</fc>"
-
 -- Configuration, using predefined monitors as well as our HelloWorld
 -- plugin:
 
@@ -49,12 +40,7 @@ config = defaultConfig {
   , iconRoot = "."
   , allDesktops = True
   , overrideRedirect = True
-  , commands = [ Run $ Weather "EGPH" ["-t","<station>: <tempC>C",
-                                        "-L","18","-H","25",
-                                        "--normal","green",
-                                        "--high","red",
-                                        "--low","lightblue"] 36000
-               , Run $ Network "eth0" ["-L","0","-H","32",
+  , commands = [ Run $ Network "eth0" ["-L","0","-H","32",
                                         "--normal","green","--high","red"] 10
                , Run $ Network "eth1" ["-L","0","-H","32",
                                         "--normal","green","--high","red"] 10
@@ -64,12 +50,11 @@ config = defaultConfig {
                , Run $ Swap [] 10
                , Run $ Com "uname" ["-s","-r"] "" 36000
                , Run $ Date "%a %b %_d %Y %H:%M:%S" "date" 10
-              , Run HelloWorld
               ]
   , sepChar = "%"
   , alignSep = "}{"
   , template = "%cpu% | %memory% * %swap% | %eth0% - %eth1% }\
-               \ %hw% { <fc=#ee9a00>%date%</fc>| %EGPH% | %uname%"
+               \ { <fc=#ee9a00>%date%</fc>"
 }
 
 main :: IO ()
