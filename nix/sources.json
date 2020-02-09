@@ -35,18 +35,6 @@
         "url": "https://github.com/nixos/nixpkgs-channels/archive/2de9367299f325c2b2021a44c2f63c810f8ad023.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "taffybar": {
-        "branch": "master",
-        "description": "A gtk based status bar for tiling window managers such as XMonad",
-        "homepage": "",
-        "owner": "taffybar",
-        "repo": "taffybar",
-        "rev": "90555b8afc998af4f2c38b7ac7fd384084ee7fce",
-        "sha256": "0rqd3p9zhnimj5rjcyfbf0v23rsfb2b5drair0w4a8z5zqbaf48v",
-        "type": "tarball",
-        "url": "https://github.com/taffybar/taffybar/archive/90555b8afc998af4f2c38b7ac7fd384084ee7fce.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "unstable": {
         "branch": "nixos-unstable",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",

@@ -8,12 +8,9 @@ in {
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      extraPackages = hpks: [ hpks.taffybar config.mine.taffybar.package ];
-      haskellPackages = stable.pkgs.haskell.packages.ghc865;
     };
   };
 
-  mine.taffybar.enable = true;
 
   programs.rofi.enable = true;
 
