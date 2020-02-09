@@ -36,8 +36,12 @@ in {
     ];
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  environment.variables = {
+    GDK_SCALE = "1";
+    GDK_DPI_SCALE = "0.5";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+  };
+
   environment.systemPackages = with pkgs; [
     acpi
     bind

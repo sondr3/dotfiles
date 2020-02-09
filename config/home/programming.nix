@@ -18,7 +18,7 @@ in {
     # Haskell
     cabal-install
     cabal2nix
-    ghc
+    (haskellPackages.ghcWithPackages (p: with p; [ xmobar ]))
     ghcid
     ghcide.ghcide-ghc865
     haskellPackages.apply-refact

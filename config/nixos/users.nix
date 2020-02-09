@@ -20,6 +20,8 @@
     };
     imports = [
       ../home
+      # [TODO] Fix this bloody import
+      ../home/desktop/xmobar.nix
     ];
   };
 }

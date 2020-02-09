@@ -11,6 +11,7 @@ in {
     };
   };
 
+  mine.xmobar.enable = true;
 
   programs.rofi.enable = true;
 
