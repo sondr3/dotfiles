@@ -32,7 +32,6 @@ in {
     python-with-packages
 
     # Rust
-    # TODO Fix in nixpkgs
     cargo-edit
     cargo-expand
     cargo-outdated
