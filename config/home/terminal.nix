@@ -39,6 +39,7 @@ with pkgs;
     nix-prefetch-git
     nix-prefetch-github
     nixfmt
+    niv
     pandoc
     ripgrep
     tokei
