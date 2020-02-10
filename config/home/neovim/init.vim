@@ -41,6 +41,11 @@ set nowritebackup
 set relativenumber
 set cursorline
 
+" Spaces, not tabs dammit
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
 " Better display for messages
 " set cmdheight=2
 
