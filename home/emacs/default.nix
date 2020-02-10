@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 
-with import ../../../lib;
+with import ../../lib;
 
 let
-  sources = import ../../../nix/sources.nix;
+  sources = import ../../nix/sources.nix;
   amalthea = (pkgs.emacs.override {
     withGTK3 = true;
     withGTK2 = false;
@@ -76,7 +76,7 @@ in {
   };
 
   home.activation.emacs = execute ''
-    ln -sfT /etc/nixos/config/home/emacs/ ~/.emacs.d
+    ln -sfT /etc/nixos/home/emacs/ ~/.emacs.d
     emacs --batch -l ~/.emacs.d/init.el --eval "(amalthea--byte-compile-amalthea)"
   '';
 }

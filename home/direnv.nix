@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  sources = import ../../nix/sources.nix;
+  sources = import ../nix/sources.nix;
   usenix = sources.nix-direnv;
 in {
   programs.direnv = {

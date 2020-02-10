@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-let sources = import ../../nix/sources.nix;
+let sources = import ../nix/sources.nix;
 in {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sondre = {

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 with lib;
-with import ../../../lib;
+with import ../../lib;
 
 let cfg = config.mine.xmobar;
 in {

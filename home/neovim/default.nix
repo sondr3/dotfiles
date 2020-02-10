@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 
-with import ../../../lib;
+with import ../../lib;
 
 let
-  sources = import ../../../nix/sources.nix;
+  sources = import ../../nix/sources.nix;
   plug = sources.vim-plug;
 in {
   programs.neovim = {
@@ -26,7 +26,7 @@ in {
   } + "/plug.vim";
 
   home.activation.neovim = execute ''
-    ln -sfT /etc/nixos/config/home/neovim/ ~/.config/nvim
+    ln -sfT /etc/nixos/home/neovim/ ~/.config/nvim
     vim +'PlugInstall --sync' +qa
   '';
 }

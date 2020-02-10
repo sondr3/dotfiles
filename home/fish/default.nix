@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 with lib;
-with import ../../../lib;
+with import ../../lib;
 
 {
   programs.fish = {
@@ -24,6 +24,6 @@ with import ../../../lib;
   };
 
   home.activation.fish = execute ''
-    ln -sf /etc/nixos/config/home/fish/functions/fish_prompt.fish ~/.config/fish/functions/
+    ln -sf /etc/nixos/home/fish/functions/fish_prompt.fish ~/.config/fish/functions/
   '';
 }

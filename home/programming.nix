@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  sources = import ../../nix/sources.nix;
+  sources = import ../nix/sources.nix;
   ghcide = import sources.ghcide-nix { };
   yarn = pkgs.yarn.override { nodejs = pkgs.nodejs-12_x; };
   pypacks = python-packages: with python-packages; [ ipython requests ];
