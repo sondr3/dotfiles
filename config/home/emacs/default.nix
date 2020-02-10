@@ -3,6 +3,7 @@
 with import ../../../lib;
 
 let
+  sources = import ../../../nix/sources.nix;
   amalthea = (pkgs.emacs.override {
     withGTK3 = true;
     withGTK2 = false;
@@ -26,12 +27,7 @@ let
     '';
   };
 in {
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url =
-        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-    }))
-  ];
+  nixpkgs.overlays = [ (import sources.emacs-overlay) ];
   programs.emacs = {
     enable = true;
     package = amalthea;

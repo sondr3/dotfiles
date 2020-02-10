@@ -1,16 +1,19 @@
 { pkgs, ... }:
 
-{
+let
+  sources = import ../../nix/sources.nix;
+  usenix = sources.nix-direnv;
+in {
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
   };
 
   xdg.configFile."direnv/usenixrc".source = pkgs.fetchFromGitHub {
-    owner = "nix-community";
-    repo = "nix-direnv";
-    rev = "f9889758694bdfe11251ac475d78a93804dbd93c";
-    sha256 = "16mpc6lidmn6annyl4skdixzx7syvwdj9c5la0sidg57l8kh1rqd";
+    owner = usenix.owner;
+    repo = usenix.repo;
+    rev = usenix.rev;
+    sha256 = usenix.sha256;
   } + "/direnvrc";
 
   xdg.configFile."direnv/direnvrc".text = ''

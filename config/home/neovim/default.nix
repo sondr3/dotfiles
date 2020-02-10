@@ -2,7 +2,10 @@
 
 with import ../../../lib;
 
-{
+let
+  sources = import ../../../nix/sources.nix;
+  plug = sources.vim-plug;
+in {
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-unwrapped;
@@ -16,10 +19,10 @@ with import ../../../lib;
   home.packages = with pkgs; [ mine.maple ];
 
   xdg.dataFile."nvim/site/autoload/plug.vim".source = pkgs.fetchFromGitHub {
-    owner = "junegunn";
-    repo = "vim-plug";
-    rev = "68fef9c2fd9d4a21b500cc2249b6711a71c6fb9f";
-    sha256 = "0azmnxq82frs375k5b9yjdvsjfmzjv92ifqnmniar19d96yh6swa";
+    owner = plug.owner;
+    repo = plug.repo;
+    rev = plug.rev;
+    sha256 = plug.sha256;
   } + "/plug.vim";
 
   home.activation.neovim = execute ''

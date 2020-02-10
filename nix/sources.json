@@ -1,4 +1,28 @@
 {
+    "emacs-overlay": {
+        "branch": "master",
+        "description": "Bleeding edge emacs overlay [maintainer=@adisbladis] ",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "68f8e0665887cc2f7ebb8bcdbac37abd43155ea0",
+        "sha256": "093v1xv9pdvh12b38mv1zvd1zdl2sghxq83780dh1x1ichl0ra1i",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/68f8e0665887cc2f7ebb8bcdbac37abd43155ea0.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "ghcide-nix": {
+        "branch": "master",
+        "description": "Nix installation for ghcide",
+        "homepage": "https://github.com/digital-asset/ghcide",
+        "owner": "cachix",
+        "repo": "ghcide-nix",
+        "rev": "c940edd61eedba6750671fc142c9422cced73528",
+        "sha256": "01f2x5sgncd468h99w3mpkkb1203akachm12czmiwbvgishf7dwp",
+        "type": "tarball",
+        "url": "https://github.com/cachix/ghcide-nix/archive/c940edd61eedba6750671fc142c9422cced73528.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "home-manager": {
         "branch": "master",
         "description": "Manage a user environment using Nix",
@@ -23,6 +47,30 @@
         "url": "https://github.com/nmattia/niv/archive/2ecfd86b631714b457e56d70dd83fa60435baeb6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nix-direnv": {
+        "branch": "master",
+        "description": "A fast, persistent use_nix implementation for direnv [maintainer=@Mic92] ",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "nix-direnv",
+        "rev": "f9889758694bdfe11251ac475d78a93804dbd93c",
+        "sha256": "16mpc6lidmn6annyl4skdixzx7syvwdj9c5la0sidg57l8kh1rqd",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/nix-direnv/archive/f9889758694bdfe11251ac475d78a93804dbd93c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nix-expressions": {
+        "branch": "master",
+        "description": "A budding collection of personal packages, modules etc for Nix(OS)",
+        "homepage": "https://sondr3.github.io/nix-expressions/",
+        "owner": "sondr3",
+        "repo": "nix-expressions",
+        "rev": "9963ae44cd7ad9d42b1bc97204353c0c13fb51f7",
+        "sha256": "1dbr09yvjlanzqzh9wqrw2340z8ypzshcplszfa22dz644vlzpwl",
+        "type": "tarball",
+        "url": "https://github.com/sondr3/nix-expressions/archive/9963ae44cd7ad9d42b1bc97204353c0c13fb51f7.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "stable": {
         "branch": "nixos-19.09",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
@@ -45,6 +93,18 @@
         "sha256": "154nrhmm3dk5kmga2w5f7a2l6j79dvizrg4wzbrcwlbvdvapdgkb",
         "type": "tarball",
         "url": "https://github.com/NixOS/nixpkgs-channels/archive/8130f3c1c2bb0e533b5e150c39911d6e61dcecc2.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "vim-plug": {
+        "branch": "master",
+        "description": ":hibiscus: Minimalist Vim Plugin Manager",
+        "homepage": "",
+        "owner": "junegunn",
+        "repo": "vim-plug",
+        "rev": "c3b6b7c2971da730d66f6955d5c467db8dae536b",
+        "sha256": "088jyadfssgyyfb588vahskszbxm1vygp5dxkky7njs6v3g8lk5v",
+        "type": "tarball",
+        "url": "https://github.com/junegunn/vim-plug/archive/c3b6b7c2971da730d66f6955d5c467db8dae536b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
-{
+let sources = import ../../nix/sources.nix;
+in {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sondre = {
     isNormalUser = true;
@@ -13,9 +14,7 @@
     nixpkgs = {
       overlays = [ (import ../pkgs) ];
       config.packageOverrides = pkgs: {
-        mine = import (fetchTarball "https://github.com/sondr3/nix-expressions/archive/master.tar.gz") {
-          inherit pkgs;
-        };
+        mine = import sources.nix-expressions { inherit pkgs; };
       };
     };
     imports = [

@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 let
-  ghcide = import (fetchTarball "https://github.com/cachix/ghcide-nix/tarball/master") {};
-  # Link Yarn against latest Node instead of stable
+  sources = import ../../nix/sources.nix;
+  ghcide = import sources.ghcide-nix { };
   yarn = pkgs.yarn.override { nodejs = pkgs.nodejs-12_x; };
   pypacks = python-packages: with python-packages; [ ipython requests ];
   python-with-packages = pkgs.python37.withPackages pypacks;
