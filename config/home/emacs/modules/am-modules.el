@@ -32,21 +32,9 @@
   (add-to-list 'load-path amalthea-module-dir t))
 
 ;;; Load modules
-(require 'am-assembly)
-(require 'am-dhall)
-(require 'am-docker)
 (require 'am-elisp)
-(require 'am-haskell)
-(require 'am-java)
-(require 'am-json)
 (require 'am-latex)
-(require 'am-lsp)
 (require 'am-markdown)
-(require 'am-nginx)
-(require 'am-nix)
-(require 'am-rust)
-(require 'am-shell)
-(require 'am-typescript)
 
 (provide 'am-modules)
 
