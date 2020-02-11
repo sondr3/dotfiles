@@ -23,6 +23,10 @@ Plug 'tmsvg/pear-tree'
 Plug 'norcalli/nvim-colorizer.lua'
 " A somewhat nice git interface
 Plug 'tpope/vim-fugitive'
+" Surrounds, like vim-surround, just better
+Plug 'machakann/vim-sandwich'
+" Comment out things
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 

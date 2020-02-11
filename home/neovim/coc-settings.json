@@ -1,6 +1,7 @@
 {
   "suggest.enablePreview":true,
   "diagnostic.displayByAle": true,
+  "rust-analyzer.raLspServerPath": "/home/sondre/.cargo/bin/ra_lsp_server",
   "languageserver": {
     "haskell": {
       "command": "ghcide",
