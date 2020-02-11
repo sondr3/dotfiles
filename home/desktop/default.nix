@@ -8,15 +8,15 @@ in {
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      extraPackages = h: with h; [ taffybar ];
-      haskellPackages = stable.pkgs.haskell.packages.ghc865;
+      extraPackages = h: with h; [ xmobar ];
     };
   };
 
-  mine.taffybar = {
-    enable = true;
-    package = stable.taffybar;
-  };
+  # mine.taffybar = {
+  #   enable = true;
+  #   package = stable.taffybar;
+  # };
+  mine.xmobar.enable = true;
   programs.rofi.enable = true;
 
   services = {

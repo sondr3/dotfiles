@@ -15,7 +15,10 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      home.packages = [ pkgs.xmobar ];
+      # /nix/store/v82gh9iql5jdknr08ljp428r8bbdqmlr-xmobar-with-packages-8.6.5/bin/xmobar
+      # /nix/store/h4g8v8pcd1ld6b7k3ccgf2ddpglqnfpx-ghc-8.6.5-with-packages/bin/xmobar
+      # home.packages = [ pkgs.mine.xmobar-wrapped ];
+      home.packages = [ pkgs.haskellPackages.xmobar ];
       systemd.user.services.xmobar = {
         Unit = {
           Description = "xmobar";
@@ -24,8 +27,7 @@ in {
         };
 
         Service = {
-          ExecStart =
-            "${pkgs.xmobar}/bin/xmobar /etc/nixos/config/home/desktop/xmobar.hs";
+          ExecStart = "${pkgs.haskellPackages.xmobar}/bin/xmobar";
           Restart = "on-failure";
         };
 

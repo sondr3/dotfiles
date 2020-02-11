@@ -65,10 +65,10 @@
         "homepage": "https://sondr3.github.io/nix-expressions/",
         "owner": "sondr3",
         "repo": "nix-expressions",
-        "rev": "9963ae44cd7ad9d42b1bc97204353c0c13fb51f7",
-        "sha256": "1dbr09yvjlanzqzh9wqrw2340z8ypzshcplszfa22dz644vlzpwl",
+        "rev": "bf1b889b6cfaf448578811ac43c9dc78f14880f9",
+        "sha256": "142b9czn2v3bjl4vqdj2n2p2pyyfcqzh2cqx3in9i0gk45rvxldz",
         "type": "tarball",
-        "url": "https://github.com/sondr3/nix-expressions/archive/9963ae44cd7ad9d42b1bc97204353c0c13fb51f7.tar.gz",
+        "url": "https://github.com/sondr3/nix-expressions/archive/bf1b889b6cfaf448578811ac43c9dc78f14880f9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "stable": {

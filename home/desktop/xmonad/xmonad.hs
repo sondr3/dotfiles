@@ -13,9 +13,6 @@ import           XMonad.Hooks.EwmhDesktops      ( ewmh )
 import           XMonad.Layout.Spacing
 import qualified XMonad.StackSet               as W
 
-import           System.Taffybar.Support.PagerHints
-                                                ( pagerHints )
-
 import           Data.Monoid
 import           System.Exit
 import qualified Data.Map                      as M
@@ -323,8 +320,7 @@ main =
       docks
     $
        -- ewmh allows taffybar access to the state of xmonad/x11
-      ewmh
-    $ pagerHints defaults
+      ewmh defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will

@@ -82,12 +82,11 @@ exampleTaffybarConfig =
       myConfig   = defaultSimpleTaffyConfig
         { startWidgets  = workspaces
                             : map (>>= buildContentsBox) [layout, windowsW]
-        , endWidgets    = map
-                            (>>= buildContentsBox)
-                            [batteryIconNew, clock, tray, cpu, mem, net, mpris2New]
+        , endWidgets    = map (>>= buildContentsBox)
+                              [batteryIconNew, clock, tray, cpu, mem]
         , barPosition   = Top
         , barHeight     = 35
-        , barPadding    = 1
+        , barPadding    = 0
         , widgetSpacing = 0
         }
   in  withBatteryRefresh $ withLogServer $ withToggleServer $ toTaffyConfig
