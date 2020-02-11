@@ -13,6 +13,7 @@ in {
   time.timeZone = "Europe/Oslo";
 
   nix = {
+    trustedUsers = [ "root" "sondre" "@wheel" ];
     autoOptimiseStore = true;
     nixPath = [
       "nixpkgs=${sources.unstable}"
