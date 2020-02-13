@@ -1,21 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
------------------------------------------------------------------------------
--- |
--- Module      : System.Taffybar.Example
--- Copyright   : (c) Ivan A. Malison
--- License     : BSD3-style (see LICENSE)
---
--- Maintainer  : Ivan A. Malison
--- Stability   : unstable
--- Portability : unportable
------------------------------------------------------------------------------
 module Main where
-
--- XXX: in an actual taffybar.hs configuration file, you will need the module
--- name to be Main, and you would need to have a main function defined at the
--- top level, e.g.
---
--- > main = dyreTaffybar exampleTaffybarConfig
 
 import           System.Taffybar
 import           System.Taffybar.Context        ( TaffybarConfig(..) )
@@ -25,6 +9,8 @@ import           System.Taffybar.Information.Memory
 import           System.Taffybar.SimpleConfig
 import           System.Taffybar.Widget
 import           System.Taffybar.Widget.Generic.PollingGraph
+import qualified System.Taffybar.Widget.Generic.PollingBar
+                                               as PB
 
 transparent, yellow1, yellow2, green1, green2, taffyBlue
   :: (Double, Double, Double, Double)
@@ -52,6 +38,17 @@ memCfg =
 cpuCfg =
   myGraphConfig { graphDataColors = [green1, green2], graphLabel = Just "cpu" }
 
+testCfg = PB.defaultBarConfig loadColor
+ where
+  loadColor pct | pct > 0.9               = (0.95, 0.63, 0.21)
+                | pct < 0.75 && pct < 0.9 = (0.129, 0.588, 0.953)
+                | otherwise               = (0, 1, 0)
+
+cpuBar :: IO Double
+cpuBar = do
+  (_, _, totalLoad) <- cpuLoad
+  return totalLoad
+
 memCallback :: IO [Double]
 memCallback = do
   mi <- parseMeminfo
@@ -72,18 +69,18 @@ exampleTaffybarConfig =
       workspaces = workspacesNew myWorkspacesConfig
       cpu        = pollingGraphNew cpuCfg 0.5 cpuCallback
       mem        = pollingGraphNew memCfg 1 memCallback
-      net        = networkGraphNew netCfg Nothing
+      cpu2       = PB.pollingBarNew testCfg 0.5 cpuBar
       clock      = textClockNewWith defaultClockConfig
       layout     = layoutNew defaultLayoutConfig
       windowsW   = windowsNew defaultWindowsConfig
       -- See https://github.com/taffybar/gtk-sni-tray#statusnotifierwatcher
       -- for a better way to set up the sni tray
-      tray       = sniTrayThatStartsWatcherEvenThoughThisIsABadWayToDoIt
+      tray       = sniTrayNew
       myConfig   = defaultSimpleTaffyConfig
         { startWidgets  = workspaces
                             : map (>>= buildContentsBox) [layout, windowsW]
         , endWidgets    = map (>>= buildContentsBox)
-                              [batteryIconNew, clock, tray, cpu, mem]
+                              [batteryIconNew, clock, tray, cpu, mem, cpu2]
         , barPosition   = Top
         , barHeight     = 35
         , barPadding    = 0

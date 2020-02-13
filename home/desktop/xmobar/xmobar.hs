@@ -23,7 +23,7 @@ import           Xmobar
 
 config :: Config
 config = defaultConfig
-  { font             = "xft:Sans Mono-6"
+  { font             = "xft:PragmataPro Mono Liga-6:antialias=true"
   , additionalFonts  = []
   , borderColor      = "black"
   , border           = TopB
@@ -56,7 +56,8 @@ config = defaultConfig
     ]
   , sepChar          = "%"
   , alignSep         = "}{"
-  , template = "%cpu% | %memory% | %cpu% }\
+  , template         =
+    "%cpu% | %memory% | }\
                \ { <fc=#ee9a00>%date%</fc>"
   }
 

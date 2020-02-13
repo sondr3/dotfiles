@@ -13,6 +13,9 @@ import           XMonad.Hooks.EwmhDesktops      ( ewmh )
 import           XMonad.Layout.Spacing
 import qualified XMonad.StackSet               as W
 
+import           System.Taffybar.Support.PagerHints
+                                                ( pagerHints )
+
 import           Data.Monoid
 import           System.Exit
 import qualified Data.Map                      as M
@@ -239,8 +242,8 @@ myMouseBindings XConfig { XMonad.modMask = modm } = M.fromList
 -- which denotes layout choice.
 --
 myLayout =
-  spacingRaw False (Border 5 5 5 5) True (Border 10 10 10 10) True
-    $   avoidStruts
+  avoidStruts
+    $   spacingRaw False (Border 5 5 5 5) True (Border 10 10 10 10) True
     $   tiled
     ||| Mirror tiled
     ||| Full
@@ -320,7 +323,10 @@ main =
       docks
     $
        -- ewmh allows taffybar access to the state of xmonad/x11
-      ewmh defaults
+      ewmh
+    $
+       -- pagerHints supplies additional state that is not supplied by ewmh
+      pagerHints defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
