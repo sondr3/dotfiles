@@ -21,6 +21,7 @@ in {
       ../home
       # [TODO] Fix this bloody import
       ../home/desktop/xmobar.nix
+      ../home/desktop/taffybar.nix
     ];
   };
 }

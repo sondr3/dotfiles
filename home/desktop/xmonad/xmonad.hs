@@ -313,7 +313,14 @@ myStartupHook = return ()
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad $ docks $ ewmh defaults
+main =
+  xmonad
+    $
+       -- docks allows xmonad to handle taffybar
+      docks
+    $
+       -- ewmh allows taffybar access to the state of xmonad/x11
+      ewmh defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will

@@ -12,6 +12,10 @@ in {
     };
   };
 
+  # mine.taffybar = {
+  #   enable = true;
+  #   package = stable.taffybar;
+  # };
   mine.xmobar.enable = true;
   programs.rofi.enable = true;
 
