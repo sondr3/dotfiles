@@ -7,12 +7,14 @@ cabal-version: >= 2.0
 
 executable myxmonad
   main-is:          xmonad.hs
-  hs-source-dirs:   .
+  hs-source-dirs:   ., lib
   build-depends:    base           ^>= 4.12.0.0
                   , X11
                   , containers
                   , taffybar
                   , xmonad         >= 0.15
                   , xmonad-contrib >= 0.15
+                  , dbus
+                  , utf8-string
   default-language: Haskell2010
   ghc-options:      -O2 -threaded

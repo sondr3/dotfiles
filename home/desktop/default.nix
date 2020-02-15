@@ -8,15 +8,10 @@ in {
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      extraPackages = h: with h; [ taffybar xmonad-contrib ];
-      haskellPackages = stable.pkgs.haskell.packages.ghc865;
+      extraPackages = h: with h; [ xmonad-contrib dbus utf8-string ];
     };
   };
 
-  mine.taffybar = {
-    enable = true;
-    package = stable.taffybar;
-  };
   programs.rofi.enable = true;
 
   services = {
@@ -24,7 +19,6 @@ in {
       enable = true;
       provider = "geoclue2";
     };
-    status-notifier-watcher.enable = true;
   };
 
   home.sessionVariables = {
@@ -35,6 +29,9 @@ in {
   };
 
   home.packages = with pkgs; [
+    xmonad-log
+    polybar
+
     firefox
     google-chrome
 

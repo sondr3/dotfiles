@@ -1,4 +1,5 @@
-{ mkDerivation, base, containers, stdenv, taffybar, X11, xmonad, xmonad-contrib
+{ mkDerivation, base, containers, dbus, stdenv, taffybar
+, utf8-string, X11, xmonad, xmonad-contrib
 }:
 mkDerivation {
   pname = "myxmonad";
@@ -6,8 +7,9 @@ mkDerivation {
   src = ./.;
   isLibrary = false;
   isExecutable = true;
-  executableHaskellDepends =
-    [ base containers taffybar X11 xmonad xmonad-contrib ];
+  executableHaskellDepends = [
+    base containers dbus taffybar utf8-string X11 xmonad xmonad-contrib
+  ];
   license = "unknown";
   hydraPlatforms = stdenv.lib.platforms.none;
 }

@@ -9,12 +9,17 @@
 
 import           XMonad
 import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.EwmhDesktops      ( ewmh )
 import           XMonad.Layout.Spacing
 import qualified XMonad.StackSet               as W
 
 import           System.Taffybar.Support.PagerHints
                                                 ( pagerHints )
+
+import qualified DBus                          as D
+import qualified DBus.Client                   as D
+import qualified Codec.Binary.UTF8.String      as UTF8
 
 import           Data.Monoid
 import           System.Exit
@@ -299,7 +304,27 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+dbusOutput :: D.Client -> String -> IO ()
+dbusOutput dbus str = do
+  let signal = (D.signal objectPath interfaceName memberName)
+        { D.signalBody = [D.toVariant $ UTF8.decodeString str]
+        }
+  D.emit dbus signal
+ where
+  objectPath    = D.objectPath_ "/org/xmonad/Log"
+  interfaceName = D.interfaceName_ "org.xmonad.Log"
+  memberName    = D.memberName_ "Update"
+
+myLogHook :: D.Client -> PP
+myLogHook dbus = def { ppOutput  = dbusOutput dbus
+                     , ppCurrent = wrap ("%{B" ++ "#fff" ++ "} ") " %{B-}"
+                     , ppVisible = wrap ("%{B" ++ "#3c3" ++ "} ") " %{B-}"
+                     , ppUrgent  = wrap ("%{F" ++ "#fb4934" ++ "} ") " %{F-}"
+                     , ppHidden  = wrap " " " "
+                     , ppWsSep   = ""
+                     , ppSep     = " : "
+                     , ppTitle   = shorten 40
+                     }
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -316,7 +341,12 @@ myStartupHook = return ()
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main =
+main = do
+  dbus <- D.connectSession
+  D.requestName
+    dbus
+    (D.busName_ "org.xmonad.Log")
+    [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
   xmonad
     $
        -- docks allows xmonad to handle taffybar
@@ -326,7 +356,8 @@ main =
       ewmh
     $
        -- pagerHints supplies additional state that is not supplied by ewmh
-      pagerHints defaults
+      pagerHints
+    $ defaults dbus
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
@@ -334,28 +365,28 @@ main =
 --
 -- No need to modify this.
 --
-defaults = def {
+defaults dbus = def {
       -- simple stuff
-                 terminal           = myTerminal
-               , focusFollowsMouse  = myFocusFollowsMouse
-               , clickJustFocuses   = myClickJustFocuses
-               , borderWidth        = myBorderWidth
-               , modMask            = myModMask
-               , workspaces         = myWorkspaces
-               , normalBorderColor  = myNormalBorderColor
-               , focusedBorderColor = myFocusedBorderColor
+                      terminal           = myTerminal
+                    , focusFollowsMouse  = myFocusFollowsMouse
+                    , clickJustFocuses   = myClickJustFocuses
+                    , borderWidth        = myBorderWidth
+                    , modMask            = myModMask
+                    , workspaces         = myWorkspaces
+                    , normalBorderColor  = myNormalBorderColor
+                    , focusedBorderColor = myFocusedBorderColor
 
       -- key bindings
-               , keys               = myKeys
-               , mouseBindings      = myMouseBindings
+                    , keys               = myKeys
+                    , mouseBindings      = myMouseBindings
 
       -- hooks, layouts
-               , layoutHook         = myLayout
-               , manageHook         = myManageHook
-               , handleEventHook    = myEventHook
-               , logHook            = myLogHook
-               , startupHook        = myStartupHook
-               }
+                    , layoutHook         = myLayout
+                    , manageHook         = myManageHook
+                    , handleEventHook    = myEventHook
+                    , logHook            = dynamicLogWithPP (myLogHook dbus)
+                    , startupHook        = myStartupHook
+                    }
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String
