@@ -17,11 +17,6 @@ in {
         mine = import sources.nix-expressions { inherit pkgs; };
       };
     };
-    imports = [
-      ../home
-      # [TODO] Fix this bloody import
-      ../home/desktop/xmobar.nix
-      ../home/desktop/taffybar.nix
-    ];
+    imports = [ ../home ];
   };
 }

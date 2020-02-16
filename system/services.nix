@@ -16,6 +16,10 @@
       enable = true;
       layout = "us,no";
       xkbOptions = "grp:alt_caps_toggle";
+      exportConfiguration = true;
+      deviceSection = ''
+        Option "TearFree" "true" 
+      '';
       desktopManager.xterm.enable = false;
       displayManager = {
         lightdm = { enable = true; };
