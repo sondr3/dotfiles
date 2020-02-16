@@ -2,11 +2,11 @@
 
 {
   # TODO: Add LaTeX packages
-  home.packages = with pkgs; [ zathura texlive.combined.scheme-full ];
+  home.packages = with pkgs; [ zathura texlive.combined.scheme-full pympress ];
 
   home.file.".latexmkrc".text = ''
     # Use LuaLaTeX
-    $lualatex='lualatex -interaction=nonstopmode -synctex=1 %O %S';
+    $lualatex='lualatex --interaction=nonstopmode --synctex=1 %O %S';
     $preview_continuous_mode = 1;
     # BibTeX with LuaLaTeX
     $bibtex_use = 2;
