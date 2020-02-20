@@ -1,14 +1,12 @@
 { pkgs, config, ... }:
 
-let stable = import <stable> { };
-in {
+{
   xsession = {
     enable = true;
     scriptPath = ".hm-xsession";
-    windowManager.xmonad = {
+    windowManager.awesome = {
       enable = true;
-      enableContribAndExtras = true;
-      extraPackages = h: with h; [ xmonad-contrib dbus utf8-string ];
+      noArgb = true;
     };
   };
 
@@ -21,16 +19,8 @@ in {
     };
   };
 
-  home.sessionVariables = {
-    XDG_CONFIG_HOME = "$HOME/.config";
-    GDK_SCALE = "1";
-    GDK_DPI_SCALE = "0.5";
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-  };
-
   home.packages = with pkgs; [
-    xmonad-log
-    polybar
+    autorandr
 
     firefox
     google-chrome

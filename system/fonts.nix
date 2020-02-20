@@ -4,7 +4,7 @@
   fonts = {
     enableFontDir = true;
     enableGhostscriptFonts = true;
-    fontconfig.dpi = 221;
+    # fontconfig.dpi = 221;
     fonts = with pkgs; [
       corefonts
       inconsolata

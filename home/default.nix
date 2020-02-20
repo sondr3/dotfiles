@@ -4,6 +4,7 @@
   imports = [
     ./common.nix
     ./desktop
+    ./desktop/compton.nix
     ./direnv.nix
     ./emacs
     ./fish

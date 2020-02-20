@@ -24,7 +24,7 @@
       displayManager = {
         lightdm = { enable = true; };
         session = [{
-          name = "xmonad";
+          name = "awesome";
           manage = "window";
           start = ''
             ${pkgs.runtimeShell} $HOME/.hm-xsession &
