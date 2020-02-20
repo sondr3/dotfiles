@@ -42,7 +42,7 @@ set nobackup
 set nowritebackup
 
 " relative line numbers, highlight current line
-set relativenumber
+set number relativenumber
 set cursorline
 
 " Spaces, not tabs dammit
@@ -61,6 +61,9 @@ set shortmess+=c
 
 " always show signcolumns
 set signcolumn=yes
+
+"This unsets the "last search pattern" register by hitting return
+nnoremap <silent> <CR> :noh<CR>
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
