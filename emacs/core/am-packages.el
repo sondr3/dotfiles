@@ -34,7 +34,7 @@
 (eval-and-compile
   (require 'use-package))
 
-(csetq use-package-ensure-function 'ignore ;; We don't want to install packages with `use-package'
+(csetq use-package-always-ensure t
        use-package-expand-minimally t      ;; Expand the `use-package' with no bells or whistles
        use-package-always-defer t)         ;; Always defer packages
 
