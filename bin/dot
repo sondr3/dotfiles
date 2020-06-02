@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 import argparse
-from typing import List
 
 from lib.version import version
 
-COMMANDS: List[str] = ["help", "version"]
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="A simple dotfile management tool")
 
-parser = argparse.ArgumentParser(description="A simple dotfile management tool")
+    sub_parser = parser.add_subparsers(help="Command to run", dest="action")
+    version_parser = sub_parser.add_parser("version", help="Display version")
 
-sub_parser = parser.add_subparsers(help="Command to run", dest="action")
-version_parser = sub_parser.add_parser("version", help="Display version")
+    help_parser = sub_parser.add_parser("help", help="Display help")
+    help_parser.add_argument("command", help="Command to display help for")
 
-help_parser = sub_parser.add_parser("help", help="Display help")
-help_parser.add_argument("command", help="Command to display help for")
-
-if __name__ == '__main__':
     args = parser.parse_args()
+
+    if not args.action:
+        parser.print_help()
 
     if args.action == "version":
         print(version())
@@ -23,7 +23,7 @@ if __name__ == '__main__':
     if args.action == "help":
         cmd = args.command
 
-        if cmd not in COMMANDS:
+        if cmd not in sub_parser.choices:
             print("Invalid command, try again")
             exit(1)
 
@@ -31,5 +31,3 @@ if __name__ == '__main__':
             version_parser.print_help()
         if cmd == "help":
             help_parser.print_help()
-
-
