@@ -27,7 +27,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'machakann/vim-sandwich'
 " Comment out things
 Plug 'tpope/vim-commentary'
-
 call plug#end()
 
 set termguicolors
@@ -64,6 +63,9 @@ set signcolumn=yes
 
 "This unsets the "last search pattern" register by hitting return
 nnoremap <silent> <CR> :noh<CR>
+
+let mapleader = "<space>"
+let localleader = ","
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
