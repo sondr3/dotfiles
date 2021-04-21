@@ -47,3 +47,12 @@ cabal.project.local~
 .HTF/
 .ghc.environment.*
 
+
+
+### Created by https://www.gitignore.io
+### Code ###
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+*.code-workspace
+
