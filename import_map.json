@@ -1,5 +1,6 @@
 {
   "imports": {
-    "fs/": "https://deno.land/std@0.94.0/fs/"
+    "fs/": "https://deno.land/std@0.94.0/fs/",
+    "flags/": "https://deno.land/std@0.94.0/flags/"
   }
 }

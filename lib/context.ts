@@ -8,8 +8,8 @@ declare global {
   }
 }
 
-export function defaultContext(): Context {
+export function buildContext(verbose: boolean): Context {
   return {
-    verbose: false,
+    verbose: verbose,
   };
 }
