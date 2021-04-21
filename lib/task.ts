@@ -1,7 +1,7 @@
 export async function task(
   name: string,
   description: string,
-  cb: () => Promise<void>
+  cb: () => Promise<void> | void,
 ) {
   console.log(`${name}`);
 

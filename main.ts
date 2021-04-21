@@ -1,5 +1,5 @@
-import { walk, expandGlob } from "fs/mod.ts";
-import { Context, buildContext } from "./lib/mod.ts";
+import { expandGlob } from "fs/mod.ts";
+import { buildContext } from "./lib/mod.ts";
 import { parse } from "flags/mod.ts";
 
 const help = `dots utility v0.1
@@ -27,7 +27,7 @@ async function main() {
   window.context = buildContext(argv.verbose);
 
   for await (const entry of expandGlob("**/*.task.ts")) {
-    const file = await import(entry.path);
+    await import(entry.path);
   }
 }
 
