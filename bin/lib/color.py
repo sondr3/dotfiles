@@ -240,6 +240,7 @@ def get_closest(v: int, l: list):
 
 class Memorize(dict):
     def __init__(self, func):
+        super().__init__()
         self.func = func
         self.__doc__ = func.__doc__
 
@@ -270,8 +271,7 @@ def memorize(func) -> Callable:
 
 @memorize
 def rgb_to_xterm(r: int, g: int, b: int) -> int:
-    """ Converts RGB values to the nearest equivalent xterm-256 color.
-    """
+    """Converts RGB values to the nearest equivalent xterm-256 color."""
     if r == g == b:
         # use gray scale
         gs = get_closest(r, GRAYSCALE_POINTS)
