@@ -16,8 +16,15 @@ import argparse
 from lib.config import Config
 from lib.version import version
 
+
+def formatter(prog: str):
+    return argparse.HelpFormatter(prog, max_help_position=72)
+
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="A simple dotfile management tool")
+    parser = argparse.ArgumentParser(description="A simple dotfile management tool", formatter_class=formatter)
+
+    parser.add_argument("--verbose", help="Log output verbosely", default=False, action=argparse.BooleanOptionalAction)
 
     sub_parser = parser.add_subparsers(help="Command to run", dest="action")
     version_parser = sub_parser.add_parser("version", help="Display version")
