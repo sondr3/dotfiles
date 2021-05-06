@@ -1,5 +1,6 @@
 {
   "imports": {
+    "dots": "./lib/mod.ts",
     "fs/": "https://deno.land/std@0.95.0/fs/",
     "flags/": "https://deno.land/std@0.95.0/flags/"
   }

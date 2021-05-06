@@ -1,6 +1,6 @@
-import { expandGlob } from 'fs/mod.ts';
-import { buildContext } from './lib/mod.ts';
-import { parse } from 'flags/mod.ts';
+import { expandGlob } from "fs/mod.ts";
+import { buildContext } from "./lib/mod.ts";
+import { parse } from "flags/mod.ts";
 
 const help = `dots utility v0.1
 
@@ -18,31 +18,29 @@ OPTIONS:
 
 async function main() {
   const argv = parse(Deno.args, {
-    boolean: ['verbose'],
+    boolean: ["verbose"],
     default: { verbose: false },
-    alias: { v: 'verbose' },
+    alias: { v: "verbose" },
   });
 
   switch (argv._[0]) {
-    case 'h':
-    case 'help': {
+    case "h":
+    case "help": {
       console.log(help);
       return Deno.exit();
     }
-    case 'what': {
-      console.log('what');
+    case "build": {
+      window.context = buildContext(argv.verbose);
+
+      for await (const entry of expandGlob("**/*.task.ts")) {
+        await import(entry.path);
+      }
       break;
     }
     default: {
       console.log(help);
       return Deno.exit();
     }
-  }
-
-  window.context = buildContext(argv.verbose);
-
-  for await (const entry of expandGlob('**/*.task.ts')) {
-    await import(entry.path);
   }
 }
 
