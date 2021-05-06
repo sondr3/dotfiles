@@ -7,7 +7,7 @@ export interface Task {
 export function task(
   name: string,
   description: string,
-  cb: () => Promise<void> | void
+  cb: () => Promise<void> | void,
 ): Task {
   return {
     name,

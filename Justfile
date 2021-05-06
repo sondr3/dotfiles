@@ -12,3 +12,9 @@ run COMMAND *FLAGS:
 
 lock:
     deno cache {{flags}} --lock-write main.ts
+
+fmt:
+    deno fmt **/*.ts
+
+lint:
+    deno lint

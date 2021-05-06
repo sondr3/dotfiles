@@ -11,7 +11,7 @@ export interface Group {
 export function group(
   name: string,
   description: string,
-  tasks: ReadonlyArray<Task>
+  tasks: ReadonlyArray<Task>,
 ): Group {
   return {
     name,
