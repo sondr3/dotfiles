@@ -9,5 +9,7 @@ export async function task(
     console.log(`${name}: ${description}`);
   }
 
+  if (window.context.info) return;
+
   await cb();
 }

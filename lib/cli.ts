@@ -10,6 +10,8 @@ USAGE:
   dots
 
 COMMANDS:
+  list, l           List all tasks/groups
+  build, b          Build dotfiles
   help, h           Show help
 
 OPTIONS:
@@ -34,14 +36,29 @@ export class CLI {
     return Deno.exit();
   }
 
+  async *walkdir() {
+    for await (const entry of expandGlob("**/*.task.ts")) {
+      yield entry;
+    }
+  }
+
   async execute() {
     switch (this.argv._[0]) {
       case "h":
       case "help": {
         return this.printHelp();
       }
+      case "l":
+      case "list": {
+        window.context.info = true;
+        for await (const entry of this.walkdir()) {
+          await import(entry.path);
+        }
+        break;
+      }
+      case "b":
       case "build": {
-        for await (const entry of expandGlob("**/*.task.ts")) {
+        for await (const entry of this.walkdir()) {
           await import(entry.path);
         }
         break;

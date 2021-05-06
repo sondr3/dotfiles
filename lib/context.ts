@@ -1,5 +1,6 @@
 export interface Context {
   verbose: boolean;
+  info: boolean;
 }
 
 declare global {
@@ -11,5 +12,6 @@ declare global {
 export function buildContext(verbose: boolean): Context {
   return {
     verbose: verbose,
+    info: false,
   };
 }
