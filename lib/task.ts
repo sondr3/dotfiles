@@ -1,15 +1,17 @@
-export async function task(
+export interface Task {
+  name: string;
+  description: string;
+  cb: () => Promise<void> | void;
+}
+
+export function task(
   name: string,
   description: string,
   cb: () => Promise<void> | void
-) {
-  if (!window.context.verbose) {
-    console.log(`${name}`);
-  } else {
-    console.log(`${name}: ${description}`);
-  }
-
-  if (window.context.info) return;
-
-  await cb();
+): Task {
+  return {
+    name,
+    description,
+    cb,
+  };
 }

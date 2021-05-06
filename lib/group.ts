@@ -1,15 +1,21 @@
-type Group = "install" | "files";
+import { Task } from "./mod.ts";
 
-export async function group(
+type GroupType = "install" | "files";
+
+export interface Group {
+  name: string;
+  description: string;
+  tasks: ReadonlyArray<Task>;
+}
+
+export function group(
   name: string,
   description: string,
-  cb: () => Promise<void> | void
-) {
-  if (!window.context.verbose) {
-    console.log(`${name}`);
-  } else {
-    console.log(`${name}: ${description}`);
-  }
-
-  await cb();
+  tasks: ReadonlyArray<Task>
+): Group {
+  return {
+    name,
+    description,
+    tasks,
+  };
 }

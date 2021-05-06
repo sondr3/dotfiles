@@ -1,6 +1,6 @@
 import { Args, parse } from "flags/mod.ts";
 import { expandGlob } from "fs/mod.ts";
-import { buildContext } from "./mod.ts";
+import { buildContext, Group } from "./mod.ts";
 
 const HELP_MESSAGE = `dots utility v0.1
 
@@ -42,6 +42,13 @@ export class CLI {
     }
   }
 
+  async *groups() {
+    for await (const entry of this.walkdir()) {
+      const { default: module }: { default: Group } = await import(entry.path);
+      yield module;
+    }
+  }
+
   async execute() {
     switch (this.argv._[0]) {
       case "h":
@@ -51,15 +58,18 @@ export class CLI {
       case "l":
       case "list": {
         window.context.info = true;
-        for await (const entry of this.walkdir()) {
-          await import(entry.path);
+        for await (const group of this.groups()) {
+          console.dir(group);
+          console.log(`${group.name}: ${group.description}`);
         }
         break;
       }
       case "b":
       case "build": {
-        for await (const entry of this.walkdir()) {
-          await import(entry.path);
+        for await (const module of this.groups()) {
+          module.tasks.forEach(async (task) => {
+            await task.cb();
+          });
         }
         break;
       }
