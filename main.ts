@@ -1,6 +1,6 @@
-import { expandGlob } from "fs/mod.ts";
-import { buildContext } from "./lib/mod.ts";
-import { parse } from "flags/mod.ts";
+import { expandGlob } from 'fs/mod.ts';
+import { buildContext } from './lib/mod.ts';
+import { parse } from 'flags/mod.ts';
 
 const help = `dots utility v0.1
 
@@ -8,25 +8,40 @@ A small utility to help me with managing dotfiles.
 
 USAGE:
   dots
+
+COMMANDS:
+  help, h           Show help
+
 OPTIONS:
-  -h, --help        Show this message
+  -v, --verbose     Verbose output
 `;
 
 async function main() {
   const argv = parse(Deno.args, {
-    boolean: ["help"],
-    default: { verbose: false, help: false },
-    alias: { h: "help" },
+    boolean: ['verbose'],
+    default: { verbose: false },
+    alias: { v: 'verbose' },
   });
 
-  if (argv.help) {
-    console.log(help);
-    Deno.exit();
+  switch (argv._[0]) {
+    case 'h':
+    case 'help': {
+      console.log(help);
+      return Deno.exit();
+    }
+    case 'what': {
+      console.log('what');
+      break;
+    }
+    default: {
+      console.log(help);
+      return Deno.exit();
+    }
   }
 
   window.context = buildContext(argv.verbose);
 
-  for await (const entry of expandGlob("**/*.task.ts")) {
+  for await (const entry of expandGlob('**/*.task.ts')) {
     await import(entry.path);
   }
 }
