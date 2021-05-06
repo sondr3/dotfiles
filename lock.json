@@ -15,6 +15,8 @@
   "https://deno.land/std@0.95.0/fs/mod.ts": "26eee4b52a8c516e37d464094b080ff6822883e7f01ff0ba0a72b8dcd54b9927",
   "https://deno.land/std@0.95.0/fs/move.ts": "4623058e39bbbeb3ad30aeff9c974c55d2d574ad7c480295c12b04c244686a99",
   "https://deno.land/std@0.95.0/fs/walk.ts": "8d37f2164a7397668842a7cb5d53b9e7bcd216462623b1b96abe519f76d7f8b9",
+  "https://deno.land/std@0.95.0/node/path.ts": "86b262d6957fba13d4f3d58a92ced49de4f40169d06542326b5547ff97257f0d",
+  "https://deno.land/std@0.95.0/node/url.ts": "d2ea2b5d479c0a70404177840304dbe5bb77722c7bd2366ce7b6cd01ea1bef73",
   "https://deno.land/std@0.95.0/path/_constants.ts": "1247fee4a79b70c89f23499691ef169b41b6ccf01887a0abd131009c5581b853",
   "https://deno.land/std@0.95.0/path/_interface.ts": "1fa73b02aaa24867e481a48492b44f2598cd9dfa513c7b34001437007d3642e4",
   "https://deno.land/std@0.95.0/path/_util.ts": "2e06a3b9e79beaf62687196bd4b60a4c391d862cfa007a20fc3a39f778ba073b",
@@ -23,5 +25,7 @@
   "https://deno.land/std@0.95.0/path/mod.ts": "4465dc494f271b02569edbb4a18d727063b5dbd6ed84283ff906260970a15d12",
   "https://deno.land/std@0.95.0/path/posix.ts": "f56c3c99feb47f30a40ce9d252ef6f00296fa7c0fcb6dd81211bdb3b8b99ca3b",
   "https://deno.land/std@0.95.0/path/separator.ts": "8fdcf289b1b76fd726a508f57d3370ca029ae6976fcde5044007f062e643ff1c",
-  "https://deno.land/std@0.95.0/path/win32.ts": "77f7b3604e0de40f3a7c698e8a79e7f601dc187035a1c21cb1e596666ce112f8"
+  "https://deno.land/std@0.95.0/path/win32.ts": "77f7b3604e0de40f3a7c698e8a79e7f601dc187035a1c21cb1e596666ce112f8",
+  "https://unpkg.com/filedirname@2.4.0/edition-deno/index.ts": "680a82e0ef41e10dfe5f6ffce2f4c1c9ede24476073f6d982e3c40e3bf4c7513",
+  "https://unpkg.com/get-current-line@6.3.0/edition-deno/index.ts": "5fbb1de81443f0e3417394db2a4a4ea36fad14f409963b4dd93d43e456ed62a4"
 }
