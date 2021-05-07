@@ -1,6 +1,6 @@
 import { Args, parse } from "flags/mod.ts";
 import { expandGlob } from "fs/mod.ts";
-import { buildContext, Group } from "./mod.ts";
+import { Context, Group } from "./mod.ts";
 
 const HELP_MESSAGE = `dots utility v0.1
 
@@ -28,7 +28,7 @@ export class CLI {
       alias: { v: "verbose" },
     });
 
-    window.context = buildContext(this.argv.verbose);
+    window.context = new Context(this.argv.verbose);
   }
 
   printHelp() {
