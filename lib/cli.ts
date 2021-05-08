@@ -1,6 +1,6 @@
 import { Args, parse } from "flags/mod.ts";
 import { expandGlob } from "fs/mod.ts";
-import { Context, Group } from "./mod.ts";
+import { Context, Group, status } from "./mod.ts";
 
 const HELP_MESSAGE = `dots utility v0.1
 
@@ -71,6 +71,11 @@ export class CLI {
             await task.cb();
           });
         }
+        break;
+      }
+      case "s":
+      case "status": {
+        status();
         break;
       }
       default: {
