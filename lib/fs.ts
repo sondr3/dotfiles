@@ -2,6 +2,10 @@ import { ensureSymlink } from "fs/mod.ts";
 import { fileURLToPath } from "node/url.ts";
 import * as path from "path/mod.ts";
 
+export function taskFileName(url: string) {
+  return fileURLToPath(url);
+}
+
 export function taskDirectory(url: string) {
   const filename = fileURLToPath(url);
   return path.dirname(filename);
