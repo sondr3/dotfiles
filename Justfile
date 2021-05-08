@@ -20,4 +20,4 @@ lint:
     deno lint
 
 test:
-    deno test -A --import-map import_map.json
+    deno test -A --unstable --import-map import_map.json
