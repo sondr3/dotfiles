@@ -1,5 +1,5 @@
 import { assert, assertEquals } from "testing/asserts.ts";
-import { getPath, getShell, Shell } from "./shell.ts";
+import { getPath, getShell, Shell, which } from "./shell.ts";
 
 Deno.test("getShell - fish", () => {
   Deno.env.set("SHELL", "/usr/bin/fish");
@@ -19,4 +19,9 @@ Deno.test("getShell - undefined", () => {
 Deno.test("getPath", () => {
   const paths = getPath();
   assert(paths.length > 0);
+});
+
+Deno.test("which", async () => {
+  assert(await which("ls"));
+  assert(!await which("blah"));
 });
