@@ -12,7 +12,12 @@ export function taskDirectory(url: string) {
 }
 
 export async function createSymlink(from: string, to: string) {
-  await ensureSymlink(from, to);
+  try {
+    await ensureSymlink(from, to);
+  } catch (error) {
+    console.error(`Could not create symlink: ${error}`);
+    Deno.exit(1);
+  }
 }
 
 export async function mkdirp(dir: string) {
