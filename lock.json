@@ -25,7 +25,5 @@
   "https://deno.land/std@0.95.0/path/mod.ts": "4465dc494f271b02569edbb4a18d727063b5dbd6ed84283ff906260970a15d12",
   "https://deno.land/std@0.95.0/path/posix.ts": "f56c3c99feb47f30a40ce9d252ef6f00296fa7c0fcb6dd81211bdb3b8b99ca3b",
   "https://deno.land/std@0.95.0/path/separator.ts": "8fdcf289b1b76fd726a508f57d3370ca029ae6976fcde5044007f062e643ff1c",
-  "https://deno.land/std@0.95.0/path/win32.ts": "77f7b3604e0de40f3a7c698e8a79e7f601dc187035a1c21cb1e596666ce112f8",
-  "https://unpkg.com/filedirname@2.4.0/edition-deno/index.ts": "680a82e0ef41e10dfe5f6ffce2f4c1c9ede24476073f6d982e3c40e3bf4c7513",
-  "https://unpkg.com/get-current-line@6.3.0/edition-deno/index.ts": "5fbb1de81443f0e3417394db2a4a4ea36fad14f409963b4dd93d43e456ed62a4"
+  "https://deno.land/std@0.95.0/path/win32.ts": "77f7b3604e0de40f3a7c698e8a79e7f601dc187035a1c21cb1e596666ce112f8"
 }

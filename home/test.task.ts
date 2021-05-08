@@ -1,11 +1,10 @@
-import { group, symlink, task } from "dots";
-import filedirname from "filedirname";
+import { group, symlink, task, taskDirectory } from "dots";
 
 export default group("test", "a test group", [
   task("thing", "copy some stuff", async () => {
-    const [__filename, __dirname] = filedirname();
+    const dirname = taskDirectory(import.meta.url);
     await symlink(
-      `${__dirname}/kitty.conf`,
+      `${dirname}/kitty.conf`,
       `/home/sondre/.config/kitty/new.conf`,
     );
   }),

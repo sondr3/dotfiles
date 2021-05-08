@@ -4,6 +4,6 @@
     "fs/": "https://deno.land/std@0.95.0/fs/",
     "path/": "https://deno.land/std@0.95.0/path/",
     "flags/": "https://deno.land/std@0.95.0/flags/",
-    "filedirname": "https://unpkg.com/filedirname@^2.4.0/edition-deno/index.ts"
+    "node/": "https://deno.land/std@0.95.0/node/"
   }
 }
