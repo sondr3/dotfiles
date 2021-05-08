@@ -4,6 +4,7 @@
     "fs/": "https://deno.land/std@0.95.0/fs/",
     "path/": "https://deno.land/std@0.95.0/path/",
     "flags/": "https://deno.land/std@0.95.0/flags/",
-    "node/": "https://deno.land/std@0.95.0/node/"
+    "node/": "https://deno.land/std@0.95.0/node/",
+    "testing/": "https://deno.land/std@0.95.0/testing/"
   }
 }

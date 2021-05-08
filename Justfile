@@ -18,3 +18,6 @@ fmt:
 
 lint:
     deno lint
+
+test:
+    deno test -A --import-map import_map.json
