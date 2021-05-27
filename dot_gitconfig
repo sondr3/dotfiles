@@ -1,0 +1,30 @@
+[user]
+	name = Sondre Nilsen
+	email = nilsen.sondre@gmail.com
+	signingkey = 9CBF84633C7DDB10
+[push]
+	default = current
+	followtags = true
+[pull]
+	default = current
+	rebase = true
+[rebase]
+	autosquash = true
+
+[alias]
+	b = branch -v
+	d = diff
+	dc = diff --cached
+	cam = commit --amend --no-edit
+	lg = log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	r = remote -v
+	s = status
+
+[hub]
+	protocol = ssh
+[github]
+	user = sondr3
+[core]
+	autocrlf = input
+[init]
+	defaultBranch = main
