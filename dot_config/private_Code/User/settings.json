@@ -1,0 +1,74 @@
+{
+  "editor.fontFamily": "PragmataPro Mono Liga",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": true,
+  "editor.tabSize": 2,
+  "editor.lineNumbers": "on",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "workbench.settings.editor": "json",
+  "vim.leader": "<space>",
+  "vim.easymotion": true,
+  "vim.sneak": true,
+  "vim.useSystemClipboard": true,
+  "vim.hlsearch": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "search.showLineNumbers": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "prettier.requireConfig": false,
+  "editor.suggestSelection": "first",
+  "emmet.showExpandedAbbreviation": "never",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma",
+    "editor.formatOnSave": true
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorTheme": "Solarized Dark",
+  "cmake.configureOnOpen": true,
+  "evenBetterToml.formatter.reorderKeys": true,
+  "editor.cursorStyle": "line",
+  "editor.insertSpaces": false,
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordWrap": "off",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  }
+}
