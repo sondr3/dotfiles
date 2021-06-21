@@ -15,13 +15,14 @@
 	b = branch -v
 	d = diff
 	dc = diff --cached
-	cam = commit --amend --no-edit
+	cm = commit -m
+	can = commit --amend --no-edit
 	lg = log --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	r = remote -v
 	s = status
-	st = status -b -s
+	st = status -bs
 	co = "!git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout"
-
+	last = log -1 HEAD --stat
 [hub]
 	protocol = ssh
 [github]
