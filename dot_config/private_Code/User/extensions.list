@@ -22,6 +22,7 @@ ms-vscode.cpptools
 panaeon.vscode-dhall-lsp-server
 Prisma.prisma
 serayuzgur.crates
+stylelint.vscode-stylelint
 svelte.svelte-vscode
 tamasfe.even-better-toml
 teabyii.ayu
