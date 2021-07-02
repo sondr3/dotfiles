@@ -23,6 +23,7 @@
 	st = status -bs
 	co = "!git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout"
 	last = log -1 HEAD --stat
+	pp = "!git pull && git push"
 [hub]
 	protocol = ssh
 [github]
