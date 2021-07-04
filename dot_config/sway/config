@@ -20,7 +20,7 @@ set $term kitty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 
-set $menu exec $term --class=launcher -e /sbin/sway-launcher-desktop
+set $menu wofi --allow-images --allow-markup --show drun,run
 
 ### Output configuration
 #
@@ -212,5 +212,3 @@ bar {
 }
 
 include /etc/sway/config.d/*
-
-exec waybar
