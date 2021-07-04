@@ -12,6 +12,8 @@ gh completion -s fish | source
 alias l="ls -la"
 alias fzp="fzf --preview 'bat --style=numbers --color=always {}'"
 
+set -gx EDITOR nvim
+
 set FZF_ALT_C_COMMAND "fd --type d"
 set FZF_DEFAULT_COMMAND "fd --type f"
 set NVM_SYMLINK_CURRENT "true"
