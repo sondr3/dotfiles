@@ -230,6 +230,19 @@ bindsym $mod+r mode "resize"
     bindsym  $mod+XF86MonBrightnessUp 	exec brightnessctl set 100%
 
 #
+# Media
+#
+
+    bindsym XF86AudioPause exec playerctl play-pause 
+    bindsym XF86AudioPlay  exec playerctl play-pause 
+    bindsym XF86AudioPrev  exec playerctl previous
+    bindsym XF86AudioNext  exec playerctl next
+
+    bindsym $mod+Ctrl+Down   exec playerctl play-pause
+    bindsym $mod+Ctrl+Left   exec playerctl previous
+    bindsym $mod+Ctrl+Right  exec playerctl next
+
+#
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
