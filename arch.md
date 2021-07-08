@@ -45,3 +45,9 @@ options resume=LABEL=SWAP
 
 1. `paru -S bluez bluez-utils`
 2. `systemctl enable --now bluetooth.service`
+
+### Configure `libinput-gestures`
+
+1. Install it: `paru -S libinput-gestures wtype`
+2. Add yourself to the `input` group: `sudo gpasswd -a $USER input`
+3. Enable the user service: `libinput-gestures-setup service && libinput-gestures-setup autostart`
