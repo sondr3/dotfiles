@@ -37,3 +37,11 @@ options resume=LABEL=SWAP
 ## Assorted
 
 - Enable `fstrim`: `systemctl enable fstrim.timer`
+- Install `xorg-xwayland`: `paru -S xorg-xwayland` (for Spotify etc)
+
+## Laptops
+
+### Configure Bluetooth
+
+1. `paru -S bluez bluez-utils`
+2. `systemctl enable --now bluetooth.service`
