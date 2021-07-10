@@ -10,7 +10,8 @@
 	rebase = true
 [rebase]
 	autosquash = true
-
+[diff]
+    colorMoved = default
 [alias]
 	b = branch -v
 	d = diff
@@ -24,11 +25,19 @@
 	co = "!git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout"
 	last = log -1 HEAD --stat
 	pp = "!git pull && git push"
-[hub]
-	protocol = ssh
 [github]
 	user = sondr3
 [core]
 	autocrlf = input
 [init]
 	defaultBranch = main
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
