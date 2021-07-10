@@ -258,4 +258,7 @@ bar {
     swaybar_command waybar
 }
 
+exec systemctl --user start mako.service
+exec systemctl --user start libinput-gestures.service
+
 include /etc/sway/config.d/*
