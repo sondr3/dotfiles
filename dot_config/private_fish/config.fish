@@ -21,6 +21,11 @@ function ..; cd ..; end
 function ...; cd ../..; end
 function ....; cd ../../..; end
 
+# Abbrevations
+
+abbr -a -g c chezmoi
+abbr -a -g g git
+
 # SSH
 eval (ssh-agent -c) > /dev/null
 
