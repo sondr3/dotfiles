@@ -70,5 +70,6 @@
   },
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
-  }
+  },
+  "workbench.iconTheme": "vscode-icons"
 }
