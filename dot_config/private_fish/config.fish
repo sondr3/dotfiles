@@ -38,3 +38,6 @@ test -f $HOME/.deno/bin/deno ; and set -gx PATH $HOME/.deno/bin $PATH
 
 # rust
 test -d $HOME/.cargo/bin; and set -gx PATH $HOME/.cargo/bin $PATH
+
+# latex
+test -d /usr/local/texlive/2021/bin/x86_64-linux; and set -gx PATH /usr/local/texlive/2021/bin/x86_64-linux $PATH
