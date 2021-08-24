@@ -1,0 +1,10 @@
+[Unit]
+Description=Automatic syncing of Obsidian repository
+Wants=vault.timer
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/obsidian-sync
+
+[Install]
+WantedBy=multi-user.target
