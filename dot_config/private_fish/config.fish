@@ -5,6 +5,7 @@ set -U fish_greeting
 direnv hook fish | source
 starship init fish | source
 zoxide init fish | source
+fnm env | source
 
 alias l="ls -la"
 alias fzp="fzf --preview 'bat --style=numbers --color=always {}'"
@@ -31,7 +32,7 @@ eval (ssh-agent -c) > /dev/null
 
 # ghcup-env
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-test -f /home/sondre/.ghcup/env ; and set -gx PATH $HOME/.cabal/bin /home/sondre/.ghcup/bin $PATH
+test -d $HOME/.ghcup/bin ; and set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH
 
 # deno
 test -f $HOME/.deno/bin/deno ; and set -gx PATH $HOME/.deno/bin $PATH
