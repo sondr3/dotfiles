@@ -5,7 +5,7 @@ set -U fish_greeting
 direnv hook fish | source
 starship init fish | source
 zoxide init fish | source
-fnm env | source
+volta completions fish | source
 
 alias l="ls -la"
 alias fzp="fzf --preview 'bat --style=numbers --color=always {}'"
@@ -14,13 +14,16 @@ set -gx EDITOR nvim
 
 set FZF_ALT_C_COMMAND "fd --type d"
 set FZF_DEFAULT_COMMAND "fd --type f"
-set NVM_SYMLINK_CURRENT "true"
 
 test -d $HOME/.local/bin; and set -gx PATH $HOME/.local/bin $PATH
 
 function ..; cd ..; end
 function ...; cd ../..; end
 function ....; cd ../../..; end
+
+# $PATH
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH
 
 # Abbrevations
 
