@@ -72,5 +72,15 @@
     "editor.defaultFormatter": "svelte.svelte-vscode"
   },
   "workbench.iconTheme": "vscode-icons",
-  "evenBetterToml.formatter.columnWidth": 140
+  "evenBetterToml.formatter.columnWidth": 140,
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.autoBuild.run": "never",
+  "[tex]": {
+    "editor.formatOnSave": false
+  },
+  "[latex]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.suggestSelection": "recentlyUsedByPrefix"
+  }
 }
