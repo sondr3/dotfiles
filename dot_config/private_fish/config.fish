@@ -1,5 +1,22 @@
 set -U fish_greeting
 
+# $PATH
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH
+
+# ghcup-env
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+test -d $HOME/.ghcup/bin ; and set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH
+
+# deno
+test -f $HOME/.deno/bin/deno ; and set -gx PATH $HOME/.deno/bin $PATH
+
+# rust
+test -d $HOME/.cargo/bin; and set -gx PATH $HOME/.cargo/bin $PATH
+
+# latex
+test -d /usr/local/texlive/2021/bin/x86_64-linux; and set -gx PATH /usr/local/texlive/2021/bin/x86_64-linux $PATH
+
 # Configure applications
 
 direnv hook fish | source
@@ -21,10 +38,6 @@ function ..; cd ..; end
 function ...; cd ../..; end
 function ....; cd ../../..; end
 
-# $PATH
-set -gx VOLTA_HOME "$HOME/.volta"
-set -gx PATH "$VOLTA_HOME/bin" $PATH
-
 # Abbrevations
 
 abbr -a -g c chezmoi
@@ -32,16 +45,3 @@ abbr -a -g g git
 
 # SSH
 eval (ssh-agent -c) > /dev/null
-
-# ghcup-env
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-test -d $HOME/.ghcup/bin ; and set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH
-
-# deno
-test -f $HOME/.deno/bin/deno ; and set -gx PATH $HOME/.deno/bin $PATH
-
-# rust
-test -d $HOME/.cargo/bin; and set -gx PATH $HOME/.cargo/bin $PATH
-
-# latex
-test -d /usr/local/texlive/2021/bin/x86_64-linux; and set -gx PATH /usr/local/texlive/2021/bin/x86_64-linux $PATH
