@@ -173,12 +173,27 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-local lsp_servers = { "rust_analyzer" }
+local lsp_servers = { "rust_analyzer", "sumneko_lua" }
 
 local function setup_lsp(name)
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   local config = { on_attach = on_attach, capabilities = capabilities }
   local ok, server = require("nvim-lsp-installer.servers").get_server(name)
+
+  if name == "sumneko_lua" then
+    config.settings = {
+      Lua = {
+        runtime = { version = "LuaJIT", path = vim.split(package.path, ";") },
+        diagnostics = { globals = {"vim"} },
+        workspace = {
+          library = {
+					  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					  [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+          },
+        },
+      },
+    }
+  end
 
   local function ensure_installed(name)
     if server:is_installed() then
