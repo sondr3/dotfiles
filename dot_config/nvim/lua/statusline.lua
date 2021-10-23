@@ -4,7 +4,7 @@ local vi_mode_utils = require("feline.providers.vi_mode")
 local git_utils = require("feline.providers.git")
 
 local function git_type_exists(gsd, type)
-    return gsd[type] and gsd[type] > 0 
+  return gsd[type] and gsd[type] > 0
 end
 
 local function git_changes()
@@ -24,7 +24,7 @@ local vi_mode_colors = {
   OP = colors.green,
   BLOCK = colors.purple,
   REPLACE = colors.red,
-  ['V-REPLACE'] = colors.red,
+  ["V-REPLACE"] = colors.red,
   ENTER = colors.intense_blue,
   MORE = colors.purple,
   SELECT = colors.orange,
@@ -42,7 +42,7 @@ local comps = {
         bg = colors.dark_white,
         fg = vi_mode_utils.get_mode_color(),
         name = vi_mode_utils.get_mode_highlight_name(),
-        style = "bold"
+        style = "bold",
       }
     end,
     left_sep = { " ", "left_rounded" },
@@ -72,25 +72,25 @@ local comps = {
     branch = {
       provider = "git_branch",
       icon = " ",
-      hl = { style = "bold", bg = colors.gray }, 
+      hl = { style = "bold", bg = colors.gray },
       left_sep = "block",
       right_sep = "block",
     },
-    added = { 
-      provider = 'git_diff_added', 
-      hl = { fg = colors.green, bg = colors.grayish }, 
+    added = {
+      provider = "git_diff_added",
+      hl = { fg = colors.green, bg = colors.grayish },
       right_sep = "block",
       icon = " +",
     },
-    changed = { 
-      provider = 'git_diff_changed', 
-      hl = { fg = colors.intense_blue, bg = colors.grayish }, 
+    changed = {
+      provider = "git_diff_changed",
+      hl = { fg = colors.intense_blue, bg = colors.grayish },
       right_sep = "block",
       icon = " ~",
     },
-    removed = { 
-      provider = 'git_diff_removed', 
-      hl = { fg = colors.red, bg = colors.grayish }, 
+    removed = {
+      provider = "git_diff_removed",
+      hl = { fg = colors.red, bg = colors.grayish },
       icon = " -",
     },
   },
@@ -98,7 +98,7 @@ local comps = {
     error = {
       provider = "diagnostics_error",
       hl = { fg = colors.red },
-      enabled = lsp.diagnostics_exist("Error")
+      enabled = lsp.diagnostics_exist("Error"),
     },
     warning = {},
     info = {},
@@ -130,7 +130,7 @@ local components = {
       comps.git.removed,
       {
         provider = " ",
-        hl = function() 
+        hl = function()
           if git_changes() then
             return { bg = colors.grayish }
           else
@@ -174,4 +174,3 @@ require("feline").setup({
   vi_mode_colors = vi_mode_colors,
   components = components,
 })
-

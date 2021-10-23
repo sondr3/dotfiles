@@ -9,10 +9,10 @@ local default_settings = {
 
   -- Hide the `-- INSERT --` messages
   showmode = false,
-  
+
   -- Highlight searches when done searching
   hlsearch = true,
-  
+
   -- Enable relative line numbers
   number = true,
   relativenumber = true,
@@ -24,19 +24,19 @@ local default_settings = {
   -- For faster completion
   updatetime = 250,
   timeoutlen = 100,
-  
+
   completeopt = { "menu", "menuone", "noselect" },
-  
+
   -- Tabs vs spaces, make indenting great again
   smartindent = true,
   expandtab = true,
   breakindent = true,
   shiftwidth = 2,
   tabstop = 2,
-  
+
   -- Show tabs for open files on top of window
   showtabline = 2,
-  
+
   -- Enable using the mouse to click around
   mouse = "a",
 
@@ -68,11 +68,11 @@ local default_settings = {
 
   -- Set folding to use Tree-Sitter
   foldmethod = "manual",
-  foldexpr = "nvim_treesitter#foldexpr()"
+  foldexpr = "nvim_treesitter#foldexpr()",
 }
 
 for k, v in pairs(default_settings) do
   vim.opt[k] = v
 end
 
-vim.opt.shortmess:append "c"
+vim.opt.shortmess:append("c")
