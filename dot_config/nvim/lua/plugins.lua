@@ -22,6 +22,10 @@ require("packer").startup({
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
+    use {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      run = "make",
+    }
  
     -- Theme
     use 'maaslalani/nordbuddy'
@@ -37,6 +41,11 @@ require("packer").startup({
       'lewis6991/gitsigns.nvim',
       requires = { 'nvim-lua/plenary.nvim' },
     }
+
+    use "akinsho/toggleterm.nvim"
+
+    -- Show indent lines
+    use 'lukas-reineke/indent-blankline.nvim'
  
     -- tree-sitter for highlighting goodness
     use {
@@ -44,10 +53,20 @@ require("packer").startup({
       branch = "0.5-compat",
       run = ":TSUpdate"
     }
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
  
     -- LSP configuration
     use "neovim/nvim-lspconfig"
-    use "hrsh7th/nvim-compe"
+    use "williamboman/nvim-lsp-installer"
+    use "hrsh7th/cmp-nvim-lsp"
+
+    -- Autocompletion
+    use {
+      "hrsh7th/nvim-cmp",
+      requires = {{"neovim/nvim-lspconfig", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path", "hrsh7th/cmp-nvim-lua"}},
+    }
+
+    -- Rust sweetness
     use "simrat39/rust-tools.nvim"
   
     if packer_bootstrap then

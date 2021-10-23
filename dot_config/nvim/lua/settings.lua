@@ -25,7 +25,7 @@ local default_settings = {
   updatetime = 250,
   timeoutlen = 100,
   
-  completeopt = { "menuone", "noselect" },
+  completeopt = { "menu", "menuone", "noselect" },
   
   -- Tabs vs spaces, make indenting great again
   smartindent = true,
@@ -74,3 +74,5 @@ local default_settings = {
 for k, v in pairs(default_settings) do
   vim.opt[k] = v
 end
+
+vim.opt.shortmess:append "c"
