@@ -74,7 +74,3 @@ local default_settings = {
 for k, v in pairs(default_settings) do
   vim.opt[k] = v
 end
-
--- Set theme
-vim.cmd[[colorscheme nord]]
-

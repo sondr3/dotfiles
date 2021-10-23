@@ -24,7 +24,19 @@ require("packer").startup({
     }
  
     -- Theme
-    use 'shaunsingh/nord.nvim'
+    use 'maaslalani/nordbuddy'
+
+    -- Status line
+    use {
+      "famiu/feline.nvim",
+      requires = {"kyazdani42/nvim-web-devicons"}
+    }
+
+    -- Git gutter signs
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires = { 'nvim-lua/plenary.nvim' },
+    }
  
     -- tree-sitter for highlighting goodness
     use {

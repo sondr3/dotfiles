@@ -1,5 +1,10 @@
 require("plugins")
 require("settings")
+require("statusline")
+
+require('gitsigns').setup()
+
+require("nordbuddy").colorscheme({})
 
 require("nvim-treesitter.configs").setup {
   ensure_installed = "maintained",
