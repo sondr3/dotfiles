@@ -1,3 +1,6 @@
 [alias]
 t = "test -- --nocapture --color=always"
 br = "build --release"
+
+[build]
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]

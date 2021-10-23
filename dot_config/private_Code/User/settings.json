@@ -82,5 +82,8 @@
     "editor.formatOnPaste": false,
     "editor.formatOnSave": false,
     "editor.suggestSelection": "recentlyUsedByPrefix"
+  },
+  "files.associations": {
+    "*.json": "json"
   }
 }
