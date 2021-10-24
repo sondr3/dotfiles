@@ -15,7 +15,7 @@ end
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua | PackerCompile
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
   augroup end
 ]])
 
@@ -23,6 +23,9 @@ require("packer").startup({
   function(use)
     -- Package manager
     use("wbthomason/packer.nvim")
+
+    -- For the impatient, used to cache compiled
+    use "lewis6991/impatient.nvim"
 
     -- Best thing ever
     use({
@@ -92,5 +95,6 @@ require("packer").startup({
     display = {
       open_fn = require("packer.util").float,
     },
+    compile_path = vim.fn.stdpath("config").."/lua/packer_compiled.lua"
   },
 })

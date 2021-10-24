@@ -1,4 +1,8 @@
 require("plugins")
+
+require("impatient")
+require("packer_compiled")
+
 require("settings")
 require("statusline")
 
@@ -109,6 +113,7 @@ require("indent_blankline").setup({
 
 require("toggleterm").setup({
   open_mapping = [[<c-t>]],
+  size = 30,
 })
 
 require("nordbuddy").colorscheme({})
@@ -223,12 +228,22 @@ end
 
 local lsp_servers = { "rust_analyzer", "sumneko_lua" }
 
-local function setup_lsp(name)
-  local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  local config = { on_attach = on_attach, capabilities = capabilities }
+local function ensure_installed(name)
   local ok, server = require("nvim-lsp-installer.servers").get_server(name)
 
-  if name == "sumneko_lua" then
+  if ok and not server:is_installed() then
+    server:install()
+  end
+end
+
+local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.on_server_ready(function(server)
+  local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local config = { on_attach = on_attach, capabilities = capabilities }
+
+  ensure_installed(server.name)
+
+  if server.name == "sumneko_lua" then
     config.settings = {
       Lua = {
         runtime = { version = "LuaJIT", path = vim.split(package.path, ";") },
@@ -243,24 +258,12 @@ local function setup_lsp(name)
     }
   end
 
-  local function ensure_installed(name)
-    if server:is_installed() then
-      return true
-    end
-
-    server:install()
-    vim.schedule(function()
-      vim.cmd([[ do User LspAttachBuffers ]])
-    end)
-  end
-
-  if ok and ensure_installed(name) then
-    server:setup(config)
+  if server.name == "rust_analyzer" then
+    require("rust-tools").setup(config)
   else
-    require("lspconfig")[name].setup(config)
+    server:setup(config)
   end
-end
 
-for _, lsp in ipairs(lsp_servers) do
-  setup_lsp(lsp)
-end
+  vim.cmd [[ do User LspAttachBuffers ]]
+end)
+
