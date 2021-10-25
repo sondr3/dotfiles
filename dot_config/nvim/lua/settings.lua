@@ -23,7 +23,7 @@ local default_settings = {
 
   -- For faster completion
   updatetime = 250,
-  timeoutlen = 100,
+  timeoutlen = 500,
 
   completeopt = { "menu", "menuone", "noselect" },
 

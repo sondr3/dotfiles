@@ -25,7 +25,7 @@ require("packer").startup({
     use("wbthomason/packer.nvim")
 
     -- For the impatient, used to cache compiled
-    use "lewis6991/impatient.nvim"
+    use("lewis6991/impatient.nvim")
 
     -- Best thing ever
     use({
@@ -95,6 +95,6 @@ require("packer").startup({
     display = {
       open_fn = require("packer.util").float,
     },
-    compile_path = vim.fn.stdpath("config").."/lua/packer_compiled.lua"
+    compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
   },
 })

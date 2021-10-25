@@ -1,7 +1,8 @@
-require("plugins")
-
+-- Speed up loading Nvim files
 require("impatient")
 require("packer_compiled")
+
+require("plugins")
 
 require("settings")
 require("statusline")
@@ -33,66 +34,23 @@ require("telescope").setup({
 
 require("telescope").load_extension("fzf")
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader><space>",
-  [[<cmd>lua require('telescope.builtin').buffers()<CR>]],
-  { noremap = true, silent = true }
-)
+local lua_leader_map = require("utils").lua_leader_map
+local leader_map = require("utils").leader_map
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>bb",
-  [[<cmd>lua require('telescope.builtin').buffers()<CR>]],
-  { noremap = true, silent = true }
-)
+lua_leader_map("<space>", "require('telescope.builtin').buffers()")
+lua_leader_map("bb", "require('telescope.builtin').buffers()")
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>ff",
-  [[<cmd>lua require('telescope.builtin').find_files()<CR>]],
-  { noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>fb",
-  [[<cmd>lua require('telescope.builtin').file_browser()<CR>]],
-  { noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>fg",
-  [[<cmd>lua require('telescope.builtin').live_grep()<CR>]],
-  { noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>fs",
-  [[<cmd>lua require('telescope.builtin').grep_string()<CR>]],
-  { noremap = true, silent = true }
-)
+lua_leader_map("ff", "require('telescope.builtin').find_files()")
+lua_leader_map("fb", "require('telescope.builtin').file_browser()")
+lua_leader_map("fg", "require('telescope.builtin').live_grep()")
+lua_leader_map("fs", "require('telescope.builtin').grep_string()")
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>gs",
-  [[<cmd>lua require('telescope.builtin').git_status()<CR>]],
-  { noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>gb",
-  [[<cmd>lua require('telescope.builtin').git_branches()<CR>]],
-  { noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>gc",
-  [[<cmd>lua require('telescope.builtin').git_commits()<CR>]],
-  { noremap = true, silent = true }
-)
+lua_leader_map("gs", "require('telescope.builtin').git_status()")
+lua_leader_map("gb", "require('telescope.builtin').git_branches()")
+lua_leader_map("gc", "require('telescope.builtin').git_commits()")
 
-vim.api.nvim_set_keymap("n", "<leader>t", [[<cmd>ToggleTerm<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>T", [[<cmd>ToggleTerm direction='float'<CR>]], { noremap = true, silent = true })
+leader_map("t", "ToggleTerm")
+leader_map("T", "ToggleTerm direction='float'")
 
 require("gitsigns").setup({
   signs = {
@@ -264,6 +222,5 @@ lsp_installer.on_server_ready(function(server)
     server:setup(config)
   end
 
-  vim.cmd [[ do User LspAttachBuffers ]]
+  vim.cmd([[ do User LspAttachBuffers ]])
 end)
-
