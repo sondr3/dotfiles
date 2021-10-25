@@ -69,6 +69,7 @@ require("packer").startup({
     use("neovim/nvim-lspconfig")
     use("williamboman/nvim-lsp-installer")
     use("hrsh7th/cmp-nvim-lsp")
+    use("onsails/lspkind-nvim")
 
     -- Snippets
     use({

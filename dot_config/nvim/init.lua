@@ -138,12 +138,16 @@ end
 
 local cmp = require("cmp")
 local luasnip = require("luasnip")
+local lsp_kind = require("lspkind")
 
 cmp.setup({
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
     end,
+  },
+  formatting = {
+    format = lsp_kind.cmp_format({}),
   },
   mapping = {
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -186,11 +190,15 @@ cmp.setup({
     { name = "luasnip" },
     { name = "buffer", keyword_length = 5 },
   }),
+  experimental = {
+    native_menu = false,
+    ghost_text = true,
+  },
 })
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
