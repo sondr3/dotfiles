@@ -85,5 +85,10 @@
   },
   "files.associations": {
     "*.json": "json"
+  },
+  "haskell.formattingProvider": "ormolu",
+  "haskell.plugin.hlint.codeActionsOn": true,
+  "[haskell]": {
+    "editor.defaultFormatter": "sjurmillidahl.ormolu-vscode"
   }
 }
