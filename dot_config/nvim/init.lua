@@ -232,25 +232,36 @@ local on_attach = function(_, bufnr)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
-local lsp_servers = { "rust_analyzer", "sumneko_lua" }
+local lsp_servers = { "rust_analyzer", "sumneko_lua", "tsserver" }
 
-local function ensure_installed(name)
+for _, name in ipairs(lsp_servers) do
   local ok, server = require("nvim-lsp-installer.servers").get_server(name)
 
   if ok and not server:is_installed() then
+    print("Installing LSP server " .. name)
     server:install()
   end
 end
 
 local lsp_installer = require("nvim-lsp-installer")
-lsp_installer.on_server_ready(function(server)
-  local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  local config = { on_attach = on_attach, capabilities = capabilities }
 
-  ensure_installed(server.name)
+lsp_installer.settings({
+  ui = {
+    icons = {
+      server_installed = "✓",
+      server_pending = "➜",
+      server_uninstalled = "✗",
+    },
+  },
+})
+
+lsp_installer.on_server_ready(function(server)
+  local opts = {}
+  opts.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  opts.on_attach = on_attach
 
   if server.name == "sumneko_lua" then
-    config.settings = {
+    opts.settings = {
       Lua = {
         runtime = { version = "LuaJIT", path = vim.split(package.path, ";") },
         diagnostics = { globals = { "vim" } },
@@ -262,12 +273,18 @@ lsp_installer.on_server_ready(function(server)
         },
       },
     }
+  elseif server.name == "rust_analyzer" then
+    local _, req_server = require("nvim-lsp-installer.servers").get_server(server.name)
+    opts.server = {
+      cmd = req_server._default_options.cmd,
+      on_attach = opts.on_attach,
+    }
   end
 
   if server.name == "rust_analyzer" then
-    require("rust-tools").setup(config)
+    require("rust-tools").setup(opts)
   else
-    server:setup(config)
+    server:setup(opts)
   end
 
   vim.cmd([[ do User LspAttachBuffers ]])
