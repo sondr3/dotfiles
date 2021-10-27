@@ -1,8 +1,8 @@
 set -U fish_greeting
 
-# $PATH
-set -gx VOLTA_HOME "$HOME/.volta"
-set -gx PATH "$VOLTA_HOME/bin" $PATH
+# Configure paths for PNPM
+set -gx PNPM_HOME "/home/sondre/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
 
 # ghcup-env
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
@@ -22,7 +22,6 @@ test -d /usr/local/texlive/2021/bin/x86_64-linux; and set -gx PATH /usr/local/te
 direnv hook fish | source
 starship init fish | source
 zoxide init fish | source
-volta completions fish | source
 
 alias l="ls -la"
 alias fzp="fzf --preview 'bat --style=numbers --color=always {}'"
