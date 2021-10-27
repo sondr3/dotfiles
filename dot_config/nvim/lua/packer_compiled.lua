@@ -46,8 +46,8 @@ local no_errors, error_msg = pcall(function()
 
   time([[Luarocks path setup]], true)
   local package_path_str =
-    "/home/sondre/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/sondre/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/sondre/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/sondre/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-  local install_cpath_pattern = "/home/sondre/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+    "/home/sondre/.cache/nvim/packer_hererocks/2.0.5/share/lua/5.1/?.lua;/home/sondre/.cache/nvim/packer_hererocks/2.0.5/share/lua/5.1/?/init.lua;/home/sondre/.cache/nvim/packer_hererocks/2.0.5/lib/luarocks/rocks-5.1/?.lua;/home/sondre/.cache/nvim/packer_hererocks/2.0.5/lib/luarocks/rocks-5.1/?/init.lua"
+  local install_cpath_pattern = "/home/sondre/.cache/nvim/packer_hererocks/2.0.5/lib/lua/5.1/?.so"
   if not string.find(package.path, package_path_str, 1, true) then
     package.path = package.path .. ";" .. package_path_str
   end
