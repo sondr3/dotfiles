@@ -70,6 +70,23 @@ require("packer").startup({
     use("williamboman/nvim-lsp-installer")
     use("hrsh7th/cmp-nvim-lsp")
     use("onsails/lspkind-nvim")
+    use({
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("trouble").setup({})
+      end,
+    })
+    use({
+      "jose-elias-alvarez/null-ls.nvim",
+      config = function()
+        require("null-ls").config({
+          sources = { require("null-ls").builtins.formatting.rustfmt },
+        })
+        require("lspconfig")["null-ls"].setup({})
+      end,
+      requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    })
 
     -- Snippets
     use({

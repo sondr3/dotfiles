@@ -12,6 +12,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
 
 require("telescope").setup({
   defaults = {
@@ -19,6 +20,10 @@ require("telescope").setup({
     mappings = {
       i = {
         ["<esc>"] = actions.close, -- escape closes popup
+        ["<c-t>"] = trouble.open_with_trouble,
+      },
+      n = {
+        ["<c-t>"] = trouble.open_with_trouble,
       },
     },
   },
@@ -230,6 +235,14 @@ local on_attach = function(_, bufnr)
   buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
   buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+  -- trouble.nvim
+  buf_set_keymap("n", "<space>xx", "<cmd>Trouble<CR>", opts)
+  buf_set_keymap("n", "<space>xw", "<cmd>Trouble lsp_workspace_diagnostics<CR>", opts)
+  buf_set_keymap("n", "<space>xd", "<cmd>Trouble lsp_document_diagnostics<CR>", opts)
+  buf_set_keymap("n", "<space>xl", "<cmd>Trouble loclist<CR>", opts)
+  buf_set_keymap("n", "<space>xq", "<cmd>Trouble quickfix<CR>", opts)
+  buf_set_keymap("n", "gR", "<cmd>Trouble lsp_references<CR>", opts)
 end
 
 local lsp_servers = { "rust_analyzer", "sumneko_lua", "tsserver" }
