@@ -1,4 +1,5 @@
 LICENSE
 *.list
 *.md
+.config/nvim/lua/packer_compiled.lua
 scripts/
