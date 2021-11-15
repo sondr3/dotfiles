@@ -91,5 +91,6 @@
   "[haskell]": {
     "editor.defaultFormatter": "sjurmillidahl.ormolu-vscode"
   },
-  "svelte.enable-ts-plugin": true
+  "svelte.enable-ts-plugin": true,
+  "prettier.documentSelectors": ["**/*.svelte"]
 }
