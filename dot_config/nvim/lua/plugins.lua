@@ -38,7 +38,7 @@ require("packer").startup({
     })
 
     -- Theme
-    use("maaslalani/nordbuddy")
+    use("andersevenrud/nordic.nvim")
 
     -- Status line
     use({

@@ -1,4 +1,4 @@
-local colors = require("nordbuddy.palette")
+local colors = require("nordic.palette")
 local lsp = require("feline.providers.lsp")
 local vi_mode_utils = require("feline.providers.vi_mode")
 local git_utils = require("feline.providers.git")

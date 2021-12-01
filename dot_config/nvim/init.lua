@@ -79,7 +79,7 @@ require("toggleterm").setup({
   size = 30,
 })
 
-require("nordbuddy").colorscheme({})
+require("nordic").colorscheme({})
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = "maintained",
