@@ -60,7 +60,6 @@ require("packer").startup({
     -- tree-sitter for highlighting goodness
     use({
       "nvim-treesitter/nvim-treesitter",
-      branch = "0.5-compat",
       run = ":TSUpdate",
     })
     use("nvim-treesitter/nvim-treesitter-textobjects")
