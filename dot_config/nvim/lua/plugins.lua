@@ -2,7 +2,7 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({
+  PACKER_BOOTSTRAP = fn.system({
     "git",
     "clone",
     "--depth",
@@ -172,7 +172,7 @@ require("packer").startup({
     -- Rust sweetness
     use("simrat39/rust-tools.nvim")
 
-    if packer_bootstrap then
+    if PACKER_BOOTSTRAP then
       require("packer").sync()
     end
   end,
