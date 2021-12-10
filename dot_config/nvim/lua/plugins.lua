@@ -111,6 +111,7 @@ require("packer").startup({
           "saadparwaiz1/cmp_luasnip",
         },
       },
+      config = [[ require("completion") ]],
     })
 
     -- Rust sweetness
