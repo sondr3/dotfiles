@@ -81,6 +81,8 @@ require("toggleterm").setup({
 
 require("nordic").colorscheme({})
 
+require("nvim-autopairs").setup({})
+
 require("nvim-treesitter.configs").setup({
   ensure_installed = "maintained",
   highlight = {
@@ -131,6 +133,7 @@ require("nvim-treesitter.configs").setup({
       },
     },
   },
+  autotag = { enable = true },
 })
 
 -- Y yank until the end of line  (note: this is now a default on master)
@@ -142,6 +145,7 @@ local has_words_before = function()
 end
 
 local cmp = require("cmp")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local luasnip = require("luasnip")
 local lsp_kind = require("lspkind")
 
@@ -200,6 +204,8 @@ cmp.setup({
     ghost_text = true,
   },
 })
+
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer

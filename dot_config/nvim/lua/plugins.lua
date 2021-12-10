@@ -52,7 +52,11 @@ require("packer").startup({
       requires = { "nvim-lua/plenary.nvim" },
     })
 
+    -- Have the terminal floating about
     use("akinsho/toggleterm.nvim")
+
+    -- Automatic brackets
+    use("windwp/nvim-autopairs")
 
     -- Show indent lines
     use("lukas-reineke/indent-blankline.nvim")
@@ -63,6 +67,7 @@ require("packer").startup({
       run = ":TSUpdate",
     })
     use("nvim-treesitter/nvim-treesitter-textobjects")
+    use("windwp/nvim-ts-autotag")
 
     -- LSP configuration
     use("neovim/nvim-lspconfig")
