@@ -5,7 +5,7 @@ local default_settings = {
   inccommand = "nosplit",
 
   -- Use system clipboard
-  clipboard = "unnamedplus",
+  clipboard = vim.opt.clipboard + "unnamedplus",
 
   -- Hide the `-- INSERT --` messages
   showmode = false,
