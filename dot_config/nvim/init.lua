@@ -81,7 +81,9 @@ require("toggleterm").setup({
 
 require("nordic").colorscheme({})
 
-require("nvim-autopairs").setup({})
+require("nvim-autopairs").setup({
+  check_ts = true,
+})
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = "maintained",
