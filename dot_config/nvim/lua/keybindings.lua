@@ -1,21 +1,38 @@
+local wk = require("which-key")
+
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local lua_leader_map = require("utils").lua_leader_map
-local leader_map = require("utils").leader_map
+local lua_cmd = function(cmd)
+  return "<cmd>lua " .. cmd .. "<CR>"
+end
 
-lua_leader_map("<space>", "require('telescope.builtin').buffers()")
-lua_leader_map("bb", "require('telescope.builtin').buffers()")
+local cmd = function(cmd)
+  return "<cmd> " .. cmd .. "<CR>"
+end
 
-lua_leader_map("ff", "require('telescope.builtin').find_files()")
-lua_leader_map("fb", "require('telescope.builtin').file_browser()")
-lua_leader_map("fg", "require('telescope.builtin').live_grep()")
-lua_leader_map("fs", "require('telescope.builtin').grep_string()")
-
-lua_leader_map("gs", "require('telescope.builtin').git_status()")
-lua_leader_map("gb", "require('telescope.builtin').git_branches()")
-lua_leader_map("gc", "require('telescope.builtin').git_commits()")
-
-leader_map("t", "ToggleTerm")
-leader_map("T", "ToggleTerm direction='float'")
+wk.register({
+  ["<leader>"] = {
+    ["<space>"] = { lua_cmd("require('telescope.builtin').buffers()"), "buffers" },
+    b = {
+      name = "+buffer",
+      b = { lua_cmd("require('telescope.builtin').buffers()"), "buffers" },
+    },
+    f = {
+      name = "+file",
+      f = { lua_cmd("require('telescope.builtin').find_files()"), "find files" },
+      b = { lua_cmd("require('telescope.builtin').file_browser()"), "file browser" },
+      g = { lua_cmd("require('telescope.builtin').live_grep()"), "live grep" },
+      s = { lua_cmd("require('telescope.builtin').grep_string()"), "grep string" },
+    },
+    g = {
+      name = "+git",
+      s = { lua_cmd("require('telescope.builtin').git_status()"), "git status" },
+      b = { lua_cmd("require('telescope.builtin').git_branches()"), "git branches" },
+      c = { lua_cmd("require('telescope.builtin').git_commits()"), "git commits" },
+    },
+    t = { cmd("ToggleTerm"), "bottom terminal" },
+    T = { cmd("ToggleTerm direction='float'"), "floating terminal" },
+  },
+})

@@ -103,6 +103,14 @@ require("packer").startup({
       end,
     })
 
+    -- which-key for keybinding popup
+    use({
+      "folke/which-key.nvim",
+      config = function()
+        require("which-key").setup({})
+      end,
+    })
+
     -- tree-sitter for highlighting goodness
     use({
       "nvim-treesitter/nvim-treesitter",
