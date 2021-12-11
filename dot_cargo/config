@@ -1,6 +1,7 @@
 [alias]
 t = "test -- --nocapture --color=always"
 br = "build --release"
+clip = "clippy -- -W clippy::pedantic"
 
 [build]
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
