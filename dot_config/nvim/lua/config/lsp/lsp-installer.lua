@@ -1,4 +1,4 @@
-local lsp = require("lsp")
+local lsp = require("config/lsp")
 
 local lsp_servers = { "rust_analyzer", "sumneko_lua", "tsserver" }
 

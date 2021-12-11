@@ -31,7 +31,7 @@ require("packer").startup({
     use({
       "nvim-telescope/telescope.nvim",
       requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
-      config = [[ require("telescope") ]],
+      config = [[ require("config/telescope") ]],
     })
     use({
       "nvim-telescope/telescope-fzf-native.nvim",
@@ -115,7 +115,7 @@ require("packer").startup({
     use({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
-      config = [[ require("tree-sitter") ]],
+      config = [[ require("config/tree-sitter") ]],
     })
     use("nvim-treesitter/nvim-treesitter-textobjects")
     use("windwp/nvim-ts-autotag")
@@ -126,7 +126,7 @@ require("packer").startup({
     use("onsails/lspkind-nvim")
     use({
       "williamboman/nvim-lsp-installer",
-      config = [[ require("lsp/lsp-installer") ]],
+      config = [[ require("config/lsp/lsp-installer") ]],
     })
     use({
       "folke/trouble.nvim",
@@ -166,7 +166,7 @@ require("packer").startup({
           "saadparwaiz1/cmp_luasnip",
         },
       },
-      config = [[ require("completion") ]],
+      config = [[ require("config/completion") ]],
     })
 
     -- Rust sweetness
