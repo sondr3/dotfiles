@@ -1,6 +1,8 @@
+local util = require("lspconfig.util")
+
 local lsp = require("config/lsp")
 
-local lsp_servers = { "rust_analyzer", "sumneko_lua", "tsserver" }
+local lsp_servers = { "rust_analyzer", "sumneko_lua", "tsserver", "denols" }
 
 for _, name in ipairs(lsp_servers) do
   local ok, server = require("nvim-lsp-installer.servers").get_server(name)
@@ -47,6 +49,8 @@ lsp_installer.on_server_ready(function(server)
       cmd = req_server._default_options.cmd,
       on_attach = opts.on_attach,
     }
+  elseif server.name == "tsserver" then
+    opts.root_dir = util.root_pattern("package.json")
   end
 
   if server.name == "rust_analyzer" then
