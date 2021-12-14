@@ -25,13 +25,27 @@ lsp_installer.settings({
   },
 })
 
-lsp_installer.on_server_ready(function(server)
-  local opts = {}
-  opts.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  opts.on_attach = lsp.on_attach
+local null_ls_formatting = function(client)
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+end
 
-  if server.name == "sumneko_lua" then
-    opts.settings = {
+local servers = {
+  tsserver = {
+    root_dir = util.root_pattern("package.json"),
+    on_attach = function(client, bufnr)
+      null_ls_formatting(client)
+      lsp.on_attach(client, bufnr)
+    end,
+  },
+  rust_analyzer = {
+    on_attach = function(client, bufnr)
+      null_ls_formatting(client)
+      lsp.on_attach(client, bufnr)
+    end,
+  },
+  sumneko_lua = {
+    settings = {
       Lua = {
         runtime = { version = "LuaJIT", path = vim.split(package.path, ";") },
         diagnostics = { globals = { "vim" } },
@@ -42,18 +56,30 @@ lsp_installer.on_server_ready(function(server)
           },
         },
       },
-    }
-  elseif server.name == "rust_analyzer" then
+    },
+  },
+}
+
+local server_options = function(server, opt)
+  if servers[server] ~= nil and servers[server][opt] ~= nil then
+    return servers[server][opt]
+  end
+
+  return nil
+end
+
+lsp_installer.on_server_ready(function(server)
+  local opts = {}
+  opts.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  opts.settings = server_options(server.name, "settings") or {}
+  opts.on_attach = server_options(server.name, "on_attach") or lsp.on_attach
+
+  if server.name == "rust_analyzer" then
     local _, req_server = require("nvim-lsp-installer.servers").get_server(server.name)
     opts.server = {
       cmd = req_server._default_options.cmd,
       on_attach = opts.on_attach,
     }
-  elseif server.name == "tsserver" then
-    opts.root_dir = util.root_pattern("package.json")
-  end
-
-  if server.name == "rust_analyzer" then
     require("rust-tools").setup(opts)
   else
     server:setup(opts)
