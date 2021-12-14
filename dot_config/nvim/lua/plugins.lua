@@ -119,6 +119,7 @@ require("packer").startup({
     })
     use("nvim-treesitter/nvim-treesitter-textobjects")
     use("windwp/nvim-ts-autotag")
+    use("JoosepAlviste/nvim-ts-context-commentstring")
 
     -- LSP configuration
     use("neovim/nvim-lspconfig")
@@ -175,6 +176,13 @@ require("packer").startup({
         },
       },
       config = [[ require("config/completion") ]],
+    })
+
+    -- Commenting
+    use({
+      "numToStr/Comment.nvim",
+      requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
+      config = [[ require("config/comments") ]],
     })
 
     -- Rust sweetness
