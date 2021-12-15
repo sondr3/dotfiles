@@ -60,19 +60,18 @@ local servers = {
   },
 }
 
-local server_options = function(server, opt)
+local set_server_option = function(server, opt, opts)
   if servers[server] ~= nil and servers[server][opt] ~= nil then
-    return servers[server][opt]
+    opts[opt] = servers[server][opt]
   end
-
-  return nil
 end
 
 lsp_installer.on_server_ready(function(server)
   local opts = {}
   opts.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  opts.settings = server_options(server.name, "settings") or {}
-  opts.on_attach = server_options(server.name, "on_attach") or lsp.on_attach
+  for _, opt in ipairs({ "settings", "on_attach", "root_dir" }) do
+    set_server_option(server.name, opt, opts)
+  end
 
   if server.name == "rust_analyzer" then
     local _, req_server = require("nvim-lsp-installer.servers").get_server(server.name)
