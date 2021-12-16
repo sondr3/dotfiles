@@ -63,6 +63,8 @@ local servers = {
 local set_server_option = function(server, opt, opts)
   if servers[server] ~= nil and servers[server][opt] ~= nil then
     opts[opt] = servers[server][opt]
+  elseif lsp[opt] ~= nil then
+    opts[opt] = lsp[opt]
   end
 end
 

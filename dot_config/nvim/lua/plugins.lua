@@ -144,7 +144,6 @@ require("packer").startup({
           sources = {
             require("null-ls").builtins.formatting.stylua,
             require("null-ls").builtins.formatting.rustfmt,
-            require("null-ls").builtins.completion.spell,
           },
           on_attach = function(client)
             if client.resolved_capabilities.document_formatting then
