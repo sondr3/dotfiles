@@ -185,6 +185,14 @@ require("packer").startup({
       config = [[ require("config/comments") ]],
     })
 
+    -- Surrounding stuff
+    use({
+      "blackCauldron7/surround.nvim",
+      config = function()
+        require("surround").setup({ mappings_style = "surround" })
+      end,
+    })
+
     -- Rust sweetness
     use("simrat39/rust-tools.nvim")
 
