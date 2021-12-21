@@ -46,6 +46,14 @@ require("packer").startup({
       end,
     })
 
+    -- Personal Theme
+    use({
+      "/home/sondre/Code/ts/a-theme/",
+      --   config = function()
+      --     require("modus").colorscheme({ theme = "modus-operandi" })
+      --   end,
+    })
+
     -- Status line
     use({
       "famiu/feline.nvim",
