@@ -49,9 +49,9 @@ require("packer").startup({
     -- Personal Theme
     use({
       "/home/sondre/Code/ts/a-theme/",
-      --   config = function()
-      --     require("modus").colorscheme({ theme = "modus-operandi" })
-      --   end,
+      -- config = function()
+      --   require("modus").colorscheme({ theme = "modus-operandi" })
+      -- end,
     })
 
     -- Status line
@@ -83,6 +83,8 @@ require("packer").startup({
       config = function()
         require("toggleterm").setup({
           open_mapping = [[<c-t>]],
+          direction = "float",
+          shade_terminals = false,
           size = 30,
         })
       end,
