@@ -32,7 +32,7 @@ wk.register({
       b = { lua_cmd("require('telescope.builtin').git_branches()"), "git branches" },
       c = { lua_cmd("require('telescope.builtin').git_commits()"), "git commits" },
     },
-    t = { cmd("ToggleTerm"), "bottom terminal" },
-    T = { cmd("ToggleTerm direction='float'"), "floating terminal" },
+    t = { cmd("ToggleTerm direction='float'"), "floating terminal" },
+    T = { cmd("ToggleTerm"), "bottom terminal" },
   },
 })
