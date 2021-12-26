@@ -37,6 +37,19 @@ local servers = {
       null_ls_formatting(client)
       lsp.on_attach(client, bufnr)
     end,
+    init_options = {
+      lint = true,
+    },
+  },
+  denols = {
+    root_dir = util.root_pattern("deno.json"),
+    init_options = {
+      enable = true,
+      lint = true,
+      unstable = true,
+      importMap = "./import_map.json",
+      config = "./deno.json",
+    },
   },
   rust_analyzer = {
     on_attach = function(client, bufnr)
@@ -71,7 +84,7 @@ end
 lsp_installer.on_server_ready(function(server)
   local opts = {}
   opts.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  for _, opt in ipairs({ "settings", "on_attach", "root_dir" }) do
+  for _, opt in ipairs({ "settings", "on_attach", "root_dir", "init_options" }) do
     set_server_option(server.name, opt, opts)
   end
 
