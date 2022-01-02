@@ -76,3 +76,11 @@ for k, v in pairs(default_settings) do
 end
 
 vim.opt.shortmess:append("c")
+
+-- Show diagnostics on hover instead of as virtual text
+vim.cmd([[ au CursorHold * lua vim.diagnostic.open_float(0, { scope = "cursor" }) ]])
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  float = { border = "single" },
+})
