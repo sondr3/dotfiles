@@ -31,6 +31,12 @@ local null_ls_formatting = function(client)
 end
 
 local servers = {
+  stylelint_lsp = {
+    on_attach = function(client, bufnr)
+      null_ls_formatting(client)
+      lsp.on_attach(client, bufnr)
+    end,
+  },
   tsserver = {
     root_dir = util.root_pattern("package.json"),
     on_attach = function(client, bufnr)
