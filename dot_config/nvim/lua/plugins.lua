@@ -148,6 +148,7 @@ require("packer").startup({
     })
 
     use({
+      -- "/home/sondre/Code/lua/null-ls.nvim",
       "jose-elias-alvarez/null-ls.nvim",
       config = function()
         require("null-ls").setup({

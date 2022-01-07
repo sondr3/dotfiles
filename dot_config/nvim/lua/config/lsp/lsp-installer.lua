@@ -32,10 +32,16 @@ end
 
 local servers = {
   stylelint_lsp = {
+    filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss", "javascriptreact", "typescriptreact" },
     on_attach = function(client, bufnr)
       null_ls_formatting(client)
       lsp.on_attach(client, bufnr)
     end,
+    settings = {
+      stylelintplus = {
+        cssInJs = false,
+      },
+    },
   },
   jsonls = {
     on_attach = function(client, bufnr)
@@ -96,7 +102,7 @@ end
 lsp_installer.on_server_ready(function(server)
   local opts = {}
   opts.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  for _, opt in ipairs({ "settings", "on_attach", "root_dir", "init_options" }) do
+  for _, opt in ipairs({ "settings", "on_attach", "root_dir", "init_options", "filetypes" }) do
     set_server_option(server.name, opt, opts)
   end
 
