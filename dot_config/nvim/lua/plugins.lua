@@ -156,7 +156,9 @@ require("packer").startup({
             require("null-ls").builtins.formatting.stylua,
             require("null-ls").builtins.formatting.rustfmt,
             require("null-ls").builtins.formatting.prettierd,
-            require("null-ls").builtins.formatting.eslint_d,
+            require("null-ls").builtins.formatting.eslint_d.with({
+              extra_args = { "--cache" },
+            }),
             require("null-ls").builtins.formatting.stylelint,
           },
           on_attach = function(client)
