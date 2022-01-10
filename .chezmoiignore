@@ -2,5 +2,5 @@ LICENSE
 *.list
 *.md
 .config/nvim/lua/packer_compiled.lua
-.config/nvim/plugin/
+.config/nvim/plugin/*.lua
 scripts/
