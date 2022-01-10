@@ -173,7 +173,10 @@ require("packer").startup({
     -- Snippets
     use({
       "L3MON4D3/LuaSnip",
-      requires = { "saadparwaiz1/cmp_luasnip" },
+      requires = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+      end,
     })
 
     -- Autocompletion
