@@ -175,6 +175,10 @@ require("packer").startup({
       "L3MON4D3/LuaSnip",
       requires = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
       config = function()
+        require("luasnip").config.setup({
+          -- disable jumping back into snippets once left
+          history = false,
+        })
         require("luasnip.loaders.from_vscode").lazy_load()
       end,
     })
