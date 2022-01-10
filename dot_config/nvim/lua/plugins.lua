@@ -136,6 +136,16 @@ require("packer").startup({
     use("hrsh7th/cmp-nvim-lsp")
     use("onsails/lspkind-nvim")
     use({
+      "ray-x/lsp_signature.nvim",
+      config = function()
+        require("lsp_signature").setup({
+          doc_lines = 0,
+          floating_window = false,
+          hint_prefix = " ",
+        })
+      end,
+    })
+    use({
       "williamboman/nvim-lsp-installer",
       config = [[ require("config/lsp/lsp-installer") ]],
     })
