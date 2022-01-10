@@ -73,6 +73,13 @@ local servers = {
       config = "./deno.json",
     },
   },
+  rust_analyzer = {
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = { command = "clippy" },
+      },
+    },
+  },
   sumneko_lua = {
     settings = {
       Lua = {
