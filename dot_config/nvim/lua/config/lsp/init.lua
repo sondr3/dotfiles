@@ -42,6 +42,11 @@ local on_attach = function(_, bufnr)
   buf_set_keymap("n", "gR", "<cmd>Trouble lsp_references<CR>", opts)
 end
 
+local flags = {
+  debounce_text_changes = 150,
+}
+
 return {
   on_attach = on_attach,
+  flags = flags,
 }
