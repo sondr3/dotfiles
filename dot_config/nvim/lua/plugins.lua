@@ -90,16 +90,6 @@ require("packer").startup({
       end,
     })
 
-    -- Automatic brackets
-    use({
-      "windwp/nvim-autopairs",
-      config = function()
-        require("nvim-autopairs").setup({
-          check_ts = true,
-        })
-      end,
-    })
-
     -- Show indent lines
     use({
       "lukas-reineke/indent-blankline.nvim",
@@ -186,8 +176,9 @@ require("packer").startup({
       requires = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
       config = function()
         require("luasnip").config.setup({
-          -- disable jumping back into snippets once left
-          history = false,
+          history = true,
+          updateevents = "TextChanged,TextChangedI",
+          enable_autosnippets = true,
         })
         require("luasnip.loaders.from_vscode").lazy_load()
       end,
@@ -206,6 +197,14 @@ require("packer").startup({
         },
       },
       config = [[ require("config/completion") ]],
+    })
+
+    -- Automatic brackets
+    use({
+      "windwp/nvim-autopairs",
+      config = function()
+        require("nvim-autopairs").setup({ check_ts = true })
+      end,
     })
 
     -- Commenting

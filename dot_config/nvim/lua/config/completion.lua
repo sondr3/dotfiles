@@ -56,11 +56,11 @@ cmp.setup({
     }),
   },
   sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "path" },
+    { name = "nvim_lsp", priority = 99 },
+    { name = "luasnip", priority = 30, max_item_count = 4 },
+    { name = "path", priority = 10 },
   }, {
-    { name = "buffer", options = { keyword_length = 5 } },
+    { name = "buffer", priority = 0, options = { keyword_length = 5 } },
   }),
   experimental = {
     native_menu = false,
