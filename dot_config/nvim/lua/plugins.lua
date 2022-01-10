@@ -154,12 +154,11 @@ require("packer").startup({
         require("null-ls").setup({
           sources = {
             require("null-ls").builtins.formatting.stylua,
-            require("null-ls").builtins.formatting.rustfmt,
             require("null-ls").builtins.formatting.prettierd,
-            require("null-ls").builtins.formatting.eslint_d.with({
+            require("null-ls").builtins.formatting.stylelint,
+            require("null-ls").builtins.diagnostics.eslint_d.with({
               extra_args = { "--cache" },
             }),
-            require("null-ls").builtins.formatting.stylelint,
           },
           on_attach = function(client)
             if client.resolved_capabilities.document_formatting then
@@ -186,7 +185,6 @@ require("packer").startup({
           "hrsh7th/cmp-nvim-lsp",
           "hrsh7th/cmp-buffer",
           "hrsh7th/cmp-path",
-          "hrsh7th/cmp-nvim-lua",
           "saadparwaiz1/cmp_luasnip",
         },
       },
@@ -216,6 +214,7 @@ require("packer").startup({
     end
   end,
   config = {
+    ensure_dependencies = true,
     display = {
       open_fn = require("packer.util").float,
     },

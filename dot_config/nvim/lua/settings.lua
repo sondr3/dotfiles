@@ -25,7 +25,7 @@ local default_settings = {
   updatetime = 250,
   timeoutlen = 500,
 
-  completeopt = { "menu", "menuone", "noinsert" },
+  completeopt = { "menu", "menuone", "noselect" },
 
   -- Tabs vs spaces, make indenting great again
   smartindent = true,

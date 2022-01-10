@@ -73,12 +73,6 @@ local servers = {
       config = "./deno.json",
     },
   },
-  rust_analyzer = {
-    on_attach = function(client, bufnr)
-      null_ls_formatting(client)
-      lsp.on_attach(client, bufnr)
-    end,
-  },
   sumneko_lua = {
     settings = {
       Lua = {
