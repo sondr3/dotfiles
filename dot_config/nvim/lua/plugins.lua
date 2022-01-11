@@ -38,6 +38,14 @@ require("packer").startup({
       run = "make",
     })
 
+    -- Move around fast
+    use({
+      "ggandor/lightspeed.nvim",
+      config = function()
+        require("lightspeed").setup({})
+      end,
+    })
+
     -- Theme
     use({
       "andersevenrud/nordic.nvim",
@@ -72,6 +80,22 @@ require("packer").startup({
             delete = { hl = "GitGutterDelete", text = "_" },
             topdelete = { hl = "GitGutterDelete", text = "‾" },
             changedelete = { hl = "GitGutterChange", text = "~" },
+          },
+        })
+      end,
+    })
+
+    -- Magit in Neovim?
+    use({
+      "TimUntersberger/neogit",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "sindrets/diffview.nvim",
+      },
+      config = function()
+        require("neogit").setup({
+          integrations = {
+            diffview = true,
           },
         })
       end,

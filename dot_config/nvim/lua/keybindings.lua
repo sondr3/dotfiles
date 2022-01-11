@@ -28,11 +28,13 @@ wk.register({
     },
     g = {
       name = "+git",
+      g = { lua_cmd("require('neogit').open()"), "neogit" },
       s = { lua_cmd("require('telescope.builtin').git_status()"), "git status" },
       b = { lua_cmd("require('telescope.builtin').git_branches()"), "git branches" },
       c = { lua_cmd("require('telescope.builtin').git_commits()"), "git commits" },
     },
     t = {
+      name = "+terminal",
       t = { cmd("ToggleTerm direction='float'"), "floating terminal" },
       v = { cmd("ToggleTerm direction='vertical'"), "vertical terminal" },
       b = { cmd("ToggleTerm direction='horizontal'"), "bottom terminal" },
