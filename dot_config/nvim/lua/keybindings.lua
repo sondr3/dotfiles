@@ -22,7 +22,7 @@ wk.register({
     f = {
       name = "+file",
       f = { lua_cmd("require('telescope.builtin').find_files()"), "find files" },
-      b = { lua_cmd("require('telescope.builtin').file_browser()"), "file browser" },
+      b = { cmd(":Telescope file_browser"), "file browser" },
       g = { lua_cmd("require('telescope.builtin').live_grep()"), "live grep" },
       s = { lua_cmd("require('telescope.builtin').grep_string()"), "grep string" },
     },

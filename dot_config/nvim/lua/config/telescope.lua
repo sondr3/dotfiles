@@ -1,7 +1,8 @@
+local telescope = require("telescope")
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
 
-require("telescope").setup({
+telescope.setup({
   defaults = {
     initial_mode = "insert",
     mappings = {
@@ -24,4 +25,5 @@ require("telescope").setup({
   },
 })
 
-require("telescope").load_extension("fzf")
+telescope.load_extension("fzf")
+telescope.load_extension("file_browser")
