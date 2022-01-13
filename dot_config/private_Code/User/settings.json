@@ -90,6 +90,5 @@
   "haskell.plugin.hlint.codeActionsOn": true,
   "[haskell]": {
     "editor.defaultFormatter": "sjurmillidahl.ormolu-vscode"
-  },
-  "svelte.enable-ts-plugin": true
+  }
 }
