@@ -186,7 +186,6 @@ require("packer").startup({
     })
 
     use({
-      -- "/home/sondre/Code/lua/null-ls.nvim",
       "jose-elias-alvarez/null-ls.nvim",
       config = function()
         require("null-ls").setup({
@@ -194,6 +193,9 @@ require("packer").startup({
             require("null-ls").builtins.formatting.stylua,
             require("null-ls").builtins.formatting.prettierd,
             require("null-ls").builtins.formatting.stylelint,
+            require("null-ls").builtins.formatting.eslint_d.with({
+              extra_args = { "--cache" },
+            }),
             require("null-ls").builtins.diagnostics.eslint_d.with({
               extra_args = { "--cache" },
             }),
