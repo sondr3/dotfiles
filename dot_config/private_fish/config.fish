@@ -19,6 +19,7 @@ test -d /usr/local/texlive/2021/bin/x86_64-linux; and set -gx PATH /usr/local/te
 
 # Configure applications
 
+fnm env --shell fish --use-on-cd | source
 direnv hook fish | source
 starship init fish | source
 zoxide init fish | source
