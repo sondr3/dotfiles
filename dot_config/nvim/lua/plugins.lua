@@ -210,6 +210,13 @@ require("packer").startup({
       requires = { "nvim-lua/plenary.nvim" },
     })
 
+    use({
+      "j-hui/fidget.nvim",
+      config = function()
+        require("fidget").setup({})
+      end,
+    })
+
     -- Snippets
     use({
       "L3MON4D3/LuaSnip",
