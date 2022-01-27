@@ -59,11 +59,11 @@ cmp.setup({
     }),
   },
   sources = cmp.config.sources({
-    { name = "nvim_lsp", priority = 99 },
-    { name = "luasnip", priority = 30, max_item_count = 4 },
-    { name = "path", priority = 10 },
+    { name = "nvim_lsp" },
+    { name = "luasnip", max_item_count = 4 },
+    { name = "path" },
   }, {
-    { name = "buffer", priority = 0, options = { keyword_length = 5 } },
+    { name = "buffer", options = { keyword_length = 5 } },
   }),
   experimental = {
     ghost_text = true,
@@ -86,4 +86,9 @@ cmp.setup.cmdline(":", {
   }),
 })
 
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+cmp.event:on(
+  "confirm_done",
+  cmp_autopairs.on_confirm_done({
+    map_char = { tex = "", haskell = "" },
+  })
+)
