@@ -188,23 +188,7 @@ require("packer").startup({
     use({
       "jose-elias-alvarez/null-ls.nvim",
       config = function()
-        require("null-ls").setup({
-          sources = {
-            require("null-ls").builtins.formatting.stylua,
-            require("null-ls").builtins.formatting.prettierd,
-            require("null-ls").builtins.formatting.eslint_d.with({
-              extra_args = { "--cache" },
-            }),
-            require("null-ls").builtins.diagnostics.eslint_d.with({
-              extra_args = { "--cache" },
-            }),
-          },
-          on_attach = function(client)
-            if client.resolved_capabilities.document_formatting then
-              vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-            end
-          end,
-        })
+        require("config/lsp/null")
       end,
       requires = { "nvim-lua/plenary.nvim" },
     })
