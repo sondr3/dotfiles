@@ -5,5 +5,4 @@ require("packer_compiled")
 require("plugins")
 require("settings")
 
-require("keybindings")
 require("statusline")

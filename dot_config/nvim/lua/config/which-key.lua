@@ -1,4 +1,7 @@
-local wk = require("which-key")
+local present, which_key = pcall(require, "which-key")
+if not present then
+  return
+end
 
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " "
@@ -12,7 +15,9 @@ local cmd = function(cmd)
   return "<cmd> " .. cmd .. "<CR>"
 end
 
-wk.register({
+which_key.setup({})
+
+which_key.register({
   ["<leader>"] = {
     ["<space>"] = { lua_cmd("require('telescope.builtin').buffers()"), "buffers" },
     b = {
