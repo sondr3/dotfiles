@@ -151,6 +151,16 @@ require("packer").startup({
       end,
     })
 
+    -- Tab magic to jump out of stuff
+    use({
+      "abecodes/tabout.nvim",
+      config = function()
+        require("tabout").setup({})
+      end,
+      wants = { "nvim-treesitter" },
+      after = { "nvim-cmp" },
+    })
+
     -- tree-sitter for highlighting goodness
     use({
       "nvim-treesitter/nvim-treesitter",
@@ -175,10 +185,14 @@ require("packer").startup({
         })
       end,
     })
+
+    -- Install and update LSP servers
     use({
       "williamboman/nvim-lsp-installer",
       config = [[ require("config/lsp/lsp-installer") ]],
     })
+
+    -- Show where stuff is failing in projects
     use({
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
@@ -187,6 +201,7 @@ require("packer").startup({
       end,
     })
 
+    -- Make non-LSP great again
     use({
       "jose-elias-alvarez/null-ls.nvim",
       config = function()
@@ -195,6 +210,7 @@ require("packer").startup({
       requires = { "nvim-lua/plenary.nvim" },
     })
 
+    -- LSP loading spinners and information
     use({
       "j-hui/fidget.nvim",
       config = function()
