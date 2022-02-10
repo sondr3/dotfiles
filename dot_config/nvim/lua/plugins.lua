@@ -276,6 +276,16 @@ require("packer").startup({
     -- Rust sweetness
     use("simrat39/rust-tools.nvim")
 
+    -- LaTeX
+    use({
+      "lervag/vimtex",
+      config = function()
+        vim.g.vimtex_view_method = "zathura"
+        vim.g.vimtex_view_use_temp_files = true
+        vim.g.vimtex_compiler_method = "latexmk"
+      end,
+    })
+
     if PACKER_BOOTSTRAP then
       require("packer").sync()
     end
