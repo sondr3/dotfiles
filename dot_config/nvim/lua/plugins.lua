@@ -178,9 +178,12 @@ require("packer").startup({
     use("JoosepAlviste/nvim-ts-context-commentstring")
 
     -- LSP configuration
-    use({ "neovim/nvim-lspconfig", requires = {
-      { "hrsh7th/cmp-nvim-lsp" },
-    } })
+    use({
+      "neovim/nvim-lspconfig",
+      requires = {
+        { "hrsh7th/cmp-nvim-lsp" },
+      },
+    })
     use("onsails/lspkind-nvim")
     use({
       "ray-x/lsp_signature.nvim",
