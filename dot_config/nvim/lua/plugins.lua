@@ -34,12 +34,18 @@ require("packer").startup({
         "nvim-lua/popup.nvim",
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-file-browser.nvim",
+        "nvim-telescope/telescope-ui-select.nvim",
       },
       config = [[ require("config/telescope") ]],
     })
     use({
       "nvim-telescope/telescope-fzf-native.nvim",
       run = "make",
+    })
+    use({
+      "nvim-telescope/telescope-frecency.nvim",
+      requires = { "tami5/sqlite.lua" },
+      config = [[ require("telescope").load_extension("frecency") ]],
     })
 
     -- Move around fast
@@ -172,8 +178,9 @@ require("packer").startup({
     use("JoosepAlviste/nvim-ts-context-commentstring")
 
     -- LSP configuration
-    use("neovim/nvim-lspconfig")
-    use("hrsh7th/cmp-nvim-lsp")
+    use({ "neovim/nvim-lspconfig", requires = {
+      { "hrsh7th/cmp-nvim-lsp" },
+    } })
     use("onsails/lspkind-nvim")
     use({
       "ray-x/lsp_signature.nvim",
