@@ -293,7 +293,19 @@ require("packer").startup({
         vim.g.vimtex_view_method = "zathura"
         vim.g.vimtex_view_use_temp_files = true
         vim.g.vimtex_compiler_method = "latexmk"
+        vim.g.vimtex_quickfix_ignore_filters = {
+          "Overfull",
+          "Underfull",
+          "LaTeX hooks Warning",
+          "Package unicode-math Warning",
+        }
       end,
+    })
+
+    -- Haskell
+    use({
+      "ndmitchell/ghcid",
+      rtp = "plugins/nvim",
     })
 
     if PACKER_BOOTSTRAP then
