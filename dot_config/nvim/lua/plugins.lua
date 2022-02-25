@@ -308,6 +308,9 @@ require("packer").startup({
       rtp = "plugins/nvim",
     })
 
+    -- Dhall
+    use({ "vmchale/dhall-vim" })
+
     if PACKER_BOOTSTRAP then
       require("packer").sync()
     end
