@@ -2,23 +2,24 @@ set -U fish_greeting
 
 # Configure paths for PNPM
 set -gx PNPM_HOME "/home/sondre/.local/share/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
+fish_add_path "$PNPM_HOME"
 
 # ghcup-env
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-test -d $HOME/.ghcup/bin ; and set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH
+test -d $HOME/.ghcup/bin ; and fish_add_path $HOME/.cabal/bin $HOME/.ghcup/bin
 
 # deno
-test -f $HOME/.deno/bin/deno ; and set -gx PATH $HOME/.deno/bin $PATH
+test -f $HOME/.deno/bin/deno ; and fish_add_path $HOME/.deno/bin 
 
 # rust
-test -d $HOME/.cargo/bin; and set -gx PATH $HOME/.cargo/bin $PATH
+test -d $HOME/.cargo/bin; and fish_add_path $HOME/.cargo/bin 
 
 # go
-test -d /usr/local/go/bin; and set -gx PATH /usr/local/go/bin/ $PATH
+test -d /usr/local/go/bin; and fish_add_path /usr/local/go/bin/ 
 
 # latex
-test -d /usr/local/texlive/2021/bin/x86_64-linux; and set -gx PATH /usr/local/texlive/2021/bin/x86_64-linux $PATH
+test -d /usr/local/texlive/2022/bin/x86_64-linux; and fish_add_path /usr/local/texlive/2022/bin/x86_64-linux 
+set PATH (string match -v /usr/local/texlive/2021/bin/x86_64-linux $PATH) # FIXME
 
 # Configure applications
 
@@ -35,7 +36,7 @@ set -gx EDITOR nvim
 set FZF_ALT_C_COMMAND "fd --type d"
 set FZF_DEFAULT_COMMAND "fd --type f"
 
-test -d $HOME/.local/bin; and set -gx PATH $HOME/.local/bin $PATH
+test -d $HOME/.local/bin; and fish_add_path $HOME/.local/bin 
 
 function ..; cd ..; end
 function ...; cd ../..; end
