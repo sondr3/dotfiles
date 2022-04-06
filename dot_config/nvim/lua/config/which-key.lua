@@ -31,7 +31,7 @@ which_key.register({
       g = { lua_cmd("require('telescope.builtin').live_grep()"), "live grep" },
       s = { lua_cmd("require('telescope.builtin').grep_string()"), "grep string" },
     },
-    g = {
+    G = {
       name = "+git",
       g = { lua_cmd("require('neogit').open()"), "neogit" },
       s = { lua_cmd("require('telescope.builtin').git_status()"), "git status" },
