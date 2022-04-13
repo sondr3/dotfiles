@@ -81,6 +81,10 @@ local servers = {
     },
   },
   sumneko_lua = {
+    on_attach = function(client, bufnr)
+      null_ls_formatting(client)
+      lsp.on_attach(client, bufnr)
+    end,
     settings = {
       Lua = {
         runtime = { version = "LuaJIT", path = runtime_path },
