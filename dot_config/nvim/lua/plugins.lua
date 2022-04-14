@@ -311,6 +311,10 @@ require("packer").startup({
     -- Dhall
     use({ "vmchale/dhall-vim" })
 
+    -- LISPs
+    use({ "Olical/conjure" })
+    use({ "jaawerth/fennel.vim" })
+
     if PACKER_BOOTSTRAP then
       require("packer").sync()
     end
