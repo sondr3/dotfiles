@@ -12,7 +12,7 @@ cmp.setup({
   formatting = {
     format = lsp_kind.cmp_format({}),
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ["<Down>"] = cmp.mapping.select_next_item({
       behavior = cmp.SelectBehavior.Select,
@@ -57,7 +57,7 @@ cmp.setup({
       "s",
       "c",
     }),
-  },
+  }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "luasnip", max_item_count = 4 },
@@ -72,6 +72,7 @@ cmp.setup({
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline("/", {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = "buffer" },
   },
@@ -79,6 +80,7 @@ cmp.setup.cmdline("/", {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = "path" },
   }, {
