@@ -10,7 +10,9 @@ return {
 			key = "t",
 			mods = "SHIFT|CTRL",
 			action = wezterm.action({
-				SpawnTab = { "CurrentPaneDomain" },
+				SpawnCommandInNewTab = {
+					cwd = "$HOME",
+				},
 			}),
 		},
 	},
