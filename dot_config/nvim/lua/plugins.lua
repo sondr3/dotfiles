@@ -12,12 +12,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
   })
 end
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = "PackerCompile",
+  pattern = "plugins.lua",
+  group = group,
+})
 
 require("packer").startup({
   function(use)

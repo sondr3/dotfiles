@@ -3,9 +3,14 @@ if not present then
   return
 end
 
-vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
+-- Set space as the leader key
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- Remap g/j to deal with word wrap better
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 local lua_cmd = function(cmd)
   return "<cmd>lua " .. cmd .. "<CR>"
