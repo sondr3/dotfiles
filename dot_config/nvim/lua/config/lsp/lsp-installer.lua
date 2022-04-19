@@ -1,6 +1,6 @@
 local util = require("lspconfig.util")
 
-local lsp = require("config/lsp")
+local lsp = require("config.lsp")
 
 local lsp_servers = { "rust_analyzer", "sumneko_lua", "tsserver", "denols" }
 
@@ -25,11 +25,6 @@ lsp_installer.settings({
   },
 })
 
-local null_ls_formatting = function(client)
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
-end
-
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -37,28 +32,14 @@ table.insert(runtime_path, "lua/?/init.lua")
 local servers = {
   stylelint_lsp = {
     filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss", "javascriptreact", "typescriptreact" },
-    on_attach = function(client, bufnr)
-      null_ls_formatting(client)
-      lsp.on_attach(client, bufnr)
-    end,
     settings = {
       stylelintplus = {
         cssInJs = false,
       },
     },
   },
-  jsonls = {
-    on_attach = function(client, bufnr)
-      null_ls_formatting(client)
-      lsp.on_attach(client, bufnr)
-    end,
-  },
   tsserver = {
     root_dir = util.root_pattern("package.json"),
-    on_attach = function(client, bufnr)
-      null_ls_formatting(client)
-      lsp.on_attach(client, bufnr)
-    end,
     init_options = {
       lint = true,
     },
@@ -81,10 +62,6 @@ local servers = {
     },
   },
   sumneko_lua = {
-    on_attach = function(client, bufnr)
-      null_ls_formatting(client)
-      lsp.on_attach(client, bufnr)
-    end,
     settings = {
       Lua = {
         runtime = { version = "LuaJIT", path = runtime_path },

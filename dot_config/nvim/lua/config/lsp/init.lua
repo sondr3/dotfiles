@@ -6,7 +6,7 @@ vim.keymap.set("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -56,8 +56,22 @@ local on_attach = function(_, bufnr)
     require("trouble").toggle({ mode = "lsp_references" })
   end, attach_opts)
 
-  -- format document
-  vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, {})
+  -- highlight on hover
+  local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+  vim.api.nvim_create_autocmd("CursorHold", {
+    callback = vim.lsp.buf.document_highlight,
+    group = group,
+  })
+  vim.api.nvim_create_autocmd("CursorMoved", {
+    callback = vim.lsp.buf.clear_references,
+    group = group,
+  })
+
+  -- setup formatting
+  local ok, lsp_format = pcall(require, "lsp-format")
+  if ok then
+    lsp_format.on_attach(client)
+  end
 end
 
 local flags = {

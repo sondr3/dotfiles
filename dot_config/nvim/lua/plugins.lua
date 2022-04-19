@@ -219,6 +219,12 @@ require("packer").startup({
       end,
       requires = { "nvim-lua/plenary.nvim" },
     })
+    use({
+      "lukas-reineke/lsp-format.nvim",
+      config = function()
+        require("lsp-format").setup({})
+      end,
+    })
 
     -- LSP loading spinners and information
     use({

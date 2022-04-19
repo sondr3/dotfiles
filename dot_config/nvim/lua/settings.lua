@@ -78,10 +78,10 @@ end
 vim.opt.shortmess:append("c")
 
 -- Show diagnostics on hover instead of as virtual text
-local group = vim.api.nvim_create_augroup("diagnostics_on_hover", { clear = true })
+local hover_group = vim.api.nvim_create_augroup("on_hover", { clear = true })
 vim.api.nvim_create_autocmd("CursorHold", {
   pattern = "*",
-  group = group,
+  group = hover_group,
   callback = function()
     vim.diagnostic.open_float(0, { scope = "cursor", focus = false })
   end,
