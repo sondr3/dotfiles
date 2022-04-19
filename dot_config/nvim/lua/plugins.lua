@@ -222,7 +222,7 @@ require("packer").startup({
     use({
       "lukas-reineke/lsp-format.nvim",
       config = function()
-        require("lsp-format").setup({})
+        require("lsp-format").setup({ sync = true })
       end,
     })
 
