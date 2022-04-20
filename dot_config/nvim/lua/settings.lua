@@ -83,7 +83,15 @@ vim.api.nvim_create_autocmd("CursorHold", {
   pattern = "*",
   group = hover_group,
   callback = function()
-    vim.diagnostic.open_float(0, { scope = "cursor", focus = false })
+    local opts = {
+      scope = "cursor",
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = "rounded",
+      source = "always",
+      prefix = " ",
+      focusable = false,
+    }
+    vim.diagnostic.open_float(nil, opts)
   end,
 })
 
