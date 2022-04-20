@@ -56,16 +56,18 @@ local on_attach = function(client, bufnr)
     require("trouble").toggle({ mode = "lsp_references" })
   end, attach_opts)
 
-  -- highlight on hover
-  local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-  vim.api.nvim_create_autocmd("CursorHold", {
-    callback = vim.lsp.buf.document_highlight,
-    group = group,
-  })
-  vim.api.nvim_create_autocmd("CursorMoved", {
-    callback = vim.lsp.buf.clear_references,
-    group = group,
-  })
+  if client.server_capabilities.documentHighlight then
+    -- highlight on hover
+    local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+    vim.api.nvim_create_autocmd("CursorHold", {
+      callback = vim.lsp.buf.document_highlight,
+      group = group,
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      callback = vim.lsp.buf.clear_references,
+      group = group,
+    })
+  end
 
   -- setup formatting
   local ok, lsp_format = pcall(require, "lsp-format")
