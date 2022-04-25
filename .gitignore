@@ -3,6 +3,7 @@
 result
 dots
 **/packer_compiled.lua
+*.task.lua
 
 # Hide Emacs folders and files
 *~
