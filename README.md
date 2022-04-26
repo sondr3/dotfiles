@@ -4,14 +4,9 @@
 
 ## What
 
-My collection of dotfiles (very WIP after declaring dotfile bankruptcy in 2021)
-for a minimal Arch with Sway machine.
-
-## How?
-
-If you absolutely need to use these dotfiles you should either just copy what
-you want from the various files, but if for whatever reason you just absolutely
-_have_ to have them all you can run `chezmoi init --apply sondr3`.
+My collection of dotfiles on my Gnome Arch machines, configured using my
+unreleased dotfile manager.
 
 ## License
+
 All code is licensed under the MIT license.
