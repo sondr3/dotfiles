@@ -1,7 +1,6 @@
-(local hm (require :heime))
-(local utils (require :heime.utils))
-
-(let [template "
+(let [hm (require :heime)
+      utils (require :heime.utils)
+      template "
 set surround
 set hlsearch
 set incsearch

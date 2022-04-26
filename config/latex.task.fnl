@@ -1,7 +1,6 @@
-(local hm (require :heime))
-(local utils (require :heime.utils))
-
-(let [template "
+(let [hm (require :heime)
+      utils (require :heime.utils)
+      template "
 # Use LuaLaTeX
 $lualatex='lualatex --interaction=nonstopmode --synctex=1 --shell-escape %O %S';
 $preview_continuous_mode = 1;
