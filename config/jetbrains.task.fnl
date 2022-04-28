@@ -20,7 +20,7 @@ nmap <leader>t :action Refactorings.QuickListPopupAction<cr>
 nmap <leader>b :action CompileDirty<cr>
 set ideajoin"
       run (fn [ctx data]
-            (ctx:write_string (ctx.user:home_file :.ideavimrc)
+            (ctx:write_string (ctx:home_file :.ideavimrc)
                               (utils:template template {})))]
   (hm.task {:name :jetbrains
             :description "setup and configure jetbrains"

@@ -13,6 +13,6 @@ $pdf_mode = 4;
 # Automatically open generated PDFs;
 $pdf_previewer = 'zathura';"
       run (fn [ctx data]
-            (ctx:write_string (ctx.user:home_file :.latexmkrc)
+            (ctx:write_string (ctx:home_file :.latexmkrc)
                               (utils:template template {})))]
   (hm.task {:name :latex :description "setup and configure latex" : run}))
