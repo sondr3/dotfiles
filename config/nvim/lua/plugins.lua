@@ -34,7 +34,6 @@ require("packer").startup({
         "nvim-lua/popup.nvim",
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-file-browser.nvim",
-        "nvim-telescope/telescope-ui-select.nvim",
       },
       config = [[ require("config/telescope") ]],
     })
@@ -46,6 +45,13 @@ require("packer").startup({
       "nvim-telescope/telescope-frecency.nvim",
       requires = { "tami5/sqlite.lua" },
       config = [[ require("telescope").load_extension("frecency") ]],
+    })
+
+    use({
+      "stevearc/dressing.nvim",
+      config = function()
+        require("dressing").setup({})
+      end,
     })
 
     -- Move around fast
@@ -181,9 +187,14 @@ require("packer").startup({
     use({
       "neovim/nvim-lspconfig",
       requires = {
-        { "hrsh7th/cmp-nvim-lsp" },
+        -- Install and update LSP servers
+        { "williamboman/nvim-lsp-installer" },
       },
+      config = function()
+        require("config/lsp")
+      end,
     })
+
     use("onsails/lspkind-nvim")
     use({
       "ray-x/lsp_signature.nvim",
@@ -194,12 +205,6 @@ require("packer").startup({
           hint_prefix = " ",
         })
       end,
-    })
-
-    -- Install and update LSP servers
-    use({
-      "williamboman/nvim-lsp-installer",
-      config = [[ require("config/lsp/lsp-installer") ]],
     })
 
     -- Show where stuff is failing in projects
@@ -214,9 +219,6 @@ require("packer").startup({
     -- Make non-LSP great again
     use({
       "jose-elias-alvarez/null-ls.nvim",
-      config = function()
-        require("config/lsp/null")
-      end,
       requires = { "nvim-lua/plenary.nvim" },
     })
     use({
