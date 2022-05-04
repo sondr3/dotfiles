@@ -177,12 +177,19 @@ lspconfig.sumneko_lua.setup({
   },
 })
 
+lspconfig.ltex.setup({
+  settings = {
+    ltex = {
+      checkFrequency = "save",
+    },
+  },
+})
+
 for _, server in ipairs({
   "cssls",
   "dhall_lsp_server",
   "html",
   "jsonls",
-  "ltex",
   "svelte",
   "tailwindcss",
   "taplo",
