@@ -242,7 +242,7 @@ require("packer").startup({
       requires = { "saadparwaiz1/cmp_luasnip", "rafamadriz/friendly-snippets" },
       config = function()
         require("luasnip").config.setup({
-          history = true,
+          history = false,
           updateevents = "TextChanged,TextChangedI",
           enable_autosnippets = true,
         })
