@@ -163,16 +163,6 @@ require("packer").startup({
       end,
     })
 
-    -- Tab magic to jump out of stuff
-    use({
-      "abecodes/tabout.nvim",
-      config = function()
-        require("tabout").setup({})
-      end,
-      wants = { "nvim-treesitter" },
-      after = { "nvim-cmp" },
-    })
-
     -- tree-sitter for highlighting goodness
     use({
       "nvim-treesitter/nvim-treesitter",
@@ -188,7 +178,7 @@ require("packer").startup({
       "neovim/nvim-lspconfig",
       requires = {
         -- Install and update LSP servers
-        { "williamboman/nvim-lsp-installer" },
+        "williamboman/nvim-lsp-installer",
       },
       config = function()
         require("config/lsp")
@@ -254,16 +244,26 @@ require("packer").startup({
     use({
       "hrsh7th/nvim-cmp",
       requires = {
-        {
-          "neovim/nvim-lspconfig",
-          "hrsh7th/cmp-nvim-lsp",
-          "hrsh7th/cmp-buffer",
-          "hrsh7th/cmp-path",
-          "hrsh7th/cmp-cmdline",
-          "saadparwaiz1/cmp_luasnip",
-        },
+        "neovim/nvim-lspconfig",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "saadparwaiz1/cmp_luasnip",
       },
-      config = [[ require("config/completion") ]],
+      config = function()
+        require("config/completion")
+      end,
+    })
+
+    -- Tab magic to jump out of stuff
+    use({
+      "abecodes/tabout.nvim",
+      config = function()
+        require("tabout").setup({})
+      end,
+      wants = { "nvim-treesitter" },
+      after = { "nvim-cmp" },
     })
 
     -- Automatic brackets
