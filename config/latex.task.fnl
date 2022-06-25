@@ -2,7 +2,7 @@
       utils (require :heime.utils)
       template "
 # Use LuaLaTeX
-$lualatex='lualatex --interaction=nonstopmode --synctex=1 --shell-escape %O %S';
+$lualatex='lualatex -interaction=batchmode -synctex=1 -shell-escape %O %S';
 $preview_continuous_mode = 1;
 # BibTeX with LuaLaTeX
 $bibtex_use = 2;
