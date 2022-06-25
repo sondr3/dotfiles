@@ -319,6 +319,9 @@ require("packer").startup({
     -- Dhall
     use({ "vmchale/dhall-vim" })
 
+    -- PureScript
+    use({ "purescript-contrib/purescript-vim" })
+
     -- LISPs
     use({ "Olical/conjure" })
     use({ "jaawerth/fennel.vim" })

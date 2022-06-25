@@ -185,6 +185,16 @@ lspconfig.ltex.setup({
   },
 })
 
+lspconfig.purescriptls.setup({
+  on_attach = on_attach,
+  settings = {
+    purescript = {
+      addSpagoSources = true,
+      formatter = "purs-tidy",
+    },
+  },
+})
+
 for _, server in ipairs({
   "cssls",
   "dhall_lsp_server",
