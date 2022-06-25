@@ -91,6 +91,6 @@ cmp.setup.cmdline(":", {
 cmp.event:on(
   "confirm_done",
   cmp_autopairs.on_confirm_done({
-    map_char = { tex = "", haskell = "" },
+    filetypes = { tex = false, haskell = false, purescript = false },
   })
 )
