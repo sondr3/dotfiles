@@ -14,9 +14,11 @@ end
 
 local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
-  command = "PackerCompile",
-  pattern = "plugins.lua",
   group = group,
+  pattern = "plugins.lua",
+  callback = function(args)
+    vim.api.nvim_command("source " .. args.file .. " | PackerCompile")
+  end,
 })
 
 require("packer").startup({
@@ -72,9 +74,9 @@ require("packer").startup({
 
     -- Personal Theme
     use({
-      "/home/sondre/Code/ts/a-theme/",
+      "/home/sondre/Code/ts/empyreum/",
       -- config = function()
-      --   require("modus").colorscheme({ theme = "modus-operandi" })
+      --   require("empyreum").colorscheme({ variant = "light" })
       -- end,
     })
 
