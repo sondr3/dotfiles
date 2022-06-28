@@ -37,7 +37,9 @@ require("packer").startup({
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-file-browser.nvim",
       },
-      config = [[ require("config/telescope") ]],
+      config = function()
+        require("config/telescope")
+      end,
     })
     use({
       "nvim-telescope/telescope-fzf-native.nvim",
@@ -46,7 +48,9 @@ require("packer").startup({
     use({
       "nvim-telescope/telescope-frecency.nvim",
       requires = { "tami5/sqlite.lua" },
-      config = [[ require("telescope").load_extension("frecency") ]],
+      config = function()
+        require("telescope").load_extension("frecency")
+      end,
     })
 
     use({
@@ -169,7 +173,9 @@ require("packer").startup({
     use({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
-      config = [[ require("config/tree-sitter") ]],
+      config = function()
+        require("config/tree-sitter")
+      end,
     })
     use("nvim-treesitter/nvim-treesitter-textobjects")
     use("windwp/nvim-ts-autotag")
@@ -282,7 +288,9 @@ require("packer").startup({
     use({
       "numToStr/Comment.nvim",
       requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
-      config = [[ require("config/comments") ]],
+      config = function()
+        require("config/comments")
+      end,
     })
 
     -- Surrounding stuff
