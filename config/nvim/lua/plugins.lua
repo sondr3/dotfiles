@@ -321,6 +321,7 @@ require("packer").startup({
     -- LISPs
     use({ "Olical/conjure" })
     use({ "jaawerth/fennel.vim" })
+    use({ "rktjmp/hotpot.nvim" })
   end,
   config = {
     ensure_dependencies = true,

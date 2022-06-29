@@ -76,6 +76,7 @@ for k, v in pairs(default_settings) do
 end
 
 vim.opt.shortmess:append("c")
+vim.g["conjure#filetype#fennel"] = "conjure.client.fennel.stdio"
 
 -- Show diagnostics on hover instead of as virtual text
 local hover_group = vim.api.nvim_create_augroup("on_hover", { clear = true })
