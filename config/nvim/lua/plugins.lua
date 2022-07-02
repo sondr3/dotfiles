@@ -1,3 +1,17 @@
+local fn = vim.fn
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+
+if fn.empty(fn.glob(install_path)) > 0 then
+  PACKER_BOOTSTRAP = fn.system({
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
+  })
+end
+
 local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = group,
@@ -321,6 +335,10 @@ require("packer").startup({
 
     -- PureScript
     use({ "purescript-contrib/purescript-vim" })
+
+    if PACKER_BOOTSTRAP then
+      require("packer").sync()
+    end
   end,
   config = {
     ensure_dependencies = true,
