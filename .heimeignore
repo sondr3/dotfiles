@@ -1,0 +1,3 @@
+**/packer_compiled.lua
+*.task.lua
+config/nvim/plugin/*.lua
