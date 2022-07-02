@@ -317,11 +317,6 @@ require("packer").startup({
 
     -- PureScript
     use({ "purescript-contrib/purescript-vim" })
-
-    -- LISPs
-    use({ "Olical/conjure" })
-    use({ "jaawerth/fennel.vim" })
-    use({ "rktjmp/hotpot.nvim" })
   end,
   config = {
     ensure_dependencies = true,

@@ -103,7 +103,6 @@ null.setup({
     builtins.formatting.prettierd,
     builtins.formatting.cabal_fmt,
     builtins.formatting.rustfmt,
-    builtins.formatting.fnlfmt,
     builtins.formatting.eslint_d.with({ extra_args = { "--cache" } }),
 
     -- diagnostics
