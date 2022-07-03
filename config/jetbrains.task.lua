@@ -12,7 +12,7 @@ set showmode
 set number
 set relativenumber
 
-let mapleader = \" \"
+let mapleader = " "
 
 imap jk <esc>
 
