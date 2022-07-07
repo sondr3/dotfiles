@@ -96,20 +96,35 @@ local on_attach = function(client, bufnr)
   end
 end
 
+local eslint_d_options = {
+  extra_args = { "--cache" },
+  condition = function(utils)
+    return utils.root_has_file({ "package.json", ".eslintrc.js" })
+  end,
+}
 null.setup({
   sources = {
     -- formatting
     builtins.formatting.stylua,
-    builtins.formatting.prettierd,
+    builtins.formatting.deno_fmt.with({
+      condition = function(utils)
+        return utils.root_has_file({ "deno.json", "import_map.json" })
+      end,
+    }),
+    builtins.formatting.prettierd.with({
+      condition = function(utils)
+        return utils.root_has_file({ "package.json", ".prettierrc", ".prettierrc.js" })
+      end,
+    }),
     builtins.formatting.cabal_fmt,
     builtins.formatting.rustfmt,
-    builtins.formatting.eslint_d.with({ extra_args = { "--cache" } }),
+    builtins.formatting.eslint_d.with(eslint_d_options),
 
     -- diagnostics
-    builtins.diagnostics.eslint_d.with({ extra_args = { "--cache" } }),
+    builtins.diagnostics.eslint_d.with(eslint_d_options),
 
     -- code actions
-    builtins.code_actions.eslint_d.with({ extra_args = { "--cache" } }),
+    builtins.code_actions.eslint_d.with(eslint_d_options),
   },
   on_attach = function(client, bufnr)
     local ok, lsp_format = pcall(require, "lsp-format")
