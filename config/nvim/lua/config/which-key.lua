@@ -31,7 +31,7 @@ which_key.register({
     },
     f = {
       name = "+file",
-      f = { lua_cmd("require('telescope.builtin').find_files()"), "find files" },
+      f = { lua_cmd("require('config/telescope').project_files()"), "find files" },
       b = { cmd(":Telescope file_browser"), "file browser" },
       g = { lua_cmd("require('telescope.builtin').live_grep()"), "live grep" },
       s = { lua_cmd("require('telescope.builtin').grep_string()"), "grep string" },
