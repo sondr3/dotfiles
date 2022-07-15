@@ -34,13 +34,13 @@ if not pcall(require, "packer_compiled") then
 end
 
 -- Setup Fennel
-ensure("rktjmp", "hotpot.nvim")
-local ok, hotpot = pcall(require, "hotpot")
-if ok then
-  hotpot.setup({ provide_require_fennel = true })
-else
-  print("Missing 'hotpot.nvim'")
-end
+-- ensure("rktjmp", "hotpot.nvim")
+-- local ok, hotpot = pcall(require, "hotpot")
+-- if ok then
+--   hotpot.setup({ provide_require_fennel = true })
+-- else
+--   print("Missing 'hotpot.nvim'")
+-- end
 
 require("plugins")
 require("settings")

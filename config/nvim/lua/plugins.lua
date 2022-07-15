@@ -281,9 +281,9 @@ require("packer").startup({
 
     -- Surrounding stuff
     use({
-      "ur4ltz/surround.nvim",
+      "kylechui/nvim-surround",
       config = function()
-        require("surround").setup({ mappings_style = "surround" })
+        require("nvim-surround").setup({})
       end,
     })
 
