@@ -108,7 +108,7 @@ null.setup({
     builtins.formatting.stylua,
     builtins.formatting.deno_fmt.with({
       condition = function(utils)
-        return utils.root_has_file({ "deno.json", "import_map.json" })
+        return utils.root_has_file({ "deno.json", "deno.jsonc", "import_map.json" })
       end,
     }),
     builtins.formatting.prettierd.with({
@@ -158,13 +158,11 @@ lspconfig.tsserver.setup({
 })
 lspconfig.denols.setup({
   on_attach = on_attach,
-  root_dir = util.root_pattern("deno.json"),
+  root_dir = util.root_pattern({ "deno.json", "deno.jsonc", "import_map.json", ".git" }),
   init_options = {
     enable = true,
     lint = true,
     unstable = true,
-    importMap = "./import_map.json",
-    config = "./deno.json",
   },
 })
 
