@@ -5,3 +5,6 @@ clip = "clippy -- -W clippy::pedantic"
 
 [build]
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+
+[net]
+git-fetch-with-cli = true
