@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 require("packer").startup({
   function(use)
-    -- Personal plugins 
+    -- Personal plugins
     -- Theme
     use({
       "sondr3/empyreum",

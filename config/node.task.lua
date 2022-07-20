@@ -9,9 +9,9 @@ save-exact=true
 ]]
 
 return hm.task({
-	name = "node",
-	description = "setup and configure node",
-	run = function(ctx, data)
-		ctx:write_string(ctx:home_file(".npmrc"), utils:template(template, data.data))
-	end,
+  name = "node",
+  description = "setup and configure node",
+  run = function(ctx, data)
+    ctx:write_string(ctx:home_file(".npmrc"), utils:template(template, data.data))
+  end,
 })
