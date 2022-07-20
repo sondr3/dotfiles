@@ -140,8 +140,11 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 lspconfig.stylelint_lsp.setup({
   on_attach = on_attach,
+  capabilities = capabilities,
   filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss", "javascriptreact", "typescriptreact" },
   settings = {
     stylelintplus = {
@@ -151,6 +154,7 @@ lspconfig.stylelint_lsp.setup({
 })
 lspconfig.tsserver.setup({
   on_attach = on_attach,
+  capabilities = capabilities,
   root_dir = util.root_pattern("package.json"),
   init_options = {
     lint = true,
@@ -158,6 +162,7 @@ lspconfig.tsserver.setup({
 })
 lspconfig.denols.setup({
   on_attach = on_attach,
+  capabilities = capabilities,
   root_dir = util.root_pattern({ "deno.json", "deno.jsonc", "import_map.json", ".git" }),
   init_options = {
     enable = true,
@@ -169,6 +174,7 @@ lspconfig.denols.setup({
 require("rust-tools").setup({
   server = {
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
       ["rust-analyzer"] = {
         checkOnSave = { command = "clippy" },
@@ -178,6 +184,7 @@ require("rust-tools").setup({
 })
 lspconfig.sumneko_lua.setup({
   on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     Lua = {
       runtime = { version = "LuaJIT", path = runtime_path },
@@ -185,11 +192,14 @@ lspconfig.sumneko_lua.setup({
       workspace = {
         library = vim.api.nvim_get_runtime_file("", true),
       },
+      telemetry = { enable = false },
     },
   },
 })
 
 lspconfig.ltex.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     ltex = {
       checkFrequency = "save",
@@ -199,6 +209,7 @@ lspconfig.ltex.setup({
 
 lspconfig.purescriptls.setup({
   on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     purescript = {
       addSpagoSources = true,
@@ -218,5 +229,5 @@ for _, server in ipairs({
   "taplo",
   "texlab",
 }) do
-  lspconfig[server].setup({ on_attach = on_attach })
+  lspconfig[server].setup({ on_attach = on_attach, capabilities = capabilities })
 end
