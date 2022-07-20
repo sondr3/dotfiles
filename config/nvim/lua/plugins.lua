@@ -9,6 +9,17 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 require("packer").startup({
   function(use)
+    -- Personal plugins 
+    -- Theme
+    use({
+      "sondr3/empyreum",
+      -- config = function()
+      --   require("empyreum").colorscheme({ variant = "light" })
+      -- end,
+    })
+
+    -- dotfile manager
+    use("sondr3/heime")
     -- Package manager
     use("wbthomason/packer.nvim")
 
@@ -60,14 +71,6 @@ require("packer").startup({
       config = function()
         require("nordic").colorscheme({})
       end,
-    })
-
-    -- Personal Theme
-    use({
-      "/home/sondre/Code/ts/empyreum/",
-      -- config = function()
-      --   require("empyreum").colorscheme({ variant = "light" })
-      -- end,
     })
 
     -- Status line
@@ -240,6 +243,7 @@ require("packer").startup({
       requires = {
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
