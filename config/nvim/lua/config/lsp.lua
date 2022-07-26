@@ -96,10 +96,10 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local eslint_d_options = {
+local eslint_options = {
   extra_args = { "--cache" },
   condition = function(utils)
-    return utils.root_has_file({ "package.json", ".eslintrc.js" })
+    return utils.root_has_file({ "package.json", ".eslintrc.js", ".eslintrc.cjs" })
   end,
 }
 null.setup({
@@ -111,20 +111,20 @@ null.setup({
         return utils.root_has_file({ "deno.json", "deno.jsonc", "import_map.json" })
       end,
     }),
-    builtins.formatting.prettierd.with({
+    builtins.formatting.prettier.with({
       condition = function(utils)
         return utils.root_has_file({ "package.json", ".prettierrc", ".prettierrc.js" })
       end,
     }),
     builtins.formatting.cabal_fmt,
     builtins.formatting.rustfmt,
-    builtins.formatting.eslint_d.with(eslint_d_options),
+    builtins.formatting.eslint.with(eslint_options),
 
     -- diagnostics
-    builtins.diagnostics.eslint_d.with(eslint_d_options),
+    builtins.diagnostics.eslint.with(eslint_options),
 
     -- code actions
-    builtins.code_actions.eslint_d.with(eslint_d_options),
+    builtins.code_actions.eslint.with(eslint_options),
   },
   on_attach = function(client, bufnr)
     local ok, lsp_format = pcall(require, "lsp-format")
@@ -155,7 +155,7 @@ lspconfig.stylelint_lsp.setup({
 lspconfig.tsserver.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  root_dir = util.root_pattern("package.json"),
+  root_dir = util.root_pattern("package.json", "tsconfig.json"),
   init_options = {
     lint = true,
   },
@@ -163,7 +163,8 @@ lspconfig.tsserver.setup({
 lspconfig.denols.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  root_dir = util.root_pattern({ "deno.json", "deno.jsonc", "import_map.json", ".git" }),
+  root_dir = util.root_pattern("deno.json", "deno.jsonc", "import_map.json"),
+  single_file_support = false,
   init_options = {
     enable = true,
     lint = true,
@@ -221,14 +222,24 @@ lspconfig.purescriptls.setup({
   },
 })
 
+lspconfig.tailwindcss.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "postcss.config.js", "postcss.config.cjs"),
+})
+
+lspconfig.svelte.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = util.root_pattern("svelte.config.cjs", "svelte.config.js"),
+})
+
 for _, server in ipairs({
   "cssls",
   "dhall_lsp_server",
   "html",
   "hls",
   "jsonls",
-  "svelte",
-  "tailwindcss",
   "taplo",
   "texlab",
 }) do
