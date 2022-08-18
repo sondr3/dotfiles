@@ -5,5 +5,7 @@ return hm.task({
   description = "setup and configure node",
   run = function(ctx)
     ctx:copy_template("gitconfig.tmpl", ctx:home_file(".gitconfig"))
+
+    ctx:copy_file("gitconfig-eviny", ctx:home_file(".gitconfig-eviny"))
   end,
 })
