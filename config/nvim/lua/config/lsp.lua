@@ -242,6 +242,7 @@ for _, server in ipairs({
   "jsonls",
   "taplo",
   "texlab",
+  "vuels",
 }) do
   lspconfig[server].setup({ on_attach = on_attach, capabilities = capabilities })
 end
