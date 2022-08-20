@@ -21,6 +21,14 @@ test -d /usr/local/go/bin; and fish_add_path /usr/local/go/bin/
 test -d /usr/local/texlive/2022/bin/x86_64-linux; and fish_add_path /usr/local/texlive/2022/bin/x86_64-linux 
 set PATH (string match -v /usr/local/texlive/2021/bin/x86_64-linux $PATH) # FIXME
 
+# homebrew
+
+if test -d /opt/homebrew
+  /opt/homebrew/bin/brew shellenv | source
+  fish_add_path /opt/homebrew/bin
+  set -gx HOMEBREW_NO_ENV_HINTS 1
+end
+
 # Configure applications
 
 fnm env --shell fish --use-on-cd | source
@@ -46,6 +54,3 @@ function ....; cd ../../..; end
 
 abbr -a -g c chezmoi
 abbr -a -g g git
-
-# SSH
-eval (ssh-agent -c) > /dev/null
