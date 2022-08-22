@@ -48,7 +48,14 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 
+{%- if is_linux() -%}
 [includeIf "gitdir:~/Code/projects/eviny/"]
   path = ~/.gitconfig-eviny 
+[includeIf "gitdir:~/Code/projects/sonat/"]
+  path = ~/.gitconfig-sonat 
+{%- else -%}
 [includeIf "gitdir:~/code/projects/eviny/"]
   path = ~/.gitconfig-eviny 
+[includeIf "gitdir:~/code/projects/sonat/"]
+  path = ~/.gitconfig-sonat 
+{%- endif -%}
