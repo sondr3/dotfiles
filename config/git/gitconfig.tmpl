@@ -1,7 +1,7 @@
 [user]
 	name = Sondre Aasemoen
 	email = {{ email }}
-	signingkey = 9CBF84633C7DDB10
+	signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOuZJPfaJ/B5lnfm9Pm7IFTRAwwxKYPIblpxzByqvKY7"
 [push]
 	default = current
 	followtags = true
@@ -10,6 +10,10 @@
 	rebase = true
 [rebase]
 	autosquash = true
+[commit]
+	gpgsign = true
+[gpg]
+	format = "ssh"
 [advice]
 	addEmptyPathspec = false
 [diff]
