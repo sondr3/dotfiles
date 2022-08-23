@@ -236,7 +236,7 @@ lspconfig.svelte.setup({
 
 for _, server in ipairs({
   "cssls",
-  "dhall_lsp_server",
+  --[[ "dhall_lsp_server", ]]
   "html",
   "hls",
   "jsonls",
