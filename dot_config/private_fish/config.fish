@@ -22,7 +22,7 @@ test -d /usr/local/texlive/2022/bin/x86_64-linux; and fish_add_path /usr/local/t
 set PATH (string match -v /usr/local/texlive/2021/bin/x86_64-linux $PATH) # FIXME
 
 # 1Password SSH 
-set SSH_AUTH_SOCK $HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+set SSH_AUTH_SOCK $HOME/.1password/agent.sock
 
 # homebrew
 
