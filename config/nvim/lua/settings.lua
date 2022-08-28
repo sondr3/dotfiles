@@ -110,3 +110,9 @@ vim.diagnostic.config({
   signs = true,
   float = { border = "single" },
 })
+
+vim.filetype.add({
+  extension = {
+    astro = "astro",
+  },
+})

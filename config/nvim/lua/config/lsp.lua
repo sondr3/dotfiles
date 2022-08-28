@@ -1,4 +1,4 @@
-local lsp_servers = { "rust_analyzer", "sumneko_lua", "tsserver", "denols", "tsserver" }
+local lsp_servers = { "rust_analyzer", "sumneko_lua", "tsserver", "denols", "tsserver", "astro" }
 
 require("nvim-lsp-installer").setup({
   ensure_installed = lsp_servers,
@@ -237,6 +237,7 @@ lspconfig.svelte.setup({
 for _, server in ipairs({
   "cssls",
   --[[ "dhall_lsp_server", ]]
+  "astro",
   "html",
   "hls",
   "jsonls",
