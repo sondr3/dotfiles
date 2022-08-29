@@ -11,7 +11,9 @@ local function git_changes()
   local gsd = vim.b.gitsigns_status_dict
 
   if gsd then
-    return git_type_exists(gsd, "added") or git_type_exists(gsd, "changed") or git_type_exists(gsd, "removed")
+    return git_type_exists(gsd, "added")
+      or git_type_exists(gsd, "changed")
+      or git_type_exists(gsd, "removed")
   end
 
   return false

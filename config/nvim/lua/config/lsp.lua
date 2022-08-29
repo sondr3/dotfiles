@@ -140,12 +140,22 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities =
+  require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 lspconfig.stylelint_lsp.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss", "javascriptreact", "typescriptreact" },
+  filetypes = {
+    "css",
+    "less",
+    "scss",
+    "sugarss",
+    "vue",
+    "wxss",
+    "javascriptreact",
+    "typescriptreact",
+  },
   settings = {
     stylelintplus = {
       cssInJs = false,
@@ -225,7 +235,12 @@ lspconfig.purescriptls.setup({
 lspconfig.tailwindcss.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "postcss.config.js", "postcss.config.cjs"),
+  root_dir = util.root_pattern(
+    "tailwind.config.js",
+    "tailwind.config.cjs",
+    "postcss.config.js",
+    "postcss.config.cjs"
+  ),
 })
 
 lspconfig.svelte.setup({
