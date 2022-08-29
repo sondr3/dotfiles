@@ -1,0 +1,35 @@
+{
+  "editor.fontFamily": "PragmataPro Mono Liga",
+  "editor.fontSize": 14,
+  "editor.fontLigatures": true,
+  "editor.tabSize": 2,
+  "editor.lineNumbers": "relative",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.cursorStyle": "line",
+  "editor.insertSpaces": false,
+  "editor.wordWrap": "off",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "workbench.settings.editor": "json",
+  "workbench.colorTheme": "GitHub Light Colorblind (Beta)",
+  "vim.leader": "<space>",
+  "vim.easymotion": true,
+  "vim.sneak": true,
+  "vim.hlsearch": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "search.showLineNumbers": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.iconTheme": "vscode-icons",
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
