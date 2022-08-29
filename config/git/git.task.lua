@@ -6,6 +6,8 @@ return hm.task({
   run = function(ctx)
     ctx:copy_template("gitconfig.tmpl", ctx:home_file(".gitconfig"))
 
+    ctx:copy_file("gitignore-global", ctx:home_file(".gitignore"))
     ctx:copy_file("gitconfig-eviny", ctx:home_file(".gitconfig-eviny"))
+    ctx:copy_file("gitconfig-sonat", ctx:home_file(".gitconfig-sonat"))
   end,
 })
