@@ -4,8 +4,7 @@
 
 ## What
 
-My collection of dotfiles on my Gnome Arch machines, configured using my
-unreleased dotfile manager.
+My collection of dotfiles on my machines, configured using my unreleased dotfile manager.
 
 ## License
 
