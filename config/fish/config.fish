@@ -39,6 +39,7 @@ fnm env --shell fish --use-on-cd | source
 direnv hook fish | source
 starship init fish | source
 zoxide init fish | source
+op completion fish | source
 
 # aliases
 alias l="ls -la"
