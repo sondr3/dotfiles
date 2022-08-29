@@ -1,5 +1,15 @@
 local wezterm = require("wezterm")
 
+local get_key_modifier = function()
+  if string.match(wezterm.target_triple, "apple-darwin") then
+    return "CMD"
+  else
+    return "SHIFT|CTRL"
+  end
+end
+
+local key_mods = get_key_modifier()
+
 return {
   color_scheme = "nord",
   font = wezterm.font("PragmataPro Mono Liga"),
@@ -9,7 +19,7 @@ return {
   keys = {
     {
       key = "t",
-      mods = "SHIFT|CTRL",
+      mods = key_mods,
       action = wezterm.action({
         SpawnCommandInNewTab = {
           cwd = "$HOME",
