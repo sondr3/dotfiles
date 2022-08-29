@@ -1,4 +1,3 @@
 [user]
-  name = Sondre Aasemoen
-  email = sondre.aasemoen@sonat.no
+  email = {{ sonat_email }}
 
