@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 
 local get_key_modifier = function()
-  if string.match(wezterm.target_triple, "apple-darwin") then
+  if wezterm.target_triple == "aarch64-apple-darwin" then
     return "CMD"
   else
     return "SHIFT|CTRL"
