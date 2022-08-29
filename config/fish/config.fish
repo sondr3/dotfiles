@@ -57,3 +57,4 @@ function ....; cd ../../..; end
 
 # Abbrevations
 abbr -a -g g git
+abbr -a -g py python3
