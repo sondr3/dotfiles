@@ -1,8 +1,6 @@
 local lsp_servers = { "rust_analyzer", "sumneko_lua", "tsserver", "denols", "tsserver", "astro" }
 
-require("nvim-lsp-installer").setup({
-  ensure_installed = lsp_servers,
-  automatic_installation = true,
+require("mason").setup({
   ui = {
     icons = {
       server_installed = "✓",
@@ -10,6 +8,11 @@ require("nvim-lsp-installer").setup({
       server_uninstalled = "✗",
     },
   },
+})
+
+require("mason-lspconfig").setup({
+  ensure_installed = lsp_servers,
+  automatic_installation = true,
 })
 
 local lspconfig = require("lspconfig")
@@ -141,7 +144,7 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 local capabilities =
-  require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 lspconfig.stylelint_lsp.setup({
   on_attach = on_attach,

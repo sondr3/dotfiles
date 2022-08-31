@@ -187,13 +187,17 @@ require("packer").startup({
     -- LSP configuration
     use({
       "neovim/nvim-lspconfig",
-      requires = {
-        -- Install and update LSP servers
-        "williamboman/nvim-lsp-installer",
-      },
       config = function()
         require("config/lsp")
       end,
+    })
+
+    use({
+      "williamboman/mason.nvim",
+      requires = {
+        "williamboman/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+      },
     })
 
     use("onsails/lspkind-nvim")
