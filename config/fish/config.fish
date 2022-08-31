@@ -39,7 +39,6 @@ starship init fish --print-full-init | source
 fnm env --shell fish --use-on-cd | source
 direnv hook fish | source
 zoxide init fish | source
-pyenv init - --path --no-rehash | source
 
 # aliases
 alias l="ls -la"
