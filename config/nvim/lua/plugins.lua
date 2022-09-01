@@ -23,6 +23,11 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 require("packer").startup({
   function(use)
+    -- Package manager
+    use("wbthomason/packer.nvim")
+    -- For the impatient, used to cache compiled
+    use("lewis6991/impatient.nvim")
+
     -- Personal plugins
     -- Theme
     use({
@@ -34,11 +39,6 @@ require("packer").startup({
 
     -- dotfile manager
     use("sondr3/heime")
-    -- Package manager
-    use("wbthomason/packer.nvim")
-
-    -- For the impatient, used to cache compiled
-    use("lewis6991/impatient.nvim")
 
     -- Best thing ever
     use({
