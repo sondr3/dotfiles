@@ -11,6 +11,7 @@ end
 local key_mods = get_key_modifier()
 
 return {
+  check_for_updates = false,
   color_scheme = "nord",
   font = wezterm.font("PragmataPro Mono Liga"),
   enable_wayland = true,
