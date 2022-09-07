@@ -1,7 +1,7 @@
 [user]
   name = Sondre Aasemoen
   email = {{ email }}
-  signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOuZJPfaJ/B5lnfm9Pm7IFTRAwwxKYPIblpxzByqvKY7"
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOuZJPfaJ/B5lnfm9Pm7IFTRAwwxKYPIblpxzByqvKY7
 [push]
   default = current
   followtags = true
@@ -13,7 +13,9 @@
 [commit]
   gpgsign = true
 [gpg]
-  format = "ssh"
+  format = ssh
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 [advice]
   addEmptyPathspec = false
 [diff]
