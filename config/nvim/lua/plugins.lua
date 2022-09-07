@@ -349,6 +349,9 @@ require("packer").startup({
     display = {
       open_fn = require("packer.util").float,
     },
+    git = {
+      default_url_format = "git@github.com:%s",
+    },
     compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
   },
 })
