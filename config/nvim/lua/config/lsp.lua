@@ -214,27 +214,6 @@ lspconfig.sumneko_lua.setup({
   },
 })
 
-lspconfig.ltex.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    ltex = {
-      checkFrequency = "save",
-    },
-  },
-})
-
-lspconfig.purescriptls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    purescript = {
-      addSpagoSources = true,
-      formatter = "purs-tidy",
-    },
-  },
-})
-
 lspconfig.tailwindcss.setup({
   on_attach = on_attach,
   capabilities = capabilities,
@@ -259,9 +238,6 @@ for _, server in ipairs({
   "html",
   "hls",
   "jsonls",
-  "taplo",
-  "texlab",
-  "vuels",
 }) do
   lspconfig[server].setup({ on_attach = on_attach, capabilities = capabilities })
 end
