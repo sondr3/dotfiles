@@ -13,13 +13,15 @@ cmp.setup({
     format = lsp_kind.cmp_format({}),
   },
   mapping = cmp.mapping.preset.insert({
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-Space>"] = cmp.mapping.complete(),
     ["<Down>"] = cmp.mapping.select_next_item({
       behavior = cmp.SelectBehavior.Select,
     }),
     ["<Up>"] = cmp.mapping.select_prev_item({
       behavior = cmp.SelectBehavior.Select,
     }),
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-y>"] = cmp.config.disable,
     ["<C-e>"] = cmp.mapping({
       i = cmp.mapping.abort(),
@@ -72,7 +74,7 @@ cmp.setup({
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = "buffer" },
