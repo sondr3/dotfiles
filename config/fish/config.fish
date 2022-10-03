@@ -14,7 +14,10 @@ test -d $HOME/.cargo/bin; and fish_add_path $HOME/.cargo/bin
 test -d /usr/local/go/bin; and fish_add_path /usr/local/go/bin/ 
 
 # python
-type -q python3; and fish_add_path $HOME/Library/Python/3.10/bin/
+if type -q python3
+  fish_add_path $HOME/Library/Python/3.10/bin/
+  fish_add_path /opt/homebrew/opt/python@3.10/libexec/bin
+end
 
 # ~/.local/bin
 test -d $HOME/.local/bin; and fish_add_path $HOME/.local/bin 
