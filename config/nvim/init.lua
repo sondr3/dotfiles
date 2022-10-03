@@ -1,7 +1,3 @@
--- Use Neovim file type detection
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
-
 -- Speed up loading Nvim files
 local impatient_ok, _ = pcall(require, "impatient")
 if not impatient_ok then
