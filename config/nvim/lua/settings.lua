@@ -114,5 +114,6 @@ vim.diagnostic.config({
 vim.filetype.add({
   extension = {
     astro = "astro",
+    mdx = "markdown",
   },
 })
