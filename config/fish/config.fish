@@ -13,6 +13,9 @@ test -d $HOME/.cargo/bin; and fish_add_path $HOME/.cargo/bin
 # go
 test -d /usr/local/go/bin; and fish_add_path /usr/local/go/bin/ 
 
+# dotnet
+test -d $HOME/.dotnet/tools/; and fish_add_path $HOME/.dotnet/tools/
+
 # python
 if type -q python3
   fish_add_path $HOME/Library/Python/3.10/bin/
