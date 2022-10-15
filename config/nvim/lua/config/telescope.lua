@@ -31,10 +31,20 @@ telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 
 M.project_files = function()
-  local opts = {}
-  local ok = pcall(require("telescope.builtin").git_files, opts)
-  if not ok then
-    require("telescope.builtin").find_files(opts)
+  local builtin = require("telescope.builtin")
+  local in_git_repo = vim.fn.systemlist("git rev-parse --is-inside-work-tree")[1] == "true"
+
+  local opts = {
+    follow = true,
+    hidden = true,
+    show_untracked = true,
+    use_git_root = false,
+  }
+
+  if in_git_repo then
+    builtin.git_files(opts)
+  else
+    builtin.find_files(opts)
   end
 end
 
