@@ -33,6 +33,8 @@
   co = "!git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout"
   last = log -1 HEAD --stat
   pp = "!git pull && git push"
+  pt = "!git pull && git pull --tags"
+  up = "!git push && git push --tags"
 [github]
   user = sondr3
 [core]
