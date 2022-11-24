@@ -22,6 +22,10 @@ if type -q python3
   fish_add_path /opt/homebrew/opt/python@3.10/libexec/bin
 end
 
+# pnpm
+set -gx PNPM_HOME "/Users/sondre/Library/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+
 # ~/.local/bin
 test -d $HOME/.local/bin; and fish_add_path $HOME/.local/bin 
 
