@@ -31,5 +31,11 @@
   "workbench.iconTheme": "vscode-icons",
   "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "haskell.manageHLS": "GHCup",
+  "haskell.formattingProvider": "ormolu",
+  "haskell.plugin.hlint.codeActionsOn": true,
+  "[haskell]": {
+    "editor.defaultFormatter": "haskell.haskell"
   }
 }
