@@ -1,16 +1,22 @@
-local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system({
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  })
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({
+      "git",
+      "clone",
+      "--depth",
+      "1",
+      "https://github.com/wbthomason/packer.nvim",
+      install_path,
+    })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
 end
+
+local packer_bootstrap = ensure_packer()
 
 local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
@@ -340,7 +346,7 @@ require("packer").startup({
     -- PureScript
     use({ "purescript-contrib/purescript-vim" })
 
-    if PACKER_BOOTSTRAP then
+    if packer_bootstrap then
       require("packer").sync()
     end
   end,
@@ -350,7 +356,7 @@ require("packer").startup({
       open_fn = require("packer.util").float,
     },
     git = {
-      default_url_format = "git@github.com:%s",
+      default_url_format = "https://github.com/%s.git",
     },
     compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
   },

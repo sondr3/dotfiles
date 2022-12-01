@@ -1,4 +1,8 @@
 require("mason").setup({
+  providers = {
+    "mason.providers.client",
+    "mason.providers.registry-api",
+  },
   ui = {
     icons = {
       server_installed = "✓",
@@ -9,7 +13,6 @@ require("mason").setup({
 })
 
 require("mason-lspconfig").setup({
-  ensure_installed = lsp_servers,
   automatic_installation = true,
 })
 
