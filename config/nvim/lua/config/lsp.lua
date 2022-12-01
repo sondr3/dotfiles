@@ -106,6 +106,7 @@ local eslint_options = {
     return utils.root_has_file({ "package.json", ".eslintrc.js", ".eslintrc.cjs" })
   end,
 }
+
 null.setup({
   sources = {
     -- formatting
@@ -196,6 +197,35 @@ require("rust-tools").setup({
     },
   },
 })
+
+local ht = require("haskell-tools")
+ht.setup({
+  hls = {
+    on_attach = function(client, bufnr)
+      local local_opts = vim.tbl_extend("keep", opts, { buffer = bufnr })
+
+      -- haskell-language-server relies heavily on codeLenses,
+      -- so auto-refresh (see advanced configuration) is enabled by default
+      vim.keymap.set("n", "<space>hs", ht.hoogle.hoogle_signature, local_opts)
+
+      -- Toggle a GHCi repl for the current package
+      vim.keymap.set("n", "<leader>rr", ht.repl.toggle, opts)
+      -- Toggle a GHCi repl for the current buffer
+      vim.keymap.set("n", "<leader>rf", function()
+        ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+      end, opts)
+      vim.keymap.set("n", "<leader>rq", ht.repl.quit, opts)
+      on_attach(client, bufnr)
+    end,
+    settings = {
+      haskell = {
+        formattingProvider = "ormolu",
+        checkProject = true,
+      },
+    },
+  },
+})
+
 lspconfig.sumneko_lua.setup({
   on_attach = on_attach,
   capabilities = capabilities,
@@ -236,7 +266,6 @@ for _, server in ipairs({
   --[[ "dhall_lsp_server", ]]
   "astro",
   "html",
-  "hls",
   "jsonls",
 }) do
   lspconfig[server].setup({ on_attach = on_attach, capabilities = capabilities })

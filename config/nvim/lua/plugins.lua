@@ -339,6 +339,14 @@ require("packer").startup({
       "ndmitchell/ghcid",
       rtp = "plugins/nvim",
     })
+    use({
+      "MrcJkb/haskell-tools.nvim",
+      requires = {
+        "neovim/nvim-lspconfig",
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
+      },
+    })
 
     -- Dhall
     use({ "vmchale/dhall-vim" })
