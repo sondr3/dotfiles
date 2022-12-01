@@ -55,13 +55,6 @@
 [credentials]
   helper = cache
 
-# use SSH over HTTPS 
-[url "git@github.com:"]
-  insteadOf = https://github.com/
-# except for cargo-edit :(
-[url "https://github.com/rust-lang/crates.io-index"]
-  insteadOf = https://github.com/rust-lang/crates.io-index
-
 {%- if is_linux() -%}
 [includeIf "gitdir:~/Code/projects/eviny/"]
   path = ~/.gitconfig-eviny 
