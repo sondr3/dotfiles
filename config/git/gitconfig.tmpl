@@ -35,6 +35,7 @@
   pp = "!git pull && git push"
   pt = "!git pull && git pull --tags"
   up = "!git push && git push --tags"
+  dead = "!git fetch --prune && git branch --merged | rg -v main | rg -v master | xargs git branch -d"
 [github]
   user = sondr3
 [core]
