@@ -72,3 +72,12 @@ function ....; cd ../../..; end
 abbr -a -g g git
 abbr -a -g py python3
 abbr -a -g pn pnpm
+
+# I need this for the fucking useless `func` for Python
+if test (arch) = "i386"
+  echo "USING x86 ROSETTA TERMINAL!!!"
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+  # <<< conda initialize <<<
+end
