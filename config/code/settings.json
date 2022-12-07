@@ -13,8 +13,13 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "workbench.settings.editor": "json",
+  "window.autoDetectColorScheme": true,
   "workbench.colorTheme": "GitHub Light Colorblind (Beta)",
+  "settingsSync.ignoredSettings": ["workbench.colorTheme"],
+  "workbench.preferredDarkColorTheme": "GitHub Dark Colorblind (Beta)",
+  "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)",
+  "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
+  "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "vim.leader": "<space>",
   "vim.easymotion": true,
   "vim.sneak": true,
