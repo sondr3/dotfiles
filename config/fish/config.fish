@@ -37,7 +37,7 @@ test -d $HOME/.local/bin; and fish_add_path $HOME/.local/bin
 set SSH_AUTH_SOCK $HOME/.1password/agent.sock
 
 # homebrew
-if test -d /opt/homebrew
+if test -d /opt/homebrew; and test (arch) = "arm64"
   set -gx HOMEBREW_PREFIX "/opt/homebrew";
   set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar";
   set -gx HOMEBREW_REPOSITORY "/opt/homebrew";
@@ -46,6 +46,8 @@ if test -d /opt/homebrew
   set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/opt/homebrew/share/info" $INFOPATH;
   fish_add_path /opt/homebrew/bin
   set -gx HOMEBREW_NO_ENV_HINTS 1
+else
+  eval /usr/local/bin/brew shellenv | source
 end
 
 # configure applications
@@ -73,7 +75,6 @@ abbr -a -g g git
 abbr -a -g py python3
 abbr -a -g pn pnpm
 
-# I need this for the fucking useless `func` for Python
 if test (arch) = "i386"
   echo "USING x86 ROSETTA TERMINAL!!!"
   # >>> conda initialize >>>
