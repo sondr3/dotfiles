@@ -1,5 +1,5 @@
 [alias]
-t = "test -- --nocapture --color=always"
+t = "test --quiet -- --nocapture --color=always"
 br = "build --release"
 clip = "clippy -- -W clippy::pedantic"
 
