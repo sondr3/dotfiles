@@ -2,11 +2,9 @@
 t = "test --quiet -- --nocapture --color=always"
 br = "build --release"
 clip = "clippy -- -W clippy::pedantic"
-
-{%- if is_linux() -%}
+{% if is_linux() %}
 [build]
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
-{%- endif -%}
-
+{% endif %}
 [net]
 git-fetch-with-cli = true
