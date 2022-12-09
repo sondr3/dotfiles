@@ -28,7 +28,11 @@ if type -q python3; and test "$os" = "Darwin"
 end
 
 # pnpm
-set -gx PNPM_HOME "/Users/sondre/Library/pnpm"
+if test "$os" = "Darwin"
+  set -gx PNPM_HOME "/Users/sondre/Library/pnpm"
+else
+  set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+end
 set -gx PATH "$PNPM_HOME" $PATH
 
 # ~/.local/bin
