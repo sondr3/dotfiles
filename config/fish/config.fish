@@ -1,5 +1,6 @@
 # disable greeting
 set -U fish_greeting
+set -l os (uname)
 
 # ghcup-env
 test -d $HOME/.ghcup/bin ; and fish_add_path $HOME/.cabal/bin $HOME/.ghcup/bin
@@ -21,7 +22,7 @@ if test -d $HOME/.dotnet
 end
 
 # python
-if type -q python3
+if type -q python3; and test "$os" = "Darwin"
   fish_add_path $HOME/Library/Python/3.10/bin/
   fish_add_path /opt/homebrew/opt/python@3.10/libexec/bin
 end
@@ -37,7 +38,7 @@ test -d $HOME/.local/bin; and fish_add_path $HOME/.local/bin
 set SSH_AUTH_SOCK $HOME/.1password/agent.sock
 
 # homebrew
-if test -d /opt/homebrew; and test (arch) = "arm64"
+if test -d /opt/homebrew; and test (arch) = "arm64"; and test "$os" = "Darwin"
   set -gx HOMEBREW_PREFIX "/opt/homebrew";
   set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar";
   set -gx HOMEBREW_REPOSITORY "/opt/homebrew";
@@ -46,8 +47,6 @@ if test -d /opt/homebrew; and test (arch) = "arm64"
   set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/opt/homebrew/share/info" $INFOPATH;
   fish_add_path /opt/homebrew/bin
   set -gx HOMEBREW_NO_ENV_HINTS 1
-else
-  eval /usr/local/bin/brew shellenv | source
 end
 
 # configure applications
@@ -75,8 +74,9 @@ abbr -a -g g git
 abbr -a -g py python3
 abbr -a -g pn pnpm
 
-if test (arch) = "i386"
+if test (arch) = "i386"; and test "$os" = "Darwin"
   echo "USING x86 ROSETTA TERMINAL!!!"
+  eval /usr/local/bin/brew shellenv | source
   # >>> conda initialize >>>
   # !! Contents within this block are managed by 'conda init' !!
   eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
