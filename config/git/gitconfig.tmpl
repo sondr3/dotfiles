@@ -14,6 +14,12 @@
   gpgsign = true
 [gpg]
   format = ssh
+[gpg "ssh"]
+{%- if is_linux() %}
+  program = "/opt/1Password/op-ssh-sign"
+{%- else %}
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+{%- endif %}
 [advice]
   addEmptyPathspec = false
 [diff]
