@@ -1,5 +1,6 @@
 local M = {
   "famiu/feline.nvim",
+  lazy = false,
   dependencies = { "nvim-tree/nvim-web-devicons" },
 }
 
@@ -18,8 +19,8 @@ M.config = function()
 
     if gsd then
       return git_type_exists(gsd, "added")
-        or git_type_exists(gsd, "changed")
-        or git_type_exists(gsd, "removed")
+          or git_type_exists(gsd, "changed")
+          or git_type_exists(gsd, "removed")
     end
 
     return false

@@ -1,12 +1,12 @@
 local M = {
   "akinsho/toggleterm.nvim",
-  keys = "<C-/>",
-  -- cmd = "Toggleterm"
+  keys = "<C-t>",
+  cmd = { "ToggleTerm", "ToggleTermOpen" }
 }
 
 M.config = function()
   require("toggleterm").setup({
-    open_mapping = [[<C-/>]],
+    open_mapping = "<c-t>",
     direction = "float",
     shade_terminals = false,
     size = 30,
@@ -26,7 +26,7 @@ M.config = function()
   vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
   -- esc esc to get to normal mode
-  vim.cmd("tnoremap <esc><esc> <C-><C-N>")
+  vim.cmd([[tnoremap <esc><esc> <C-><C-N>]])
 end
 
 return M
