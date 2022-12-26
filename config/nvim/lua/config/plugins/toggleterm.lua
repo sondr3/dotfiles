@@ -1,7 +1,7 @@
 local M = {
   "akinsho/toggleterm.nvim",
   keys = "<C-t>",
-  cmd = { "ToggleTerm", "ToggleTermOpen" }
+  cmd = { "ToggleTerm", "ToggleTermOpen" },
 }
 
 M.config = function()
