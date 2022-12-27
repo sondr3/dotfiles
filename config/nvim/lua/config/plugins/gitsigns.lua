@@ -1,5 +1,9 @@
 local M = {
   "lewis6991/gitsigns.nvim",
+  event = "BufReadPre",
+  cond = function()
+    return vim.loop.fs_stat(".git")
+  end,
   dependencies = { "nvim-lua/plenary.nvim" },
 }
 
