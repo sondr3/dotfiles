@@ -47,10 +47,12 @@ M.config = function()
   local telescope = require("telescope")
   local actions = require("telescope.actions")
   local trouble = require("trouble.providers.telescope")
+  local frecency = require("utils.frecency")
 
   telescope.setup({
     defaults = {
       initial_mode = "insert",
+      file_sorter = frecency.frecency_sorter,
       mappings = {
         i = {
           ["<esc>"] = actions.close, -- escape closes popup
