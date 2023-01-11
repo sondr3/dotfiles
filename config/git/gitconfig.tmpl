@@ -59,6 +59,11 @@
   whitespace-error-style = 22 reverse
 [credentials]
   helper = cache
+[url "https://github.com/"]
+  insteadOf = "git@github.com:"
+[url "git@github.com:"]
+  pushInsteadOf = "https://github.com/"
+  pushInsteadOf = "git@github.com:"
 [includeIf "gitdir:~/code/projects/eviny/"]
   path = ~/.gitconfig-eviny 
 [includeIf "gitdir:~/code/projects/sonat/"]
