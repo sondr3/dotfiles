@@ -81,7 +81,7 @@ end
 
 M.init = function()
   vim.keymap.set("n", "<leader><space>", function()
-    require("config.plugins.telescope").project_files()
+    require("telescope.builtin").buffers()
   end)
   vim.keymap.set("n", "<leader>ff", function()
     require("config.plugins.telescope").project_files()
