@@ -3,12 +3,14 @@ local M = {
   name = "lsp",
   event = "BufReadPre",
   dependencies = {
+    "nvim-lua/plenary.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "ray-x/lsp_signature.nvim",
     "j-hui/fidget.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
+    "lukas-reineke/lsp-format.nvim",
   },
 }
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 M.on_attach = function(client, bufnr)
@@ -81,6 +83,55 @@ M.on_attach = function(client, bufnr)
     lsp_format.on_attach(client)
   end
 end
+
+M.null_ls = function()
+  local eslint_options = {
+    extra_args = { "--cache" },
+    condition = function(utils)
+      return utils.root_has_file({ "package.json", ".eslintrc.js", ".eslintrc.cjs" })
+    end,
+  }
+
+  local null = require("null-ls")
+  local builtins = null.builtins
+
+  require("lsp-format").setup({ sync = true })
+  null.setup({
+    sources = {
+      -- formatting
+      builtins.formatting.stylua,
+      builtins.formatting.deno_fmt.with({
+        condition = function(utils)
+          return utils.root_has_file({ "deno.json", "deno.jsonc", "import_map.json" })
+        end,
+      }),
+      builtins.formatting.prettier.with({
+        condition = function(utils)
+          return utils.root_has_file({ "package.json", ".prettierrc", ".prettierrc.js", ".prettierrc.cjs" })
+        end,
+      }),
+      -- builtins.formatting.cabal_fmt,
+      builtins.formatting.rustfmt,
+      builtins.formatting.eslint.with(eslint_options),
+
+      -- diagnostics
+      builtins.diagnostics.eslint.with(eslint_options),
+
+      -- code actions
+      builtins.code_actions.eslint.with(eslint_options),
+    },
+    on_attach = function(client, bufnr)
+      local ok, lsp_format = pcall(require, "lsp-format")
+      if ok then
+        lsp_format.on_attach(client)
+      end
+
+      M.on_attach(client, bufnr)
+    end,
+  })
+end
+
+
 
 M.signature = function()
   require("lsp_signature").setup({
@@ -235,6 +286,7 @@ M.config = function()
     lspconfig[server].setup({ on_attach = M.on_attach, capabilities = capabilities })
   end
 
+  M.null_ls()
   M.signature()
   M.fidget()
 end
