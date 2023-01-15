@@ -107,7 +107,12 @@ M.null_ls = function()
       }),
       builtins.formatting.prettier.with({
         condition = function(utils)
-          return utils.root_has_file({ "package.json", ".prettierrc", ".prettierrc.js", ".prettierrc.cjs" })
+          return utils.root_has_file({
+            "package.json",
+            ".prettierrc",
+            ".prettierrc.js",
+            ".prettierrc.cjs",
+          })
         end,
       }),
       -- builtins.formatting.cabal_fmt,
@@ -130,8 +135,6 @@ M.null_ls = function()
     end,
   })
 end
-
-
 
 M.signature = function()
   require("lsp_signature").setup({
