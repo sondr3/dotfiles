@@ -2,11 +2,11 @@ local hm = require("heime")
 local utils = require("heime.utils")
 
 local template = [[ 
-{%- if is_macos() -%}
+{% if is_macos() -%}
 prefix=/Users/sondre/.local
-{%- else -%}
+{% else -%}
 prefix=/home/sondre/.local
-{%- endif -%}
+{% endif -%}
 save-prefix=''
 save-exact=true
 //registry.npmjs.org/:_authToken={{ npmToken }}
