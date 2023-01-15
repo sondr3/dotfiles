@@ -30,10 +30,10 @@ M.config = function()
       }),
       builtins.formatting.prettier.with({
         condition = function(utils)
-          return utils.root_has_file({ "package.json", ".prettierrc", ".prettierrc.js" })
+          return utils.root_has_file({ "package.json", ".prettierrc", ".prettierrc.js", ".prettierrc.cjs" })
         end,
       }),
-      builtins.formatting.cabal_fmt,
+      -- builtins.formatting.cabal_fmt,
       builtins.formatting.rustfmt,
       builtins.formatting.eslint.with(eslint_options),
 
