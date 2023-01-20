@@ -287,23 +287,32 @@ M.config = function()
     on_attach = M.on_attach,
     capabilities = capabilities,
     init_options = {
-      userlanguages = {
-        eelixir = "html-eex",
+      userLanguages = {
         elixir = "phoenix-heex",
+        eruby = "erb",
         heex = "phoenix-heex",
         svelte = "html",
+        surface = "phoenix-heex",
       },
     },
-    root_dir = util.root_pattern(
-      "tailwind.config.js",
-      "tailwind.config.cjs",
-      "postcss.config.js",
-      "postcss.config.cjs",
-      "assets/tailwind.config.js",
-      "package.json",
-      "node_modules",
-      ".git"
-    ),
+    handlers = {
+      ["tailwindcss/getConfiguration"] = function(_, _, params, _, bufnr, _)
+        vim.lsp.buf_notify(bufnr, "tailwindcss/getConfigurationResponse", { _id = params._id })
+      end,
+    },
+    settings = {
+      includeLanguages = {
+        typescript = "javascript",
+        typescriptreact = "html",
+        ["html-eex"] = "html",
+        ["phoenix-heex"] = "html",
+        heex = "html",
+        eelixir = "html",
+        elixir = "html",
+        svelte = "html",
+        surface = "html",
+      },
+    },
   })
 
   lspconfig.svelte.setup({
