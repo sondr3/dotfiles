@@ -118,9 +118,11 @@ M.null_ls = function()
       -- builtins.formatting.cabal_fmt,
       builtins.formatting.rustfmt,
       builtins.formatting.eslint.with(eslint_options),
+      builtins.formatting.mix,
 
       -- diagnostics
       builtins.diagnostics.eslint.with(eslint_options),
+      builtins.diagnostics.credo,
 
       -- code actions
       builtins.code_actions.eslint.with(eslint_options),
