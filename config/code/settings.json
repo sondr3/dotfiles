@@ -57,5 +57,8 @@
   "workbench.settings.editor": "json",
   "[elixir]": {
     "editor.defaultFormatter": "JakeBecker.elixir-ls"
+  },
+  "[html-eex]": {
+    "editor.defaultFormatter": "JakeBecker.elixir-ls"
   }
 }
