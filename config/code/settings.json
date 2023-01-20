@@ -1,6 +1,6 @@
 {
   "editor.fontFamily": "PragmataPro Mono Liga",
-  "editor.fontSize": 14,
+  "editor.fontSize": 16,
   "editor.fontLigatures": true,
   "editor.tabSize": 2,
   "editor.lineNumbers": "relative",
@@ -15,7 +15,9 @@
   },
   "window.autoDetectColorScheme": true,
   "workbench.colorTheme": "GitHub Light Colorblind (Beta)",
-  "settingsSync.ignoredSettings": ["workbench.colorTheme"],
+  "settingsSync.ignoredSettings": [
+    "workbench.colorTheme"
+  ],
   "workbench.preferredDarkColorTheme": "GitHub Dark Colorblind (Beta)",
   "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
@@ -26,8 +28,13 @@
   "vim.hlsearch": true,
   "vim.insertModeKeyBindings": [
     {
-      "before": ["j", "k"],
-      "after": ["<Esc>"]
+      "before": [
+        "j",
+        "k"
+      ],
+      "after": [
+        "<Esc>"
+      ]
     }
   ],
   "search.showLineNumbers": true,
@@ -42,5 +49,13 @@
   "haskell.plugin.hlint.codeActionsOn": true,
   "[haskell]": {
     "editor.defaultFormatter": "haskell.haskell"
+  },
+  "emmet.includeLanguages": {
+    "html-eex": "html"
+  },
+  "workbench.startupEditor": "none",
+  "workbench.settings.editor": "json",
+  "[elixir]": {
+    "editor.defaultFormatter": "JakeBecker.elixir-ls"
   }
 }
