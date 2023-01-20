@@ -51,7 +51,4 @@ return {
 
   -- PureScript
   { "purescript-contrib/purescript-vim" },
-
-  -- Elixir
-  { "mhanberg/elixir.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 }

@@ -118,7 +118,12 @@ M.null_ls = function()
       -- builtins.formatting.cabal_fmt,
       builtins.formatting.rustfmt,
       builtins.formatting.eslint.with(eslint_options),
-      builtins.formatting.mix,
+      builtins.formatting.mix.with({
+        filetypes = { "heex", "eelixir", "elixir", "html-eex", "phoenix-heex" },
+      }),
+      builtins.formatting.rustywind.with({
+        extra_filetypes = { "heex", "html", "html-eex", "phoenix-heex" },
+      }),
 
       -- diagnostics
       builtins.diagnostics.eslint.with(eslint_options),
@@ -127,13 +132,8 @@ M.null_ls = function()
       -- code actions
       builtins.code_actions.eslint.with(eslint_options),
     },
-    on_attach = function(client, bufnr)
-      local ok, lsp_format = pcall(require, "lsp-format")
-      if ok then
-        lsp_format.on_attach(client)
-      end
-
-      M.on_attach(client, bufnr)
+    on_attach = function(client, _)
+      require("lsp-format").on_attach(client)
     end,
   })
 end
@@ -246,27 +246,6 @@ M.config = function()
     },
   })
 
-  local registry = require("mason-registry")
-  local elixir_ls = registry.get_package("elixir-ls")
-  local elixir = require("elixir")
-  elixir.setup({
-    cmd = elixir_ls:get_install_path() .. "/language_server.sh",
-    settings = elixir.settings({
-      dialyzerEnabled = true,
-      enableTestLenses = true,
-      suggestSpecs = true,
-    }),
-    on_attach = function(client, bufnr)
-      local map_opts = vim.tbl_extend("keep", opts, { buffer = true })
-      -- remove the pipe operator
-      vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", map_opts)
-      -- add the pipe operator
-      vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", map_opts)
-      vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", map_opts)
-      M.on_attach(client, bufnr)
-    end,
-  })
-
   lspconfig.sumneko_lua.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
@@ -321,6 +300,19 @@ M.config = function()
     on_attach = M.on_attach,
     capabilities = capabilities,
     root_dir = util.root_pattern("svelte.config.cjs", "svelte.config.js"),
+  })
+
+  lspconfig.elixirls.setup({
+    on_attach = M.on_attach,
+    capabilities = capabilities,
+    init_options = { documentFormatting = true },
+    settings = {
+      elixirLS = {
+        dialyzerEnabled = true,
+        enableTestLenses = true,
+        suggestSpecs = true,
+      },
+    },
   })
 
   for _, server in ipairs({
