@@ -244,6 +244,27 @@ M.config = function()
     },
   })
 
+  local registry = require("mason-registry")
+  local elixir_ls = registry.get_package("elixir-ls")
+  local elixir = require("elixir")
+  elixir.setup({
+    cmd = elixir_ls:get_install_path() .. "/language_server.sh",
+    settings = elixir.settings({
+      dialyzerEnabled = true,
+      enableTestLenses = true,
+      suggestSpecs = true,
+    }),
+    on_attach = function(client, bufnr)
+      local map_opts = vim.tbl_extend("keep", opts, { buffer = true })
+      -- remove the pipe operator
+      vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", map_opts)
+      -- add the pipe operator
+      vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", map_opts)
+      vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", map_opts)
+      M.on_attach(client, bufnr)
+    end,
+  })
+
   lspconfig.sumneko_lua.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
