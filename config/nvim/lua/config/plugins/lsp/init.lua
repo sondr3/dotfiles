@@ -286,11 +286,23 @@ M.config = function()
   lspconfig.tailwindcss.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
+    init_options = {
+      userlanguages = {
+        eelixir = "html-eex",
+        elixir = "phoenix-heex",
+        heex = "phoenix-heex",
+        svelte = "html",
+      },
+    },
     root_dir = util.root_pattern(
       "tailwind.config.js",
       "tailwind.config.cjs",
       "postcss.config.js",
-      "postcss.config.cjs"
+      "postcss.config.cjs",
+      "assets/tailwind.config.js",
+      "package.json",
+      "node_modules",
+      ".git"
     ),
   })
 
