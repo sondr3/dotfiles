@@ -121,6 +121,9 @@ M.null_ls = function()
       builtins.formatting.mix.with({
         filetypes = { "heex", "eelixir", "elixir", "html-eex", "phoenix-heex" },
       }),
+      builtins.formatting.rustywind.with({
+        extra_filetypes = { "heex", "html", "html-eex", "phoenix-heex" },
+      }),
 
       -- diagnostics
       builtins.diagnostics.eslint.with(eslint_options),
@@ -299,7 +302,10 @@ M.config = function()
     root_dir = util.root_pattern("svelte.config.cjs", "svelte.config.js"),
   })
 
+  local registry = require("mason-registry")
+  local elixir_ls = registry.get_package("elixir-ls")
   lspconfig.elixirls.setup({
+    cmd = { elixir_ls:get_install_path() .. "/language_server.sh" },
     on_attach = M.on_attach,
     capabilities = capabilities,
     init_options = { documentFormatting = true },
