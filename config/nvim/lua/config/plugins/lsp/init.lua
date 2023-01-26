@@ -121,9 +121,6 @@ M.null_ls = function()
       builtins.formatting.mix.with({
         filetypes = { "heex", "eelixir", "elixir", "html-eex", "phoenix-heex" },
       }),
-      builtins.formatting.rustywind.with({
-        extra_filetypes = { "heex", "html", "html-eex", "phoenix-heex" },
-      }),
 
       -- diagnostics
       builtins.diagnostics.eslint.with(eslint_options),
