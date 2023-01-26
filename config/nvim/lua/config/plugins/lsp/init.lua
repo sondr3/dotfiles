@@ -189,7 +189,7 @@ M.config = function()
   lspconfig.tsserver.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
-    root_dir = util.root_pattern("package.json", "tsconfig.json"),
+    root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
     init_options = {
       lint = true,
     },
@@ -197,7 +197,7 @@ M.config = function()
   lspconfig.denols.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
-    root_dir = util.root_pattern("deno.json", "deno.jsonc", "import_map.json"),
+    root_dir = util.root_pattern("deno.json", "deno.jsonc", "deno.lock", ".git"),
     single_file_support = false,
     init_options = {
       enable = true,
