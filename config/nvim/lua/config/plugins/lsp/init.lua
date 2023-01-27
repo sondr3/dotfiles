@@ -117,12 +117,14 @@ M.null_ls = function()
       }),
       -- builtins.formatting.cabal_fmt,
       builtins.formatting.rustfmt,
+      builtins.formatting.stylelint,
       builtins.formatting.eslint.with(eslint_options),
       builtins.formatting.mix.with({
         filetypes = { "heex", "eelixir", "elixir", "html-eex", "phoenix-heex" },
       }),
 
       -- diagnostics
+      builtins.diagnostics.stylelint,
       builtins.diagnostics.eslint.with(eslint_options),
       builtins.diagnostics.credo,
 
