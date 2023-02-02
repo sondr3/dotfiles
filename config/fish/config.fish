@@ -38,6 +38,9 @@ set -gx PATH "$PNPM_HOME" $PATH
 # ~/.local/bin
 test -d $HOME/.local/bin; and fish_add_path $HOME/.local/bin 
 
+# go
+test -d $HOME/go/bin; and fish_add_path $HOME/go/bin
+
 # 1Password SSH 
 set SSH_AUTH_SOCK $HOME/.1password/agent.sock
 
