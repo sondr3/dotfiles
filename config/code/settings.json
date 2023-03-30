@@ -15,9 +15,7 @@
   },
   "window.autoDetectColorScheme": true,
   "workbench.colorTheme": "GitHub Light Colorblind (Beta)",
-  "settingsSync.ignoredSettings": [
-    "workbench.colorTheme"
-  ],
+  "settingsSync.ignoredSettings": ["workbench.colorTheme"],
   "workbench.preferredDarkColorTheme": "GitHub Dark Colorblind (Beta)",
   "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
@@ -28,13 +26,8 @@
   "vim.hlsearch": true,
   "vim.insertModeKeyBindings": [
     {
-      "before": [
-        "j",
-        "k"
-      ],
-      "after": [
-        "<Esc>"
-      ]
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
     }
   ],
   "search.showLineNumbers": true,
@@ -60,5 +53,8 @@
   },
   "[html-eex]": {
     "editor.defaultFormatter": "JakeBecker.elixir-ls"
+  },
+  "[python]": {
+    "editor.formatOnType": true
   }
 }
