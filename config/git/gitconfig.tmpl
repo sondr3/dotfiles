@@ -39,7 +39,7 @@
   pp = "!git pull && git push"
   pt = "!git pull && git pull --tags"
   up = "!git push && git push --tags"
-  dead = "!git fetch --prune && git branch --merged | rg -v main | rg -v master | xargs git branch -d"
+  dead = "!git fetch --prune && git branch --merged | rg -v 'main|master' | xargs git branch -d"
 [github]
   user = sondr3
 [core]
@@ -59,6 +59,11 @@
   whitespace-error-style = 22 reverse
 [credentials]
   helper = cache
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [url "git@github.com:"]
   insteadOf = https://github.com/
 [includeIf "gitdir:~/code/projects/eviny/"]
