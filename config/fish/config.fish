@@ -23,8 +23,8 @@ end
 
 # python
 if type -q python3; and test "$os" = "Darwin"
-  fish_add_path $HOME/Library/Python/3.10/bin/
-  fish_add_path /opt/homebrew/opt/python@3.10/libexec/bin
+  fish_add_path $HOME/Library/Python/3.11/bin/
+  fish_add_path /opt/homebrew/opt/python@3.11/libexec/bin
 end
 
 # pnpm
