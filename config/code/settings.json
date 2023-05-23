@@ -55,6 +55,10 @@
     "editor.defaultFormatter": "JakeBecker.elixir-ls"
   },
   "[python]": {
-    "editor.formatOnType": true
-  }
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.formatting.provider": "black",
+  "redhat.telemetry.enabled": true,
+  "editor.inlineSuggest.enabled": true
 }
