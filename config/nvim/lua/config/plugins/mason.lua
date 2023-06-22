@@ -9,10 +9,6 @@ local M = {
 
 M.config = function()
   require("mason").setup({
-    providers = {
-      "mason.providers.client",
-      "mason.providers.registry-api",
-    },
     ui = {
       icons = {
         server_installed = "✓",
