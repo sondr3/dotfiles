@@ -6,7 +6,7 @@ local M = {
     "nvim-lua/plenary.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "ray-x/lsp_signature.nvim",
-    "j-hui/fidget.nvim",
+    { "j-hui/fidget.nvim", tag = "legacy" },
     "jose-elias-alvarez/null-ls.nvim",
     "lukas-reineke/lsp-format.nvim",
   },
@@ -189,6 +189,7 @@ M.config = function()
     on_attach = M.on_attach,
     capabilities = capabilities,
     root_dir = util.root_pattern("package.json", "tsconfig.json"),
+    single_file_support = false,
     init_options = {
       lint = true,
     },

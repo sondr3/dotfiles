@@ -1,6 +1,6 @@
 local ext = require("telescope._extensions")
 local builtins = require("telescope.builtin")
-local frecency_db = require("telescope._extensions.frecency.db_client")
+local frecency = require("frecency.db")
 
 local fzf = ext.manager.fzf
 
@@ -23,15 +23,12 @@ local function frecency_start(self, prompt)
   self.default_start(self, prompt)
 
   if not self.state.frecency then
-    self.state.frecency = frecency_db.get_file_scores()
+    self.state.frecency = frecency.get_files({})
   end
 end
 
 local frecency_sorter = function(opts)
   local fzf_sorter = fzf.native_fzf_sorter()
-
-  fzf_sorter.default_scoring_function = fzf_sorter.scoring_function
-  fzf_sorter.default_start = fzf_sorter.start
 
   fzf_sorter.scoring_function = frecency_score
   fzf_sorter.start = frecency_start

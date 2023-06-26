@@ -3,24 +3,14 @@ local M = {
   dependencies = {
     { "nvim-lua/popup.nvim" },
     { "nvim-lua/plenary.nvim" },
-    {
-      "nvim-telescope/telescope-file-browser.nvim",
-      config = function()
-        require("telescope").load_extension("file_browser")
-      end,
-    },
+    { "nvim-telescope/telescope-file-browser.nvim" },
     {
       "nvim-telescope/telescope-fzf-native.nvim",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
       build = "make",
     },
     {
       "nvim-telescope/telescope-frecency.nvim",
-      config = function()
-        require("telescope").load_extension("frecency")
-      end,
+      requires = { "kkharji/sqlite.lua" },
     },
   },
 }
@@ -44,6 +34,10 @@ M.project_files = function()
 end
 
 M.config = function()
+  require("telescope").load_extension("file_browser")
+  require("telescope").load_extension("fzf")
+  require("telescope").load_extension("frecency")
+
   local telescope = require("telescope")
   local actions = require("telescope.actions")
   local trouble = require("trouble.providers.telescope")
@@ -52,7 +46,7 @@ M.config = function()
   telescope.setup({
     defaults = {
       initial_mode = "insert",
-      file_sorter = frecency.frecency_sorter,
+      -- file_sorter = frecency.frecency_sorter,
       mappings = {
         i = {
           ["<esc>"] = actions.close, -- escape closes popup

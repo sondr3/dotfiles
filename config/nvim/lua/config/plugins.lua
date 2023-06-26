@@ -1,7 +1,7 @@
 return {
   "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
-  "tami5/sqlite.lua",
+  "kkharji/sqlite.lua",
 
   -- Personal plugins
   {
