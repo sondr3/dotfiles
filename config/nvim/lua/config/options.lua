@@ -118,6 +118,7 @@ vim.diagnostic.config({
 
 vim.filetype.add({
   extension = {
+    jinja = "jinja",
     astro = "astro",
     mdx = "markdown",
   },

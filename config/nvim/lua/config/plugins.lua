@@ -51,4 +51,7 @@ return {
 
   -- PureScript
   { "purescript-contrib/purescript-vim" },
+
+  -- Jinja
+  { "Glench/Vim-Jinja2-Syntax", ft = "jinja" },
 }
