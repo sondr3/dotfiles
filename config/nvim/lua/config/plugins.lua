@@ -54,4 +54,7 @@ return {
 
   -- Jinja
   { "Glench/Vim-Jinja2-Syntax", ft = "jinja" },
+
+  -- Djot
+  { "jgm/djot", ft = "dj", build = "mv editors/vim ." },
 }
