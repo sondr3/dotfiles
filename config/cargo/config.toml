@@ -1,6 +1,7 @@
 [alias]
 t = "test --quiet -- --nocapture --color=always"
 br = "build --release"
+rr = "run --release"
 pedantic = "clippy -- -W clippy::pedantic"
 ped = "pedantic"
 nursery = "clippy -- -W clippy::nursery"
