@@ -149,6 +149,10 @@ M.fidget = function()
   require("fidget").setup({})
 end
 
+M.capabilities = function()
+  require("cmp_nvim_lsp").default_capabilities()
+end
+
 M.config = function()
   require("mason")
   local lspconfig = require("lspconfig")
