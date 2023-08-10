@@ -40,6 +40,7 @@ return {
   {
     "MrcJkb/haskell-tools.nvim",
     branch = "2.x.x",
+    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
     dependencies = {
       "neovim/nvim-lspconfig",
       "nvim-lua/plenary.nvim",
@@ -47,11 +48,7 @@ return {
     },
     init = function()
       local lsp = require("config.plugins.lsp")
-      lsp.fidget()
-      lsp.signature()
-      lsp.null_ls()
       vim.g.haskell_tools = {
-
         hls = {
           on_attach = function(client, bufnr, ht)
             local opts = { noremap = true, silent = true }
