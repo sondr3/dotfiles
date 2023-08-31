@@ -57,6 +57,9 @@
   "[python]": {
     "editor.formatOnType": true
   },
+  "purescript.formatter": "purs-tidy",
   "editor.inlineSuggest.enabled": true,
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "lldb.library": "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
+  "lldb.launch.expressions": "native"
 }
