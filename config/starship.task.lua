@@ -8,6 +8,9 @@ disabled = true
 
 [elixir]
 disabled = true
+ 
+[purescript]
+format = "via [$symbol](bold white)"
 ]]
 
 return hm.task({
