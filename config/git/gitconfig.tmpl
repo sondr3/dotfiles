@@ -40,6 +40,7 @@
   pt = "!git pull && git pull --tags"
   up = "!git push && git push --tags"
   dead = "!git fetch --prune && git branch --merged | rg -v 'main|master' | xargs git branch -d"
+  gone = "!git fetch --all --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D;"
 [github]
   user = sondr3
 [core]
