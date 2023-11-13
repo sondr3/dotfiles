@@ -10,7 +10,7 @@ disabled = true
 disabled = true
  
 [purescript]
-format = "via [$symbol](bold white)"
+detect_files = ["spago.yaml", "spago.dhall"]
 ]]
 
 return hm.task({
