@@ -294,21 +294,6 @@ M.config = function()
     },
   })
 
-  lspconfig.fennel_language_server.setup({
-    single_file_support = true,
-    root_dir = lspconfig.util.root_pattern("fnl"),
-    settings = {
-      fennel = {
-        workspace = {
-          library = vim.api.nvim_list_runtime_paths(),
-        },
-        diagnostics = {
-          globals = { "vim" },
-        },
-      },
-    },
-  })
-
   for _, server in ipairs({
     "cssls",
     --[[ "dhall_lsp_server", ]]
