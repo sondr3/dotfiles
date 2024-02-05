@@ -61,6 +61,7 @@ starship init fish --print-full-init | source
 fnm env --shell fish --use-on-cd | source
 direnv hook fish | source
 zoxide init fish | source
+atuin init fish | source
 
 # aliases
 alias l="ls -la"
