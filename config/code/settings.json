@@ -43,23 +43,8 @@
   "[haskell]": {
     "editor.defaultFormatter": "haskell.haskell"
   },
-  "emmet.includeLanguages": {
-    "html-eex": "html"
-  },
   "workbench.startupEditor": "none",
   "workbench.settings.editor": "json",
-  "[elixir]": {
-    "editor.defaultFormatter": "JakeBecker.elixir-ls"
-  },
-  "[html-eex]": {
-    "editor.defaultFormatter": "JakeBecker.elixir-ls"
-  },
-  "[python]": {
-    "editor.formatOnType": true
-  },
-  "purescript.formatter": "purs-tidy",
   "editor.inlineSuggest.enabled": true,
-  "redhat.telemetry.enabled": false,
-  "lldb.library": "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
-  "lldb.launch.expressions": "native"
+  "redhat.telemetry.enabled": false
 }
