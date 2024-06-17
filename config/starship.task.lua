@@ -11,6 +11,9 @@ disabled = true
  
 [purescript]
 detect_files = ["spago.yaml", "spago.dhall"]
+
+[haskell]
+format = "via [$symbol($ghc_version )]($style)"
 ]]
 
 return hm.task({
