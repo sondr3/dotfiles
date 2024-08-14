@@ -1,7 +1,7 @@
 [user]
   name = Sondre Aasemoen
   email = {{ email }}
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOuZJPfaJ/B5lnfm9Pm7IFTRAwwxKYPIblpxzByqvKY7
+  signingkey = {{ signingkey }}
 [push]
   default = current
   followTags = true
@@ -16,7 +16,8 @@
   format = ssh
 [gpg "ssh"]
 {%- if is_linux() %}
-  program = "/opt/1Password/op-ssh-sign"
+  ; program = "/opt/1Password/op-ssh-sign"
+  program = "/mnt/c/Users/SondreAasemoen/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
 {%- else %}
   program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 {%- endif %}
@@ -68,10 +69,3 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
-; This should work but it ain't
-; [url "git@github.com:"]
-;   insteadOf = https://github.com/
-[includeIf "gitdir:~/code/projects/eviny/"]
-  path = ~/.gitconfig-eviny 
-[includeIf "gitdir:~/code/projects/sonat/"]
-  path = ~/.gitconfig-sonat 
