@@ -45,7 +45,7 @@ test -d $HOME/go/bin; and fish_add_path $HOME/go/bin
 set SSH_AUTH_SOCK $HOME/.1password/agent.sock
 
 # homebrew
-if test -d /opt/homebrew; and test (arch) = "arm64"; and test "$os" = "Darwin"
+if test -d /opt/homebrew; and test "$os" = "Darwin"
   set -gx HOMEBREW_PREFIX "/opt/homebrew";
   set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar";
   set -gx HOMEBREW_REPOSITORY "/opt/homebrew";
@@ -57,11 +57,11 @@ if test -d /opt/homebrew; and test (arch) = "arm64"; and test "$os" = "Darwin"
 end
 
 # configure applications
-starship init fish --print-full-init | source
-fnm env --shell fish --use-on-cd | source
-direnv hook fish | source
-zoxide init fish | source
-atuin init fish | source
+type -q starship; and starship init fish --print-full-init | source
+type -q fnm; and fnm env --shell fish --use-on-cd | source
+type -q direnv; and direnv hook fish | source
+type -q zoxide; and zoxide init fish | source
+type -q atuin; and atuin init fish | source
 
 # aliases
 alias l="ls -la"
@@ -81,12 +81,3 @@ function ....; cd ../../..; end
 abbr -a -g g git
 abbr -a -g py python3
 abbr -a -g pn pnpm
-
-if test (arch) = "i386"; and test "$os" = "Darwin"
-  echo "USING x86 ROSETTA TERMINAL!!!"
-  eval /usr/local/bin/brew shellenv | source
-  # >>> conda initialize >>>
-  # !! Contents within this block are managed by 'conda init' !!
-  eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-  # <<< conda initialize <<<
-end
