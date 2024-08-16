@@ -2,7 +2,7 @@ local hm = require("heime")
 local utils = require("heime.utils")
 
 local template = [[ 
-{% if is_macos() -%}
+{% if is_macos -%}
 prefix=/Users/sondre/.local
 {% else -%}
 prefix=/home/sondre/.local

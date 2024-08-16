@@ -15,9 +15,9 @@
 [gpg]
   format = ssh
 [gpg "ssh"]
-{%- if hostname() == "Neptune" %}
+{%- if hostname == "Neptune" %}
   program = "/mnt/c/Users/SondreAasemoen/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
-{%- elif is_linux() %}
+{%- elif is_linux %}
   program = "/opt/1Password/op-ssh-sign"
 {%- else %}
   program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
@@ -48,7 +48,7 @@
 [core]
   autocrlf = input
   excludesFile = ~/.gitignore
-{%- if hostname() == "Neptune" %}
+{%- if hostname == "Neptune" %}
   sshCommand = ssh.exe
 {%- endif %}
 [init]

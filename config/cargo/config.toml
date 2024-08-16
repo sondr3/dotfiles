@@ -7,7 +7,7 @@ ped = "pedantic"
 nursery = "clippy -- -W clippy::nursery"
 nur = "nursery"
 
-{%- if is_linux() %}
+{%- if is_linux %}
 [build]
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 {%- endif %}
