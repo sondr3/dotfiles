@@ -19,6 +19,6 @@ return hm.task({
   name = "latex",
   description = "setup and configure latex",
   run = function(ctx)
-    ctx:write_string(ctx:home_file(".latexmkrc"), utils:template(template, {}))
+    ctx:write_string(hm.path(hm.home_dir, ".latexmkrc"), utils:template(template, {}))
   end,
 })

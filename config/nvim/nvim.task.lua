@@ -4,8 +4,8 @@ return hm.task({
   name = "neovim",
   description = "setup and configure neovim",
   run = function(ctx)
-    ctx:copy_directory("nvim", ctx:config_file("nvim"))
-    ctx:copy_file("stylua.toml", ctx:config_file("nvim", "stylua.toml"))
-    ctx:copy_file("lazy-lock.json", ctx:config_file("nvim", "lazy-lock.json"))
+    ctx:copy_directory("nvim", hm.path(hm.config_dir, "nvim"))
+    ctx:copy_file("stylua.toml", hm.path(hm.config_dir, "nvim", "stylua.toml"))
+    ctx:copy_file("lazy-lock.json", hm.path(hm.config_dir, "nvim", "lazy-lock.json"))
   end,
 })

@@ -20,6 +20,6 @@ return hm.task({
   name = "starship",
   description = "setup and configure starship",
   run = function(ctx)
-    ctx:write_string(ctx:config_file("starship.toml"), config)
+    ctx:write_string(hm.path(hm.config_dir, "starship.toml"), config)
   end,
 })

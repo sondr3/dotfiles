@@ -9,10 +9,10 @@ NewsOnUpgrade
 return hm.task({
   name = "paru",
   description = "setup and configure paru",
-  enabled = function(ctx)
-    return ctx.is_linux()
+  enabled = function()
+    return hm.is_linux
   end,
   run = function(ctx)
-    ctx:write_string(ctx:config_file("paru", "paru.conf"), template)
+    ctx:write_string(hm.path(hm.config_dir, "paru", "paru.conf"), template)
   end,
 })
