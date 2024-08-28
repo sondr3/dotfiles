@@ -13,6 +13,6 @@ return hm.task({
     return hm.is_linux
   end,
   run = function(ctx)
-    ctx:write_string(hm.path(hm.config_dir, "paru", "paru.conf"), template)
+    ctx:write(hm.path(hm.config_dir, "paru", "paru.conf"), template)
   end,
 })

@@ -12,6 +12,6 @@ return hm.task({
   name = "vscode",
   description = "setup and configure vscode",
   run = function(ctx)
-    ctx:copy_file("settings.json", path())
+    ctx:copy("settings.json", path())
   end,
 })

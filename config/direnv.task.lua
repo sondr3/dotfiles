@@ -9,6 +9,6 @@ return hm.task({
   name = "direnv",
   description = "setup and configure direnv",
   run = function(ctx)
-    ctx:write_string(hm.path(hm.config_dir, "direnv", "direnv.toml"), config)
+    ctx:write(hm.path(hm.config_dir, "direnv", "direnv.toml"), config)
   end,
 })

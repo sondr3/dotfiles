@@ -26,6 +26,6 @@ return hm.task({
   name = "jetbrains",
   description = "setup and configure jetbrains",
   run = function(ctx)
-    ctx:write_string(hm.path(hm.home_dir, ".ideavimrc"), utils:template(template, {}))
+    ctx:write(hm.path(hm.home_dir, ".ideavimrc"), utils:template(template, {}))
   end,
 })

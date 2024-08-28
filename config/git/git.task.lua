@@ -4,8 +4,8 @@ return hm.task({
   name = "git",
   description = "setup and configure node",
   run = function(ctx)
-    ctx:copy_template("gitconfig.tmpl", hm.path(hm.home_dir, ".gitconfig"))
+    ctx:template("gitconfig.tmpl", hm.path(hm.home_dir, ".gitconfig"))
 
-    ctx:copy_file("gitignore-global", hm.path(hm.home_dir, ".gitignore"))
+    ctx:copy("gitignore-global", hm.path(hm.home_dir, ".gitignore"))
   end,
 })
