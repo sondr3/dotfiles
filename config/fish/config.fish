@@ -13,6 +13,7 @@ test -d $HOME/.cargo/bin; and fish_add_path $HOME/.cargo/bin
 
 # go
 test -d /usr/local/go/bin; and fish_add_path /usr/local/go/bin/ 
+test -d $HOME/go/bin; and fish_add_path $HOME/go/bin
 
 # dotnet
 if test -d $HOME/.dotnet 
@@ -38,8 +39,8 @@ set -gx PATH "$PNPM_HOME" $PATH
 # ~/.local/bin
 test -d $HOME/.local/bin; and fish_add_path $HOME/.local/bin 
 
-# go
-test -d $HOME/go/bin; and fish_add_path $HOME/go/bin
+# orbstack
+test -d $HOME/.orbstack; and fish_add_path $HOME/.orbstack/bin
 
 # 1Password SSH 
 set SSH_AUTH_SOCK $HOME/.1password/agent.sock
