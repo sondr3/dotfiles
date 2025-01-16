@@ -1,0 +1,5 @@
+pre-commit:
+  commands:
+    stylua:
+      glob: "*.lua"
+      run: stylua --check {staged_files}
