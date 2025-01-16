@@ -1,16 +1,11 @@
 local hm = require("heime")
 
 local ssh = function(data)
-  local program = nil
-  if hm.hostname == "Neptune" then
-    program = "/mnt/c/Users/SondreAasemoen/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
-  elseif hm.is_linux then
-    program = "/opt/1Password/op-ssh-sign"
+  if hm.is_linux then
+    return "/opt/1Password/op-ssh-sign"
   else
-    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    return "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
   end
-
-  return program
 end
 
 local config = function(data)
@@ -100,6 +95,17 @@ local config = function(data)
       process = "git-lfs filter-process",
       required = true,
     },
+    [ [[includeIf "gitdir:~/code/projects/aritma/"]] ] = {
+      path = "~/.gitconfig-aritma",
+    }
+  }
+end
+
+local aritma_config = function(data)
+  return {
+    user = {
+      email = data:get("work_email"),
+    }
   }
 end
 
@@ -116,6 +122,7 @@ return hm.task({
     --   "fzf";
     -- })
     ctx:write(hm.path(hm.home_dir, ".gitconfig"), hm.to_ini(config(data)))
+    ctx:write(hm.path(hm.home_dir, ".gitconfig-aritma"), hm.to_ini(aritma_config(data)))
 
     ctx:copy("gitignore-global", hm.path(hm.home_dir, ".gitignore"))
   end,
