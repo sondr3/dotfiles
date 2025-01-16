@@ -97,7 +97,7 @@ local config = function(data)
     },
     [ [[includeIf "gitdir:~/code/projects/aritma/"]] ] = {
       path = "~/.gitconfig-aritma",
-    }
+    },
   }
 end
 
@@ -105,7 +105,7 @@ local aritma_config = function(data)
   return {
     user = {
       email = data:get("work_email"),
-    }
+    },
   }
 end
 
