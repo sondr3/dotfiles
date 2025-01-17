@@ -75,12 +75,15 @@ local config = function(data)
     { "init", {
       defaultBranch = "main",
     } },
-    { "pager", {
-      diff = "delta",
-      log = "delta",
-      reflog = "delta",
-      show = "delta",
-    } },
+    {
+      "pager",
+      {
+        diff = "delta",
+        log = "delta",
+        reflog = "delta",
+        show = "delta",
+      },
+    },
     { "interactive", {
       diffFilter = "delta --color-only",
     } },
