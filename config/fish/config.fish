@@ -17,7 +17,6 @@ test -d $HOME/go/bin; and fish_add_path $HOME/go/bin
 
 # dotnet
 if test -d $HOME/.dotnet 
-  set -gx DOTNET_ROOT "$HOME/.dotnet"
   fish_add_path $HOME/.dotnet
   fish_add_path $HOME/.dotnet/tools/
 end
