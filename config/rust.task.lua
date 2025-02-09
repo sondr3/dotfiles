@@ -30,6 +30,6 @@ return hm.task({
   name = "rust",
   description = "setup and configure rust",
   run = function(ctx)
-    ctx:write(hm.path(hm.config_dir, "cargo", "config.toml"), hm.to_toml(config))
+    ctx:write(hm.path(hm.home_dir, ".cargo", "config.toml"), hm.to_toml(config))
   end,
 })
