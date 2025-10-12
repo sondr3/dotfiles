@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "nordic.nvim": {
+      "rev": "c88388b",
+      "src": "https://github.com/andersevenrud/nordic.nvim"
+    }
+  }
+}
