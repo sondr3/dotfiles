@@ -13,9 +13,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 
 -- sync clipboard between nvim and OS
-vim.schedule(function()
-  vim.o.clipboard = "unnamedplus"
-end)
+vim.schedule(function() vim.o.clipboard = "unnamedplus" end)
 
 -- Increase width of number columns and always show sign column
 vim.o.numberwidth = 4
@@ -84,9 +82,7 @@ vim.o.wrap = false
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+	callback = function() vim.hl.on_yank() end,
 })
