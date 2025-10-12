@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "gitsigns.nvim": {
+      "rev": "1ee5c1f",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
     "nordic.nvim": {
       "rev": "c88388b",
       "src": "https://github.com/andersevenrud/nordic.nvim"
