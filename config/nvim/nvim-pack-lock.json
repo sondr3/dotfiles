@@ -7,6 +7,11 @@
     "nordic.nvim": {
       "rev": "c88388b",
       "src": "https://github.com/andersevenrud/nordic.nvim"
+    },
+    "nvim-treesitter": {
+      "rev": "0606c7a9",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
     }
   }
 }
