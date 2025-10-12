@@ -16,9 +16,7 @@ $pdf_previewer = 'zathura';
 ]]
 
 return hm.task({
-  name = "latex",
-  description = "setup and configure latex",
-  run = function(ctx)
-    ctx:write(hm.path(hm.home_dir, ".latexmkrc"), utils:template(template, {}))
-  end,
+	name = "latex",
+	description = "setup and configure latex",
+	run = function(ctx) ctx:write(hm.path(hm.home_dir, ".latexmkrc"), utils:template(template, {})) end,
 })

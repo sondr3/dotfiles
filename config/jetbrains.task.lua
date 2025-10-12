@@ -23,9 +23,7 @@ set ideajoin
 ]]
 
 return hm.task({
-  name = "jetbrains",
-  description = "setup and configure jetbrains",
-  run = function(ctx)
-    ctx:write(hm.path(hm.home_dir, ".ideavimrc"), utils:template(template, {}))
-  end,
+	name = "jetbrains",
+	description = "setup and configure jetbrains",
+	run = function(ctx) ctx:write(hm.path(hm.home_dir, ".ideavimrc"), utils:template(template, {})) end,
 })
