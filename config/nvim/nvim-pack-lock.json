@@ -64,9 +64,18 @@
       "rev": "ac98db2",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
+    "nvim-surround": {
+      "rev": "75de178",
+      "src": "https://github.com/kylechui/nvim-surround"
+    },
     "nvim-treesitter": {
       "rev": "0606c7a9",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
+    },
+    "nvim-treesitter-textobjects": {
+      "rev": "1b2d85d",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
     "nvim-web-devicons": {
