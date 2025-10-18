@@ -15,4 +15,9 @@ neotree.setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>ft", function() vim.cmd("Neotree") end, { desc = "[f]ile [t]ree" })
+vim.keymap.set(
+	"n",
+	"<leader>ft",
+	function() vim.cmd([[ Neotree toggle ]]) end,
+	{ desc = "[f]ile [t]ree" }
+)
