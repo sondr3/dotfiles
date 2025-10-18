@@ -79,3 +79,10 @@ vim.o.confirm = true
 
 -- Disable line wrapping
 vim.o.wrap = false
+
+-- disable the cmdline
+vim.o.cmdheight = 0
+
+-- fake netrw being used for yazi
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
