@@ -4,8 +4,9 @@ vim.pack.add({
 	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/xzbdmw/colorful-menu.nvim",
 	"https://github.com/folke/lazydev.nvim",
-	"https://github.com/nvim-mini/mini.nvim",
 	"https://github.com/onsails/lspkind.nvim",
+	"https://github.com/altermo/ultimate-autopair.nvim",
+	"https://github.com/windwp/nvim-ts-autotag",
 })
 
 require("lazydev").setup({
@@ -15,6 +16,14 @@ require("lazydev").setup({
 	},
 })
 
+require("ultimate-autopair").setup()
+require("nvim-ts-autotag").setup({
+	opts = {
+		enable_close = true,
+		enable_rename = true,
+		enable_close_on_slash = true,
+	},
+})
 require("lspkind").init({
 	preset = "default",
 })
@@ -28,6 +37,9 @@ require("blink.cmp").setup({
 		nerd_font_variant = "mono",
 	},
 	completion = {
+		accept = {
+			auto_brackets = { enabled = true },
+		},
 		menu = {
 			draw = {
 				-- We don't need label_description now because label and label_description are already
