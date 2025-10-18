@@ -6,10 +6,5 @@ require("mini.ai").setup({ n_lines = 500 })
 require("mini.statusline").setup({
 	use_icons = true,
 })
-
-require("mini.tabline").setup({
-	use_icons = true,
-})
-
 require("mini.pairs").setup()
 require("mini.indentscope").setup()
