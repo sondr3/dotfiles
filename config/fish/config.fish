@@ -61,7 +61,7 @@ type -q starship; and starship init fish --print-full-init | source
 type -q fnm; and fnm env --shell fish --use-on-cd | source
 type -q direnv; and direnv hook fish | source
 type -q zoxide; and zoxide init fish | source
-type -q atuin; and atuin init fish | source
+type -q atuin; and atuin init fish | sed 's/-k up/up/' | source
 
 # aliases
 alias l="ls -la"
