@@ -86,3 +86,7 @@ vim.o.cmdheight = 0
 -- fake netrw being used for yazi
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrw = 1
+
+-- allow and automatically load .nvim.lua files in directories
+vim.o.exrc = true
+vim.o.secure = true
