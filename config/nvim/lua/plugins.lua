@@ -1,7 +1,5 @@
 require("plugins.gitsigns")
 require("plugins.tree-sitter")
-require("plugins.lsp")
-require("plugins.cmp")
 require("plugins.mini")
 require("plugins.which-key")
 require("plugins.fzf")
@@ -11,5 +9,10 @@ require("plugins.noice")
 require("plugins.barbar")
 require("plugins.yazi")
 require("plugins.neotree")
+
+require("plugins.language.rust")
+
+require("plugins.lsp")
+require("plugins.cmp")
 require("plugins.neotest")
 require("plugins.trouble")

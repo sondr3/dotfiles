@@ -17,7 +17,13 @@ require("mason").setup({
 		},
 	},
 })
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+	automatic_enable = {
+		exclude = {
+			"rust_analyzer",
+		},
+	},
+})
 require("fidget").setup({})
 
 vim.api.nvim_create_autocmd("LspAttach", {
