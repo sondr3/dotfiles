@@ -12,6 +12,7 @@ fzf.setup({
 })
 fzf.register_ui_select()
 
+vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find files" })
 vim.keymap.set("n", "<leader>,", fzf.buffers, { desc = "Buffers" })
 vim.keymap.set("n", "<leader>/", fzf.live_grep, { desc = "Gutters" })
 vim.keymap.set("n", "<leader>q", fzf.diagnostics_workspace, { desc = "Diagnostics" })
