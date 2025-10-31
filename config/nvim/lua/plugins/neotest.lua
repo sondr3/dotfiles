@@ -15,6 +15,8 @@ neotest.setup({
 })
 
 vim.keymap.set("n", "<leader>ta", neotest.run.attach, { desc = "Attach to Test" })
+vim.keymap.set("n", "<leader>tp", neotest.output_panel.toggle, { desc = "Toggle panel" })
+vim.keymap.set("n", "<leader>tc", neotest.output_panel.close, { desc = "Close panel" })
 vim.keymap.set(
 	"n",
 	"<leader>tt",
@@ -36,7 +38,6 @@ vim.keymap.set(
 	function() neotest.output.open({ enter = true, auto_close = true }) end,
 	{ desc = "Show Output" }
 )
-vim.keymap.set("n", "<leader>tO", neotest.output_panel.toggle, { desc = "Toggle Output Panel" })
 vim.keymap.set("n", "<leader>tS", neotest.run.stop, { desc = "Stop" })
 vim.keymap.set(
 	"n",
