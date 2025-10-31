@@ -4,6 +4,7 @@ vim.pack.add({
 })
 
 local fzf = require("fzf-lua")
+
 fzf.setup({
 	"default",
 	globals = {
