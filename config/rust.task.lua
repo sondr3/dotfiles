@@ -10,17 +10,13 @@ local config = {
 		nursery = "clippy -- -W clippy::nursery",
 		nur = "nursery",
 	},
-	build = hm.is_linux and {
-			rustflags = { "-C", "link-arg=-fuse-ld=lld" },
-		}
-		or {
-			rustflags = {
-				"-C",
-				"link-arg=-fuse-ld=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
-				"-C",
-				"link-arg=-ld_new",
-			},
-		},
+	-- rustflags = { "-C", "link-arg=-fuse-ld=lld" },
+	["[target.aarch64-apple-darwin]"] = {
+		"-C",
+		"link-arg=-fuse-ld=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+		"-C",
+		"link-arg=-ld_new",
+	},
 	net = {
 		["git-fetch-with-cli"] = true,
 	},
