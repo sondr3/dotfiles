@@ -8,6 +8,7 @@ local fzf = require("fzf-lua")
 fzf.setup({
 	"default",
 	globals = {
+		fzf_bin = "sk",
 		file_icons = "devicons",
 	},
 })
