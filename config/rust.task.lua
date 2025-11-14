@@ -11,11 +11,15 @@ local config = {
 		nur = "nursery",
 	},
 	-- rustflags = { "-C", "link-arg=-fuse-ld=lld" },
-	["[target.aarch64-apple-darwin]"] = {
-		"-C",
-		"link-arg=-fuse-ld=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
-		"-C",
-		"link-arg=-ld_new",
+	target = {
+		["aarch64-apple-darwin"] = {
+			rustflags = {
+				"-C",
+				"link-arg=-fuse-ld=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+				"-C",
+				"link-arg=-ld_new",
+			},
+		},
 	},
 	net = {
 		["git-fetch-with-cli"] = true,
