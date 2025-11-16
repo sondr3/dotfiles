@@ -97,7 +97,7 @@ require("blink.cmp").setup({
 	},
 	snippets = { preset = "default" },
 	signature = { enabled = true },
-	fuzzy = { implementation = "prefer_rust", prebuilt_binaries = { force_version = "v1.7.0" } },
+	fuzzy = { implementation = "prefer_rust", prebuilt_binaries = { force_version = "v1.8.0" } },
 })
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
