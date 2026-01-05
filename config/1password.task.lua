@@ -3,7 +3,7 @@ local hm = require("heime")
 local agent = [=[
 # Allow all files from my account
 [[ssh-keys]]
-account = "my.1password.com"
+account = "my.1password.eu"
 ]=]
 
 return hm.task({
