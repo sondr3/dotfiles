@@ -21,9 +21,9 @@ local config = function(data)
 		{ "push", {
 			default = "current",
 			followTags = true,
+			autoSetupRemote = true,
 		} },
 		{ "pull", {
-			default = "current",
 			rebase = true,
 		} },
 		{ "rebase", {
