@@ -1,8 +1,8 @@
 vim.pack.add({
-	"https://github.com/andersevenrud/nordic.nvim",
+	"https://github.com/yorickpeterse/nvim-grey",
 })
 
-vim.cmd.colorscheme("nordic")
+vim.cmd.colorscheme("grey")
 
 require("options")
 require("autocmds")

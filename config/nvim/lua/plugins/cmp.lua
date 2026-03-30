@@ -1,5 +1,8 @@
 vim.pack.add({
-	"https://github.com/saghen/blink.cmp",
+	{
+		src = "https://github.com/saghen/blink.cmp",
+		version = "v1.10.1",
+	},
 	"https://github.com/rafamadriz/friendly-snippets",
 	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/xzbdmw/colorful-menu.nvim",

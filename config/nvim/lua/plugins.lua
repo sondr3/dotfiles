@@ -11,6 +11,7 @@ require("plugins.yazi")
 require("plugins.neotree")
 
 require("plugins.language.rust")
+require("plugins.language.haskell")
 
 require("plugins.lsp")
 require("plugins.cmp")
