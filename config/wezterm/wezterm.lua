@@ -23,6 +23,7 @@ return {
 	enable_wayland = true,
 	font_size = get_font_size(),
 	hide_tab_bar_if_only_one_tab = true,
+	force_reverse_video_cursor = true,
 	keys = {
 		{ key = "{", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(-1) },
 		{ key = "}", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(1) },
