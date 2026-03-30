@@ -24,6 +24,8 @@ return {
 	font_size = get_font_size(),
 	hide_tab_bar_if_only_one_tab = true,
 	keys = {
+		{ key = "{", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(-1) },
+		{ key = "}", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(1) },
 		{
 			key = "t",
 			mods = key_mods,

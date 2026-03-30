@@ -68,6 +68,9 @@ set -gx EDITOR nvim
 set FZF_ALT_C_COMMAND "fd --type d"
 set FZF_DEFAULT_COMMAND "fd --type f"
 
+# mise
+set MISE_EXPERIMENTAL 1
+
 # functions
 function ..; cd ..; end
 function ...; cd ../..; end
