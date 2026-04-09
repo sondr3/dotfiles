@@ -79,10 +79,6 @@
       "rev": "72bc8f1ec62a590fb47368c81f89610e0f353e28",
       "src": "https://github.com/nvim-neotest/neotest"
     },
-    "noice.nvim": {
-      "rev": "7bfd942",
-      "src": "https://github.com/folke/noice.nvim"
-    },
     "nordic.nvim": {
       "rev": "c88388b",
       "src": "https://github.com/andersevenrud/nordic.nvim"
@@ -131,6 +127,10 @@
     "rustaceanvim": {
       "rev": "8a3617b88696a129e7ecec7ddf9437716615dc8b",
       "src": "https://github.com/mrcjkb/rustaceanvim"
+    },
+    "tiny-cmdline.nvim": {
+      "rev": "01519b13230d549380cee405c12062738240a11b",
+      "src": "https://github.com/rachartier/tiny-cmdline.nvim"
     },
     "trouble.nvim": {
       "rev": "bd67efe",

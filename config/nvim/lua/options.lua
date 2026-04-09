@@ -80,8 +80,9 @@ vim.o.confirm = true
 -- Disable line wrapping
 vim.o.wrap = false
 
--- disable the cmdline
+-- disable the cmdline, used with tiny-cmdline.nvim
 vim.o.cmdheight = 0
+require("vim._core.ui2").enable({ enable = true })
 
 -- fake netrw being used for yazi
 vim.g.loaded_netrwPlugin = 1
