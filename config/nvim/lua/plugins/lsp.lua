@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- Execute a code action, usually your cursor needs to be on top of an error
 		-- or a suggestion from your LSP for this to activate.
-		map("gra", fzf.lsp_code_actions, "[G]oto Code [A]ction", { "n", "x" })
+		map("gra", require("tiny-code-action").code_action, "[G]oto Code [A]ction", { "n", "x" })
 		--
 		-- -- Find references for the word under your cursor.
 		map("grr", fzf.lsp_references, "[G]oto [R]eferences")
@@ -146,19 +146,8 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.HINT] = "󰌶 ",
 		},
 	} or {},
-	virtual_text = {
-		source = "if_many",
-		spacing = 2,
-		format = function(diagnostic)
-			local diagnostic_message = {
-				[vim.diagnostic.severity.ERROR] = diagnostic.message,
-				[vim.diagnostic.severity.WARN] = diagnostic.message,
-				[vim.diagnostic.severity.INFO] = diagnostic.message,
-				[vim.diagnostic.severity.HINT] = diagnostic.message,
-			}
-			return diagnostic_message[diagnostic.severity]
-		end,
-	},
+	-- Disable Neovim's default virtual text diagnostics, replaced with rachartier/tiny-inline-diagnostic.nvim
+	virtual_text = false,
 })
 
 -- LSP servers and clients are able to communicate to each other what features they support.

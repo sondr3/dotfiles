@@ -132,6 +132,14 @@
       "rev": "01519b13230d549380cee405c12062738240a11b",
       "src": "https://github.com/rachartier/tiny-cmdline.nvim"
     },
+    "tiny-code-action.nvim": {
+      "rev": "47ec77edf11db531b01d415688b87b1c63bc0aca",
+      "src": "https://github.com/rachartier/tiny-code-action.nvim"
+    },
+    "tiny-inline-diagnostic.nvim": {
+      "rev": "57a0eb84b2008c76e77930639890d9874195b1e1",
+      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
+    },
     "trouble.nvim": {
       "rev": "bd67efe",
       "src": "https://github.com/folke/trouble.nvim"

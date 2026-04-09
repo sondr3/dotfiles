@@ -8,7 +8,7 @@ require("plugins.hlchunk")
 require("plugins.barbar")
 require("plugins.yazi")
 require("plugins.neotree")
-require("plugins.tiny-cmdline")
+require("plugins.tiny")
 
 require("plugins.language.rust")
 require("plugins.language.haskell")
