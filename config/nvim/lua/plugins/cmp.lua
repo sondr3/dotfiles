@@ -100,7 +100,7 @@ require("blink.cmp").setup({
 	},
 	snippets = { preset = "default" },
 	signature = { enabled = true },
-	fuzzy = { implementation = "prefer_rust", prebuilt_binaries = { force_version = "v1.8.0" } },
+	fuzzy = { implementation = "prefer_rust", prebuilt_binaries = { force_version = "v1.10.1" } },
 })
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -114,5 +114,6 @@ require("conform").setup({
 		lua = { "stylua" },
 		rust = { "rustfmt", lsp_format = "fallback" },
 		javascript = { "prettierd", "prettier", stop_after_first = true },
+		haskell = { "ormolu" },
 	},
 })

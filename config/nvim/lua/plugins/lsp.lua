@@ -190,6 +190,14 @@ local servers = {
 	-- ts_ls = {},
 	--
 
+	hls = {
+		settings = {
+			haskell = {
+				formattingProvider = "ormolu",
+				cabalFormattingProvider = "cabal-gild",
+			},
+		},
+	},
 	lua_ls = {
 		-- cmd = { ... },
 		-- filetypes = { ... },
