@@ -29,7 +29,7 @@ end
 
 # pnpm
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
+set -gx PATH "$PNPM_HOME/bin" $PATH
 
 # ~/.local/bin
 test -d $HOME/.local/bin; and fish_add_path $HOME/.local/bin 
