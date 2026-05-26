@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local config = wezterm.config_builder()
 
 local is_macos = function() return wezterm.target_triple == "aarch64-apple-darwin" end
 
@@ -16,25 +17,23 @@ local get_font_size = function() return set_on_macos(16, 14) end
 
 local key_mods = get_key_modifier()
 
-return {
-	check_for_updates = false,
-	color_scheme = "nord",
-	font = wezterm.font("PragmataPro Mono Liga"),
-	enable_wayland = true,
-	font_size = get_font_size(),
-	hide_tab_bar_if_only_one_tab = true,
-	force_reverse_video_cursor = true,
-	keys = {
-		{ key = "{", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(-1) },
-		{ key = "}", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(1) },
-		{
-			key = "t",
-			mods = key_mods,
-			action = wezterm.action({
-				SpawnCommandInNewTab = {
-					cwd = "$HOME",
-				},
-			}),
-		},
+config.check_for_updates = false
+config.color_scheme = "nord"
+config.font = wezterm.font("PragmataPro Mono Liga")
+config.enable_wayland = true
+config.enable_kitty_keyboard = true
+config.font_size = get_font_size()
+config.hide_tab_bar_if_only_one_tab = true
+config.keys = {
+	{
+		key = "t",
+		mods = key_mods,
+		action = wezterm.action({
+			SpawnCommandInNewTab = {
+				cwd = "$HOME",
+			},
+		}),
 	},
 }
+
+return config
