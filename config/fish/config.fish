@@ -50,6 +50,8 @@ if test -d /opt/homebrew; and test "$os" = "Darwin"
   set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/opt/homebrew/share/info" $INFOPATH;
   fish_add_path /opt/homebrew/bin
   set -gx HOMEBREW_NO_ENV_HINTS 1
+  set -gx HOMEBREW_NO_UPGRADE_QUIT_CASKS 1
+  set -gx HOMEBREW_NO_ASK 1
 end
 
 # configure applications
