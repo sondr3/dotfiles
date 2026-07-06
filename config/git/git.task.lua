@@ -118,9 +118,13 @@ end
 
 local aritma_config = function(data)
 	return {
-		{ "user", {
-			email = data:get("work_email"),
-		} },
+		{
+			"user",
+			{
+				email = data:get("work_email"),
+				signingkey = data:get("work_signing_key"),
+			},
+		},
 	}
 end
 
