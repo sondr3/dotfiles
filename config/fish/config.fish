@@ -2,14 +2,14 @@
 set -U fish_greeting
 set -l os (uname)
 
+# rust
+test -d $HOME/.cargo/bin; and fish_add_path $HOME/.cargo/bin 
+
 # ghcup-env
 test -d $HOME/.ghcup/bin ; and fish_add_path $HOME/.cabal/bin $HOME/.ghcup/bin
 
 # deno
 test -f $HOME/.deno/bin/deno ; and fish_add_path $HOME/.deno/bin 
-
-# rust
-test -d $HOME/.cargo/bin; and fish_add_path $HOME/.cargo/bin 
 
 # go
 test -d /usr/local/go/bin; and fish_add_path /usr/local/go/bin/ 
@@ -45,7 +45,7 @@ if test -d /opt/homebrew; and test "$os" = "Darwin"
   set -gx HOMEBREW_PREFIX "/opt/homebrew";
   set -gx HOMEBREW_CELLAR "/opt/homebrew/Cellar";
   set -gx HOMEBREW_REPOSITORY "/opt/homebrew";
-  set -q PATH; or set PATH ''; set -gx PATH "/opt/homebrew/bin" "/opt/homebrew/sbin" $PATH;
+  set -q PATH; or set PATH ''; set -gx PATH "/opt/homebrew/bin" "/opt/homebrew/sbin" "/opt/homebrew/opt/rustup/bin" $PATH;
   set -q MANPATH; or set MANPATH ''; set -gx MANPATH "/opt/homebrew/share/man" $MANPATH;
   set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/opt/homebrew/share/info" $INFOPATH;
   fish_add_path /opt/homebrew/bin
